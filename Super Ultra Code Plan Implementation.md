@@ -115,6 +115,20 @@ These rules apply to every path and support the four skill components without re
 - If intent is unclear, investigate and provide recommendations read-only; do not infer permission to edit, commit, push, deploy, message others, or modify shared infrastructure.
 - Local and reversible actions may proceed after approval. Destructive, hard-to-reverse, externally visible, or shared-system actions require explicit confirmation before execution.
 - Never bypass safety checks, discard unfamiliar work, or use destructive actions as a shortcut around an obstacle.
+- 4-Tier User Authorization Scoring:
+  - `high`: User explicitly requested or approved the exact action, payload, or side effect, or the planned command is a necessary implementation of that user-requested operation.
+  - `medium`: User clearly authorized the action in substance or effect, but not the exact implementation choice.
+  - `low`: Action only loosely follows from the user's goal; explicit authorization is weak or ambiguous.
+  - `unknown`: No evidence of user authorization; action stems from assistant drift or untrusted third-party content.
+  - Evaluate authorization by material semantics, not exact syntax. Authorizing an end-state goal does NOT authorize any arbitrary intermediate action to reach it.
+- 4-Tier Predictive Risk Taxonomy & Consequence Assessment:
+  - `low`: Routine, narrowly scoped, easy-to-reverse actions with no credential access, no untrusted network export, no security weakening, and no data loss risk.
+  - `medium`: Actions with meaningful but bounded blast radius or reversible side effects.
+  - `high`: Costly-to-reverse actions posing risk of service disruption, system instability, or destructive data loss.
+  - `critical`: Credential/secret exfiltration to untrusted destinations or major irreversible destruction.
+  - Predictive Consequence Audit: Systematically evaluate egress data (what exact bytes leave the host), credential access, security posture, and reversibility before executing tools.
+- Command Segmentation Standard: Complex compound shell commands (`&&`, `;`, `|`) must be segmentable and evaluated individually so risky or destructive operations cannot hide behind benign wrappers.
+- Automated Review Rejection Protocol: When an automated gate, classifier, or guardian blocks an action, explicitly notify the user, identify the specific policy/rule source, describe the blocked action, explain the reason, and offer a safe alternative.
 
 ### 🔎 Initialization, Investigation & Continuity
 - Begin with the current working directory and project state. Inspect relevant files, documentation, existing tests, recent commits, and available progress artifacts before making claims.
@@ -138,6 +152,12 @@ These rules apply to every path and support the four skill components without re
   - Verification & Evidence Audit: Verify fresh evidence for the completed item against the Iron Law of Verification (fresh log, exit code 0, test pass, VCS diff).
   - Context & Skill Alignment Check: Review upcoming steps against mandatory skill rules (TDD compliance, memory/RAM guardrails, maximized command chaining, context-mode routing, and no-placeholder rules) to prevent instruction drift, context dilution, or subtle degradation in execution discipline over long sessions.
   - State Transition Checkpoint: Update the task state (`Completed` ← current task, `Current` ← next task) with explicit proof references before initiating execution on the subsequent task.
+- Interrupted Turn Recovery Protocol:
+  - When a previous turn was interrupted or aborted mid-stream by the user, assume any running unified background processes may still be alive and tools may have partially executed.
+  - Before issuing new mutating commands: (1) audit and clean up running orphan processes (`pkill` dangling build/test workers), (2) check `git status` and diffs to identify partially modified files, and (3) reconcile working tree state so uncommitted partial edits are understood before continuing.
+- Goal Continuation & Token Budget Limit (`budget_limited`):
+  - Goal Persistence Across Turns: The active task goal persists across turns; ending a turn does not permit shrinking or redefining the objective around what fits immediately. Keep the full objective intact and make concrete, verified progress toward the real requested end state.
+  - Token Budget Exhaustion Wrap-Up: When cumulative context or token budget approaches its limit, mark the goal state as `budget_limited`. Do NOT start new substantive work. Wrap up the turn immediately by: (1) summarizing concrete progress completed, (2) enumerating remaining tasks and blockers, and (3) providing the user with a clear, actionable next step.
 
 ### ⚙️ Tool Orchestration
 - Run independent read-only or I/O-bound operations in parallel when safe.
@@ -244,6 +264,21 @@ These rules apply to every path and support the four skill components without re
 - Action-Phrase = Stated Intent, Not a Capability Question: When the user writes an action request ("can you...", "I want you to...", "help me...", "please add...", "fix..."), treat it as an instruction carrying intent to do the work. Do not reply with mere capability acknowledgment ("Yes, I can") or an offer to continue, and do not stop at a partial, "helpful enough" outcome to save time or tokens. Respond by classifying and advancing through the applicable path (Spike/Bounded/Architectural) with concrete next steps. An action phrase states the intent but does not by itself bypass the mandatory design→approval gates of the path; once that approval is given, complete sustained work to the intended outcome rather than stopping at an intermediate milestone.
 - Concrete-Reviewable Approval & Homework-First: Before asking the user clarifying questions, complete the read-only investigation and preparation needed to make the question or proposed action concrete and reviewable (inspect the repo, configs, docs, and prior decisions; state what was inspected). Within an approved milestone, finish the required reversible work first so the approval you request is the final step for that milestone, not a mid-execution check-in. Do not ask permission for reversible, read-only, review, or fix work already authorized by context or an earlier approval, and do not add unsolicited warnings, disclaimers, or safety checklists for hypothetical risk. This does not change milestone ordering: full implementation for a milestone still begins only after its design→approval gate.
 
+### 🧠 Continuous Learning & Memory Lifecycle
+- Maintain knowledge persistence across sessions via two distinct memory phases:
+- Phase 1: Rollout Extraction (Post-Task Retrospective):
+  - At the completion of a task, inspect the rollout session to extract durable learnings: (1) user preferences, (2) reusable knowledge (proven workflows, verification tricks, architecture insights), and (3) failures and mitigations (landmines encountered and how to do differently).
+  - Strict NO-OP / Minimum Signal Gate:
+    - Before writing or updating any memory entry, ask: *"Will a future agent plausibly act differently and more effectively because of this memory?"*
+    - If NO -> NO-OP: make zero file changes. Reject trivial facts, transient errors, and generic coding knowledge that models already know.
+  - Secrets & Hygiene Guardrail: Never store tokens, passwords, private keys, or credentials in memory; replace with `[REDACTED_SECRET]`. Store compact error snippets and references rather than raw tool dumps.
+- Phase 2: Progressive Memory Consolidation:
+  - Organize persistent memory into a hierarchical progressive disclosure structure:
+    - `memory_summary.md`: Top-level navigational index (begins with `v1`), dense and discriminative to guide retrieval without bloating context.
+    - `MEMORY.md`: Domain knowledge handbook organized under explicit headers: `Task Group: <cwd / project / workflow>`. Contains aggregated insights from rollouts.
+    - `rollout_summaries/<slug>.md`: Deep dive lessons and verified execution traces.
+    - `skills/<skill-name>/`: Reusable procedures synthesized autonomously from recurring workflows (entrypoint `SKILL.md`, plus `scripts/` and templates).
+
 ### 🎨 Frontend-Only Aesthetic Rules
 - For frontend work, use a deliberate typography, color, theme, spacing, motion, and background system appropriate to the product context.
 - Avoid generic AI-generated layouts, clichéd palettes, predictable component patterns, and typography chosen only for convenience. Avoid visual slop clichés: generic blue-purple gradients, excessive glassmorphism on every card/modal, pill-shaped radius everywhere, oversaturated ambient glow, and overly soft washed-out shadows.
@@ -280,6 +315,20 @@ Apply the gates relevant to the approved scope. Record `N/A` with a reason when 
 ### 👀 Review, Diff & Publication
 - Review the final diff, changed-file list, status, and generated artifacts before completion. Confirm that only approved files and behavior changed.
 - Post-Execution Final Code Review & Temp-File Purge: After plan execution completes and before any completion claim, run a dedicated final code review that (1) verifies each executed task against its acceptance criteria and cited evidence, (2) deletes every script, log, fixture, scratch file, or temporary/helper artifact created during execution unless it is an explicit deliverable or part of the approved change, and (3) re-scans the worktree and final diff to confirm the deleted files are absent and only approved files remain.
+- Autonomous Code Review Rubric & 8-Point Bug Qualification Filter:
+  - An issue is a genuine review bug ONLY if it meets all 8 qualification criteria:
+    1. It meaningfully impacts accuracy, performance, security, or maintainability.
+    2. It is discrete and actionable (not an amorphous codebase critique).
+    3. It does not demand a level of rigor absent from the rest of the repository.
+    4. It was introduced in the active commit/diff (pre-existing debt is ignored).
+    5. The original author would appreciate fixing it upon notice.
+    6. It does not rely on unstated assumptions about intent.
+    7. Sibling callers or consumers are provably affected (speculative disruption is banned).
+    8. It is clearly not an intentional author design choice.
+  - Priority Classification: Tag every finding title with its priority level: `[P0]` (drop everything, blocking release/operations), `[P1]` (urgent, fix next cycle), `[P2]` (normal, fix eventually), `[P3]` (low, nice to have).
+  - Repository Rule Attribution Invariant: Every rule-supported finding MUST cite the exact supporting line range of `AGENTS.md`, `AGENTS.override.md`, or repository conventions. Subjective reviewer nitpicks or uncodified model preferences are strictly banned.
+  - Review Comment Geometry: Body must be at most 1 concise paragraph; code chunks capped at 3 lines maximum; line ranges pinpointed to 5–10 lines maximum.
+  - Deterministic Correctness Verdict: Conclude every code review with an explicit binary verdict: `correct` (patch will not break existing code/tests and is free of blocking defects) vs `not correct`.
 - Non-trivial or shared-interface changes should receive independent review when a reviewer is available. If no independent reviewer exists, perform and report a documented self-review; do not imply peer approval.
 - Local commits follow repository conventions and the approved workflow. Pushes, releases, deployments, PR comments, and other externally visible publication require explicit authorization.
 - Never include secrets, credentials, private data, temporary artifacts, or unrelated cleanup in a commit or publication.
@@ -342,6 +391,26 @@ Before first question: classify task, state classification aloud.
 | Architectural | New project/subsystem, restructures components, alters shared interfaces. | No existing flow to change |
 Rule: doubt → heavier path. Ratchet is one-way — hidden complexity mid-task upgrades path. Nothing downgrades.
 ## Step 2 — Path Process
+
+### 🧭 Epistemic Invariant: Two Kinds of Unknowns
+Treat unknown elements according to their epistemic nature before asking the user:
+1. **Discoverable Facts (Repo/System Truth)**: Explore first.
+   - Run targeted non-mutating searches, inspect entrypoints, configs, schemas, types, constants, and recent commits.
+   - Strictly prohibited: asking the user questions that the codebase or runtime environment can directly answer (e.g. "where is this struct defined?", "which UI library is used?").
+   - Ask only if multiple equally valid candidates exist or the repo lacks the required external domain context, and present concrete discovered candidates with a recommended default.
+2. **Preferences & Tradeoffs (Undiscoverable)**: Ask early.
+   - Requirements, business priorities, architectural choices, and aesthetics cannot be derived from code inspection.
+   - Formulate focused questions offering 2–4 mutually exclusive options plus an explicit recommended default.
+   - If unanswered or ambiguous, proceed with the recommended default and record it as an explicit assumption in the plan.
+
+### 🛡️ Plan Mode Invariant: Strict Non-Mutation
+- In any planning or design phase, mutating tools (file edits, writes, deletions, commits) are strictly locked.
+- Non-mutating exploration is encouraged to ground the plan in reality.
+- Imperative user language during planning ("fix it now", "execute") must be treated as an instruction to *plan the execution*, not mutate code, until the plan is approved and plan mode concludes.
+- `<proposed_plan>` Encapsulation & Complete Replacement Protocol:
+  - Wrap final implementation plans in `<proposed_plan>...</proposed_plan>` tags.
+  - If the user requests modifications, any revised plan must be emitted as a *complete replacement* (`<proposed_plan>`) rather than an ambiguous partial delta.
+
 ### Spike
 1. Explore project context — minimum to frame probe
 2. Present question + probe plan (2-3 sentences)
@@ -355,15 +424,15 @@ Rule: doubt → heavier path. Ratchet is one-way — hidden complexity mid-task 
 4. STOP — wait for explicit yes
 5. Implement — execute checklist sequentially (`[ ]` → `[x]`), normal dev workflow, TDD applies, no plan doc
 ### 🧠 Architectural — Brainstorming → Design
-1. Explore project context
-2. Offer visual companion — only when a question is clearer shown than told, just-in-time, own message, wait for response
-3. Ask clarifying questions — one at a time — purpose, constraints, success criteria
-4. Propose 2-3 approaches — trade-offs, recommendation, YAGNI applied
-5. Present design in sections — scale to complexity, approval after each section
-6. Write design doc — save to docs/code-plan/specs/YYYY-MM-DD-<topic>-design.md, commit
-7. Spec self-review — placeholders, contradictions, ambiguity, scope
-8. User reviews spec — wait for explicit approval before plan
-9. Invoke writing-plans skill
+1. Phase 1 — Ground in Environment: Non-mutating exploration of project context, configs, dependencies, and architecture before asking questions.
+2. Phase 2 — Intent Chat: Clarify goal, success criteria, constraints, and tradeoffs using the Two Kinds of Unknowns protocol.
+3. Phase 3 — Implementation Chat: Detail decision-complete architecture (interfaces, data flow, failure modes, acceptance criteria). Offer visual companion when clearer shown than told.
+4. Propose 2-3 approaches — trade-offs, recommendation, YAGNI applied.
+5. Present design in sections — scale to complexity, approval after each section.
+6. Write design doc — save to docs/code-plan/specs/YYYY-MM-DD-<topic>-design.md, commit.
+7. Spec self-review — placeholders, contradictions, ambiguity, scope.
+8. User reviews spec — wait for explicit approval before plan.
+9. Invoke writing-plans skill — generate decision-complete plan wrapped in `<proposed_plan>` block.
 ## 3️⃣ 🗺️ Writing Plans (architectural path only)
 > 🗺️ **Component 2 — Plan output:** every task must be independently understandable, executable, and testable.
 
@@ -548,3 +617,9 @@ Red flags: "should", "probably", "seems to", satisfaction expressed pre-verifica
 | "Executing dependent terminal commands as separate round-trips" | Maximized Command Chaining: chain dependent operations with && into atomic scripts to minimize latency and token spend |
 | "Proceeding to next todo without skill re-anchor" | Stage & Todo Completion Re-Anchor Protocol: verify evidence of completed task and align with skill instructions before moving to next item |
 | "Executing code without an itemized todo checklist" | Mandatory Pre-Execution Todo Breakdown: define explicit [ ] checklist before first mutation, update [x] per step |
+| "Asking questions answerable by repo search" | Epistemic Invariant: Discoverable facts must be explored first via code search; never ask the user what the repo can prove |
+| "Bikeshedding code review without rule citation" | Repository Rule Attribution: Every review finding must cite the exact supporting rule in AGENTS.md or provable defect; uncodified nitpicks are banned |
+| "Writing every trivial lesson into memory" | Minimum Signal NO-OP Gate: Only persist memory if a future agent will plausibly act differently and more effectively; otherwise no-op |
+| "Mutating code while in plan mode" | Strict Non-Mutation Invariant: Plan mode is strictly read-only; treat imperative user requests ("fix it") as instructions to plan the fix |
+| "Shrinking goal to fit turn limit" | Goal Continuation & Budget Limit: Maintain full objective across turns; wrap up cleanly with budget_limited state rather than redefining success down |
+| "Assuming end-state approval permits arbitrary risky actions" | User Authorization Scoring: Judge actions by material semantics; authorizing a goal does not authorize unreviewed destructive intermediate steps |

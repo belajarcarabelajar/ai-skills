@@ -294,6 +294,8 @@ These rules apply to every path and support the four skill components without re
   - Working tree verification: Run `git status` to confirm only expected files are touched, with zero unintended edits.
   - Purge iteration artifacts: Remove temporary scratch files, debug scripts, reproduction logs, and ad-hoc test files outside the repository's permanent test suite.
   - Conventional commit standard: Structure commit messages with standard prefixes (`feat:`, `fix:`, `refactor:`, `docs:`, `chore:`) providing a clear rationale.
+  - Commit author policy: All commits must use the primary author name `Iwan Kurniawan`. Check and verify the author email from each respective repository's git config (`git config user.email` or `.git/config`).
+  - No co-author trailers: Never insert `Co-authored-by:` or any AI assistant attribution trailers in commit messages or pull requests unless explicitly requested by the user.
   - Clean handoff: State exact modified files, fresh verification evidence (commands + exit codes), and remaining user actions.
 
 ### 🧠 Continuous Learning & Memory Lifecycle

@@ -1,3 +1,14 @@
+---
+name: super-ultra-code-plan
+description: Ultimate all-in-one AI coding pipeline for complex development tasks. Covers idea, design, spike, planning, strict TDD, subagent delegation, systematic debugging, verification gates, and finishing.
+triggers:
+  - coding task
+  - feature implementation
+  - bug fix
+  - refactoring
+  - system architecture
+---
+
 # Super Ultra Code Plan Implementation
 ## Purpose
 Unified pipeline for AI coding agents: idea → design → plan → implementation → verification. Merges brainstorming, writing-plans, TDD, verification-before-completion.
@@ -223,6 +234,10 @@ These rules apply to every path and support the four skill components without re
 - Every delegated task needs a clear scope, inputs, expected output, verification method, and review checkpoint.
 - If the runtime supports asynchronous subagents, continue safe independent work while they run and collect their results at a defined review checkpoint.
 - Parallel Subagent Result Recap: When parallel subagents finish, do not swallow their reports raw. At the review checkpoint, group the results by task scope, discard duplicates and redundant restatements, resolve conflicts between overlapping results from the evidence, and verify each subagent's claims independently (diff, log, exit status) instead of trusting the report. Then integrate only the new findings, blockers, and evidence into the task state and checklist before starting the next item. Keep the recap as a concise per-scope summary, not a concatenation of every report.
+- Subagent Orchestration & Isolation Standard:
+  - Isolated Context: Provide each subagent with an explicit, self-contained prompt specifying target files, constraints, required tests, and clear output contracts.
+  - Non-Overlapping Workspaces: Ensure parallel subagents work on strictly disjoint sets of files or in isolated worktrees (`share` or `branch` modes) to prevent write-write conflicts.
+  - Parent Diff Audit Gate: Never accept a subagent's self-reported success blindly. Inspect `git diff` and run targeted regression tests directly in the parent agent before integrating the result.
 
 ### 🧱 Quality, Generality & Cleanup
 - Implement the actual general solution for all valid inputs. Do not hard-code test-specific values, create test workarounds, or narrow the solution to observed examples.
@@ -275,6 +290,11 @@ These rules apply to every path and support the four skill components without re
 - Draft PR as Externally Visible Publication: Creating a draft or full PR is externally visible publication, so it still requires explicit confirmation or inclusion in the approved plan/rollout; it is not silently authorized by the autonomous completion bias above.
 - Action-Phrase = Stated Intent, Not a Capability Question: When the user writes an action request ("can you...", "I want you to...", "help me...", "please add...", "fix..."), treat it as an instruction carrying intent to do the work. Do not reply with mere capability acknowledgment ("Yes, I can") or an offer to continue, and do not stop at a partial, "helpful enough" outcome to save time or tokens. Respond by classifying and advancing through the applicable path (Spike/Bounded/Architectural) with concrete next steps. An action phrase states the intent but does not by itself bypass the mandatory design→approval gates of the path; once that approval is given, complete sustained work to the intended outcome rather than stopping at an intermediate milestone.
 - Concrete-Reviewable Approval & Homework-First: Before asking the user clarifying questions, complete the read-only investigation and preparation needed to make the question or proposed action concrete and reviewable (inspect the repo, configs, docs, and prior decisions; state what was inspected). Within an approved milestone, finish the required reversible work first so the approval you request is the final step for that milestone, not a mid-execution check-in. Do not ask permission for reversible, read-only, review, or fix work already authorized by context or an earlier approval, and do not add unsolicited warnings, disclaimers, or safety checklists for hypothetical risk. This does not change milestone ordering: full implementation for a milestone still begins only after its design→approval gate.
+- Finishing & Git Hygiene Protocol:
+  - Working tree verification: Run `git status` to confirm only expected files are touched, with zero unintended edits.
+  - Purge iteration artifacts: Remove temporary scratch files, debug scripts, reproduction logs, and ad-hoc test files outside the repository's permanent test suite.
+  - Conventional commit standard: Structure commit messages with standard prefixes (`feat:`, `fix:`, `refactor:`, `docs:`, `chore:`) providing a clear rationale.
+  - Clean handoff: State exact modified files, fresh verification evidence (commands + exit codes), and remaining user actions.
 
 ### 🧠 Continuous Learning & Memory Lifecycle
 - Maintain knowledge persistence across sessions via two distinct memory phases:
@@ -570,6 +590,27 @@ Cycle: RED (one minimal failing test) → verify fails for right reason → GREE
 | Shows intent | Demonstrates desired API | Obscures intended behavior |
 Exceptions require explicit human approval: throwaway prototypes, generated code, documentation/configuration-only work, and visual-only changes. Every exception still needs an appropriate verification method.
 Red flags — stop, restart: code before test, test passes immediately, can't explain failure, "just this once", "keep as reference", sunk-cost argument, "spirit not ritual" argument.
+
+## 4.1 🐞 Systematic Debugging (Iron Law of Bug Isolation)
+> 🐞 **Diagnostic loop:** REPRODUCE → DIAGNOSE (RCA) → SMALLEST SAFE FIX → REGRESSION PROOF.
+
+```
+NO BUG FIX WITHOUT A MINIMAL REPRODUCING FAILING TEST AND ROOT CAUSE ISOLATION
+```
+Shotgun debugging, speculative edits, and fixing symptoms without root cause isolation are strictly prohibited.
+1. Phase 1 — Reproduce Deterministically:
+   - Write a minimal failing test or deterministic reproducer command before touching production code.
+   - Confirm failure matches the reported bug symptoms exactly.
+2. Phase 2 — Diagnose & Isolate Root Cause:
+   - Trace call stack, state transitions, and variable boundaries to identify the exact flaw.
+   - Articulate the root cause clearly: what invariant was violated and why.
+3. Phase 3 — Smallest Safe Localized Fix:
+   - Apply the most focused, surgical patch that eliminates the root cause.
+   - Strictly avoid unsolicited refactoring, cleanup of adjacent code, or changing unrelated interfaces.
+4. Phase 4 — Regression Proof & Verification:
+   - Run the reproduction test to prove GREEN status.
+   - Execute the targeted test suite to confirm 0 regressions across existing functionality.
+
 ## 5️⃣ ✅ Verification Before Completion (Iron Law)
 > ✅ **Component 4 — Evidence gate:** identify, run, read, and confirm the proof before making the claim.
 

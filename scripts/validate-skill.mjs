@@ -67,7 +67,9 @@ const requiredTemplates = [
   'implementation-plan-template.md',
   'spike-report-template.md',
   'systematic-debugging-log-template.md',
-  'verification-checklist-template.md'
+  'verification-checklist-template.md',
+  'handoff-template.md',
+  'progress-log-template.md',
 ];
 
 for (const tmpl of requiredTemplates) {
@@ -76,6 +78,19 @@ for (const tmpl of requiredTemplates) {
     console.log(`✅ Template present: templates/${tmpl}`);
   } else {
     console.error(`❌ Missing template: templates/${tmpl}`);
+    errors++;
+  }
+}
+
+// 3b. Check Examples directory
+const examplesDir = path.join(rootDir, 'examples');
+const requiredExamples = ['worked-example.md'];
+for (const ex of requiredExamples) {
+  const p = path.join(examplesDir, ex);
+  if (fs.existsSync(p)) {
+    console.log(`✅ Example present: examples/${ex}`);
+  } else {
+    console.error(`❌ Missing example: examples/${ex}`);
     errors++;
   }
 }

@@ -61,15 +61,19 @@ ai-skills/
 │       └── ci.yml                               # CI: install, render diagrams, validate, dry-run
 ├── diagrams/                                    # Auto-generated SVG diagrams (CI artifact)
 │   └── lifecycle.svg                            # Lifecycle diagram embedded in README
+├── examples/
+│   └── worked-example.md                        # Full pipeline walkthrough (filled-in reference)
 ├── scripts/
 │   ├── sync.sh                                  # Bidirectional sync (~/.config/ai <-> repo)
 │   ├── render-diagrams.sh                       # Render all mermaid blocks to SVG
 │   └── validate-skill.mjs                       # Frontmatter, link, token & mermaid lint
-├── templates/                                   # Companion templates
+├── templates/                                   # Companion templates (blank scaffolds)
 │   ├── implementation-plan-template.md          # Visual work breakdown & task mapping
 │   ├── spike-report-template.md                 # Timeboxed exploratory spike & hypotheses
 │   ├── systematic-debugging-log-template.md     # 4-phase RCA & bug reproduction log
-│   └── verification-checklist-template.md       # Multi-layer proof & sign-off checklist
+│   ├── verification-checklist-template.md       # Multi-layer proof & sign-off checklist
+│   ├── handoff-template.md                      # Session handoff — resume from exact state
+│   └── progress-log-template.md                # Persistent task state across sessions
 └── skills/
     └── super-ultra-code-plan/
         └── SKILL.md -> ../../Super Ultra Code Plan Implementation.md  # Harness discovery symlink
@@ -106,6 +110,16 @@ Agents can instantly scaffold structured artifacts using the ready-to-use templa
 - **[`spike-report-template.md`](templates/spike-report-template.md)**: Hypothesis testing flow, epistemic unknowns exploration, and architectural trade-off evaluations.
 - **[`systematic-debugging-log-template.md`](templates/systematic-debugging-log-template.md)**: 4-phase RCA state machine (REPRODUCE -> DIAGNOSE -> FIX -> VERIFY) and bug reproduction log.
 - **[`verification-checklist-template.md`](templates/verification-checklist-template.md)**: Evidence gate flowchart, pre-completion checks (test logs, zero warnings, build pass, git hygiene).
+- **[`handoff-template.md`](templates/handoff-template.md)**: Session handoff document — fill at the end of every session so the next session can resume exactly where you left off (last verified state, next action, open decisions, blockers).
+- **[`progress-log-template.md`](templates/progress-log-template.md)**: Persistent task state log — the single source of truth for a task across multiple sessions (checklist, decisions, evidence trail, session log).
+
+---
+
+## Examples
+
+See the [`examples/`](examples/) folder for a complete filled-in walkthrough:
+
+- **[`worked-example.md`](examples/worked-example.md)**: Full pipeline from Classify through Commit on a real-sized task (adding zod input validation to a REST endpoint). Use this as a reference for what correct output looks like at each phase.
 
 ---
 

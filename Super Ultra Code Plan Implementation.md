@@ -131,6 +131,30 @@ Activate only the reasoning lenses relevant to the task. Always use the core len
 | API/data change | Computational, systems/contract, compatibility/migration, security/privacy, test-first, verification |
 | Production change | Investigative, critical, security/privacy, operational/recovery, reproducibility, verification |
 
+## 🔬 Deep Research Workflow
+
+The deep research workflow produces a long-form, citation-grounded report that the implementation plan can cite as evidence base. It sits between the brainstorming spike and the implementation plan, and only runs when the implementation choice depends on information that is not already in the codebase, the active project's overlay, or the agent's verified configuration. Typical triggers are selecting between competing libraries, evaluating a new framework release, understanding an RFC, or surveying an ecosystem for a vendor decision.
+
+### When to Invoke
+
+Invoke the workflow when at least one of the following is true. The decision touches a library, framework, or API whose surface area the agent has not directly observed in the active project. The decision requires comparing more than two alternatives along several axes. The decision must be defensible to a reviewer who has not seen the agent's reasoning. Short investigations that fit in a spike report or an ADR do not require this workflow.
+
+### Method and Artifacts
+
+The report follows the structure defined in `templates/deep-research-report-template.md`. It opens with an executive summary paragraph, develops three to seven `##` themes with `###` subsections, and closes with a synthesis. Every claim is grounded in an inline citation of the form `[n]`. Mathematical notation uses LaTeX delimiters. Lists are converted to prose; tables are used for multi-axis comparisons. The report length matches the scope of the question, not a fixed minimum.
+
+### Worked Example
+
+`examples/deep-research-worked-example.md` demonstrates the template on a topic relevant to this repository: the three-layer memory model that long-running AI coding agents use to retain context across sessions. Read the example before writing your first report to calibrate length, citation density, and prose rhythm.
+
+### Integration with Downstream Phases
+
+The research report becomes a dated, versioned artifact under `research/` in the active project. The implementation plan cites specific section anchors from the report rather than re-stating findings. If the research surfaces a decision that warrants an ADR, that ADR references the report and does not duplicate its citations.
+
+### Anti-Patterns
+
+The workflow fails when the report uses lists where prose would read naturally, cites sources it has not consulted, claims authorship by a specific external system, pads to an artificial length, or hides directives in markup that tries to override downstream reader behavior. The validator refuses reports that exhibit any of these patterns.
+
 ## 🧭 Cross-Cutting Operating Rules
 These rules apply to every path and support the four skill components without replacing their gates.
 

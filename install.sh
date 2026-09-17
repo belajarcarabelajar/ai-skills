@@ -37,25 +37,47 @@ link_target() {
   fi
 }
 
+link_skill_package() {
+  local target_skill_dir="$1"
+
+  if [ "$DRY_RUN" = true ]; then
+    echo "[DRY-RUN] Would configure skill package in: $target_skill_dir"
+    echo "[DRY-RUN]   - SKILL.md -> $MASTER_FILE"
+    echo "[DRY-RUN]   - templates -> $REPO_DIR/templates"
+    echo "[DRY-RUN]   - examples -> $REPO_DIR/examples"
+  else
+    mkdir -p "$target_skill_dir"
+    ln -sf "$MASTER_FILE" "$target_skill_dir/SKILL.md"
+    ln -sfn "$REPO_DIR/templates" "$target_skill_dir/templates"
+    ln -sfn "$REPO_DIR/examples" "$target_skill_dir/examples"
+    echo "[OK] Linked skill package in: $target_skill_dir"
+  fi
+}
+
 # 1. Personal AI config directory (~/.config/ai/)
 link_target "$HOME/.config/ai" "$HOME/.config/ai/Super Ultra Code Plan Implementation.md"
 
 # 2. Universal Agent Skills (~/.agents/skills/super-ultra-code-plan/)
-link_target "$HOME/.agents/skills/super-ultra-code-plan" "$HOME/.agents/skills/super-ultra-code-plan/SKILL.md"
+link_skill_package "$HOME/.agents/skills/super-ultra-code-plan"
 
-# 3. Antigravity CLI builtin skills (~/.gemini/antigravity-cli/builtin/skills/)
+# 3. Gemini / Antigravity User Skills (~/.gemini/config/skills/super-ultra-code-plan/)
+link_skill_package "$HOME/.gemini/config/skills/super-ultra-code-plan"
+
+# 4. Antigravity CLI builtin fallback (~/.gemini/antigravity-cli/builtin/skills/)
 if [ -d "$HOME/.gemini/antigravity-cli/builtin/skills" ]; then
-  link_target "$HOME/.gemini/antigravity-cli/builtin/skills/super-ultra-code-plan" "$HOME/.gemini/antigravity-cli/builtin/skills/super-ultra-code-plan/SKILL.md"
+  link_skill_package "$HOME/.gemini/antigravity-cli/builtin/skills/super-ultra-code-plan"
 fi
 
-# 4. Claude Code directory (~/.claude/skills/)
+# 5. Claude Code directory (~/.claude/skills/)
 if [ -d "$HOME/.claude" ]; then
-  link_target "$HOME/.claude/skills/super-ultra-code-plan" "$HOME/.claude/skills/super-ultra-code-plan/SKILL.md"
+  link_skill_package "$HOME/.claude/skills/super-ultra-code-plan"
 fi
 
-# 5. Local Repo Self-Check
+# 6. Local Repo Self-Check
 mkdir -p "$REPO_DIR/skills/super-ultra-code-plan"
 ln -sf "../../Super Ultra Code Plan Implementation.md" "$REPO_DIR/skills/super-ultra-code-plan/SKILL.md"
-echo "[OK] Internal repo skill symlink verified."
+ln -sfn "../../templates" "$REPO_DIR/skills/super-ultra-code-plan/templates"
+ln -sfn "../../examples" "$REPO_DIR/skills/super-ultra-code-plan/examples"
+echo "[OK] Internal repo skill package symlinks verified."
 
 echo "==> Ultimate AI Coding Skill installation complete!"

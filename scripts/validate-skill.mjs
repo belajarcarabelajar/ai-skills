@@ -47,18 +47,23 @@ if (!fs.existsSync(masterPath)) {
   console.log(`📊 Master file stats: ${charCount} chars, ${wordCount} words, ~${estimatedTokens} estimated tokens.`);
 }
 
-// 2. Check Symlink in skills/
-const symlinkPath = path.join(rootDir, 'skills', 'super-ultra-code-plan', 'SKILL.md');
-if (!fs.existsSync(symlinkPath)) {
-  console.error('❌ skills/super-ultra-code-plan/SKILL.md does not exist.');
-  errors++;
-} else {
-  try {
-    const target = fs.readlinkSync(symlinkPath);
-    console.log(`✅ Symlink valid: skills/super-ultra-code-plan/SKILL.md -> ${target}`);
-  } catch (err) {
-    console.error(`❌ Failed to read symlink: ${err.message}`);
+// 2. Check Symlinks in skills/super-ultra-code-plan/
+const skillDir = path.join(rootDir, 'skills', 'super-ultra-code-plan');
+const requiredSkillLinks = ['SKILL.md', 'templates', 'examples'];
+
+for (const linkName of requiredSkillLinks) {
+  const p = path.join(skillDir, linkName);
+  if (!fs.existsSync(p)) {
+    console.error(`❌ skills/super-ultra-code-plan/${linkName} does not exist.`);
     errors++;
+  } else {
+    try {
+      const target = fs.readlinkSync(p);
+      console.log(`✅ Symlink valid: skills/super-ultra-code-plan/${linkName} -> ${target}`);
+    } catch (err) {
+      console.error(`❌ Failed to read symlink ${linkName}: ${err.message}`);
+      errors++;
+    }
   }
 }
 
@@ -70,6 +75,8 @@ const requiredTemplates = [
   'verification-checklist-template.md',
   'handoff-template.md',
   'progress-log-template.md',
+  'adr-template.md',
+  'subagent-contract-template.md',
 ];
 
 for (const tmpl of requiredTemplates) {

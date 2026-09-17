@@ -72,11 +72,15 @@ ai-skills/
 │   ├── spike-report-template.md                 # Timeboxed exploratory spike & hypotheses
 │   ├── systematic-debugging-log-template.md     # 4-phase RCA & bug reproduction log
 │   ├── verification-checklist-template.md       # Multi-layer proof & sign-off checklist
-│   ├── handoff-template.md                      # Session handoff — resume from exact state
-│   └── progress-log-template.md                # Persistent task state across sessions
+│   ├── handoff-template.md                      # Session handoff - resume from exact state
+│   ├── progress-log-template.md                 # Persistent task state across sessions
+│   ├── adr-template.md                          # Architecture Decision Record with decision tree
+│   └── subagent-contract-template.md            # Subagent task contract & parent audit gate
 └── skills/
-    └── super-ultra-code-plan/
-        └── SKILL.md -> ../../Super Ultra Code Plan Implementation.md  # Harness discovery symlink
+    └── super-ultra-code-plan/                   # Full skill package with bundled templates & examples
+        ├── SKILL.md -> ../../Super Ultra Code Plan Implementation.md
+        ├── templates -> ../../templates
+        └── examples -> ../../examples
 ```
 
 ---
@@ -95,7 +99,7 @@ cd ai-skills
 
 | Harness / Ecosystem | Config / Skill Location | Auto-Discovery Support |
 |---|---|---|
-| **Google Antigravity CLI** (`agy`) | `~/.gemini/antigravity-cli/builtin/skills/super-ultra-code-plan/` | Supported |
+| **Google Antigravity CLI** (`agy`) | `~/.gemini/config/skills/super-ultra-code-plan/` | Supported |
 | **Universal Agents** | `~/.agents/skills/super-ultra-code-plan/` | Supported |
 | **Claude Code** | `~/.claude/skills/super-ultra-code-plan/` | Supported |
 | **Personal Config Mirror** | `~/.config/ai/Super Ultra Code Plan Implementation.md` | Supported |
@@ -110,8 +114,10 @@ Agents can instantly scaffold structured artifacts using the ready-to-use templa
 - **[`spike-report-template.md`](templates/spike-report-template.md)**: Hypothesis testing flow, epistemic unknowns exploration, and architectural trade-off evaluations.
 - **[`systematic-debugging-log-template.md`](templates/systematic-debugging-log-template.md)**: 4-phase RCA state machine (REPRODUCE -> DIAGNOSE -> FIX -> VERIFY) and bug reproduction log.
 - **[`verification-checklist-template.md`](templates/verification-checklist-template.md)**: Evidence gate flowchart, pre-completion checks (test logs, zero warnings, build pass, git hygiene).
-- **[`handoff-template.md`](templates/handoff-template.md)**: Session handoff document — fill at the end of every session so the next session can resume exactly where you left off (last verified state, next action, open decisions, blockers).
-- **[`progress-log-template.md`](templates/progress-log-template.md)**: Persistent task state log — the single source of truth for a task across multiple sessions (checklist, decisions, evidence trail, session log).
+- **[`handoff-template.md`](templates/handoff-template.md)**: Session handoff document - fill at the end of every session so the next session can resume exactly where you left off (last verified state, next action, open decisions, blockers).
+- **[`progress-log-template.md`](templates/progress-log-template.md)**: Persistent task state log - the single source of truth for a task across multiple sessions (checklist, decisions, evidence trail, session log).
+- **[`adr-template.md`](templates/adr-template.md)**: Architecture Decision Record (ADR) - structured decision tree, alternative trade-off comparison, and consequences.
+- **[`subagent-contract-template.md`](templates/subagent-contract-template.md)**: Subagent task contract - strict scope isolation, permitted target files, and parent diff audit gate sequence.
 
 ---
 

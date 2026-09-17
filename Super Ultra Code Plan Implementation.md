@@ -193,6 +193,14 @@ These rules apply to every path and support the four skill components without re
 - Before requesting tools, identify all next inputs that do not depend on one another and batch them in the same turn when the runtime supports it.
 - Mandatory Accelerator & Tool Routing: Context-mode MCP tools (`ctx_execute`, `ctx_batch_execute`, `ctx_fetch_and_index`, `ctx_search`) are MANDATORY for processing large data, logs, API responses, web fetches, or commands producing >20 lines of output. Never dump raw data or unrouted large outputs into the context window. Use RTK (`rtk`) proxy for all development operations to maximize token efficiency. Preserve underlying command semantics.
 - Command Log Tracking Protocol: Every command execution—particularly testing, linting, building, migrations, and runtime scripts—must be systematically followed by explicit log verification. When the command supports a verbose or log-producing mode (e.g. `--verbose`, `--log-level`, `-v`, `--json` output, or a log-file flag), the verbosity/log flag MUST be included in the command invocation so the run produces retrievable output. Inspect exit status, error count, and relevant stdout/stderr logs. When redirecting output to a file or pipe (e.g. `2>&1 | tee test.log`), immediately inspect the destination log. Never assume silent completion implies success without checking the execution log or verbose output.
+- Piped Log Capping & Exit Code Preservation Standard:
+  - Mandatory Context Protection: Commands producing large or unbound output (>20 lines, e.g. dependency installs, test suites, builds) must be capped to prevent context window flooding.
+  - Mandatory Search Utility: Use `tgrep` exclusively for pattern-based log filtering and code search (e.g. `2>&1 | tgrep -i 'error|failed|pass|exit'`). GNU `grep` is strictly prohibited.
+  - Zero-Masking Exit Code Guarantee: Standard piping (`cmd | tail`) silently masks non-zero exit codes in bash. Agents must NEVER execute an unpreserved piped command. Use one of these verified execution patterns:
+    - Pattern 1 (Pipefail Mode): `set -o pipefail; <cmd> 2>&1 | tail -n 25`
+    - Pattern 2 (Explicit PIPESTATUS Marker): `<cmd> 2>&1 | tail -n 25; echo "EXIT:${PIPESTATUS[0]}"`
+    - Pattern 3 (File Redirection & Tail): `<cmd> > /tmp/cmd.log 2>&1; STATUS=$?; tail -n 25 /tmp/cmd.log; (exit $STATUS)`
+  - Full Log Triage Invariant: If a capped log indicates failure, inspect the full log before formulating hypotheses. Never guess errors from truncated tail snippets alone.
 - Background & Async Task Log Inspection: Any command running asynchronously or as a background task must actively monitor its log file or task status buffer until completion or stable readiness before initiating dependent actions. Never abandon a running background task without verifying its status and inspecting log output.
 - Command Execution Timeout & Hang Guardrail:
   - Strict Timeout Budgets per Category:

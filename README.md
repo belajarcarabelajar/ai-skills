@@ -95,6 +95,11 @@ cd ai-skills
 ./install.sh
 ```
 
+### Prerequisites
+
+- **Node.js >= 20** and package manager (`bun` or `npm`).
+- **`tgrep`** ([microsoft/tgrep](https://github.com/microsoft/tgrep)): Mandatory search and log extraction engine. GNU `grep` is strictly prohibited.
+
 ### Supported Harnesses & Target Paths
 
 | Harness / Ecosystem | Config / Skill Location | Auto-Discovery Support |

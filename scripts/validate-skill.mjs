@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 import fs from 'fs';
 import path from 'path';
+import os from 'os';
 import { fileURLToPath } from 'url';
+import { execSync } from 'child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -9,6 +11,15 @@ const rootDir = path.resolve(__dirname, '..');
 
 console.log('==> Validating Ultimate All-in-One AI Skills Repository...');
 let errors = 0;
+
+// 0. Check Mandatory Prerequisites: tgrep
+try {
+  const tgrepOut = execSync('tgrep --version 2>&1 || ~/.local/bin/tgrep --version 2>&1', { encoding: 'utf8' }).trim().split('\n')[0];
+  console.log(`✅ Prerequisite verified: ${tgrepOut}`);
+} catch (err) {
+  console.error('❌ Prerequisite missing: tgrep (microsoft/tgrep) is mandatory.');
+  errors++;
+}
 
 // 1. Check Master File & Frontmatter
 const masterPath = path.join(rootDir, 'Super Ultra Code Plan Implementation.md');
@@ -115,9 +126,6 @@ for (const scr of scripts) {
 }
 
 // 5. Mermaid Block Validation
-import { execSync } from 'child_process';
-import os from 'os';
-
 const mmdcPath = path.join(rootDir, 'node_modules', '.bin', 'mmdc');
 const mmdcAvailable = fs.existsSync(mmdcPath) ||
   (() => { try { execSync('mmdc --version', { stdio: 'ignore' }); return true; } catch { return false; } })();

@@ -23,6 +23,18 @@ done
 echo "==> Configuring Ultimate All-in-One AI Coding Agent Skill..."
 echo "    Source: $MASTER_FILE"
 
+# 0. Prerequisites Check: tgrep
+if ! command -v tgrep &>/dev/null; then
+  if [ -x "$HOME/.local/bin/tgrep" ]; then
+    export PATH="$HOME/.local/bin:$PATH"
+  else
+    echo "❌ Missing prerequisite: 'tgrep' (microsoft/tgrep) is mandatory." >&2
+    echo "   Install binary to ~/.local/bin/tgrep or system PATH." >&2
+    exit 1
+  fi
+fi
+echo "[OK] Prerequisite verified: $(tgrep --version 2>&1 | head -n 1)"
+
 link_target() {
   local target_dir="$1"
   local target_file="$2"

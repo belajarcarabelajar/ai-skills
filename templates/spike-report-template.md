@@ -5,6 +5,24 @@
 - **Timebox Budget:** [e.g. 30 minutes / 1 hour]
 - **Deliverable:** [Findings report, architecture decision, or proof-of-concept diff]
 
+## 1b. Spike Flow
+
+```mermaid
+flowchart TD
+    Start(["🔎 Spike Start\nTimebox begins"]) --> Form["Formulate hypotheses\nH1, H2, ..."]
+    Form --> Probe["Probe each hypothesis\nwith minimal test/script"]
+    Probe --> Outcome{"Outcome?"}
+    Outcome -->|"Confirmed"| Record["Record evidence\n& confidence level"]
+    Outcome -->|"Disproven"| Record
+    Outcome -->|"Inconclusive"| NewH["Refine hypothesis\nor extend timebox?"]
+    NewH -->|"Refine"| Probe
+    NewH -->|"Timebox exceeded"| Record
+    Record --> More{"More hypotheses\nremaining?"}
+    More -->|"Yes"| Probe
+    More -->|"No"| Decide["Evaluate trade-offs\n& pick recommended path"]
+    Decide --> Done(["📋 Spike Report\nReady for plan transition"])
+```
+
 ## 2. Hypothesis Matrix
 | # | Hypothesis | Test / Probe Method | Outcome | Confidence |
 |---|---|---|---|---|

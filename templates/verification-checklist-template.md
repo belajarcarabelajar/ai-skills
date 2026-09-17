@@ -11,6 +11,22 @@
 - [ ] No hardcoded tokens, secrets, or API keys present in git diff.
 - [ ] Commit message conforms to Conventional Commits format (`feat:`, `fix:`, `docs:`, etc.).
 
+## 2b. Evidence Gate Flow
+
+```mermaid
+flowchart LR
+    Claim(["Completion\nclaim ready?"]) --> RunCmd["Run verification\ncommand fresh"]
+    RunCmd --> Inspect["Inspect exit code\n+ full log output"]
+    Inspect --> Pass{"Exit 0 &\n0 failures?"}
+    Pass -->|"Yes"| ExtractEvidence["Extract structured\nevidence snippet"]
+    Pass -->|"No"| Fix["Fix code/test\nand re-run"]
+    Fix --> RunCmd
+    ExtractEvidence --> AllGates{"All required\ngates checked?"}
+    AllGates -->|"No"| NextGate["Run next\nverification gate"]
+    NextGate --> RunCmd
+    AllGates -->|"Yes"| Sign(["✅ Sign off\nwith evidence"])
+```
+
 ## 3. Fresh Evidence Table
 | Verification Gate | Exact Command | Exit Code | Verified Evidence / Summary | Verdict |
 |---|---|---|---|---|

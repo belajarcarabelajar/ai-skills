@@ -5,6 +5,40 @@
 - **Environment:** [OS, runtime, package version, commit hash]
 - **Affected Subsystem:** [Module, endpoint, or component]
 
+## 1b. Debugging Loop
+
+```mermaid
+stateDiagram-v2
+    [*] --> REPRODUCE : Bug reported
+    REPRODUCE --> DIAGNOSE : Failing test confirms bug
+    REPRODUCE --> REPRODUCE : Test flaky or inconclusive — tighten reproducer
+    DIAGNOSE --> FIX : Root cause isolated
+    DIAGNOSE --> REPRODUCE : New repro needed to confirm root cause
+    FIX --> VERIFY : Patch applied
+    VERIFY --> [*] : Reproduction test GREEN, 0 regressions
+    VERIFY --> DIAGNOSE : Regressions found — root cause incomplete
+
+    state REPRODUCE {
+        [*] --> WriteReproducer
+        WriteReproducer --> RunReproducer
+        RunReproducer --> ConfirmDeterministic
+    }
+    state DIAGNOSE {
+        [*] --> TraceStack
+        TraceStack --> IdentifyInvariant
+        IdentifyInvariant --> ArticulateRootCause
+    }
+    state FIX {
+        [*] --> SmallestSafePatch
+        SmallestSafePatch --> NoUnrelatedRefactor
+    }
+    state VERIFY {
+        [*] --> RunRepro
+        RunRepro --> RunFullSuite
+        RunFullSuite --> ZeroRegressions
+    }
+```
+
 ## 2. Phase 1 — Deterministic Reproduction (Failing Test First)
 - **Minimal Reproducer Test / Command:**
   ```bash

@@ -18,10 +18,27 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Puppeteer Browser
+        run: npx puppeteer browsers install chrome-headless-shell
+
+      - name: Make scripts executable
+        run: chmod +x install.sh scripts/sync.sh scripts/render-diagrams.sh
+
+      - name: Render Mermaid Diagrams
+        run: bash scripts/render-diagrams.sh
+
+      - name: Upload Diagram Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: mermaid-diagrams
+          path: diagrams/
+          if-no-files-found: warn
+
       - name: Run Skill Validation Script
-        run: |
-          chmod +x install.sh scripts/sync.sh scripts/validate-skill.mjs
-          node scripts/validate-skill.mjs
+        run: node scripts/validate-skill.mjs
 
       - name: Test Installer Dry-Run
         run: |

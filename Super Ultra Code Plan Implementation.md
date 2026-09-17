@@ -68,6 +68,18 @@ The universal rules must adapt at runtime to the repository, package, applicatio
 | 3 | 🧪 **Test-Driven Development** | Does the test prove the behavior before production code exists? | RED → GREEN → REFACTOR cycle | Failing test before implementation |
 | 4 | ✅ **Verification** | What fresh evidence proves the completion claim? | Commands, output, exit status, diff | Evidence before completion claim |
 
+```mermaid
+flowchart LR
+    B["🧠 Brainstorming\nValidated design/spec"]
+    B -->|"Human approval"| G1{{"⏸️ Gate 1"}}
+    G1 --> P["🗺️ Writing Plans\nExecutable implementation plan"]
+    P -->|"Spec exists"| G2{{"⏸️ Gate 2"}}
+    G2 --> T["🧪 TDD\nRED → GREEN → REFACTOR"]
+    T -->|"Failing test first"| G3{{"⏸️ Gate 3"}}
+    G3 --> V["✅ Verification\nFresh evidence & diff"]
+    V -->|"Evidence confirmed"| Done(["🏁 Done"])
+```
+
 > 📊 **Progress symbols:** 🔎 Explore · 🧬 Profile · 💬 Clarify · 🧠 Design · 🗺️ Plan · 🧪 Test · 🛠️ Implement · ✅ Verify · ⏸️ Await approval · 🛑 Stop
 
 ## 🧠 Adaptive Reasoning Modes
@@ -297,6 +309,19 @@ These rules apply to every path and support the four skill components without re
   - Commit author policy: All commits must use the primary author name `Iwan Kurniawan`. Check and verify the author email from each respective repository's git config (`git config user.email` or `.git/config`).
   - No co-author trailers: Never insert `Co-authored-by:` or any AI assistant attribution trailers in commit messages or pull requests unless explicitly requested by the user.
   - Clean handoff: State exact modified files, fresh verification evidence (commands + exit codes), and remaining user actions.
+
+```mermaid
+flowchart LR
+    Approval(["✅ Human Approval\nreceived"]) --> Check{"Reversible &\nwithin scope?"}
+    Check -->|"Yes"| Execute["Execute step\ncompletely"]
+    Execute --> More{"More approved\nsteps remain?"}
+    More -->|"Yes"| Check
+    More -->|"No"| Verify["Run verification\n& git hygiene"]
+    Verify --> Done(["🏁 Handoff with\nfresh evidence"])
+    Check -->|"Destructive /\nscope change"| Stop["⏸️ Stop — request\nexplicit confirmation"]
+    Check -->|"Blocked externally"| Unblock["Complete all\nindependent steps\nthen report blocker"]
+    Unblock --> More
+```
 
 ### 🧠 Continuous Learning & Memory Lifecycle
 - Maintain knowledge persistence across sessions via two distinct memory phases:
@@ -593,6 +618,36 @@ Cycle: RED (one minimal failing test) → verify fails for right reason → GREE
 Exceptions require explicit human approval: throwaway prototypes, generated code, documentation/configuration-only work, and visual-only changes. Every exception still needs an appropriate verification method.
 Red flags — stop, restart: code before test, test passes immediately, can't explain failure, "just this once", "keep as reference", sunk-cost argument, "spirit not ritual" argument.
 
+```mermaid
+stateDiagram-v2
+    [*] --> RED : Write one minimal failing test
+    RED --> RED : Test passes immediately? Rewrite — too weak
+    RED --> GREEN : Test fails for right reason
+    GREEN --> GREEN : Regressions? Fix before continuing
+    GREEN --> REFACTOR : All tests pass
+    REFACTOR --> RED : Next behavior — repeat cycle
+    REFACTOR --> [*] : All behaviors covered & verified
+
+    state RED {
+        direction LR
+        [*] --> WriteTest
+        WriteTest --> RunTest
+        RunTest --> ConfirmFail : Exit non-zero
+    }
+    state GREEN {
+        direction LR
+        [*] --> MinimalCode
+        MinimalCode --> RunAll
+        RunAll --> ConfirmPass : Exit 0, 0 regressions
+    }
+    state REFACTOR {
+        direction LR
+        [*] --> CleanUp
+        CleanUp --> RunAll2
+        RunAll2 --> StayGreen : Exit 0
+    }
+```
+
 ## 4.1 🐞 Systematic Debugging (Iron Law of Bug Isolation)
 > 🐞 **Diagnostic loop:** REPRODUCE → DIAGNOSE (RCA) → SMALLEST SAFE FIX → REGRESSION PROOF.
 
@@ -657,6 +712,19 @@ Verification matrix — run only the rows relevant to the approved scope and rec
 | Definition of Done | Every applicable gate and acceptance criterion is complete, evidenced, and traceable |
 | Build/deployment | Relevant build/package/deploy check when the deliverable includes it |
 | Documentation/configuration | References, examples, and configuration behavior match the implementation |
+
+```mermaid
+flowchart TD
+    Start(["Ready to claim completion?"]) --> Step1["1. Identify the command\nthat proves the claim"]
+    Step1 --> Step2["2. Run it fresh\nwith log capture"]
+    Step2 --> Step3["3. Inspect full log:\nexit code + error lines"]
+    Step3 --> HasEvidence{"Evidence\ndirectly proves claim?"}
+    HasEvidence -->|"No — partial or stale"| Fix["Fix the gap:\ncode, test, or config"]
+    Fix --> Step2
+    HasEvidence -->|"Yes"| Step4["4. Extract structured evidence:\n[Command] → [Exit 0] → [Log] → [Verdict]"]
+    Step4 --> Step5["5. State completion claim\nciting evidence"]
+    Step5 --> Done(["✅ Claim verified & safe"])
+```
 
 Red flags: "should", "probably", "seems to", satisfaction expressed pre-verification, trusting agent reports without diff check, "I'm tired", "just this once".
 ## Consolidated Anti-Patterns

@@ -81,7 +81,7 @@ for (const tmpl of requiredTemplates) {
 }
 
 // 4. Check Executable Scripts
-const scripts = ['install.sh', 'scripts/sync.sh'];
+const scripts = ['install.sh', 'scripts/sync.sh', 'scripts/render-diagrams.sh'];
 for (const scr of scripts) {
   const p = path.join(rootDir, scr);
   if (!fs.existsSync(p)) {
@@ -89,6 +89,70 @@ for (const scr of scripts) {
     errors++;
   } else {
     console.log(`✅ Script present: ${scr}`);
+  }
+}
+
+// 5. Mermaid Block Validation
+import { execSync } from 'child_process';
+import os from 'os';
+
+const mmdcPath = path.join(rootDir, 'node_modules', '.bin', 'mmdc');
+const mmdcAvailable = fs.existsSync(mmdcPath) ||
+  (() => { try { execSync('mmdc --version', { stdio: 'ignore' }); return true; } catch { return false; } })();
+
+if (!mmdcAvailable) {
+  console.warn('⚠️  mmdc not found — skipping mermaid block validation. Run: npm install');
+} else {
+  const mmdc = fs.existsSync(mmdcPath) ? mmdcPath : 'mmdc';
+  const mdFiles = [];
+
+  function findMdFiles(dir) {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (entry.name === 'node_modules' || entry.name === '.git' || entry.name === 'diagrams') continue;
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) findMdFiles(full);
+      else if (entry.name.endsWith('.md')) mdFiles.push(full);
+    }
+  }
+  findMdFiles(rootDir);
+
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'skill-mermaid-'));
+  let mermaidValid = 0;
+  let mermaidInvalid = 0;
+
+  for (const mdFile of mdFiles) {
+    const content = fs.readFileSync(mdFile, 'utf8');
+    const blocks = [];
+    const blockRe = /```mermaid\n([\s\S]*?)```/g;
+    let match;
+    while ((match = blockRe.exec(content)) !== null) {
+      blocks.push(match[1].trim());
+    }
+
+    for (let i = 0; i < blocks.length; i++) {
+      const rel = path.relative(rootDir, mdFile);
+      const tmpIn = path.join(tmpDir, `block-${mermaidValid + mermaidInvalid + 1}.mmd`);
+      const tmpOut = path.join(tmpDir, `block-${mermaidValid + mermaidInvalid + 1}.svg`);
+      fs.writeFileSync(tmpIn, blocks[i]);
+      try {
+        execSync(`"${mmdc}" --input "${tmpIn}" --output "${tmpOut}"`, { stdio: 'pipe' });
+        mermaidValid++;
+      } catch (err) {
+        console.error(`❌ Mermaid syntax error in ${rel} [block ${i + 1}]`);
+        console.error(`   ${err.stderr?.toString().trim().split('\n')[0] || 'unknown error'}`);
+        mermaidInvalid++;
+        errors++;
+      }
+    }
+  }
+
+  // Cleanup temp dir
+  fs.rmSync(tmpDir, { recursive: true, force: true });
+
+  if (mermaidInvalid > 0) {
+    console.error(`❌ Mermaid validation: ${mermaidValid} valid, ${mermaidInvalid} invalid block(s).`);
+  } else {
+    console.log(`✅ Mermaid validation: ${mermaidValid} block(s) valid.`);
   }
 }
 

@@ -1,6 +1,6 @@
 # AI Skills: Ultimate All-in-One AI Coding Agent Pipeline
 
-Comprehensive, production-grade, all-in-one skill pipeline for AI coding agents. Designed to guide agents through the entire software engineering lifecycle: **Idea → Design → Plan → Human Approval Gate → TDD → Systematic Debugging → Subagent Orchestration → Verification → Finishing**.
+Comprehensive, production-grade, all-in-one skill pipeline for AI coding agents. Designed to guide agents through the entire software engineering lifecycle: **Idea -> Design -> Plan -> Human Approval Gate -> TDD -> Systematic Debugging -> Subagent Orchestration -> Verification -> Finishing**.
 
 Maintains a **Single Source of Truth** (`Super Ultra Code Plan Implementation.md`) so the agent never loses contextual invariants, safety constraints, or human-approval gates during execution.
 
@@ -8,35 +8,42 @@ Maintains a **Single Source of Truth** (`Super Ultra Code Plan Implementation.md
 
 ## Execution Lifecycle
 
+![Execution Lifecycle](diagrams/lifecycle.svg)
+
+<details>
+<summary>View raw Mermaid source</summary>
+
 ```mermaid
 flowchart TD
     Start["User Request / Intent"] --> Classify{"Task Classification"}
-    
+
     Classify -->|Spike| PathSpike["Exploratory Spike & Hypothesis Testing"]
     Classify -->|Bounded| PathBounded["Bounded Direct Fix (< 2 Files)"]
     Classify -->|Architectural| PathArch["Architectural Design & Brainstorming"]
-    
+
     PathSpike --> DesignReport["Spike Report & Recommendations"]
     PathArch --> WritePlan["Visual Implementation Plan (Writing Plans)"]
     PathBounded --> WritePlan
     DesignReport --> WritePlan
-    
+
     WritePlan --> HardGate{{"🛑 HARD HUMAN APPROVAL GATE"}}
-    
+
     HardGate -->|Revisions Requested| WritePlan
     HardGate -->|Approved| ExecRoute{"Execution Strategy"}
-    
-    ExecRoute -->|New Feature / Refactor| TDD["4️⃣ Test-Driven Development (RED → GREEN → REFACTOR)"]
+
+    ExecRoute -->|New Feature / Refactor| TDD["4️⃣ Test-Driven Development (RED -> GREEN -> REFACTOR)"]
     ExecRoute -->|Bug Isolation| Debug["4.1 🐞 Systematic Debugging (4-Phase RCA Loop)"]
     ExecRoute -->|Parallel Workstreams| Subagents["🤖 Subagent Orchestration & Isolated Workspaces"]
-    
+
     TDD --> VerifyGate
     Debug --> VerifyGate
     Subagents --> VerifyGate
-    
+
     VerifyGate["5️⃣ Verification Before Completion (Evidence Gate)"] --> GitHygiene["Finishing & Git Hygiene Protocol"]
     GitHygiene --> Done["✅ Task Completed & Verified"]
 ```
+
+</details>
 
 ---
 
@@ -46,14 +53,18 @@ flowchart TD
 ai-skills/
 ├── README.md                                    # Documentation & architecture flow
 ├── LICENSE                                      # MIT License
+├── package.json                                 # devDependencies: @mermaid-js/mermaid-cli
 ├── Super Ultra Code Plan Implementation.md      # SINGLE SOURCE OF TRUTH (Master Skill)
 ├── install.sh                                   # 1-command installer for all harnesses
 ├── .github/
 │   └── workflows/
-│       └── ci.yml                               # CI validation workflow
+│       └── ci.yml                               # CI: install, render diagrams, validate, dry-run
+├── diagrams/                                    # Auto-generated SVG diagrams (CI artifact)
+│   └── lifecycle.svg                            # Lifecycle diagram embedded in README
 ├── scripts/
 │   ├── sync.sh                                  # Bidirectional sync (~/.config/ai <-> repo)
-│   └── validate-skill.mjs                       # Frontmatter, link & token validation
+│   ├── render-diagrams.sh                       # Render all mermaid blocks to SVG
+│   └── validate-skill.mjs                       # Frontmatter, link, token & mermaid lint
 ├── templates/                                   # Companion templates
 │   ├── implementation-plan-template.md          # Visual work breakdown & task mapping
 │   ├── spike-report-template.md                 # Timeboxed exploratory spike & hypotheses
@@ -89,12 +100,12 @@ cd ai-skills
 
 ## Companion Templates
 
-Agents can instantly scaffold structured artifacts using the ready-to-use templates in `templates/`:
+Agents can instantly scaffold structured artifacts using the ready-to-use templates in `templates/`. Each template includes an embedded Mermaid diagram illustrating its workflow:
 
 - **[`implementation-plan-template.md`](templates/implementation-plan-template.md)**: Visual Mermaid map, task breakdown, failing tests (RED), implementation (GREEN), and verification matrix.
-- **[`spike-report-template.md`](templates/spike-report-template.md)**: Hypothesis testing, epistemic unknowns exploration, and architectural trade-off evaluations.
-- **[`systematic-debugging-log-template.md`](templates/systematic-debugging-log-template.md)**: 4-phase debugging (deterministic repro test, root cause analysis, smallest safe fix, regression proof).
-- **[`verification-checklist-template.md`](templates/verification-checklist-template.md)**: Pre-completion evidence gate (test logs, zero warnings, build pass, git hygiene).
+- **[`spike-report-template.md`](templates/spike-report-template.md)**: Hypothesis testing flow, epistemic unknowns exploration, and architectural trade-off evaluations.
+- **[`systematic-debugging-log-template.md`](templates/systematic-debugging-log-template.md)**: 4-phase RCA state machine (REPRODUCE -> DIAGNOSE -> FIX -> VERIFY) and bug reproduction log.
+- **[`verification-checklist-template.md`](templates/verification-checklist-template.md)**: Evidence gate flowchart, pre-completion checks (test logs, zero warnings, build pass, git hygiene).
 
 ---
 
@@ -103,6 +114,13 @@ Agents can instantly scaffold structured artifacts using the ready-to-use templa
 Run the automated validation suite locally:
 
 ```bash
+# Install mermaid-cli (once)
+npm install
+
+# Render all diagrams to diagrams/
+bash scripts/render-diagrams.sh
+
+# Validate frontmatter, symlinks, templates, scripts & mermaid syntax
 node scripts/validate-skill.mjs
 ```
 
@@ -111,6 +129,7 @@ Verifies:
 - Master file integrity and estimated token budget (~22k tokens).
 - Symlink validity in `skills/super-ultra-code-plan/SKILL.md`.
 - Presence of all required templates and executable scripts.
+- Mermaid syntax validity for every ` ```mermaid` block in the repo (exits 1 on any error).
 
 ---
 

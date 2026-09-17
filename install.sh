@@ -23,17 +23,42 @@ done
 echo "==> Configuring Ultimate All-in-One AI Coding Agent Skill..."
 echo "    Source: $MASTER_FILE"
 
-# 0. Prerequisites Check: tgrep
-if ! command -v tgrep &>/dev/null; then
-  if [ -x "$HOME/.local/bin/tgrep" ]; then
-    export PATH="$HOME/.local/bin:$PATH"
-  else
-    echo "❌ Missing prerequisite: 'tgrep' (microsoft/tgrep) is mandatory." >&2
-    echo "   Install binary to ~/.local/bin/tgrep or system PATH." >&2
-    exit 1
+# 0. Prerequisites Check: tgrep, context-mode, rtk, gh, bun, opencode
+check_prereq() {
+  local cmd="$1"
+  local label="$2"
+  local min_hint="${3:-}"
+
+  if ! command -v "$cmd" &>/dev/null; then
+    if [ -x "$HOME/.local/bin/$cmd" ]; then
+      export PATH="$HOME/.local/bin:$PATH"
+    elif [ -x "$HOME/.bun/bin/$cmd" ]; then
+      export PATH="$HOME/.bun/bin:$PATH"
+    else
+      echo "❌ Missing prerequisite: '$cmd' ($label) is mandatory." >&2
+      [ -n "$min_hint" ] && echo "   Hint: $min_hint" >&2
+      echo "   Install to ~/.local/bin/$cmd, ~/.bun/bin/$cmd, or system PATH." >&2
+      exit 1
+    fi
   fi
-fi
-echo "[OK] Prerequisite verified: $(tgrep --version 2>&1 | head -n 1)"
+  local version
+  version="$($cmd --version 2>&1 | head -n 1)"
+  [ -z "$version" ] && version="installed (no version flag)"
+  echo "[OK] Prerequisite verified: $cmd — $version"
+}
+
+check_prereq "tgrep"        "microsoft/tgrep v1.0.5 (trigram-indexed search)" \
+             "curl -fsSL https://raw.githubusercontent.com/microsoft/tgrep/main/install.sh | bash"
+check_prereq "context-mode" "Context Mode MCP server (token-efficient routing)" \
+             "npm i -g context-mode"
+check_prereq "rtk"          "Rust Token Killer (rtk proxy for dev ops)" \
+             "cargo install rtk"
+check_prereq "gh"           "GitHub CLI (web search GitHub operations)" \
+             "sudo pacman -S github-cli  # Arch Linux"
+check_prereq "bun"          "Bun runtime (JS/TS + script execution)" \
+             "curl -fsSL https://bun.sh/install | bash"
+check_prereq "opencode"     "OpenCode AI agent harness (1.x CLI)" \
+             "curl -fsSL https://opencode.ai/install | bash"
 
 link_target() {
   local target_dir="$1"

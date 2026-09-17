@@ -56,7 +56,12 @@ while IFS= read -r mdfile; do
       svg_out="$OUTPUT_DIR/${svg_name}.svg"
 
       echo "  Rendering: $rel [block $block_index] -> diagrams/${svg_name}.svg"
-      if "$MMDC" --input "$tmp_file" --output "$svg_out" --backgroundColor transparent 2>&1; then
+      # Use puppeteer-config.json if present (auto --no-sandbox for root environments)
+      PUPPETEER_CFG_FLAG=""
+      if [ -f "$REPO_DIR/puppeteer-config.json" ]; then
+        PUPPETEER_CFG_FLAG="-p $REPO_DIR/puppeteer-config.json"
+      fi
+      if "$MMDC" $PUPPETEER_CFG_FLAG --input "$tmp_file" --output "$svg_out" --backgroundColor transparent 2>&1; then
         rendered=$((rendered + 1))
       else
         echo "  ❌ FAILED: $rel [block $block_index]" >&2

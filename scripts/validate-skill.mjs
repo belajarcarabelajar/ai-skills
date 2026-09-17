@@ -164,8 +164,10 @@ if (!mmdcAvailable) {
       const tmpIn = path.join(tmpDir, `block-${mermaidValid + mermaidInvalid + 1}.mmd`);
       const tmpOut = path.join(tmpDir, `block-${mermaidValid + mermaidInvalid + 1}.svg`);
       fs.writeFileSync(tmpIn, blocks[i]);
+      const puppeteerCfg = path.join(rootDir, 'puppeteer-config.json');
+      const cfgFlag = fs.existsSync(puppeteerCfg) ? ` -p "${puppeteerCfg}"` : '';
       try {
-        execSync(`"${mmdc}" --input "${tmpIn}" --output "${tmpOut}"`, { stdio: 'pipe' });
+        execSync(`"${mmdc}"${cfgFlag} --input "${tmpIn}" --output "${tmpOut}"`, { stdio: 'pipe' });
         mermaidValid++;
       } catch (err) {
         console.error(`❌ Mermaid syntax error in ${rel} [block ${i + 1}]`);

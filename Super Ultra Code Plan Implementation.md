@@ -197,6 +197,7 @@ These rules apply to every path and support the four skill components without re
   - Real-Time Todo State Transition: Each item must be visibly updated (`[x]`) immediately upon completion with fresh verification evidence cited before proceeding to check off or start the next item. Never execute multiple tasks in an opaque block without itemized checklist progression.
 - Update the state at task start, after each meaningful checkpoint, before compaction, and before handoff. Keep completed work and evidence separate from assumptions and planned work.
 - A resumed task must read the latest state, inspect the current files and diff, and continue from the last verified checkpoint rather than replaying already completed work.
+- Idempotent skip (evidence-based, not checkbox-based): before executing a task, evaluate its `skip_if` command from the plan frontmatter. If `skip_if` exits 0, the task is already satisfied by fresh runtime proof; mark it `SKIPPED-IDEMPOTENT` and advance. A `[x]` mark alone never justifies a skip; skipping requires a fresh verifying command, so re-runs stay safe and non-destructive.
 - Stage & Todo Completion Re-Anchor Protocol:
   - At the completion of each discrete task, to-do list item, or execution stage, the agent MUST explicitly re-anchor against the engineering standards and active constraints defined in this skill before moving to the next item.
   - Verification & Evidence Audit: Verify fresh evidence for the completed item against the Iron Law of Verification (fresh log, exit code 0, test pass, VCS diff).
@@ -242,7 +243,7 @@ These rules apply to every path and support the four skill components without re
   - Automatic Abort & Process Cleanup: Immediately abort the active command, terminate orphaned compiler/worker processes (`pkill -f "cargo nextest"; pkill -f "rustc"`), and release build locks to prevent WSL lockup, system freezes, or host Windows BSOD.
   - Interactive Safety Gate: Never force-continue through a memory panic state. Prompt the user directly with live memory metrics and provide adaptive choices: (1) Run cache cleanup (`cleanup-dev` / `cargo clean -p <target>`) and retry with reduced concurrency (e.g. `-j 1` or `-j 2`), (2) Defer or hand off execution to run outside the agent session directly in a dedicated host terminal, or (3) Safely abort the progress.
 - When a tool fails, capture the exact failure and exit status, determine whether it is transient, environmental, or deterministic, retry only when the retry is safe and bounded, and change strategy or report a blocker when it is not. Never conceal a failed command behind a success summary.
-- Mid-Implementation Failure Protocol: When a bug or test error appears mid-execution, stop the current step and follow this order: (1) capture the exact failure, stack/log lines, and exit status; (2) reproduce or isolate the failing case before theorizing; (3) classify the failure as code, test, contract, environment, infrastructure, or pre-existing (per Test Reliability & Failure Classification), and for a tool failure as transient, environmental, or deterministic; (4) trace the shared root cause and all callers before fixing, and fix the root cause, not the symptom; (5) apply the fix with a failing-then-passing check when code behavior is involved; (6) re-run the focused suite plus neighboring/regression tests; then (7) update the checklist and state with the failure, classification, fix, and evidence before continuing. Do not skip classification, do not weaken assertions to make a test pass, and do not continue past an unclassified failure.
+- Mid-Implementation Failure Protocol: When a bug or test error appears mid-execution, stop the current step and follow this order: (1) capture the exact failure, stack/log lines, and exit status; (2) reproduce or isolate the failing case before theorizing; (3) classify the failure as code, test, contract, environment, infrastructure, or pre-existing (per Test Reliability & Failure Classification), and for a tool failure as transient, environmental, or deterministic; (4) trace the shared root cause and all callers before fixing, and fix the root cause, not the symptom; (5) apply the fix with a failing-then-passing check when code behavior is involved; (6) re-run the focused suite plus neighboring/regression tests; then (7) update the checklist and state with the failure, classification, fix, and evidence before continuing. Do not skip classification, do not weaken assertions to make a test pass, and do not continue past an unclassified failure. Blast-radius rule (deterministic): compute impact from the plan's `depends_on` graph and halt only the downstream tasks that depend on the failed task; tasks that are independent of it continue to execute. Record every failure in the centralized Error Ledger and report them as one batch at the end of the turn, rather than halting the entire run on the first failure of an independent task. A dependent chain halts at the failed node (`FAILED-BLOCKING`); an independent-task failure is isolated (`FAILED-ISOLATED`) and the run proceeds.
 - Catalog-First Tool Discovery & Non-Intrusive Suggestions: Prioritize checking the connected tool registry, MCP directory, and skill catalog before proposing raw web scraping, bespoke wrapper scripts, or browser automations. If a catalog tool fits the need, suggest it concisely; render at most one suggestion card per conversation and never repeat an ignored or dismissed suggestion.
 - Partner Tool Opt-In & Strict No-Mocking Rule: Consumer partner tools (e.g. third-party services) require explicit user choice; urgency is not an exception to partner selection. Strict No-Mocking Invariant: never create mock interfaces, fake tool outputs, or simulated MCP experiences. Rely exclusively on real, available tools and truthful runtime execution.
 
@@ -571,8 +572,33 @@ Step granularity: 2-5 min per step.
 - Implement minimal code
 - Run — confirm pass
 - Commit
+Runner Contract (determinism fondasi): the YAML frontmatter below is the single source of truth for routing, dependency order, retry, and idempotency. Prose and checklists under it explain but must never contradict it. Every `Task N` heading MUST use an `id` identical to its `tasks[].id` in frontmatter and to its node name in the Mermaid map; any mismatch is a pre-execution blocker. Commands inside the plan MUST be tool-agnostic and directly runnable (e.g. `bun test path`), never MCP/rtk/tgrep-specific; context-mode and rtk are execution-environment wrappers applied by the runner or harness, not baked into the portable artifact.
 Plan header template:
 ```
+---
+schema: ultra-plan/v1
+plan_id: YYYY-MM-DD-<feature-name>
+status: Draft            # Draft|Approved|InProgress|Verification|Complete|Blocked
+version: 1
+runner_contract: true
+defaults:
+  retry_transient_max: 1            # explicit integer, never the word "bounded"
+  step_timeout_s: 120               # per-step hang guardrail
+  on_precondition_fail: stop-task-continue-independent
+tasks:
+  - id: T1
+    depends_on: []                  # DAG edges — machine-parseable, must match Mermaid
+    files: { create: [exact/path.ext], modify: [], test: [exact/path.test.ext] }
+    idempotency_key: "T1:exact/path.ext"
+    skip_if: "<verification command>"  # exit 0 = already done → SKIPPED-IDEMPOTENT
+    verify_exit: 0
+  - id: T2
+    depends_on: [T1]
+    files: { create: [exact/path2.ext], modify: [], test: [exact/path2.test.ext] }
+    idempotency_key: "T2:exact/path2.ext"
+    skip_if: "<verification command>"
+    verify_exit: 0
+---
 # [Feature Name] Implementation Plan
 > For agentic workers: REQUIRED EXECUTION METHOD — delegated task execution (recommended) or inline plan execution. Steps use checkbox syntax.
 **Goal:** [one sentence]
@@ -618,6 +644,13 @@ Task template:
 **Interfaces:**
 - Consumes: [exact signatures from earlier tasks]
 - Produces: [exact names/types for later tasks]
+**Preconditions (assert FIRST; fail-fast, never improvise a substitute):**
+- [ ] Upstream: artifact from Task <id> exists at <path> (else abort: `E_PRECOND_UPSTREAM`)
+- [ ] Dependency: `<cmd> --version` exits 0 (else abort: `E_PRECOND_DEP`)
+- [ ] Input contract: <VAR> defined and satisfies <constraint> (else abort: `E_PRECOND_INPUT`)
+- On any failed precondition: STOP this task, do NOT guess a substitute, record it to the Error Ledger, and continue only tasks whose `depends_on` does not include this task.
+**Idempotency Check (evaluate BEFORE Step 1):**
+- [ ] Skip when the `skip_if` command from frontmatter exits 0 (fresh runtime proof). Mark the task `SKIPPED-IDEMPOTENT` and advance. A `[x]` checkbox alone is never sufficient to skip.
 **Behavior & Acceptance:**
 - [AC identifier and observable behavior delivered by this task]
 **Edge Cases & Failure Behavior:**
@@ -633,11 +666,12 @@ Task template:
 **Test Data & Determinism:**
 - [fixture, isolation, cleanup, clock, external-state, and retry behavior]
 - [ ] Step 1: Write failing test [code]
-- [ ] Step 2: Run — verify fail [command + expected output]
+- [ ] Step 2: Run — verify fail | cmd: `<single runnable command>` | expect: exit <non-zero> | retry: 0 | on_fail: n/a (failure is expected here)
 - [ ] Step 3: Write minimal implementation [code]
-- [ ] Step 4: Run — verify pass [command + expected output]
+- [ ] Step 4: Run — verify pass | cmd: `<single runnable command>` | expect: exit 0, 0 failures | retry: 1 (transient only) | on_fail: mark task FAILED, write Error Ledger, halt only downstream tasks (those with this id in `depends_on`); independent tasks keep running
 - [ ] Step 5: Commit [git commands]
 ```
+Deterministic step mapping: one execution step maps to exactly one runnable shell command (1-to-1). Never fold multiple non-chained commands into a single step. Each executable step carries `cmd`, `expect` (exit code / count), `retry` (explicit integer, transient-only), and `on_fail` (route, never silent). `retry: 0` means no retry; the word "bounded" is banned in favor of an integer.
 No placeholders — banned: TBD, TODO, "implement later", "add appropriate error handling", "similar to Task N", steps without code, undefined references.
 Plan self-review: spec and acceptance-criteria coverage (every requirement → a task), selected reasoning-lens coverage and outputs, visual-map validity and consistency, non-goals, assumptions, dependencies, risks, rollback, placeholder scan, anti-bloat pruning pass (scan with tags: `delete:` dead/speculative code, `stdlib:` stdlib replacement, `native:` platform feature, `yagni:` single-impl abstraction/unused config, `shrink:` fewer lines; target net line reduction), deliberate shortcut check (all simplifications must include `defer: <ceiling>, <upgrade-trigger>`), type consistency across tasks (signature names must match), and verification evidence. Fix inline, no re-review cycle.
 Pre-execution walkthrough: refresh the active project profile and inspect the plan's Mermaid diagram and selected reasoning-lens outputs, then compare every path, dependency, gate, failure branch, contract, command, and acceptance criterion with the current repository and approved spec before starting implementation.

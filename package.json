@@ -6,7 +6,10 @@
   "scripts": {
     "render-diagrams": "bash scripts/render-diagrams.sh",
     "validate": "node scripts/validate-skill.mjs",
-    "ci": "bash scripts/render-diagrams.sh && node scripts/validate-skill.mjs"
+    "test": "bun test scripts/ultra-plan-runner.test.mjs",
+    "plan:check": "node scripts/ultra-plan-runner.mjs",
+    "plan:run": "node scripts/ultra-plan-runner.mjs --execute",
+    "ci": "bash scripts/render-diagrams.sh && node scripts/validate-skill.mjs && bun test scripts/ultra-plan-runner.test.mjs"
   },
   "devDependencies": {
     "@mermaid-js/mermaid-cli": "^11.4.2"

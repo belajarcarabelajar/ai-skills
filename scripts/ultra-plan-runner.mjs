@@ -211,10 +211,14 @@ export function validatePlan(plan, body) {
   try { topoSort(plan.tasks || []); } catch (e) { errors.push(e.message); }
 
   if (body) {
+    const mermaidBlocks = body.match(/```mermaid[\s\S]*?```/g) || [];
+    if (mermaidBlocks.length === 0) {
+      errors.push('plan body must contain at least one ```mermaid diagram (Visual Implementation Map is mandatory)');
+    }
     for (const t of plan.tasks || []) {
       const headingRe = new RegExp(`Task\\s+${t.id}\\b`);
       const mermaidRe = new RegExp(`\\b${t.id}\\b`);
-      const mermaidBlock = (body.match(/```mermaid[\s\S]*?```/g) || []).join('\n');
+      const mermaidBlock = mermaidBlocks.join('\n');
       if (!headingRe.test(body)) errors.push(`task ${t.id} has no matching "Task ${t.id}" heading in body`);
       if (!mermaidRe.test(mermaidBlock)) errors.push(`task ${t.id} has no matching node in the mermaid map`);
     }

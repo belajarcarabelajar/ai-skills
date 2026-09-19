@@ -93,7 +93,7 @@ Activate only the reasoning lenses relevant to the task. Always use the core len
 | 🔎 Investigative & Evidence | Current repository, documentation, tests, history, and runtime facts | Findings, source references, baseline, confidence |
 | 💻 Computational | Decomposition, patterns, abstractions, algorithms, data, and evaluation | Inputs/outputs, contracts, invariants, transitions, complexity, and test cases |
 | 🧩 Analytical | Components, dependencies, constraints, and impact | Task decomposition, dependency map, affected surfaces |
-| 🕸️ Systems & Contract | Boundaries, interfaces, consumers, data flow, and lifecycle | Architecture model, interface contract, Mermaid diagram when useful |
+| 🕸️ Systems & Contract | Boundaries, interfaces, consumers, data flow, and lifecycle | Architecture model, interface contract, MANDATORY Mermaid diagram for every plan (see Visual Implementation Map) |
 | ⚔️ Critical & Adversarial | Assumptions, contradictions, blind spots, misuse, and failure | Risks, counterexamples, rejected interpretations, failure modes |
 | 🧪 Behavioral & Test-First | Observable behavior and regression boundaries | Failing test, test matrix, expected behavior, regression scope |
 | ✅ Evidence & Reflection | Whether the result actually satisfies the request | Self-review, traceability, verification evidence, unresolved gaps |
@@ -103,7 +103,7 @@ Activate only the reasoning lenses relevant to the task. Always use the core len
 - Identify existing patterns without copying accidental behavior. Define abstractions, boundaries, interfaces, preconditions, postconditions, invariants, and ownership.
 - Specify the algorithm or state transitions, including ordering, branching, loops, retries, termination conditions, failure paths, and data mutation.
 - Evaluate correctness, edge cases, time complexity, space complexity, latency, and maintainability when relevant to the scope.
-- Produce pseudocode, a Mermaid diagram, or a data-flow/state model when it materially improves understanding. Derive tests from the behavior and boundaries, not from one observed example.
+- Produce a MANDATORY Mermaid diagram for every plan, plus pseudocode or a data-flow/state model when it materially improves understanding. Derive tests from the behavior and boundaries, not from one observed example.
 
 ### 🎛️ Conditional Reasoning Lenses
 
@@ -528,17 +528,17 @@ Treat unknown elements according to their epistemic nature before asking the use
 2. Present question + probe plan (2-3 sentences)
 3. Get approval (nod sufficient)
 4. Investigate — cheapest method preserving correctness
-5. Report recommendation — label built code as throwaway
+5. Report recommendation — label built code as throwaway; include a MANDATORY Mermaid diagram (hypothesis → probe → outcome → decision, per spike-report-template §1b)
 ### Bounded
 1. Explore project context — files, docs, recent commits
 2. Ask clarifying questions — one at a time, only ones that matter
-3. Present short design in chat — approach, files touched, testing plan, and itemized pre-execution todo checklist (`[ ]`)
+3. Present short design in chat — MANDATORY Mermaid diagram (even a 3-node `flowchart LR`), approach, files touched, testing plan, and itemized pre-execution todo checklist (`[ ]`)
 4. STOP — wait for explicit yes
 5. Implement — execute checklist sequentially (`[ ]` → `[x]`), normal dev workflow, TDD applies, no plan doc
 ### 🧠 Architectural — Brainstorming → Design
 1. Phase 1 — Ground in Environment: Non-mutating exploration of project context, configs, dependencies, and architecture before asking questions.
 2. Phase 2 — Intent Chat: Clarify goal, success criteria, constraints, and tradeoffs using the Two Kinds of Unknowns protocol.
-3. Phase 3 — Implementation Chat: Detail decision-complete architecture (interfaces, data flow, failure modes, acceptance criteria). Offer visual companion when clearer shown than told.
+3. Phase 3 — Implementation Chat: Detail decision-complete architecture (interfaces, data flow, failure modes, acceptance criteria). Must include at least one Mermaid diagram as visual companion (a `flowchart` showing tasks, dependencies, gates, and verification is MANDATORY; add `sequenceDiagram`, `stateDiagram-v2`, or `erDiagram` when they clarify interactions, lifecycle, or data).
 4. Propose 2-3 approaches — trade-offs, recommendation, YAGNI applied.
 5. Present design in sections — scale to complexity, approval after each section.
 6. Write design doc — save to docs/code-plan/specs/YYYY-MM-DD-<topic>-design.md, commit.
@@ -548,15 +548,15 @@ Treat unknown elements according to their epistemic nature before asking the use
 ## 3️⃣ 🗺️ Writing Plans (architectural path only)
 > 🗺️ **Component 2 — Plan output:** every task must be independently understandable, executable, and testable.
 
-### 🗺️ Visual Implementation Map
-- For an Architectural plan or any multi-step flow with meaningful sequence, branching, dependency, lifecycle, data movement, or component interaction, include at least one valid Mermaid diagram.
-- Choose the diagram type that matches the reasoning: `flowchart` for process and decisions, `sequenceDiagram` for interactions, `stateDiagram-v2` for lifecycle, `graph` for architecture/dependencies, and `erDiagram` for data relationships.
-- Place the Mermaid diagram near the plan overview, label gates and decision points, and keep node names consistent with the interfaces, components, tasks, and files in the plan.
+### 🗺️ Visual Implementation Map — MANDATORY for every plan
+- Every plan (Bounded short design in chat AND Architectural plan file) MUST include at least one valid ` ```mermaid` diagram. No exceptions, no `N/A`. A plan without Mermaid is incomplete and blocks the approval gate.
+- Minimum: one `flowchart` (TD or LR) placed near the plan overview showing task nodes (`T1`, `T2`, ...), `depends_on` edges, human approval gate(s) (`{{...}}`), and the Verify → Completion tail.
+- Choose additional diagram types that match the reasoning when they add clarity: `flowchart` for process and decisions, `sequenceDiagram` for component/user interactions, `stateDiagram-v2` for lifecycle/status, `graph` for architecture/dependencies, `erDiagram` for data relationships.
+- Label gates and decision points (`{{Gate}}`, `{Decision}`), keep node ids identical to `tasks[].id` frontmatter ids and `Task <id>` headings, and keep node labels consistent with the interfaces, components, files, and acceptance criteria in the plan.
 - Before execution, read the plan and walk through the Mermaid diagram: identify the start, sequence, dependencies, branches, approval gates, failure paths, and expected outcome. Compare it with the current repository and approved spec.
-- A mismatch between the diagram, plan, spec, or repository is a pre-execution blocker. Update the affected artifact or obtain approval for the changed interpretation before implementing.
+- A missing diagram, an unrunnable diagram (mermaid syntax error), or a mismatch between the diagram, plan tasks, spec, or repository is a pre-execution blocker. Update the affected artifact or obtain approval for the changed interpretation before implementing.
 - When the plan changes, update the Mermaid diagram and its related task, interface, acceptance, and verification details in the same change.
-- Mermaid is a visual companion, not a replacement for exact files, interfaces, acceptance criteria, test steps, commands, or evidence.
-- Do not force a diagram onto a simple one-file change with no meaningful flow; record `N/A — no meaningful visual flow` when the plan template requests a visual map.
+- Mermaid is a visual companion and a machine-checked contract (frontmatter `depends_on` == Mermaid edges == task headings), not a replacement for exact files, interfaces, acceptance criteria, test steps, commands, or evidence.
 
 Trigger: spec/requirements exist, before touching code.
 Assume: engineer has zero codebase context, questionable taste, skilled developer, weak test design.
@@ -610,7 +610,7 @@ tasks:
 **Spec:** [path to spec]
 **Scope:** [included behavior and surfaces]
 **Non-Goals:** [explicitly excluded behavior]
-**Visual Map:** [Mermaid diagram(s), or `N/A — no meaningful visual flow` with reason]
+**Visual Map:** [MANDATORY Mermaid diagram(s) — at least one flowchart mapping every task id, dependency edge, gate, and Verify step]
 **Reasoning Lenses:** [selected core and conditional lenses with their required outputs]
 **Acceptance Criteria:** [observable conditions that define success]
 **Traceability:** [acceptance criterion → task → test/check → evidence]
@@ -673,7 +673,7 @@ Task template:
 ```
 Deterministic step mapping: one execution step maps to exactly one runnable shell command (1-to-1). Never fold multiple non-chained commands into a single step. Each executable step carries `cmd`, `expect` (exit code / count), `retry` (explicit integer, transient-only), and `on_fail` (route, never silent). `retry: 0` means no retry; the word "bounded" is banned in favor of an integer.
 No placeholders — banned: TBD, TODO, "implement later", "add appropriate error handling", "similar to Task N", steps without code, undefined references.
-Plan self-review: spec and acceptance-criteria coverage (every requirement → a task), selected reasoning-lens coverage and outputs, visual-map validity and consistency, non-goals, assumptions, dependencies, risks, rollback, placeholder scan, anti-bloat pruning pass (scan with tags: `delete:` dead/speculative code, `stdlib:` stdlib replacement, `native:` platform feature, `yagni:` single-impl abstraction/unused config, `shrink:` fewer lines; target net line reduction), deliberate shortcut check (all simplifications must include `defer: <ceiling>, <upgrade-trigger>`), type consistency across tasks (signature names must match), and verification evidence. Fix inline, no re-review cycle.
+Plan self-review: spec and acceptance-criteria coverage (every requirement → a task), selected reasoning-lens coverage and outputs, visual-map presence + validity + consistency (at least one runnable Mermaid flowchart; every task id appears as a node; every `depends_on` edge appears in the diagram; missing diagram or mismatch = blocker), non-goals, assumptions, dependencies, risks, rollback, placeholder scan, anti-bloat pruning pass (scan with tags: `delete:` dead/speculative code, `stdlib:` stdlib replacement, `native:` platform feature, `yagni:` single-impl abstraction/unused config, `shrink:` fewer lines; target net line reduction), deliberate shortcut check (all simplifications must include `defer: <ceiling>, <upgrade-trigger>`), type consistency across tasks (signature names must match), and verification evidence. Fix inline, no re-review cycle.
 Pre-execution walkthrough: refresh the active project profile and inspect the plan's Mermaid diagram and selected reasoning-lens outputs, then compare every path, dependency, gate, failure branch, contract, command, and acceptance criterion with the current repository and approved spec before starting implementation.
 Execution handoff — offer choice:
 1. Subagent-driven (recommended) — fresh subagent per task, review between tasks
@@ -839,6 +839,7 @@ Red flags: "should", "probably", "seems to", satisfaction expressed pre-verifica
 | "Storing moving task state in persistent memory" | Horizon test failure: today's bug or ephemeral task pollutes long-term memory. Retain only stable residue that matters in 30 days |
 | "Simulating MCP or fake tool outputs" | Strict No-Mocking violation: confabulating tool interactions without real execution destroys trustworthiness |
 | "Stacking visuals back-to-back without prose context" | Visual interleaving violation: interleave prose → visual → prose → visual to provide structural context |
+| "Planning without a Mermaid visual map" | Unreviewable plan: every plan (Bounded or Architectural) requires at least one valid Mermaid flowchart; missing diagram blocks the approval gate |
 | "Self-abasing apologies when caught in a mistake" | Accountability violation: performative regret or submissive apology; acknowledge what went wrong directly, stay on the problem, and fix it |
 | "Using localStorage in artifacts" | Artifact runtime failure: browser storage fails in sandboxed iframes. Use in-memory state or window.storage with hierarchical keys |
 | "Replying with just 'Done.' after tool calls" | Empty reply violation: turn completion requires substantive 1-2 sentence answer of what was delivered or found |

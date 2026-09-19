@@ -133,3 +133,12 @@ test('validatePlan flags task id missing its heading or mermaid node', () => {
   const { errors } = validatePlan(plan, '# Plan\n### Task T9: x\n');
   assert.ok(errors.some((e) => /mermaid/i.test(e) && /T9/.test(e)));
 });
+
+test('validatePlan rejects a plan body with no mermaid diagram', () => {
+  const plan = {
+    schema: 'ultra-plan/v1',
+    tasks: [{ id: 'T1', depends_on: [] }],
+  };
+  const { errors } = validatePlan(plan, '# Plan\n### Task T1: x\nNo diagram here.\n');
+  assert.ok(errors.some((e) => /at least one.*mermaid/i.test(e)));
+});

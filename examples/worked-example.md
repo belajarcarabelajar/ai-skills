@@ -41,9 +41,10 @@ Reasoning:
 
 ```mermaid
 flowchart LR
-    A["Write failing tests\n(RED)"] --> B["Add zod schema\n+ parse in handler (GREEN)"]
-    B --> C["Verify all tests pass\n+ no regressions (REFACTOR)"]
-    C --> D["git commit"]
+    T1["T1: Write failing tests (RED)"] --> T2["T2: Add zod schema + parse in handler (GREEN)"]
+    T2 --> Verify["Verify: all tests pass + no regressions"]
+    Verify --> Gate{{"Human Approval Gate"}}
+    Gate --> Done["git commit"]
 ```
 
 Target files:
@@ -221,7 +222,7 @@ Tests: 3 new cases (missing email, invalid email, missing name) all GREEN."
 |---|---|
 | Classify | One clear path label (Spike / Bounded / Architectural) with 2-sentence justification |
 | Brainstorm | Intent, non-goals, acceptance criteria, one design decision with rejected alternative |
-| Plan | Mermaid diagram + target files list + hard gate confirmation |
+| Plan | MANDATORY Mermaid diagram + target files list + hard gate confirmation |
 | RED | Test code written, tests run, failure output pasted, failure is for the right reason |
 | GREEN | Minimal production code, tests run again, all pass, output pasted |
 | REFACTOR | Brief statement of what was cleaned, re-run confirms still green |

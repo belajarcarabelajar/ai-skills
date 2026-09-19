@@ -100,6 +100,28 @@ for (const tmpl of requiredTemplates) {
   }
 }
 
+// 3b. Mandatory Mermaid presence: every planning artifact template must embed at least one mermaid block
+const mermaidRequiredTemplates = [
+  'implementation-plan-template.md',
+  'spike-report-template.md',
+  'systematic-debugging-log-template.md',
+  'verification-checklist-template.md',
+  'adr-template.md',
+  'subagent-contract-template.md',
+];
+for (const tmpl of mermaidRequiredTemplates) {
+  const p = path.join(rootDir, 'templates', tmpl);
+  if (fs.existsSync(p)) {
+    const content = fs.readFileSync(p, 'utf8');
+    if (/```mermaid[\s\S]*?```/.test(content)) {
+      console.log(`✅ Mermaid present: templates/${tmpl}`);
+    } else {
+      console.error(`❌ templates/${tmpl} must contain at least one \`\`\`mermaid diagram (planning always uses Mermaid).`);
+      errors++;
+    }
+  }
+}
+
 // 3b. Check Examples directory
 const examplesDir = path.join(rootDir, 'examples');
 const requiredExamples = ['worked-example.md'];

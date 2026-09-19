@@ -113,9 +113,9 @@ cd ai-skills
 
 ## Companion Templates
 
-Agents can instantly scaffold structured artifacts using the ready-to-use templates in `templates/`. Each template includes an embedded Mermaid diagram illustrating its workflow:
+Agents can instantly scaffold structured artifacts using the ready-to-use templates in `templates/`. Every planning artifact mandatorily includes at least one embedded Mermaid diagram (a plan without Mermaid is incomplete and blocks the approval gate):
 
-- **[`implementation-plan-template.md`](templates/implementation-plan-template.md)**: Visual Mermaid map, task breakdown, failing tests (RED), implementation (GREEN), and verification matrix.
+- **[`implementation-plan-template.md`](templates/implementation-plan-template.md)**: MANDATORY Mermaid visual map (tasks, dependencies, gates, verification), task breakdown, failing tests (RED), implementation (GREEN), and verification matrix.
 - **[`spike-report-template.md`](templates/spike-report-template.md)**: Hypothesis testing flow, epistemic unknowns exploration, and architectural trade-off evaluations.
 - **[`systematic-debugging-log-template.md`](templates/systematic-debugging-log-template.md)**: 4-phase RCA state machine (REPRODUCE -> DIAGNOSE -> FIX -> VERIFY) and bug reproduction log.
 - **[`verification-checklist-template.md`](templates/verification-checklist-template.md)**: Evidence gate flowchart, pre-completion checks (test logs, zero warnings, build pass, git hygiene).

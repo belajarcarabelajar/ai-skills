@@ -35,14 +35,16 @@ tasks:
   - [ ] AC-2: [Criterion 2]
   - [ ] AC-3: [Criterion 3]
 
-## 2. Visual Implementation Map
+## 2. Visual Implementation Map — MANDATORY (approval gate blocker if missing)
+> Every plan MUST include at least one valid Mermaid diagram. Minimum: a `flowchart` showing every task node, every `depends_on` edge, the approval gate, and the Verify → Completion tail. Add a second diagram (`sequenceDiagram` for interactions, `stateDiagram-v2` for lifecycle, `erDiagram` for data) when it clarifies the design. Node ids must be identical to `tasks[].id` in frontmatter and to the `Task <id>` headings in §4. Validate with `node scripts/validate-skill.mjs` (syntax) and `node scripts/ultra-plan-runner.mjs <plan.md>` (id/edge consistency) before requesting approval.
 ```mermaid
 flowchart TD
     T1["T1: [Component A]"] --> T2["T2: [Component B]"]
-    T2 --> Verify["Verify: Integration Verification"]
+    T2 --> Gate{{"Human Approval Gate"}}
+    Gate --> Verify["Verify: Integration Verification"]
     Verify --> Finish["Completion & Sign-off"]
 ```
-> Node ids (`T1`, `T2`, ...) must match `tasks[].id` in frontmatter and the task headings below.
+> Node ids (`T1`, `T2`, ...) must match `tasks[].id` in frontmatter and the task headings below. Every `depends_on` edge in frontmatter must appear as an arrow here, and vice versa.
 
 ## 3. Global Constraints
 - Non-negotiable constraints, safety rules, and platform compatibility requirements.

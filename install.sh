@@ -111,10 +111,17 @@ if [ -d "$HOME/.claude" ]; then
 fi
 
 # 6. Local Repo Self-Check
-mkdir -p "$REPO_DIR/skills/super-ultra-code-plan"
-ln -sf "../../Super Ultra Code Plan Implementation.md" "$REPO_DIR/skills/super-ultra-code-plan/SKILL.md"
-ln -sfn "../../templates" "$REPO_DIR/skills/super-ultra-code-plan/templates"
-ln -sfn "../../examples" "$REPO_DIR/skills/super-ultra-code-plan/examples"
-echo "[OK] Internal repo skill package symlinks verified."
+if [ "$DRY_RUN" = true ]; then
+  echo "[DRY-RUN] Would verify internal skill package in: $REPO_DIR/skills/super-ultra-code-plan"
+  echo "[DRY-RUN]   - SKILL.md -> ../../Super Ultra Code Plan Implementation.md"
+  echo "[DRY-RUN]   - templates -> ../../templates"
+  echo "[DRY-RUN]   - examples -> ../../examples"
+else
+  mkdir -p "$REPO_DIR/skills/super-ultra-code-plan"
+  ln -sf "../../Super Ultra Code Plan Implementation.md" "$REPO_DIR/skills/super-ultra-code-plan/SKILL.md"
+  ln -sfn "../../templates" "$REPO_DIR/skills/super-ultra-code-plan/templates"
+  ln -sfn "../../examples" "$REPO_DIR/skills/super-ultra-code-plan/examples"
+  echo "[OK] Internal repo skill package symlinks verified."
+fi
 
 echo "==> Ultimate AI Coding Skill installation complete!"

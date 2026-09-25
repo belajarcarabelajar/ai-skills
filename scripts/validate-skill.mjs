@@ -88,6 +88,7 @@ const requiredTemplates = [
   'progress-log-template.md',
   'adr-template.md',
   'subagent-contract-template.md',
+  'code-review-template.md',
 ];
 
 for (const tmpl of requiredTemplates) {
@@ -108,6 +109,7 @@ const mermaidRequiredTemplates = [
   'verification-checklist-template.md',
   'adr-template.md',
   'subagent-contract-template.md',
+  'code-review-template.md',
 ];
 for (const tmpl of mermaidRequiredTemplates) {
   const p = path.join(rootDir, 'templates', tmpl);

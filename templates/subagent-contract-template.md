@@ -9,6 +9,31 @@
 - **Parent Goal:** [Link to active plan and parent milestone]
 - **Delegation Mode:** `share` | `branch` | `isolated-files`
 
+## 1b. Task Chunking & Fan-Out Plan (written before dispatch)
+The parent chunks the work into the smallest independently verifiable units, then assigns one unit per subagent. Target 10+ narrow subagents when the task supports it.
+
+| Chunk ID | Single-purpose scope | Owner subagent | Permitted target files | Expected output | Verification command |
+|---|---|---|---|---|---|
+| C1 | [one behavior / one file] | [role] | `path` | [artifact] | `cmd` |
+| C2 | [...] | [...] | `path` | [...] | `cmd` |
+| CN | [...] | [...] | `path` | [...] | `cmd` |
+
+- **Fan-out count:** [N] subagents (below the 10 floor? state the reason: atomic task, no subagent tool in this runtime, or inseparable shared state)
+- **Chunk boundary check:** [ ] every chunk has exactly one owner, [ ] every planned unit is covered, [ ] no two chunks write the same file
+- **Re-dispatch rule:** a red chunk is re-chunked and re-dispatched alone, never by restarting the whole batch
+
+```mermaid
+flowchart LR
+    Plan["Approved task"] --> Chunk["Chunk into smallest\nverifiable units"]
+    Chunk --> Fan["Dispatch N narrow subagents\ndisjoint targets"]
+    Fan --> Gather["Gather all reports\nat review checkpoint"]
+    Gather --> Synth["Synthesize: dedupe,\nresolve, verify"]
+    Synth --> Audit["Parent diff audit gate"]
+    Audit -->|"Green"| Merge["Merged result"]
+    Audit -->|"Red"| Redo["Re-chunk that scope\nand re-dispatch"]
+    Redo --> Fan
+```
+
 ## 2. Delegation & Audit Lifecycle
 
 ```mermaid
@@ -51,7 +76,14 @@ sequenceDiagram
   - Command: `[command]`
   - Expected Output: Exit 0, 0 failures
 
-## 6. Parent Diff Audit Gate Checklist
+## 6. Gather & Synthesize Checkpoint (parent side)
+- [ ] All subagent reports collected at the review checkpoint; none skipped, none pasted raw as the result.
+- [ ] Duplicate and restated findings removed.
+- [ ] Conflicting claims between overlapping reports resolved from the evidence, not by picking the newest report.
+- [ ] Each subagent's success claim re-verified by the parent (diff, log, exit status).
+- [ ] Only new findings, blockers, and evidence merged into the parent task state.
+
+## 7. Parent Diff Audit Gate Checklist
 - [ ] Subagent modified ONLY the permitted target files.
 - [ ] No extraneous refactoring or whitespace reformatting in adjacent lines.
 - [ ] No hardcoded secrets, temporary scratch files, or mock outputs left behind.

@@ -173,7 +173,7 @@ node scripts/validate-skill.mjs
 
 Verifies:
 - YAML frontmatter syntax (`name`, `description`, `triggers`).
-- Master file integrity and estimated token budget (~22k tokens).
+- Master file integrity and estimated token budget (~33k tokens, measured at ~4 chars/token).
 - Symlink validity in `skills/super-ultra-code-plan/SKILL.md`.
 - Presence of all required templates and executable scripts.
 - Mermaid syntax validity for every ` ```mermaid` block in the repo (exits 1 on any error).

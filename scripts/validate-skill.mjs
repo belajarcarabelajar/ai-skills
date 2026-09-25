@@ -56,6 +56,25 @@ if (!fs.existsSync(masterPath)) {
   const wordCount = content.trim().split(/\s+/).length;
   const estimatedTokens = Math.round(charCount / 4);
   console.log(`📊 Master file stats: ${charCount} chars, ${wordCount} words, ~${estimatedTokens} estimated tokens.`);
+
+  // 1b. Mandatory Session-Close Debt Sweep contract must stay in the master file.
+  // Silently dropping this stage would let every session end with unexamined technical debt.
+  const sweepContract = [
+    { label: 'Step 6 debt sweep heading', re: /^##\s*6️⃣.*Debt Sweep/m },
+    { label: 'Done 100% saturation rule', re: /Plan Completion Saturation Rule/ },
+    { label: 'NOW/LATER debt classification', re: /`NOW`/ },
+    { label: 'default 3-5 follow-up cap', re: /3-5 follow-up questions|3-5 follow-ups/ },
+    { label: 'harness multi-select question injection', re: /multi-select checkboxes/ },
+    { label: 'debt sweep template reference', re: /templates\/follow-up-injection-template\.md/ },
+  ];
+  for (const contract of sweepContract) {
+    if (contract.re.test(content)) {
+      console.log(`✅ Debt sweep contract present: ${contract.label}`);
+    } else {
+      console.error(`❌ Master file missing debt sweep contract: ${contract.label}`);
+      errors++;
+    }
+  }
 }
 
 // 2. Check Symlinks in skills/super-ultra-code-plan/

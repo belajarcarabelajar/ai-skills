@@ -95,6 +95,21 @@
 
 ---
 
+## Follow-Up Backlog (Session-Close Debt Sweep)
+
+> Every noticed-but-unclosed item lands here so no debt leaves the session unrecorded.
+> `NOW` = closable in this session. `LATER` = needs a new plan, an external dependency, or a real scope decision.
+
+| # | Follow-up (outcome + path + finish line) | Class | `defer: <ceiling>, <upgrade-trigger>` | Status |
+|---|---|---|---|---|
+| F1 | | `NOW` / `LATER` | | `OPEN` / `DONE` / `DECLINED` / `DEFERRED` |
+
+- [ ] 3-5 ranked follow-ups injected as one multi-select question (checkboxes), not as a prose report.
+- [ ] Every selected follow-up executed through the full pipeline with fresh evidence.
+- [ ] Declined and out-of-cap items written above, never dropped.
+
+---
+
 ## Session Log
 
 *Append a one-liner per session — newest at top.*

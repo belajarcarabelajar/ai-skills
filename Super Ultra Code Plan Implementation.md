@@ -904,6 +904,7 @@ Every candidate must be stated as an outcome with a file path and a checkable fi
 - Banned as a question: anything already `Done 100%`, anything the user never asked about and the plan never touched when the risk is cosmetic, and anything only phrased as a preference question with no code outcome ("would you like me to also..."). A question must resolve into a code change, a test, a doc, or a deletion.
 
 ### 🙋 6.4 Inject — ask, do not narrate (mandatory)
+> Record the sweep with `templates/follow-up-injection-template.md` (candidates, ranking, the question, the execution record, the deferred backlog).
 - Use the harness's own structured question mechanism. Discover it first: a `question`/`ask` tool, an AskUserQuestion-style prompt, a plan-approval or multi-select widget, or an equivalent. Present the follow-ups as **multi-select checkboxes** so the user answers by tapping, never by typing.
 - Batch every follow-up into **one single question-set call**, never one call per item, and place it after the final recap so the user first sees what was delivered, then decides what to finish.
 - Each option carries a short label plus a one-line description naming the file or surface it touches and the check that proves it closed. Label the first option of each question as the recommended default where one exists.

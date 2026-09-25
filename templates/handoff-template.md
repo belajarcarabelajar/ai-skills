@@ -90,10 +90,25 @@ A  src/api/rate-limit.test.ts
 
 ---
 
+## Follow-Up Backlog (Carried Into Next Session)
+
+> Output of the Session-Close Debt Sweep. Anything not closed in this session must appear here
+> with its `defer:` marker, so the next session resumes the debt instead of rediscovering it.
+
+| # | Follow-up (outcome + path + finish line) | Class | `defer: <ceiling>, <upgrade-trigger>` | Status |
+|---|---|---|---|---|
+| F1 | | `NOW` / `LATER` | | `OPEN` / `DONE` / `DECLINED` / `DEFERRED` |
+
+- [ ] 3-5 ranked follow-ups were offered as one multi-select question at session close.
+- [ ] Selected items executed and evidenced; nothing was left as an unexamined promise.
+
+---
+
 ## Resume Checklist (for next session)
 
 - [ ] Read this handoff document fully
 - [ ] Run `git status` to confirm working tree state
 - [ ] Re-read the active plan file
 - [ ] Confirm last verified state still holds (re-run key test command above)
+- [ ] Review the Follow-Up Backlog above and pick the first `OPEN` item
 - [ ] Continue from "Next Immediate Action" above

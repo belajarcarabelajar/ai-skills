@@ -110,7 +110,8 @@ cd ai-skills
 
 ### Prerequisites
 
-- **Node.js >= 20** and package manager (`bun` or `npm`).
+- **Bun >= 1.1.0** ([bun.sh](https://bun.sh)): **mandatory runtime.** All dependency installation uses `bun install` / `bun add`, and all JS/TS execution uses `bun test` / `bun run`. `npm install`, `npm test`, `yarn`, and `pnpm` are strictly prohibited. `curl -fsSL https://bun.sh/install | bash`
+- **Node.js is not required.** Every script in this repository runs under Bun, and the only lockfile is `bun.lock`.
 - **`tgrep`** ([microsoft/tgrep](https://github.com/microsoft/tgrep)): Mandatory search and log extraction engine. GNU `grep` is strictly prohibited.
 
 ### Supported Harnesses & Target Paths
@@ -154,7 +155,7 @@ Run the automated validation suite locally:
 
 ```bash
 # Install mermaid-cli (once)
-npm install
+bun install
 
 # Render all diagrams to diagrams/
 bash scripts/render-diagrams.sh

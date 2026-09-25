@@ -155,7 +155,7 @@ const mmdcAvailable = fs.existsSync(mmdcPath) ||
   (() => { try { execSync('mmdc --version', { stdio: 'ignore' }); return true; } catch { return false; } })();
 
 if (!mmdcAvailable) {
-  console.warn('⚠️  mmdc not found — skipping mermaid block validation. Run: npm install');
+  console.warn('⚠️  mmdc not found — skipping mermaid block validation. Run: bun install');
 } else {
   const mmdc = fs.existsSync(mmdcPath) ? mmdcPath : 'mmdc';
   const mdFiles = [];

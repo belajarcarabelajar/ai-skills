@@ -14,7 +14,7 @@ if [ -f "$REPO_DIR/node_modules/.bin/mmdc" ]; then
 elif command -v mmdc &>/dev/null; then
   MMDC="mmdc"
 else
-  echo "❌ mmdc not found. Run: bun install (or npm install)" >&2
+  echo "❌ mmdc not found. Run: bun install" >&2
   exit 1
 fi
 

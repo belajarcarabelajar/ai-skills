@@ -219,6 +219,7 @@ These rules apply to every path and support the four skill components without re
   - When blocked, state exactly what external change or user decision would unblock it, and what independent work was completed meanwhile.
 
 ### ⚙️ Tool Orchestration
+- Mandatory Runtime — Bun (absolute): Bun >= 1.1.0 is the ONLY sanctioned runtime for JavaScript/TypeScript work. Dependency installation is exclusively `bun install` / `bun add <pkg>` / `bun remove <pkg>`; script execution is `bun run <script>`; test execution is `bun test [path]`. STRICTLY PROHIBITED as substitutes: `npm install`, `npm ci`, `npm test`, `npm run`, `yarn`, `pnpm`, `npx`, and bare `node <file>` for project code. If a project already contains a `package-lock.json`, `yarn.lock`, or `pnpm-lock.yaml`, leave the foreign lockfile untouched but perform all new installs with `bun install`; do not regenerate or delete another package manager's lockfile as a side effect. There is no Node.js carve-out: this repository's own scripts (`scripts/validate-skill.mjs`, `scripts/ultra-plan-runner.mjs`) are invoked as `bun scripts/<file>`, and `bun.lock` is the only lockfile. Record the Bun version in the project profile when known.
 - Run independent read-only or I/O-bound operations in parallel when safe.
 - Run dependent, stateful, mutation, build, test, and lock-sensitive operations sequentially.
 - After each tool result, check its exit status, completeness, and relevance before deciding the next action.
@@ -241,7 +242,7 @@ These rules apply to every path and support the four skill components without re
   - Strict Timeout Budgets per Category:
     - Quick Checks & Status (lint, formatting, typecheck, git status, diff): Maximum 60s.
     - Test Suites (unit, integration, reproduction tests): Maximum 120s (2 minutes).
-    - Dependency Installation & Package Resolution (bun install, npm install): Maximum 180s (3 minutes).
+    - Dependency Installation & Package Resolution (`bun install`, `bun add <pkg>`): Maximum 180s (3 minutes).
     - Heavy Compilations & Builds (cargo build, bun run build, native targets): Maximum 300s (5 minutes).
   - Explicit Timeout Wrapping: When executing operations vulnerable to indefinite hangs (network calls, interactive prompts, or unknown test loops), wrap with the system timeout utility where feasible (e.g. `timeout 120s <cmd>`).
   - Stagnation & Hang Detection Heuristic: If a running command or background task produces zero new bytes in its log file or task buffer for 60 consecutive seconds after initial activity, treat it as stagnant/hanging.
@@ -618,7 +619,7 @@ Step granularity: 2-5 min per step.
 - Implement minimal code
 - Run — confirm pass
 - Commit
-Runner Contract (determinism fondasi): the YAML frontmatter below is the single source of truth for routing, dependency order, retry, and idempotency. Prose and checklists under it explain but must never contradict it. Every `Task N` heading MUST use an `id` identical to its `tasks[].id` in frontmatter and to its node name in the Mermaid map; any mismatch is a pre-execution blocker. Commands inside the plan MUST be tool-agnostic and directly runnable (e.g. `bun test path`), never MCP/rtk/tgrep-specific; context-mode and rtk are execution-environment wrappers applied by the runner or harness, not baked into the portable artifact.
+Runner Contract (determinism fondasi): the YAML frontmatter below is the single source of truth for routing, dependency order, retry, and idempotency. Prose and checklists under it explain but must never contradict it. Every `Task N` heading MUST use an `id` identical to its `tasks[].id` in frontmatter and to its node name in the Mermaid map; any mismatch is a pre-execution blocker. Commands inside the plan MUST be directly runnable and wrapper-agnostic — never MCP/rtk/tgrep-specific — while still obeying the Mandatory Runtime rule: JS/TS commands are written with Bun (`bun test path`, `bun run lint`, `bun install`), never `npm`/`npx`/`node`. Context-mode and rtk are execution-environment wrappers applied by the runner or harness, not baked into the portable artifact.
 Plan header template:
 ```
 ---

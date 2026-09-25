@@ -49,14 +49,14 @@ check_prereq() {
 
 check_prereq "tgrep"        "microsoft/tgrep v1.0.5 (trigram-indexed search)" \
              "curl -fsSL https://raw.githubusercontent.com/microsoft/tgrep/main/install.sh | bash"
+check_prereq "bun"          "Bun >= 1.1.0 (mandatory JS/TS runtime; bun install / bun test / bun run)" \
+             "curl -fsSL https://bun.sh/install | bash"
 check_prereq "context-mode" "Context Mode MCP server (token-efficient routing)" \
-             "npm i -g context-mode"
+             "bun add -g context-mode"
 check_prereq "rtk"          "Rust Token Killer (rtk proxy for dev ops)" \
              "cargo install rtk"
 check_prereq "gh"           "GitHub CLI (web search GitHub operations)" \
              "sudo pacman -S github-cli  # Arch Linux"
-check_prereq "bun"          "Bun runtime (JS/TS + script execution)" \
-             "curl -fsSL https://bun.sh/install | bash"
 check_prereq "opencode"     "OpenCode AI agent harness (1.x CLI)" \
              "curl -fsSL https://opencode.ai/install | bash"
 

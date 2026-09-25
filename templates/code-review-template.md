@@ -68,11 +68,11 @@ Report **every** qualifying finding, not the first one. Deduplicate by changed l
 ```
 [P2] Clear the staged lockfile before resolving the new transitive dep
 
-`bun install` runs before `git add package-lock.json`, so the commit can capture
+`bun install` runs before `git add bun.lock`, so the commit can capture
 a lockfile rewritten by a later unrelated install in the same run. Anyone checking
-out that commit and running with `--frozen-lockfile` gets a resolution error
+out that commit and running `bun install --frozen-lockfile` gets a resolution error
 instead of the pinned tree. Move the staging line after the install and add
-`git diff --exit-code package-lock.json` to the verification step.
+`git diff --exit-code bun.lock` to the verification step.
 ```
 
 ### Suggestion Blocks

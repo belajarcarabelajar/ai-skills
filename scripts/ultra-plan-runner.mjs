@@ -2,7 +2,7 @@
 // Ultra Plan Runner — zero-dependency orchestrator for `ultra-plan/v1` Markdown plans.
 // Parses the YAML frontmatter (the runner contract), validates the task DAG,
 // enforces idempotent skips, and aggregates failures into an Error Ledger.
-// No MCP, no external packages — portable across any Node >=20 / Bun environment.
+// No MCP, no external packages — runs under Bun only.
 
 import { readFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';

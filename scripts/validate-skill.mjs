@@ -145,9 +145,61 @@ for (const tmpl of mermaidRequiredTemplates) {
   }
 }
 
+// 3c. Trigger snippets must carry the mandatory subagent contract.
+// A trigger prompt that omits it is the most common cause of an agent quietly
+// implementing everything inline, so its absence is a build failure.
+const requiredSnippetTerms = [
+  'SUBAGENT-FIRST',
+  'TASK-CHUNKING',
+  'BATCH MANIFEST',
+  'HIGH FAN-OUT FLOOR',
+  'NON-OVERLAPPING',
+  'NESTED FAN-OUT',
+  'GATHER & SYNTHESIZE',
+  'PARENT DIFF AUDIT GATE',
+  'subagent-contract-template.md',
+];
+const requiredSnippets = [
+  'orkestrasi-ngoding-plan.md',
+  'orkestrasi-debugging.md',
+];
+for (const snip of requiredSnippets) {
+  const p = path.join(rootDir, 'snippets', snip);
+  if (!fs.existsSync(p)) {
+    console.error(`❌ Missing trigger snippet: snippets/${snip}`);
+    errors++;
+    continue;
+  }
+  const body = fs.readFileSync(p, 'utf8');
+  const missing = requiredSnippetTerms.filter((term) => !body.includes(term));
+  if (missing.length === 0) {
+    console.log(`✅ Trigger snippet carries the subagent contract: snippets/${snip}`);
+  } else {
+    console.error(`❌ snippets/${snip} is missing required subagent terms: ${missing.join(', ')}`);
+    errors++;
+  }
+}
+
+// 3d. Trigger snippets must not invoke the runtime the skill prohibits.
+// The master skill bans npm/npx/bare node in favour of Bun; a snippet that
+// reintroduces them is a self-violating instruction.
+for (const snip of requiredSnippets) {
+  const p = path.join(rootDir, 'snippets', snip);
+  if (!fs.existsSync(p)) continue;
+  const body = fs.readFileSync(p, 'utf8');
+  const banned = ['node scripts/', 'npm install', 'npm test', 'npx ']
+    .filter((needle) => body.includes(needle));
+  if (banned.length === 0) {
+    console.log(`✅ Trigger snippet respects the Bun runtime rule: snippets/${snip}`);
+  } else {
+    console.error(`❌ snippets/${snip} uses a prohibited runtime: ${banned.join(', ')} (use bun)`);
+    errors++;
+  }
+}
+
 // 3b. Check Examples directory
 const examplesDir = path.join(rootDir, 'examples');
-const requiredExamples = ['worked-example.md'];
+const requiredExamples = ['worked-example.md', 'deep-research-worked-example.md'];
 for (const ex of requiredExamples) {
   const p = path.join(examplesDir, ex);
   if (fs.existsSync(p)) {

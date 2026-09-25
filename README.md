@@ -82,17 +82,25 @@ ai-skills/
 ├── package.json                                 # devDependencies: @mermaid-js/mermaid-cli
 ├── Super Ultra Code Plan Implementation.md      # SINGLE SOURCE OF TRUTH (Master Skill)
 ├── install.sh                                   # 1-command installer for all harnesses
+├── mermaid.config.json                          # Light theme: palette + embedded-font stack
+├── mermaid.dark.config.json                     # Dark variant, same layout and font
 ├── .github/
 │   └── workflows/
-│       └── ci.yml                               # CI: install, render diagrams, validate, dry-run
-├── diagrams/                                    # Auto-generated SVG diagrams (CI artifact)
-│   └── lifecycle.svg                            # Lifecycle diagram embedded in README
+│       └── ci.yml                               # CI: bun install, render, drift gate, validate, test
+├── diagrams/                                    # Generated SVGs (only the hero pair is committed)
+│   ├── lifecycle.svg                            # README hero, light
+│   └── lifecycle-dark.svg                       # README hero, dark
 ├── examples/
 │   └── worked-example.md                        # Full pipeline walkthrough (filled-in reference)
 ├── scripts/
 │   ├── sync.sh                                  # Bidirectional sync (~/.config/ai <-> repo)
 │   ├── render-diagrams.sh                       # Render all mermaid blocks to SVG
-│   └── validate-skill.mjs                       # Frontmatter, link, token & mermaid lint
+│   ├── validate-skill.mjs                       # Frontmatter, link, token, mermaid & a11y lint
+│   ├── ultra-plan-runner.mjs                    # ultra-plan/v1 DAG runner + visual map contract
+│   └── ultra-plan-runner.test.mjs               # Contract tests for the runner
+├── snippets/                                    # Copy-paste trigger prompts
+│   ├── orkestrasi-ngoding-plan.md               # Plan + TDD + mandatory subagent fan-out
+│   └── orkestrasi-debugging.md                  # RCA + mandatory hypothesis-parallel subagent fan-out
 ├── templates/                                   # Companion templates (blank scaffolds)
 │   ├── implementation-plan-template.md          # Visual work breakdown & task mapping
 │   ├── spike-report-template.md                 # Timeboxed exploratory spike & hypotheses
@@ -101,12 +109,17 @@ ai-skills/
 │   ├── handoff-template.md                      # Session handoff - resume from exact state
 │   ├── progress-log-template.md                 # Persistent task state across sessions
 │   ├── adr-template.md                          # Architecture Decision Record with decision tree
-│   └── subagent-contract-template.md            # Subagent task contract & parent audit gate
+│   ├── subagent-contract-template.md            # Subagent task contract & parent audit gate
+│   ├── code-review-template.md                  # Reviewer output contract & verdict
+│   ├── deep-research-report-template.md         # Citation-grounded long-form research report
+│   └── follow-up-injection-template.md          # Session-close debt sweep & follow-up question
 └── skills/
     └── super-ultra-code-plan/                   # Full skill package with bundled templates & examples
         ├── SKILL.md -> ../../Super Ultra Code Plan Implementation.md
         ├── templates -> ../../templates
-        └── examples -> ../../examples
+        ├── examples -> ../../examples
+        ├── mermaid.config.json -> ../../mermaid.config.json
+        └── mermaid.dark.config.json -> ../../mermaid.dark.config.json
 ```
 
 ---
@@ -204,7 +217,29 @@ Agents can instantly scaffold structured artifacts using the ready-to-use templa
 
 See the [`examples/`](examples/) folder for a complete filled-in walkthrough:
 
-- **[`worked-example.md`](examples/worked-example.md)**: Full pipeline from Classify through Commit on a real-sized task (adding zod input validation to a REST endpoint). Use this as a reference for what correct output looks like at each phase.
+- **[`worked-example.md`](examples/worked-example.md)**: Full pipeline from Classify through the session-close debt sweep on a real-sized task (adding zod input validation to a REST endpoint). Use this as a reference for what correct output looks like at each phase.
+- **[`deep-research-worked-example.md`](examples/deep-research-worked-example.md)**: Citation-grounded research report at target length and density.
+
+---
+
+## Trigger Snippets
+
+Copy-paste prompts for the two most common entry points. They live in
+[`snippets/`](snippets/) and are the fastest way to activate the skill correctly.
+
+- **[`orkestrasi-ngoding-plan.md`](snippets/orkestrasi-ngoding-plan.md)**: plan generation, TDD execution, and the mandatory subagent pipeline.
+- **[`orkestrasi-debugging.md`](snippets/orkestrasi-debugging.md)**: root cause analysis with hypothesis-parallel investigation, and the mandatory subagent pipeline.
+
+Both snippets carry the same subagent rules, because the most common failure is an agent
+that reads a trigger prompt, never sees a subagent requirement in it, and quietly
+implements everything inline. Each one states the eight-step pipeline explicitly:
+task-chunking, batch manifest, high fan-out floor, non-overlapping scopes, nested
+fan-out, gather and synthesize, parent diff audit, and batched dispatch. Inline work is
+allowed only as a written exception.
+
+The debugging variant chunks by **hypothesis** rather than by file, so competing
+explanations are tested in parallel and a disproven cause is discarded without
+contaminating the others.
 
 ---
 

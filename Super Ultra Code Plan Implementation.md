@@ -68,6 +68,8 @@ The universal rules must adapt at runtime to the repository, package, applicatio
 | 3 | 🧪 **Test-Driven Development** | Does the test prove the behavior before production code exists? | RED → GREEN → REFACTOR cycle | Failing test before implementation |
 | 4 | ✅ **Verification** | What fresh evidence proves the completion claim? | Commands, output, exit status, diff | Evidence before completion claim |
 
+Verification is the last gate, never the last step. A mandatory **🧹 Session-Close Debt Sweep** (Step 6) runs after the evidence gate, converts every observation made during planning and execution into a selectable follow-up, and drives it to completion inside the same session so no coding debt survives the handoff.
+
 ```mermaid
 flowchart LR
     B["🧠 Brainstorming\nValidated design/spec"]
@@ -77,10 +79,11 @@ flowchart LR
     G2 --> T["🧪 TDD\nRED → GREEN → REFACTOR"]
     T -->|"Failing test first"| G3{{"⏸️ Gate 3"}}
     G3 --> V["✅ Verification\nFresh evidence & diff"]
-    V -->|"Evidence confirmed"| Done(["🏁 Done"])
+    V -->|"Evidence confirmed"| S["🧹 Debt Sweep\nSession-close follow-up injection"]
+    S -->|"Items selected"| Sweep(["🧹 Zero-debt session\nor documented deferral"])
 ```
 
-> 📊 **Progress symbols:** 🔎 Explore · 🧬 Profile · 💬 Clarify · 🧠 Design · 🗺️ Plan · 🧪 Test · 🛠️ Implement · ✅ Verify · ⏸️ Await approval · 🛑 Stop
+> 📊 **Progress symbols:** 🔎 Explore · 🧬 Profile · 💬 Clarify · 🧠 Design · 🗺️ Plan · 🧪 Test · 🛠️ Implement · ✅ Verify · 🧹 Debt sweep · ⏸️ Await approval · 🛑 Stop
 
 ## 🧠 Adaptive Reasoning Modes
 Activate only the reasoning lenses relevant to the task. Always use the core lenses; add conditional lenses when the scope or risk requires them. Do not expose private chain-of-thought. Report the selected lenses through their conclusions, assumptions, decisions, risks, artifacts, and evidence.
@@ -354,7 +357,7 @@ flowchart TD
   - Retain comments only when they explain non-obvious "why", domain constraints, invariant conditions, security considerations, or explicit deliberate shortcuts (`defer: <ceiling>, <upgrade-trigger>`).
 - Avoid unrelated refactors, speculative features, unnecessary abstractions, and defensive code outside real system boundaries.
 - Never speculate about code, APIs, configuration, or project structure that has not been inspected.
-- Keep changes and permanent tests limited to the approved request and repository conventions. Report pre-existing bugs, performance concerns, or unrelated cleanup as follow-ups unless the requested behavior cannot work without addressing them.
+- Keep changes and permanent tests limited to the approved request and repository conventions. Report pre-existing bugs, performance concerns, or unrelated cleanup as follow-ups unless the requested behavior cannot work without addressing them. Every such finding is a mandatory candidate for the Step 6 debt sweep, not a silent note in the report.
 - Prefer targeted edits over whole-file rewrites when the result is equivalent, especially for small and medium changes.
 - Before mutating files, inspect the worktree and preserve unrelated or unfamiliar changes. Do not overwrite user work merely to simplify an edit.
 - Remove temporary scripts, helper files, and generated iteration artifacts at the end unless they are explicitly part of the deliverable.
@@ -508,6 +511,9 @@ Apply the gates relevant to the approved scope. Record `N/A` with a reason when 
 ### ✅ Definition of Done & Plan Lifecycle
 - Define `Definition of Done` for the approved scope before implementation. It must identify the applicable acceptance, implementation, test, review, security, documentation, and operational gates.
 - Track plan status as `Draft → Approved → In Progress → Verification → Complete`, or `Blocked` when progress cannot continue without user input or an external change.
+- Plan Completion Saturation Rule: when execution finishes, every task in the approved plan reaches `Done 100%` with cited evidence. A task left at 90%, "mostly done", or "done except the tests" is not a task state; it is either finished and evidenced, or `Blocked`/`DEFERRED` with a named reason. Never hand back a plan whose own scope is partially complete while claiming the plan is finished.
+- Definition-of-Done scope boundary: `Done 100%` covers exactly what the approved plan defined. Anything discovered outside that scope belongs to the Step 6 debt sweep as a follow-up candidate, so plan completion is never inflated into unrelated cleanup.
+- Plan status flips to `Complete` only after the Step 6 debt sweep has run and every remaining item is either resolved in-session or explicitly deferred with a `defer: <ceiling>, <upgrade-trigger>` marker. A plan is never closed while unexamined technical debt is still sitting in the task state.
 - Record plan version, approval state, changed decisions, superseded sections, and the reason for each scope or contract change.
 - A completion claim requires every applicable gate to pass or an explicit, documented risk acceptance from the authorized human partner.
 
@@ -850,6 +856,7 @@ Verification matrix — run only the rows relevant to the approved scope and rec
 | Definition of Done | Every applicable gate and acceptance criterion is complete, evidenced, and traceable |
 | Build/deployment | Relevant build/package/deploy check when the deliverable includes it |
 | Documentation/configuration | References, examples, and configuration behavior match the implementation |
+| Session close / debt sweep | Every noticed-but-unclosed item classified `NOW`/`LATER`, 3-5 ranked follow-ups injected as one multi-select question, each selection executed with fresh evidence or explicitly deferred with a `defer:` marker |
 
 ```mermaid
 flowchart TD
@@ -865,6 +872,73 @@ flowchart TD
 ```
 
 Red flags: "should", "probably", "seems to", satisfaction expressed pre-verification, trusting agent reports without diff check, "I'm tired", "just this once".
+## 6️⃣ 🧹 Session-Close Debt Sweep & Follow-Up Injection (Mandatory)
+> 🧹 **Closing stage — zero-debt session:** once the plan is `Done 100%` and the evidence gate is green, the agent mines everything it learned during planning and execution, turns it into a short list of concrete follow-ups that can be finished right now, and asks the user to pick them with a single tap. Reporting alone is a failed close: the deliverable of this stage is a question the user answers with a checkbox, not a paragraph they must retype.
+
+```
+A SESSION ENDS WITH ZERO UNEXAMINED CODING DEBT
+```
+
+### 🧾 6.1 Preconditions — the plan must be finished first
+- The approved plan is `Done 100%` per the Plan Completion Saturation Rule. Every task carries fresh evidence; nothing sits at "mostly done". The sweep is the step *after* a finished plan, never a substitute for finishing it.
+- The Verification gate passed with fresh evidence, git hygiene is done, and the final diff has been audited. Starting the sweep on unverified work converts a completion claim into a bigger unverified claim.
+- Anything that is genuinely `Blocked` by an external dependency is excluded from follow-up candidates and instead reported with the exact unblock condition. A blocked item is not a follow-up question; asking the user to "also fix" it is noise.
+
+### 🔍 6.2 Harvest — collect debt candidates from the whole session
+Sweep the session record, not just the last command, for anything that was noticed but not closed. Candidate sources, in priority order:
+1. Recorded `defer:` deliberate shortcuts whose `<ceiling>` has actually been hit, so the debt the plan promised to revisit is now due.
+2. Findings deferred to follow-up by the code review, the Zero-Tolerance Clean Pass pre-existing warnings, or the Simplicity Ladder pruning pass.
+3. Adjacent code, sibling callers, or sibling files the fix touched only partially. Comprehension-before-reduction exposes these; leaving them unlisted is choosing debt.
+4. Missing test layers on the changed surface (no unit test, no contract test, no e2e for a user-facing flow), missing accessibility/localization/empty/error states, missing docs or changelog or runbook entries.
+5. TODO/FIXME/XXX/HACK comments, skipped or quarantined tests, `@ts-ignore`/`eslint-disable`/`.skip`/`.only` markers, dead code, stale feature flags, duplicate helpers, and orphaned files that the diff revealed.
+6. Pre-existing lint/type/build warnings, flaky tests, unmeasured performance risk, unverified dependency or license assumptions, and security or compatibility observations that were out of scope for the plan.
+7. Verification gaps themselves: claims resting on partial evidence, checks that could not run in this environment, or reviewers' findings that were accepted verbally without a code change.
+
+Every candidate must be stated as an outcome with a file path and a checkable finish line, not as a topic. "Refactor the auth module" is not a candidate. "Extract token refresh out of session.ts:88-140 and cover it with a new session.test.ts case" is.
+
+### 🧮 6.3 Rank & Cap — default 3 to 5 questions
+- Default to **3-5 follow-up questions**, ranked by `(leftover risk × blast radius × cheapness to close)`. Cap at 5 so the user can answer in one glance; rank below that always go to a written follow-up backlog in the plan or progress log, not to an extra question batch.
+- Expand beyond 5 only when the harvested debt is itself more than 5 genuinely independent items, and then state explicitly why the cap was raised. Under-filling is also a defect: never ask a single trivial question when three real ones exist.
+- Every candidate is classified `NOW` (closes fully inside this session, no new approval, no destructive action, no external dependency) or `LATER`. `NOW` items become selectable questions. `LATER` items are recorded in the plan's follow-up backlog with an owner-less `defer: <ceiling>, <upgrade-trigger>` line so they survive the session instead of evaporating.
+- Banned as a question: anything destructive, externally visible, credential-touching, or scope-expanding. Those go through a normal explicit-confirmation path, not through a quick-select chip.
+- Banned as a question: anything already `Done 100%`, anything the user never asked about and the plan never touched when the risk is cosmetic, and anything only phrased as a preference question with no code outcome ("would you like me to also..."). A question must resolve into a code change, a test, a doc, or a deletion.
+
+### 🙋 6.4 Inject — ask, do not narrate (mandatory)
+- Use the harness's own structured question mechanism. Discover it first: a `question`/`ask` tool, an AskUserQuestion-style prompt, a plan-approval or multi-select widget, or an equivalent. Present the follow-ups as **multi-select checkboxes** so the user answers by tapping, never by typing.
+- Batch every follow-up into **one single question-set call**, never one call per item, and place it after the final recap so the user first sees what was delivered, then decides what to finish.
+- Each option carries a short label plus a one-line description naming the file or surface it touches and the check that proves it closed. Label the first option of each question as the recommended default where one exists.
+- Ask even when the list is short, even when the session looked clean, and even when the user seemed satisfied. A quiet session is exactly where unnoticed debt accumulates; the sweep is not a courtesy, it is the closing gate.
+- If no structured question tool exists in the runtime, degrade to a rendered checkbox list in the final message with an explicit instruction to reply with the item numbers to execute, and state plainly that the runtime lacks a prompt widget. Never silently skip the ask because the widget was missing.
+- If the user selects nothing, accept it in one line, keep the items in the written backlog with their `defer:` markers, and close. Never re-ask the same question in the same session, and never treat a declined follow-up as a reason to re-open the completed plan.
+
+### 🛠️ 6.5 Execute — selected follow-ups run as real work
+- A selected follow-up is a task, not a favor. It enters the same pipeline as plan work: chunk it, fan out to subagents, TDD when behavior changes, verification with fresh evidence, diff audit, and commit. No reduced standard, no "quick fix" exemption.
+- Re-open the plan status to `In Progress` for the duration, add the item as a numbered follow-up task with its own acceptance criterion and `skip_if`, and return it to `Complete` when the evidence is green. The plan file, not the chat, is the record.
+- After the batch closes, run the sweep's own short pass once more: did executing item A create new debt in the surface it touched? Any new candidate goes to the same ranked list, and the user is asked again only for genuinely new items.
+- Batch the selections into one round. Sequentially asking about each follow-up's sub-steps reproduces the low-value prompting this stage exists to eliminate.
+
+### 🚫 Anti-Patterns
+- Closing the session with a report and no question. A debt sweep that produces prose instead of a selectable question has not run.
+- Generic chips (`"Anything else?"`, `"More tests?"`) with no file path and no finish line. Unactionable options waste the user's attention and get ignored.
+- Padding to 3-5 items with speculative work, or asking 8 questions because everything looked interesting. Rank first, then cap.
+- Turning a follow-up question into a new scope decision. The user picking an item is approval to close known debt inside the same goal, not approval to redesign the feature.
+- Re-asking the declined items, or treating "no" as a reason to reopen the verified plan.
+- Doing the follow-ups silently without asking, which violates the check-first contract, or asking and then not doing them, which is worse.
+
+```mermaid
+flowchart TD
+    Gate["Plan tasks Done 100%\n+ verification evidence green"] --> Harvest["Harvest debt candidates\nshortcuts, review findings,\nmissing tests/docs, TODOs,\nwarnings, gaps"]
+    Harvest --> Rank["Classify NOW vs LATER\nrank by risk x blast radius x cost\ndefault 3-5 items"]
+    Rank --> Ask["Inject ONE multi-select\nquestion via harness prompt\ncheckboxes, not prose"]
+    Ask -->|User selects items| Reopen["Re-open plan to In Progress\nadd follow-up tasks"]
+    Ask -->|User selects nothing| Backlog["Record LATER items in backlog\nwith defer markers\nclose session"]
+    Reopen --> Exec["Execute as real work:\nchunk, subagent fan-out,\nTDD, verify, diff audit, commit"]
+    Exec --> SweepAgain{"Did the fix create\nnew debt?"}
+    SweepAgain -->|"Yes"| Rank
+    SweepAgain -->|"No"| Close(["🏁 Zero-debt session\nor documented deferral"])
+    Backlog --> Close
+```
+
 ## Consolidated Anti-Patterns
 | Excuse | Reality |
 |---|---|
@@ -877,6 +951,11 @@ Red flags: "should", "probably", "seems to", satisfaction expressed pre-verifica
 | "I'll ship the smaller, safer version" | Fidelity: a narrower or merely compatible solution is misalignment, not prudence. Surface the conflict instead of shrinking the goal |
 | "It's blocked, so I'll stop here" | Blocked Audit: the same blocker must recur across three consecutive turns before it counts as blocked; until then keep completing independent work |
 | "Updating the plan instead of running it" | A plan update is not progress. Keep it current, then execute; trivial single-step work needs no plan at all |
+| "I left a few TODOs, I'll clean them later" | Session-Close Debt Sweep: every noticed-but-unclosed item becomes a selectable follow-up now, so nothing survives the handoff as debt |
+| "Plan says done, so the session is over" | Plan Completion Saturation: tasks reach `Done 100%` with evidence, and the Step 6 sweep runs before the plan flips to `Complete` |
+| "I'll list the follow-ups at the end so you can read them" | Ask, don't narrate: one multi-select question with checkboxes, batched after the recap, so the user taps instead of retyping |
+| "Here are 8 follow-ups, pick the important ones" | Rank then cap: default 3-5 ranked follow-ups; the tail goes to the written backlog with `defer:` markers instead of a longer question list |
+| "You declined, so let me re-ask at the end" | A declined follow-up is closed. Record it in the backlog and finish; never re-ask the same question in one session |
 | "Asking again for permission already granted" | Authorization Persistence: approval and preferences carry across turns; batch any genuinely new confirmation into one request |
 | "Reporting only the first bug I found" | Review Exhaustiveness: return every qualifying finding, deduplicated by location and defect/remedy |
 | "This task is too small to bother with subagents" | Task-Chunking Principle: small total work means more chunks, not fewer subagents. Chunk and fan out anyway |

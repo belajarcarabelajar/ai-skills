@@ -1,6 +1,8 @@
 # AI Skills: Ultimate All-in-One AI Coding Agent Pipeline
 
-Comprehensive, production-grade, all-in-one skill pipeline for AI coding agents. Designed to guide agents through the entire software engineering lifecycle: **Idea -> Design -> Plan -> Human Approval Gate -> TDD -> Systematic Debugging -> Subagent Orchestration -> Verification -> Finishing**.
+Comprehensive, production-grade, all-in-one skill pipeline for AI coding agents. Designed to guide agents through the entire software engineering lifecycle: **Idea -> Design -> Plan -> Human Approval Gate -> TDD -> Systematic Debugging -> Subagent Orchestration -> Verification -> Finishing -> Session-Close Debt Sweep**.
+
+Verification is the last gate, not the last step. Once the plan is `Done 100%` and the evidence is green, the agent harvests every noticed-but-unclosed item from the session, ranks 3-5 follow-ups that can be finished right now, and asks them as a single multi-select question through the harness's own prompt widget. The user taps checkboxes instead of retyping, selected items run as real work, and the session ends with zero unexamined coding debt.
 
 Maintains a **Single Source of Truth** (`Super Ultra Code Plan Implementation.md`) so the agent never loses contextual invariants, safety constraints, or human-approval gates during execution.
 
@@ -40,7 +42,11 @@ flowchart TD
     Subagents --> VerifyGate
 
     VerifyGate["5️⃣ Verification Before Completion (Evidence Gate)"] --> GitHygiene["Finishing & Git Hygiene Protocol"]
-    GitHygiene --> Done["✅ Task Completed & Verified"]
+    GitHygiene --> DebtSweep["6️⃣ Session-Close Debt Sweep (3-5 ranked follow-ups)"]
+    DebtSweep --> AskGate{{"🙋 Multi-Select Follow-Up Question"}}
+    AskGate -->|Items selected| SweepFix["Execute as real work: chunk, subagents, TDD, verify, commit"]
+    AskGate -->|Nothing selected| Done["✅ Zero-Debt Session or Documented Deferral"]
+    SweepFix --> Done
 ```
 
 </details>
@@ -138,6 +144,7 @@ Agents can instantly scaffold structured artifacts using the ready-to-use templa
 - **[`adr-template.md`](templates/adr-template.md)**: Architecture Decision Record (ADR) - structured decision tree, alternative trade-off comparison, and consequences.
 - **[`subagent-contract-template.md`](templates/subagent-contract-template.md)**: Subagent task contract - task chunking and fan-out plan, strict scope isolation, permitted target files, gather & synthesize checkpoint, and parent diff audit gate sequence.
 - **[`code-review-template.md`](templates/code-review-template.md)**: Reviewer output contract - rule attribution precedence, 8-point bug qualification filter, P0–P3 priority with confidence, exhaustiveness and dedupe rules, suggestion block format, and the binary `correct` / `not correct` verdict.
+- **[`follow-up-injection-template.md`](templates/follow-up-injection-template.md)**: Session-close debt sweep - harvested debt candidates, `NOW`/`LATER` classification, the ranked 3-5 follow-up set, the batched multi-select question, the execution record, and the deferred backlog.
 
 ---
 

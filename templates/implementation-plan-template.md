@@ -100,3 +100,15 @@ flowchart TD
 
 ## 7. Human Approval Gate
 - [ ] Partner / Human approval received for this plan before implementation begins.
+
+## 8. Session-Close Debt Sweep & Follow-Up Backlog
+> Runs when every task above is `Done 100%`. Filled with `templates/follow-up-injection-template.md`.
+
+| # | Follow-up (outcome + path + finish line) | Class | `defer: <ceiling>, <upgrade-trigger>` | Status |
+|---|---|---|---|---|
+| F1 | | `NOW` / `LATER` | | `OPEN` / `DONE` / `DEFERRED` |
+
+- [ ] 3-5 ranked follow-ups injected as one multi-select question (checkboxes) after the final recap.
+- [ ] Every selected follow-up executed through the full pipeline with fresh evidence.
+- [ ] Declined and out-of-cap items written here so no debt leaves the session unrecorded.
+

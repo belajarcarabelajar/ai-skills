@@ -82,11 +82,17 @@ link_skill_package() {
     echo "[DRY-RUN]   - SKILL.md -> $MASTER_FILE"
     echo "[DRY-RUN]   - templates -> $REPO_DIR/templates"
     echo "[DRY-RUN]   - examples -> $REPO_DIR/examples"
+    echo "[DRY-RUN]   - mermaid.config.json -> $REPO_DIR/mermaid.config.json"
+    echo "[DRY-RUN]   - mermaid.dark.config.json -> $REPO_DIR/mermaid.dark.config.json"
   else
     mkdir -p "$target_skill_dir"
     ln -sf "$MASTER_FILE" "$target_skill_dir/SKILL.md"
     ln -sfn "$REPO_DIR/templates" "$target_skill_dir/templates"
     ln -sfn "$REPO_DIR/examples" "$target_skill_dir/examples"
+    # Theming config ships with the skill so an installed harness can reproduce
+    # the same diagram rendering (font embedding, palette, dark variant).
+    ln -sf "$REPO_DIR/mermaid.config.json" "$target_skill_dir/mermaid.config.json"
+    ln -sf "$REPO_DIR/mermaid.dark.config.json" "$target_skill_dir/mermaid.dark.config.json"
     echo "[OK] Linked skill package in: $target_skill_dir"
   fi
 }
@@ -116,11 +122,15 @@ if [ "$DRY_RUN" = true ]; then
   echo "[DRY-RUN]   - SKILL.md -> ../../Super Ultra Code Plan Implementation.md"
   echo "[DRY-RUN]   - templates -> ../../templates"
   echo "[DRY-RUN]   - examples -> ../../examples"
+  echo "[DRY-RUN]   - mermaid.config.json -> ../../mermaid.config.json"
+  echo "[DRY-RUN]   - mermaid.dark.config.json -> ../../mermaid.dark.config.json"
 else
   mkdir -p "$REPO_DIR/skills/super-ultra-code-plan"
   ln -sf "../../Super Ultra Code Plan Implementation.md" "$REPO_DIR/skills/super-ultra-code-plan/SKILL.md"
   ln -sfn "../../templates" "$REPO_DIR/skills/super-ultra-code-plan/templates"
   ln -sfn "../../examples" "$REPO_DIR/skills/super-ultra-code-plan/examples"
+  ln -sf "../../mermaid.config.json" "$REPO_DIR/skills/super-ultra-code-plan/mermaid.config.json"
+  ln -sf "../../mermaid.dark.config.json" "$REPO_DIR/skills/super-ultra-code-plan/mermaid.dark.config.json"
   echo "[OK] Internal repo skill package symlinks verified."
 fi
 

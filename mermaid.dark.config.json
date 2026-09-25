@@ -1,0 +1,14 @@
+{
+  "$comment": "Dark variant of mermaid.config.json. Only the theme differs; font and layout must stay identical so the two files are the same diagram in both color schemes. Used for the README hero via <picture> + prefers-color-scheme.",
+  "theme": "dark",
+  "securityLevel": "strict",
+  "fontFamily": "'Recursive Variable', 'Open Sans', Arial, sans-serif",
+  "flowchart": {
+    "useMaxWidth": true,
+    "htmlLabels": true,
+    "curve": "basis"
+  },
+  "themeVariables": {
+    "fontSize": "15px"
+  }
+}

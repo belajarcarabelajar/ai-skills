@@ -13,22 +13,39 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # mermaid-cli 12 requires Node >= 22.13 and puppeteer ^25.
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
+
+      # The skill mandates Bun as the only sanctioned runtime, and CI is the
+      # loudest place that rule can be demonstrated rather than just asserted.
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.4.0'
 
       - name: Install dependencies
-        run: npm install
+        run: bun install --frozen-lockfile
 
       - name: Install Puppeteer Browser
-        run: npx puppeteer browsers install chrome-headless-shell
+        run: bunx puppeteer browsers install chrome-headless-shell
 
       - name: Make scripts executable
         run: chmod +x install.sh scripts/sync.sh scripts/render-diagrams.sh
 
       - name: Render Mermaid Diagrams
         run: bash scripts/render-diagrams.sh
+
+      - name: Fail if committed diagrams drifted from their Mermaid source
+        run: |
+          if ! git diff --quiet -- diagrams/; then
+            echo "::error::Committed diagrams are out of sync with their Mermaid source."
+            echo "Run 'bash scripts/render-diagrams.sh' and commit the result."
+            git diff --stat -- diagrams/
+            exit 1
+          fi
 
       - name: Upload Diagram Artifacts
         uses: actions/upload-artifact@v4
@@ -38,7 +55,10 @@ jobs:
           if-no-files-found: warn
 
       - name: Run Skill Validation Script
-        run: node scripts/validate-skill.mjs
+        run: bun scripts/validate-skill.mjs
+
+      - name: Run Unit Tests
+        run: bun test scripts/
 
       - name: Test Installer Dry-Run
         run: |

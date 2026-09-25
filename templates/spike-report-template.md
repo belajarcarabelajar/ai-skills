@@ -9,6 +9,8 @@
 
 ```mermaid
 flowchart TD
+    accTitle: Spike hypothesis testing loop
+    accDescr: A timeboxed spike formulates hypotheses, probes each with the cheapest valid test, records evidence with a confidence level, and loops back to reformulate when every hypothesis is disproven.
     Start(["🔎 Spike Start\nTimebox begins"]) --> Form["Formulate hypotheses\nH1, H2, ..."]
     Form --> Probe["Probe each hypothesis\nwith minimal test/script"]
     Probe --> Outcome{"Outcome?"}

@@ -36,15 +36,17 @@ tasks:
   - [ ] AC-3: [Criterion 3]
 
 ## 2. Visual Implementation Map — MANDATORY (approval gate blocker if missing)
-> Every plan MUST include at least one valid Mermaid diagram. Minimum: a `flowchart` showing every task node, every `depends_on` edge, the approval gate, and the Verify → Completion tail. Add a second diagram (`sequenceDiagram` for interactions, `stateDiagram-v2` for lifecycle, `erDiagram` for data) when it clarifies the design. Node ids must be identical to `tasks[].id` in frontmatter and to the `Task <id>` headings in §4. Validate with `node scripts/validate-skill.mjs` (syntax) and `node scripts/ultra-plan-runner.mjs <plan.md>` (id/edge consistency) before requesting approval.
+> Every plan MUST include at least one valid Mermaid diagram. Minimum: a `flowchart` showing every task node, every `depends_on` edge, the approval gate, and the Verify → Completion tail. Add a second diagram (`sequenceDiagram` for interactions, `stateDiagram-v2` for lifecycle, `erDiagram` for data) when it clarifies the design. Node ids must be identical to `tasks[].id` in frontmatter and to the `Task <id>` headings in §4. Edge direction is `A --> B` meaning B depends on A. Every diagram MUST carry `accTitle` and `accDescr`. Validate with `bun scripts/validate-skill.mjs` (syntax + accessibility) and `bun scripts/ultra-plan-runner.mjs <plan.md>` (id and edge consistency, both directions) before requesting approval.
 ```mermaid
 flowchart TD
+    accTitle: Implementation plan visual map
+    accDescr: Task T1 and task T2 form the dependency chain, followed by a human approval gate, integration verification, and completion sign-off.
     T1["T1: [Component A]"] --> T2["T2: [Component B]"]
     T2 --> Gate{{"Human Approval Gate"}}
     Gate --> Verify["Verify: Integration Verification"]
     Verify --> Finish["Completion & Sign-off"]
 ```
-> Node ids (`T1`, `T2`, ...) must match `tasks[].id` in frontmatter and the task headings below. Every `depends_on` edge in frontmatter must appear as an arrow here, and vice versa.
+> Node ids (`T1`, `T2`, ...) must match `tasks[].id` in frontmatter and the task headings below. Every `depends_on` edge in frontmatter must appear as an arrow here, and every arrow between two task nodes must be declared in `depends_on`. The runner enforces both directions and rejects transitive-only reachability.
 
 ## 3. Global Constraints
 - Non-negotiable constraints, safety rules, and platform compatibility requirements.

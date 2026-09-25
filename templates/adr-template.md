@@ -21,6 +21,8 @@
 
 ```mermaid
 flowchart TD
+    accTitle: Architecture decision record flow
+    accDescr: A problem is stated, alternatives are evaluated, options are compared on trade-offs, one is chosen with a rationale, and the consequences are recorded.
     Problem["Problem / Architectural Need"] --> Eval{"Evaluate Alternatives"}
     Eval --> OptA["Option A: [Name]"]
     Eval --> OptB["Option B: [Name]"]

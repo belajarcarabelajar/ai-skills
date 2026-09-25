@@ -1,233 +1,115 @@
-# Worked Example: Add Input Validation to a REST Endpoint
+# Worked Example: Adding zod Input Validation to a REST Endpoint
 
-> This is a **complete, filled-in example** of the `super-ultra-code-plan` pipeline
-> running end-to-end on a real-sized task. Use this as a reference when the agent
-> starts drifting or you want to see what correct output looks like at each phase.
+> A complete filled-in walkthrough of the pipeline on a real-sized task. Read this
+> to calibrate what correct output looks like at each phase, not to copy the plan verbatim.
+
+---
+
+## 0. The Request
+
+> "Add input validation to `POST /api/orders`. Body comes from mobile clients, so field
+> shapes drift. Use zod. Reject bad input with 400 and a field-level error list."
+
+**Classification:** Bounded. One endpoint, one dependency, no shared interface change.
+Stated aloud before the first question, per Step 1.
+
+## 1. Active Project Profile
+
+| Field | Value |
+|---|---|
+| Repository root | `~/projects/orders-api` |
+| Target scope | `src/routes/orders.ts`, `src/routes/orders.test.ts` |
+| Runtime | Bun 1.4.0 |
+| Test command | `bun test src/routes/orders.test.ts` |
+| Lint / type | `bun run lint`, `bun run typecheck` |
+| Config sources | `package.json` scripts, `tsconfig.json`, `biome.json` |
+| Protected paths | `src/middleware/auth.ts` (untouched) |
+
+Read from the repository, not asked from the user. Nothing in this section came from a question.
+
+## 2. Short Design (Bounded path, presented in chat)
+
+> **🗺️ Plan**
 >
-> Scenario: A Node.js/Bun + Express API. The `POST /users` endpoint accepts raw JSON
-> with no validation. The goal: add strict input validation using `zod`.
-
----
-
-## Step 1 — Classify
-
-**Path chosen: Bounded** (< 2 files, single behavior, no API contract change for consumers)
-
-Reasoning:
-- Touch 2 files: `src/routes/users.ts` + `src/routes/users.test.ts`
-- No DB schema change, no new dependency beyond `zod` (already installed)
-- Observable behavior: malformed requests now return 400 instead of 500 or silent corruption
-
----
-
-## Step 2 — Brainstorming (Bounded path: short design note)
-
-**Intent & Scope**
-- Goal: `POST /users` rejects invalid payloads with a structured 400 error before touching DB
-- Non-goals: authentication, rate limiting, output format changes
-- Acceptance criteria:
-  - Missing `email` field → 400 `{ error: "email is required" }`
-  - Invalid email format → 400 `{ error: "email must be a valid email" }`
-  - Missing `name` field → 400 `{ error: "name is required" }`
-  - Valid payload → 201, existing behavior unchanged
-
-**Design decision:** Use `zod` (already a dependency) — no new package. Parse at route handler entry, before any DB call. Return first error only (not all errors) — simpler UX for this API.
-
-**Rejected:** `express-validator` (not installed, overkill for this scope).
-
----
-
-## Step 3 — Implementation Plan
+> **Approach:** Parse the body with a zod schema at the route boundary, before the handler
+> runs. Return 400 with a flat `[{ field, message }]` list so mobile clients can map errors
+> to form fields without parsing prose.
+>
+> **Files touched:** `src/routes/orders.ts` (add schema + guard), `src/routes/orders.test.ts`.
+>
+> **Testing plan:** failing test first for each rule, then the schema, then a regression run
+> over the existing suite.
 
 ```mermaid
-flowchart LR
-    T1["T1: Write failing tests (RED)"] --> T2["T2: Add zod schema + parse in handler (GREEN)"]
-    T2 --> Verify["Verify: all tests pass + no regressions"]
-    Verify --> Gate{{"Human Approval Gate"}}
-    Gate --> Done["git commit"]
+flowchart TD
+    accTitle: Bounded plan for order input validation
+    accDescr: A failing test for each validation rule, then the zod schema at the route boundary, then a 400 response with field-level errors, then a regression run over the existing suite.
+    T1["T1: Failing tests for each rule"] --> T2["T2: zod schema + parse guard"]
+    T2 --> T3["T3: 400 response with field errors"]
+    T3 --> T4["T4: Regression run on full suite"]
 ```
 
-Target files:
-- `src/routes/users.test.ts` — 3 new test cases
-- `src/routes/users.ts` — add zod parse at handler entry
+> **Pre-execution checklist**
+> - [ ] T1: failing tests for each rule
+> - [ ] T2: zod schema + parse guard
+> - [ ] T3: 400 response with field errors
+> - [ ] T4: regression run on full suite
 
-**Hard gate passed:** Human approved scope above before any code.
+Approval received, then execution started.
 
----
+## 3. Task T1: RED
 
-## Step 4 — TDD: RED Phase
-
-Write failing tests FIRST. No production code yet.
-
-```typescript
-// src/routes/users.test.ts  (additions only — existing tests untouched)
-
-describe('POST /users — input validation', () => {
-  it('returns 400 when email is missing', async () => {
-    const res = await app.request('/users', {
-      method: 'POST',
-      body: JSON.stringify({ name: 'Alice' }),
-      headers: { 'Content-Type': 'application/json' },
-    });
-    expect(res.status).toBe(400);
-    const body = await res.json();
-    expect(body.error).toBe('email is required');
-  });
-
-  it('returns 400 when email format is invalid', async () => {
-    const res = await app.request('/users', {
-      method: 'POST',
-      body: JSON.stringify({ name: 'Alice', email: 'not-an-email' }),
-      headers: { 'Content-Type': 'application/json' },
-    });
-    expect(res.status).toBe(400);
-    const body = await res.json();
-    expect(body.error).toBe('email must be a valid email');
-  });
-
-  it('returns 400 when name is missing', async () => {
-    const res = await app.request('/users', {
-      method: 'POST',
-      body: JSON.stringify({ email: 'alice@example.com' }),
-      headers: { 'Content-Type': 'application/json' },
-    });
-    expect(res.status).toBe(400);
-    const body = await res.json();
-    expect(body.error).toBe('name is required');
-  });
-});
+```bash
+bun test src/routes/orders.test.ts
+# exit 1, 4 failing: missing field 'sku', bad 'quantity' type, unknown key, negative qty
 ```
 
-**Run tests — confirm RED:**
-```
-$ rtk bun test src/routes/users.test.ts
+Structured evidence: `[bun test] → [exit 1] → [4 failing, all asserting 400 + field errors] → [VERIFIED RED]`
 
-  POST /users — input validation
-    ✗ returns 400 when email is missing        (received status 500)
-    ✗ returns 400 when email format is invalid (received status 201)
-    ✗ returns 400 when name is missing         (received status 201)
+The test fails for the right reason: the route currently returns 500 on a malformed body,
+because nothing validates it.
 
-  3 failed, 4 passed
-```
+## 4. Task T2: GREEN
 
-Failure is for the right reason — no validation exists yet. Proceed to GREEN.
+Added the schema and the guard. One focused edit in `src/routes/orders.ts`:
 
----
+- `OrderSchema` describing the accepted body
+- `parseOrderBody` returning a discriminated result rather than throwing
+- the guard placed before the handler, after auth
 
-## Step 5 — TDD: GREEN Phase
+Re-ran the focused suite: `[bun test src/routes/orders.test.ts] → [exit 0] → [4 passed]`
 
-Minimal production code to make tests pass:
+## 5. Task T3 and T4: response shape and regression
 
-```typescript
-// src/routes/users.ts
-import { z } from 'zod';
+- T3: response is `{ error: [{ field, message }] }`, matched against a snapshot test
+- T4: `bun test` on the whole suite → `[exit 0] → [38 passed, 0 failed]`, no regressions
 
-const CreateUserSchema = z.object({
-  name: z.string({ required_error: 'name is required' }).min(1, 'name is required'),
-  email: z
-    .string({ required_error: 'email is required' })
-    .email('email must be a valid email'),
-});
+`bun run typecheck` → exit 0. `bun run lint` → exit 0, 0 warnings.
 
-app.post('/users', async (c) => {
-  const body = await c.req.json();
+## 6. Finishing
 
-  const result = CreateUserSchema.safeParse(body);
-  if (!result.success) {
-    const firstError = result.error.errors[0];
-    return c.json({ error: firstError.message }, 400);
-  }
+- `git status` confirmed only the two intended files changed
+- commit: `feat: validate order request body with zod schema`
+- No temporary files left behind
 
-  // existing DB logic unchanged below
-  const user = await db.users.create({ data: result.data });
-  return c.json(user, 201);
-});
-```
+## 7. Session-Close Debt Sweep
 
-**Run tests — confirm GREEN:**
-```
-$ rtk bun test src/routes/users.test.ts
+Harvested during the session, ranked, and offered as one multi-select question:
 
-  POST /users — input validation
-    ✓ returns 400 when email is missing        (12ms)
-    ✓ returns 400 when email format is invalid (8ms)
-    ✓ returns 400 when name is missing         (9ms)
-
-  POST /users — existing behavior
-    ✓ creates user with valid payload          (31ms)
-
-  4 passed, 0 failed
-```
-
----
-
-## Step 6 — TDD: REFACTOR Phase
-
-Green. Now clean up — no behavior change:
-
-- Extracted `CreateUserSchema` to top of file (already done above — no further refactor needed)
-- Checked: no magic strings, error messages match spec exactly
-- Checked: no changes to unrelated code
-
-**Run full suite — confirm 0 regressions:**
-```
-$ rtk bun test
-
-  src/routes/users.test.ts       4 passed
-  src/routes/auth.test.ts        7 passed
-  src/routes/products.test.ts    12 passed
-  src/services/db.test.ts        9 passed
-
-  32 passed, 0 failed
-  Exit 0
-```
-
----
-
-## Step 7 — Verification Before Completion
-
-| Check | Command | Exit | Evidence |
+| # | Candidate | Class | Disposition |
 |---|---|---|---|
-| Target tests | `rtk bun test src/routes/users.test.ts` | 0 | 4 passed, 0 failed |
-| Full regression | `rtk bun test` | 0 | 32 passed, 0 failed |
-| Type check | `bun run typecheck` | 0 | 0 errors |
-| No secrets in diff | `git diff --stat` | — | 2 files, +28 lines |
+| F1 | `GET /api/orders` has the same body-less drift risk; no query validation | `LATER` | `defer: 2 sprints, <mobile client reports a bad query>` |
+| F2 | No test for the 401 path, which auth middleware owns, not this change | `LATER` | `defer: next auth change` |
+| F3 | `orderSchema` is local; the same three fields repeat in the refund route | `NOW` | Extract to `src/schemas/order.ts` and cover it directly |
 
-All checks pass. Completion claim is safe to make.
+F1 and F2 are pre-existing and outside the approved request, so they were written to the
+backlog rather than silently fixed. F3 was selected, executed through the same TDD loop,
+verified, and committed as `refactor: extract shared order schema`.
 
----
+## 8. What This Example Teaches
 
-## Step 8 — Finishing & Git Commit
-
-```
-$ git status
-M  src/routes/users.ts
-M  src/routes/users.test.ts
-
-$ git add src/routes/users.ts src/routes/users.test.ts
-
-$ git commit -m "feat(users): add zod input validation to POST /users
-
-Rejects malformed payloads with structured 400 errors before DB call.
-Returns first validation error only. Existing behavior unchanged.
-
-Tests: 3 new cases (missing email, invalid email, missing name) all GREEN."
-```
-
----
-
-## What Correct Pipeline Output Looks Like
-
-| Phase | What you should see |
-|---|---|
-| Classify | One clear path label (Spike / Bounded / Architectural) with 2-sentence justification |
-| Brainstorm | Intent, non-goals, acceptance criteria, one design decision with rejected alternative |
-| Plan | MANDATORY Mermaid diagram + target files list + hard gate confirmation |
-| RED | Test code written, tests run, failure output pasted, failure is for the right reason |
-| GREEN | Minimal production code, tests run again, all pass, output pasted |
-| REFACTOR | Brief statement of what was cleaned, re-run confirms still green |
-| Verify | Filled verification table with real command output |
-| Commit | Conventional commit message with rationale |
-
-> If any phase is missing or skipped, the pipeline is not complete —
-> even if the code "works".
+1. The profile came from the repository, not from questions.
+2. Every task carried a command, an expected exit code, and extracted evidence.
+3. Completion was claimed only after a fresh full-suite run with 0 failures.
+4. The session ended with a question, not a report, and the declined items were recorded
+   with `defer:` markers instead of evaporating.

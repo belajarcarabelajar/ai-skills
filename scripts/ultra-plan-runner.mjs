@@ -189,6 +189,86 @@ export function descendants(id, tasks) {
   return out;
 }
 
+// ---------- Mermaid map parsing ----------
+// The Visual Implementation Map is a machine-checked contract, not prose:
+// frontmatter `depends_on` == Mermaid edges == task headings. To enforce that,
+// the map is parsed structurally instead of grepped for ids in raw text, so a
+// task id mentioned inside an unrelated label can never satisfy the check.
+
+// Only flowchart/graph diagrams can express the task DAG. A sequenceDiagram or
+// stateDiagram-v2 in the same plan is legitimate supporting context, and its
+// arrows are not dependency edges, so it is excluded from the contract check.
+const FLOW_TYPES = /^(flowchart|graph)\b/i;
+
+const ARROW_SPLIT = /(<-->|<--|-->|-\.->|---|==>|~~~|--x|--o)/;
+const IDENT = /[A-Za-z][\w-]*/g;
+const NODE_DECL = /([A-Za-z][\w-]*)\s*[[({]{1,2}([^\])}]*)\]/;
+
+function lastIdent(text) {
+  const m = [...text.matchAll(IDENT)];
+  return m.length ? m[m.length - 1][0] : null;
+}
+
+function firstIdent(text) {
+  const m = text.match(IDENT);
+  return m ? m[0] : null;
+}
+
+// Returns { nodes: Set<string>, edges: Array<[from, to]> } for one diagram source.
+export function parseMermaidMap(source) {
+  const nodes = new Set();
+  const edges = [];
+  for (const rawLine of source.split(/\r?\n/)) {
+    const line = rawLine.trim();
+    if (!line || line.startsWith('%%')) continue;
+
+    // Mask quoted label text first so brackets, arrows, and prose inside a
+    // label can never be mistaken for graph structure.
+    const literals = [];
+    let skeleton = line.replace(/"[^"]*"/g, (m) => `\u0000${literals.push(m) - 1}\u0000`);
+
+    // Node declarations: record the id, drop the shape and its label.
+    skeleton = skeleton.replace(NODE_DECL, (_m, id) => {
+      nodes.add(id);
+      return ` ${id} `;
+    });
+
+    // Edge labels such as `-->|"depends"|` are not endpoints.
+    skeleton = skeleton.replace(/\|[^|]*\|/g, ' ');
+
+    const parts = skeleton.split(ARROW_SPLIT);
+    for (let i = 1; i < parts.length; i += 2) {
+      const from = lastIdent(parts[i - 1]);
+      const to = firstIdent(parts[i + 1]);
+      if (!from || !to || from === to) continue;
+      nodes.add(from);
+      nodes.add(to);
+      edges.push([from, to]);
+    }
+  }
+  return { nodes, edges };
+}
+
+// Parses every ```mermaid block in a plan body and unions the result.
+// `blockCount` counts all diagrams; `nodes`/`edges` come only from flowchart
+// and graph diagrams, which are the only ones that can carry the task DAG.
+export function parseMermaidMaps(body) {
+  const blocks = body.match(/```mermaid[^\n]*\n[\s\S]*?```/g) || [];
+  const nodes = new Set();
+  const edges = [];
+  let flowBlockCount = 0;
+  for (const block of blocks) {
+    const source = block.replace(/^```mermaid[^\n]*\n/, '').replace(/```\s*$/, '');
+    const typeLine = source.split('\n').map((l) => l.trim()).find((l) => l && !l.startsWith('%%'));
+    if (!typeLine || !FLOW_TYPES.test(typeLine)) continue;
+    flowBlockCount++;
+    const parsed = parseMermaidMap(source);
+    for (const n of parsed.nodes) nodes.add(n);
+    edges.push(...parsed.edges);
+  }
+  return { nodes, edges, blockCount: blocks.length, flowBlockCount };
+}
+
 // ---------- Validation ----------
 
 export function validatePlan(plan, body) {
@@ -211,16 +291,38 @@ export function validatePlan(plan, body) {
   try { topoSort(plan.tasks || []); } catch (e) { errors.push(e.message); }
 
   if (body) {
-    const mermaidBlocks = body.match(/```mermaid[\s\S]*?```/g) || [];
-    if (mermaidBlocks.length === 0) {
+    const { nodes, edges, blockCount, flowBlockCount } = parseMermaidMaps(body);
+    if (blockCount === 0) {
       errors.push('plan body must contain at least one ```mermaid diagram (Visual Implementation Map is mandatory)');
-    }
-    for (const t of plan.tasks || []) {
-      const headingRe = new RegExp(`Task\\s+${t.id}\\b`);
-      const mermaidRe = new RegExp(`\\b${t.id}\\b`);
-      const mermaidBlock = mermaidBlocks.join('\n');
-      if (!headingRe.test(body)) errors.push(`task ${t.id} has no matching "Task ${t.id}" heading in body`);
-      if (!mermaidRe.test(mermaidBlock)) errors.push(`task ${t.id} has no matching node in the mermaid map`);
+    } else if (flowBlockCount === 0) {
+      errors.push('plan body must contain a flowchart or graph Visual Implementation Map with a node per task; '
+        + 'a sequenceDiagram or stateDiagram alone cannot express the task DAG');
+    } else {
+      const edgeSet = new Set(edges.map(([a, b]) => `${a}\u0000${b}`));
+      const depsOf = new Map((plan.tasks || []).map((t) => [t.id, t.depends_on || []]));
+
+      for (const t of plan.tasks || []) {
+        const headingRe = new RegExp(`Task\\s+${t.id}\\b`);
+        if (!headingRe.test(body)) errors.push(`task ${t.id} has no matching "Task ${t.id}" heading in body`);
+        if (!nodes.has(t.id)) errors.push(`task ${t.id} has no matching node in the mermaid map`);
+      }
+
+      // Flow direction: `A --> B` means B depends on A.
+      for (const t of plan.tasks || []) {
+        for (const dep of t.depends_on || []) {
+          if (!seen.has(dep)) continue;
+          if (!edgeSet.has(`${dep}\u0000${t.id}`)) {
+            errors.push(`task ${t.id} depends_on ${dep} but the mermaid map has no edge ${dep} --> ${t.id}`);
+          }
+        }
+      }
+
+      for (const [from, to] of edges) {
+        if (!seen.has(from) || !seen.has(to)) continue; // entry, gate, or exit node
+        if (!(depsOf.get(to) || []).includes(from)) {
+          errors.push(`mermaid map has edge ${from} --> ${to} but ${to}.depends_on does not declare ${from}`);
+        }
+      }
     }
   }
   return { errors, warnings };

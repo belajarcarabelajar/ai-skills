@@ -24,6 +24,8 @@ The parent chunks the work into the smallest independently verifiable units, the
 
 ```mermaid
 flowchart LR
+    accTitle: Subagent fan-out and audit sequence
+    accDescr: An approved task is chunked, dispatched to narrow subagents with disjoint targets, gathered at a review checkpoint, synthesized with independent verification, and passed through the parent diff audit gate.
     Plan["Approved task"] --> Chunk["Chunk into smallest\nverifiable units"]
     Chunk --> Fan["Dispatch N narrow subagents\ndisjoint targets"]
     Fan --> Gather["Gather all reports\nat review checkpoint"]
@@ -38,6 +40,8 @@ flowchart LR
 
 ```mermaid
 sequenceDiagram
+    accTitle: Parent and subagent interaction sequence
+    accDescr: The parent writes a batch manifest and dispatches chunks. Each subagent edits only its permitted files and runs its own tests, the parent audits the diff, and failing chunks are re-dispatched alone.
     autonumber
     actor Parent as Parent Agent
     participant Sub as Subagent

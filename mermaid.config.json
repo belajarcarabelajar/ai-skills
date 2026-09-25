@@ -1,0 +1,15 @@
+{
+  "$comment": "Light theme for every rendered diagram. Single source of truth: scripts/render-diagrams.sh passes this to `mmdc -c`. Paired with mermaid.dark.config.json.",
+  "theme": "neutral",
+  "securityLevel": "strict",
+  "fontFamily": "'Recursive Variable', 'Open Sans', Arial, sans-serif",
+  "$fontFamilyRationale": "Recursive Variable is a variable font bundled with mermaid-cli, so mmdc embeds it as 4 base64 faces in the SVG (~200KB). That makes label geometry identical on every renderer (GitHub, docs sites, PDF export) instead of depending on whichever of Verdana/Arial/Trebuchet the viewer happens to have. A generic stack would silently re-flow labels computed here under different metrics. It is also half the size of embedding Open Sans (20 faces), and it is the font mermaid itself recommends.",
+  "flowchart": {
+    "useMaxWidth": true,
+    "htmlLabels": true,
+    "curve": "basis"
+  },
+  "themeVariables": {
+    "fontSize": "15px"
+  }
+}

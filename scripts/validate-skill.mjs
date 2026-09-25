@@ -79,7 +79,7 @@ if (!fs.existsSync(masterPath)) {
 
 // 2. Check Symlinks in skills/super-ultra-code-plan/
 const skillDir = path.join(rootDir, 'skills', 'super-ultra-code-plan');
-const requiredSkillLinks = ['SKILL.md', 'templates', 'examples'];
+const requiredSkillLinks = ['SKILL.md', 'templates', 'examples', 'mermaid.config.json', 'mermaid.dark.config.json'];
 
 for (const linkName of requiredSkillLinks) {
   const p = path.join(skillDir, linkName);
@@ -176,7 +176,12 @@ const mmdcAvailable = fs.existsSync(mmdcPath) ||
   (() => { try { execSync('mmdc --version', { stdio: 'ignore' }); return true; } catch { return false; } })();
 
 if (!mmdcAvailable) {
-  console.warn('⚠️  mmdc not found — skipping mermaid block validation. Run: bun install');
+  // Hard error, not a warning. A silently skipped render gate is worse than no
+  // gate: it reports success while proving nothing. See the Zero-Tolerance
+  // Clean Pass rule in the master skill.
+  console.error('❌ mmdc not found — mermaid validation cannot run, so the gate would prove nothing.');
+  console.error('   Install the pinned toolchain first: bun install');
+  errors++;
 } else {
   const mmdc = fs.existsSync(mmdcPath) ? mmdcPath : 'mmdc';
   const mdFiles = [];
@@ -185,6 +190,9 @@ if (!mmdcAvailable) {
     for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
       if (entry.name === 'node_modules' || entry.name === '.git' || entry.name === 'diagrams') continue;
       const full = path.join(dir, entry.name);
+      // Skip symlinks: skills/*/SKILL.md points at the master file, so scanning
+      // it would validate (and later render) every diagram twice.
+      if (entry.isSymbolicLink()) continue;
       if (entry.isDirectory()) findMdFiles(full);
       else if (entry.name.endsWith('.md')) mdFiles.push(full);
     }
@@ -194,6 +202,12 @@ if (!mmdcAvailable) {
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'skill-mermaid-'));
   let mermaidValid = 0;
   let mermaidInvalid = 0;
+  let mermaidMissingA11y = 0;
+
+  // Accessibility contract: every diagram must carry accTitle + accDescr, which
+  // mermaid emits as <title>/<desc> wired to aria-labelledby. Without them the
+  // SVG is an unlabelled graphic for screen readers.
+  const a11yRe = /accTitle:[^\n]*\n\s*accDescr:/;
 
   for (const mdFile of mdFiles) {
     const content = fs.readFileSync(mdFile, 'utf8');
@@ -210,14 +224,25 @@ if (!mmdcAvailable) {
       const tmpOut = path.join(tmpDir, `block-${mermaidValid + mermaidInvalid + 1}.svg`);
       fs.writeFileSync(tmpIn, blocks[i]);
       const puppeteerCfg = path.join(rootDir, 'puppeteer-config.json');
-      const cfgFlag = fs.existsSync(puppeteerCfg) ? ` -p "${puppeteerCfg}"` : '';
+      const mermaidCfg = path.join(rootDir, 'mermaid.config.json');
+      const cfgFlag = [
+        fs.existsSync(mermaidCfg) ? ` -c "${mermaidCfg}"` : '',
+        fs.existsSync(puppeteerCfg) ? ` -p "${puppeteerCfg}"` : '',
+      ].join('');
       try {
-        execSync(`"${mmdc}"${cfgFlag} --input "${tmpIn}" --output "${tmpOut}"`, { stdio: 'pipe' });
+        execSync(`"${mmdc}"${cfgFlag} -b transparent --input "${tmpIn}" --output "${tmpOut}"`, { stdio: 'pipe' });
         mermaidValid++;
       } catch (err) {
         console.error(`❌ Mermaid syntax error in ${rel} [block ${i + 1}]`);
         console.error(`   ${err.stderr?.toString().trim().split('\n')[0] || 'unknown error'}`);
         mermaidInvalid++;
+        errors++;
+        continue;
+      }
+
+      if (!a11yRe.test(blocks[i])) {
+        console.error(`❌ Missing accessibility metadata in ${rel} [block ${i + 1}]: add accTitle + accDescr.`);
+        mermaidMissingA11y++;
         errors++;
       }
     }
@@ -230,6 +255,52 @@ if (!mmdcAvailable) {
     console.error(`❌ Mermaid validation: ${mermaidValid} valid, ${mermaidInvalid} invalid block(s).`);
   } else {
     console.log(`✅ Mermaid validation: ${mermaidValid} block(s) valid.`);
+  }
+
+  if (mermaidMissingA11y > 0) {
+    console.error(`❌ Accessibility: ${mermaidMissingA11y} diagram(s) lack accTitle/accDescr.`);
+  } else {
+    console.log('✅ Accessibility: every diagram carries accTitle + accDescr.');
+  }
+}
+
+// 6. Mermaid theming config must exist and stay paired with the renderer.
+const themeConfigs = [
+  ['mermaid.config.json', 'light'],
+  ['mermaid.dark.config.json', 'dark'],
+];
+for (const [cfg, variant] of themeConfigs) {
+  const p = path.join(rootDir, cfg);
+  if (!fs.existsSync(p)) {
+    console.error(`❌ Missing mermaid ${variant} config: ${cfg}`);
+    errors++;
+    continue;
+  }
+  try {
+    const parsed = JSON.parse(fs.readFileSync(p, 'utf8'));
+    if (!parsed.fontFamily) {
+      console.error(`❌ ${cfg} must pin fontFamily; an unpinned font re-flows labels per viewer.`);
+      errors++;
+    } else if (!parsed.theme) {
+      console.error(`❌ ${cfg} must pin theme.`);
+      errors++;
+    } else {
+      console.log(`✅ Mermaid ${variant} config valid: theme=${parsed.theme}, fontFamily=${parsed.fontFamily}`);
+    }
+  } catch (e) {
+    console.error(`❌ ${cfg} is not valid JSON: ${e.message}`);
+    errors++;
+  }
+}
+
+// 7. The committed README hero must exist; GitHub does not render Mermaid in raw HTML.
+for (const hero of ['lifecycle.svg', 'lifecycle-dark.svg']) {
+  const p = path.join(rootDir, 'diagrams', hero);
+  if (fs.existsSync(p)) {
+    console.log(`✅ Committed hero present: diagrams/${hero}`);
+  } else {
+    console.error(`❌ Missing committed hero: diagrams/${hero} (run: bash scripts/render-diagrams.sh)`);
+    errors++;
   }
 }
 

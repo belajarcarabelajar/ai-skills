@@ -9,6 +9,8 @@
 
 ```mermaid
 stateDiagram-v2
+    accTitle: Systematic debugging state machine
+    accDescr: Reproduce deterministically, diagnose the root cause, apply the smallest safe fix, then prove the regression. An inconclusive reproducer loops back to REPRODUCE and an unconfirmed root cause loops back for a new failing test.
     [*] --> REPRODUCE : Bug reported
     REPRODUCE --> DIAGNOSE : Failing test confirms bug
     REPRODUCE --> REPRODUCE : Test flaky or inconclusive — tighten reproducer

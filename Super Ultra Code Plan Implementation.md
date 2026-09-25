@@ -72,6 +72,8 @@ Verification is the last gate, never the last step. A mandatory **🧹 Session-C
 
 ```mermaid
 flowchart LR
+    accTitle: Four skill components and their approval gates
+    accDescr: Brainstorming, writing plans, test-driven development, and verification, joined by numbered human approval gates, with a session-close debt sweep after verification.
     B["🧠 Brainstorming\nValidated design/spec"]
     B -->|"Human approval"| G1{{"⏸️ Gate 1"}}
     G1 --> P["🗺️ Writing Plans\nExecutable implementation plan"]
@@ -325,6 +327,8 @@ These rules apply to every path and support the four skill components without re
 
 ```mermaid
 flowchart TD
+    accTitle: Subagent chunking, fan-out, gather, and audit
+    accDescr: An approved plan is chunked into the smallest verifiable units, split further when feasible, dispatched as a narrow batch, gathered at a review checkpoint, synthesized, and audited. A red chunk is re-chunked and re-dispatched alone.
     Plan["Approved plan or task"] --> Chunk["Chunk into smallest\nindependently verifiable units"]
     Chunk --> Floor{"High fan-out floor:\n10+ narrow subagents feasible?"}
     Floor -->|"Yes"| Split["Split until every chunk is\nsingle-purpose and small"]
@@ -404,6 +408,8 @@ flowchart TD
 
 ```mermaid
 flowchart LR
+    accTitle: Approved-work completion and stop conditions
+    accDescr: After approval every reversible in-scope step runs to completion. Destructive actions and scope changes stop for confirmation, while external blockers still let all independent work finish first.
     Approval(["✅ Human Approval\nreceived"]) --> Check{"Reversible &\nwithin scope?"}
     Check -->|"Yes"| Execute["Execute step\ncompletely"]
     Execute --> More{"More approved\nsteps remain?"}
@@ -611,11 +617,15 @@ Treat unknown elements according to their epistemic nature before asking the use
 - Every plan (Bounded short design in chat AND Architectural plan file) MUST include at least one valid ` ```mermaid` diagram. No exceptions, no `N/A`. A plan without Mermaid is incomplete and blocks the approval gate.
 - Minimum: one `flowchart` (TD or LR) placed near the plan overview showing task nodes (`T1`, `T2`, ...), `depends_on` edges, human approval gate(s) (`{{...}}`), and the Verify → Completion tail.
 - Choose additional diagram types that match the reasoning when they add clarity: `flowchart` for process and decisions, `sequenceDiagram` for component/user interactions, `stateDiagram-v2` for lifecycle/status, `graph` for architecture/dependencies, `erDiagram` for data relationships.
+- Every diagram MUST declare `accTitle:` and `accDescr:` on the lines immediately after the diagram-type declaration. Mermaid emits these as `<title>`/`<desc>` wired to `aria-labelledby`, which is what makes the diagram readable to a screen reader and to an agent that parses the SVG. The title names the diagram; the description states what it shows, in one or two sentences, without restating the node list. A diagram without them is incomplete and fails `scripts/validate-skill.mjs`.
+- Keep diagrams free of decoration that carries no information: no gradient fills, no drop shadows, no emoji used as the only label. `accDescr` is the accessible equivalent of visual flourish.
 - Label gates and decision points (`{{Gate}}`, `{Decision}`), keep node ids identical to `tasks[].id` frontmatter ids and `Task <id>` headings, and keep node labels consistent with the interfaces, components, files, and acceptance criteria in the plan.
 - Before execution, read the plan and walk through the Mermaid diagram: identify the start, sequence, dependencies, branches, approval gates, failure paths, and expected outcome. Compare it with the current repository and approved spec.
 - A missing diagram, an unrunnable diagram (mermaid syntax error), or a mismatch between the diagram, plan tasks, spec, or repository is a pre-execution blocker. Update the affected artifact or obtain approval for the changed interpretation before implementing.
 - When the plan changes, update the Mermaid diagram and its related task, interface, acceptance, and verification details in the same change.
 - Mermaid is a visual companion and a machine-checked contract (frontmatter `depends_on` == Mermaid edges == task headings), not a replacement for exact files, interfaces, acceptance criteria, test steps, commands, or evidence.
+- Edge Direction Convention: `A --> B` means B depends on A. Every `depends_on` entry requires exactly one matching arrow, and every arrow between two task nodes must be declared in `depends_on`. `scripts/ultra-plan-runner.mjs` parses the map structurally and enforces both directions, so removing an arrow or adding one without updating the frontmatter fails the gate. Reachability is not a substitute: a transitive path does not satisfy a `depends_on` entry.
+- A task id mentioned inside an unrelated label, comment, or second diagram does not count as a node. Node presence is determined by graph structure, not by text search.
 
 Trigger: spec/requirements exist, before touching code.
 Assume: engineer has zero codebase context, questionable taste, skilled developer, weak test design.
@@ -646,7 +656,7 @@ defaults:
   on_precondition_fail: stop-task-continue-independent
 tasks:
   - id: T1
-    depends_on: []                  # DAG edges — machine-parseable, must match Mermaid
+    depends_on: []                  # DAG edges — `A --> B` means B depends_on A; must match Mermaid
     files: { create: [exact/path.ext], modify: [], test: [exact/path.test.ext] }
     idempotency_key: "T1:exact/path.ext"
     skip_if: "<verification command>"  # exit 0 = already done → SKIPPED-IDEMPOTENT
@@ -669,7 +679,7 @@ tasks:
 **Spec:** [path to spec]
 **Scope:** [included behavior and surfaces]
 **Non-Goals:** [explicitly excluded behavior]
-**Visual Map:** [MANDATORY Mermaid diagram(s) — at least one flowchart mapping every task id, dependency edge, gate, and Verify step]
+**Visual Map:** [MANDATORY Mermaid diagram(s) — at least one flowchart mapping every task id, dependency edge, gate, and Verify step. Every diagram MUST also declare `accTitle:` and `accDescr:` right after its diagram-type line.]
 **Reasoning Lenses:** [selected core and conditional lenses with their required outputs]
 **Acceptance Criteria:** [observable conditions that define success]
 **Traceability:** [acceptance criterion → task → test/check → evidence]
@@ -755,6 +765,8 @@ Red flags — stop, restart: code before test, test passes immediately, can't ex
 
 ```mermaid
 stateDiagram-v2
+    accTitle: Test-driven development cycle
+    accDescr: RED to GREEN to REFACTOR, looping back to RED when a test passes immediately or to GREEN when a regression appears, until every behavior is covered and verified.
     [*] --> RED : Write one minimal failing test
     RED --> RED : Test passes immediately? Rewrite — too weak
     RED --> GREEN : Test fails for right reason
@@ -860,6 +872,8 @@ Verification matrix — run only the rows relevant to the approved scope and rec
 
 ```mermaid
 flowchart TD
+    accTitle: Verification before completion
+    accDescr: Identify the proving command, run it fresh with log capture, inspect the full log, fix and re-run when evidence is partial or stale, then extract structured evidence and state the claim.
     Start(["Ready to claim completion?"]) --> Step1["1. Identify the command\nthat proves the claim"]
     Step1 --> Step2["2. Run it fresh\nwith log capture"]
     Step2 --> Step3["3. Inspect full log:\nexit code + error lines"]
@@ -928,6 +942,8 @@ Every candidate must be stated as an outcome with a file path and a checkable fi
 
 ```mermaid
 flowchart TD
+    accTitle: Session-close debt sweep and follow-up injection
+    accDescr: Once the plan is done at one hundred percent, harvested debt is classified and ranked into three to five follow-ups, injected as one multi-select question, executed as real work, and swept again until no new debt appears.
     Gate["Plan tasks Done 100%\n+ verification evidence green"] --> Harvest["Harvest debt candidates\nshortcuts, review findings,\nmissing tests/docs, TODOs,\nwarnings, gaps"]
     Harvest --> Rank["Classify NOW vs LATER\nrank by risk x blast radius x cost\ndefault 3-5 items"]
     Rank --> Ask["Inject ONE multi-select\nquestion via harness prompt\ncheckboxes, not prose"]

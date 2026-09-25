@@ -4,4 +4,10 @@ Thumbs.db
 *.swp
 *.swo
 node_modules/
-diagrams/
+
+# Rendered SVGs are build artifacts, not source. The README hero is the one
+# exception: GitHub does not render Mermaid in raw HTML, so the lifecycle image
+# has to exist as a file. CI re-renders and fails if it drifts from the source.
+diagrams/*
+!diagrams/lifecycle.svg
+!diagrams/lifecycle-dark.svg

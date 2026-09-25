@@ -111,6 +111,8 @@ End every review with one explicit binary verdict, justified in one to three sen
 
 ```mermaid
 flowchart TD
+    accTitle: Code review qualification and reporting flow
+    accDescr: A diff and its task contract are read, rule precedence is resolved, every changed line is scanned, the 8-point filter drops anything that fails, and surviving findings are tagged P0 to P3 with confidence and location.
     Diff["Diff under review<br/>+ linked task contract"] --> Rules["Resolve rule precedence<br/>user > AGENTS.override > AGENTS"]
     Rules --> Scan["Scan every changed line<br/>against acceptance criteria"]
     Scan --> Filter{"Passes all 8<br/>qualification criteria?"}

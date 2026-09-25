@@ -15,6 +15,8 @@
 
 ```mermaid
 flowchart LR
+    accTitle: [Short diagram title, e.g. "Verification checklist loop"]
+    accDescr: [One or two sentences describing what this diagram shows, e.g. "A completion claim triggers a fresh verification run, inspection of the exit code and full log, extraction of structured evidence on success or a fix and re-run on failure, ending in a stated claim."]
     Claim(["Completion\nclaim ready?"]) --> RunCmd["Run verification\ncommand fresh"]
     RunCmd --> Inspect["Inspect exit code\n+ full log output"]
     Inspect --> Pass{"Exit 0 &\n0 failures?"}

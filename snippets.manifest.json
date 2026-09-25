@@ -1,0 +1,21 @@
+{
+  "$comment": "Maps trigger-prompt source files to their Snipset database slots. Source of truth is the markdown file; the database is a derived copy. Run `bun run snippets:check` in CI to catch drift, `bun run snippets:push` to update the database. Normalization rules are documented in scripts/sync-snippets.mjs and must match on both sides, so em dashes and arrow glyphs in the source do not create false drift.",
+  "version": 1,
+  "group": "Agentic Coding AI",
+  "snippets": [
+    {
+      "source": "snippets/orkestrasi-ngoding-plan.md",
+      "uuid": "87f42bad-9b3f-441e-ab97-632ceeba4728",
+      "keyword": ";'",
+      "name": "Implementation Plan",
+      "description": "Plan + TDD + WAJIB subagent fan-out (chunking, batch manifest, high fan-out floor, parent diff audit). Source: ai-skills/snippets/orkestrasi-ngoding-plan.md"
+    },
+    {
+      "source": "snippets/orkestrasi-debugging.md",
+      "uuid": "f8934c15-955a-4fd2-8ff7-8e3dc86dbcb9",
+      "keyword": "';",
+      "name": "Debug Agent Prompt",
+      "description": "RCA + WAJIB hypothesis-parallel subagent fan-out. Source: ai-skills/snippets/orkestrasi-debugging.md"
+    }
+  ]
+}

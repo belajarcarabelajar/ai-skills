@@ -9,7 +9,10 @@
     "test": "bun test scripts/",
     "plan:check": "bun scripts/ultra-plan-runner.mjs",
     "plan:run": "bun scripts/ultra-plan-runner.mjs --execute",
-    "ci": "bash scripts/render-diagrams.sh && bun scripts/validate-skill.mjs && bun test scripts/"
+    "snippets:status": "bun scripts/sync-snippets.mjs --status",
+    "snippets:check": "bun scripts/sync-snippets.mjs --check",
+    "snippets:push": "bun scripts/sync-snippets.mjs --push",
+    "ci": "bash scripts/render-diagrams.sh && bun scripts/validate-skill.mjs && bun test scripts/ && bun scripts/sync-snippets.mjs --check"
   },
   "devDependencies": {
     "@mermaid-js/mermaid-cli": "^12.0.0"

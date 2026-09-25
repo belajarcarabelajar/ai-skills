@@ -97,7 +97,10 @@ ai-skills/
 │   ├── render-diagrams.sh                       # Render all mermaid blocks to SVG
 │   ├── validate-skill.mjs                       # Frontmatter, link, token, mermaid & a11y lint
 │   ├── ultra-plan-runner.mjs                    # ultra-plan/v1 DAG runner + visual map contract
-│   └── ultra-plan-runner.test.mjs               # Contract tests for the runner
+│   ├── ultra-plan-runner.test.mjs               # Contract tests for the runner
+│   ├── sync-snippets.mjs                        # Drift guard: snippets/ <-> Snipset database
+│   └── sync-snippets.test.mjs                   # Normalization + drift-detection tests
+├── snippets.manifest.json                      # Maps trigger prompts to Snipset database slots
 ├── snippets/                                    # Copy-paste trigger prompts
 │   ├── orkestrasi-ngoding-plan.md               # Plan + TDD + mandatory subagent fan-out
 │   └── orkestrasi-debugging.md                  # RCA + mandatory hypothesis-parallel subagent fan-out
@@ -241,6 +244,31 @@ The debugging variant chunks by **hypothesis** rather than by file, so competing
 explanations are tested in parallel and a disproven cause is discarded without
 contaminating the others.
 
+### Keeping the database in sync
+
+The markdown files are the source of truth. The Snipset database holds a copy, because
+that copy is what an agent actually receives when the snippet is triggered.
+[`snippets.manifest.json`](snippets.manifest.json) maps each file to its database slot
+(uuid, keyword, name, description).
+
+```bash
+bun run snippets:status   # table of local vs database hashes
+bun run snippets:check    # exit 1 on drift (also runs in CI)
+bun run snippets:push     # write local content to the database
+```
+
+Both sides are normalized before comparison (em dash, curly quotes, rightwards arrow,
+CRLF, trailing whitespace), so a typographic character in the Markdown source is not
+reported as drift. A missing Snipset install is reported as a skipped comparison rather
+than a failure, because a CI runner has no local database and that is an environment
+boundary, not evidence of a problem. Real drift still fails.
+
+`validate-skill.mjs` enforces the invariants that hold everywhere, including CI: the
+manifest is valid JSON, every entry has all required fields, no duplicate uuid or
+keyword, every referenced file exists, every tracked file carries the subagent contract,
+and every required trigger snippet is tracked so it can never be silently left out of the
+database.
+
 ---
 
 ## Validation & Quality Checks
@@ -257,9 +285,14 @@ bun run render-diagrams
 # Validate frontmatter, symlinks, templates, scripts, mermaid syntax & a11y
 bun run validate
 
-# Contract tests for the plan runner
+# Contract tests for the plan runner and the snippet sync guard
 bun test scripts/
+
+# Trigger prompts vs the Snipset database (skips cleanly where no database exists)
+bun run snippets:check
 ```
+
+Or run the whole gate in order with `bun run ci`.
 
 Verifies:
 - YAML frontmatter syntax (`name`, `description`, `triggers`).
@@ -271,6 +304,8 @@ Verifies:
 - Both mermaid config files parse and pin `theme` + `fontFamily`.
 - The committed README hero exists in light and dark.
 - `ultra-plan-runner` enforces the visual map: task headings, task nodes, and `depends_on` matching the Mermaid edges in both directions.
+- Trigger snippets carry the mandatory subagent contract and use Bun rather than the prohibited runtimes.
+- `snippets.manifest.json` is consistent: valid, complete, no duplicate uuid or keyword, and every trigger snippet is tracked.
 
 ---
 

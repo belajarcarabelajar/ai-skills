@@ -197,6 +197,79 @@ for (const snip of requiredSnippets) {
   }
 }
 
+// 3e. The snippet manifest must stay consistent with the files it tracks.
+// The database comparison itself needs a local Snipset install and runs in
+// `bun run snippets:check`, but these invariants hold everywhere, including CI.
+{
+  const manifestPath = path.join(rootDir, 'snippets.manifest.json');
+  if (!fs.existsSync(manifestPath)) {
+    console.error('❌ Missing snippets.manifest.json (source-to-database mapping)');
+    errors++;
+  } else {
+    let manifest = null;
+    const before = errors;
+    try {
+      manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+    } catch (e) {
+      console.error(`❌ snippets.manifest.json is not valid JSON: ${e.message}`);
+      errors++;
+    }
+    if (manifest) {
+      const entries = Array.isArray(manifest.snippets) ? manifest.snippets : [];
+      if (entries.length === 0) {
+        console.error('❌ snippets.manifest.json has no entries');
+        errors++;
+      }
+      const uuids = new Set();
+      const keywords = new Set();
+      for (const e of entries) {
+        for (const field of ['source', 'uuid', 'keyword', 'name', 'description']) {
+          if (!e[field]) {
+            console.error(`❌ snippets.manifest.json entry ${e.source || '(no source)'} is missing "${field}"`);
+            errors++;
+          }
+        }
+        if (uuids.has(e.uuid)) {
+          console.error(`❌ snippets.manifest.json has duplicate uuid: ${e.uuid}`);
+          errors++;
+        }
+        uuids.add(e.uuid);
+        if (keywords.has(e.keyword)) {
+          console.error(`❌ snippets.manifest.json has duplicate keyword: ${JSON.stringify(e.keyword)}`);
+          errors++;
+        }
+        keywords.add(e.keyword);
+        if (e.source && !fs.existsSync(path.join(rootDir, e.source))) {
+          console.error(`❌ snippets.manifest.json references a missing file: ${e.source}`);
+          errors++;
+        }
+        // Every tracked source must itself carry the subagent contract, so a
+        // database copy can never be the only place the rules exist.
+        if (e.source && fs.existsSync(path.join(rootDir, e.source))) {
+          const body = fs.readFileSync(path.join(rootDir, e.source), 'utf8');
+          const missing = requiredSnippetTerms.filter((term) => !body.includes(term));
+          if (missing.length > 0) {
+            console.error(`❌ ${e.source} is tracked in the manifest but is missing: ${missing.join(', ')}`);
+            errors++;
+          }
+        }
+      }
+      // Conversely, every required trigger snippet must be tracked, or it can
+      // never be synced to the database.
+      for (const snip of requiredSnippets) {
+        const rel = `snippets/${snip}`;
+        if (!entries.some((e) => e.source === rel)) {
+          console.error(`❌ ${rel} is not tracked in snippets.manifest.json; it can never reach the database`);
+          errors++;
+        }
+      }
+      if (errors === before) {
+        console.log(`✅ Snippet manifest valid: ${entries.length} tracked entr(ies), no duplicate uuid or keyword.`);
+      }
+    }
+  }
+}
+
 // 3b. Check Examples directory
 const examplesDir = path.join(rootDir, 'examples');
 const requiredExamples = ['worked-example.md', 'deep-research-worked-example.md'];

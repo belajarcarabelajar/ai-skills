@@ -60,6 +60,9 @@ jobs:
       - name: Run Unit Tests
         run: bun test scripts/
 
+      - name: Check trigger prompts against the Snipset database
+        run: bun run snippets:check
+
       - name: Test Installer Dry-Run
         run: |
           ./install.sh --dry-run

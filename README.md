@@ -6,6 +6,8 @@ Verification is the last gate, not the last step. Once the plan is `Done 100%` a
 
 Maintains a **Single Source of Truth** (`Super Ultra Code Plan Implementation.md`) so the agent never loses contextual invariants, safety constraints, or human-approval gates during execution.
 
+The skill is four components in sequence — **Brainstorming → Writing Plans → TDD → Verification** — with a human approval gate between each one, plus a **Deep Research** path that runs only when a decision depends on information the codebase does not contain. The sub-agent pipeline that carries out the work is mandatory, not a recommendation.
+
 ---
 
 ## Execution Lifecycle
@@ -84,14 +86,21 @@ ai-skills/
 ├── install.sh                                   # 1-command installer for all harnesses
 ├── mermaid.config.json                          # Light theme: palette + embedded-font stack
 ├── mermaid.dark.config.json                     # Dark variant, same layout and font
+├── puppeteer-config.json                        # Headless flags for mermaid-cli rendering
 ├── .github/
 │   └── workflows/
 │       └── ci.yml                               # CI: bun install, render, drift gate, validate, test
 ├── diagrams/                                    # Generated SVGs (only the hero pair is committed)
 │   ├── lifecycle.svg                            # README hero, light
 │   └── lifecycle-dark.svg                       # README hero, dark
+├── docs/
+│   └── code-plan/
+│       ├── <date>-<slug>.manifest.md            # Batch manifest written before the first dispatch
+│       └── plans/
+│           └── <date>-<slug>.md                 # ultra-plan/v1 plans this repo executed
 ├── examples/
-│   └── worked-example.md                        # Full pipeline walkthrough (filled-in reference)
+│   ├── worked-example.md                        # Full pipeline walkthrough (filled-in reference)
+│   └── deep-research-worked-example.md          # Citation-grounded report at target density
 ├── scripts/
 │   ├── sync.sh                                  # Bidirectional sync (~/.config/ai <-> repo)
 │   ├── render-diagrams.sh                       # Render all mermaid blocks to SVG
@@ -105,7 +114,8 @@ ai-skills/
 │   ├── plan-publish-registry.mjs                # Vault + project registry and destination paths
 │   ├── plan-publish-registry.test.mjs           # Config, project resolution, enumeration tests
 │   ├── plan-publish-frontmatter.mjs             # Pure ultra-plan/v1 -> PARA frontmatter transform
-│   └── plan-publish-frontmatter.test.mjs        # Merge rules, related-link, title fallback tests
+│   ├── plan-publish-frontmatter.test.mjs        # Merge rules, related-link, title fallback tests
+│   └── plan-mirror-check.sh                     # Local drift watchdog (systemd --user timer, check only)
 ├── snippets.manifest.json                      # Maps trigger prompts to Snipset database slots
 ├── plans.publish.json                          # Vault path, destination template, and project roots for the plan mirror
 ├── snippets/                                    # Copy-paste trigger prompts
@@ -131,6 +141,10 @@ ai-skills/
         ├── mermaid.config.json -> ../../mermaid.config.json
         └── mermaid.dark.config.json -> ../../mermaid.dark.config.json
 ```
+
+The skill installs through `skills/super-ultra-code-plan/`, which is a set of symlinks into
+the repo root rather than a copy. The master file stays single-sourced, and
+`render-diagrams.sh` skips symlinked files so the same diagram is never rendered twice.
 
 ---
 
@@ -186,9 +200,11 @@ bun test scripts/                        # plan-runner contract tests
 bun run ci                               # everything above, in order
 ```
 
-> Only `diagrams/lifecycle.svg` and `diagrams/lifecycle-dark.svg` are committed. The other
-> 16 are build artifacts: GitHub renders Mermaid code blocks natively, so committing them
-> would add megabytes of duplicated output for no reader.
+> Only `diagrams/lifecycle.svg` and `diagrams/lifecycle-dark.svg` are committed. Every
+> other SVG under `diagrams/` is a build artifact that the render step regenerates and CI
+> prunes: GitHub renders Mermaid code blocks natively, so committing them would add
+> megabytes of duplicated output for no reader. The exact count moves as templates are
+> added, which is why it is not written down here.
 
 ### Why the font is embedded
 
@@ -219,6 +235,7 @@ Agents can instantly scaffold structured artifacts using the ready-to-use templa
 - **[`adr-template.md`](templates/adr-template.md)**: Architecture Decision Record (ADR) - structured decision tree, alternative trade-off comparison, and consequences.
 - **[`subagent-contract-template.md`](templates/subagent-contract-template.md)**: Subagent task contract - task chunking and fan-out plan, strict scope isolation, permitted target files, gather & synthesize checkpoint, and parent diff audit gate sequence.
 - **[`code-review-template.md`](templates/code-review-template.md)**: Reviewer output contract - rule attribution precedence, 8-point bug qualification filter, P0–P3 priority with confidence, exhaustiveness and dedupe rules, suggestion block format, and the binary `correct` / `not correct` verdict.
+- **[`deep-research-report-template.md`](templates/deep-research-report-template.md)**: Citation-grounded long-form research report - executive summary, `##` themes with `###` subsections, inline `[n]` citations, LaTeX notation, and a closing synthesis.
 - **[`follow-up-injection-template.md`](templates/follow-up-injection-template.md)**: Session-close debt sweep - harvested debt candidates, `NOW`/`LATER` classification, the ranked 3-5 follow-up set, the batched multi-select question, the execution record, and the deferred backlog.
 
 ---
@@ -229,6 +246,52 @@ See the [`examples/`](examples/) folder for a complete filled-in walkthrough:
 
 - **[`worked-example.md`](examples/worked-example.md)**: Full pipeline from Classify through the session-close debt sweep on a real-sized task (adding zod input validation to a REST endpoint). Use this as a reference for what correct output looks like at each phase.
 - **[`deep-research-worked-example.md`](examples/deep-research-worked-example.md)**: Citation-grounded research report at target length and density.
+
+---
+
+## Deep Research Workflow
+
+Some implementation choices cannot be settled from the codebase: the decision depends on a
+library surface the agent has not observed, on comparing more than two alternatives along
+several axes, or on being defensible to a reviewer who never saw the reasoning. The
+`🔬 Deep Research Workflow` in the master skill exists for exactly that case, and it runs
+between the spike and the implementation plan rather than replacing either.
+
+| Concern | Rule |
+|---|---|
+| Invocation | Only when the decision depends on information absent from the codebase, the project overlay, and the agent's verified configuration. A question that fits in a spike report or an ADR does not need it. |
+| Output | A long-form, citation-grounded report built from [`templates/deep-research-report-template.md`](templates/deep-research-report-template.md). Length follows the scope of the question, never a padded minimum. |
+| Shape | Executive summary, 3-7 `##` themes with `###` subsections, closing synthesis. Inline `[n]` citations, LaTeX delimiters for notation, prose over lists, tables for multi-axis comparisons. |
+| Provenance | The report lands as a dated artifact under `research/` in the active project. The plan cites its section anchors instead of restating findings; an ADR references the report rather than duplicating its citations. |
+| Anti-patterns | Citing unconsulted sources, claiming authorship by a specific external system, padding to an artificial length, or hiding directives in markup are all failures. These are skill rules the agent is held to at review time, not a machine gate: `validate-skill.mjs` currently only asserts that the template and the worked example exist. |
+
+[`examples/deep-research-worked-example.md`](examples/deep-research-worked-example.md) is
+the calibration reference: read it before writing the first report to match its length,
+citation density, and prose rhythm.
+
+---
+
+## Executing an `ultra-plan/v1` Plan
+
+`scripts/ultra-plan-runner.mjs` is the machine half of the plan contract. It parses the
+`ultra-plan/v1` frontmatter, validates the task DAG, enforces idempotent skips, and
+aggregates failures into an error ledger. Zero dependencies, Bun only.
+
+```bash
+bun run plan:check docs/code-plan/plans/<plan>.md   # validate the DAG and the visual map
+bun run plan:run  docs/code-plan/plans/<plan>.md   # same, then execute the tasks
+```
+
+The visual map check is the part that catches a lying plan. Every task heading must have a
+matching node in the Mermaid block, and every `depends_on` edge must match a Mermaid edge
+**in both directions** — a task in the diagram with no `depends_on`, or a `depends_on` with
+no arrow, is a contradiction between the two representations of the same plan, and the
+runner fails rather than guessing which one is right.
+
+This repository's own plans live in [`docs/code-plan/plans/`](docs/code-plan/plans/), with
+the pre-dispatch batch manifest beside them in [`docs/code-plan/`](docs/code-plan/). The
+manifests are kept because they record the deviations that were approved during execution,
+which is the part a finished plan can no longer explain.
 
 ---
 
@@ -317,8 +380,28 @@ transform failure, `2` usage error.
 
 `mirror:check` is deliberately **not** part of `bun run ci`. It reads `plans.publish.json`, which
 names one vault by absolute path on one machine, and the plan set it enumerates currently has
-mirrors for none of its 267 plans, so the check is a local gate to run on the machine that owns
-the vault rather than something a portable CI runner can ever pass.
+mirrors for none of it, so the check is a local gate to run on the machine that owns the vault
+rather than something a portable CI runner can ever pass.
+
+### The drift watchdog
+
+`scripts/plan-mirror-check.sh` wraps `mirror:check` for unattended daily runs. It only ever
+passes `--check`, so there is deliberately no publish path in that file.
+
+| Concern | How it is handled |
+|---|---|
+| Scheduling | A `systemd --user` timer, not a GitHub Actions workflow. A workflow on a runner can see neither the vault nor the sibling repositories, so it would either fail forever on a missing path or pass vacuously by enumerating zero plans. |
+| Vacuous pass | Reported as a distinct verdict rather than hidden. A gate that passes because it found nothing is worse than no gate, because it manufactures confidence. |
+| Exit status | Propagated on purpose, so a failed run shows up in `systemctl --user --failed`. Swallowing it would make the script a log-dumper instead of a watchdog. |
+| Missing runtime | `exit 127` when `bun` is absent from both `PATH` and `$HOME/.bun/bin/bun`, because systemd starts services with a minimal environment. |
+| Log | `~/.local/state/plan-mirror/mirror-check.log`, append-only, capped at 500 records and 20 detail lines per run. The trim goes through a temp file, so an interrupted run cannot leave a truncated log. |
+
+Disable it with:
+
+```bash
+systemctl --user disable --now plan-mirror-check.timer
+systemctl --user reset-failed plan-mirror-check.service
+```
 
 ---
 
@@ -357,6 +440,10 @@ Verifies:
 - `ultra-plan-runner` enforces the visual map: task headings, task nodes, and `depends_on` matching the Mermaid edges in both directions.
 - Trigger snippets carry the mandatory subagent contract and use Bun rather than the prohibited runtimes.
 - `snippets.manifest.json` is consistent: valid, complete, no duplicate uuid or keyword, and every trigger snippet is tracked.
+- The plan-publishing contract is documented: publisher CLI reference, idempotency marker, and a valid `plans.publish.json`.
+
+Not covered by `bun run ci`, on purpose: `mirror:check`, which needs a vault this runner
+cannot see. Run it locally when you own the vault.
 
 ---
 

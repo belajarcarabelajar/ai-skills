@@ -43,6 +43,23 @@ const CLI = path.join(ROOT, 'scripts', 'plan-publish.mjs');
 
 const sha12 = (bytes) => createHash('sha256').update(bytes).digest('hex').slice(0, 12);
 
+// The bulk-publish tally, parsed. One regex for both the real run and the dry
+// run, because the SECOND counter means the same thing in each and a dry run
+// that reported "published" for files it did not write would be lying.
+const TALLY_RE = /(\d+) total \u00b7 (\d+) (published|would-write) \u00b7 (\d+) skipped-idempotent \u00b7 (\d+) failed/;
+
+function tally(stdout) {
+  const m = TALLY_RE.exec(stdout);
+  assert.ok(m, `the run must end in a parseable tally, got:\n${stdout}`);
+  return {
+    total: Number(m[1]),
+    written: Number(m[2]),
+    writtenLabel: m[3],
+    skipped: Number(m[4]),
+    failed: Number(m[5]),
+  };
+}
+
 // ---------- fixtures ----------
 
 function git(args, cwd) {
@@ -58,6 +75,9 @@ function fixture(tag, {
   stageInVault = true,
   withGit = true,
   withIndex = false,
+  // Adds a SECOND mirror:true project (so `--all` has to enumerate more than
+  // one root) plus a mirror:false root whose plans must never be published.
+  secondProject = false,
 } = {}) {
   const base = mkdtempSync(path.join(tmpdir(), `plan-publish-cli-${tag}-`));
   const vault = path.join(base, 'vault');
@@ -68,13 +88,39 @@ function fixture(tag, {
   const plansDir = path.join(projectRoot, 'docs', 'code-plan', 'plans');
   mkdirSync(plansDir, { recursive: true });
 
+  const projects = [{ name: 'demo', root: projectRoot, mirror: true }];
+  const other = { writePlan: () => { throw new Error('secondProject was not enabled'); } };
+  if (secondProject) {
+    const otherRoot = path.join(base, 'proj2');
+    const otherPlans = path.join(otherRoot, 'docs', 'code-plan', 'plans');
+    mkdirSync(otherPlans, { recursive: true });
+    projects.push({ name: 'other', root: otherRoot, mirror: true });
+
+    // mirror:false is the vault's own entry: those plans are already inside the
+    // vault, so publishing one would copy a file onto itself. enumeratePlans()
+    // excludes the root, and `--all` must inherit that exclusion rather than
+    // growing its own walk.
+    const inVaultRoot = path.join(base, 'proj-vault');
+    const inVaultPlans = path.join(inVaultRoot, 'docs', 'code-plan', 'plans');
+    mkdirSync(inVaultPlans, { recursive: true });
+    projects.push({ name: 'in-vault', root: inVaultRoot, mirror: false });
+
+    other.writePlan = (name, body) => {
+      const p = path.join(otherPlans, name);
+      writeFileSync(p, body, 'utf8');
+      return p;
+    };
+    other.destPath = (name) => path.join(vault, '01 - Projects', 'other', 'plans', name);
+    other.inVaultPlans = inVaultPlans;
+  }
+
   const configPath = path.join(base, 'plans.publish.json');
   writeFileSync(configPath, JSON.stringify({
     vault,
     destDirTemplate,
     indexTemplate,
     stageInVault,
-    projects: [{ name: 'demo', root: projectRoot, mirror: true }],
+    projects,
   }, null, 2), 'utf8');
 
   const indexPath = path.join(vault, '01 - Projects', 'demo', 'index.md');
@@ -90,6 +136,7 @@ function fixture(tag, {
     plansDir,
     config: configPath,
     indexPath,
+    other,
     planPath: (name) => path.join(plansDir, name),
     destPath: (name) => path.join(vault, '01 - Projects', 'demo', 'plans', name),
     writePlan(name, body) {
@@ -800,5 +847,266 @@ test('an unstaged-file-only publish leaves the vault index empty on an unborn HE
     git(['diff', '--cached', '--name-only'], f.vault).includes(PLAN),
     'control: with staging on, the mirror is visible in the index',
   );
+  cleanup(f);
+});
+
+// ---------- bulk publish: --all ----------
+
+// WHY THESE EXIST
+//
+// `--all` used to exist only on `--check`. Measured on this machine:
+// `--check --all` reported 267 of 267 mirrors missing, and exactly one plan had
+// been published — so converging the vault meant naming all 267 files by hand,
+// which is how a tool that promises to converge never converges. These tests
+// pin the bulk publish path, and they pin the part that actually mattered: a
+// partial failure must be VISIBLE. One non-zero exit that swallowed which files
+// failed is how a 267-file run silently half-completes.
+
+test('--all publishes every enumerated plan in one run', () => {
+  const f = fixture('all-publish');
+  f.writePlan('2026-09-26-a.md', '# A\n\nfirst\n');
+  f.writePlan('2026-09-26-b.md', '# B\n\nsecond\n');
+  f.writePlan('2026-09-26-c.md', '# C\n\nthird\n');
+
+  const r = run(['--all'], f);
+  assert.equal(r.code, 0, `stdout: ${r.stdout}\nstderr: ${r.stderr}`);
+  for (const name of ['2026-09-26-a.md', '2026-09-26-b.md', '2026-09-26-c.md']) {
+    const dest = f.destPath(name);
+    assert.ok(existsSync(dest), `${name} must be mirrored, stdout:\n${r.stdout}`);
+    const text = readFileSync(dest, 'utf8');
+    assert.ok(text.startsWith('---\n'), `${name} mirror must carry PARA frontmatter`);
+    assert.equal(
+      new RegExp(`^source_hash: ${sha12(readFileSync(f.planPath(name)))}$`, 'm').test(text),
+      true,
+      `${name} mirror must carry the source hash`,
+    );
+  }
+  cleanup(f);
+});
+
+test('--all enumerates every mirror:true project and never a mirror:false root', () => {
+  // The point of reusing enumeratePlans(): the registry module stays the single
+  // source of truth for "what counts as a plan". A second walk inside the CLI
+  // is how the publisher and the drift check start disagreeing about the file
+  // set. A mirror:false root is the existing regression case — those plans are
+  // already in the vault, so publishing one copies a file onto itself.
+  const f = fixture('all-projects', { secondProject: true });
+  f.writePlan('2026-09-26-a.md', '# A\n');
+  f.writePlan('2026-09-26-b.md', '# B\n');
+  f.other.writePlan('2026-09-26-c.md', '# C\n');
+  writeFileSync(path.join(f.other.inVaultPlans, '2026-09-26-d.md'), '# D\n', 'utf8');
+
+  const r = run(['--all'], f);
+  assert.equal(r.code, 0, `stdout: ${r.stdout}\nstderr: ${r.stderr}`);
+  assert.ok(existsSync(f.destPath('2026-09-26-a.md')), 'project 1 plan must be mirrored');
+  assert.ok(existsSync(f.destPath('2026-09-26-b.md')), 'project 1 plan must be mirrored');
+  assert.ok(existsSync(f.other.destPath('2026-09-26-c.md')), 'project 2 plan must be mirrored');
+  assert.equal(
+    existsSync(path.join(f.vault, '01 - Projects', 'in-vault', 'plans', '2026-09-26-d.md')),
+    false,
+    'a mirror:false project must never be published',
+  );
+  assert.equal(tally(r.stdout).total, 3, 'exactly the three mirror:true plans are enumerated');
+  cleanup(f);
+});
+
+test('--all reports an already-current plan as SKIPPED-IDEMPOTENT and does not rewrite it', () => {
+  const f = fixture('all-idem');
+  const a = f.writePlan('2026-09-26-a.md', '# A\n');
+  const b = f.writePlan('2026-09-26-b.md', '# B\n');
+  assert.equal(run(['--all'], f).code, 0);
+
+  // Pin mtimes into the past so "unchanged" cannot pass by accident on a coarse
+  // timestamp resolution.
+  const past = new Date(Date.now() - 60_000);
+  const before = {};
+  for (const name of ['2026-09-26-a.md', '2026-09-26-b.md']) {
+    utimesSync(f.destPath(name), past, past);
+    before[name] = { text: readFileSync(f.destPath(name), 'utf8'), mtime: statSync(f.destPath(name)).mtimeMs };
+  }
+
+  const r = run(['--all'], f);
+  assert.equal(r.code, 0, `stderr: ${r.stderr}`);
+  assert.ok(
+    r.stdout.includes('SKIPPED-IDEMPOTENT'),
+    `the literal SKIPPED-IDEMPOTENT must survive into bulk mode, got:\n${r.stdout}`,
+  );
+  for (const name of Object.keys(before)) {
+    assert.equal(readFileSync(f.destPath(name), 'utf8'), before[name].text, `${name} must not be rewritten`);
+    assert.equal(statSync(f.destPath(name)).mtimeMs, before[name].mtime, `${name} must not be touched`);
+  }
+  const t = tally(r.stdout);
+  assert.equal(t.written, 0, 'nothing was stale, so nothing was written');
+  assert.equal(t.skipped, 2, 'both plans must be counted as idempotent skips');
+  // And the sources are genuinely unchanged: a skip is only correct because the
+  // freshness rule said so, not because the run did nothing at all.
+  assert.equal(sha12(readFileSync(a)), sha12(readFileSync(a)));
+  assert.equal(sha12(readFileSync(b)), sha12(readFileSync(b)));
+  cleanup(f);
+});
+
+test('--all together with an explicit plan path is a usage error', () => {
+  // Mutually exclusive because the two spellings mean different SETS. Guessing
+  // which one was meant is how a bulk run quietly publishes something the
+  // caller did not ask for.
+  const f = fixture('all-usage');
+  const plan = f.writePlan(PLAN, PLAN_BODY);
+  const r = run(['--all', plan], f);
+  assert.equal(r.code, 2, `expected a usage error, got ${r.code}: ${r.stdout}${r.stderr}`);
+  assert.match(
+    `${r.stdout}${r.stderr}`,
+    /--all/,
+    'the error must name the flag that caused it',
+  );
+  assert.equal(existsSync(f.destPath(PLAN)), false, 'a usage error must not publish anything');
+  cleanup(f);
+});
+
+test('--all --dry-run reports every destination, writes nothing and stages nothing', () => {
+  const f = fixture('all-dry');
+  const names = ['2026-09-26-a.md', '2026-09-26-b.md', '2026-09-26-c.md'];
+  for (const n of names) f.writePlan(n, `# ${n}\n`);
+
+  const r = run(['--all', '--dry-run'], f);
+  assert.equal(r.code, 0, `stdout: ${r.stdout}\nstderr: ${r.stderr}`);
+  for (const n of names) {
+    assert.ok(r.stdout.includes(f.destPath(n)), `dry run must report the destination of ${n}:\n${r.stdout}`);
+  }
+  assert.ok(/would write/i.test(r.stdout), `the write decision must be reported:\n${r.stdout}`);
+  const t = tally(r.stdout);
+  assert.equal(t.total, names.length, 'every enumerated plan must be accounted for');
+  assert.equal(t.writtenLabel, 'would-write', 'a dry run must not claim it published anything');
+  assert.equal(t.failed, 0);
+  for (const n of names) {
+    assert.equal(existsSync(f.destPath(n)), false, `--all --dry-run must not write ${n}`);
+  }
+  assert.equal(git(['status', '--porcelain'], f.vault), '', '--all --dry-run must not stage');
+  cleanup(f);
+});
+
+test('--all keeps processing after one file fails, and exits 1 with the failure in the tally', () => {
+  // A file/directory name collision on the destination: the mirror path already
+  // exists as a DIRECTORY, so the write of that one plan fails with EISDIR while
+  // its two siblings publish normally. This is the failure shape that matters —
+  // if the run aborted at the first error, the other two would never be mirrored
+  // and the exit code alone would not say which ones were done.
+  const f = fixture('all-partial');
+  f.writePlan('2026-09-26-a.md', '# A\n');
+  f.writePlan('2026-09-26-b.md', '# B\n');
+  const doomed = '2026-09-26-c-doomed.md';
+  f.writePlan(doomed, '# C\n');
+
+  const dest = f.destPath(doomed);
+  mkdirSync(dest, { recursive: true });
+  writeFileSync(path.join(dest, 'keep.md'), 'a note that happens to live in the way\n', 'utf8');
+
+  const r = run(['--all'], f);
+  assert.equal(r.code, 1, `a partial failure must exit 1, got ${r.code}:\n${r.stdout}${r.stderr}`);
+
+  // The rest were still processed.
+  assert.ok(existsSync(f.destPath('2026-09-26-a.md')), 'a good plan must still be published after a failure');
+  assert.ok(existsSync(f.destPath('2026-09-26-b.md')), 'a good plan must still be published after a failure');
+
+  // And the failure is visible: named in its own line, counted in the tally.
+  assert.match(
+    `${r.stdout}${r.stderr}`,
+    new RegExp(doomed),
+    'the failing plan must be named, not summarised away',
+  );
+  const t = tally(`${r.stdout}${r.stderr}`);
+  assert.equal(t.total, 3);
+  assert.equal(t.failed, 1, 'the tally must count the failure');
+  assert.equal(t.written, 2, 'the tally must count the two that did publish');
+  assert.equal(t.written + t.skipped + t.failed, t.total, 'the tally must account for every enumerated plan');
+  // The collision is left exactly as found: the publisher must not delete or
+  // truncate something it did not create.
+  assert.ok(existsSync(path.join(dest, 'keep.md')), 'the blocking file must be untouched');
+  cleanup(f);
+});
+
+test('the --all tally counts add up to the number enumerated', () => {
+  // Four plans, one of which is already current, so all three buckets are
+  // populated at once and the sum has something to be wrong about.
+  const f = fixture('all-tally');
+  const names = ['2026-09-26-a.md', '2026-09-26-b.md', '2026-09-26-c.md', '2026-09-26-d.md'];
+  for (const n of names) f.writePlan(n, `# ${n}\n`);
+  assert.equal(run([f.planPath(names[0])], f).code, 0, 'precondition: one mirror is already current');
+
+  const r = run(['--all'], f);
+  assert.equal(r.code, 0, `stderr: ${r.stderr}`);
+  const t = tally(r.stdout);
+  assert.equal(t.total, names.length, 'the total must be the number of enumerated plans');
+  assert.equal(t.written, 3, 'the three stale plans must be counted as written');
+  assert.equal(t.skipped, 1, 'the current plan must be counted as an idempotent skip');
+  assert.equal(t.failed, 0);
+  assert.equal(
+    t.written + t.skipped + t.failed,
+    t.total,
+    `tally buckets must sum to the total, got ${JSON.stringify(t)}`,
+  );
+  cleanup(f);
+});
+
+test('the bulk-publish mode is a named exported constant, not an inline string', () => {
+  // Two reasons this is asserted and not just implemented. (1) The plan's own
+  // skip_if greps the source for the literal token `PUBLISH_ALL`, so the mode
+  // has to be NAMED for the plan to recognise that the work is already done.
+  // (2) A string literal repeated in three places is how the flag, the usage
+  // line and the dispatch drift apart.
+  const src = readFileSync(CLI, 'utf8');
+  assert.ok(
+    /export\s+const\s+PUBLISH_ALL\s*=/.test(src),
+    'the CLI must export a named PUBLISH_ALL constant',
+  );
+  assert.ok(
+    src.includes('PUBLISH_ALL'),
+    'the literal token PUBLISH_ALL must be present in the CLI source for the plan skip-check',
+  );
+  assert.equal(typeof cli.PUBLISH_ALL, 'string', 'PUBLISH_ALL must be an exported string');
+  assert.ok(cli.PUBLISH_ALL.length > 0, 'PUBLISH_ALL must not be empty');
+
+  // Positive control: the constant is what the dispatch actually resolves to, so
+  // a run that reaches bulk mode and writes its one mirror proves the export is
+  // the live one and not a decorative constant. (A first attempt asserted
+  // `/^1 total /m`, which can never match: the tally line is indented. The
+  // control was wrong, not the CLI.)
+  const f = fixture('all-const');
+  f.writePlan(PLAN, PLAN_BODY);
+  const r = run(['--all'], f);
+  assert.equal(r.code, 0, `stderr: ${r.stderr}`);
+  assert.ok(existsSync(f.destPath(PLAN)), 'control: the bulk run reached the publish path');
+  assert.equal(tally(r.stdout).total, 1, 'control: the bulk run enumerated and counted the one plan');
+  cleanup(f);
+});
+
+test('--all honours --today, so bulk output is deterministic under test', () => {
+  // The transform stamps `updated` from ctx.today, which for the single-file path
+  // comes from --today. Bulk mode must pass the SAME option object through, or a
+  // 267-file run stamps 267 mirrors with whatever date the machine thinks it is
+  // and no test can assert on the bytes.
+  const f = fixture('all-today');
+  f.writePlan('2026-09-26-a.md', '# A\n');
+  f.writePlan('2026-09-26-b.md', '# B\n');
+
+  const r = run(['--all', '--today', '2031-01-02'], f);
+  assert.equal(r.code, 0, `stderr: ${r.stderr}`);
+  for (const n of ['2026-09-26-a.md', '2026-09-26-b.md']) {
+    assert.ok(
+      /^updated: 2031-01-02$/m.test(readFileSync(f.destPath(n), 'utf8')),
+      `the --today value must reach every bulk-written mirror (${n})`,
+    );
+  }
+  assert.equal(run(['--all', '--today', 'yesterday'], f).code, 2, 'a bad --today is still a usage error');
+  cleanup(f);
+});
+
+test('--all with no plans anywhere exits 0 and says so', () => {
+  // Not an error: a project that has never written a plan has nothing to
+  // mirror, and --check already answers it that way. The tally is still printed
+  // so a script that parses it does not have to special-case the empty run.
+  const f = fixture('all-empty');
+  const r = run(['--all'], f);
+  assert.equal(r.code, 0, `an empty enumeration is not a failure, got ${r.code}: ${r.stderr}`);
+  assert.match(`${r.stdout}${r.stderr}`, /no plans/i, `it must say why:\n${r.stdout}${r.stderr}`);
   cleanup(f);
 });

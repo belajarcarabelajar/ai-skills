@@ -17,6 +17,7 @@
 // visibly (that is what `--check` is for) but can never corrupt a plan.
 //
 //   bun scripts/plan-publish.mjs <plan.md>... [--dry-run] [--today YYYY-MM-DD]
+//   bun scripts/plan-publish.mjs --all [--dry-run]   every plan in the registry
 //   bun scripts/plan-publish.mjs --check [--all]     exit 1 on drift / missing mirror
 //   bun scripts/plan-publish.mjs --status            table, always exit 0
 //
@@ -74,9 +75,19 @@ const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 const USAGE = [
   'usage:',
   '  bun scripts/plan-publish.mjs <plan.md>... [--dry-run] [--today YYYY-MM-DD]',
+  '  bun scripts/plan-publish.mjs --all [--dry-run] [--today YYYY-MM-DD]',
+  '  bun scripts/plan-publish.mjs --all --dry-run      # what a bulk publish would do',
   '  bun scripts/plan-publish.mjs --check [--all]   # exit 1 on drift or missing mirror',
   '  bun scripts/plan-publish.mjs --status          # table, always exit 0',
 ].join('\n');
+
+// The bulk-publish mode, NAMED rather than inlined at each use site. Two reasons,
+// and the second is the practical one: the plan that asked for this feature
+// recognises the work as already done by grepping this file for the literal
+// token `PUBLISH_ALL`, so an anonymous `--all` branch would leave the plan
+// re-running work that is finished. The other is that a mode string repeated in
+// the parser, the validator and the dispatcher is three chances to drift apart.
+export const PUBLISH_ALL = 'publish-all';
 
 class UsageError extends Error {}
 
@@ -283,7 +294,11 @@ function publishOne(registry, rawPlanPath, opts) {
     } else {
       console.log(`⏭️  SKIPPED-IDEMPOTENT ${planPath} -> ${dest} (source_hash ${hash} unchanged)`);
     }
-    return { dest, written: false, staged: false };
+    // `skipped` is what distinguishes "the freshness rule said this mirror is
+    // already current" from "--dry-run decided not to write anything". The bulk
+    // path needs the difference: only the first one is a real no-op, and only
+    // the second one is something a dry run is expected to produce in bulk.
+    return { dest, written: false, staged: false, skipped: true };
   }
 
   const out = mergeFrontmatter(planText, publishCtx(registry, project, planPath, opts));
@@ -299,7 +314,7 @@ function publishOne(registry, rawPlanPath, opts) {
       `            would write: ${destBytes.length} bytes `
       + `(current ${current.length}, delta ${delta >= 0 ? '+' : ''}${delta}), source_hash ${hash}`,
     );
-    return { dest, written: false, staged: false };
+    return { dest, written: false, staged: false, skipped: false };
   }
 
   mkdirSync(path.dirname(dest), { recursive: true });
@@ -317,7 +332,80 @@ function publishOne(registry, rawPlanPath, opts) {
     `✅ published ${planPath} -> ${rel} (${destBytes.length} bytes, source_hash ${hash})`
     + (staged ? ' [staged in vault]' : ' [not staged: stageInVault=false]'),
   );
-  return { dest, written: true, staged };
+  return { dest, written: true, staged, skipped: false };
+}
+
+// ---------- bulk publish ----------
+
+// BULK IS NOT A DIFFERENT PUBLISHER, IT IS A LOOP THAT COUNTS
+//
+// The bulk path calls the SAME publishOne() the single-file path calls, so
+// freshness, the protected-path refusal, the absolute-source_path rule and the
+// one-`git add`-per-written-mirror staging all apply unchanged. The only thing
+// this function adds is a tally and a rule about failing.
+//
+// WHY THE TALLY IS NOT OPTIONAL: a single non-zero exit is not a report. With
+// 267 plans on the real machine, "exited 1" cannot tell anyone which 200 files
+// were mirrored and which 67 were not, so the run gets repeated, or believed,
+// or ignored. Every plan therefore gets its own outcome line and the run ends
+// with four numbers that add up to the number enumerated.
+//
+// WHY A FAILURE DOES NOT ABORT THE LOOP: aborting on the first error turns one
+// unroutable file into a 266-plan backlog, and the exit code would be the same
+// 1 either way. So each failure is recorded, named, and the loop continues; the
+// non-zero exit then reports "some of these failed", and the tally says how
+// many.
+function runPublishAll(registry, opts) {
+  let plans;
+  try {
+    // enumeratePlans is the registry module's answer to "what is a plan", and
+    // --check already uses it. A second directory walk here would be a second
+    // source of truth, and the two would disagree the first time a project
+    // turned mirror:false.
+    plans = enumeratePlans(registry);
+  } catch (e) {
+    console.error(`❌ ${e.message}`);
+    process.exit(1);
+  }
+
+  if (plans.length === 0) {
+    console.log('✅ No plans found under any mirror:true project. Nothing to publish.');
+    // Still a tally, still summing: a caller that parses the last line of the
+    // output must not have to special-case the empty run.
+    console.log('   tally: 0 total · 0 published · 0 skipped-idempotent · 0 failed');
+    process.exit(0);
+  }
+
+  let written = 0;
+  let skipped = 0;
+  let failed = 0;
+  for (const p of plans) {
+    try {
+      const r = publishOne(registry, p, opts);
+      // `skipped` is the one bucket that means "nothing was needed". Anything
+      // else either wrote the mirror or was a --dry-run that declined to write
+      // it; the tally's label says which, so the counter itself stays honest in
+      // both cases.
+      if (r.skipped) skipped++; else written++;
+    } catch (e) {
+      failed++;
+      // Named, not summarised: this line is the only place the operator learns
+      // which file to go look at.
+      console.error(`❌ ${p}: ${e.message}`);
+    }
+  }
+
+  // The second counter is labelled by what it MEANT, not by which code path
+  // filled it: a dry run that printed "published" for 267 files it did not write
+  // would be the exact kind of report this tally exists to replace.
+  const label = opts.dryRun ? 'would-write' : 'published';
+  console.log(
+    `   tally: ${plans.length} total · ${written} ${label} · ${skipped} skipped-idempotent · ${failed} failed`,
+  );
+  if (failed > 0) {
+    console.error(`   ${failed}/${plans.length} plan(s) failed. The failures are listed above; re-run --all to retry only those.`);
+  }
+  process.exit(failed ? 1 : 0);
 }
 
 // ---------- check ----------
@@ -470,16 +558,30 @@ function validateArgs(opts) {
   if (opts.modeFlags.length > 1) {
     throw new UsageError(`${[...new Set(opts.modeFlags)].join(' and ')} cannot be combined`);
   }
-  if (opts.all && opts.mode !== 'check') throw new UsageError('--all is only meaningful with --check');
+  // `--all` names a SET, not a file, so it belongs to the check path (verify
+  // every mirror) and to the publish path (mirror every plan). It means nothing
+  // to --status, which already reports every plan.
+  if (opts.all && opts.mode && opts.mode !== 'check') {
+    throw new UsageError(`--all is not meaningful with --${opts.mode}`);
+  }
   if (opts.dryRun && opts.mode) throw new UsageError(`--dry-run is a publish option, not a ${opts.mode} option`);
-  if (!opts.mode && opts.plans.length === 0) throw new UsageError('no plan files given');
+  // Mutually exclusive, and a usage error rather than a silent preference: the
+  // two spell a different SET of plans, and a bulk run that quietly published
+  // only the one path the user named is worse than a refusal.
+  if (opts.all && opts.plans.length > 0) {
+    throw new UsageError(
+      `--all cannot be combined with plan paths: --all means every plan in the registry, `
+      + `and ${opts.plans.length} path(s) were also given. Name the files, or pass --all alone.`,
+    );
+  }
+  if (!opts.mode && !opts.all && opts.plans.length === 0) throw new UsageError('no plan files given');
   if (opts.mode === 'check' && !opts.all && opts.plans.length === 0) {
     throw new UsageError('--check needs plan files, or --all to enumerate them');
   }
   if (opts.mode && opts.plans.length > 0 && opts.mode === 'status') {
     throw new UsageError('--status takes no plan files; it reports every plan');
   }
-  return opts.mode ?? 'publish';
+  return opts.mode ?? (opts.all ? PUBLISH_ALL : 'publish');
 }
 
 // ---------- main ----------
@@ -505,6 +607,7 @@ function main(argv) {
 
     if (action === 'status') return runStatus(registry);
     if (action === 'check') return runCheck(registry, opts.plans, { all: opts.all });
+    if (action === PUBLISH_ALL) return runPublishAll(registry, opts);
 
     let failed = 0;
     for (const p of opts.plans) {

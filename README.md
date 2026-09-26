@@ -287,19 +287,19 @@ publisher never reads a mirror back as an input, so a stale mirror can rot visib
 (`--check` exists to catch that) but can never corrupt a plan.
 
 ```bash
-bun run plans:publish <plan.md>...   # mirror the named plans (or pass the flags below directly)
-bun run plans:check                  # exit 1 on drift or a missing mirror
-bun run plans:status                 # table of every plan and its mirror state, always exit 0
+bun run mirror:publish <plan.md>...   # mirror the named plans (or pass the flags below directly)
+bun run mirror:check                  # exit 1 on drift or a missing mirror
+bun run mirror:status                 # table of every plan and its mirror state, always exit 0
 ```
 
-- **`plans:publish`** writes one file per plan and stages it in the vault with `git add` when
+- **`mirror:publish`** writes one file per plan and stages it in the vault with `git add` when
   `stageInVault` is on, so obsidian-git (configured with `autoCommitOnlyStaged: true`) commits
   it. It stages the single file and never commits or pushes. A re-publish of an unchanged plan
   prints `SKIPPED-IDEMPOTENT`, exits 0, and writes nothing.
-- **`plans:check`** is the CI-style gate: it never writes, and it exits 1 when a mirror's
+- **`mirror:check`** is the CI-style gate: it never writes, and it exits 1 when a mirror's
   recorded `source_hash` no longer matches its source plan or the mirror is missing. Exit 0
   means every enumerated plan is mirrored and current.
-- **`plans:status`** is a report, not a verdict. It always exits 0, including when a mirror is
+- **`mirror:status`** is a report, not a verdict. It always exits 0, including when a mirror is
   missing, so it is safe inside a `&&` chain and in a shell pipeline.
 
 Flags the CLI itself understands, for when you call `bun scripts/plan-publish.mjs` directly:
@@ -315,7 +315,7 @@ Flags the CLI itself understands, for when you call `bun scripts/plan-publish.mj
 Exit codes: `0` success or idempotent skip, `1` drift / missing mirror / refused destination /
 transform failure, `2` usage error.
 
-`plans:check` is deliberately **not** part of `bun run ci`. It reads `plans.publish.json`, which
+`mirror:check` is deliberately **not** part of `bun run ci`. It reads `plans.publish.json`, which
 names one vault by absolute path on one machine, and the plan set it enumerates currently has
 mirrors for none of its 267 plans, so the check is a local gate to run on the machine that owns
 the vault rather than something a portable CI runner can ever pass.

@@ -12,9 +12,9 @@
     "snippets:status": "bun scripts/sync-snippets.mjs --status",
     "snippets:check": "bun scripts/sync-snippets.mjs --check",
     "snippets:push": "bun scripts/sync-snippets.mjs --push",
-    "plans:publish": "bun scripts/plan-publish.mjs",
-    "plans:check": "bun scripts/plan-publish.mjs --check --all",
-    "plans:status": "bun scripts/plan-publish.mjs --status",
+    "mirror:publish": "bun scripts/plan-publish.mjs",
+    "mirror:check": "bun scripts/plan-publish.mjs --check --all",
+    "mirror:status": "bun scripts/plan-publish.mjs --status",
     "ci": "bash scripts/render-diagrams.sh && bun scripts/validate-skill.mjs && bun test scripts/ && bun scripts/sync-snippets.mjs --check"
   },
   "devDependencies": {

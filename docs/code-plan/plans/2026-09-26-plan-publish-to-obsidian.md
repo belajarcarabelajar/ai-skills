@@ -31,7 +31,7 @@ tasks:
     depends_on: [T3]
     files: { create: [], modify: [package.json, README.md], test: [] }
     idempotency_key: "T4:package.json"
-    skip_if: "bun -e \"const p=JSON.parse(await Bun.file('package.json').text());process.exit(p.scripts?.['plans:publish']&&p.scripts?.['plans:check']?0:1)\""
+    skip_if: "bun -e \"const p=JSON.parse(await Bun.file('package.json').text());process.exit(p.scripts?.['mirror:publish']&&p.scripts?.['mirror:check']?0:1)\""
     verify_exit: 0
   - id: T5
     depends_on: [T3]
@@ -49,7 +49,7 @@ tasks:
     depends_on: [T5]
     files: { create: [], modify: [snippets/orkestrasi-ngoding-plan.md], modify_also: [snippets.manifest.json], test: [] }
     idempotency_key: "T7:snippets/orkestrasi-ngoding-plan.md"
-    skip_if: "bun -e \"process.exit((await Bun.file('snippets/orkestrasi-ngoding-plan.md').text()).includes('plans:publish')?0:1)\""
+    skip_if: "bun -e \"process.exit((await Bun.file('snippets/orkestrasi-ngoding-plan.md').text()).includes('mirror:publish')?0:1)\""
     verify_exit: 0
   - id: T8
     depends_on: []
@@ -73,10 +73,10 @@ tasks:
     depends_on: [T3, T8]
     files: { create: ["90 - System/Plan-Publishing.md"], modify: [], test: [] }
     idempotency_key: "T11:90 - System/Plan-Publishing.md"
-    skip_if: "bun -e \"process.exit((await Bun.file('/home/belajarcarabelajar/Dokumen/Obsidian Vault/90 - System/Plan-Publishing.md').text()).includes('plans:publish')?0:1)\""
+    skip_if: "bun -e \"process.exit((await Bun.file('/home/belajarcarabelajar/Dokumen/Obsidian Vault/90 - System/Plan-Publishing.md').text()).includes('mirror:publish')?0:1)\""
     verify_exit: 0
   - id: T12
-    depends_on: [T4, T6, T7, T9, T10, T11, T14, T16]
+    depends_on: [T4, T6, T7, T9, T10, T11, T14, T16, T18, T19, T21, T22, T23]
     files: { create: ["01 - Projects/ai-skills/plans/2026-09-26-plan-publish-to-obsidian.md"], modify: [], test: [] }
     idempotency_key: "T12:e2e-dogfood"
     skip_if: "bun scripts/plan-publish.mjs --check --all"
@@ -104,6 +104,48 @@ tasks:
     files: { create: [], modify: ["scripts/plan-publish.mjs", "scripts/plan-publish.test.mjs", "scripts/validate-skill.mjs"], test: [] }
     idempotency_key: "T16:publisher_version-freshness"
     skip_if: "bun -e \"process.exit((await Bun.file('scripts/plan-publish.mjs').text()).includes('publisher_version')?0:1)\""
+    verify_exit: 0
+  - id: T17
+    depends_on: []
+    files: { create: [], modify: ["scripts/plan-publish.mjs", "scripts/plan-publish.test.mjs"], test: [] }
+    idempotency_key: "T17:publish-all-mode"
+    skip_if: "bun -e \"process.exit((await Bun.file('scripts/plan-publish.mjs').readText?.() ?? (await Bun.file('scripts/plan-publish.mjs').text())).includes('PUBLISH_ALL')?0:1)\""
+    verify_exit: 0
+  - id: T18
+    depends_on: [T17]
+    files: { create: ["01 - Projects/Snipset/plans/"], modify: [], test: [] }
+    idempotency_key: "T18:bulk-publish-267"
+    skip_if: "bun scripts/plan-publish.mjs --check --all"
+    verify_exit: 0
+  - id: T19
+    depends_on: []
+    files: { create: ["scripts/plan-mirror-watch.sh"], modify: [], test: [] }
+    idempotency_key: "T19:drift-watchdog"
+    skip_if: "test -x /home/belajarcarabelajar/.local/bin/plan-mirror-check"
+    verify_exit: 0
+  - id: T20
+    depends_on: []
+    files: { create: [], modify: ["package.json", "README.md", "snippets/orkestrasi-ngoding-plan.md"], test: [] }
+    idempotency_key: "T20:mirror-namespace"
+    skip_if: "bun -e \"const p=JSON.parse(await Bun.file('package.json').text());process.exit(p.scripts?.['mirror:check']?0:1)\""
+    verify_exit: 0
+  - id: T21
+    depends_on: [T20]
+    files: { create: ["90 - System/Plan-Publishing.md"], modify: [], test: [] }
+    idempotency_key: "T21:vault-page-rename"
+    skip_if: "bun -e \"process.exit((await Bun.file('/home/belajarcarabelajar/Dokumen/Obsidian Vault/90 - System/Plan-Publishing.md').text()).includes('mirror:check')?0:1)\""
+    verify_exit: 0
+  - id: T22
+    depends_on: []
+    files: { create: ["tests/test_vault_reachability.py"], modify: [], test: [] }
+    idempotency_key: "T22:reachability-test"
+    skip_if: "cd '/home/belajarcarabelajar/Dokumen/Obsidian Vault' && python3 -m unittest discover -s tests -p 'test_vault_reachability.py'"
+    verify_exit: 0
+  - id: T23
+    depends_on: []
+    files: { create: [], modify: ["90 - System/index.md"], test: [] }
+    idempotency_key: "T23:audits-link"
+    skip_if: "bun -e \"process.exit((await Bun.file('/home/belajarcarabelajar/Dokumen/Obsidian Vault/90 - System/index.md').text()).includes('90 - System/Audits/index')?0:1)\""
     verify_exit: 0
 ---
 
@@ -157,6 +199,13 @@ flowchart TD
     T15 --> T16["T16: Version-aware freshness"]
     T3 --> T16
     T16 --> T12
+    T17["T17: Publish --all mode"] --> T18["T18: Bulk publish 267"]
+    T18 --> T12
+    T19["T19: Drift watchdog"] --> T12
+    T20["T20: mirror namespace"] --> T21["T21: Vault page rename"]
+    T21 --> T12
+    T22["T22: Reachability test"] --> T12
+    T23["T23: Audits link fix"] --> T12
     T9 --> T12
     T10 --> T12
     T11 --> T12
@@ -285,7 +334,7 @@ A `## Related` section is appended to the body containing the source path as **p
 
 - [ ] Step 1: Add `plans:publish`, `plans:check`, `plans:status` to `package.json` scripts, and add `plan-publish.mjs` to the `ci` chain before `bun test scripts/`.
 - [ ] Step 2: Document the three commands in README next to the existing `snippets:*` block, and add the new script to the repository tree listing.
-- [ ] Step 3: Run — verify pass | cmd: `bun -e "const p=JSON.parse(await Bun.file('package.json').text());process.exit(p.scripts?.['plans:publish']&&p.scripts?.['plans:check']?0:1)"` | expect: exit 0
+- [ ] Step 3: Run — verify pass | cmd: `bun -e "const p=JSON.parse(await Bun.file('package.json').text());process.exit(p.scripts?.['mirror:publish']&&p.scripts?.['mirror:check']?0:1)"` | expect: exit 0
 - [ ] Step 4: Commit
 
 ### Task T5: Master skill contract
@@ -307,7 +356,7 @@ A `## Related` section is appended to the body containing the source path as **p
 
 - [ ] Step 1: Add one line to `snippets/orkestrasi-ngoding-plan.md` requiring `bun scripts/plan-publish.mjs <plan>` after approval, and a `bun -e` skip check mirroring §4's Step 4 form. Do not introduce `npm`, `npx`, or `node scripts/` — the validator rejects them in this file.
 - [ ] Step 2: Confirm `snippets.manifest.json` already tracks this snippet and needs no new entry; the snippet body is what is pushed, so a body edit is enough.
-- [ ] Step 3: Run — verify pass | cmd: `bun -e "process.exit((await Bun.file('snippets/orkestrasi-ngoding-plan.md').text()).includes('plans:publish')?0:1)"` | expect: exit 0
+- [ ] Step 3: Run — verify pass | cmd: `bun -e "process.exit((await Bun.file('snippets/orkestrasi-ngoding-plan.md').text()).includes('mirror:publish')?0:1)"` | expect: exit 0
 - [ ] Step 4: Commit
 
 ### Task T8: Vault project indexes
@@ -337,7 +386,7 @@ A `## Related` section is appended to the body containing the source path as **p
 
 - [ ] Step 1: Create `90 - System/Plan-Publishing.md` with YAML properties and sections: what the mirror is, who owns it, how to re-publish, how to revert, and the rule that the mirror is never hand-edited.
 - [ ] Step 2: Do NOT link this page from `90 - System/index.md`. T14 owns that file; two chunks writing one hub is an orchestration defect, not a shortcut.
-- [ ] Step 3: Run — verify pass | cmd: `bun -e "process.exit((await Bun.file('/home/belajarcarabelajar/Dokumen/Obsidian Vault/90 - System/Plan-Publishing.md').text()).includes('plans:publish')?0:1)"` | expect: exit 0
+- [ ] Step 3: Run — verify pass | cmd: `bun -e "process.exit((await Bun.file('/home/belajarcarabelajar/Dokumen/Obsidian Vault/90 - System/Plan-Publishing.md').text()).includes('mirror:publish')?0:1)"` | expect: exit 0
 - [ ] Step 4: Commit in the vault repo
 
 ### Task T14: Vault hub wiring
@@ -367,6 +416,67 @@ A `## Related` section is appended to the body containing the source path as **p
 - [ ] Step 6: Run — verify pass | cmd: `bun test scripts/ 2>&1 | tail -n 8; echo "EXIT:${PIPESTATUS[0]}"` | expect: exit 0, 0 failures
 - [ ] Step 7: Re-publish the real mirror and confirm it is rewritten with the new property | cmd: `bun scripts/plan-publish.mjs docs/code-plan/plans/2026-09-26-plan-publish-to-obsidian.md` | expect: `✅ published`, not `SKIPPED-IDEMPOTENT`
 - [ ] Step 8: Commit
+
+## 8. Debt Sweep — Selected Follow-Ups (Step 6)
+
+All five harvested items were selected by the user and are executed as real work, not narrated as done. Each is a task in the DAG above.
+
+### Task T17: Bulk publish mode
+
+- [ ] Step 1: Add a `--all` publish mode to `scripts/plan-publish.mjs`. Today `--all` exists only on `--check`; publishing 267 plans requires enumerating them by hand. Reuse `enumeratePlans` from the registry module so the source of truth stays single.
+- [ ] Step 2: `--all` must honour `--dry-run`, report per-file outcomes, exit 1 if any file fails while still processing the rest, and print a final tally. A partial bulk failure must be visible, not swallowed by a single non-zero exit.
+- [ ] Step 3: Mutually exclusive with explicit plan arguments. `--all` together with a plan path is a usage error, exit 2.
+- [ ] Step 4: Run — verify pass | cmd: `bun test scripts/ 2>&1 | tail -n 8; echo "EXIT:${PIPESTATUS[0]}"` | expect: exit 0, 0 failures
+- [ ] Step 5: Commit
+
+### Task T18: Bulk publish the backlog
+
+- [ ] Step 1: Measure first | cmd: `bun scripts/plan-publish.mjs --check --all 2>&1 | tail -n 3` | expect: exit 1, a large missing count. This is the pre-change baseline.
+- [ ] Step 2: Run the bulk publish | cmd: `bun scripts/plan-publish.mjs --all` | expect: exit 0 with a tally covering every enumerated plan
+- [ ] Step 3: Confirm convergence | cmd: `bun scripts/plan-publish.mjs --check --all` | expect: exit 0, every mirror matching its source
+- [ ] Step 4: Re-run the vault linter and confirm no new broken links | cmd: `cd '/home/belajarcarabelajar/Dokumen/Obsidian Vault' && python3 scripts/vault_lint.py . --json` | expect: `broken_links` still 1987
+- [ ] Step 5: Re-run the vault contract test, which must now execute against real mirrors instead of skipping | cmd: `cd '/home/belajarcarabelajar/Dokumen/Obsidian Vault' && python3 -m unittest discover -s tests -p 'test_plan_mirror.py' -v` | expect: exit 0, no skips
+- [ ] Step 6: Commit in the vault repo
+
+### Task T19: Drift watchdog
+
+- [ ] Step 1: Create `scripts/plan-mirror-check.sh` plus an installed entry at `~/.local/bin/plan-mirror-check` that runs `bun scripts/plan-publish.mjs --check --all` and appends a timestamped result to a log under `~/.local/state/plan-mirror/`.
+- [ ] Step 2: Wire a `systemd --user` timer to run it daily. Reason a local timer and not a GitHub Actions workflow: the check needs the vault at an absolute local path plus three local repositories, none of which a CI runner can see. A workflow in the vault repo would pass vacuously, which is worse than no gate.
+- [ ] Step 3: The script must exit 0 when the check passes and 1 when it drifts, so `systemctl --user` surfaces the failure instead of hiding it.
+- [ ] Step 4: Run — verify pass | cmd: `~/.local/bin/plan-mirror-check; echo "EXIT:$?"` | expect: exit 1 today, because T18 has not run yet at the time this is written. After T18 it must exit 0. Report both.
+- [ ] Step 5: Commit
+
+### Task T20: `mirror:*` namespace
+
+- [ ] Step 1: Rename the three npm scripts `plans:publish`, `plans:check`, `plans:status` to `mirror:publish`, `mirror:check`, `mirror:status` in `package.json`. Reason: `plan:check` already exists and validates the ultra-plan DAG; the two differ by one character and a typo silently runs the wrong gate.
+- [ ] Step 2: Update `README.md` and `snippets/orkestrasi-ngoding-plan.md` to the new names. The snippet is the user-facing trigger, so a stale name there means the mandate invokes a command that no longer exists.
+- [ ] Step 3: Do NOT rename the CLI script file, the `plan-publish.mjs` path, or the `Plan-Publishing.md` page. The collision is only in the npm script namespace.
+- [ ] Step 4: Run — verify pass | cmd: `bun scripts/validate-skill.mjs 2>&1 | tail -n 6; echo "EXIT:${PIPESTATUS[0]}"` | expect: exit 0
+- [ ] Step 5: Commit
+
+### Task T21: Vault page follows the rename
+
+- [ ] Step 1: Update `90 - System/Plan-Publishing.md` to reference `mirror:publish`, `mirror:check`, and `mirror:status`. A vault page documenting commands that no longer exist is worse than no page.
+- [ ] Step 2: Change nothing else in that file.
+- [ ] Step 3: Run — verify pass | cmd: `bun -e "process.exit((await Bun.file('/home/belajarcarabelajar/Dokumen/Obsidian Vault/90 - System/Plan-Publishing.md').text()).includes('mirror:check')?0:1)"; echo "EXIT:$?"` | expect: 0
+- [ ] Step 4: Commit in the vault repo
+
+### Task T22: Reachability test for hub pages
+
+- [ ] Step 1: Create `tests/test_vault_reachability.py` asserting that every hub page — `01 - Projects/*/index.md` and `90 - System/Plan-Publishing.md` — has at least one inbound wikilink from another file in the vault.
+- [ ] Step 2: The test must NOT exempt `index.md`. `vault_lint.scan_vault` filters orphans with `path.name not in {"index.md", "overview.md"}`, so the existing linter structurally cannot catch an unreachable index page. That exemption is correct for a general orphan sweep and wrong for a hub-reachability contract, which is why this needs its own test.
+- [ ] Step 3: Scope it to hub pages only. Do NOT require an inbound link for every file under `01 - Projects/*/plans/` — a mirrored plan is a leaf, and demanding an inbound link per mirror would mean 267 index pages.
+- [ ] Step 4: Tests — the assertion helper must have teeth: drive it against a temp fixture with an orphaned hub, an orphaned `index.md`, and a linked hub, and show which assertion fires in each case.
+- [ ] Step 5: Run — verify pass | cmd: `cd '/home/belajarcarabelajar/Dokumen/Obsidian Vault' && python3 -m unittest discover -s tests -p 'test_*.py' 2>&1 | tail -n 5; echo "EXIT:${PIPESTATUS[0]}"` | expect: exit 0
+- [ ] Step 6: Commit in the vault repo
+
+### Task T23: Repair the pre-existing broken Audits link
+
+- [ ] Step 1: Establish the fact first. Determine whether `90 - System/Audits/` is a directory with no `index.md`, or has some other entry point, and what the correct wikilink target is. Do not guess a target.
+- [ ] Step 2: Fix `[[90 - System/Audits]]` in `90 - System/index.md` to a target that provably resolves under the linter's own resolution order. This link predates this feature; it is the only broken link in a file this feature now edits.
+- [ ] Step 3: Run — verify pass | cmd: `bun -e "process.exit((await Bun.file('/home/belajarcarabelajar/Dokumen/Obsidian Vault/90 - System/index.md').text()).includes('90 - System/Audits/index')?0:1)"; echo "EXIT:$?"` | expect: 0
+- [ ] Step 4: Confirm the vault's broken-link count DROPS by one, from 1987 to 1986 | cmd: `cd '/home/belajarcarabelajar/Dokumen/Obsidian Vault' && python3 scripts/vault_lint.py . --json` | expect: 1986
+- [ ] Step 5: Commit in the vault repo
 
 ### Task T12: End-to-end dogfood
 

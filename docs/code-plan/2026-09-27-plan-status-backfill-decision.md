@@ -126,11 +126,30 @@ The second near-miss was in this record's own §3, where the first draft blamed
 printed summary; the cause was in a gate condition one line away. A plausible
 number next to a failing command is not a cause.
 
-### Still outstanding, and not fixed by any status change
+### Outstanding after the two follow-ups were closed
 
-- `docs/troubleshooting/youtube-linux-audio.md` still instructs operators to
-  install `yt-dlp` for a code path the application no longer calls.
-- FU6 on that plan: "confirm the reporter's real error integer; if it is `5` and
-  not `153`, this design does not apply". If it is 5, the premise was wrong.
-- 227 untracked plans remain in the publisher's fallback bucket, untouched by
-  design.
+Both items that were open after the status pass were then closed, and both turned
+out to be answerable from material already in the repositories:
+
+| Item | Closed how |
+|---|---|
+| `docs/troubleshooting/youtube-linux-audio.md` telling operators to install `yt-dlp` for a route the app no longer calls | Corrected in `f00ee49f6`. A prominent banner states the route is not in the current build, §2/§3/§5/§7 are marked superseded with the reason, and §1 and §4 are kept as current because the custom-scheme root-cause analysis is why the webview route exists. |
+| FU6 — "confirm the reporter's real error integer; if it is `5` and not `153`, this design does not apply" | **It is `153`.** The answer was already in `2026-09-26-linux-youtube-player-error-pomodoro-rca.md` the same day: a user screenshot plus an independent WebKitGTK 2.52.6 probe against YouTube's demo video `M7lc1UVf-VE`. The plan's premise about the cause was right; what was wrong is narrower — a direct audio stream was never obtainable for HLS-only content. |
+
+Both were left open not because they were hard but because nobody connected the
+evidence to the question. That is the same failure mode as the missing RCA log in
+`2026-09-20-mobile-overlap-text-audit`, where a progress log asserted a file that
+was never committed: **a status field and a progress note are claims, and the
+repository is the only thing that settles them.**
+
+### Still outstanding
+
+- **227 untracked plans** remain in the publisher's fallback bucket, untouched by
+  design. F3, and deliberately still open.
+- **One attachment whose filename contains an email address**,
+  `03 - Resources/Attachments/🆔 OAuth Client Creation Successful - …@….md` in the
+  vault. Never opened, never renamed, never committed. Needs an owner decision
+  because renaming or moving it is itself a disclosure-adjacent act.
+- **The nine `missing_frontmatter` files and the `zero_outgoing_files` gate scope**
+  in the vault. Triaged in `90 - System/Vault-Lint-Triage.md`; the gate-scope fix
+  is F1 and has not been applied.

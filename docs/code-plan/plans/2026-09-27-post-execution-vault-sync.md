@@ -310,7 +310,7 @@ was declined and stays `DEFERRED` on the user's judgement, not on a cap.
 | # | Follow-up (outcome + path + finish line) | Class | `defer: <ceiling>, <upgrade-trigger>` | Status |
 |---|---|---|---|---|
 | F1 | Fix the `vault_lint --strict` gate scope so it stops failing on immutable material, and add frontmatter to the 3 actionable notes. Pre-existing; triaged in `90 - System/Vault-Lint-Triage.md`. Finish line: `--strict` exits 0, or the immutable remainder is reported as a separate non-gating figure. One attachment with an email address in its filename needs an owner decision first and is NOT part of this. | `NOW` | — | `SELECTED` |
-| F2 | Read the 8 inconclusive Snipset plans against their own acceptance criteria and decide each status, finishing what T6 deliberately left open. Finish line: every one of the 8 has a status backed by a cited acceptance criterion, and the decision record is updated. **Partly done — see §8.1.** | `NOW` | — | `SELECTED` |
+| F2 | Read the 8 inconclusive Snipset plans against their own acceptance criteria and decide each status, finishing what T6 deliberately left open. Finish line: every one of the 8 has a status backed by a cited acceptance criterion, and the decision record is updated. | `NOW` | — | `DONE` — 1 `Complete`, 6 `Verification`, 1 `Blocked`; `Draft` 8 → 0 |
 | F3 | Backfill frontmatter for the 227 untracked plans, which is the prerequisite for stage 3 ever reaching them: `plan-mark-done` needs `tasks[].id` and none of them have one. Finish line: each backfilled plan carries a real `status` line, and none is assigned a status nobody measured. | `NOW` | — | `SELECTED` |
 | F4 | A check mode that flags mirrors reading `Draft` whose plan looks finished, so the stale-status case is visible without Dataview. This is the workaround for deferring the Dataview board. Finish line: the mode names the candidates and exits 0, staying a report rather than a gate. | `NOW` | — | `SELECTED` |
 | F5 | Automate the runner-log capture in stage 3. Today the snippet asks for `\| tee runner.log` by hand, and a missed capture silently downgrades every tick from `evidence` to `asserted`. Finish line: `plan:run` writes the log itself, or `plan-mark-done` can invoke the runner. | `LATER` | `defer: 2 sessions, upgrade-trigger = the first time a tick is recorded as asserted when evidence existed` | `DECLINED` |
@@ -333,25 +333,28 @@ was declined and stays `DEFERRED` on the user's judgement, not on a cap.
    because a verification matrix whose expectations were never true is worse than
    no matrix — it trains the reader to expect green.
 
-### 8.1 F2 progress — five of eight assessed, one closed
+### 8.1 F2 — closed: all eight assessed, every status now carries a cited reason
 
 The eight plans were read against their own acceptance criteria, with evidence
 gathered from the repository rather than from the plans' prose. Five are done:
 
-| Plan | Verdict | Decisive evidence |
-|---|---|---|
-| `2026-09-26-linux-webkitgtk-empty-voice-catalog` | **FINISHED** | All six ACs met and re-verified fresh: 84 voice tests, 158 accessibility tests, `tsc --noEmit`, eslint, prettier, `bun run build` — all exit 0 |
-| `2026-09-20-mobile-overlap-text-audit` | PARTIAL | AC-4's RCA artifact `docs/code-plan/logs/2026-09-20-mobile-overlap-rca.md` never existed and is falsely ticked in the progress log; the whole `logs/` directory is absent from git history |
-| `2026-09-21-website-telegram-monitoring` | PARTIAL | AC-7 is self-declared BLOCKED with no external-monitor drill; AC-10 rests on operational prose plus one admitted HTTP 400 |
-| `2026-09-21-bundled-cli-delivery-plan` | PARTIAL | AC-1/2/3 need a regenerated NSIS script and a Windows install; no `.nsi` exists anywhere in the repo |
-| `2026-09-21-mouse-operator` | PARTIAL | Every file shipped with real test coverage, but the plan itself states "Missing native verification keeps final status in Verification or Blocked, never Complete" — and the later debugging plan found two real defects in that same code |
+The full outcome, with the decisive evidence per plan, is in
+`docs/code-plan/2026-09-27-plan-status-backfill-decision.md` §2. Summary:
+**1 `Complete`, 6 `Verification`, 1 `Blocked`. `Draft` went from 8 to 0.**
 
-One status therefore changes: the voice-catalog plan is the only one whose
-evidence supports `Complete`. The other four stay `Draft`, now with a cited
-reason instead of the word "inconclusive", which is a real improvement over the
-state T6 left them in.
+Two corrections came out of this that are worth more than the status changes:
 
-A pattern worth recording, because it is the whole point of the exercise: four
-of these five plans have **committed production changes** and a `Draft` status.
-The status was never the problem — it was simply never updated, which is exactly
-what the three-stage publish pipeline now prevents from recurring.
+1. **One plan was marked `Complete` and had to be reversed.** The youtube-player
+   plan passes 114 tests, but commit `f1c0fb020` afterwards added
+   `requiresYoutubeWebview()`, so on Linux the IFrame path carrying AC-3's
+   `console.warn(event.data)` is never entered. A green suite proved the mapping
+   correct without proving the diagnostic logging — the plan's actual purpose —
+   is still reachable on the platform it targets.
+2. **The lint triage in §5 was itself wrong twice**, and both corrections are
+   recorded there rather than quietly dropped. A plausible number next to a
+   failing command is not a cause; read the condition.
+
+A pattern worth recording, because it is the whole point of the exercise: all
+eight had **committed production changes** and a `Draft` status. The status was
+never the problem — it was simply never updated, which is exactly what the
+three-stage publish pipeline now prevents from recurring.

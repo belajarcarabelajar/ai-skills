@@ -755,6 +755,34 @@ Pre-execution walkthrough: refresh the active project profile and inspect the pl
 Execution handoff — subagent fan-out is the default:
 1. Subagent fan-out (default, required) — chunk every task into small verifiable units, dispatch a high-fan-out batch of narrow subagents, then gather and synthesize their reports.
 2. Inline execution — permitted only for a genuinely atomic task, and the reason (atomic scope, no subagent tool in this runtime, or inseparable shared state) is stated explicitly at the handoff.
+
+### 📤 Plan Publishing
+> 📤 **Component 2b — Reachability:** a plan that exists only inside a project repository cannot be searched, rendered, or re-read months later. Publishing is a required step of finishing a plan, not an optional convenience.
+
+- Mandate: after a plan is written to `docs/code-plan/plans/` and approved, you MUST run the publisher from the project that owns the plan. That run is what makes "every plan is also in the vault" true rather than aspirational.
+- `SKIPPED-IDEMPOTENT` is a pass, not a failure: publishing an unchanged plan twice prints `SKIPPED-IDEMPOTENT`, writes nothing, and stages nothing. Nothing happened because nothing needed to happen. Do not go investigate a non-problem.
+- One-way: the project repository is the source of truth; the vault copy is a read-only mirror. Never edit a mirrored note in the vault — edit the plan in the project and re-run the publisher. Two-way sync is permanently rejected, not deferred, because a vault edit is invisible to the repository and the mirror can no longer be regenerated from the truth.
+- The check: `bun scripts/plan-publish.mjs --check --all` exits 1 when any mirror is missing or stale, and is the gate to run when verifying that a plan is published. `--status` is a human report: it prints a table and always exits 0, so it is never a gate.
+- Not hardwired: the CLI reads `PLAN_PUBLISH_CONFIG` to locate `plans.publish.json` instead of the repository copy, so a later session can point the publisher at another registry without editing the script.
+- Failure handling: a non-zero exit does not invalidate the plan. The plan is still valid and still saved in the project; the mirror is derived state. Report the failure and its exit code. Do not hand-copy the file into the vault as a workaround — a hand copy carries no `source_hash`, so it reads as permanent drift to `--check` and can only be fixed by deleting it and republishing by hand.
+
+```
+bun scripts/plan-publish.mjs docs/code-plan/plans/YYYY-MM-DD-<feature>.md
+bun scripts/plan-publish.mjs --check --all
+bun scripts/plan-publish.mjs --status
+```
+
+```mermaid
+flowchart LR
+    accTitle: Plan publishing data flow
+    accDescr: The publisher reads a plan from the project repository, merges the vault PARA properties into its frontmatter, writes the mirror into the vault plans folder, and stages that single file for Obsidian Git. The mirror is never read back as an input.
+    Plan["Read plan file\ndocs/code-plan/plans/"] --> Merge["Merge PARA properties\ninto frontmatter"]
+    Merge --> Mirror["Write mirror note\ninto vault plans folder"]
+    Mirror --> Stage["Stage the single file\nfor Obsidian Git"]
+    Stage --> Commit(["Obsidian Git\ncommits the mirror"])
+    Mirror -.-> NoReadback["Mirror is never\nread back as an input"]
+```
+
 ## 4️⃣ 🧪 Test-Driven Development (Iron Law)
 > 🧪 **Component 3 — Test loop:** RED → GREEN → REFACTOR, repeated for each behavior, executed inside subagents (see Delegation & Execution for chunking, the high fan-out floor, and the gather & synthesize loop).
 

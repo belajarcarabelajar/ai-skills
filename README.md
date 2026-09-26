@@ -99,8 +99,15 @@ ai-skills/
 │   ├── ultra-plan-runner.mjs                    # ultra-plan/v1 DAG runner + visual map contract
 │   ├── ultra-plan-runner.test.mjs               # Contract tests for the runner
 │   ├── sync-snippets.mjs                        # Drift guard: snippets/ <-> Snipset database
-│   └── sync-snippets.test.mjs                   # Normalization + drift-detection tests
+│   ├── sync-snippets.test.mjs                   # Normalization + drift-detection tests
+│   ├── plan-publish.mjs                         # Publish plans into the Obsidian vault (one-way mirror)
+│   ├── plan-publish.test.mjs                    # Publish, idempotency, drift, and refusal tests
+│   ├── plan-publish-registry.mjs                # Vault + project registry and destination paths
+│   ├── plan-publish-registry.test.mjs           # Config, project resolution, enumeration tests
+│   ├── plan-publish-frontmatter.mjs             # Pure ultra-plan/v1 -> PARA frontmatter transform
+│   └── plan-publish-frontmatter.test.mjs        # Merge rules, related-link, title fallback tests
 ├── snippets.manifest.json                      # Maps trigger prompts to Snipset database slots
+├── plans.publish.json                          # Vault path, destination template, and project roots for the plan mirror
 ├── snippets/                                    # Copy-paste trigger prompts
 │   ├── orkestrasi-ngoding-plan.md               # Plan + TDD + mandatory subagent fan-out
 │   └── orkestrasi-debugging.md                  # RCA + mandatory hypothesis-parallel subagent fan-out
@@ -268,6 +275,50 @@ manifest is valid JSON, every entry has all required fields, no duplicate uuid o
 keyword, every referenced file exists, every tracked file carries the subagent contract,
 and every required trigger snippet is tracked so it can never be silently left out of the
 database.
+
+### Mirroring plans into the Obsidian vault
+
+A plan under `docs/code-plan/plans/` is a markdown file in a project repository, so the
+vault cannot search it, render its Mermaid, or show it in the graph. `scripts/plan-publish.mjs`
+copies each plan into `01 - Projects/<Project>/plans/` with the vault's PARA frontmatter
+merged in. The copy is a **one-way, read-only mirror**: the project repository is the source
+of truth, the vault copy is derived state, and the vault copy is never hand-edited. The
+publisher never reads a mirror back as an input, so a stale mirror can rot visibly
+(`--check` exists to catch that) but can never corrupt a plan.
+
+```bash
+bun run plans:publish <plan.md>...   # mirror the named plans (or pass the flags below directly)
+bun run plans:check                  # exit 1 on drift or a missing mirror
+bun run plans:status                 # table of every plan and its mirror state, always exit 0
+```
+
+- **`plans:publish`** writes one file per plan and stages it in the vault with `git add` when
+  `stageInVault` is on, so obsidian-git (configured with `autoCommitOnlyStaged: true`) commits
+  it. It stages the single file and never commits or pushes. A re-publish of an unchanged plan
+  prints `SKIPPED-IDEMPOTENT`, exits 0, and writes nothing.
+- **`plans:check`** is the CI-style gate: it never writes, and it exits 1 when a mirror's
+  recorded `source_hash` no longer matches its source plan or the mirror is missing. Exit 0
+  means every enumerated plan is mirrored and current.
+- **`plans:status`** is a report, not a verdict. It always exits 0, including when a mirror is
+  missing, so it is safe inside a `&&` chain and in a shell pipeline.
+
+Flags the CLI itself understands, for when you call `bun scripts/plan-publish.mjs` directly:
+
+| Flag | Why it exists |
+|---|---|
+| `--check [--all]` | Verify only. `--all` enumerates every plan under every `mirror: true` project instead of requiring explicit paths. |
+| `--status` | Report mirror state for every plan; never fails. |
+| `--dry-run` | Print the destination and whether it would write, then write and stage nothing. |
+| `--today YYYY-MM-DD` | Overrides the `updated` frontmatter value. It exists to make that property deterministic in tests; without it the value is today's local date. |
+| `PLAN_PUBLISH_CONFIG` | Environment variable holding the path to `plans.publish.json`. It is the only way to point the tool at a different vault or a different set of project roots. |
+
+Exit codes: `0` success or idempotent skip, `1` drift / missing mirror / refused destination /
+transform failure, `2` usage error.
+
+`plans:check` is deliberately **not** part of `bun run ci`. It reads `plans.publish.json`, which
+names one vault by absolute path on one machine, and the plan set it enumerates currently has
+mirrors for none of its 267 plans, so the check is a local gate to run on the machine that owns
+the vault rather than something a portable CI runner can ever pass.
 
 ---
 

@@ -295,6 +295,93 @@ for (const scr of scripts) {
   }
 }
 
+// 4b. Mandatory Plan Publishing contract. A skill contract that can be silently
+// deleted is not a contract, so the mandate wording, the CLI it names, and the
+// registry the CLI reads are each asserted separately. Placed before section 5
+// on purpose: section 5 renders every Mermaid block in the repository with mmdc
+// and costs 60-120 seconds, so a cheap missing-contract error must not queue
+// behind the expensive render pass.
+{
+  const planPublishContract = [
+    { label: 'Plan Publishing heading', needle: 'Plan Publishing' },
+    { label: 'publisher CLI reference', needle: 'plan-publish.mjs' },
+    { label: 'idempotency marker', needle: 'SKIPPED-IDEMPOTENT' },
+  ];
+  if (!fs.existsSync(masterPath)) {
+    // Section 1 already counted the missing master file. Re-reading it here
+    // would triple-count one root cause, so the wording checks are skipped and
+    // the filesystem checks below still run.
+    console.error('❌ Plan publishing contract cannot be checked: the master file is missing (see section 1).');
+  } else {
+    const masterBody = fs.readFileSync(masterPath, 'utf8');
+    for (const c of planPublishContract) {
+      if (masterBody.includes(c.needle)) {
+        console.log(`✅ Plan publishing contract present: ${c.label}`);
+      } else {
+        console.error(`❌ Master file missing plan publishing contract: ${c.label} — literal "${c.needle}" not found.`);
+        errors++;
+      }
+    }
+  }
+
+  const publisherPath = path.join(rootDir, 'scripts', 'plan-publish.mjs');
+  if (fs.existsSync(publisherPath)) {
+    console.log('✅ Script present: scripts/plan-publish.mjs');
+  } else {
+    console.error('❌ Missing script: scripts/plan-publish.mjs (the Plan Publishing mandate names a CLI that does not exist).');
+    errors++;
+  }
+
+  const publishConfigPath = path.join(rootDir, 'plans.publish.json');
+  if (!fs.existsSync(publishConfigPath)) {
+    console.error('❌ Missing plans.publish.json (publish registry; the publisher cannot resolve a vault without it).');
+    errors++;
+  } else {
+    try {
+      JSON.parse(fs.readFileSync(publishConfigPath, 'utf8'));
+      console.log('✅ Plan publish registry is valid JSON: plans.publish.json');
+    } catch (e) {
+      console.error(`❌ plans.publish.json is not valid JSON: ${e.message}`);
+      errors++;
+    }
+  }
+
+  // PUBLISHER_VERSION is a BUMP OBLIGATION, not bookkeeping, and this is the
+  // only thing in the repository that enforces it. Freshness in
+  // plan-publish.mjs keys on publisher_version as well as on source_hash, so a
+  // change to the transform that alters published output MUST increment this
+  // constant. If it is not bumped, every mirror written by the previous version
+  // keeps reporting itself current and never heals — the exact failure this
+  // constant was added to fix, and it is silent. Nothing else would notice.
+  //
+  // This IMPORTS the module and inspects the real export rather than grepping
+  // the source: a text search for the word passes when the identifier appears in
+  // a comment, which is precisely the state this guard exists to catch.
+  const frontmatterModulePath = path.join(rootDir, 'scripts', 'plan-publish-frontmatter.mjs');
+  if (!fs.existsSync(frontmatterModulePath)) {
+    console.error('❌ Missing script: scripts/plan-publish-frontmatter.mjs (the transform whose PUBLISHER_VERSION gates mirror freshness does not exist).');
+    errors++;
+  } else {
+    let observedVersion;
+    let probeFailure = null;
+    try {
+      const mod = await import(frontmatterModulePath);
+      observedVersion = mod.PUBLISHER_VERSION;
+    } catch (e) {
+      probeFailure = e;
+    }
+    if (probeFailure) {
+      console.error(`❌ Cannot load scripts/plan-publish-frontmatter.mjs to read PUBLISHER_VERSION: ${probeFailure.message}`);
+      errors++;
+    } else if (!Number.isInteger(observedVersion)) {
+      console.error(`❌ scripts/plan-publish-frontmatter.mjs must DEFINE and EXPORT an integer PUBLISHER_VERSION; the export is ${observedVersion === undefined ? 'absent' : `${typeof observedVersion} ${JSON.stringify(observedVersion)}`}. Mirrors would never be invalidated when the transform changes.`);
+      errors++;
+    } else {
+      console.log(`✅ Plan publish freshness stamp exported: PUBLISHER_VERSION = ${observedVersion}`);
+    }
+  }
+}
+
 // 5. Mermaid Block Validation
 const mmdcPath = path.join(rootDir, 'node_modules', '.bin', 'mmdc');
 const mmdcAvailable = fs.existsSync(mmdcPath) ||

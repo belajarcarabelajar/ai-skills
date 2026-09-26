@@ -1,7 +1,7 @@
 ---
 schema: ultra-plan/v1
 plan_id: 2026-09-27-plan-finish-sync-to-obsidian
-status: Draft
+status: Complete
 version: 1
 runner_contract: true
 defaults:

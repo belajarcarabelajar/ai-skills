@@ -548,7 +548,10 @@ function runCheck(registry, planPaths, { all }) {
     process.exit(0);
   }
   console.error(`   ${failed}/${plans.length} mirror(s) drifted or missing.`);
-  console.error('   Fix: bun scripts/plan-publish.mjs <plan>   (or --all after the plan is approved)');
+  console.error('   Fix: bun scripts/plan-publish.mjs <plan>');
+  console.error('        (--all for every plan). Publish when the plan is FINISHED, not when it is');
+  console.error('        approved: stage 1 right after Validation: OK so a human can review it in the');
+  console.error('        vault, stage 2 after approval, stage 3 after execution and the debt sweep.');
   process.exit(1);
 }
 

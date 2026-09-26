@@ -1259,3 +1259,25 @@ test('a version bump forces existing mirrors to re-publish', () => {
     cleanup(f);
   }
 });
+
+test('the failure hint names the current publish stages, not the retired one', () => {
+  // This string is what a person reads at the exact moment a plan is
+  // unpublished, so it is load-bearing documentation. It used to say "after the
+  // plan is approved", which described the retired single-stage rule: under the
+  // current three-stage pipeline a plan is published BEFORE approval is even
+  // requested, so the old wording told the reader to do the thing later than the
+  // pipeline does. A stale hint is worse than no hint, because it is confident.
+  const f = fixture('hint');
+  try {
+    const plan = f.writePlan(PLAN, PLAN_BODY);
+    const r = run(['--check', plan], f);
+    assert.equal(r.code, 1, `a missing mirror must fail --check, got ${r.code}`);
+    const out = `${r.stdout}${r.stderr}`;
+    assert.doesNotMatch(out, /after the plan is approved/,
+      `the retired one-stage wording must be gone:\n${out}`);
+    assert.match(out, /plan-publish\.mjs/,
+      `the hint must still name the command that fixes it:\n${out}`);
+  } finally {
+    cleanup(f);
+  }
+});

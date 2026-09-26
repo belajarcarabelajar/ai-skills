@@ -108,6 +108,7 @@ const requiredTemplates = [
   'adr-template.md',
   'subagent-contract-template.md',
   'code-review-template.md',
+  'deep-research-report-template.md',
   'follow-up-injection-template.md',
 ];
 

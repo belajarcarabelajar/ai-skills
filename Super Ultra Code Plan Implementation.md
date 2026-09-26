@@ -158,7 +158,7 @@ The research report becomes a dated, versioned artifact under `research/` in the
 
 ### Anti-Patterns
 
-The workflow fails when the report uses lists where prose would read naturally, cites sources it has not consulted, claims authorship by a specific external system, pads to an artificial length, or hides directives in markup that tries to override downstream reader behavior. The validator refuses reports that exhibit any of these patterns.
+The workflow fails when the report uses lists where prose would read naturally, cites sources it has not consulted, claims authorship by a specific external system, pads to an artificial length, or hides directives in markup that tries to override downstream reader behavior. These are review-time rules, not a machine gate: `validate-skill.mjs` currently asserts only that `templates/deep-research-report-template.md` and `examples/deep-research-worked-example.md` exist.
 
 ## 🧭 Cross-Cutting Operating Rules
 These rules apply to every path and support the four skill components without replacing their gates.

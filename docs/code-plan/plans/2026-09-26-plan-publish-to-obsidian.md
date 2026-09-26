@@ -1,7 +1,7 @@
 ---
 schema: ultra-plan/v1
 plan_id: 2026-09-26-plan-publish-to-obsidian
-status: Draft
+status: Complete
 version: 1
 runner_contract: true
 defaults:
@@ -417,7 +417,7 @@ A `## Related` section is appended to the body containing the source path as **p
 - [ ] Step 7: Re-publish the real mirror and confirm it is rewritten with the new property | cmd: `bun scripts/plan-publish.mjs docs/code-plan/plans/2026-09-26-plan-publish-to-obsidian.md` | expect: `✅ published`, not `SKIPPED-IDEMPOTENT`
 - [ ] Step 8: Commit
 
-## 8. Debt Sweep — Selected Follow-Ups (Step 6)
+## 5. Debt Sweep — Selected Follow-Ups (Step 6)
 
 All five harvested items were selected by the user and are executed as real work, not narrated as done. Each is a task in the DAG above.
 
@@ -496,7 +496,7 @@ All five harvested items were selected by the user and are executed as real work
 - [ ] Step 4: Confirm clean | cmd: `bun run snippets:check` | expect: exit 0
 - [ ] Step 5: Commit
 
-## 5. Rejected Alternatives
+## 6. Rejected Alternatives
 
 | Alternative | Why rejected |
 |---|---|
@@ -506,7 +506,7 @@ All five harvested items were selected by the user and are executed as real work
 | `inotifywait` watcher | Not installed on this machine, and a daemon that races obsidian-git for the index is a new failure mode. Deferred. |
 | Two-way sync | Two sources of truth for one document. Rejected permanently. |
 
-## 6. Risks
+## 7. Risks
 
 | Risk | Mitigation |
 |---|---|
@@ -516,7 +516,7 @@ All five harvested items were selected by the user and are executed as real work
 | T10 edits `AGENTS.md`, which the vault skill protects | Gated on explicit user approval; no other task touches that file. |
 | T13 writes outside the repo | Gated on explicit user approval. |
 
-## 7. Approval Gate — Resolved
+## 8. Approval Gate — Resolved
 
 | Decision | Choice | Consequence in this plan |
 |---|---|---|
@@ -525,14 +525,47 @@ All five harvested items were selected by the user and are executed as real work
 | T10 `AGENTS.md` schema line | **Approved** | T10 is unblocked. One bullet in the Folder Contract, nothing else in that file. |
 | T13 Snipset push | **Approved** | T13 is unblocked. It writes to the live Snipset database and is the last task. |
 
-## 8. Task State
+## 9. Task State
 
-- **Status:** Approved — execution in progress
-- **Approved scope:** §1 through §6 plus the four decisions in §7, signed off by the user
-- **Completed:** overlay resolution · baseline measurement · plan written · both gates green · batch manifest written
-- **Current:** Wave 1 — T1 (registry), T2 (transform), T8 (vault indexes) dispatched as three concurrent subagents
-- **Next:** parent diff audit on wave 1, then wave 2 (T3, T10)
+- **Status:** Complete
+- **Approved scope:** §1 through §4 plus the four decisions in §8, signed off by the user
+- **Completed:** all 23 tasks. T1–T16 built the feature; T17–T23 were the Step 6 debt sweep, all five items selected and executed as real work.
+- **Current:** nothing. Plan closed.
 - **Blockers:** none
-- **Decisions:** one-way mirror · `status` reused not remapped · explicit trigger, no daemon · publisher stages the mirror · T10 and T13 authorized · subagents do not commit, parent commits (see manifest §0)
-- **Manifest:** `docs/code-plan/plans/2026-09-26-plan-publish-to-obsidian.manifest.md`
-- **Evidence:** `bun scripts/ultra-plan-runner.mjs <plan>` → exit 0, Validation OK, 13 tasks, DAG consistent both directions · `bun scripts/validate-skill.mjs` → exit 0, 19 mermaid blocks valid, all a11y present · `bun test scripts/` → 36 pass, 0 fail, exit 0 · `vault_lint.py '03 - Resources/LLM Wiki' --strict` → exit 0 · vault whole-tree lint → 2757 files, 1987 pre-existing broken links · obsidian-git `autoCommitOnlyStaged: true`
+- **Decisions:** one-way mirror, never two-way · `status` reused not remapped · `type: note` / `para: project` from the vault's measured vocabulary · qualified wikilinks only · freshness keyed on `source_hash` AND `publisher_version` · explicit trigger, no daemon · publisher stages each mirror file · npm scripts namespaced `mirror:*` · subagents never commit, the parent does
+- **Manifest:** `docs/code-plan/2026-09-26-plan-publish-to-obsidian.manifest.md`
+
+### Final evidence, all parent-run
+
+| Gate | Result |
+|---|---|
+| `bun run ci` | exit 0 — render, validate, 142 tests, snippets in sync |
+| `bun scripts/validate-skill.mjs` | exit 0 — 20 mermaid blocks valid, all a11y present |
+| `bun scripts/ultra-plan-runner.mjs <plan>` | exit 0 — 23 tasks, DAG consistent both directions |
+| `bun run mirror:check` | exit 0 — all 267 mirrors match their source |
+| `bun run mirror:status` | 267/267 current |
+| vault `unittest discover -s tests` | 81 tests, OK, exit 0 |
+| vault `test_plan_mirror.py` | 9 tests, OK — executing against 267 real mirrors, no longer skipping |
+| vault `test_vault_reachability.py` | 31 tests, OK |
+| vault `compileall` | exit 0 |
+| vault `vault_lint.py .` | 3029 files, **broken_links 1986** — down one from 1987, and the 266 added mirrors introduced none |
+| vault `vault_lint.py '03 - Resources/LLM Wiki' --strict` | exit 0 |
+| idempotency at scale | 267 skipped-idempotent, verified by 267 checksums identical across a second run |
+| watchdog | `exit=1 DRIFT 267/267` → `exit=0 clean` after the fix — the safety net detected the drift and now reports clean |
+
+### Commits
+- `ai-skills` `2dd1d4e` feature, `c054bab` bulk publish + namespace + watchdog
+- `Obsidian Vault` `4a37d3c` hubs and contract test, `86ea415` 267 mirrors + Audits hub + reachability
+
+### Defects found by running the tool, not by reading it
+1. `[[ai-skills index]]` did not resolve; the vault has seven `index.md` files, so a bare stem is ambiguous as well as wrong. Links are now fully qualified.
+2. `source_path` was whatever the CLI argument was, so a relative invocation produced a relative provenance path. Now resolved once, early, to absolute.
+3. Freshness keyed on `source_hash` alone could not detect a transform change, so a stale mirror stayed `OK` forever under `--check`. Now keyed on `source_hash` AND `publisher_version`.
+4. The plan's own `type: project` / `para: projects` appear zero times in 2757 vault files. Corrected to the measured `type: note` / `para: project`.
+5. A working artifact sitting in `docs/code-plan/plans/` is indistinguishable from a plan to a glob, so the dispatch manifest was being published and reported as permanent drift.
+
+### Corrections to this plan's own premises
+- The plan assumed all plans are `ultra-plan/v1`. Measured: 40 of 267 are; 227 have no frontmatter at all. The transform must create a frontmatter block, not only merge into one.
+- The plan asserted four hub pages were all invisible to the orphan check. Only the three `index.md` ones are; `Plan-Publishing.md` is not named `index.md` and the linter does report it.
+- The plan's own validator caught four DAG/mermaid inconsistencies introduced while amending it mid-flight, each time because the edge and the `depends_on` entry had to be changed together.
+

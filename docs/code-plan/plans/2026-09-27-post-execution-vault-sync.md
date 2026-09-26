@@ -246,19 +246,40 @@ The obvious fix for a misleading `updated` is to rename it, and that is wrong: `
 | Full CI | `bun run ci` | 0 | 193 pass, 0 fail across 7 files; 2/2 snippets match the Snipset database | PASS |
 | Every mirror re-stamped | `bun scripts/plan-publish.mjs --check --all` | 0 | `All 272 mirror(s) match their source`; 272 of 272 carry `published` | PASS |
 | Vault contract intact | `python3 -m unittest discover -s tests -p 'test_*.py'` in the vault | 0 | 112 tests pass | PASS |
-| Vault lint strict | `python3 scripts/vault_lint.py --strict` in the vault | **1** | `broken_links: 1986` | **PRE-EXISTING — see below** |
+| Vault lint strict | `python3 scripts/vault_lint.py --strict` in the vault | **1** | `active_broken_links: 0`, `missing_frontmatter: 9`, `zero_outgoing_files: 1423` | **PRE-EXISTING — see below** |
 | End-to-end on a real plan | tick from a runner log, publish, confirm the mirror | 0 | mirror `status: Complete`, 0 unticked step lines | PASS |
 | Gate still closes | `bun scripts/ultra-plan-runner.mjs <plan> --execute` after ticking without publishing | 3 | exit 3 while stale, exit 0 after republish | PASS |
 | Lifecycle audit | `bun scripts/plan-lifecycle-audit.mjs` | 0 | 272 total · 227 untracked · 45 tracked · 0 tracked-without-status | PASS |
 
-**The lint row was written wrong and is corrected here rather than quietly
-passed.** This plan's own matrix asked for `vault_lint.py --strict` to exit 0.
-It exits 1, and it did so before this plan started: measured on a clean
-`git worktree` at the pre-change commit, `--strict` already reported
-`broken_links: 1987`. After this plan it reports 1986 — one fewer, not one
-fewer *new*. The gate has therefore never been usable, and claiming it passed
-would have been the exact kind of unearned confidence this repository's own
-comments warn against. Triaging it is follow-up F2 in §8.
+**The lint row was written wrong twice, and both corrections are recorded here
+rather than quietly passed.**
+
+The first error was the expectation itself: this plan's matrix asked for
+`vault_lint.py --strict` to exit 0. It exits 1, and it did so before this plan
+started, measured on a clean `git worktree` at the pre-change commit.
+
+The second error was worse, and it was mine, made while writing the triage:
+the failure was attributed to "1986 broken links". That number was read off the
+summary the linter prints, and the cause was **inferred from the summary instead
+of read off the gate condition**, which is a single line:
+
+```python
+if args.strict and (report["active_broken_links"] or report["missing_frontmatter"] or report["zero_outgoing_files"]):
+```
+
+`broken_links` is not in it. Of the three inputs that are, `active_broken_links`
+is **0** — so the vault has no broken link in any `## Related` section, which is
+the vault's own contract for a meaningful related page. The active graph is
+clean and the 1986 is a diagnostic, not a gate.
+
+What actually fails the gate is `missing_frontmatter: 9` and
+`zero_outgoing_files: 1423`, and 1409 of those 1423 (99.1%) sit in folders the
+schema forbids editing. The full triage, including the gate-scope fix it implies
+and one attachment whose filename contains an email address and needs an owner
+decision, is in the vault at `90 - System/Vault-Lint-Triage.md`.
+
+The lesson is the one this repository keeps restating: a plausible number next
+to a failing command is not a cause. Read the condition.
 
 ## 6. Error Ledger (aggregated at end; independent tasks not halted)
 
@@ -288,8 +309,8 @@ was declined and stays `DEFERRED` on the user's judgement, not on a cap.
 
 | # | Follow-up (outcome + path + finish line) | Class | `defer: <ceiling>, <upgrade-trigger>` | Status |
 |---|---|---|---|---|
-| F1 | Triage the 1986 broken links so `vault_lint.py --strict` can be a real gate. Pre-existing, measured at 1987 before this plan, and recorded in §5 rather than papered over. Finish line: `--strict` exits 0, or the remaining count is triaged into named buckets with an owner each. | `NOW` | — | `SELECTED` |
-| F2 | Read the 8 inconclusive Snipset plans against their own acceptance criteria and decide each status, finishing what T6 deliberately left open. Finish line: every one of the 8 has a status backed by a cited acceptance criterion, and the decision record is updated. | `NOW` | — | `SELECTED` |
+| F1 | Fix the `vault_lint --strict` gate scope so it stops failing on immutable material, and add frontmatter to the 3 actionable notes. Pre-existing; triaged in `90 - System/Vault-Lint-Triage.md`. Finish line: `--strict` exits 0, or the immutable remainder is reported as a separate non-gating figure. One attachment with an email address in its filename needs an owner decision first and is NOT part of this. | `NOW` | — | `SELECTED` |
+| F2 | Read the 8 inconclusive Snipset plans against their own acceptance criteria and decide each status, finishing what T6 deliberately left open. Finish line: every one of the 8 has a status backed by a cited acceptance criterion, and the decision record is updated. **Partly done — see §8.1.** | `NOW` | — | `SELECTED` |
 | F3 | Backfill frontmatter for the 227 untracked plans, which is the prerequisite for stage 3 ever reaching them: `plan-mark-done` needs `tasks[].id` and none of them have one. Finish line: each backfilled plan carries a real `status` line, and none is assigned a status nobody measured. | `NOW` | — | `SELECTED` |
 | F4 | A check mode that flags mirrors reading `Draft` whose plan looks finished, so the stale-status case is visible without Dataview. This is the workaround for deferring the Dataview board. Finish line: the mode names the candidates and exits 0, staying a report rather than a gate. | `NOW` | — | `SELECTED` |
 | F5 | Automate the runner-log capture in stage 3. Today the snippet asks for `\| tee runner.log` by hand, and a missed capture silently downgrades every tick from `evidence` to `asserted`. Finish line: `plan:run` writes the log itself, or `plan-mark-done` can invoke the runner. | `LATER` | `defer: 2 sessions, upgrade-trigger = the first time a tick is recorded as asserted when evidence existed` | `DECLINED` |
@@ -311,3 +332,26 @@ was declined and stays `DEFERRED` on the user's judgement, not on a cap.
    The row now records the real number and the baseline it was compared against,
    because a verification matrix whose expectations were never true is worse than
    no matrix — it trains the reader to expect green.
+
+### 8.1 F2 progress — five of eight assessed, one closed
+
+The eight plans were read against their own acceptance criteria, with evidence
+gathered from the repository rather than from the plans' prose. Five are done:
+
+| Plan | Verdict | Decisive evidence |
+|---|---|---|
+| `2026-09-26-linux-webkitgtk-empty-voice-catalog` | **FINISHED** | All six ACs met and re-verified fresh: 84 voice tests, 158 accessibility tests, `tsc --noEmit`, eslint, prettier, `bun run build` — all exit 0 |
+| `2026-09-20-mobile-overlap-text-audit` | PARTIAL | AC-4's RCA artifact `docs/code-plan/logs/2026-09-20-mobile-overlap-rca.md` never existed and is falsely ticked in the progress log; the whole `logs/` directory is absent from git history |
+| `2026-09-21-website-telegram-monitoring` | PARTIAL | AC-7 is self-declared BLOCKED with no external-monitor drill; AC-10 rests on operational prose plus one admitted HTTP 400 |
+| `2026-09-21-bundled-cli-delivery-plan` | PARTIAL | AC-1/2/3 need a regenerated NSIS script and a Windows install; no `.nsi` exists anywhere in the repo |
+| `2026-09-21-mouse-operator` | PARTIAL | Every file shipped with real test coverage, but the plan itself states "Missing native verification keeps final status in Verification or Blocked, never Complete" — and the later debugging plan found two real defects in that same code |
+
+One status therefore changes: the voice-catalog plan is the only one whose
+evidence supports `Complete`. The other four stay `Draft`, now with a cited
+reason instead of the word "inconclusive", which is a real improvement over the
+state T6 left them in.
+
+A pattern worth recording, because it is the whole point of the exercise: four
+of these five plans have **committed production changes** and a `Draft` status.
+The status was never the problem — it was simply never updated, which is exactly
+what the three-stage publish pipeline now prevents from recurring.

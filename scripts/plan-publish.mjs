@@ -408,31 +408,107 @@ function runPublishAll(registry, opts) {
   process.exit(failed ? 1 : 0);
 }
 
-// ---------- check ----------
+// ---------- freshness verdict ----------
+//
+// ONE implementation of "is this mirror current?", shared by --check and by the
+// plan runner's execute gate. It was already shared once (stalenessReason) and
+// the sharing is why the gate is trustworthy: a gate that re-derived freshness
+// with its own hash, its own path resolution, or its own idea of what counts as
+// a refusal could disagree with --check, and then it would be blocking execution
+// for a reason the vault check does not consider a problem.
+//
+// The public shape is a plain object rather than a boolean because every caller
+// needs to tell the user WHICH file to fix and WHY. `applicable` is the field
+// that keeps `mirror: false` honest: those plans have no mirror by definition,
+// so the answer is NOT-APPLICABLE, never OK — "OK" would claim a check that
+// cannot exist happened and passed.
+//
+//   { applicable, state, detail, dest, label }
+//   state: OK | MISSING | DRIFT | REFUSED | NO-SOURCE | UNROUTABLE | NOT-APPLICABLE
+//
+// UNROUTABLE and REFUSED are reported rather than thrown, because a caller
+// gating execution needs to print a reason, not a stack trace.
 
-function checkOne(registry, rawPlanPath) {
-  // Same single-resolution seam as publishOne, so --check and --status report
-  // on the same file the publisher would actually write, whichever way the
-  // path was spelled on the command line.
+function freshnessFor(registry, rawPlanPath) {
+  // Same single-resolution seam as publishOne, so the verdict names the file the
+  // publisher would actually write, whichever way the path was spelled.
   const planPath = absolute(rawPlanPath);
   const label = path.basename(planPath);
-  const project = resolveProject(registry, planPath);
+
+  let project;
+  try {
+    project = resolveProject(registry, planPath);
+  } catch (e) {
+    return { applicable: true, state: 'UNROUTABLE', detail: e.message, dest: null, label };
+  }
+
+  // mirror:false is the vault's own entry. Publishing it would copy a file onto
+  // itself, so there is nothing to be current about.
+  if (project.mirror === false) {
+    return {
+      applicable: false, state: 'NOT-APPLICABLE', detail: '',
+      dest: null, label, project: project.name,
+    };
+  }
+
   const dest = destPathFor(registry, project, planPath);
-
   const denied = protectedReason(registry, dest);
-  if (denied) return { label, dest, state: 'REFUSED', detail: denied };
+  if (denied) {
+    return { applicable: true, state: 'REFUSED', detail: denied, dest, label, project: project.name };
+  }
 
-  if (!existsSync(planPath)) return { label, dest, state: 'NO-SOURCE', detail: `source missing: ${planPath}` };
+  if (!existsSync(planPath)) {
+    return { applicable: true, state: 'NO-SOURCE', detail: `source missing: ${planPath}`, dest, label, project: project.name };
+  }
 
   const hash = hashOf(readFileSync(planPath, 'utf8'));
   if (!existsSync(dest)) {
-    return { label, dest, state: 'MISSING', detail: `no mirror (source_hash ${hash})` };
+    return { applicable: true, state: 'MISSING', detail: `no mirror (source_hash ${hash})`, dest, label, project: project.name };
   }
-  // The SAME predicate the publisher uses, so --check can never call a mirror
-  // current that the publisher would rewrite.
+
   const stale = stalenessReason(readMirrorState(dest), hash);
-  if (!stale) return { label, dest, state: 'OK', detail: `source_hash ${hash}` };
-  return { label, dest, state: 'DRIFT', detail: stale };
+  if (!stale) {
+    return { applicable: true, state: 'OK', detail: `source_hash ${hash}`, dest, label, project: project.name };
+  }
+  return { applicable: true, state: 'DRIFT', detail: stale, dest, label, project: project.name };
+}
+
+// The exported entry point. Loads its own registry so a caller in another
+// process — the plan runner — needs neither the registry nor this module's
+// internals. `opts.config` overrides the environment, which is what the tests
+// use; PLAN_PUBLISH_CONFIG is the documented CLI seam, so the runner inherits
+// the same override for free.
+export function planFreshness(rawPlanPath, opts = {}) {
+  const configPath = opts.config ?? process.env.PLAN_PUBLISH_CONFIG ?? DEFAULT_CONFIG;
+  let registry;
+  try {
+    registry = loadRegistry(configPath);
+  } catch (e) {
+    // A missing or invalid registry is UNROUTABLE, not OK. A gate that passes
+    // when it cannot check is the failure mode already documented for the CI
+    // version of this check.
+    return {
+      applicable: true,
+      state: 'UNROUTABLE',
+      detail: `cannot load plan publish config: ${e.message}`,
+      dest: null,
+      label: path.basename(absolute(rawPlanPath)),
+    };
+  }
+  return freshnessFor(registry, rawPlanPath);
+}
+
+// ---------- check ----------
+
+function checkOne(registry, rawPlanPath) {
+  // Delegates to the shared verdict rather than re-deriving it, so --check and
+  // the runner gate cannot drift apart by construction. The state names below
+  // are the ones --check reports; the other states cannot occur for a plan that
+  // came from enumeratePlans, but they are mapped rather than dropped so a
+  // surprising verdict is visible in the table instead of silently OK.
+  const v = freshnessFor(registry, rawPlanPath);
+  const state = v.state === 'NOT-APPLICABLE' ? 'REFUSED' : v.state;
+  return { label: v.label, dest: v.dest, state, detail: v.detail || 'not applicable' };
 }
 
 function runCheck(registry, planPaths, { all }) {

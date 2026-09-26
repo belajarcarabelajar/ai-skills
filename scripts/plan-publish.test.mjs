@@ -1110,3 +1110,107 @@ test('--all with no plans anywhere exits 0 and says so', () => {
   assert.match(`${r.stdout}${r.stderr}`, /no plans/i, `it must say why:\n${r.stdout}${r.stderr}`);
   cleanup(f);
 });
+
+// ---------- exported freshness verdict (T1) ----------
+//
+// The runner gates `--execute` on this verdict, so it is tested HERE, next to
+// the code that already decides freshness for --check. The whole point of
+// exporting it rather than letting the runner re-derive "is this current?" is
+// that two implementations of one predicate is how a gate ends up disagreeing
+// with the check it is supposed to agree with. If these cases are ever deleted
+// instead of the export removed, that is the regression this header warns about.
+
+test('exports a single-plan freshness verdict', () => {
+  assert.equal(typeof cli.planFreshness, 'function',
+    'plan-publish.mjs must export planFreshness() for the runner to gate on');
+
+  // 1. A plan that was never published: MISSING, and the reason names the hash
+  //    the source currently has, because "no mirror" alone does not say whether
+  //    the publish is pending or the file is unroutable.
+  {
+    const f = fixture('fresh-missing');
+    const plan = f.writePlan(PLAN, PLAN_BODY);
+    const v = cli.planFreshness(plan, { config: f.config });
+    assert.equal(v.applicable, true, 'a mirror:true project is always gated');
+    assert.equal(v.state, 'MISSING', `got ${v.state}: ${v.detail}`);
+    assert.equal(v.dest, f.destPath(PLAN), 'the verdict must name the mirror path it expected');
+    assert.equal(v.label, PLAN, 'the verdict must name the plan it judged');
+    assert.match(v.detail, new RegExp(sha12(PLAN_BODY)), 'the reason must carry the source hash');
+    cleanup(f);
+  }
+
+  // 2. Published and unchanged: OK, and applicable stays true so the runner can
+  //    tell "checked and current" from "not applicable" — both run the DAG, but
+  //    only one of them is evidence.
+  {
+    const f = fixture('fresh-ok');
+    const plan = f.writePlan(PLAN, PLAN_BODY);
+    assert.equal(run([plan], f).code, 0);
+    const v = cli.planFreshness(plan, { config: f.config });
+    assert.equal(v.state, 'OK', `got ${v.state}: ${v.detail}`);
+    assert.equal(v.applicable, true);
+    assert.equal(v.detail, `source_hash ${sha12(PLAN_BODY)}`);
+    cleanup(f);
+  }
+
+  // 3. Source edited after publishing: DRIFT. This is the case the runner gate
+  //    exists for, so it must not be reachable as anything else.
+  {
+    const f = fixture('fresh-drift');
+    const plan = f.writePlan(PLAN, PLAN_BODY);
+    assert.equal(run([plan], f).code, 0);
+    f.writePlan(PLAN, `${PLAN_BODY}\nedited\n`);
+    const v = cli.planFreshness(plan, { config: f.config });
+    assert.equal(v.state, 'DRIFT', `got ${v.state}: ${v.detail}`);
+    assert.match(v.detail, /mirror .* != source/, `the reason must show both hashes: ${v.detail}`);
+    cleanup(f);
+  }
+
+  // 4. mirror:false — the vault's own plans. Publishing one would copy a file
+  //    onto itself, so the gate is not applicable. A false "OK" here would be
+  //    the more dangerous bug: it would mean the runner believed it had checked
+  //    a mirror that by definition does not exist.
+  {
+    const f = fixture('fresh-invault', { secondProject: true });
+    const plan = f.other.inVaultPlans ? null : null;
+    assert.ok(f.other.inVaultPlans, 'the fixture must expose the mirror:false plans dir');
+    const p = path.join(f.other.inVaultPlans, PLAN);
+    writeFileSync(p, PLAN_BODY, 'utf8');
+    const v = cli.planFreshness(p, { config: f.config });
+    assert.equal(v.applicable, false, `a mirror:false project is not gated, got ${v.state}: ${v.detail}`);
+    assert.equal(v.state, 'NOT-APPLICABLE', `got ${v.state}: ${v.detail}`);
+    assert.equal(v.detail, '');
+    assert.ok(plan === null);
+    cleanup(f);
+  }
+});
+
+test('the exported verdict and --check cannot disagree', () => {
+  // Same file, same registry, two code paths. If these ever differ, the runner
+  // gate is enforcing a rule the vault check does not have — which is the exact
+  // class of bug the shared predicate was extracted to prevent.
+  const f = fixture('fresh-parity');
+  const plan = f.writePlan(PLAN, PLAN_BODY);
+
+  const check = () => {
+    const r = run(['--check', plan], f);
+    // The per-plan row, not the last line: on failure the run ends with a
+    // "Fix:" hint, so the last line says nothing about the verdict.
+    const row = `${r.stdout}${r.stderr}`.split('\n').find((l) => l.includes(PLAN));
+    return { code: r.code, row: (row ?? '').trim() };
+  };
+
+  assert.equal(cli.planFreshness(plan, { config: f.config }).state, 'MISSING');
+  assert.equal(check().code, 1, 'a missing mirror must fail --check');
+  assert.match(check().row, /no mirror/i);
+
+  assert.equal(run([plan], f).code, 0);
+  assert.equal(cli.planFreshness(plan, { config: f.config }).state, 'OK');
+  assert.equal(check().code, 0, 'a current mirror must pass --check');
+
+  f.writePlan(PLAN, `${PLAN_BODY}\nedited\n`);
+  assert.equal(cli.planFreshness(plan, { config: f.config }).state, 'DRIFT');
+  assert.equal(check().code, 1, 'a drifted mirror must fail --check');
+  assert.match(check().row, /!=|drift/i, `expected a drift reason, got: ${check().row}`);
+  cleanup(f);
+});

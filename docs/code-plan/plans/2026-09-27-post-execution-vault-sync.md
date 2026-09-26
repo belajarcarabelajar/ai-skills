@@ -23,9 +23,9 @@ tasks:
     verify_exit: 0
   - id: T3
     depends_on: []
-    files: { create: [], modify: ["Super Ultra Code Plan Implementation.md"], test: [] }
+    files: { create: [], modify: ["/home/belajarcarabelajar/Dokumen/Obsidian Vault/90 - System/Plan-Publishing.md"], test: [] }
     idempotency_key: "T3:document-stages-one-and-three"
-    skip_if: "grep -q 'Plan Mirror Stage 3' 'Super Ultra Code Plan Implementation.md'"
+    skip_if: "grep -q '## After execution' '/home/belajarcarabelajar/Dokumen/Obsidian Vault/90 - System/Plan-Publishing.md'"
     verify_exit: 0
   - id: T4
     depends_on: [T1]

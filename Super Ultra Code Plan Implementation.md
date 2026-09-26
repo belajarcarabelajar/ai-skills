@@ -759,10 +759,13 @@ Execution handoff — subagent fan-out is the default:
 ### 📤 Plan Publishing
 > 📤 **Component 2b — Reachability:** a plan that exists only inside a project repository cannot be searched, rendered, or re-read months later. Publishing is a required step of finishing a plan, not an optional convenience.
 
-- **The trigger is "the plan is finished", not "the plan is approved".** Two publishes, in this order:
+- **The trigger is "the plan is finished", not "the plan is approved".** Three publishes, in this order:
   1. **Immediately after `bun scripts/ultra-plan-runner.mjs <plan.md>` prints `Validation: OK`, and before requesting approval.** The plan lands in the vault at `status: Draft` while the human is still deciding, so review happens in Obsidian — where they are looking — instead of only in a repository directory they have to go find.
   2. **Again after approval, and before `bun scripts/ultra-plan-runner.mjs <plan.md> --execute`.** The mirror then carries the approved state.
+  3. **After execution and after the Session-Close Debt Sweep.** Close the plan in three sub-steps: apply the task ticks, set `status: Complete`, publish again. The ticks are applied by `bun scripts/plan-mark-done.mjs <plan.md> --from <runner.log>`, which reads the runner's own recorded statuses and refuses to tick anything the runner recorded as `NEEDS-AGENT`, `READY (dry-run)`, `HALTED-UPSTREAM` or `FAILED-*`. Capture the runner output to a log first; that log is the evidence.
   Do not skip step 1 because approval feels close. The whole reason the trigger moved earlier is that the authoring and approval window is exactly when a human wants to read the plan, and it is currently the window in which the vault has no copy at all.
+- **Step 3 is not optional bookkeeping.** Without it the mirror keeps the step-2 snapshot forever, so a plan whose work is finished reads `status: Draft` in the vault. That is a known and measurable state — `bun scripts/plan-lifecycle-audit.mjs` counts exactly how many plans are in it and why — not something to be guessed at.
+- **The runner never writes to a plan file.** `ultra-plan-runner.mjs` reads the plan, prints a ledger, and exits; it has no write path at all. So ticking is a separate, explicit step, and that separation is deliberate: a checkbox that the runner could set itself would be a claim rather than a record.
 - Mandate: you MUST run the publisher from the ai-skills repository — that is where the publisher and `plans.publish.json` live, whichever project owns the plan. Those two runs are what make "every plan is also in the vault" true rather than aspirational.
 - **The runner enforces it, so this is a contract and not advice.** `bun scripts/ultra-plan-runner.mjs <plan.md> --execute` refuses to start when the plan's mirror is missing or stale, runs zero task steps, and exits **3**. The block names the mirror path, the reason, and the literal publish command that fixes it. `--skip-mirror-gate` executes anyway and prints a warning every time, so the escape is loud rather than a silent default. A dry run is never gated, so validating a plan still works on a machine with no vault.
 - **A review verdict belongs in the source plan, never in the mirror.** Publishing twice means the second publish overwrites the first, so a verdict written into the vault note is erased by the next publish without warning. Write it into the plan's approval section, which is the direction that survives.
@@ -777,6 +780,8 @@ Execution handoff — subagent fan-out is the default:
 bun scripts/plan-publish.mjs docs/code-plan/plans/YYYY-MM-DD-<feature>.md
 bun scripts/plan-publish.mjs --check --all
 bun scripts/plan-publish.mjs --status
+bun scripts/plan-mark-done.mjs docs/code-plan/plans/YYYY-MM-DD-<feature>.md --from runner.log
+bun scripts/plan-lifecycle-audit.mjs
 ```
 
 ```mermaid

@@ -497,3 +497,37 @@ test('re-running on the published text does not duplicate the Related line', () 
   assert.equal(twice.match(/^Source: /gm).length, 1);
   assert.equal(twice.match(/^## Related$/gm).length, 1);
 });
+
+// ---------- published, beside the contract-required updated ----------
+//
+// WHY ADDITIVE, NOT A RENAME. The obvious fix for a misleading `updated` is to
+// rename it to `published`, and that is wrong: `updated` is a REQUIRED mirror
+// property. `tests/test_plan_mirror.py` in the vault lists it in
+// REQUIRED_PROPERTIES and asserts every mirror note declares it, and the vault's
+// own AGENTS.md Page Contract names it too. Renaming it would break the vault in
+// order to fix the vault. So `updated` stays exactly as it is and `published`
+// arrives beside it.
+//
+// WHAT `updated` ACTUALLY MEANS ON A MIRROR, which is the confusion this pair
+// resolves: it is the date the publisher last ran, not the date the plan text
+// last changed. A plan edited three months ago and re-published today shows
+// `updated` as today. Nothing in a mirror can tell you when the plan changed;
+// the plan's own history lives in git, and `source_hash` is the only field that
+// proves the mirror matches its source right now.
+
+test('emits published alongside the contract-required updated', () => {
+  const out = mergeFrontmatter(plan(), ctx({ today: '2030-01-02' }));
+  // Both present. `updated` is NOT removed: the vault test requires it.
+  assert.equal(fmValue(out, 'updated'), '2030-01-02', 'updated stays; the vault contract requires it');
+  assert.equal(fmValue(out, 'published'), '2030-01-02', 'published carries the same publish date');
+  // They are the same value on purpose. Adding a property that computes
+  // something else would invent a second meaning nobody can verify.
+  assert.equal(fmValue(out, 'published'), fmValue(out, 'updated'));
+
+  // The version stamp must move, or every one of the 271 existing mirrors keeps
+  // looking current and none of them ever gains the property.
+  assert.equal(PUBLISHER_VERSION, 2,
+    'PUBLISHER_VERSION must be 2: the emitted document changed, and the bump is what '
+    + 'forces the existing mirrors to re-publish. Asserted as a literal on purpose — '
+    + 'this one test exists to fail the day someone forgets to bump it.');
+});

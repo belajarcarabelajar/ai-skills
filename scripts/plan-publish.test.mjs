@@ -1214,3 +1214,48 @@ test('the exported verdict and --check cannot disagree', () => {
   assert.match(check().row, /!=|drift/i, `expected a drift reason, got: ${check().row}`);
   cleanup(f);
 });
+
+test('a version bump forces existing mirrors to re-publish', () => {
+  // The whole reason PUBLISHER_VERSION exists. When the transform starts
+  // emitting something new, every mirror written by the old transform must stop
+  // looking current — otherwise the improvement reaches new plans only and the
+  // 271 that already exist silently keep the old shape forever. That is the
+  // failure this assertion exists to catch: someone improves the transform,
+  // everything still reports OK, and nothing heals.
+  const f = fixture('version-bump');
+  try {
+    const plan = f.writePlan(PLAN, PLAN_BODY);
+
+    // Publish with the CURRENT transform, then age the mirror to look like an
+    // older publisher wrote it: same source hash, older publisher_version. The
+    // source is untouched, so only the version key can detect this.
+    assert.equal(run([plan], f).code, 0);
+    f.patchMirror(PLAN, (t) => t.replace(
+      new RegExp(`^publisher_version:[ \\t]*.*$`, 'm'),
+      'publisher_version: 1',
+    ));
+
+    const v = cli.planFreshness(plan, { config: f.config });
+    assert.equal(v.state, 'DRIFT',
+      `an older publisher's mirror must read as drifted, got ${v.state}: ${v.detail}`);
+    assert.match(v.detail, /publisher_version/,
+      `the reason must name the version, not the hash — the source did not change: ${v.detail}`);
+
+    const chk = run(['--check', plan], f);
+    assert.equal(chk.code, 1, '--check must fail for the same reason');
+    assert.match(`${chk.stdout}${chk.stderr}`, /publisher_version/);
+
+    // Re-publishing heals it, and the healed mirror carries the new property.
+    assert.equal(run([plan], f).code, 0);
+    const healed = f.mirror(PLAN);
+    assert.match(healed, new RegExp(`^publisher_version:[ \\t]*${PUBLISHER_VERSION}$`, 'm'),
+      'the healed mirror must record the current publisher version');
+    assert.match(healed, /^published: \d{4}-\d{2}-\d{2}$/m,
+      'the healed mirror must carry the property the new transform emits');
+    assert.match(healed, /^updated: \d{4}-\d{2}-\d{2}$/m,
+      'and must still carry updated, which the vault contract requires');
+    assert.equal(cli.planFreshness(plan, { config: f.config }).state, 'OK');
+  } finally {
+    cleanup(f);
+  }
+});

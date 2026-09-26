@@ -86,10 +86,18 @@ import path from 'node:path';
 
 // A stamp for "what this transform emits", NOT a package version. Bump it when
 // and only when a change alters the published document — see the header.
-export const PUBLISHER_VERSION = 1;
+//
+// 2 — added `published` beside `updated`. The bump is the mechanism, not a
+// formality: freshness requires `source_hash` AND `publisher_version` to match,
+// and `source_hash` is a hash of the PLAN TEXT, which this change does not
+// touch. Without the bump, all 271 existing mirrors would keep reporting
+// current and none would ever gain the new property.
+export const PUBLISHER_VERSION = 2;
 
 // Column-0 keys this module owns. Any other line, at any indentation, is
-// copied through untouched.
+// copied through untouched. `published` is owned for the same reason `updated`
+// is: if a plan ever carried one of these lines itself, copying it through as
+// well would emit the key twice in one frontmatter block.
 const OWNED_KEYS = [
   'title',
   'type',
@@ -97,6 +105,7 @@ const OWNED_KEYS = [
   'status',
   'created',
   'updated',
+  'published',
   'related',
   'source_path',
   'source_hash',
@@ -275,7 +284,14 @@ export function mergeFrontmatter(planText, ctx) {
     'para: project',
     verbatimStatus ?? 'status: Draft',
     `created: ${createdDate(planPath, today)}`,
+    // `updated` is REQUIRED on a mirror: the vault's test_plan_mirror.py lists
+    // it in REQUIRED_PROPERTIES and its AGENTS.md Page Contract names it. So it
+    // stays, and it stays meaning "the publisher last ran today" — which is NOT
+    // when the plan text last changed. `published` is the same date under a name
+    // that cannot be misread as a document-modification date. Nothing in a
+    // mirror can tell you when the plan changed; that history is in git.
     `updated: ${today}`,
+    `published: ${today}`,
   ];
 
   // A wikilink is only ever emitted for a file the caller has proven exists,

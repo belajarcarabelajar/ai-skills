@@ -88,7 +88,7 @@
 // scripts/plan-lifecycle-audit.mjs` is the whole revert. Its own test file goes
 // with it.
 
-import { readFileSync } from 'node:fs';
+import { readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadRegistry, enumeratePlans, resolveProject } from './plan-publish-registry.mjs';
@@ -100,6 +100,7 @@ const DEFAULT_CONFIG = path.join(rootDir, 'plans.publish.json');
 const USAGE = [
   'usage:',
   '  bun scripts/plan-lifecycle-audit.mjs            split plans by cause, always exit 0',
+  '  bun scripts/plan-lifecycle-audit.mjs --stale-status   list Draft claims that look finished',
   '  bun scripts/plan-lifecycle-audit.mjs --json     the same data as JSON, for quoting',
 ].join('\n');
 
@@ -198,6 +199,7 @@ export function auditPlans(registry) {
   const trackedPlans = [];
   const noStatusPlans = [];
   const unreadablePlans = [];
+  const candidates = [];
   let untracked = 0;
   let tracked = 0;
   let trackedNoStatus = 0;
@@ -245,7 +247,30 @@ export function auditPlans(registry) {
       statusLine: c.statusLine,
     });
     byStatus.set(c.status, (byStatus.get(c.status) ?? 0) + 1);
+
+    // Stale-claim detection runs here rather than in a second pass so it costs
+    // no extra read of any plan file.
+    let mtimeMs = null;
+    try {
+      mtimeMs = statSync(p).mtimeMs;
+    } catch {
+      // A plan that cannot be stat'd is already counted as unreadable above;
+      // it simply has no age, which costs it the weakest signal and nothing else.
+    }
+    const cand = staleStatusCandidates(text, { mtimeMs });
+    // Only a plan that actually carries a signal becomes a candidate. This
+    // filter is the whole point of the view: measured on the real registry, an
+    // earlier version with no filter printed "8 candidates" with an empty
+    // signals column on all eight, which reads as "all eight are suspicious"
+    // when the truth is that none of them had said anything. Silence is counted
+    // (see draftCount below) and then deliberately not listed.
+    if (cand && cand.signals.length > 0) candidates.push({ planPath: p, project, ...cand });
   }
+  // Every tracked plan whose claim is Draft, whether or not it carries a signal.
+  // The unsignalled ones are counted here rather than left implicit, because the
+  // render has to be able to say "8 Draft plans, 0 with evidence" instead of
+  // printing an empty evidence column and letting the reader assume otherwise.
+  const draftPlans = trackedPlans.filter((p) => p.status === 'Draft');
 
   // Most common first, ties broken by name. Deterministic, so two runs on the same
   // registry produce byte-identical output and a diff between them means
@@ -264,9 +289,19 @@ export function auditPlans(registry) {
     trackedNoStatus,
     unreadable,
     byStatus: byStatusObject,
+    draftCount: draftPlans.length,
     trackedPlans: trackedPlans.sort((a, b) => a.path.localeCompare(b.path)),
     noStatusPlans: noStatusPlans.sort((a, b) => a.path.localeCompare(b.path)),
     unreadablePlans,
+    // Strongest evidence first, then oldest, then by path. The ordering is the
+    // reading order: a reader works down the list and stops when the evidence
+    // stops being about the work.
+    candidates: candidates.sort((a, b) => {
+      const rank = (x) => x.signals.length;
+      return rank(b) - rank(a)
+        || (b.ageDays ?? -1) - (a.ageDays ?? -1)
+        || a.planPath.localeCompare(b.planPath);
+    }),
   };
 }
 
@@ -278,6 +313,125 @@ export function auditRegistry(registry, configPath = DEFAULT_CONFIG) {
     vault: registry.vault,
     ...auditPlans(registry),
   };
+}
+
+// ---------- stale-status candidates ----------
+//
+// A `Draft` claim can go stale: a plan whose work is finished but which was
+// never closed leaves the vault saying `Draft` indefinitely, and with no
+// Dataview in that vault there is no board that would surface it. This finds the
+// CANDIDATES. It never decides they are finished.
+//
+// The three signals are of deliberately different strength, because they are not
+// the same claim:
+//
+//   CONTRADICTED  the body records Complete while the frontmatter says Draft.
+//                 Nothing is inferred; the file disagrees with itself.
+//   FULLY-TICKED  every step checkbox inside a `### Task <id>` section is
+//                 ticked, and there is at least one step to tick.
+//   STALE-BY-AGE  Draft, and the plan file has not changed for a while.
+//
+// STALE-BY-AGE is the weakest and is labelled as such wherever it is printed:
+// an abandoned draft and a finished one look identical from here, and only
+// reading the plan can tell them apart. That is the whole reason this is a
+// report and not a backfill.
+
+const STALE_AFTER_DAYS = 30;
+const STEP_LINE_RE = /^[ \t]*-[ \t]*\[([ xX])\]/;
+const TASK_HEADING_RE = /^#{2,4}[ \t]+Task[ \t]+(\S+?)[ \t]*[:—-]?[ \t]*(.*)$/;
+const ANY_HEADING_RE = /^#{1,6}[ \t]+/;
+// A body line that records the plan as finished. Matched only OUTSIDE the
+// frontmatter fence, so it can never read the plan's own `status: Draft` line
+// back as a contradiction — that mistake would flag every single Draft plan.
+//
+// The colon is allowed on EITHER side of the closing emphasis, because both
+// spellings occur in real plans: `**Status:** Complete` and `**Status**:
+// Complete`. Writing the pattern for only one of them was a real miss, caught
+// by a test fixture rather than by reading the plans it was meant to describe.
+const BODY_COMPLETE_RE = /^[ \t]*(?:[-*+][ \t]+)?\**[ \t]*status[ \t]*\**[ \t]*:?[ \t]*\**[ \t]*:?[ \t]*`?Complete`?[ \t]*\**[ \t]*$/i;
+
+// Step checkboxes inside `### Task <id>` sections ONLY. The acceptance list in
+// section 1 and the approval gate in section 7 are not steps; counting them
+// would let a plan look finished because somebody ticked an acceptance box.
+// This is the same scoping rule plan-mark-done.mjs applies when it ticks, so
+// the report and the tool cannot disagree about what a step is.
+//
+// Returns null when the plan declares no task section at all, which is NOT the
+// same as "zero steps, all ticked": vacuous truth would light up every
+// prose-only plan in the registry.
+function stepTally(bodyLines) {
+  let inTask = false;
+  let ticked = 0;
+  let unticked = 0;
+  for (const line of bodyLines) {
+    if (TASK_HEADING_RE.test(line)) { inTask = true; continue; }
+    if (ANY_HEADING_RE.test(line)) { inTask = false; continue; }
+    if (!inTask) continue;
+    const m = STEP_LINE_RE.exec(line);
+    if (!m) continue;
+    if (m[1] === ' ') unticked++; else ticked++;
+  }
+  return (ticked + unticked) === 0 ? null : { ticked, unticked };
+}
+
+// The body, with the frontmatter fence removed. Returns the lines AND whether
+// a fence was actually closed, because an unclosed fence would otherwise make
+// the frontmatter's own `status: Draft` line look like body prose.
+function bodyLinesOf(text) {
+  const lines = text.split('\n');
+  if (!FENCE_RE.test(lines[0] ?? '')) return lines;
+  for (let i = 1; i < lines.length; i++) {
+    if (FENCE_RE.test(lines[i])) return lines.slice(i + 1);
+  }
+  return [];
+}
+
+export function staleStatusCandidates(planText, { mtimeMs = null, nowMs = Date.now(), staleDays = STALE_AFTER_DAYS } = {}) {
+  const c = classifyPlan(planText);
+  // Only a real claim can be stale. The untracked bucket's Draft is the
+  // publisher's fallback and is counted by the main report instead.
+  if (c.bucket !== 'tracked') return null;
+  if (c.status !== 'Draft') return null;
+
+  const body = bodyLinesOf(planText);
+  const steps = stepTally(body);
+  const signals = [];
+
+  if (body.some((l) => BODY_COMPLETE_RE.test(l))) signals.push('CONTRADICTED');
+  if (steps && steps.unticked === 0) signals.push('FULLY-TICKED');
+
+  let ageDays = null;
+  if (mtimeMs != null) {
+    ageDays = Math.floor((nowMs - mtimeMs) / 86_400_000);
+    if (ageDays >= staleDays) signals.push('STALE-BY-AGE');
+  }
+
+  // A candidate with only the weakest signal is still worth printing — that is
+  // the whole point, since nothing else surfaces it — but it carries no
+  // evidence that the work is done, and the render says so.
+  return {
+    status: c.status,
+    statusValue: c.statusValue,
+    signals,
+    tickedSteps: steps ? steps.ticked : 0,
+    untickedSteps: steps ? steps.unticked : 0,
+    hasTaskSection: steps !== null,
+    ageDays,
+  };
+}
+
+// Every tracked plan that declares `status: Draft`, split by whether it carries
+// any signal at all. The split is the point: a plan with zero signals is NOT a
+// candidate, and printing it in the same list as one that contradicts itself
+// would hand the reader a list of eight and imply all eight are suspicious when
+// in fact none of them has said anything. That overstatement is how a report
+// becomes a nudge to bulk-edit, which is the outcome this whole script exists
+// to avoid.
+export function splitDraftPlans(registry) {
+  const { candidates, trackedPlans } = auditPlans(registry);
+  const withSignals = new Set(candidates.map((c) => c.planPath));
+  const silent = trackedPlans.filter((p) => p.status === 'Draft' && !withSignals.has(p.path));
+  return { candidates, silentDraft: silent };
 }
 
 // ---------- render ----------
@@ -383,10 +537,15 @@ export function renderReport(data) {
 // ---------- argument parsing ----------
 
 function parseArgs(argv) {
-  const opts = { json: false, help: false };
+  const opts = { json: false, help: false, staleStatus: false };
   for (const a of argv) {
     switch (a) {
       case '--json': opts.json = true; break;
+      // --stale-status is a VIEW of the same measurement, not a second
+      // measurement, so it composes with --json rather than excluding it. Two
+      // passes over the registry would be two chances to report different
+      // numbers for the same tree.
+      case '--stale-status': opts.staleStatus = true; break;
       case '--help':
       case '-h': opts.help = true; break;
       default:
@@ -436,6 +595,60 @@ function main(argv) {
 
   if (opts.json) console.log(JSON.stringify(data, null, 2));
   else console.log(renderReport(data));
+  if (opts.staleStatus) console.log(renderStaleStatus(data));
+}
+
+// The candidate list, rendered. Its job is to be READ, so the wording carries
+// the evidence strength all the way to the reader: a line that says only
+// STALE-BY-AGE must not read like a line that says CONTRADICTED, or the report
+// becomes a nudge to bulk-edit plans on the strength of a file's mtime.
+export function renderStaleStatus(data) {
+  const out = [];
+  const draft = data.draftCount ?? 0;
+  const withEvidence = data.candidates.length;
+  const silent = Math.max(0, draft - withEvidence);
+  out.push('');
+  out.push(`🔎 Draft claims that may be stale`);
+  out.push(`   ${draft} tracked plan(s) declare \`status: Draft\`; ${withEvidence} carry evidence that the claim is stale.`);
+  if (silent > 0) {
+    out.push(`   The other ${silent} say nothing either way: not fully ticked, not contradicted, not old enough.`);
+    out.push('   They are counted here rather than listed, because a list of Draft plans with an empty');
+    out.push('   evidence column reads as "all suspicious" when the truth is "none of them has said');
+    out.push('   anything". For those, only reading the plan can settle it.');
+  }
+  out.push('');
+  out.push('Signals, strongest first. They are not the same claim and are not meant to be read as one:');
+  out.push('   CONTRADICTED   the plan\'s own body records Complete while its frontmatter says Draft.');
+  out.push('                  Nothing is inferred here — the file disagrees with itself.');
+  out.push('   FULLY-TICKED   every step checkbox inside every `### Task <id>` section is ticked.');
+  out.push('                  A fact about the file, and still not a statement about the work:');
+  out.push('                  the acceptance criteria and the approval gate are NOT steps, and are');
+  out.push('                  excluded on purpose, so a ticked acceptance box cannot cause this.');
+  out.push(`   STALE-BY-AGE   the plan has not changed for ${STALE_AFTER_DAYS}+ days. THE WEAKEST SIGNAL, and`);
+  out.push('                  on its own it is not evidence of anything: an abandoned draft and a');
+  out.push('                  finished one are indistinguishable from a file\'s mtime. It is listed so');
+  out.push('                  the case is visible, not so it can be acted on in bulk.');
+  out.push('');
+  if (data.candidates.length === 0) {
+    out.push('   (no candidate carries evidence — nothing in any plan file points at a stale claim)');
+  } else {
+    out.push('   plan                                                            project      ticks    age   signals');
+    for (const c of data.candidates) {
+      const name = c.planPath.split('/').pop();
+      const ticks = c.hasTaskSection
+        ? `${c.tickedSteps}/${c.tickedSteps + c.untickedSteps}`
+        : 'no tasks';
+      const age = c.ageDays === null ? '   ?  ' : `${String(c.ageDays).padStart(4)}d `;
+      out.push(`   ${name.padEnd(64)} ${c.project.padEnd(12)} ${ticks.padStart(6)}  ${age}  ${c.signals.join(' ')}`);
+    }
+    out.push('');
+    out.push('   Read `source_path` in the mirror and decide one plan at a time. Do NOT bulk-edit:');
+    out.push('   a backfill that guesses produces false claims and looks finished while being wrong.');
+  }
+  out.push('');
+  out.push('   This is a report. It exits 0 whether or not it finds candidates, on purpose: a command');
+  out.push('   whose failure nobody can resolve without editing hundreds of plans would be ignored.');
+  return out.join('\n');
 }
 
 const isMain = process.argv[1] && process.argv[1].endsWith('plan-lifecycle-audit.mjs');

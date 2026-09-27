@@ -168,10 +168,17 @@ cd ai-skills
 
 | Harness / Ecosystem | Config / Skill Location | Auto-Discovery Support |
 |---|---|---|
+| **OpenCode** | `~/.config/opencode/skills/super-ultra-code-plan/` | Supported |
 | **Google Antigravity CLI** (`agy`) | `~/.gemini/config/skills/super-ultra-code-plan/` | Supported |
 | **Universal Agents** | `~/.agents/skills/super-ultra-code-plan/` | Supported |
-| **Claude Code** | `~/.claude/skills/super-ultra-code-plan/` | Supported |
+| **Claude Code** | `~/.claude/skills/super-ultra-code-plan/` | Conditional |
 | **Personal Config Mirror** | `~/.config/ai/Super Ultra Code Plan Implementation.md` | Supported |
+
+**Conditional** means the target is linked only when that harness is already installed. The
+installer checks for the parent directory first (`~/.claude`, `~/.gemini/antigravity-cli/builtin/skills`)
+and skips the target rather than fabricating an empty config tree. So a target that is absent after a
+successful `./install.sh` means the harness is not installed — it is not a failed install. Run
+`./install.sh --dry-run` to see exactly which targets your machine qualifies for.
 
 ---
 

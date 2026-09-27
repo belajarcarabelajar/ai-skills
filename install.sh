@@ -14,7 +14,8 @@ for arg in "$@"; do
       ;;
     -h|--help)
       echo "Usage: ./install.sh [--dry-run]"
-      echo "Links the master skill into ~/.config/ai, ~/.agents/skills, ~/.gemini, and ~/.claude."
+      echo "Links the master skill into ~/.config/ai, ~/.agents/skills, ~/.gemini, and"
+      echo "~/.config/opencode/skills, plus ~/.claude only when that harness is installed."
       exit 0
       ;;
   esac
@@ -111,12 +112,17 @@ if [ -d "$HOME/.gemini/antigravity-cli/builtin/skills" ]; then
   link_skill_package "$HOME/.gemini/antigravity-cli/builtin/skills/super-ultra-code-plan"
 fi
 
-# 5. Claude Code directory (~/.claude/skills/)
+# 5. OpenCode (mandatory prereq, so the target is always populated).
+#    Without this the skill is only discoverable while the cwd is the repo itself.
+link_skill_package "$HOME/.config/opencode/skills/super-ultra-code-plan"
+
+# 6. Claude Code directory (~/.claude/skills/). Optional harness: only linked when
+#    already installed, so a missing ~/.claude never gets fabricated here.
 if [ -d "$HOME/.claude" ]; then
   link_skill_package "$HOME/.claude/skills/super-ultra-code-plan"
 fi
 
-# 6. Local Repo Self-Check
+# 7. Local Repo Self-Check
 if [ "$DRY_RUN" = true ]; then
   echo "[DRY-RUN] Would verify internal skill package in: $REPO_DIR/skills/super-ultra-code-plan"
   echo "[DRY-RUN]   - SKILL.md -> ../../Super Ultra Code Plan Implementation.md"

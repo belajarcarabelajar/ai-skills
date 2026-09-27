@@ -662,7 +662,13 @@ Execution Hook Contract: `tasks[].run[]` is the only key that makes the runner e
 - **`expect_exit: 1` is a first-class value, not a hack.** A RED step is expected to fail, so the failing test passes the gate with `expect_exit: 1`. Never wrap a RED step in a command that swallows its exit code to make it "pass".
 - **A `run[]` step with no `cmd` is a validation error.** One step is one command. Never fold multiple non-chained commands into one step.
 
-Idempotency Honesty: `skip_if` is a claim that the work is already done, and `plan-mark-done.mjs` will tick the task on that claim alone. A `skip_if` that only proves a string is present in a file is therefore a false-pass channel: `grep -q 'Marker' src/x.md` stays true after the string moves into a comment, after the behaviour is reverted, and after the file is truncated. The runner classifies this and warns. Prefer a command that fails on behaviour — a test invocation, a build, a `git diff` query, a state check. A `grep` that filters a tool's output (`bun test x 2>&1 | grep -q '...'`) is behavioural and fine, because the tool has to succeed first. When a task genuinely has no command, say so with `skip_if: "false"` rather than inventing a probe that passes.
+Idempotency Honesty: `skip_if` is a claim that the work is already done, and `plan-mark-done.mjs` will tick the task on that claim alone. A `skip_if` that only proves a string is present in a file is therefore a false-pass channel: `grep -q 'Marker' src/x.md` stays true after the string moves into a comment, after the behaviour is reverted, and after the file is truncated. **This is a validation error, not a warning.** Prefer a command that fails on behaviour — a test invocation, a build, a `git diff` query, a state check. A `grep` that filters a tool's output (`bun test x 2>&1 | grep -q '...'`) is behavioural and fine, because the tool has to succeed first. An existing plan is grandfathered by naming the task in `defaults.allow_loose_skip_if`, and a name that no longer corresponds to a loose `skip_if` is itself an error, so the allowlist cannot decay into a permanent blanket. When a task genuinely has no command, say so with `skip_if: "false"` rather than inventing a probe that passes.
+
+Declared Fields Are Enforced, Not Described: every other frontmatter field the runner reads is a check, not a comment.
+- `files: { create: [], modify: [], test: [] }` — before the steps run, every path in `modify` and `test` must exist; after they run, every path in `create` must exist. A path that is missing on either side fails the task with the missing paths named. This is the working-tree verification the Finishing Protocol asks for, done mechanically: a task that touched a file it never declared is not caught by this, but a task that declared a file and did not produce it is.
+- `verify_exit: 0` — the expected exit code for any `run[]` step that does not declare its own `expect_exit`. A step that is expected to fail must say so explicitly, so a RED step reads as the deliberate exception it is.
+- `idempotency_key: "T1:unit-of-work"` — must begin with this task's own id. The right-hand side names the task's unit of work and is free-form: in practice it is a behaviour (`T3:two-stage-trigger`, `T5:lifecycle-audit`) rather than a path, because a behaviour has no filename. A key whose prefix names a different task is an error — that is a copy-paste or a plan edited in the wrong place, and it is the part that actually goes stale.
+- `on_precondition_fail: stop-task-continue-independent` — the permissive default, which keeps independent tasks running. `halt-plan` stops the whole plan, reported as `HALTED-PLAN`. An unrecognised value throws rather than silently falling back to the permissive one, because a typo should not quietly grant the weaker semantics.
 Plan header template:
 ```
 ---
@@ -674,7 +680,8 @@ runner_contract: true
 defaults:
   retry_transient_max: 1            # explicit integer, never the word "bounded"
   step_timeout_s: 120               # per-step hang guardrail
-  on_precondition_fail: stop-task-continue-independent
+  on_precondition_fail: stop-task-continue-independent   # or: halt-plan
+  allow_loose_skip_if: []            # task ids grandfathered from the skip_if probe ban
 tasks:
   - id: T1
     depends_on: []                  # DAG edges — `A --> B` means B depends_on A; must match Mermaid

@@ -4,7 +4,7 @@
 // enforces idempotent skips, and aggregates failures into an Error Ledger.
 // No MCP, no external packages — runs under Bun only.
 
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -32,14 +32,20 @@ const SCHEMA_ID = 'ultra-plan/v1';
 // zero plans. The doc and the executor drifted apart with CI green the whole
 // time, because nothing compared them. This export is that comparison.
 //
-// `files`, `idempotency_key`, `verify_exit`, and `on_precondition_fail` are
-// deliberately absent: they are planning-time documentation, not execution
-// inputs, and a key listed here is one the runner depends on.
+// The first four unused keys were then made real: `verify_exit` is the default
+// expected exit for a step that declares no `expect_exit`, `files` is checked
+// against the working tree before and after the steps run, `idempotency_key`
+// is checked against the task's own declared files, and
+// `on_precondition_fail` chooses between halting one task and halting the plan.
+// A documented key that nothing reads is worse than an undocumented one, so a
+// key belongs here only if the runner acts on it.
 export const RUNNER_CONTRACT_KEYS = [
   'schema', 'plan_id', 'status', 'runner_contract',
-  'defaults.retry_transient_max', 'defaults.step_timeout_s',
+  'defaults.retry_transient_max', 'defaults.step_timeout_s', 'defaults.on_precondition_fail',
+  'defaults.allow_loose_skip_if',
   'tasks[].id', 'tasks[].depends_on', 'tasks[].skip_if', 'tasks[].run',
   'tasks[].run[].cmd', 'tasks[].run[].expect_exit', 'tasks[].run[].retry',
+  'tasks[].files', 'tasks[].verify_exit', 'tasks[].idempotency_key',
 ];
 
 // A `skip_if` that only proves a string is present in a file is not an
@@ -447,8 +453,14 @@ export function validatePlan(plan, body) {
   // legitimate for work with no shell command (writing prose, choosing a
   // layout) but must at least be declared, or it is invisible to the runner and
   // silently exempt from every gate below.
+  const looseAllowed = new Set(plan.defaults?.allow_loose_skip_if || []);
+  const usedExemptions = new Set();
   for (const t of plan.tasks || []) {
     if (!t.id) continue;
+    const keyMismatch = idempotencyMismatch(t);
+    if (keyMismatch) {
+      errors.push(`task ${t.id} idempotency_key ${keyMismatch}`);
+    }
     const hasRun = Array.isArray(t.run) && t.run.length > 0;
     if (hasRun) {
       t.run.forEach((step, i) => {
@@ -467,9 +479,24 @@ export function validatePlan(plan, body) {
         + 'and the agent executes the prose steps itself.');
     }
     if (t.skip_if && classifySkipIf(t.skip_if) === 'loose') {
-      warnings.push(`task ${t.id} skip_if is a file-content probe: "${t.skip_if}". It proves a string is `
-        + 'present, not that the behaviour works — it survives the string moving into a comment. '
-        + 'Prefer a command that fails on behaviour: a test invocation, a build, or a state query.');
+      // A text probe is a false-pass channel, not a warning: plan-mark-done
+      // ticks the task on this claim alone. Existing plans are grandfathered by
+      // naming the task in defaults.allow_loose_skip_if, and a name that is no
+      // longer needed is an error too, so the allowlist cannot quietly become a
+      // permanent blanket.
+      if (looseAllowed.has(t.id)) {
+        usedExemptions.add(t.id);
+      } else {
+        errors.push(`task ${t.id} skip_if is a file-content probe: "${t.skip_if}". It proves a string is `
+          + 'present, not that the behaviour works — it survives the string moving into a comment. '
+          + 'Use a command that fails on behaviour, or add this task id to defaults.allow_loose_skip_if '
+          + 'to grandfather an existing plan.');
+      }
+    }
+  }
+  for (const id of looseAllowed) {
+    if (!usedExemptions.has(id)) {
+      errors.push(`defaults.allow_loose_skip_if names "${id}", but task ${id} either does not exist or no longer needs an exemption`);
     }
   }
 
@@ -511,6 +538,64 @@ export function validatePlan(plan, body) {
   return { errors, warnings };
 }
 
+// ---------- Declared files as a checked claim ----------
+//
+// A plan that names its files is making a falsifiable claim: "this task touches
+// these paths and nothing else." Checking it is cheap and catches two real
+// defects. A path in `modify`/`test` that does not exist means the plan is
+// describing a codebase that is not there, and a path in `create` that still
+// does not exist after the steps ran means the task did not do what it said.
+//
+// `create` is deliberately NOT required to be absent beforehand. A task whose
+// file already exists is usually one being re-run, and failing it for that
+// would make idempotency impossible. What matters is the end state.
+function filePrecondition(t, dir) {
+  const files = t.files;
+  if (!files || typeof files !== 'object') return null;
+  const missing = [];
+  for (const group of ['modify', 'test']) {
+    for (const f of files[group] || []) {
+      if (typeof f !== 'string' || f === '') continue;
+      if (!existsSync(path.resolve(dir, f))) missing.push(`${group}: ${f}`);
+    }
+  }
+  return missing.length ? missing : null;
+}
+
+function filePostcondition(t, dir) {
+  const files = t.files;
+  if (!files || typeof files !== 'object') return null;
+  const missing = [];
+  for (const f of files.create || []) {
+    if (typeof f !== 'string' || f === '') continue;
+    if (!existsSync(path.resolve(dir, f))) missing.push(`create: ${f}`);
+  }
+  return missing.length ? missing : null;
+}
+
+// `idempotency_key` is written as "<task id>:<something>". Checking it against
+// `files` was the obvious idea and it is wrong.
+//
+// The key names the task's UNIT OF WORK, and that is a behaviour, not a path:
+// `T3:two-stage-trigger`, `T5:lifecycle-audit`, `T18:bulk-publish-267`. A
+// behaviour has no filename. Every real key in this repository is a
+// description like that, and requiring the right-hand side to be a declared
+// path rejected all of them.
+//
+// What is still checkable, and is the part that catches a stale or copied key,
+// is the left-hand side: the key must name the task it belongs to. A key
+// reading `T2:...` inside task T3 is a copy-paste or a plan edited in the wrong
+// place, and that is a real defect worth refusing. The right-hand side stays
+// free-form, which is also why it cannot drift out of sync with the file list.
+function idempotencyMismatch(t) {
+  if (typeof t.idempotency_key !== 'string' || t.idempotency_key === '') return null;
+  const colon = t.idempotency_key.indexOf(':');
+  if (colon === -1) return `is not "<task id>:<unit of work>"`;
+  const keyId = t.idempotency_key.slice(0, colon);
+  if (keyId !== t.id) return `names task "${keyId}" but belongs to task "${t.id}"`;
+  return null;
+}
+
 // ---------- Execution ----------
 
 function run(cmd, timeoutMs) {
@@ -519,18 +604,32 @@ function run(cmd, timeoutMs) {
   return { exit: timedOut ? 124 : (r.status ?? 1), timedOut, stderr: r.stderr || '', stdout: r.stdout || '' };
 }
 
-export function executePlan(plan, { execute = false, log = () => {} } = {}) {
+export function executePlan(plan, { execute = false, log = () => {}, dir = process.cwd() } = {}) {
   const order = topoSort(plan.tasks);
   const byId = new Map(plan.tasks.map((t) => [t.id, t]));
   const retryMax = plan.defaults?.retry_transient_max ?? 1;
   const timeoutMs = (plan.defaults?.step_timeout_s ?? 120) * 1000;
+  // An explicit integer policy, or fail closed. The permissive value used to be
+  // the only behaviour, which meant a typo in this field silently granted the
+  // weaker semantics instead of being noticed.
+  const onPreconditionFail = plan.defaults?.on_precondition_fail ?? 'stop-task-continue-independent';
+  if (!['stop-task-continue-independent', 'halt-plan'].includes(onPreconditionFail)) {
+    throw new Error(`defaults.on_precondition_fail must be "stop-task-continue-independent" or "halt-plan", got ${JSON.stringify(onPreconditionFail)}`);
+  }
 
   const status = new Map();
   const ledger = [];
   const failed = new Set();
+  let planHalted = false;
 
   for (const id of order) {
     const t = byId.get(id);
+    if (planHalted) {
+      status.set(id, 'HALTED-PLAN');
+      ledger.push({ task: id, step: '-', klass: 'contract', exit: '-', cause: 'plan halted by on_precondition_fail', retry: '0/0', status: 'HALTED-PLAN' });
+      log(`  ${id}: HALTED-PLAN`);
+      continue;
+    }
     const upstreamFail = (t.depends_on || []).some((d) => failed.has(d) || status.get(d) === 'HALTED-UPSTREAM');
     if (upstreamFail) {
       status.set(id, 'HALTED-UPSTREAM');
@@ -552,10 +651,27 @@ export function executePlan(plan, { execute = false, log = () => {} } = {}) {
       continue;
     }
 
+    // A step that does not declare its own expected exit inherits the task's
+    // verify_exit. A step that is expected to FAIL must say so explicitly,
+    // which is the point: a RED step is a deliberate exception, and it should
+    // read as one in the plan rather than be implied by a default.
+    const verifyExit = typeof t.verify_exit === 'number' ? t.verify_exit : 0;
+    const missing = filePrecondition(t, dir);
+    if (missing) {
+      const cause = `declared file(s) absent before the task ran: ${missing.join(', ')}`;
+      failed.add(id);
+      const st = onPreconditionFail === 'halt-plan' ? 'FAILED-BLOCKING' : (descendants(id, plan.tasks).size ? 'FAILED-BLOCKING' : 'FAILED-ISOLATED');
+      status.set(id, st);
+      ledger.push({ task: id, step: 'pre', klass: 'contract', exit: '-', cause, retry: '0/0', status: st });
+      log(`  ${id}: ${st} (precondition: ${missing.join(', ')})`);
+      if (onPreconditionFail === 'halt-plan') { planHalted = true; failed.add(id); }
+      continue;
+    }
+
     let ok = true, failStep = null, lastExit = 0, usedRetry = 0;
     for (let s = 0; s < t.run.length; s++) {
       const step = t.run[s];
-      const want = step.expect_exit ?? 0;
+      const want = typeof step.expect_exit === 'number' ? step.expect_exit : verifyExit;
       const stepRetry = step.retry ?? retryMax;
       let attempt = 0, r;
       do {
@@ -567,7 +683,21 @@ export function executePlan(plan, { execute = false, log = () => {} } = {}) {
       if (r.exit !== want) { ok = false; failStep = s + 1; lastExit = r.exit; break; }
     }
 
-    if (ok) { status.set(id, 'PASSED'); log(`  ${id}: PASSED`); continue; }
+    if (ok) {
+      const absent = filePostcondition(t, dir);
+      if (absent) {
+        failed.add(id);
+        const st = onPreconditionFail === 'halt-plan' ? 'FAILED-BLOCKING' : (descendants(id, plan.tasks).size ? 'FAILED-BLOCKING' : 'FAILED-ISOLATED');
+        status.set(id, st);
+        ledger.push({ task: id, step: t.run.length, klass: 'contract', exit: 0, cause: `declared file(s) still absent after the task ran: ${absent.join(', ')}`, retry: `${usedRetry}/${retryMax}`, status: st });
+        log(`  ${id}: ${st} (postcondition: ${absent.join(', ')})`);
+        if (onPreconditionFail === 'halt-plan') planHalted = true;
+        continue;
+      }
+      status.set(id, 'PASSED');
+      log(`  ${id}: PASSED`);
+      continue;
+    }
     failed.add(id);
     const hasChildren = descendants(id, plan.tasks).size > 0;
     const st = hasChildren ? 'FAILED-BLOCKING' : 'FAILED-ISOLATED';

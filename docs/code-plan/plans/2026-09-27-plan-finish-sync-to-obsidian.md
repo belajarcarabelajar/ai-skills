@@ -8,6 +8,11 @@ defaults:
   retry_transient_max: 1
   step_timeout_s: 600
   on_precondition_fail: stop-task-continue-independent
+  # Grandfathered: T3's `grep -q 'Plan Publish Gate'` is a genuine text probe
+  # over a prose file. The behavioural replacement is a check that the publish
+  # stage actually runs; converting it is a follow-up, not a reason to break a
+  # finished plan.
+  allow_loose_skip_if: [T3]
 tasks:
   - id: T1
     depends_on: []

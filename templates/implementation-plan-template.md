@@ -7,7 +7,8 @@ runner_contract: true
 defaults:
   retry_transient_max: 1            # explicit integer, never the word "bounded"
   step_timeout_s: 120               # per-step hang guardrail
-  on_precondition_fail: stop-task-continue-independent
+  on_precondition_fail: stop-task-continue-independent   # or: halt-plan
+  allow_loose_skip_if: []            # task ids grandfathered from the skip_if probe ban
 tasks:
   - id: T1
     depends_on: []                  # DAG edges — machine-parseable, must match Mermaid
@@ -43,7 +44,9 @@ tasks:
 >
 > **`run[]` is what the runner executes.** A task carrying `run[]` is machine-runnable: `bun scripts/ultra-plan-runner.mjs <plan.md> --execute` runs each `cmd` in order, compares the exit code to `expect_exit`, retries up to `retry` times, and reports `PASSED` / `FAILED-BLOCKING` / `FAILED-ISOLATED`. Without `run[]` the runner reports `NEEDS-AGENT` and the agent runs the prose steps itself, which is correct for work with no shell command (writing prose, choosing a layout, settling a design question) — but that task must still declare `skip_if`, or it is invisible to the runner and exempt from every gate.
 >
-> **A `skip_if` that only proves a string is present is not an idempotency proof.** `grep -q 'Marker' src/x.md` stays true after the string moves into a comment, and `plan-mark-done.mjs` will tick the task off it. Prefer a command that fails on behaviour: a test invocation, a build, a `git diff` query, or a state check. A `grep` that filters the output of a tool (`bun test x 2>&1 | grep -q ...`) is fine — the tool has to succeed first.
+> **A `skip_if` that only proves a string is present is not an idempotency proof.** `grep -q 'Marker' src/x.md` stays true after the string moves into a comment, and `plan-mark-done.mjs` will tick the task off it. **The runner rejects this as a validation error.** Prefer a command that fails on behaviour: a test invocation, a build, a `git diff` query, or a state check. A `grep` that filters the output of a tool (`bun test x 2>&1 | grep -q ...`) is fine — the tool has to succeed first. Grandfather an existing plan with `defaults.allow_loose_skip_if: [T3]`.
+>
+> **The other declared fields are enforced too, so keep them honest.** Every `files.modify` and `files.test` path must exist before the steps run, and every `files.create` path must exist after they finish. A `run[]` step with no `expect_exit` inherits `verify_exit`. `idempotency_key` must begin with this task's own id; its right-hand side names the unit of work and is free-form, because a behaviour like `T3:two-stage-trigger` has no filename. `on_precondition_fail` is either `stop-task-continue-independent` or `halt-plan`; anything else throws.
 
 ## 1. Intent & Scope
 - **Goal:** [Concise description of target capability or fix]

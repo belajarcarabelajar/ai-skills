@@ -8,6 +8,10 @@ defaults:
   retry_transient_max: 1
   step_timeout_s: 600
   on_precondition_fail: stop-task-continue-independent
+  # Grandfathered: T3, T4, and T6 probe file content or existence. They predate
+  # the ban and the plan is Complete, so breaking it retroactively would lose
+  # the record for no gain. Converting them is a follow-up.
+  allow_loose_skip_if: [T3, T4, T6]
 tasks:
   - id: T1
     depends_on: []

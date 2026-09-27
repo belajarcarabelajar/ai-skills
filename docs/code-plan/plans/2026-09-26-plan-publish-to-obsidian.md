@@ -8,6 +8,10 @@ defaults:
   retry_transient_max: 1
   step_timeout_s: 120
   on_precondition_fail: stop-task-continue-independent
+  # Grandfathered: T19's `test -x` proves the watchdog is installed and
+  # executable, which is a state check rather than a string probe. Kept here so
+  # the runner's loose-skip_if ban does not retroactively break a finished plan.
+  allow_loose_skip_if: [T19]
 tasks:
   - id: T1
     depends_on: []

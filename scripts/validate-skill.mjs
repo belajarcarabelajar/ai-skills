@@ -4,7 +4,7 @@ import path from 'path';
 import os from 'os';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
-import { RUNNER_CONTRACT_KEYS, extractFrontmatter, parseUltraPlanYaml } from './ultra-plan-runner.mjs';
+import { checkRunnerContract } from './check-runner-contract.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -15,83 +15,17 @@ let errors = 0;
 
 // 0b. The runner contract must match what the plan template documents.
 //
-// Why this check exists: `files`, `idempotency_key`, `verify_exit`, and
-// `defaults.on_precondition_fail` were all documented in the template and none
-// of them was ever read by the runner, while `run[]` — the only key that makes
-// the runner execute anything — was documented nowhere, appeared in zero plans,
-// and had zero test coverage. CI was green the entire time, because nothing
-// compared the documentation against the code that consumes it.
-//
-// The key list is imported from the runner itself rather than restated here, so
-// the check cannot itself rot: adding a key to RUNNER_CONTRACT_KEYS without
-// documenting it fails this check.
-//
-// The comparison is STRUCTURAL, not a text search. The first draft of this
-// check grepped the template for the key name, and it passed even after `run:`
-// was renamed to `disabled_run:` — because the word "run" still appears in the
-// surrounding prose. That is precisely the "grep the diagram for a task id"
-// mistake this skill already forbids elsewhere: text presence is not structure.
+// The check itself lives in `check-runner-contract.mjs` so a plan's `skip_if`
+// and `run[]` steps can invoke it in about a second. This file renders 27
+// Mermaid blocks through a headless browser, which takes minutes, and a step
+// that shells into that on every re-run is a step that times out.
 {
-  const templatePath = path.join(rootDir, 'templates', 'implementation-plan-template.md');
-  const masterFile = path.join(rootDir, 'Super Ultra Code Plan Implementation.md');
-
-  // Every key path present in a parsed plan, with array indices dropped so
-  // `tasks[].run[].cmd` and `tasks.run.cmd` compare equal.
-  function keyPaths(obj, prefix = '', out = new Set()) {
-    if (obj === null || typeof obj !== 'object') return out;
-    for (const [k, v] of Object.entries(obj)) {
-      if (Array.isArray(obj)) { keyPaths(v, prefix, out); continue; } // drop the index
-      const p = prefix ? `${prefix}.${k}` : k;
-      out.add(p);
-      keyPaths(v, p, out);
-    }
-    return out;
-  }
-
-  const contractPaths = RUNNER_CONTRACT_KEYS.map((k) => k.replace(/\[\]\./g, '.').replace(/\[\]/g, ''));
-
-  function check(artifact, planLike) {
-    const present = keyPaths(planLike);
-    const missing = contractPaths.filter((k) => !present.has(k));
-    if (missing.length === 0) {
-      console.log(`✅ Runner contract documented in ${artifact}: all ${contractPaths.length} keys present.`);
-      return 0;
-    }
-    for (const k of missing) {
-      console.error(`❌ The runner reads \`${k}\` but ${artifact} does not declare it.`);
-    }
-    return missing.length;
-  }
-
-  if (!fs.existsSync(templatePath)) {
-    console.error('❌ Plan template missing: templates/implementation-plan-template.md');
-    errors++;
+  const { problems, total } = checkRunnerContract();
+  if (problems.length === 0) {
+    console.log(`✅ Runner contract documented: all ${total} keys present in the template and the master skill.`);
   } else {
-    try {
-      const { frontmatter } = extractFrontmatter(fs.readFileSync(templatePath, 'utf8'));
-      errors += check('templates/implementation-plan-template.md', parseUltraPlanYaml(frontmatter));
-    } catch (e) {
-      console.error(`❌ templates/implementation-plan-template.md has unusable frontmatter: ${e.message}`);
-      errors++;
-    }
-  }
-
-  // The master file carries the same header template inside a fenced block, so
-  // the plan an agent is told to write from the skill and the plan it is told to
-  // write from the template cannot diverge silently.
-  try {
-    const masterText = fs.readFileSync(masterFile, 'utf8');
-    const fenced = masterText.match(/```\n---\nschema: ultra-plan\/v1[\s\S]*?\n---\n/);
-    if (!fenced) {
-      console.error('❌ Master file has no fenced `ultra-plan/v1` plan header template to check.');
-      errors++;
-    } else {
-      const { frontmatter } = extractFrontmatter(fenced[0].replace(/^```[^\n]*\n/, ''));
-      errors += check('the master skill plan header template', parseUltraPlanYaml(frontmatter));
-    }
-  } catch (e) {
-    console.error(`❌ Master file plan header template is unusable: ${e.message}`);
-    errors++;
+    for (const p of problems) console.error(`❌ ${p}`);
+    errors += problems.length;
   }
 }
 
@@ -499,6 +433,7 @@ if (!mmdcAvailable) {
   let mermaidValid = 0;
   let mermaidInvalid = 0;
   let mermaidMissingA11y = 0;
+  let mermaidMissingWiring = 0;
 
   // Accessibility contract: every diagram must carry accTitle + accDescr, which
   // mermaid emits as <title>/<desc> wired to aria-labelledby. Without them the
@@ -540,6 +475,32 @@ if (!mmdcAvailable) {
         console.error(`❌ Missing accessibility metadata in ${rel} [block ${i + 1}]: add accTitle + accDescr.`);
         mermaidMissingA11y++;
         errors++;
+        continue;
+      }
+
+      // Source-level accTitle/accDescr is necessary but not sufficient. The
+      // skill claims Mermaid emits these as <title>/<desc> wired to
+      // aria-labelledby, and that claim is about the RENDERED SVG, not the
+      // source. Checking only the source would pass even if the renderer
+      // silently dropped the wiring, which is exactly the kind of claim that
+      // goes stale unnoticed.
+      //
+      // I had this backwards once: a grep reported no <title> in a rendered
+      // diagram, and I concluded from one failed tool result that the feature
+      // was broken. It was not — the tags and the aria wiring were both there.
+      // So this check reads the SVG the renderer just wrote, and the negative
+      // control is a block whose source has no accTitle at all, not a guess
+      // about renderer behaviour.
+      const svg = fs.readFileSync(tmpOut, 'utf8');
+      const wired = /<title[^>]*>/.test(svg)
+        && /<desc[^>]*>/.test(svg)
+        && /aria-labelledby="[^"]*"/.test(svg)
+        && /aria-describedby="[^"]*"/.test(svg);
+      if (!wired) {
+        console.error(`❌ Rendered SVG lacks the a11y wiring in ${rel} [block ${i + 1}]: the source declares `
+          + 'accTitle/accDescr but the output has no <title>/<desc> pair referenced by aria-labelledby/aria-describedby.');
+        mermaidMissingWiring++;
+        errors++;
       }
     }
   }
@@ -557,6 +518,12 @@ if (!mmdcAvailable) {
     console.error(`❌ Accessibility: ${mermaidMissingA11y} diagram(s) lack accTitle/accDescr.`);
   } else {
     console.log('✅ Accessibility: every diagram carries accTitle + accDescr.');
+  }
+
+  if (mermaidMissingWiring === 0) {
+    console.log('✅ Accessibility: every rendered SVG carries the a11y wiring (<title>/<desc> + aria-labelledby/aria-describedby).');
+  } else {
+    console.error(`❌ Rendered SVG: ${mermaidMissingWiring} diagram(s) render without the a11y wiring.`);
   }
 }
 

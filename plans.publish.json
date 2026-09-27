@@ -7,6 +7,7 @@
     { "name": "Snipset", "root": "/home/belajarcarabelajar/Proyek/Snipset", "mirror": true },
     { "name": "ram-audit", "root": "/home/belajarcarabelajar/ram-audit", "mirror": true },
     { "name": "ai-skills", "root": "/home/belajarcarabelajar/ai-skills", "mirror": true },
+    { "name": "dawnbook", "root": "/home/belajarcarabelajar/dawnbook", "mirror": true },
     { "name": "vault", "root": "/home/belajarcarabelajar/Dokumen/Obsidian Vault", "mirror": false }
   ]
 }

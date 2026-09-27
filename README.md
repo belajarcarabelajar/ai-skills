@@ -200,9 +200,20 @@ bun test scripts/                        # plan-runner contract tests
 bun run ci                               # everything above, in order
 ```
 
+These run **locally, by you, before the commit** — not on a hosted runner. Two reasons,
+and the second is the one that matters:
+
+1. GitHub Actions minutes on the free tier are the scarce resource here, so the workflow
+   at `.github/workflows/ci.yml` is `workflow_dispatch`-only by explicit user policy. It
+   has no `push` or `pull_request` trigger, and it should not grow one. The file's header
+   carries the reasoning and the exact revert.
+2. A hosted runner cannot see your vault, your Snipset database, or your working tree. It
+   can only check the portable subset, so a green remote result is weaker evidence than
+   the same command run locally, not stronger.
+
 > Only `diagrams/lifecycle.svg` and `diagrams/lifecycle-dark.svg` are committed. Every
-> other SVG under `diagrams/` is a build artifact that the render step regenerates and CI
-> prunes: GitHub renders Mermaid code blocks natively, so committing them would add
+> other SVG under `diagrams/` is a build artifact that the render step regenerates and the
+> gate prunes: GitHub renders Mermaid code blocks natively, so committing them would add
 > megabytes of duplicated output for no reader. The exact count moves as templates are
 > added, which is why it is not written down here.
 
@@ -274,8 +285,9 @@ citation density, and prose rhythm.
 ## Executing an `ultra-plan/v1` Plan
 
 `scripts/ultra-plan-runner.mjs` is the machine half of the plan contract. It parses the
-`ultra-plan/v1` frontmatter, validates the task DAG, enforces idempotent skips, and
-aggregates failures into an error ledger. Zero dependencies, Bun only.
+`ultra-plan/v1` frontmatter, validates the task DAG, enforces idempotent skips, executes
+each task's `run[]` steps, and aggregates failures into an error ledger. Zero dependencies,
+Bun only.
 
 ```bash
 bun run plan:check docs/code-plan/plans/<plan>.md   # validate the DAG and the visual map
@@ -287,6 +299,35 @@ matching node in the Mermaid block, and every `depends_on` edge must match a Mer
 **in both directions** — a task in the diagram with no `depends_on`, or a `depends_on` with
 no arrow, is a contradiction between the two representations of the same plan, and the
 runner fails rather than guessing which one is right.
+
+### `run[]` is what makes a plan executable
+
+A plan is only machine-runnable to the degree its steps live in `tasks[].run[]`. Each entry
+is one command with `cmd`, `expect_exit`, and `retry`; the runner runs them in order,
+compares the exit code, retries a transient mismatch, and reports `PASSED`,
+`FAILED-BLOCKING`, `FAILED-ISOLATED`, `HALTED-UPSTREAM`, or `SKIPPED-IDEMPOTENT`. A RED
+step is expected to fail, so it passes with `expect_exit: 1`.
+
+| Task declares | Runner does |
+|---|---|
+| `run[]` | Executes the steps. `PASSED` or a classified failure. |
+| `skip_if` only | `NEEDS-AGENT` plus a warning. Correct for prose, layouts, design calls. |
+| Neither | **Validation error.** Invisible to the runner and exempt from every gate. |
+
+A `skip_if` that only proves a string is present (`grep -q 'Marker' src/x.md`) is a
+false-pass channel: it survives the behaviour being reverted, and `plan-mark-done.mjs`
+ticks the task on that claim alone. The runner warns. Use a command that fails on
+behaviour — a test invocation, a build, a `git diff` query, a state check. A `grep`
+filtering a tool's output (`bun test x 2>&1 | grep -q '...'`) is fine, because the tool
+has to succeed first.
+
+`validate-skill.mjs` asserts that the plan template and the master skill's plan header both
+declare every key the runner reads, comparing the **parsed frontmatter structure** rather
+than searching the text. The key list is imported from the runner, so adding an input
+without documenting it fails CI. This check exists because the two halves did drift once
+with CI green: `files`, `idempotency_key`, `verify_exit`, and `on_precondition_fail` were
+all documented and none were read, while `run[]` was read by nothing and documented
+nowhere.
 
 This repository's own plans live in [`docs/code-plan/plans/`](docs/code-plan/plans/), with
 the pre-dispatch batch manifest beside them in [`docs/code-plan/`](docs/code-plan/). The

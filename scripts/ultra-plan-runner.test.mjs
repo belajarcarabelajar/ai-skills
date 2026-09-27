@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, mkdirSync, writeFileSync, appendFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, appendFileSync, rmSync, chmodSync, readFileSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -11,6 +11,9 @@ import {
   topoSort,
   descendants,
   validatePlan,
+  executePlan,
+  classifySkipIf,
+  RUNNER_CONTRACT_KEYS,
 } from './ultra-plan-runner.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -157,7 +160,12 @@ test('validatePlan rejects a plan body with no mermaid diagram', () => {
 // The skill claims `depends_on` (frontmatter) == Mermaid edges == task headings.
 // These tests hold that claim honest: both directions of drift must fail.
 
-const planWith = (tasks) => ({ schema: 'ultra-plan/v1', runner_contract: true, tasks });
+// Every task gets a hook so these fixtures are valid plans under the
+// execution-hook contract. Without it each one also trips the unrelated
+// "no run[] and no skip_if" error, and a Mermaid test that fails on a hook
+// problem can no longer say what it is about.
+const withHook = (tasks) => tasks.map((t) => (t.run || t.skip_if ? t : { ...t, skip_if: 'true' }));
+const planWith = (tasks) => ({ schema: 'ultra-plan/v1', runner_contract: true, tasks: withHook(tasks) });
 const headings = (ids) => ids.map((id) => `### Task ${id}: work`).join('\n');
 const mapWith = (inner) => `# Plan\n\n\`\`\`mermaid\nflowchart TD\n${inner}\n\`\`\`\n`;
 
@@ -320,6 +328,325 @@ test('validatePlan treats a node that only appears as an edge endpoint as presen
   assert.deepEqual(errors, []);
 });
 
+// ---------- execution-hook contract ----------
+
+// The runner's whole point is executing a plan. `run[]` is the only key that
+// makes it do anything, and until these tests existed nothing covered it: the
+// suite exercised frontmatter, the DAG, the Mermaid contract, and the mirror
+// gate, then stopped. `executePlan` had zero references, so a regression in
+// retry accounting, exit-code matching, or blast-radius classification would
+// have shipped green.
+
+const execDir = mkdtempSync(path.join(tmpdir(), 'ultra-runner-exec-'));
+process.on('exit', () => rmSync(execDir, { recursive: true, force: true }));
+
+const abs = (f) => path.join(execDir, f);
+
+// Fails on the first run, succeeds on the second. A real file-based counter
+// rather than a quoted one-liner, so the test asserts the runner's retry loop
+// and not the shell's parsing.
+const flaky = abs('flaky.sh');
+writeFileSync(flaky, '#!/bin/sh\n'
+  + 'd=$(dirname "$0")\n'
+  + 'n=$(cat "$d/count" 2>/dev/null || echo 0)\n'
+  + 'n=$((n+1))\n'
+  + 'echo "$n" > "$d/count"\n'
+  + '[ "$n" -ge 2 ]\n');
+chmodSync(flaky, 0o755);
+
+function runPlan(tasks, defaults = {}) {
+  return executePlan(
+    { tasks, defaults: { retry_transient_max: 0, step_timeout_s: 30, ...defaults } },
+    { execute: true },
+  );
+}
+
+test('block-style run[] parses as steps of the task it belongs to', () => {
+  const { frontmatter } = extractFrontmatter(`---
+schema: ultra-plan/v1
+plan_id: 2026-09-28-blockrun
+status: Approved
+runner_contract: true
+tasks:
+  - id: T1
+    depends_on: []
+    run:
+      - cmd: "bun test a.test.ts"
+        expect_exit: 0
+        retry: 2
+    skip_if: "bun test a.test.ts"
+---
+# p
+`);
+  const plan = parseUltraPlanYaml(frontmatter);
+  // The regression this locks: the `- cmd` line used to open a NEW task, so
+  // the plan came back with 2 tasks, the second one id-less.
+  assert.equal(plan.tasks.length, 1);
+  assert.equal(plan.tasks[0].id, 'T1');
+  assert.equal(plan.tasks[0].run.length, 1);
+  assert.equal(plan.tasks[0].run[0].cmd, 'bun test a.test.ts');
+  assert.equal(plan.tasks[0].run[0].expect_exit, 0);
+  assert.equal(plan.tasks[0].run[0].retry, 2);
+  // A sibling key after the block must not be swallowed by the sequence.
+  assert.equal(plan.tasks[0].skip_if, 'bun test a.test.ts');
+});
+
+test('executePlan runs every step and reports PASSED', () => {
+  const out = abs('made.txt');
+  rmSync(out, { force: true });
+  const { status, ledger } = runPlan([{
+    id: 'T1',
+    depends_on: [],
+    run: [
+      { cmd: `printf hello > ${out}` },
+      { cmd: `grep -q hello ${out}` },
+    ],
+  }]);
+  assert.equal(status.get('T1'), 'PASSED');
+  assert.equal(ledger.length, 0);
+  assert.match(readFileSync(out, 'utf8'), /hello/);
+});
+
+test('executePlan honours a non-zero expect_exit, so a RED step can pass', () => {
+  const { status, ledger } = runPlan([{
+    id: 'T1',
+    depends_on: [],
+    run: [{ cmd: `test -f ${abs('never-created')}`, expect_exit: 1 }],
+  }]);
+  assert.equal(status.get('T1'), 'PASSED');
+  assert.equal(ledger.length, 0);
+});
+
+test('executePlan retries a transient failure and counts the retry', () => {
+  rmSync(abs('count'), { force: true });
+  const { status, ledger } = runPlan(
+    [{ id: 'T1', depends_on: [], run: [{ cmd: flaky, retry: 1 }] }],
+    { retry_transient_max: 1 },
+  );
+  assert.equal(status.get('T1'), 'PASSED');
+  assert.equal(ledger.length, 0);
+});
+
+test('executePlan does not retry when retry is 0, and records the step and exit', () => {
+  rmSync(abs('count'), { force: true });
+  const { status, ledger } = runPlan([{ id: 'T1', depends_on: [], run: [{ cmd: flaky, retry: 0 }] }]);
+  assert.equal(status.get('T1'), 'FAILED-ISOLATED');
+  assert.equal(ledger.length, 1);
+  assert.equal(ledger[0].step, 1);
+  assert.equal(ledger[0].retry, '0/0');
+  assert.equal(ledger[0].exit, 1);
+});
+
+test('a task with no dependents fails ISOLATED and the run continues', () => {
+  const { status, order } = runPlan([
+    { id: 'T1', depends_on: [], run: [{ cmd: 'exit 3' }] },
+    { id: 'T2', depends_on: [], run: [{ cmd: 'true' }] },
+  ]);
+  assert.equal(status.get('T1'), 'FAILED-ISOLATED');
+  assert.equal(status.get('T2'), 'PASSED');
+  assert.deepEqual(order, ['T1', 'T2']);
+});
+
+test('a task others depend on fails BLOCKING and halts only its descendants', () => {
+  const { status, ledger } = runPlan([
+    { id: 'T1', depends_on: [], run: [{ cmd: 'exit 1' }] },
+    { id: 'T2', depends_on: ['T1'], run: [{ cmd: 'true' }] },
+    { id: 'T3', depends_on: ['T2'], run: [{ cmd: 'true' }] },
+    { id: 'T4', depends_on: [], run: [{ cmd: 'true' }] },
+  ]);
+  assert.equal(status.get('T1'), 'FAILED-BLOCKING');
+  assert.equal(status.get('T2'), 'HALTED-UPSTREAM');
+  assert.equal(status.get('T3'), 'HALTED-UPSTREAM');
+  assert.equal(status.get('T4'), 'PASSED');
+  // The ledger carries the failure and every halt it caused, so the blast
+  // radius is auditable; only T1 is the actual failing step.
+  assert.deepEqual(ledger.map((e) => `${e.task}:${e.status}`), [
+    'T1:FAILED-BLOCKING', 'T2:HALTED-UPSTREAM', 'T3:HALTED-UPSTREAM',
+  ]);
+  assert.equal(ledger.find((e) => e.task === 'T1').step, 1);
+});
+
+test('a step that outlives step_timeout_s is killed and reported as 124', () => {
+  const { status, ledger } = runPlan(
+    [{ id: 'T1', depends_on: [], run: [{ cmd: 'sleep 5', retry: 0 }] }],
+    { step_timeout_s: 1 },
+  );
+  assert.equal(status.get('T1'), 'FAILED-ISOLATED');
+  assert.equal(ledger[0].exit, 124);
+});
+
+test('skip_if exiting 0 short-circuits the task before any step runs', () => {
+  const marker = abs('never-written.txt');
+  rmSync(marker, { force: true });
+  const { status, ledger } = runPlan([{
+    id: 'T1',
+    depends_on: [],
+    skip_if: 'true',
+    run: [{ cmd: `printf ran > ${marker}` }],
+  }]);
+  assert.equal(status.get('T1'), 'SKIPPED-IDEMPOTENT');
+  assert.equal(ledger.length, 0);
+  assert.equal(existsSync(marker), false);
+});
+
+test('a task with skip_if but no run[] is reported NEEDS-AGENT, not silently skipped', () => {
+  const { status, ledger } = runPlan([{ id: 'T1', depends_on: [], skip_if: 'false' }]);
+  assert.equal(status.get('T1'), 'NEEDS-AGENT');
+  assert.equal(ledger.length, 0);
+});
+
+test('validatePlan rejects a task with neither run[] nor skip_if', () => {
+  const plan = { schema: 'ultra-plan/v1', tasks: [{ id: 'T1', depends_on: [] }] };
+  const { errors } = validatePlan(plan, null);
+  assert.ok(errors.some((e) => /T1 has no execution hook/.test(e)), errors.join(' | '));
+});
+
+test('validatePlan rejects a run[] step with no cmd', () => {
+  const plan = { schema: 'ultra-plan/v1', tasks: [{ id: 'T1', depends_on: [], run: [{ expect_exit: 0 }] }] };
+  const { errors } = validatePlan(plan, null);
+  assert.ok(errors.some((e) => /run\[0\] has no cmd/.test(e)), errors.join(' | '));
+});
+
+test('validatePlan warns, but does not block, when a task only has skip_if', () => {
+  const plan = { schema: 'ultra-plan/v1', tasks: [{ id: 'T1', depends_on: [], skip_if: 'bun test a.test.ts' }] };
+  const { errors, warnings } = validatePlan(plan, null);
+  assert.equal(errors.length, 0);
+  assert.ok(warnings.some((w) => /T1 declares skip_if but no run\[\]/.test(w)), warnings.join(' | '));
+});
+
+test('classifySkipIf separates a behavioural check from a file-content probe', () => {
+  // Behavioural: a tool has to succeed first, so the probe reads its output.
+  assert.equal(classifySkipIf("bun test a.test.ts 2>&1 | grep -q 'passes'"), 'behavioural');
+  assert.equal(classifySkipIf('systemctl --user is-active foo.timer'), 'behavioural');
+  assert.equal(classifySkipIf('git diff --quiet -- path'), 'behavioural');
+  // Loose: proves a string is present in a file, nothing more. It survives the
+  // string being moved into a comment, and plan-mark-done then ticks the task.
+  assert.equal(classifySkipIf("grep -q 'Plan Publish Gate' snippets/x.md"), 'loose');
+  assert.equal(classifySkipIf('test -f out.txt'), 'loose');
+  assert.equal(classifySkipIf('ls dist/'), 'loose');
+});
+
+test('validatePlan warns when skip_if is only a file-content probe', () => {
+  const plan = {
+    schema: 'ultra-plan/v1',
+    tasks: [{ id: 'T3', depends_on: [], skip_if: "grep -q 'Marker' src/x.md" }],
+  };
+  const { errors, warnings } = validatePlan(plan, null);
+  assert.equal(errors.length, 0);
+  assert.ok(warnings.some((w) => /T3 skip_if is a file-content probe/.test(w)), warnings.join(' | '));
+});
+
+test('a double-quoted cmd keeps one backslash, not two', () => {
+  // The defect this locks: `coerceScalar` stripped the quotes without expanding
+  // escapes, so `run\\[\\]` reached the shell as `run\\[\\]` and the step failed
+  // with "exit mismatch" and no hint that the string had been misparsed. A plan
+  // author writing a regex in a grep hit a command the runner never sent.
+  const { frontmatter } = extractFrontmatter(`---
+schema: ultra-plan/v1
+plan_id: 2026-09-28-escape
+status: Approved
+runner_contract: true
+tasks:
+  - id: T1
+    depends_on: []
+    run:
+      - cmd: "grep -q 'run\\[\\]' src/x.md"
+        expect_exit: 0
+        retry: 0
+---
+# p
+`);
+  const plan = parseUltraPlanYaml(frontmatter);
+  // The plan author wrote two backslashes; the shell must receive one.
+  assert.equal(plan.tasks[0].run[0].cmd, "grep -q 'run\\[\\]' src/x.md");
+});
+
+test('an unrecognised escape survives, because cmd fields carry regexes', () => {
+  const { frontmatter } = extractFrontmatter(`---
+schema: ultra-plan/v1
+plan_id: 2026-09-28-escape2
+status: Approved
+runner_contract: true
+tasks:
+  - id: T1
+    depends_on: []
+    run:
+      - cmd: "grep -q 'a\\db' src/x.md"
+        expect_exit: 0
+        retry: 0
+---
+# p
+`);
+  const plan = parseUltraPlanYaml(frontmatter);
+  assert.equal(plan.tasks[0].run[0].cmd, "grep -q 'a\\db' src/x.md");
+});
+
+test('a single-quoted scalar is literal, as YAML specifies', () => {
+  const { frontmatter } = extractFrontmatter(`---
+schema: ultra-plan/v1
+plan_id: 2026-09-28-escape3
+status: Approved
+runner_contract: true
+tasks:
+  - id: T1
+    depends_on: []
+    run:
+      - cmd: 'grep -q "run\\[\\]" src/x.md'
+        expect_exit: 0
+        retry: 0
+---
+# p
+`);
+  const plan = parseUltraPlanYaml(frontmatter);
+  assert.equal(plan.tasks[0].run[0].cmd, 'grep -q "run\\[\\]" src/x.md');
+});
+
+test('a double-quoted escape for a quote and a tab is expanded', () => {
+  const { frontmatter } = extractFrontmatter(`---
+schema: ultra-plan/v1
+plan_id: 2026-09-28-escape4
+status: Approved
+runner_contract: true
+tasks:
+  - id: T1
+    depends_on: []
+    run:
+      - cmd: "echo \\"a\\"\\tb"
+        expect_exit: 0
+        retry: 0
+---
+# p
+`);
+  const plan = parseUltraPlanYaml(frontmatter);
+  assert.equal(plan.tasks[0].run[0].cmd, 'echo "a"\tb');
+});
+
+test('a parsed cmd is what the shell actually receives', () => {
+  // End-to-end: the point of the three tests above is that this command runs.
+  const marker = abs('escape-target.txt');
+  writeFileSync(marker, 'run[]\n');
+  const { status } = runPlan([{
+    id: 'T1',
+    depends_on: [],
+    run: [{ cmd: `grep -q 'run\\[\\]' ${marker}`, expect_exit: 0 }],
+  }]);
+  assert.equal(status.get('T1'), 'PASSED');
+});
+
+test('RUNNER_CONTRACT_KEYS names the keys the template has to document', () => {
+  // This list is what validate-skill.mjs checks the template against. If the
+  // runner grows a new input, adding it here is the only way CI notices that
+  // the template was never updated.
+  for (const k of ['schema', 'tasks[].id', 'tasks[].depends_on', 'tasks[].skip_if', 'tasks[].run', 'tasks[].run[].cmd']) {
+    assert.ok(RUNNER_CONTRACT_KEYS.includes(k), `missing contract key: ${k}`);
+  }
+  // Planning-time documentation, not execution inputs. Listing them would make
+  // the contract check demand keys the runner never reads.
+  for (const k of ['tasks[].files', 'tasks[].idempotency_key', 'tasks[].verify_exit']) {
+    assert.ok(!RUNNER_CONTRACT_KEYS.includes(k), `${k} is not read by the runner`);
+  }
+});
+
 // ---------- vault mirror gate (T2) ----------
 //
 // The runner is the one place that can make "publish the plan" mandatory instead
@@ -334,10 +661,14 @@ test('validatePlan treats a node that only appears as an edge endpoint as presen
 
 const GATE_PLAN = '2026-09-27-gate-demo.md';
 
-// A minimal VALID plan: one task, no run[] steps. No run[] means the runner
-// reports NEEDS-AGENT and executes nothing, which is exactly what lets these
-// tests assert "the DAG was reached" versus "the gate stopped it" without any
-// task command being able to fail for an unrelated reason.
+// A minimal VALID plan: one task, `skip_if` but no `run[]` steps. No run[]
+// means the runner reports NEEDS-AGENT and executes nothing, which is exactly
+// what lets these tests assert "the DAG was reached" versus "the gate stopped
+// it" without any task command being able to fail for an unrelated reason.
+// The `skip_if` is what keeps the fixture valid under the execution-hook
+// contract: a task with neither run[] nor skip_if is a validation error, and
+// an errored plan never reaches the gate at all — which would make these tests
+// pass for the wrong reason.
 function gatePlanBody() {
   return `---
 schema: ultra-plan/v1
@@ -354,6 +685,7 @@ tasks:
     depends_on: []
     files: { create: [src/a.ts], modify: [], test: [] }
     idempotency_key: "T1:src/a.ts"
+    skip_if: "test -f src/a.ts"
     verify_exit: 0
 ---
 # Gate demo

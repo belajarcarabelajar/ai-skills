@@ -11,3 +11,8 @@ node_modules/
 diagrams/*
 !diagrams/lifecycle.svg
 !diagrams/lifecycle-dark.svg
+
+# Staging dir render-diagrams.sh creates while mmdc runs. It is recreated on
+# every CI run, and without this it shows up as untracked noise in `git status`
+# every time, which trains you to ignore untracked files.
+.mermaid-tmp/

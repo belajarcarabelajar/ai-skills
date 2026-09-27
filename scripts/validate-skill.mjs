@@ -4,6 +4,7 @@ import path from 'path';
 import os from 'os';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
+import { RUNNER_CONTRACT_KEYS, extractFrontmatter, parseUltraPlanYaml } from './ultra-plan-runner.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -11,6 +12,88 @@ const rootDir = path.resolve(__dirname, '..');
 
 console.log('==> Validating Ultimate All-in-One AI Skills Repository...');
 let errors = 0;
+
+// 0b. The runner contract must match what the plan template documents.
+//
+// Why this check exists: `files`, `idempotency_key`, `verify_exit`, and
+// `defaults.on_precondition_fail` were all documented in the template and none
+// of them was ever read by the runner, while `run[]` — the only key that makes
+// the runner execute anything — was documented nowhere, appeared in zero plans,
+// and had zero test coverage. CI was green the entire time, because nothing
+// compared the documentation against the code that consumes it.
+//
+// The key list is imported from the runner itself rather than restated here, so
+// the check cannot itself rot: adding a key to RUNNER_CONTRACT_KEYS without
+// documenting it fails this check.
+//
+// The comparison is STRUCTURAL, not a text search. The first draft of this
+// check grepped the template for the key name, and it passed even after `run:`
+// was renamed to `disabled_run:` — because the word "run" still appears in the
+// surrounding prose. That is precisely the "grep the diagram for a task id"
+// mistake this skill already forbids elsewhere: text presence is not structure.
+{
+  const templatePath = path.join(rootDir, 'templates', 'implementation-plan-template.md');
+  const masterFile = path.join(rootDir, 'Super Ultra Code Plan Implementation.md');
+
+  // Every key path present in a parsed plan, with array indices dropped so
+  // `tasks[].run[].cmd` and `tasks.run.cmd` compare equal.
+  function keyPaths(obj, prefix = '', out = new Set()) {
+    if (obj === null || typeof obj !== 'object') return out;
+    for (const [k, v] of Object.entries(obj)) {
+      if (Array.isArray(obj)) { keyPaths(v, prefix, out); continue; } // drop the index
+      const p = prefix ? `${prefix}.${k}` : k;
+      out.add(p);
+      keyPaths(v, p, out);
+    }
+    return out;
+  }
+
+  const contractPaths = RUNNER_CONTRACT_KEYS.map((k) => k.replace(/\[\]\./g, '.').replace(/\[\]/g, ''));
+
+  function check(artifact, planLike) {
+    const present = keyPaths(planLike);
+    const missing = contractPaths.filter((k) => !present.has(k));
+    if (missing.length === 0) {
+      console.log(`✅ Runner contract documented in ${artifact}: all ${contractPaths.length} keys present.`);
+      return 0;
+    }
+    for (const k of missing) {
+      console.error(`❌ The runner reads \`${k}\` but ${artifact} does not declare it.`);
+    }
+    return missing.length;
+  }
+
+  if (!fs.existsSync(templatePath)) {
+    console.error('❌ Plan template missing: templates/implementation-plan-template.md');
+    errors++;
+  } else {
+    try {
+      const { frontmatter } = extractFrontmatter(fs.readFileSync(templatePath, 'utf8'));
+      errors += check('templates/implementation-plan-template.md', parseUltraPlanYaml(frontmatter));
+    } catch (e) {
+      console.error(`❌ templates/implementation-plan-template.md has unusable frontmatter: ${e.message}`);
+      errors++;
+    }
+  }
+
+  // The master file carries the same header template inside a fenced block, so
+  // the plan an agent is told to write from the skill and the plan it is told to
+  // write from the template cannot diverge silently.
+  try {
+    const masterText = fs.readFileSync(masterFile, 'utf8');
+    const fenced = masterText.match(/```\n---\nschema: ultra-plan\/v1[\s\S]*?\n---\n/);
+    if (!fenced) {
+      console.error('❌ Master file has no fenced `ultra-plan/v1` plan header template to check.');
+      errors++;
+    } else {
+      const { frontmatter } = extractFrontmatter(fenced[0].replace(/^```[^\n]*\n/, ''));
+      errors += check('the master skill plan header template', parseUltraPlanYaml(frontmatter));
+    }
+  } catch (e) {
+    console.error(`❌ Master file plan header template is unusable: ${e.message}`);
+    errors++;
+  }
+}
 
 // 0. Check Mandatory Prerequisites: tgrep
 try {

@@ -19,6 +19,47 @@ const PUBLISHER = path.join(__dirname, 'plan-publish.mjs');
 
 const SCHEMA_ID = 'ultra-plan/v1';
 
+// ---------- The contract, declared once ----------
+//
+// Every frontmatter key this runner actually reads while routing, executing, or
+// halting a plan. Exported so `validate-skill.mjs` can assert that the plan
+// template still documents all of them.
+//
+// Why this list has to be machine-checked: `files`, `idempotency_key`,
+// `verify_exit`, and `defaults.on_precondition_fail` were all documented in the
+// template and none of them was ever read, while `run[]` — the only key that
+// makes the runner execute anything — was documented nowhere and appeared in
+// zero plans. The doc and the executor drifted apart with CI green the whole
+// time, because nothing compared them. This export is that comparison.
+//
+// `files`, `idempotency_key`, `verify_exit`, and `on_precondition_fail` are
+// deliberately absent: they are planning-time documentation, not execution
+// inputs, and a key listed here is one the runner depends on.
+export const RUNNER_CONTRACT_KEYS = [
+  'schema', 'plan_id', 'status', 'runner_contract',
+  'defaults.retry_transient_max', 'defaults.step_timeout_s',
+  'tasks[].id', 'tasks[].depends_on', 'tasks[].skip_if', 'tasks[].run',
+  'tasks[].run[].cmd', 'tasks[].run[].expect_exit', 'tasks[].run[].retry',
+];
+
+// A `skip_if` that only proves a string is present in a file is not an
+// idempotency proof. It stays true after the string is moved into a comment,
+// renamed, or left behind by a reverted edit, and `plan-mark-done.mjs` then
+// ticks the task off it.
+//
+// The discriminator is whether the command actually *runs* something that can
+// fail on behaviour. A tool invocation (test runner, build, `git`, `systemctl`)
+// qualifies even when a grep filters its output, because the tool has to
+// succeed first. A bare file read does not.
+const EVIDENCE_COMMAND = /\b(bun|node|npm|pnpm|yarn|deno|python3?|pytest|go|cargo|make|cmake|git|systemctl|curl|docker|tsc|eslint|vitest|jest|ruff|mypy|gradle|mvn)\b/;
+const FILE_PROBE = /(^|[\s;&|(])(grep|egrep|rg|cat|head|tail|ls|find|wc|test)\b/;
+
+export function classifySkipIf(cmd) {
+  if (typeof cmd !== 'string' || cmd.trim() === '') return 'empty';
+  if (EVIDENCE_COMMAND.test(cmd)) return 'behavioural';
+  return FILE_PROBE.test(cmd) ? 'loose' : 'behavioural';
+}
+
 // ---------- Frontmatter extraction ----------
 
 export function extractFrontmatter(md) {
@@ -53,11 +94,43 @@ function stripComment(line) {
   return line;
 }
 
+// YAML double-quoted scalars process backslash escapes; single-quoted ones do
+// not. The plan template puts shell commands in double quotes, and a command is
+// exactly where a backslash appears — a regex in a `grep`, an escaped quote, a
+// literal `\d`. Stripping the quotes without expanding the escapes hands the
+// shell a different command than the plan author wrote, and it fails silently:
+// the step runs, exits non-zero, and the ledger says "exit mismatch" with
+// nothing pointing at the parsing.
+//
+// Only the escapes that change the string are expanded. An unrecognised escape
+// is left alone, backslash included, because in a `cmd` field `\d` is far more
+// likely to be a regex than a typo, and mangling it would be worse than
+// tolerating it. That is deliberately more lenient than the YAML spec, which
+// rejects the sequence outright.
+const YAML_ESCAPES = { '\\': '\\', '"': '"', '/': '/', n: '\n', t: '\t', r: '\r', b: '\b', f: '\f', '0': '\0', a: '\x07', v: '\v', e: '\x1b' };
+
+function unescapeDoubleQuoted(s) {
+  if (!s.includes('\\')) return s;
+  let out = '';
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] === '\\' && i + 1 < s.length) {
+      const next = s[i + 1];
+      if (Object.hasOwn(YAML_ESCAPES, next)) { out += YAML_ESCAPES[next]; i++; continue; }
+      if (/[0-9a-fA-F]/.test(next)) { out += s[i] + next; i++; continue; } // \xNN, \uNNNN: leave alone
+    }
+    out += s[i];
+  }
+  return out;
+}
+
 function coerceScalar(raw) {
   const s = raw.trim();
   if (s === '') return '';
-  if ((s.startsWith('"') && s.endsWith('"')) || (s.startsWith("'") && s.endsWith("'"))) {
-    return s.slice(1, -1);
+  if (s.startsWith('"') && s.endsWith('"')) {
+    return unescapeDoubleQuoted(s.slice(1, -1));
+  }
+  if (s.startsWith("'") && s.endsWith("'")) {
+    return s.slice(1, -1).replace(/''/g, "'");
   }
   if (s === 'true') return true;
   if (s === 'false') return false;
@@ -106,6 +179,57 @@ function parseValue(raw) {
 
 const indentOf = (l) => l.length - l.replace(/^\s+/, '').length;
 
+// ---------- Block sequence under a task key ----------
+//
+// Why this exists: `run: [ {cmd: ...} ]` parses, but the block style
+//
+//     run:
+//       - cmd: "bun test x"
+//         expect_exit: 0
+//
+// does NOT: the task loop saw the `- cmd` line and started a *new task* from
+// it, so the plan validated as `tasks=5` with three tasks named "undefined"
+// instead of two real ones. That made block-style steps — the style every
+// other key in the template already uses — silently unrepresentable, which is
+// the whole reason the execute path was never reachable from the template.
+//
+// Consumes `- item` lines at a deeper indent than `parentIndent`, plus their
+// own continuation keys. Returns [array, nextIndex] so the caller resumes at
+// the parent's own key level.
+function parseBlockSeq(lines, start, parentIndent) {
+  const out = [];
+  let itemIndent = null;
+  let cur = null;
+  let i = start;
+  while (i < lines.length) {
+    const ind = indentOf(lines[i]);
+    if (ind <= parentIndent) break;
+    const trimmed = lines[i].trimStart();
+    if (trimmed.startsWith('- ')) {
+      if (itemIndent === null) itemIndent = ind;
+      if (ind !== itemIndent) break; // dedented out of the sequence
+      if (cur) out.push(cur);
+      cur = {};
+      const item = trimmed.slice(2);
+      const ci = item.indexOf(':');
+      if (ci === -1) { i++; continue; }
+      const inline = item.slice(ci + 1);
+      cur[item.slice(0, ci).trim()] = inline.trim() === '' ? '' : parseValue(inline);
+      i++;
+      continue;
+    }
+    if (itemIndent === null) break;      // no sequence here
+    if (ind <= itemIndent) break;        // back to the parent key level
+    if (cur) {
+      const kci = trimmed.indexOf(':');
+      if (kci !== -1) cur[trimmed.slice(0, kci).trim()] = parseValue(trimmed.slice(kci + 1));
+    }
+    i++;
+  }
+  if (cur) out.push(cur);
+  return [out, i];
+}
+
 export function parseUltraPlanYaml(yamlStr) {
   const lines = yamlStr.split(/\r?\n/).map(stripComment).filter((l) => l.trim() !== '');
   const plan = { defaults: {}, tasks: [] };
@@ -139,9 +263,27 @@ export function parseUltraPlanYaml(yamlStr) {
           const item = trimmed.slice(2);
           const ici = item.indexOf(':');
           cur[item.slice(0, ici).trim()] = parseValue(item.slice(ici + 1));
-        } else if (cur) {
+          i++;
+          continue;
+        }
+        if (cur) {
           const kci = trimmed.indexOf(':');
-          cur[trimmed.slice(0, kci).trim()] = parseValue(trimmed.slice(kci + 1));
+          const k = trimmed.slice(0, kci).trim();
+          const inline = trimmed.slice(kci + 1);
+          // An empty inline value followed by a deeper `- ` block is a nested
+          // sequence of maps (today: `run:`), not a new task. Without this the
+          // block form of `run:` was parsed as extra tasks and the plan failed
+          // validation with phantom "undefined" task ids.
+          if (inline.trim() === '') {
+            const next = lines[i + 1];
+            if (next !== undefined && indentOf(next) > indentOf(tl) && next.trimStart().startsWith('- ')) {
+              const [arr, ni] = parseBlockSeq(lines, i + 1, indentOf(tl));
+              cur[k] = arr;
+              i = ni;
+              continue;
+            }
+          }
+          cur[k] = parseValue(inline);
         }
         i++;
       }
@@ -299,6 +441,37 @@ export function validatePlan(plan, body) {
     }
   }
   try { topoSort(plan.tasks || []); } catch (e) { errors.push(e.message); }
+
+  // Execution-hook contract. A task is machine-runnable only when it declares
+  // `run[]`. A task with no `run[]` is handed to the agent as prose, which is
+  // legitimate for work with no shell command (writing prose, choosing a
+  // layout) but must at least be declared, or it is invisible to the runner and
+  // silently exempt from every gate below.
+  for (const t of plan.tasks || []) {
+    if (!t.id) continue;
+    const hasRun = Array.isArray(t.run) && t.run.length > 0;
+    if (hasRun) {
+      t.run.forEach((step, i) => {
+        if (!step || typeof step.cmd !== 'string' || step.cmd.trim() === '') {
+          errors.push(`task ${t.id} run[${i}] has no cmd; every step is one runnable command`);
+        }
+      });
+      continue;
+    }
+    if (!t.skip_if) {
+      errors.push(`task ${t.id} has no execution hook: declare run[] (steps the runner executes) `
+        + 'or skip_if (idempotency proof for work the agent does inline). '
+        + 'A task with neither is invisible to the runner.');
+    } else {
+      warnings.push(`task ${t.id} declares skip_if but no run[]: the runner reports NEEDS-AGENT `
+        + 'and the agent executes the prose steps itself.');
+    }
+    if (t.skip_if && classifySkipIf(t.skip_if) === 'loose') {
+      warnings.push(`task ${t.id} skip_if is a file-content probe: "${t.skip_if}". It proves a string is `
+        + 'present, not that the behaviour works — it survives the string moving into a comment. '
+        + 'Prefer a command that fails on behaviour: a test invocation, a build, or a state query.');
+    }
+  }
 
   if (body) {
     const { nodes, edges, blockCount, flowBlockCount } = parseMermaidMaps(body);

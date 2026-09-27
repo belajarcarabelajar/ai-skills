@@ -15,17 +15,35 @@ tasks:
     idempotency_key: "T1:path/to/file1.ts"
     skip_if: "bun test path/to/file1.test.ts"   # exit 0 = already done → SKIPPED-IDEMPOTENT
     verify_exit: 0
+    run:                             # the steps the runner executes; omit only for
+      - cmd: "bun test path/to/file1.test.ts"  # work with no shell command (see below)
+        expect_exit: 1               # RED: the failing test, before any implementation
+        retry: 0
+      - cmd: "bun test path/to/file1.test.ts"
+        expect_exit: 0               # GREEN: passes, 0 failures
+        retry: 1
   - id: T2
     depends_on: [T1]
     files: { create: [path/to/file2.ts], modify: [], test: [path/to/file2.test.ts] }
     idempotency_key: "T2:path/to/file2.ts"
     skip_if: "bun test path/to/file2.test.ts"
     verify_exit: 0
+    run:
+      - cmd: "bun test path/to/file2.test.ts"
+        expect_exit: 1
+        retry: 0
+      - cmd: "bun test path/to/file2.test.ts"
+        expect_exit: 0
+        retry: 1
 ---
 
 # [Feature Name] Implementation Plan
 
 > The YAML frontmatter above is the single source of truth for routing, dependency order, retry, and idempotency. Prose and checklists below only explain and must never contradict it. Every `Task N` heading, its `tasks[].id`, and its Mermaid node id must be the same identifier; a mismatch is a pre-execution blocker. Commands stay tool-agnostic and directly runnable (no MCP/rtk required to execute this plan).
+>
+> **`run[]` is what the runner executes.** A task carrying `run[]` is machine-runnable: `bun scripts/ultra-plan-runner.mjs <plan.md> --execute` runs each `cmd` in order, compares the exit code to `expect_exit`, retries up to `retry` times, and reports `PASSED` / `FAILED-BLOCKING` / `FAILED-ISOLATED`. Without `run[]` the runner reports `NEEDS-AGENT` and the agent runs the prose steps itself, which is correct for work with no shell command (writing prose, choosing a layout, settling a design question) — but that task must still declare `skip_if`, or it is invisible to the runner and exempt from every gate.
+>
+> **A `skip_if` that only proves a string is present is not an idempotency proof.** `grep -q 'Marker' src/x.md` stays true after the string moves into a comment, and `plan-mark-done.mjs` will tick the task off it. Prefer a command that fails on behaviour: a test invocation, a build, a `git diff` query, or a state check. A `grep` that filters the output of a tool (`bun test x 2>&1 | grep -q ...`) is fine — the tool has to succeed first.
 
 ## 1. Intent & Scope
 - **Goal:** [Concise description of target capability or fix]
@@ -69,6 +87,8 @@ flowchart TD
 - [ ] **Step 2 — Implementation (GREEN):** minimal code to pass the test
 - [ ] **Step 3 — Verify:** cmd: `bun test path/to/file1.test.ts` | expect: exit 0, 0 failures | retry: 1 (transient only) | on_fail: mark FAILED, write §6, halt only downstream (`depends_on` includes T1), keep independent tasks running
 - [ ] **Step 4 — Commit:** `git add <files> && git commit -m "feat: ..."`
+
+> Steps 1 and 3 are the same commands as T1's `run[]` in the frontmatter. The frontmatter is the copy the runner executes; this checklist is the copy a human reads. When they disagree, the frontmatter wins and the checklist is the defect.
 
 ### Task T2: [Component Name]
 - **Interfaces:**

@@ -1,10 +1,41 @@
 name: CI Validation
 
+# ---------------------------------------------------------------------------
+# DO NOT ADD AN AUTOMATIC TRIGGER TO THIS FILE.
+#
+# By explicit user policy (2026-09-28): as long as the ai-skills pipeline is
+# the execution path for this repository, this workflow must not run on push or
+# on pull request. GitHub Actions minutes on the free tier are the scarce
+# resource here, and an automatic `push` trigger spends them on every commit
+# whether or not anyone is waiting for the result.
+#
+# The checks below are not a safety net that is being removed; they run locally
+# instead, and locally they are strictly stronger because they can see the real
+# vault, the real Snipset database, and the real working tree:
+#
+#     bun run ci        # render-diagrams + validate-skill + tests + snippets
+#
+# `workflow_dispatch` is retained deliberately. It costs nothing until someone
+# presses Run, which makes this file documentation of what CI would do plus a
+# deliberate, visible escape hatch for checking a clean checkout on a machine
+# that is not this one.
+#
+# To revert to automatic runs: restore `push` and `pull_request` under `on:`,
+# i.e.
+#
+#     on:
+#       push:
+#         branches: [ main ]
+#       pull_request:
+#         branches: [ main ]
+#       workflow_dispatch:
+#
+# Nothing else in this file has to change. To delete the workflow outright:
+# `git rm .github/workflows/ci.yml`.
+# ---------------------------------------------------------------------------
+
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   validate:
@@ -52,8 +83,12 @@ jobs:
         with:
           name: mermaid-diagrams
           path: diagrams/
-          if-no-files-found: warn
+        if-no-files-found: warn
 
+      # The mirror-drift gate and the plan-lifecycle audit are absent from this
+      # file on purpose: both need the developer's own Obsidian vault and Snipset
+      # database, which a hosted runner does not have. `bun run ci` covers what
+      # is portable, and the local command below is the one that closes the loop.
       - name: Run Skill Validation Script
         run: bun scripts/validate-skill.mjs
 

@@ -208,7 +208,7 @@ These rules apply to every path and support the four skill components without re
 - A resumed task must read the latest state, inspect the current files and diff, and continue from the last verified checkpoint rather than replaying already completed work.
 - Unattended Continuation Rule: when the user is not watching (scheduled run, "check back later", unanswered question), take the most reasonable reading, state it in one line, and continue. Stop only for decisions that are irreversible and could reasonably go either way; do the preparatory work, state the decision, and wait. A question never stalls cheap reversible progress.
 - Cheap-vs-Expensive Question Heuristic: when the request is clear or cheap to redo (research spike, single lookup, small reversible edit), start immediately and ask alongside first results. When the task is expensive to redo (large fan-out, multi-file change, parallel deliverables, hard-to-reverse action) and ambiguous, ask first with 1-4 concrete options (first = recommended) before building.
-- Idempotent skip (evidence-based, not checkbox-based): before executing a task, evaluate its `skip_if` command from the plan frontmatter. If `skip_if` exits 0, the task is already satisfied by fresh runtime proof; mark it `SKIPPED-IDEMPOTENT` and advance. A `[x]` mark alone never justifies a skip; skipping requires a fresh verifying command, so re-runs stay safe and non-destructive.
+- Idempotent skip (evidence-based, not checkbox-based): before executing a task, evaluate its `skip_if` command from the plan frontmatter. If `skip_if` exits 0, the task is already satisfied by fresh runtime proof; mark it `SKIPPED-IDEMPOTENT` and advance. A `[x]` mark alone never justifies a skip; skipping requires a fresh verifying command, so re-runs stay safe and non-destructive. The command must fail on behaviour, not on the presence of a string: a `grep` over a source or doc file proves the text is there, which survives the behaviour being reverted. See Idempotency Honesty.
 - Stage & Todo Completion Re-Anchor Protocol:
   - At the completion of each discrete task, to-do list item, or execution stage, the agent MUST explicitly re-anchor against the engineering standards and active constraints defined in this skill before moving to the next item.
   - Verification & Evidence Audit: Verify fresh evidence for the completed item against the Iron Law of Verification (fresh log, exit code 0, test pass, VCS diff).
@@ -513,6 +513,8 @@ Apply the gates relevant to the approved scope. Record `N/A` with a reason when 
 
 ### 🚦 CI, Test Layers & Quality Gates
 - Run the repository's required checks for the affected surface. Start with focused tests and expand to required integration, contract, end-to-end, lint, type, build, or package checks as the scope demands.
+- Checks run **locally in the agent's own session**, on the machine that holds the real working tree, the real vault, and the real service databases. A check that only runs on a remote runner cannot see that state, so a green remote result is not evidence about the thing being changed. Declare the checks complete only from local output, and quote the command and its exit code.
+- Do not treat a hosted CI service as the executor, and do not push in order to make a remote pipeline run. Pushing to trigger someone else's runner converts a local verification problem into a remote one that costs the user's compute budget and still cannot see local state. If a check genuinely cannot run locally, report the boundary instead of relocating it.
 - Select the test layer that matches the risk: unit tests for local logic, integration or contract tests for boundaries, and end-to-end tests for critical user flows. Do not substitute a passing lower-level test for a required boundary check.
 - A failed required check blocks a completion claim. If an environment failure prevents verification, report the exact boundary instead of treating the check as passed.
 - Zero-Tolerance Clean Pass: A passing run must be clean. Test output must report 0 failures and lint/type/build output 0 errors and 0 warnings. A single failure or warning in the affected surface is not a pass, and it may not be explained away as cosmetic or silenced with a suppression; resolve it and re-run until the run is clean before claiming completion. Distinguish pre-existing warnings outside the changed surface from new ones, and report any pre-existing warning explicitly as a follow-up rather than carrying it as part of the deliverable.
@@ -608,7 +610,10 @@ Treat unknown elements according to their epistemic nature before asking the use
 2. Ask clarifying questions — one at a time, only ones that matter
 3. Present short design in chat — MANDATORY Mermaid diagram (even a 3-node `flowchart LR`), approach, files touched, testing plan, and itemized pre-execution todo checklist (`[ ]`)
 4. STOP — wait for explicit yes
-5. Implement — chunk the checklist into small verifiable units, fan out to subagents, then gather and synthesize their reports; TDD applies, no plan doc
+5. Implement — chunk the checklist into small verifiable units, fan out to subagents, then gather and synthesize their reports; TDD applies
+6. Size Rule — the plan file is required exactly when the work is too big to hold in one checklist:
+   - **One task, one file, no dependency:** no plan file. The in-chat Mermaid diagram and the `[ ]` checklist are the plan. Writing a file here is ceremony the skill already promised to scale away.
+   - **Two or more tasks, any `depends_on` edge, or anything a subagent will own:** write a real plan to `docs/code-plan/plans/YYYY-MM-DD-<name>.md` with `ultra-plan/v1` frontmatter, and validate it with `bun scripts/ultra-plan-runner.mjs <plan.md>`. The point is not the document; it is that the runner can then check the DAG, the Mermaid contract, and each task's `run[]`/`skip_if` hook mechanically. A Bounded task that fans out to subagents with no runner behind it is the least-checked work in the whole pipeline.
 ### 🧠 Architectural — Brainstorming → Design
 1. Phase 1 — Ground in Environment: Non-mutating exploration of project context, configs, dependencies, and architecture before asking questions.
 2. Phase 2 — Intent Chat: Clarify goal, success criteria, constraints, and tradeoffs using the Two Kinds of Unknowns protocol.
@@ -651,6 +656,13 @@ Step granularity: 2-5 min per step.
 - Run — confirm pass
 - Commit
 Runner Contract (determinism fondasi): the YAML frontmatter below is the single source of truth for routing, dependency order, retry, and idempotency. Prose and checklists under it explain but must never contradict it. Every `Task N` heading MUST use an `id` identical to its `tasks[].id` in frontmatter and to its node name in the Mermaid map; any mismatch is a pre-execution blocker. Commands inside the plan MUST be directly runnable and wrapper-agnostic — never MCP/rtk/tgrep-specific — while still obeying the Mandatory Runtime rule: JS/TS commands are written with Bun (`bun test path`, `bun run lint`, `bun install`), never `npm`/`npx`/`node`. Context-mode and rtk are execution-environment wrappers applied by the runner or harness, not baked into the portable artifact.
+
+Execution Hook Contract: `tasks[].run[]` is the only key that makes the runner execute anything, and it is what separates a machine-run plan from a prose one. Each entry is one runnable command with `cmd`, `expect_exit`, and `retry`; the runner runs them in order, compares the exit code, retries a transient mismatch, and reports `PASSED`, `FAILED-BLOCKING`, `FAILED-ISOLATED`, `HALTED-UPSTREAM`, or `SKIPPED-IDEMPOTENT`. Three rules, all enforced by `scripts/ultra-plan-runner.mjs`:
+- **Every task declares a hook.** A task with `run[]` is executed by the runner. A task with only `skip_if` is legitimate for work with no shell command (writing prose, choosing a layout, settling a design question) and reports `NEEDS-AGENT` with a warning. A task with **neither is a validation error**: it is invisible to the runner and silently exempt from every gate, which is how a plan ends up looking fully covered while nothing checks it.
+- **`expect_exit: 1` is a first-class value, not a hack.** A RED step is expected to fail, so the failing test passes the gate with `expect_exit: 1`. Never wrap a RED step in a command that swallows its exit code to make it "pass".
+- **A `run[]` step with no `cmd` is a validation error.** One step is one command. Never fold multiple non-chained commands into one step.
+
+Idempotency Honesty: `skip_if` is a claim that the work is already done, and `plan-mark-done.mjs` will tick the task on that claim alone. A `skip_if` that only proves a string is present in a file is therefore a false-pass channel: `grep -q 'Marker' src/x.md` stays true after the string moves into a comment, after the behaviour is reverted, and after the file is truncated. The runner classifies this and warns. Prefer a command that fails on behaviour — a test invocation, a build, a `git diff` query, a state check. A `grep` that filters a tool's output (`bun test x 2>&1 | grep -q '...'`) is behavioural and fine, because the tool has to succeed first. When a task genuinely has no command, say so with `skip_if: "false"` rather than inventing a probe that passes.
 Plan header template:
 ```
 ---
@@ -670,12 +682,26 @@ tasks:
     idempotency_key: "T1:exact/path.ext"
     skip_if: "<verification command>"  # exit 0 = already done → SKIPPED-IDEMPOTENT
     verify_exit: 0
+    run:                            # the steps the runner executes
+      - cmd: "<failing-test command>"
+        expect_exit: 1              # RED, before any implementation
+        retry: 0
+      - cmd: "<verification command>"
+        expect_exit: 0
+        retry: 1
   - id: T2
     depends_on: [T1]
     files: { create: [exact/path2.ext], modify: [], test: [exact/path2.test.ext] }
     idempotency_key: "T2:exact/path2.ext"
     skip_if: "<verification command>"
     verify_exit: 0
+    run:
+      - cmd: "<failing-test command>"
+        expect_exit: 1
+        retry: 0
+      - cmd: "<verification command>"
+        expect_exit: 0
+        retry: 1
 ---
 # [Feature Name] Implementation Plan
 > For agentic workers: REQUIRED EXECUTION METHOD — delegated task execution (recommended) or inline plan execution. Steps use checkbox syntax.
@@ -749,7 +775,7 @@ Task template:
 - [ ] Step 4: Run — verify pass | cmd: `<single runnable command>` | expect: exit 0, 0 failures | retry: 1 (transient only) | on_fail: mark task FAILED, write Error Ledger, halt only downstream tasks (those with this id in `depends_on`); independent tasks keep running
 - [ ] Step 5: Commit [git commands]
 ```
-Deterministic step mapping: one execution step maps to exactly one runnable shell command (1-to-1). Never fold multiple non-chained commands into a single step. Each executable step carries `cmd`, `expect` (exit code / count), `retry` (explicit integer, transient-only), and `on_fail` (route, never silent). `retry: 0` means no retry; the word "bounded" is banned in favor of an integer.
+Deterministic step mapping: one execution step maps to exactly one runnable shell command (1-to-1). Never fold multiple non-chained commands into a single step. Each executable step carries `cmd`, `expect` (exit code / count), `retry` (explicit integer, transient-only), and `on_fail` (route, never silent). `retry: 0` means no retry; the word "bounded" is banned in favor of an integer. These four fields live in `tasks[].run[]` in the frontmatter, which is the copy the runner executes; the `- [ ] Step N` checklist in the task body is the human-readable copy of the same steps. When the two disagree, the frontmatter wins and the checklist is the defect.
 No placeholders — banned: TBD, TODO, "implement later", "add appropriate error handling", "similar to Task N", steps without code, undefined references.
 Plan self-review: spec and acceptance-criteria coverage (every requirement → a task), selected reasoning-lens coverage and outputs, visual-map presence + validity + consistency (at least one runnable Mermaid flowchart; every task id appears as a node; every `depends_on` edge appears in the diagram; missing diagram or mismatch = blocker), non-goals, assumptions, dependencies, risks, rollback, placeholder scan, anti-bloat pruning pass (scan with tags: `delete:` dead/speculative code, `stdlib:` stdlib replacement, `native:` platform feature, `yagni:` single-impl abstraction/unused config, `shrink:` fewer lines; target net line reduction), deliberate shortcut check (all simplifications must include `defer: <ceiling>, <upgrade-trigger>`), type consistency across tasks (signature names must match), and verification evidence. Fix inline, no re-review cycle.
 Pre-execution walkthrough: refresh the active project profile and inspect the plan's Mermaid diagram and selected reasoning-lens outputs, then compare every path, dependency, gate, failure branch, contract, command, and acceptance criterion with the current repository and approved spec before starting implementation.
@@ -1063,6 +1089,10 @@ flowchart TD
 | "Simulating MCP or fake tool outputs" | Strict No-Mocking violation: confabulating tool interactions without real execution destroys trustworthiness |
 | "Stacking visuals back-to-back without prose context" | Visual interleaving violation: interleave prose → visual → prose → visual to provide structural context |
 | "Planning without a Mermaid visual map" | Unreviewable plan: every plan (Bounded or Architectural) requires at least one valid Mermaid flowchart; missing diagram blocks the approval gate |
+| "The steps are written out, so the plan is executable" | Written is not executable. Only `tasks[].run[]` makes the runner run anything; a task with neither `run[]` nor `skip_if` is a validation error, and a task with only prose is `NEEDS-AGENT` |
+| "skip_if greps for the string, so the task is done" | A text probe survives the behaviour being reverted. `plan-mark-done` ticks on the claim alone, so a loose `skip_if` is a false-pass. Use a command that fails on behaviour |
+| "I need a green build, let me push and let CI check it" | Checks run locally, in this session, on the machine that holds the working tree. A remote runner cannot see local state, and pushing to trigger it spends the user's compute budget for a weaker answer |
+| "It's a small Bounded change, no plan file needed" | Ceremony scales with size, but the size threshold is mechanical, not a feeling: two or more tasks, any `depends_on` edge, or any subagent-owned unit requires a runner-validated plan file |
 | "Self-abasing apologies when caught in a mistake" | Accountability violation: performative regret or submissive apology; acknowledge what went wrong directly, stay on the problem, and fix it |
 | "Using localStorage in artifacts" | Artifact runtime failure: browser storage fails in sandboxed iframes. Use in-memory state or window.storage with hierarchical keys |
 | "Replying with just 'Done.' after tool calls" | Empty reply violation: turn completion requires substantive 1-2 sentence answer of what was delivered or found |

@@ -11,7 +11,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -78,15 +78,28 @@ test('loadRegistry throws and names the path when the config file is absent', ()
   );
 });
 
-test('loadRegistry reads the repo config with the four registered projects', () => {
+test('loadRegistry reads the repo config, whichever projects it lists today', () => {
   const r = loadRegistry();
   assert.equal(r.vault, VAULT);
   assert.equal(r.destDirTemplate, '01 - Projects/{project}/plans');
   assert.equal(r.indexTemplate, '01 - Projects/{project}/index.md');
   assert.equal(r.stageInVault, true);
+  // The project LIST is compared against plans.publish.json rather than against
+  // a literal. This test guards the parser; a hardcoded list guarded nothing but
+  // the day someone added a project, which is exactly what happened when
+  // Snipset-seo and dawnbook were registered and this assertion went stale.
+  //
+  // Reading the same file still proves the file was read: a registry built from
+  // defaults would not carry these names, and a config emptied to `projects: []`
+  // fails the length check rather than passing quietly.
+  const raw = JSON.parse(readFileSync(path.join(rootDir, 'plans.publish.json'), 'utf8'));
   assert.deepEqual(
     r.projects.map((p) => p.name),
-    ['Snipset', 'ram-audit', 'ai-skills', 'vault'],
+    raw.projects.map((p) => p.name),
+  );
+  assert.ok(
+    r.projects.length >= 4,
+    `the real registry must still list its projects, got ${r.projects.length}`,
   );
   // The vault's own entry is the reason the mirror flag exists at all.
   assert.equal(r.projects.find((p) => p.name === 'vault').mirror, false);

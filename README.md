@@ -426,6 +426,43 @@ Flags the CLI itself understands, for when you call `bun scripts/plan-publish.mj
 Exit codes: `0` success or idempotent skip, `1` drift / missing mirror / refused destination /
 transform failure, `2` usage error.
 
+### A worktree is not a project
+
+`projects` is a routing table keyed on **path prefix**, and a plan file carries no
+project name, so a plan is routed purely by where it sits on disk. That makes a git
+worktree of an already-registered project unpublishable: its path is owned by nobody,
+and `mirror:publish` refuses rather than guessing.
+
+The tempting fix, registering the worktree as a project in its own right, is wrong,
+and the damage is proportional to the repository's history. `mirror: true` does two
+things: it permits explicit publishing *and* it enrolls the root in `--check --all`
+enumeration, which walks **every** `.md` under `<root>/docs/code-plan/plans/`. A
+worktree checkout contains the entire tracked history, so enumerating one republishes
+every plan the repository has ever had. Registering the Snipset SEO worktree as a
+project mirrored all 274 existing Snipset plans a second time, under a second project
+folder, 286 files in one commit.
+
+So a project may declare **`worktrees`**: extra directories that hold the same
+project's plans on another branch.
+
+```json
+{ "name": "Snipset", "root": "/home/.../Proyek/Snipset", "mirror": true,
+  "worktrees": ["/home/.../Proyek/Snipset-seo"] }
+```
+
+| Concern | How it is handled |
+| --- | --- |
+| Routing | `resolveProject()` treats a worktree as a candidate location for its project, so a plan written in a worktree mirrors into `01 - Projects/<Project>/plans/` beside its siblings. It creates no second project and no second index. |
+| Enumeration | `enumeratePlans()` reads the **root only**, never the worktrees. This asymmetry is the whole point of the field: routing must accept a worktree, enumeration must not, because the worktree's plans are the root's plans. `enumeratePlans` is asserted against it directly. |
+| Precedence | Roots and worktrees compete on the same longest-prefix scale, so a real project nested inside a worktree still wins over the worktree that contains it. |
+| Refusal | A `worktrees` value that is not an array, an entry that is empty or not a string, an entry that is already a registered root, and an entry two projects both claim are all load errors. One directory is never routable as two projects. |
+| Detection | There is no git-identity check, so nothing infers that two roots are one repository. A worktree has to be declared. `loadRegistry` rejects the collision instead of letting the longer-prefix rule pick a winner by accident. |
+
+A worktree that has been removed from disk should be dropped from `worktrees`. The
+field costs nothing while stale, since enumeration never reads it, but a stale entry
+silently keeps routing paths that no longer exist to a project that will never mirror
+them.
+
 `mirror:check` is deliberately **not** part of `bun run ci`. It reads `plans.publish.json`, which
 names one vault by absolute path on one machine, and the plan set it enumerates currently has
 mirrors for none of it, so the check is a local gate to run on the machine that owns the vault

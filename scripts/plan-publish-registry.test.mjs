@@ -30,18 +30,33 @@ const VAULT = '/home/belajarcarabelajar/Dokumen/Obsidian Vault';
 // under a fresh temp directory. `rootRel` is relative to that temp base, so
 // nested roots can be expressed without depending on the base before it exists.
 //
-// spec: [{ name, rootRel, mirror, plans: ['a.md'] }]   plans: undefined means
-// "do not create docs/code-plan/plans at all".
+// spec: [{ name, rootRel, mirror, plans, worktrees }]
+//   plans:      undefined means "do not create docs/code-plan/plans at all"
+//   worktrees:  [{ rel, plans }] extra checkouts of the same project
 function fixture(tag, spec) {
   const base = mkdtempSync(path.join(tmpdir(), `plan-publish-${tag}-`));
-  const projects = spec.map(({ name, rootRel, mirror, plans }) => {
+  const projects = spec.map(({ name, rootRel, mirror, plans, worktrees }) => {
     const root = path.join(base, rootRel);
-    if (plans) {
-      const dir = path.join(root, 'docs', 'code-plan', 'plans');
+    const plansDir = path.join(root, 'docs', 'code-plan', 'plans');
+    const writePlans = (dir, files) => {
       mkdirSync(dir, { recursive: true });
-      for (const f of plans) writeFileSync(path.join(dir, f), `# plan ${f}\n`, 'utf8');
-    }
-    return { name, root, mirror, base, plansDir: path.join(root, 'docs', 'code-plan', 'plans') };
+      for (const f of files) writeFileSync(path.join(dir, f), `# plan ${f}\n`, 'utf8');
+    };
+    if (plans) writePlans(plansDir, plans);
+    const wt = (worktrees ?? []).map(({ rel, plans: wtPlans }) => {
+      const wtRoot = path.join(base, rel);
+      const wtPlansDir = path.join(wtRoot, 'docs', 'code-plan', 'plans');
+      if (wtPlans) writePlans(wtPlansDir, wtPlans);
+      return { root: wtRoot, plansDir: wtPlansDir, plans: wtPlans ?? [] };
+    });
+    return {
+      name,
+      root,
+      mirror,
+      base,
+      plansDir,
+      worktrees: wt,
+    };
   });
   return {
     base,
@@ -51,7 +66,12 @@ function fixture(tag, spec) {
       destDirTemplate: '01 - Projects/{project}/plans',
       indexTemplate: '01 - Projects/{project}/index.md',
       stageInVault: true,
-      projects: projects.map(({ name, root, mirror }) => ({ name, root, mirror })),
+      projects: projects.map(({ name, root, mirror, worktrees }) => ({
+        name,
+        root,
+        mirror,
+        ...(worktrees.length ? { worktrees: worktrees.map((w) => w.root) } : {}),
+      })),
     },
   };
 }
@@ -151,6 +171,61 @@ test('loadRegistry rejects unparseable JSON instead of returning garbage', () =>
   rmSync(f.dir, { recursive: true, force: true });
 });
 
+test('loadRegistry rejects a malformed worktrees field', () => {
+  const cases = [
+    { label: 'not an array', worktrees: '/tmp/wt', expect: /must be an array/i },
+    { label: 'non-string entry', worktrees: [42], expect: /non-empty path/i },
+    { label: 'empty string entry', worktrees: [''], expect: /non-empty path/i },
+  ];
+  for (const { label, worktrees, expect } of cases) {
+    const f = tmpFile('wt-bad', 'c.json', JSON.stringify({
+      vault: VAULT,
+      destDirTemplate: '01 - Projects/{project}/plans',
+      projects: [{ name: 'a', root: '/tmp/a', mirror: true, worktrees }],
+    }));
+    assert.throws(
+      () => loadRegistry(f.path),
+      (e) => e instanceof Error && expect.test(e.message),
+      `worktrees ${label} must be rejected, not silently ignored`,
+    );
+    rmSync(f.dir, { recursive: true, force: true });
+  }
+});
+
+test('loadRegistry rejects a worktree that is already a project root', () => {
+  const f = tmpFile('wt-collide', 'c.json', JSON.stringify({
+    vault: VAULT,
+    destDirTemplate: '01 - Projects/{project}/plans',
+    projects: [
+      { name: 'a', root: '/tmp/a', mirror: true, worktrees: ['/tmp/b'] },
+      { name: 'b', root: '/tmp/b', mirror: true },
+    ],
+  }));
+  assert.throws(
+    () => loadRegistry(f.path),
+    (e) => e instanceof Error && /already a project root/i.test(e.message),
+    'one directory cannot be routable as two projects',
+  );
+  rmSync(f.dir, { recursive: true, force: true });
+});
+
+test('loadRegistry rejects one worktree claimed by two projects', () => {
+  const f = tmpFile('wt-shared', 'c.json', JSON.stringify({
+    vault: VAULT,
+    destDirTemplate: '01 - Projects/{project}/plans',
+    projects: [
+      { name: 'a', root: '/tmp/a', mirror: true, worktrees: ['/tmp/shared'] },
+      { name: 'b', root: '/tmp/b', mirror: true, worktrees: ['/tmp/shared'] },
+    ],
+  }));
+  assert.throws(
+    () => loadRegistry(f.path),
+    (e) => e instanceof Error && /more than one project/i.test(e.message),
+    'shared ownership would make routing depend on config order',
+  );
+  rmSync(f.dir, { recursive: true, force: true });
+});
+
 // ---------- resolveProject ----------
 
 test('resolveProject picks the longest matching root so nested roots stay specific', () => {
@@ -193,6 +268,46 @@ test('resolveProject routes a real repo plan to the ai-skills project', () => {
   assert.equal(p.name, 'ai-skills');
 });
 
+test('resolveProject routes a worktree plan to the project that owns the worktree', () => {
+  const f = fixture('wt-route', [
+    { name: 'Snipset', rootRel: 'Snipset', mirror: true, plans: ['a.md'],
+      worktrees: [{ rel: 'Snipset-seo', plans: ['branch-plan.md'] }] },
+  ]);
+  const inWorktree = path.join(f.projects[0].worktrees[0].root, 'docs', 'code-plan', 'plans', 'branch-plan.md');
+  assert.equal(resolveProject(f.registry, inWorktree).name, 'Snipset');
+  // The point of routing a worktree to its parent: the mirror lands in the one
+  // folder, not in a second project built from the same repository.
+  const dest = destPathFor(f.registry, resolveProject(f.registry, inWorktree), inWorktree);
+  assert.ok(dest.includes('01 - Projects/Snipset/plans/'), `got ${dest}`);
+  assert.ok(!dest.includes('Snipset-seo'), 'a worktree must not create its own vault project');
+  cleanup(f);
+});
+
+test('resolveProject still prefers a longer registered root over a worktree claim', () => {
+  const f = fixture('wt-nested', [
+    { name: 'outer', rootRel: 'outer', mirror: true, worktrees: [{ rel: 'outer/wt' }] },
+    { name: 'inner', rootRel: 'outer/wt/inner', mirror: true },
+  ]);
+  const plan = path.join(f.base, 'outer', 'wt', 'inner', 'docs', 'code-plan', 'plans', 'x.md');
+  assert.equal(resolveProject(f.registry, plan).name, 'inner');
+  cleanup(f);
+});
+
+test('resolveProject routes the real Snipset SEO worktree to Snipset, not to a second project', () => {
+  const registry = loadRegistry();
+  const wt = (registry.projects.find((p) => p.name === 'Snipset') ?? {}).worktrees;
+  assert.ok(Array.isArray(wt) && wt.length > 0,
+    'the SEO worktree must be registered as a worktree of Snipset');
+  const plan = path.join(wt[0], 'docs', 'code-plan', 'plans', '2026-09-28-website-seo-page-audit-and-indexing.md');
+  assert.equal(resolveProject(registry, plan).name, 'Snipset');
+  // No project may be named after the worktree; that is the duplication.
+  assert.equal(
+    registry.projects.some((p) => /snipset-seo/i.test(p.name)),
+    false,
+    'a worktree must never be registered as its own project',
+  );
+});
+
 // ---------- enumeratePlans ----------
 
 test('enumeratePlans excludes a mirror:false project entirely', () => {
@@ -222,6 +337,36 @@ test('enumeratePlans ignores non-markdown files in the plans directory', () => {
   writeFileSync(path.join(f.projects[0].plansDir, 'notes.txt'), 'ignore me', 'utf8');
   assert.deepEqual(enumeratePlans(f.registry).map((p) => path.basename(p)), ['real.md']);
   cleanup(f);
+});
+
+test('enumeratePlans never enumerates a worktree, so history is not mirrored twice', () => {
+  const f = fixture('wt-enum', [
+    { name: 'Snipset', rootRel: 'Snipset', mirror: true, plans: ['a.md', 'b.md'],
+      worktrees: [{ rel: 'Snipset-seo', plans: ['a.md', 'b.md', 'branch-only.md'] }] },
+  ]);
+  const found = enumeratePlans(f.registry);
+  assert.deepEqual(found.map((p) => path.basename(p)).sort(), ['a.md', 'b.md'],
+    'a worktree carries the whole history, so enumerating it republishes every plan');
+  assert.equal(
+    found.some((p) => p.startsWith(f.projects[0].worktrees[0].root)),
+    false,
+    'no enumerated plan may come from a worktree directory',
+  );
+  assert.equal(
+    found.some((p) => path.basename(p) === 'branch-only.md'),
+    false,
+    'a plan that exists only in the worktree is not enumerated either',
+  );
+  cleanup(f);
+});
+
+test('enumeratePlans over the real registry returns each plan once', () => {
+  const registry = loadRegistry();
+  const found = enumeratePlans(registry);
+  assert.equal(new Set(found).size, found.length, 'enumeration must not yield duplicates');
+  const fromWorktrees = found.filter((p) => /Snipset-seo/.test(p));
+  assert.deepEqual(fromWorktrees, [],
+    'no registered worktree may contribute to enumeration');
 });
 
 // ---------- destPathFor ----------

@@ -19,6 +19,14 @@
 // already inside the vault, so publishing them would copy a file onto itself.
 // That flag is the only thing preventing the self-copy, so enumeratePlans()
 // excludes those roots rather than filtering them at write time.
+//
+// A project may also list `worktrees`: extra directories that hold the *same*
+// project's plans on another branch. Routing honours them so a plan written in
+// a worktree mirrors into its parent project's vault folder instead of being
+// unroutable. enumeratePlans() deliberately does NOT read them, because a
+// worktree checkout contains the whole tracked history: enumerating one
+// republishes every historical plan a second time, which is exactly the
+// duplication that registering a worktree as its own project caused.
 
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import path from 'node:path';
@@ -69,6 +77,30 @@ export function loadRegistry(configPath = DEFAULT_CONFIG) {
     seenRoots.add(p.root);
   }
 
+  // Second pass, so a worktree is checked against every declared root rather
+  // than only the ones seen so far. Otherwise declaring the collision in the
+  // other order surfaces as "duplicate project root", which sends the reader
+  // looking for a second root instead of at the worktrees they just added.
+  const seenWorktrees = new Set();
+  for (const p of registry.projects) {
+    if (p.worktrees === undefined) continue;
+    if (!Array.isArray(p.worktrees)) {
+      throw new Error(`plan publish config ${configPath}: "worktrees" on "${p.name}" must be an array`);
+    }
+    for (const w of p.worktrees) {
+      if (typeof w !== 'string' || w === '') {
+        throw new Error(`plan publish config ${configPath}: every worktree of "${p.name}" needs a non-empty path`);
+      }
+      if (seenRoots.has(w)) {
+        throw new Error(`plan publish config ${configPath}: worktree "${w}" of "${p.name}" is already a project root`);
+      }
+      if (seenWorktrees.has(w)) {
+        throw new Error(`plan publish config ${configPath}: worktree "${w}" is claimed by more than one project`);
+      }
+      seenWorktrees.add(w);
+    }
+  }
+
   return registry;
 }
 
@@ -82,13 +114,28 @@ function owns(root, planPath) {
   return true;
 }
 
+// Every directory that can hold this project's plans: its root plus any
+// worktrees, all of which route to the same project and therefore to the same
+// vault folder.
+function candidateRoots(p) {
+  return [p.root, ...(Array.isArray(p.worktrees) ? p.worktrees : [])];
+}
+
 export function resolveProject(registry, planPath) {
   // Longest root wins, so a project nested inside another project resolves to
-  // the inner one instead of the outer.
+  // the inner one instead of the outer. Worktrees compete on the same scale,
+  // otherwise a worktree path nested in a registered project would lose to the
+  // outer project it is supposed to belong to.
   let best = null;
+  let bestRoot = null;
   for (const p of registry.projects) {
-    if (!owns(p.root, planPath)) continue;
-    if (!best || p.root.length > best.root.length) best = p;
+    for (const root of candidateRoots(p)) {
+      if (!owns(root, planPath)) continue;
+      if (!best || root.length > bestRoot.length) {
+        best = p;
+        bestRoot = root;
+      }
+    }
   }
   if (!best) {
     throw new Error(
@@ -105,6 +152,9 @@ export function enumeratePlans(registry) {
     // mirror:false is the vault's own entry; publishing it would copy a file
     // onto itself, so it is never a source.
     if (p.mirror === false) continue;
+    // Only the root, never the worktrees. A worktree holds the full tracked
+    // history, so every plan it contains already has a mirror from the root and
+    // enumerating it would file a second copy of the entire history.
     const dir = path.join(p.root, PLANS_SUBDIR);
     // A project that has never written a plan is not an error; there is simply
     // nothing to mirror yet.

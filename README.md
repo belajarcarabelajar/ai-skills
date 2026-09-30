@@ -323,10 +323,20 @@ step is expected to fail, so it passes with `expect_exit: 1`.
 
 A `skip_if` that only proves a string is present (`grep -q 'Marker' src/x.md`) is a
 false-pass channel: it survives the behaviour being reverted, and `plan-mark-done.mjs`
-ticks the task on that claim alone. The runner warns. Use a command that fails on
-behaviour — a test invocation, a build, a `git diff` query, a state check. A `grep`
-filtering a tool's output (`bun test x 2>&1 | grep -q '...'`) is fine, because the tool
-has to succeed first.
+ticks the task on that claim alone. The runner **rejects it as a validation error**. Use
+a command that fails on behaviour — a test invocation, a build, a `git diff` query, a
+state check. A `grep` filtering a tool's output (`bun test x 2>&1 | grep -q '...'`) is
+fine, because the tool has to succeed first.
+
+The classifier behind that check returns one of five classes: `empty` (nothing claimed),
+`sentinel` (the literal `skip_if: "false"`, the documented "this task has no command"),
+`behavioural` (runs a tool that has to succeed first), `loose` (reads a file and asserts
+a string is in it — rejected), and `unknown` (matches neither rule). `unknown` **warns**
+rather than errors, naming the task and the command, because 14 such tasks live in plans
+belonging to repositories this one does not own and an error here would be one commit
+changing someone else's repository. Run `bun scripts/skipif-registry-audit.mjs` for the
+current per-plan tally, or `--compare-to-frozen` to see what the live rule changed since
+the 2026-09-30 freeze.
 
 `validate-skill.mjs` asserts that the plan template and the master skill's plan header both
 declare every key the runner reads, comparing the **parsed frontmatter structure** rather

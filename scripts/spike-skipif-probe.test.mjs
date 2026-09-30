@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import os from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { summarize, verdictFor, PRICE_PER_MTOK } from './spike-skipif-probe.mjs';
 import { classifySpikeSkipIf } from './spike-skipif-classifier.mjs';
@@ -135,6 +136,47 @@ test('every reference label agrees with the frozen classifier snapshot', () => {
   for (const row of corpus) {
     assert.equal(row.label, classifySpikeSkipIf(row.cmd), `stale label on ${row.cmd}`);
   }
+});
+
+test('a replay does not re-date the recording, because recordedAt means "when the calls were made"', async () => {
+  // The defect this locks: the CLI wrote `recordedAt: new Date().toISOString()`
+  // on every run, including replay. Replay re-derives every number in the file
+  // from the cassette without making one request, so that line overwrote the
+  // recording date with the date someone last replayed it. The freeze test
+  // reads `recordedAt` to date the classifier snapshot, so a replay silently
+  // re-dated the freeze — and on a later day it would have failed the freeze for
+  // a reason that has nothing to do with the classifier.
+  //
+  // This is a process-level test: it runs the CLI, not a function, because the
+  // bug lived in the CLI's write path and no unit test of `runProbe` could see
+  // it. `runProbe` takes `out` and writes nothing, which is why it was
+  // invisible until the CLI was actually invoked.
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'jev-probe-replay-'));
+  const target = path.join(tmp, 'two-class.json');
+  const corpus = JSON.parse(fs.readFileSync(path.join(ROOT, 'spike-out', 'corpus.json'), 'utf8'));
+
+  // Seed a target that claims a recording on a distinctive day.
+  const seededAt = '2026-01-02T03:04:05.000Z';
+  fs.writeFileSync(target, JSON.stringify({ probe: 'jev-skipif-two-class', recordedAt: seededAt }, null, 2));
+
+  const { execFileSync } = await import('node:child_process');
+  const probeCli = path.join(ROOT, 'scripts', 'spike-skipif-probe.mjs');
+  execFileSync('bun', [probeCli, '--replay', '--corpus', path.join(ROOT, 'spike-out', 'corpus.json'), '--out', target], {
+    encoding: 'utf8',
+  });
+
+  const after = JSON.parse(fs.readFileSync(target, 'utf8'));
+  assert.equal(after.recordedAt, seededAt,
+    'a replay re-dated the recording; recordedAt must keep meaning "when the API calls were made"');
+  assert.equal(typeof after.replayedAt, 'string',
+    'a replay must record its own timestamp separately, under a name that says what it is');
+  assert.notEqual(after.replayedAt, seededAt);
+  // And the numbers it did re-derive must still be the committed ones, or the
+  // test above would be asserting a timestamp on an otherwise broken file.
+  assert.equal(after.agreement, 0.995);
+  assert.equal(after.mode, 'replay');
+
+  fs.rmSync(tmp, { recursive: true, force: true });
 });
 
 async function runReplay(corpus) {

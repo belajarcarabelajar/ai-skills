@@ -228,3 +228,34 @@ Recorded so a later session does not repeat it.
 | Agreement could not fail | any arm answering "low" would score about 96% |
 
 The general lesson is worth more than this spike: **a corpus that clears a size threshold can still be useless if its classes are degenerate.** v1's 77 rows passed its own "at least 40" precondition and measured nothing. T1 now fails closed with `E_PRECOND_IMBALANCE` instead of that.
+
+## 11. Amendment, 2026-09-30: the classifier is frozen, and nothing above changed
+
+Recorded after the fact, in the manner of §6's "Correction" above: appended, dated, with the evidence, and without touching a single number already printed in this report.
+
+**What changed.** The production `classifySkipIf` in `scripts/ultra-plan-runner.mjs` now returns five classes — `empty`, `sentinel`, `behavioural`, `loose`, `unknown` — and `FILE_PROBE` widened to `(^|[\s;&|(/])` with `tgrep` added. The old `: 'behavioural'` fallthrough is gone. Every one of those changes is a change to the reference label this spike measured against.
+
+**What was done about it.** The two regex literals the probe was measured against were copied verbatim into `scripts/spike-skipif-classifier.mjs` on 2026-09-30 and frozen there as `SPIKE_EVIDENCE_COMMAND` and `SPIKE_FILE_PROBE`, alongside `classifySpikeSkipIf` and the constant `SPIKE_CLASSIFIER_FROZEN_ON = '2026-09-30'`. `scripts/spike-skipif-corpus.mjs` and `scripts/spike-skipif-probe.mjs` now import that snapshot; neither imports the live `classifySkipIf` any more. The freeze is held by a test, not by a comment: the snapshot's own test file keeps an independent copy of both source strings and compares them byte for byte, asserts the frozen date against `recordedAt` in `two-class.json`, and asserts that `classifySpikeSkipIf` reproduces the committed label of all 200 rows in `spike-out/corpus.json`.
+
+**What did not change, and still is not changed, by this amendment.** The §3 figures are measurements of the classifier that was frozen, and they remain exactly that:
+
+| Measurement | Value | Status after the freeze |
+|---|---|---|
+| model | `jev-1.13.0` | unchanged |
+| sample | 200 commands | unchanged |
+| agreement | `0.995` (199/200) | unchanged |
+| ECE | `0.011` | unchanged |
+| Brier | `0.005` | unchanged |
+| cost USD | `$0.004129` (98,319 input tokens) | unchanged |
+
+Nothing above this section has been edited to accommodate the new classes. The disagreement in §4 still stands as adjudicated. The 32-row F5 gap in §6 is still described there as it was measured, and the registry-wide correction to it lives in F5's row in the plan, not here.
+
+**How to re-verify it without an API key.** The cassette is committed, so the whole probe replays offline:
+
+```
+bun scripts/spike-skipif-probe.mjs --replay
+```
+
+It prints `agreement 0.995 (199/200)`, `ECE 0.011`, `Brier 0.005`, `cost USD 0.004129`, and exits 0 with no network call and no `TYPESAFE_API_KEY` present. `bun test scripts/spike-skipif-classifier.test.mjs` fails loudly if the frozen snapshot ever drifts from the 200 committed labels.
+
+**Why the freeze and not a re-measurement.** Re-recording the corpus against the post-change classifier would have produced a new agreement number — measured against a different instrument, for a rule that no longer exists — and pasted it over a published verdict. The verdict in §5 is a statement about Jev, and it is still true. Freezing the instrument preserves the claim; re-measuring would have destroyed it. The live rule's remaining defects are a separate question with its own command: `bun scripts/skipif-registry-audit.mjs` reports, per plan, the class of every `skip_if` under the live classifier and names every task whose class differs from the frozen one.

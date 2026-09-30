@@ -186,9 +186,20 @@ if (import.meta.main) {
   const run = await runProbe({ corpus, mode, out });
   const scan = scanCassette(CASSETTE_FILE);
 
+  // `recordedAt` is the moment the CALLS were made, and it must keep meaning
+  // that. Replay re-derives every number in this file from the cassette without
+  // making a single request, so stamping it with `new Date()` would overwrite
+  // the recording date with the date someone last replayed it — and
+  // `spike-skipif-classifier.test.mjs` reads this field to date the classifier
+  // freeze. A replay would silently re-date the freeze.
+  //
+  // So replay carries the previous value forward and records its own timestamp
+  // separately, which is the fact it is actually asserting.
+  const previous = fs.existsSync(out) ? JSON.parse(fs.readFileSync(out, 'utf8')) : null;
   const payload = {
     probe: 'jev-skipif-two-class',
-    recordedAt: new Date().toISOString(),
+    recordedAt: mode === 'replay' && previous?.recordedAt ? previous.recordedAt : new Date().toISOString(),
+    ...(mode === 'replay' ? { replayedAt: new Date().toISOString() } : {}),
     mode,
     model: run.model,
     priceNote: 'Jev pricing is a vendor claim; cost here is that price applied to measured tokens',

@@ -60,10 +60,60 @@ export const RUNNER_CONTRACT_KEYS = [
 const EVIDENCE_COMMAND = /\b(bun|node|npm|pnpm|yarn|deno|python3?|pytest|go|cargo|make|cmake|git|systemctl|curl|docker|tsc|eslint|vitest|jest|ruff|mypy|gradle|mvn)\b/;
 const FILE_PROBE = /(^|[\s;&|(])(grep|egrep|rg|cat|head|tail|ls|find|wc|test)\b/;
 
+// Five named classes, in this resolution order:
+//
+//   empty        blank or not a string — nothing was claimed
+//   sentinel     the string "false", the documented "this task has no command"
+//   behavioural  runs a tool that has to succeed first
+//   loose        reads a file and asserts a string is in it
+//   unknown      matches neither rule; the classifier does not know
+//
+// The order matters and is not interchangeable. `empty` first, so a blank
+// `skip_if` is a blank claim rather than a malformed sentinel; `sentinel`
+// before the two regexes, so the marker is recognised as a marker and not as
+// whatever it happens to match.
+//
+// **`unknown` is the point of this function, and it used to not exist.**
+// This ended in `return FILE_PROBE.test(cmd) ? 'loose' : 'behavioural'`. That
+// `: 'behavioural'` filed every unrecognised command under the one class that
+// means "this proves the work works", and the verdict was indistinguishable
+// from a real test run. Across the registry that was 121 `skip_if` values: 77
+// sentinels and 44 commands matching neither rule, of which 14 are genuine
+// defects — `bash scripts/x.sh --verify …` fails on behaviour in verify mode
+// and writes a file in generate mode, `pacman -Q rtkit` asserts a package is
+// installed, and no token-level regex can tell those apart from each other.
+// A name the rule cannot justify is reported, not guessed. It is a name and
+// not a verdict: nothing in `validatePlan` acts on it yet, so nothing becomes
+// unrunnable.
+//
+// The 44 split in two, and both halves are defects:
+//   30 are grep-family probes — `tgrep -q …`, `/usr/bin/grep -q …` — which
+//      FILE_PROBE misses only because it anchors on `(^|[\s;&|(])`, so a path
+//      separator or a `t` prefix puts the tool name out of reach. They read a
+//      file and assert a string is in it, which is the false-pass channel this
+//      whole rule exists to close.
+//   14 name a tool no rule knows: `bash scripts/x.sh --verify …` (behavioural in
+//      verify mode, a bare file write in generate mode), `pacman -Q rtkit`
+//      (asserts a package is installed, which no code change can regress),
+//      `pwsh -NoProfile -Command Test-Path`, `cf d1 query`, `cmp -s a b`.
+//      Adding any of these to EVIDENCE_COMMAND would be guessing, and for
+//      `bash` it is measurably wrong: generate mode exits 0 unconditionally.
 export function classifySkipIf(cmd) {
   if (typeof cmd !== 'string' || cmd.trim() === '') return 'empty';
+  // `"false"` is the documented no-command marker, from the Idempotency Honesty
+  // paragraph of `Super Ultra Code Plan Implementation.md:665`:
+  //   "When a task genuinely has no command, say so with `skip_if: "false"`
+  //    rather than inventing a probe that passes."
+  // 77 tasks across 22 plans in the registry write exactly this. It is its own
+  // class and it is NOT redundant with `empty`: empty is a missing claim, this
+  // is a deliberate one, and collapsing the two would erase the difference. It
+  // was not redundant with the old `behavioural` fallthrough either — it merely
+  // produced the same answer by matching no regex, which is why a future edit
+  // to that fallthrough would have invalidated 77 tasks with nothing to notice.
+  if (cmd.trim() === 'false') return 'sentinel';
   if (EVIDENCE_COMMAND.test(cmd)) return 'behavioural';
-  return FILE_PROBE.test(cmd) ? 'loose' : 'behavioural';
+  if (FILE_PROBE.test(cmd)) return 'loose';
+  return 'unknown';
 }
 
 // ---------- Frontmatter extraction ----------

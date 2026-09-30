@@ -15,6 +15,10 @@ import {
   classifySkipIf,
   RUNNER_CONTRACT_KEYS,
 } from './ultra-plan-runner.mjs';
+// T1's frozen snapshot, imported here so one test can assert the two classifiers
+// have genuinely diverged. It is a historical record, not a second source of
+// truth: nothing in production depends on it.
+import { classifySpikeSkipIf } from './spike-skipif-classifier.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const RUNNER = path.join(ROOT, 'scripts', 'ultra-plan-runner.mjs');
@@ -524,6 +528,151 @@ test('classifySkipIf separates a behavioural check from a file-content probe', (
   assert.equal(classifySkipIf("grep -q 'Plan Publish Gate' snippets/x.md"), 'loose');
   assert.equal(classifySkipIf('test -f out.txt'), 'loose');
   assert.equal(classifySkipIf('ls dist/'), 'loose');
+});
+
+// ---------- T2: the classes that were being guessed at ----------
+//
+// `classifySkipIf` used to end in `return FILE_PROBE.test(cmd) ? 'loose' : 'behavioural'`.
+// That `: 'behavioural'` is the whole defect: a command matching neither regex was
+// filed under `behavioural` — the one class that means "this proves the work
+// works" — and the verdict was indistinguishable from a real tool invocation.
+// Every test below exists to make one of those two guesses a named class.
+
+test('the documented false sentinel is its own class, not an accident of matching nothing', () => {
+  // `skip_if: "false"` is how a task says it has no command at all
+  // (`Super Ultra Code Plan Implementation.md:665`, Idempotency Honesty:
+  // "When a task genuinely has no command, say so with `skip_if: "false"`
+  // rather than inventing a probe that passes"). 77 tasks across 22 plans in
+  // the registry write exactly that.
+  //
+  // It passed before this rule existed, but only because it matched no regex
+  // and fell through to `behavioural` — the same path an unlisted tool takes.
+  // Named explicitly, the pass is deliberate and separate from the guessing.
+  assert.equal(classifySkipIf('false'), 'sentinel');
+  assert.equal(classifySkipIf(' false '), 'sentinel', 'surrounding whitespace is not a different marker');
+  // The sentinel is the string `false`, not a family of falsy-looking strings.
+  // `False`, `falsey` and `no` are commands nobody documented; they are unknown.
+  assert.equal(classifySkipIf('False'), 'unknown');
+  assert.equal(classifySkipIf('falsey'), 'unknown');
+});
+
+test('empty still means blank or non-string, and is decided before the sentinel', () => {
+  for (const bad of ['', '   ', null, undefined, 42]) {
+    assert.equal(classifySkipIf(bad), 'empty', `input ${JSON.stringify(bad)} should be empty`);
+  }
+});
+
+test('a command matching neither regex is unknown, not behavioural', () => {
+  // These are real `skip_if` values from the registry, measured in the plan's §2
+  // as reaching the `behavioural` fallthrough. Each is a command that CAN assert
+  // something, and none of them can be decided by the rule as written: `bash` in
+  // `--verify` mode fails on behaviour and in generate mode writes a file and
+  // exits 0, and no token-level regex can tell those apart. `pacman -Q rtkit`
+  // asserts a package is installed, which no code change can regress. The honest
+  // answer is that the classifier does not know, and says so.
+  for (const cmd of [
+    'bash scripts/kwin-effect-control.sh --verify evidence/anim-02-kwin-control.txt',
+    'pacman -Q rtkit >/dev/null 2>&1',
+    'cmp -s a b',
+    "pwsh -NoProfile -Command Test-Path 'C:\\x'",
+    'cf d1 query ID --sql "SELECT 1"',
+  ]) {
+    assert.equal(classifySkipIf(cmd), 'unknown', `${cmd} matches neither EVIDENCE_COMMAND nor FILE_PROBE`);
+  }
+});
+
+test('NO command reaches behavioural without matching EVIDENCE_COMMAND', () => {
+  // The lock. Every other test here asserts a particular answer, and an assertion
+  // on the new answers passes just as happily while the old `: 'behavioural'`
+  // fallthrough is still sitting at the end of the function. This one cannot: it
+  // walks commands that provably contain no evidence token and requires that not
+  // one of them is called behavioural.
+  //
+  // The token list is an independent copy, not an import. If it were derived from
+  // the production regex then widening `EVIDENCE_COMMAND` would silently shrink
+  // this fixture and the lock would decay into a test of nothing — which is the
+  // same failure mode as the defect it guards, one level up.
+  const EVIDENCE_TOKENS = [
+    'bun', 'node', 'npm', 'pnpm', 'yarn', 'deno', 'python3', 'python', 'pytest',
+    'go', 'cargo', 'make', 'cmake', 'git', 'systemctl', 'curl', 'docker', 'tsc',
+    'eslint', 'vitest', 'jest', 'ruff', 'mypy', 'gradle', 'mvn',
+  ];
+  const hasEvidenceToken = new RegExp(`\\b(?:${EVIDENCE_TOKENS.join('|')})\\b`);
+
+  // The §2 measured examples, plus commands invented for this test. Note the
+  // grep-family shapes: `tgrep -q …` is a file probe that the current
+  // FILE_PROBE does not recognise, and will keep answering non-behavioural when
+  // T5 widens that regex. The lock holds across that change by design.
+  const NO_EVIDENCE = [
+    'bash scripts/kwin-effect-control.sh --verify evidence/anim-02-kwin-control.txt',
+    'pacman -Q rtkit >/dev/null 2>&1',
+    'cmp -s a b',
+    "pwsh -NoProfile -Command Test-Path 'C:\\x'",
+    'cf d1 query ID --sql "SELECT 1"',
+    "sh -c 'true'",
+    'md5sum -c checksums.txt',
+    "awk 'NR==1{print}' src/x.md",
+    "tgrep -q 'marker' apps/x.test.ts",
+    "sqlite3 db.sqlite 'PRAGMA integrity_check'",
+    'diff -u expected.txt actual.txt',
+    'openssl dgst -sha256 out.bin',
+  ];
+
+  // Guard the fixture first. A leak here would make the assertion below pass for
+  // the wrong reason, so it is reported as a broken lock rather than a green run.
+  const leaked = NO_EVIDENCE.filter((c) => hasEvidenceToken.test(c));
+  assert.deepEqual(leaked, [], `lock fixture is broken: these commands DO contain an evidence token: ${JSON.stringify(leaked)}`);
+
+  const misfiled = NO_EVIDENCE.filter((c) => classifySkipIf(c) === 'behavioural');
+  assert.deepEqual(
+    misfiled,
+    [],
+    `${misfiled.length} command(s) with no evidence token were called behavioural — the fallthrough is back: ${JSON.stringify(misfiled)}`,
+  );
+
+  // Positive control, or the lock is satisfiable by deleting the EVIDENCE_COMMAND
+  // branch entirely: a classifier that never says `behavioural` would pass every
+  // assertion above. These must still be behavioural.
+  for (const cmd of [
+    'bun test scripts/x.test.ts',
+    'git diff --quiet -- path',
+    'make -C dir build',
+    'python3 -m pytest -q',
+    'systemctl --user is-active foo.timer',
+  ]) {
+    assert.equal(classifySkipIf(cmd), 'behavioural', `${cmd} runs a tool that has to succeed first`);
+  }
+});
+
+test('the frozen spike classifier and the live one have genuinely diverged', () => {
+  // T1 froze `classifySkipIf` as it stood on 2026-09-30 so the Jev spike's
+  // published 0.995 stays reproducible. This asserts the freeze is doing real
+  // work: for the same five commands the frozen three-value contract still says
+  // `behavioural` and the live five-value contract says `unknown`.
+  //
+  // If the snapshot had been left delegating to the live function, both columns
+  // would read `unknown`, the published 0.995 would stop being reproducible, and
+  // nothing else in the suite would notice — this test is the guard against that.
+  const FIVE = [
+    'bash scripts/kwin-effect-control.sh --verify evidence/anim-02-kwin-control.txt',
+    'pacman -Q rtkit >/dev/null 2>&1',
+    'cmp -s a b',
+    "pwsh -NoProfile -Command Test-Path 'C:\\x'",
+    'cf d1 query ID --sql "SELECT 1"',
+  ];
+  for (const cmd of FIVE) {
+    assert.equal(classifySpikeSkipIf(cmd), 'behavioural', `frozen 2026-09-30 contract: ${cmd}`);
+    assert.equal(classifySkipIf(cmd), 'unknown', `live contract: ${cmd}`);
+  }
+  // The two agreeing where they should is the control: the frozen classifier is
+  // not a different function that happens to differ everywhere.
+  for (const cmd of ["grep -q 'marker' file.md", 'bun test a.test.ts', '']) {
+    assert.equal(
+      classifySpikeSkipIf(cmd),
+      classifySkipIf(cmd),
+      `frozen and live must still agree on ${JSON.stringify(cmd)}`,
+    );
+  }
 });
 
 test('a behavioural skip_if that greps a tool is not a file-content probe', () => {

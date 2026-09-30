@@ -290,23 +290,54 @@ for (const snip of requiredSnippets) {
 
 // 3f. Deep-research evidence contract: the workflow must name its evidence tool.
 // Without a named tool each agent improvises its own browsing and citations stop
-// being reproducible. TinyFish is the tool; the master skill, the template, and
-// this check must agree on it.
+// being reproducible. TinyFish is the tool, and as of 2026-10-01 it is integrated
+// into the master skill itself rather than a separate vendored skill.
+//
+// The check verifies the integration is real, not merely that a word appears:
+// the master skill must carry the escalation ladder plus the actual tool names
+// an agent calls, and the template must defer to that section instead of
+// inventing its own rules.
+//
 // Revert 2026-09-30: delete this block together with the Evidence Gathering
-// section in templates/deep-research-report-template.md and the Evidence
-// Gathering subsection in the master skill.
+// section in templates/deep-research-report-template.md and the
+// "Web Evidence & Retrieval" subsection in the master skill.
 {
   const evidenceContract = [
-    { label: 'master skill evidence subsection', file: masterPath, needle: 'use-tinyfish' },
-    { label: 'deep-research template evidence section', file: path.join(rootDir, 'templates', 'deep-research-report-template.md'), needle: 'use-tinyfish' },
+    // The master skill is the source of truth. The heading check is line-anchored
+    // on purpose: a plain substring test is satisfied by any cross-reference to
+    // the section, so deleting the section while leaving a pointer behind would
+    // still pass. A real negative test caught exactly that.
+    { label: 'master skill web-evidence heading', file: masterPath, needle: '^### 🌐 Web Evidence & Retrieval — TinyFish$', multiline: true },
+    { label: 'master skill escalation ladder', file: masterPath, needle: 'Escalation ladder' },
+    { label: 'master skill fetch tool', file: masterPath, needle: 'fetch_content' },
+    { label: 'master skill automation tool', file: masterPath, needle: 'run_web_automation' },
+    { label: 'master skill browser tool', file: masterPath, needle: 'create_browser_session' },
+    // The template must point at the master section, not restate a retired skill.
+    { label: 'deep-research template defers to master section', file: path.join(rootDir, 'templates', 'deep-research-report-template.md'), needle: 'Web Evidence & Retrieval' },
   ];
   for (const c of evidenceContract) {
     const body = fs.readFileSync(c.file, 'utf8');
-    if (body.includes(c.needle)) {
+    const present = c.multiline ? new RegExp(c.needle, 'm').test(body) : body.includes(c.needle);
+    if (present) {
       console.log(`✅ Deep-research evidence contract present: ${c.label}`);
     } else {
-      console.error(`❌ Deep-research evidence contract missing: ${c.label} — literal "${c.needle}" not found in ${path.relative(rootDir, c.file)}.`);
+      console.error(`❌ Deep-research evidence contract missing: ${c.label} — ${c.multiline ? 'pattern' : 'literal'} "${c.needle}" not found in ${path.relative(rootDir, c.file)}.`);
       errors++;
+    }
+  }
+  // The retired separate skill must not linger as a dangling instruction. A stale
+  // "use the use-tinyfish skill" pointer is worse than no pointer at all: an agent
+  // would go looking for a skill that is no longer deployed.
+  for (const c of [
+    { label: 'master skill', file: masterPath },
+    { label: 'deep-research template', file: path.join(rootDir, 'templates', 'deep-research-report-template.md') },
+  ]) {
+    const body = fs.readFileSync(c.file, 'utf8');
+    if (body.includes('use-tinyfish')) {
+      console.error(`❌ Stale separate-skill pointer: ${c.label} still references "use-tinyfish"; the evidence rules are now inline in the master skill.`);
+      errors++;
+    } else {
+      console.log(`✅ No stale separate-skill pointer: ${c.label}`);
     }
   }
 }

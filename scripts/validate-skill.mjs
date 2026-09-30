@@ -198,6 +198,32 @@ for (const snip of requiredSnippets) {
   }
 }
 
+// 3c-bis. Trigger snippets must name the evidence tool.
+// Both snippets gate a research phase (deep-research in the plan path, upstream
+// issue research in the debugging path), and the master skill routes that
+// evidence through TinyFish. A snippet that says "run deep-research" without
+// naming how evidence is gathered leaves the agent to improvise its own
+// browsing, which is exactly the drift the 3f check exists to stop on the
+// master-skill side.
+//
+// Revert: delete this block.
+for (const snip of requiredSnippets) {
+  const p = path.join(rootDir, 'snippets', snip);
+  if (!fs.existsSync(p)) continue;
+  const body = fs.readFileSync(p, 'utf8');
+  // Require the ladder's free rungs by name, not the word "TinyFish" alone: a
+  // snippet naming the product but not the tools still leaves the escalation
+  // order undefined, and the escalation order is the part that costs nothing.
+  const need = ['TinyFish', 'search', 'fetch_content'];
+  const missing = need.filter((n) => !body.includes(n));
+  if (missing.length === 0) {
+    console.log(`✅ Trigger snippet names the TinyFish evidence ladder: snippets/${snip}`);
+  } else {
+    console.error(`❌ snippets/${snip} does not carry the TinyFish evidence ladder: missing ${missing.join(', ')}`);
+    errors++;
+  }
+}
+
 // 3d. Trigger snippets must not invoke the runtime the skill prohibits.
 // The master skill bans npm/npx/bare node in favour of Bun; a snippet that
 // reintroduces them is a self-violating instruction.

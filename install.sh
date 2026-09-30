@@ -16,6 +16,7 @@ for arg in "$@"; do
       echo "Usage: ./install.sh [--dry-run]"
       echo "Links the master skill into ~/.config/ai, ~/.agents/skills, ~/.gemini, and"
       echo "~/.config/opencode/skills, plus ~/.claude only when that harness is installed."
+      echo "Also deploys the vendored use-tinyfish skill (skills/use-tinyfish/) to the same targets."
       exit 0
       ;;
   esac
@@ -120,6 +121,41 @@ link_skill_package "$HOME/.config/opencode/skills/super-ultra-code-plan"
 #    already installed, so a missing ~/.claude never gets fabricated here.
 if [ -d "$HOME/.claude" ]; then
   link_skill_package "$HOME/.claude/skills/super-ultra-code-plan"
+fi
+
+# 6b. Vendored use-tinyfish skill (skills/use-tinyfish/SKILL.md).
+#     Upstream: tinyfish-io/tinyfish-cookbook, skill use-tinyfish (see the
+#     Provenance section at the end of that file). Single-file skill, so it is
+#     linked as one SKILL.md per target rather than a full package.
+#     Revert: delete this block and `rm -rf` the use-tinyfish dirs below.
+link_single_skill() {
+  local target_skill_dir="$1"
+
+  if [ "$DRY_RUN" = true ]; then
+    echo "[DRY-RUN] Would configure use-tinyfish skill in: $target_skill_dir"
+    echo "[DRY-RUN]   - SKILL.md -> $REPO_DIR/skills/use-tinyfish/SKILL.md"
+  else
+    mkdir -p "$target_skill_dir"
+    ln -sf "$REPO_DIR/skills/use-tinyfish/SKILL.md" "$target_skill_dir/SKILL.md"
+    echo "[OK] Linked use-tinyfish skill in: $target_skill_dir"
+  fi
+}
+
+if [ -f "$REPO_DIR/skills/use-tinyfish/SKILL.md" ]; then
+  link_single_skill "$HOME/.agents/skills/use-tinyfish"
+  link_single_skill "$HOME/.gemini/config/skills/use-tinyfish"
+  if [ -d "$HOME/.gemini/antigravity-cli/builtin/skills" ]; then
+    link_single_skill "$HOME/.gemini/antigravity-cli/builtin/skills/use-tinyfish"
+  fi
+  # OpenCode always populated (mandatory prereq). Note: `tinyfish connect`
+  # only writes ~/.agents/skills/use-tinyfish, so this is what makes the skill
+  # directly visible under ~/.config/opencode/skills/ too.
+  link_single_skill "$HOME/.config/opencode/skills/use-tinyfish"
+  if [ -d "$HOME/.claude" ]; then
+    link_single_skill "$HOME/.claude/skills/use-tinyfish"
+  fi
+else
+  echo "[WARN] skills/use-tinyfish/SKILL.md missing; skipping use-tinyfish deploy."
 fi
 
 # 7. Local Repo Self-Check

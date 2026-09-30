@@ -150,6 +150,18 @@ Invoke the workflow when at least one of the following is true. The decision tou
 
 The report follows the structure defined in `templates/deep-research-report-template.md`. It opens with an executive summary paragraph, develops three to seven `##` themes with `###` subsections, and closes with a synthesis. Every claim is grounded in an inline citation of the form `[n]`. Mathematical notation uses LaTeX delimiters. Lists are converted to prose; tables are used for multi-axis comparisons. The report length matches the scope of the question, not a fixed minimum.
 
+### Evidence Gathering
+
+<!-- Revert 2026-09-30: delete this subsection to restore tool-agnostic research;
+     also remove the Evidence Gathering section in templates/deep-research-report-template.md
+     and the tinyfish-evidence check in scripts/validate-skill.mjs. -->
+
+Evidence is gathered with TinyFish (the vendored `use-tinyfish` skill, deployed by
+`install.sh` §6b): `search` to discover sources, `fetch` to read them, `agent` only
+when a page needs interaction. The template's Evidence Gathering section states the
+ladder; every cited source must have been retrieved through it, so citations stay
+reproducible no matter which harness runs the workflow.
+
 ### Worked Example
 
 `examples/deep-research-worked-example.md` demonstrates the template on a topic relevant to this repository: the three-layer memory model that long-running AI coding agents use to retain context across sessions. Read the example before writing your first report to calibrate length, citation density, and prose rhythm.

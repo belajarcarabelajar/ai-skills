@@ -24,6 +24,19 @@ Before writing, decompose the topic into three to seven major themes. Each theme
 
 Verify that sources are available for every claim you intend to make. If a section cannot be grounded, either drop it or restructure the topic so grounded sections absorb its questions.
 
+## Evidence Gathering
+
+<!-- Revert 2026-09-30: delete this section to restore tool-agnostic research;
+     also remove the Evidence Gathering subsection in the master skill and the
+     tinyfish-evidence check in scripts/validate-skill.mjs. -->
+
+Collect evidence with TinyFish (skill `use-tinyfish`, deployed by `install.sh` §6b).
+Follow the lightest-tool ladder: `search` to discover sources, then `fetch` the
+best results for full content. Escalate to `agent` only for pages that need
+interaction (forms, login, dynamic extraction); never start with the heaviest
+tool. Every inline citation index must map to a source actually retrieved this
+way — a cited-but-unfetched source fails the report exactly like an unread one.
+
 ## Document Structure
 
 The report must open with a single-paragraph executive summary that names the question, the scope of the investigation, the principal findings, and the recommended action. This paragraph carries no header and stands alone between the title and the first `##` section.

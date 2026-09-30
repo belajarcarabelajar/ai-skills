@@ -288,6 +288,29 @@ for (const snip of requiredSnippets) {
   }
 }
 
+// 3f. Deep-research evidence contract: the workflow must name its evidence tool.
+// Without a named tool each agent improvises its own browsing and citations stop
+// being reproducible. TinyFish is the tool; the master skill, the template, and
+// this check must agree on it.
+// Revert 2026-09-30: delete this block together with the Evidence Gathering
+// section in templates/deep-research-report-template.md and the Evidence
+// Gathering subsection in the master skill.
+{
+  const evidenceContract = [
+    { label: 'master skill evidence subsection', file: masterPath, needle: 'use-tinyfish' },
+    { label: 'deep-research template evidence section', file: path.join(rootDir, 'templates', 'deep-research-report-template.md'), needle: 'use-tinyfish' },
+  ];
+  for (const c of evidenceContract) {
+    const body = fs.readFileSync(c.file, 'utf8');
+    if (body.includes(c.needle)) {
+      console.log(`✅ Deep-research evidence contract present: ${c.label}`);
+    } else {
+      console.error(`❌ Deep-research evidence contract missing: ${c.label} — literal "${c.needle}" not found in ${path.relative(rootDir, c.file)}.`);
+      errors++;
+    }
+  }
+}
+
 // 3b. Check Examples directory
 const examplesDir = path.join(rootDir, 'examples');
 const requiredExamples = ['worked-example.md', 'deep-research-worked-example.md'];

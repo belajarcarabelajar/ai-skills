@@ -140,6 +140,8 @@ ai-skills/
         ├── examples -> ../../examples
         ├── mermaid.config.json -> ../../mermaid.config.json
         └── mermaid.dark.config.json -> ../../mermaid.dark.config.json
+    └── use-tinyfish/                            # Vendored copy of tinyfish-cookbook use-tinyfish (see Provenance footer in SKILL.md)
+        └── SKILL.md                             # web search/fetch/automation via TinyFish; deployed by install.sh §6b
 ```
 
 The skill installs through `skills/super-ultra-code-plan/`, which is a set of symlinks into
@@ -179,6 +181,10 @@ installer checks for the parent directory first (`~/.claude`, `~/.gemini/antigra
 and skips the target rather than fabricating an empty config tree. So a target that is absent after a
 successful `./install.sh` means the harness is not installed — it is not a failed install. Run
 `./install.sh --dry-run` to see exactly which targets your machine qualifies for.
+
+`install.sh` §6b also deploys the vendored `use-tinyfish` skill (`skills/use-tinyfish/`,
+upstream `tinyfish-io/tinyfish-cookbook`) to the same skill targets, plus
+`~/.config/opencode/skills/use-tinyfish/` which `tinyfish connect` does not write itself.
 
 ---
 

@@ -124,6 +124,8 @@ Activate only the reasoning lenses relevant to the task. Always use the core len
 | 🧰 Reproducibility | Environment, dependency, fixture, or external service affects results | Versions, setup, fixture, command, expected output, and environment boundary |
 | 🏷️ Epistemic & Provenance | External entities, new libraries/APIs, or past decisions referenced | Entity verification, source freshness, Human vs Assistant commitment attribution |
 
+> **The 💡 Creative & Convergent output is not verified by anything.** That row asks for 2–3 alternatives, trade-offs, and one recommendation, and no test, lint, or runner step checks whether the alternatives are real, whether the trade-offs are honest, or whether the recommendation follows from them. Two spikes were opened to give it a check and both were closed without one: `2026-09-30-jev-decision-gate-spike.md` F6 was closed `corpus not viable` because the workspace holds 4 within-set alternative pairs and **0 near-duplicates** (`docs/code-plan/spikes/2026-09-30-jev-dedupe-corpus-spike-report.md`), so there is nothing to measure a dedupe model against; the earlier F1 was dropped for the same reason. Do not assume a gate exists downstream. The check on this row is the human reading it immediately after, and that is the whole of it.
+
 ### 🧭 Task-to-Mode Routing
 
 | Task path | Activate first |

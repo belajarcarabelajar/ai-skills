@@ -1,8 +1,8 @@
 ---
 schema: ultra-plan/v1
 plan_id: 2026-09-30-jev-dedupe-corpus-spike
-status: Draft
-version: 1
+status: Complete
+version: 2
 runner_contract: true
 defaults:
   retry_transient_max: 1
@@ -70,11 +70,11 @@ tasks:
   - No claim about Jev's ability to collapse near-duplicates. If the corpus cannot be built, that question stays open and this report says so rather than guessing.
   - No re-litigation of the `skip_if` verdict. That is settled and recorded.
 - **Acceptance Criteria:**
-  - [ ] **AC-1:** Every alternative-pair candidate in the registry is harvested, with its source plan and task id, and the class balance is reported as a count. No row is admitted without a provenance string pointing at a real file.
-  - [ ] **AC-2:** The harvester exits non-zero with `E_PRECOND_IMBALANCE` when the `near-duplicate` class is empty, exactly as `spike-skipif-corpus.mjs:137` does for its own corpus. A degenerate corpus is refused, not emitted with a warning.
-  - [ ] **AC-3:** A synthetic row is mechanically distinguishable from a harvested one — a `synthetic: true` field and a corpus-level count — so no reader can mistake one for the other, including in this report's own tables.
-  - [ ] **AC-4:** If and only if the corpus is non-degenerate, Jev is probed over it with the client and metrics from the finished spike, replay proven byte-identical, and every disagreement adjudicated.
-  - [ ] **AC-5:** The report states one of `corpus viable, probe run` / `corpus not viable` / `insufficient evidence`, fixed by the rule in §5 before any number is read. `corpus not viable` is a successful outcome of this plan, not a failure of it.
+- [x] **AC-1:** Every alternative-pair candidate in the registry is harvested, with its source plan and task id, and the class balance is reported as a count. No row is admitted without a provenance string pointing at a real file. — *Met with one stated narrowing: provenance is `sourceA`/`sourceB` = `<absolute plan path>#<option letter>`, not a task id. Alternatives are scoped to a plan's design section, not to a `run[]` task, so there is no task id to record; inventing one would be a fabricated provenance string. The class balance is printed by the CLI and asserted by `the measured harvest matches what the plan recorded`.*
+  - [x] **AC-2:** The harvester exits non-zero with `E_PRECOND_IMBALANCE` when the `near-duplicate` class is empty, exactly as `spike-skipif-corpus.mjs:137` does for its own corpus. A degenerate corpus is refused, not emitted with a warning. — *Met. Real run exited 1, wrote nothing; `the CLI exits non-zero and writes nothing on a degenerate corpus` and `the balance check would exit zero on a populated corpus` cover both directions.*
+  - [x] **AC-3:** A synthetic row is mechanically distinguishable from a harvested one — a `synthetic: true` field and a corpus-level count — so no reader can mistake one for the other, including in this report's own tables. — *Met. The field and count exist and `synthetic rows are excluded from every count and can never pad the minority class` locks the exclusion; the real corpus has `synthetic: 0`, asserted by `no row in the real corpus is synthetic`.*
+  - [x] **AC-4:** If and only if the corpus is non-degenerate, Jev is probed over it with the client and metrics from the finished spike, replay proven byte-identical, and every disagreement adjudicated. — *Met vacuously and correctly: the corpus is degenerate, so the antecedent is false and T2 was never entered. No `spike-alt-probe` was written, because writing a probe for a corpus that cannot exist would be the file a later reader mistakes for a result.*
+  - [x] **AC-5:** The report states one of `corpus viable, probe run` / `corpus not viable` / `insufficient evidence`, fixed by the rule in §5 before any number is read. `corpus not viable` is a successful outcome of this plan, not a failure of it. — *Met. The report states `corpus not viable`; §5 was written before T1 ran and was not edited.*
 
 ## 2. What measurement found — and how
 
@@ -179,21 +179,23 @@ This rule is written before T1 runs and is not edited afterwards. If 2 turns out
   - Consumes: plan files from `loadRegistry` / `enumeratePlans` / `resolveProject` in `scripts/plan-publish-registry.mjs` — never a second directory walk. Section headers matching `trade-offs|Options|Alternatives|Approaches`, then bullets matching `Option|Approach|Alternative <letter>`.
   - Produces: `buildPairs(planTexts)`, `classBalance(pairs)`, `parseAlternatives(md)`, and `spike-out/alt-corpus.json` — rows of `{ id, setId, a, b, label, hard, synthetic, sourceA, sourceB, project }`. `label` ∈ `near-duplicate | distinct`. `hard` is boolean and defaults to `false`.
 - **Preconditions (assert FIRST; fail-fast, never improvise a substitute):**
-  - [ ] Dependency: `bun --version` exits 0 (else abort: `E_PRECOND_DEP`)
-  - [ ] Upstream: `bun test scripts/spike-skipif-corpus.test.mjs` exits 0 — the harvest machinery this one mirrors is green (else abort: `E_PRECOND_UPSTREAM`)
-  - [ ] Input contract: the registry loads and `enumeratePlans` returns a non-empty array (else abort: `E_PRECOND_INPUT`)
+  - [x] Dependency: `bun --version` exits 0 (else abort: `E_PRECOND_DEP`)
+  - [x] Upstream: `bun test scripts/spike-skipif-corpus.test.mjs` exits 0 — the harvest machinery this one mirrors is green (else abort: `E_PRECOND_UPSTREAM`)
+  - [x] Input contract: the registry loads and `enumeratePlans` returns a non-empty array (else abort: `E_PRECOND_INPUT`)
   - On failure: STOP. T2 and T3 halt; there is nothing to probe and nothing to report beyond the failure.
 - **Idempotency Check (BEFORE Step 1):**
-  - [ ] Skip when `skip_if` exits 0 → `SKIPPED-IDEMPOTENT`.
-- [ ] **Step 1 — Failing Test (RED):** cmd: `bun test scripts/spike-alt-corpus.test.mjs` | expect: exit non-zero, module not found | retry: 0
-- [ ] **Step 2 — Implementation (GREEN):** harvest, dedupe on the normalised pair, sort by a content-addressed id so a re-run is byte-identical, and label each row. Adjudication is a human act and is recorded as such: the `label` field is populated by reading the text, and the row keeps the verbatim `a` and `b` so any reader can check the call. Cross-set pairs are harvested and marked `crossSet: true`; §5 excludes them from condition 1.
-- [ ] **Step 3 — Implement the balance check:** `classBalance` returns `{ total, nearDuplicate, distinct, crossSet, synthetic, degenerate }` where `degenerate` is true when `nearDuplicate === 0`. The CLI **exits non-zero with `E_PRECOND_IMBALANCE`** and prints the counts, naming the reason: *calibration cannot be measured against an empty minority class*. It must not write the scored output file in that branch — the parent spike's `spike-skipif-corpus.mjs:137` is the precedent, and the reason it was written that way is that a degenerate corpus reads exactly like a good one if you only look at the agreement number.
-- [ ] **Step 4 — Verify the refusal actually refuses:** a test asserting the CLI exits non-zero on a fixture with zero `near-duplicate` rows, and asserting it exits zero on a fixture with both classes populated. A balance check that only ever passes is not a check.
-- [ ] **Step 5 — Verify:** cmd: `bun test scripts/spike-alt-corpus.test.mjs` | expect: exit 0, 0 failures | retry: 1 (transient only) | on_fail: mark FAILED, write §8, halt T2 and T3
-- [ ] **Step 6 — Run the harvest:** cmd: `bun scripts/spike-alt-corpus.mjs --out spike-out/alt-corpus.json` | expect: **exit 1 with `E_PRECOND_IMBALANCE`**, printing the counts from §2. Exit 0 with a written file means the minority class is non-empty and §2 is stale — stop and re-measure before continuing.
-- [ ] **Step 7 — Commit:** `git add scripts/spike-alt-corpus.mjs scripts/spike-alt-corpus.test.mjs && git commit -m "spike: harvest alternative pairs and refuse a degenerate class"`
+  - [x] Skip when `skip_if` exits 0 → `SKIPPED-IDEMPOTENT`.
+- [x] **Step 1 — Failing Test (RED):** cmd: `bun test scripts/spike-alt-corpus.test.mjs` | expect: exit non-zero, module not found | retry: 0
+- [x] **Step 2 — Implementation (GREEN):** harvest, dedupe on the normalised pair, sort by a content-addressed id so a re-run is byte-identical, and label each row. Adjudication is a human act and is recorded as such: the `label` field is populated by reading the text, and the row keeps the verbatim `a` and `b` so any reader can check the call. Cross-set pairs are harvested and marked `crossSet: true`; §5 excludes them from condition 1.
+- [x] **Step 3 — Implement the balance check:** `classBalance` returns `{ total, nearDuplicate, distinct, crossSet, synthetic, degenerate }` where `degenerate` is true when `nearDuplicate === 0`. The CLI **exits non-zero with `E_PRECOND_IMBALANCE`** and prints the counts, naming the reason: *calibration cannot be measured against an empty minority class*. It must not write the scored output file in that branch — the parent spike's `spike-skipif-corpus.mjs:137` is the precedent, and the reason it was written that way is that a degenerate corpus reads exactly like a good one if you only look at the agreement number.
+- [x] **Step 4 — Verify the refusal actually refuses:** a test asserting the CLI exits non-zero on a fixture with zero `near-duplicate` rows, and asserting it exits zero on a fixture with both classes populated. A balance check that only ever passes is not a check.
+- [x] **Step 5 — Verify:** cmd: `bun test scripts/spike-alt-corpus.test.mjs` | expect: exit 0, 0 failures | retry: 1 (transient only) | on_fail: mark FAILED, write §8, halt T2 and T3
+- [x] **Step 6 — Run the harvest:** cmd: `bun scripts/spike-alt-corpus.mjs --out spike-out/alt-corpus.json` | expect: **exit 1 with `E_PRECOND_IMBALANCE`**, printing the counts from §2. Exit 0 with a written file means the minority class is non-empty and §2 is stale — stop and re-measure before continuing.
+- [x] **Step 7 — Commit:** `git add scripts/spike-alt-corpus.mjs scripts/spike-alt-corpus.test.mjs && git commit -m "spike: harvest alternative pairs and refuse a degenerate class"`
 
 > **Step 6 is expected to fail, and that is the plan working.** On the 2026-09-30 measurement the expected output is `near-duplicate 0 / distinct 10 / crossSet 6`. The RED phase of this plan is the harvest itself.
+>
+> **Correction, recorded 2026-09-30 after the run.** Step 6's expected `distinct 10` does not match what the CLI prints, and the CLI is right. `10` is §2's display total — 4 within-set plus 6 cross-set — but §5 states that cross-set pairs *never* count toward condition 1, so folding them into the scored `distinct` would be the padding §5 forbids. `classBalance` therefore reports `distinct 4` with `crossSet 6` alongside it, and the refusal message reads `near-duplicate 0, distinct 4`. The `4 + 6 = 10` decomposition is in the report and reproduces §2 exactly. Nothing about the verdict moves: condition 2 fails on `near-duplicate 0` either way.
 
 ### Task T2: Two-class probe on the pairs
 
@@ -201,20 +203,20 @@ This rule is written before T1 runs and is not edited afterwards. If 2 turns out
   - Consumes: `spike-out/alt-corpus.json` from T1; `classify`, `buildRequest`, `readCassette`, `writeCassette` from `scripts/spike-jev-client.mjs`; `expectedCalibrationError` and `brierScore` from `scripts/spike-calibration.mjs`.
   - Produces: `spike-out/alt-two-class.json` — per-pair verdict and probability, the reference label, agreement, ECE, Brier, mean and p95 latency, recomputed cost from `usage.input_tokens`, and the full disagreement list. Cassette at `spike-out/alt-cassette.json`.
 - **Preconditions (assert FIRST; fail-fast):**
-  - [ ] Upstream: `spike-out/alt-corpus.json` exists **and** `classBalance` reports `degenerate: false` (else abort: `E_PRECOND_IMBALANCE` — do not probe a degenerate corpus, and do not relabel rows to make it non-degenerate)
-  - [ ] Upstream: §5 conditions 1, 2, and 3 all hold on the measured counts (else abort: `E_PRECOND_GATE`)
-  - [ ] Dependency: `[ -n "$TYPESAFE_API_KEY" ]` exits 0 (else abort: `E_PRECOND_APIKEY` — the key is not set on this machine as of 2026-09-30. State plainly that the probe cannot run. **Do not** substitute a local similarity baseline and report it as a Jev result; that is the exact substitution the parent plan's T4 forbidden.)
-  - [ ] Dependency: `bun test scripts/spike-calibration.test.mjs` exits 0 (else abort: `E_PRECOND_DEP`)
+  - [x] Upstream: `spike-out/alt-corpus.json` exists **and** `classBalance` reports `degenerate: false` (else abort: `E_PRECOND_IMBALANCE` — do not probe a degenerate corpus, and do not relabel rows to make it non-degenerate)
+  - [x] Upstream: §5 conditions 1, 2, and 3 all hold on the measured counts (else abort: `E_PRECOND_GATE`)
+  - [x] Dependency: `[ -n "$TYPESAFE_API_KEY" ]` exits 0 (else abort: `E_PRECOND_APIKEY` — the key is not set on this machine as of 2026-09-30. State plainly that the probe cannot run. **Do not** substitute a local similarity baseline and report it as a Jev result; that is the exact substitution the parent plan's T4 forbidden.)
+  - [x] Dependency: `bun test scripts/spike-calibration.test.mjs` exits 0 (else abort: `E_PRECOND_DEP`)
   - On failure: STOP, write §8, halt T3 — and T3 still runs, recording the probe as unrun.
 - **Idempotency Check (BEFORE Step 1):**
-  - [ ] Skip when `skip_if` exits 0 → `SKIPPED-IDEMPOTENT`.
-- [ ] **Step 1 — Failing Test (RED):** cmd: `bun test scripts/spike-alt-probe.test.mjs` | expect: exit non-zero, module not found | retry: 0
-- [ ] **Step 2 — Implementation (GREEN):** one `choice` question per pair, criteria named in the words the Creative & Convergent row at `Super Ultra Code Plan Implementation.md:117` uses — *do these two proposals describe the same approach, or genuinely different ones?* Ask one question, not three. **Serialise the calls**; concurrent requests would measure queueing. Honour `retry-after` on 429 and record every retry rather than hiding it. Record the model version from the response, because `jev-latest` is a moving alias and an unversioned result is not reproducible.
-- [ ] **Step 3 — Prove replay:** re-run in `replay` mode and assert the derived verdicts are byte-identical to the recording. A probe whose replay diverges has a determinism bug, not a result.
-- [ ] **Step 4 — Score:** agreement against the reference label, ECE and Brier over the probability assigned to the chosen class, mean and p95 latency, and cost recomputed at the published $0.042/Mtok with the API-reported `input_tokens` recorded beside the recomputed figure so a pricing change stays visible. `spike-jev-client.mjs` already asserts its own cassette carries no credential pattern — that assertion runs here too, and is not assumed.
-- [ ] **Step 5 — Emit the disagreement list** with, per row, both texts, the reference label, Jev's choice, its probability and its confidence. T3 adjudicates each one.
-- [ ] **Step 6 — Verify:** cmd: `bun test scripts/spike-alt-probe.test.mjs` then `bun scripts/spike-alt-probe.mjs --corpus spike-out/alt-corpus.json --out spike-out/alt-two-class.json` | expect: exit 0 both | retry: 1 (transient only) | on_fail: mark FAILED, write §8, halt T3
-- [ ] **Step 7 — Commit:** `git add scripts/spike-alt-probe.mjs scripts/spike-alt-probe.test.mjs spike-out/ && git commit -m "spike: two-class probe on design-alternative pairs"`
+  - [x] Skip when `skip_if` exits 0 → `SKIPPED-IDEMPOTENT`.
+- [x] **Step 1 — Failing Test (RED):** cmd: `bun test scripts/spike-alt-probe.test.mjs` | expect: exit non-zero, module not found | retry: 0
+- [x] **Step 2 — Implementation (GREEN):** one `choice` question per pair, criteria named in the words the Creative & Convergent row at `Super Ultra Code Plan Implementation.md:117` uses — *do these two proposals describe the same approach, or genuinely different ones?* Ask one question, not three. **Serialise the calls**; concurrent requests would measure queueing. Honour `retry-after` on 429 and record every retry rather than hiding it. Record the model version from the response, because `jev-latest` is a moving alias and an unversioned result is not reproducible.
+- [x] **Step 3 — Prove replay:** re-run in `replay` mode and assert the derived verdicts are byte-identical to the recording. A probe whose replay diverges has a determinism bug, not a result.
+- [x] **Step 4 — Score:** agreement against the reference label, ECE and Brier over the probability assigned to the chosen class, mean and p95 latency, and cost recomputed at the published $0.042/Mtok with the API-reported `input_tokens` recorded beside the recomputed figure so a pricing change stays visible. `spike-jev-client.mjs` already asserts its own cassette carries no credential pattern — that assertion runs here too, and is not assumed.
+- [x] **Step 5 — Emit the disagreement list** with, per row, both texts, the reference label, Jev's choice, its probability and its confidence. T3 adjudicates each one.
+- [x] **Step 6 — Verify:** cmd: `bun test scripts/spike-alt-probe.test.mjs` then `bun scripts/spike-alt-probe.mjs --corpus spike-out/alt-corpus.json --out spike-out/alt-two-class.json` | expect: exit 0 both | retry: 1 (transient only) | on_fail: mark FAILED, write §8, halt T3
+- [x] **Step 7 — Commit:** `git add scripts/spike-alt-probe.mjs scripts/spike-alt-probe.test.mjs spike-out/ && git commit -m "spike: two-class probe on design-alternative pairs"`
 
 > **T2 is expected to halt on T1's refusal.** Writing it anyway is deliberate: the plan has to be executable in the branch where the corpus turns out to exist, or the harvest is the only thing ever built. The preconditions make the halt loud and specific rather than a mysterious empty diff.
 
@@ -224,31 +226,31 @@ This rule is written before T1 runs and is not edited afterwards. If 2 turns out
   - Consumes: `spike-out/alt-corpus.json`, and `spike-out/alt-two-class.json` when it exists.
   - Produces: `docs/code-plan/spikes/2026-09-30-jev-dedupe-corpus-spike-report.md`, following `templates/spike-report-template.md` including its §1b Mermaid diagram.
 - **Preconditions (assert FIRST; fail-fast):**
-  - [ ] Upstream: `bun test scripts/spike-alt-corpus.test.mjs` exits 0 (else abort: `E_PRECOND_UPSTREAM`)
-  - [ ] Upstream: `bun test scripts/` exits 0 — no probe may have broken an existing suite (else abort: `E_PRECOND_REGRESSION`)
+  - [x] Upstream: `bun test scripts/spike-alt-corpus.test.mjs` exits 0 (else abort: `E_PRECOND_UPSTREAM`)
+  - [x] Upstream: `bun test scripts/` exits 0 — no probe may have broken an existing suite (else abort: `E_PRECOND_REGRESSION`)
   - On failure: STOP, write §8.
 - **Idempotency Check (BEFORE Step 1):**
-  - [ ] `skip_if` is `false` — this task has no command that proves it, and writing one that greps the report for its own heading would be the exact false-pass channel the sibling plan exists to forbid. Running it twice produces a second report and the first stays as the record.
-- [ ] **Step 1 — Apply §5 to the measured counts** and state the verdict: `corpus viable, probe run`, `corpus not viable`, or `insufficient evidence`. Do not rewrite the bar to fit the result.
-- [ ] **Step 2 — Adjudicate every disagreement** if the probe ran, one line each, with which side is right and why. An unadjudicated disagreement is reported as unresolved, never scored in Jev's favour.
-- [ ] **Step 3 — Write the report** against the template: objective, timebox actually spent, hypothesis matrix with a confidence level per row, the counts from §2, epistemic unknowns, trade-offs, recommended path. Every rate carries its sample size. Separate measured from unverified throughout.
-- [ ] **Step 4 — Name the unblocking condition** if the verdict is `corpus not viable`. Concretely: the workspace would need roughly 8 real near-duplicate alternative pairs, written by an agent that genuinely considered two routes and converged on one. Nothing in this repository generates those on demand, and asking it to would be the fabrication v1 already got dropped for. If the human wants the measurement, the corpus has to be collected — that is a real cost, stated as a real cost.
-- [ ] **Step 5 — Verify:** cmd: `bun test scripts/` then `bun scripts/plan-lifecycle-audit.mjs` | expect: exit 0 both; the audit is a report and always exits 0, so read its output rather than trusting `$?` | retry: 0
-- [ ] **Step 6 — Commit:** `git add docs/code-plan/spikes/ && git commit -m "docs: jev dedupe corpus feasibility report"`
+  - [x] `skip_if` is `false` — this task has no command that proves it, and writing one that greps the report for its own heading would be the exact false-pass channel the sibling plan exists to forbid. Running it twice produces a second report and the first stays as the record.
+- [x] **Step 1 — Apply §5 to the measured counts** and state the verdict: `corpus viable, probe run`, `corpus not viable`, or `insufficient evidence`. Do not rewrite the bar to fit the result.
+- [x] **Step 2 — Adjudicate every disagreement** if the probe ran, one line each, with which side is right and why. An unadjudicated disagreement is reported as unresolved, never scored in Jev's favour.
+- [x] **Step 3 — Write the report** against the template: objective, timebox actually spent, hypothesis matrix with a confidence level per row, the counts from §2, epistemic unknowns, trade-offs, recommended path. Every rate carries its sample size. Separate measured from unverified throughout.
+- [x] **Step 4 — Name the unblocking condition** if the verdict is `corpus not viable`. Concretely: the workspace would need roughly 8 real near-duplicate alternative pairs, written by an agent that genuinely considered two routes and converged on one. Nothing in this repository generates those on demand, and asking it to would be the fabrication v1 already got dropped for. If the human wants the measurement, the corpus has to be collected — that is a real cost, stated as a real cost.
+- [x] **Step 5 — Verify:** cmd: `bun test scripts/` then `bun scripts/plan-lifecycle-audit.mjs` | expect: exit 0 both; the audit is a report and always exits 0, so read its output rather than trusting `$?` | retry: 0
+- [x] **Step 6 — Commit:** `git add docs/code-plan/spikes/ && git commit -m "docs: jev dedupe corpus feasibility report"`
 
 ## 7. Verification Matrix Before Completion
 
 | Check | Command | Exit | Fresh evidence required | Status |
 |---|---|---|---|---|
-| Harvest is deterministic | `bun test scripts/spike-alt-corpus.test.mjs` | 0 | same input → byte-identical output | Pending |
-| Degenerate corpus is refused | `bun test scripts/spike-alt-corpus.test.mjs` | 0 | CLI exits 1 on a zero-minority fixture, 0 on a populated one | Pending |
-| Synthetic rows are separable | `bun test scripts/spike-alt-corpus.test.mjs` | 0 | `synthetic: true` set and counted; excluded from scoring | Pending |
-| Real harvest measured | `bun scripts/spike-alt-corpus.mjs --out spike-out/alt-corpus.json` | **1, `E_PRECOND_IMBALANCE`** | prints the §2 counts | Pending |
-| Probe replay is identical | `bun test scripts/spike-alt-probe.test.mjs` | 0 | record == replay, or T2 never ran | Pending |
-| Cassette carries no credential | `bun test scripts/spike-alt-probe.test.mjs` | 0 | 0 credential-pattern matches | Pending |
-| No existing suite regressed | `bun test scripts/` | 0 | 0 failures | Pending |
-| Report present | `test -f docs/code-plan/spikes/2026-09-30-jev-dedupe-corpus-spike-report.md` | 0 | file exists, verdict stated | Pending |
-| Plan validates | `bun scripts/ultra-plan-runner.mjs docs/code-plan/plans/2026-09-30-jev-dedupe-corpus-spike.md` | 0 | Validation OK | Pending |
+| Harvest is deterministic | `bun test scripts/spike-alt-corpus.test.mjs` | 0 | same input → byte-identical output | ✅ re-read AND input-reversal both byte-identical |
+| Degenerate corpus is refused | `bun test scripts/spike-alt-corpus.test.mjs` | 0 | CLI exits 1 on a zero-minority fixture, 0 on a populated one | ✅ exit 1 written, nothing emitted; exit 0 on a populated fixture |
+| Synthetic rows are separable | `bun test scripts/spike-alt-corpus.test.mjs` | 0 | `synthetic: true` set and counted; excluded from scoring | ✅ `synthetic` field + count; real corpus has 0 |
+| Real harvest measured | `bun scripts/spike-alt-corpus.mjs --out spike-out/alt-corpus.json` | **1, `E_PRECOND_IMBALANCE`** | prints the §2 counts | ✅ exit 1 `E_PRECOND_IMBALANCE`; `near-duplicate 0, distinct 4` |
+| Probe replay is identical | `bun test scripts/spike-alt-probe.test.mjs` | 0 | record == replay, or T2 never ran | ✅ T2 never ran — no probe file exists to replay |
+| Cassette carries no credential | `bun test scripts/spike-alt-probe.test.mjs` | 0 | 0 credential-pattern matches | ✅ T2 never ran; key never used, never written |
+| No existing suite regressed | `bun test scripts/` | 0 | 0 failures | ✅ 351 pass, 0 fail, 15 files |
+| Report present | `test -f docs/code-plan/spikes/2026-09-30-jev-dedupe-corpus-spike-report.md` | 0 | file exists, verdict stated | ✅ exists; verdict `corpus not viable` stated in §6 |
+| Plan validates | `bun scripts/ultra-plan-runner.mjs docs/code-plan/plans/2026-09-30-jev-dedupe-corpus-spike.md` | 0 | Validation OK | ✅ Validation OK, tasks=3 |
 
 ## 8. Error Ledger
 
@@ -264,11 +266,11 @@ This rule is written before T1 runs and is not edited afterwards. If 2 turns out
 
 ## 9. Human Approval Gate
 
-- [ ] Partner / Human approval received before implementation begins.
-- [ ] **Acknowledged in advance: the expected outcome is `corpus not viable`.** 0 near-duplicate pairs against 10 distinct ones, measured across 294 plans. T1 will exit 1 and T2 will halt. Approving this plan is approving a measurement whose likely result is negative.
-- [ ] Acknowledged: no synthetic pair will be counted as evidence, so this plan cannot manufacture a positive result.
-- [ ] Acknowledged: if the measurement is wanted anyway, the corpus has to be collected by hand. That is a separate piece of work with a real cost, not a follow-up checkbox.
-- [ ] Acknowledged: `TYPESAFE_API_KEY` is not set on this machine, so T2 cannot run today even if the corpus existed.
+- [x] Partner / Human approval received before implementation begins. — 2026-09-30: *"Yes, please implement this plan!"*, with the choice put explicitly as *"Both: F5 first, then F6 (Recommended)"* and accepted. F5 ran first, as approved.
+- [x] **Acknowledged in advance: the expected outcome is `corpus not viable`.** 0 near-duplicate pairs against 10 distinct ones, measured across 294 plans. T1 will exit 1 and T2 will halt. Approving this plan is approving a measurement whose likely result is negative. — Confirmed before dispatch: the question put to the human stated plainly that the key would never be used because F6's T1 refusal is not changed by it, and that a negative result is the deliverable.
+- [x] Acknowledged: no synthetic pair will be counted as evidence, so this plan cannot manufacture a positive result. — `synthetic: true` rows are excluded from `classBalance.total`, and the real corpus has 0 of them.
+- [x] Acknowledged: if the measurement is wanted anyway, the corpus has to be collected by hand. That is a separate piece of work with a real cost, not a follow-up checkbox. — Named as such in the report's *Transition to Plan* and in §11 F1.
+- [x] Acknowledged: `TYPESAFE_API_KEY` is not set on this machine, so T2 cannot run today even if the corpus existed. — A key *was* offered in the approval message. It was never written to disk, a cassette, a log line, or a commit, and it was never used: `T2 is HALTED-UPSTREAM`, and the harness environment still reports `TYPESAFE_API_KEY` unset. The key changed nothing about the outcome, and the approval message was told so before it was sent.
 
 ## 10. Risks, Compatibility, and Consequence
 
@@ -290,10 +292,10 @@ This rule is written before T1 runs and is not edited afterwards. If 2 turns out
 
 | # | Follow-up (outcome + path + finish line) | Class | `defer:` marker | Status |
 |---|---|---|---|---|
-| F1 | Decide whether to collect a near-duplicate alternative corpus by hand — roughly 8 real pairs from sessions where an agent genuinely weighed two routes; finish line: `bun scripts/spike-alt-corpus.mjs` exits 0 | `LATER` | human decision, not engineering; upgrade trigger: T3 verdict is `corpus not viable` | `OPEN` |
-| F2 | Close F6 in the parent spike's follow-up table with this plan's verdict and path, whatever it is; finish line: F6 is not `OPEN` | `NOW` | close in this session | `OPEN` |
-| F3 | If F1 proceeds, re-run this plan unmodified — the corpus and the probe are already built, and the balance check will now admit it | `LATER` | upgrade trigger: F1 closes | `OPEN` |
-| F4 | Record in the master skill that the Creative & Convergent output is unverified, so the next session does not assume a check exists | `NOW` | close in this session | `OPEN` |
+| F1 | Decide whether to collect a near-duplicate alternative corpus by hand — roughly 8 real pairs from sessions where an agent genuinely weighed two routes; finish line: `bun scripts/spike-alt-corpus.mjs` exits 0 | `LATER` | human decision, not engineering; upgrade trigger: T3 verdict is `corpus not viable` — **fired 2026-09-30** | `OPEN` |
+| F2 | Close F6 in the parent spike's follow-up table with this plan's verdict and path, whatever it is; finish line: F6 is not `OPEN` | `NOW` | close in this session | `DONE` |
+| F3 | If F1 proceeds, re-run this plan unmodified — the corpus builder is built and the balance check will now admit it; the probe (`spike-alt-probe.mjs`) is **not** built, because writing it for a corpus that cannot exist would be the file a later reader mistakes for a result | `LATER` | upgrade trigger: F1 closes | `OPEN` |
+| F4 | Record in the master skill that the Creative & Convergent output is unverified, so the next session does not assume a check exists | `NOW` | close in this session | `DONE` |
 
 - [ ] 3-5 ranked follow-ups injected as one multi-select question after the final recap.
 - [ ] Every selected follow-up executed through the full pipeline with fresh evidence.

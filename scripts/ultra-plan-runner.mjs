@@ -58,7 +58,7 @@ export const RUNNER_CONTRACT_KEYS = [
 // qualifies even when a grep filters its output, because the tool has to
 // succeed first. A bare file read does not.
 const EVIDENCE_COMMAND = /\b(bun|node|npm|pnpm|yarn|deno|python3?|pytest|go|cargo|make|cmake|git|systemctl|curl|docker|tsc|eslint|vitest|jest|ruff|mypy|gradle|mvn)\b/;
-const FILE_PROBE = /(^|[\s;&|(])(grep|egrep|rg|cat|head|tail|ls|find|wc|test)\b/;
+const FILE_PROBE = /(^|[\s;&|(/])(grep|egrep|rg|tgrep|cat|head|tail|ls|find|wc|test)\b/;
 
 // Five named classes, in this resolution order:
 //

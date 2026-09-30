@@ -675,6 +675,190 @@ test('the frozen spike classifier and the live one have genuinely diverged', () 
   }
 });
 
+// ---------- T5: a grep-family probe is `loose`, whatever qualifies the tool name ----------
+//
+// `FILE_PROBE` anchored on `(^|[\s;&|(])`, so a probe was only recognised when
+// nothing but whitespace or a shell operator stood in front of the tool name.
+// Two shapes walked straight past it, and both read a file and assert a string
+// is in it — the false-pass channel the rule exists to close, because the string
+// survives being moved into a comment and `plan-mark-done.mjs` then ticks the
+// task off it:
+//
+//   tgrep -q 'solutions/social-media.astro' apps/website/test/page-style-parity.test.ts
+//   /usr/bin/grep -q 'pomodoroMusicPlayer.ts:81' docs/website/privacy-facts-matrix.md
+//
+// 30 real `skip_if` values across 3 Snipset plans were misfiled on that gap.
+//
+// The expectations below are built from two string constants that are NOT
+// imported from production. A test whose "before" column were derived from the
+// live regex could not distinguish "the fix landed" from "the yardstick moved
+// with the code", which is the exact failure this lock exists to catch.
+const T5_PRE_CHANGE_FILE_PROBE_SOURCE = String.raw`(^|[\s;&|(])(grep|egrep|rg|cat|head|tail|ls|find|wc|test)\b`;
+const T5_PRE_CHANGE_FILE_PROBE = new RegExp(T5_PRE_CHANGE_FILE_PROBE_SOURCE);
+
+// An independent copy of the evidence token list, same reason and same pattern
+// as the lock above. `EVIDENCE_COMMAND` is untouched by T5, so the only thing
+// that decides these rows is whether the probe is seen.
+const T5_EVIDENCE_TOKENS = [
+  'bun', 'node', 'npm', 'pnpm', 'yarn', 'deno', 'python3', 'python', 'pytest',
+  'go', 'cargo', 'make', 'cmake', 'git', 'systemctl', 'curl', 'docker', 'tsc',
+  'eslint', 'vitest', 'jest', 'ruff', 'mypy', 'gradle', 'mvn',
+];
+const T5_HAS_EVIDENCE_TOKEN = new RegExp(`\\b(?:${T5_EVIDENCE_TOKENS.join('|')})\\b`);
+
+// `classifySkipIf` as it stood before this change, reconstructed from the
+// constants above. Its last line is the one that was wrong: a command matching
+// neither rule was filed under `behavioural`, the one class that means "this
+// proves the work works".
+function classifySkipIfBeforeT5(cmd) {
+  if (typeof cmd !== 'string' || cmd.trim() === '') return 'empty';
+  if (cmd.trim() === 'false') return 'sentinel';
+  if (T5_HAS_EVIDENCE_TOKEN.test(cmd)) return 'behavioural';
+  return T5_PRE_CHANGE_FILE_PROBE.test(cmd) ? 'loose' : 'behavioural';
+}
+
+// The 30 rows the audit named, transcribed from
+// `bun scripts/skipif-registry-audit.mjs --grep "tgrep -q"` (18) and
+// `--grep "/usr/bin/grep"` (12). Every one classified `unknown` at the time.
+const T5_GREP_FAMILY_ROWS = [
+  // Snipset  2026-09-26-linux-youtube-player-error-pomodoro.md (1)
+  ['2026-09-26-linux-youtube-player-error-pomodoro.md', 'T6', "/usr/bin/grep -q 'pomodoroMusicPlayer.ts:81' docs/website/privacy-facts-matrix.md"],
+  // Snipset  2026-09-26-youtube-native-audio-linux.md (11)
+  ['2026-09-26-youtube-native-audio-linux.md', 'T1', "/usr/bin/grep -q 'youtube_audio_service' apps/desktop/src-tauri/src/services/mod.rs"],
+  ['2026-09-26-youtube-native-audio-linux.md', 'T2', "/usr/bin/grep -q 'pub struct YoutubeAudioSource' apps/desktop/src-tauri/src/services/youtube_audio_service.rs"],
+  ['2026-09-26-youtube-native-audio-linux.md', 'T3', "/usr/bin/grep -q 'extract_youtube_audio_cmd' apps/desktop/src-tauri/src/commands/mod.rs"],
+  ['2026-09-26-youtube-native-audio-linux.md', 'T4', "/usr/bin/grep -q 'fn resolve_result_serializes_camel_case' apps/desktop/src-tauri/src/commands/youtube_cmds.rs"],
+  ['2026-09-26-youtube-native-audio-linux.md', 'T5', "/usr/bin/grep -q 'resolveYoutubeAudio' apps/web/src/services/TauriAdapter.ts"],
+  ['2026-09-26-youtube-native-audio-linux.md', 'T6', "/usr/bin/grep -q 'youtube-native' apps/web/src/features/pomodoro/types.ts"],
+  ['2026-09-26-youtube-native-audio-linux.md', 'T7', "/usr/bin/grep -q 'resolvedSourceUrl' apps/web/src/features/pomodoro/pomodoroMusicPlayer.ts"],
+  ['2026-09-26-youtube-native-audio-linux.md', 'T8', "/usr/bin/grep -q 'routes a resolved youtube track through the audio element' apps/web/src/features/pomodoro/pomodoroMusicPlayer.test.ts"],
+  ['2026-09-26-youtube-native-audio-linux.md', 'T9', "/usr/bin/grep -q 'resolveYoutubeAudio' apps/web/src/pages/pomodoro/PomodoroMusicBar.tsx"],
+  ['2026-09-26-youtube-native-audio-linux.md', 'T10', "/usr/bin/grep -q 'pomoMusicExtractorMissing' apps/web/src/i18n/locales/en/main.ts"],
+  ['2026-09-26-youtube-native-audio-linux.md', 'T11', "/usr/bin/grep -q 'stripResolvedSourceUrl' apps/web/src/pages/pomodoro/PomodoroMusicBar.tsx"],
+  // Snipset  2026-09-27-solutions-social-media-landing.md (18)
+  ['2026-09-27-solutions-social-media-landing.md', 'T5', "tgrep -q 'solutions/social-media.astro' apps/website/test/page-style-parity.test.ts"],
+  ['2026-09-27-solutions-social-media-landing.md', 'T6', "tgrep -q '/solutions/social-media|' apps/website/src/data/siteSearchIndex.ts"],
+  ['2026-09-27-solutions-social-media-landing.md', 'T7', "tgrep -q 'solutions/social-media.astro' apps/website/test/seo/breadcrumb-list.test.ts"],
+  ['2026-09-27-solutions-social-media-landing.md', 'T8', "tgrep -q '/solutions/social-media' apps/website/src/pages/solutions/marketing.astro"],
+  ['2026-09-27-solutions-social-media-landing.md', 'T9', "tgrep -q 'solutions/social-media' apps/website/dist/client/sitemap-0.xml"],
+  ['2026-09-27-solutions-social-media-landing.md', 'T10', "tgrep -q 'solutions/social-media' apps/website/public/llms.txt"],
+  ['2026-09-27-solutions-social-media-landing.md', 'T11', "tgrep -q 'solutions/social-media' apps/website/dist/client/id/solutions/social-media/index.html"],
+  ['2026-09-27-solutions-social-media-landing.md', 'T15', "tgrep -q '/id/docs' apps/website/src/data/solutions/social-media.id.ts && exit 1 || exit 0"],
+  ['2026-09-27-solutions-social-media-landing.md', 'T16', "tgrep -q 'href=\"/pricing\"' apps/website/src/pages/id/solutions/social-media.astro"],
+  ['2026-09-27-solutions-social-media-landing.md', 'T17', "tgrep -q 'Tidak dinilai' apps/website/src/data/solutions/social-media.id.ts"],
+  ['2026-09-27-solutions-social-media-landing.md', 'T18', "tgrep -q 'solutions-social-media' apps/website/src/lib/ruleChat/evaluationPageCases.ts"],
+  ['2026-09-27-solutions-social-media-landing.md', 'T19', "tgrep -q 'solutions-social-media' apps/website/src/lib/ruleChat/knowledge.test.ts"],
+  ['2026-09-27-solutions-social-media-landing.md', 'T20', "tgrep -q 'solutions-social-media' apps/website/src/lib/ruleChat/flows.ts"],
+  ['2026-09-27-solutions-social-media-landing.md', 'T21', 'tgrep -q "verifyTurnstileWithReason" apps/website/test/api/verify-license.test.ts'],
+  ['2026-09-27-solutions-social-media-landing.md', 'T22', 'tgrep -q "lihat harga" apps/website/src/pages/id/solutions/social-media.astro'],
+  ['2026-09-27-solutions-social-media-landing.md', 'T23', 'tgrep -q "solutions/social-media" apps/website/scripts/llms-txt/index.ts'],
+  ['2026-09-27-solutions-social-media-landing.md', 'T24', 'tgrep -q "solutions-social-media" apps/website/src/lib/ruleChat/knowledgeAliases.ts'],
+  ['2026-09-27-solutions-social-media-landing.md', 'T25', 'tgrep -q "dateTime:+" apps/website/src/pages/solutions/marketing.astro'],
+];
+
+test('tgrep is a file probe even though the tool name is a single token', () => {
+  // `tgrep` is the trigram-index grep on this machine. The pre-change alternation
+  // had no entry for it, and `^t` matched neither `^` nor the boundary class, so
+  // the row was unrecognised.
+  assert.equal(classifySkipIf("tgrep -q 'marker' apps/x.test.ts"), 'loose');
+});
+
+test('a path-qualified grep is a file probe', () => {
+  // `/usr/bin/grep` is a real invocation and the same false-pass channel; a
+  // leading `/` is what put it out of reach of `(^|[\s;&|(])`.
+  assert.equal(classifySkipIf("/usr/bin/grep -q 'marker' docs/x.md"), 'loose');
+});
+
+test('all 30 grep-family rows are now loose, and every one of them was behavioural before', () => {
+  // The regression lock, and the second half is the load-bearing half. Asserting
+  // only `loose` would pass just as happily if the probe had never been
+  // misclassified in the first place — the test would be measuring the fixture,
+  // not the defect. So each row is run through the pre-change classifier too and
+  // must come back `behavioural`: that is what `plan-mark-done.mjs` was being
+  // handed, under the one class that means "this proves the work works".
+  //
+  // Guard the fixture first, or the "before" column is unfalsifiable: if any of
+  // these commands contains an evidence token, it was `behavioural` for a
+  // legitimate reason and proves nothing about the probe gap.
+  const withEvidenceToken = T5_GREP_FAMILY_ROWS
+    .map(([plan, task, cmd]) => [plan, task, cmd])
+    .filter(([, , cmd]) => T5_HAS_EVIDENCE_TOKEN.test(cmd));
+  assert.deepEqual(
+    withEvidenceToken.map(([, task]) => task),
+    [],
+    'lock fixture is broken: these commands DO run a tool, so their old verdict was correct anyway',
+  );
+
+  const notLooseNow = [];
+  const notBehaviouralBefore = [];
+  for (const [plan, task, cmd] of T5_GREP_FAMILY_ROWS) {
+    if (classifySkipIf(cmd) !== 'loose') notLooseNow.push(`${plan} ${task}`);
+    if (classifySkipIfBeforeT5(cmd) !== 'behavioural') notBehaviouralBefore.push(`${plan} ${task}`);
+  }
+  assert.deepEqual(notLooseNow, [], 'these grep-family rows are not file probes any more');
+  assert.deepEqual(
+    notBehaviouralBefore,
+    [],
+    'these rows were NOT misclassified before the change, so asserting "now loose" proves nothing',
+  );
+
+  // The pre-change regex really is the one that was in the file, checked here so
+  // a typo in the constant above cannot quietly make the "before" column agree
+  // with the "after" one for a reason that has nothing to do with the gap.
+  assert.equal(T5_PRE_CHANGE_FILE_PROBE.test("grep -q 'x' f.md"), true, 'the old regex did catch a bare grep');
+  assert.equal(T5_PRE_CHANGE_FILE_PROBE.test("tgrep -q 'x' f.md"), false, 'the old regex missed tgrep');
+  assert.equal(T5_PRE_CHANGE_FILE_PROBE.test("/usr/bin/grep -q 'x' f.md"), false, 'the old regex missed a path-qualified grep');
+});
+
+test('adding / to the boundary class does not turn a path segment into a probe', () => {
+  // The risk this change introduces, recorded in the plan's risk table: a `/`
+  // in the boundary class means `/test/`, `/head/`, `/find/` and `/ls/` inside a
+  // path now match FILE_PROBE. Every command below has such a segment in a path
+  // argument and none of them is a file probe — each one runs a tool that has to
+  // succeed first, so each must stay `behavioural`. A false rejection here means
+  // a real idempotency proof gets refused.
+  const OVER_REACH = [
+    'bun run app/head/foo.ts',
+    'bun run app/test/foo.ts',
+    'bun test apps/website/test/page-style-parity.test.ts',
+    'git diff --quiet -- apps/website/test/page-style-parity.test.ts',
+    'make -C apps/test build',
+    'cargo build --manifest-path apps/head/Cargo.toml',
+  ];
+  // Guard: each of these must be `behavioural` because it matches
+  // EVIDENCE_COMMAND, which is tested FIRST. If one ever stopped matching, it
+  // would be passing this assertion by accident, via the probe branch.
+  const withoutEvidenceToken = OVER_REACH.filter((cmd) => !T5_HAS_EVIDENCE_TOKEN.test(cmd));
+  assert.deepEqual(withoutEvidenceToken, [], 'over-reach fixture is broken: these do not run a known tool');
+
+  for (const cmd of OVER_REACH) {
+    assert.equal(classifySkipIf(cmd), 'behavioural', `${cmd} runs a tool; a path segment is not a probe`);
+  }
+  // The distinction the rule turns on is unchanged: the same widened boundary
+  // must not rescue a command whose ONLY tool is a file reader.
+  assert.equal(classifySkipIf('ls apps/head/'), 'loose', 'a bare path listing is still a file probe');
+  assert.equal(classifySkipIf("head -n 20 apps/test/log.txt"), 'loose');
+});
+
+test('the widening is additive: a bare grep or rg probe is still loose', () => {
+  // Guards against a reclassification dressed as a fix. If the change had moved
+  // the probe branch, or reordered it behind the evidence branch, these would
+  // stop being `loose`.
+  for (const cmd of [
+    "grep -q 'Plan Publish Gate' snippets/x.md",
+    'rg -q marker src/x.ts',
+    "egrep -q 'a|b' f.md",
+    "cat f.md | grep -q 'x'",
+    'test -f out.txt',
+    'find . -name "*.png"',
+  ]) {
+    assert.equal(classifySkipIf(cmd), 'loose', `${cmd} reads a file and asserts a string is in it`);
+  }
+  // And a grep filtering a tool's output stays behavioural, which is the reason
+  // the evidence branch is ordered first.
+  assert.equal(classifySkipIf("bun test a.test.ts 2>&1 | grep -q 'passes'"), 'behavioural');
+});
+
 test('a behavioural skip_if that greps a tool is not a file-content probe', () => {
   // The distinction that has to hold: a grep filtering a test run is
   // behavioural, because the runner has to exit 0 before the grep sees

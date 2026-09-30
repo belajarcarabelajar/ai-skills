@@ -5,7 +5,7 @@ import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { normalizeCmd, stableId, buildCorpus, balanceOf } from './spike-skipif-corpus.mjs';
-import { classifySkipIf } from './ultra-plan-runner.mjs';
+import { classifySpikeSkipIf } from './spike-skipif-classifier.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CLI = path.join(ROOT, 'scripts', 'spike-skipif-corpus.mjs');
@@ -44,15 +44,15 @@ test('buildCorpus dedupes on the normalized command and keeps first source', () 
   assert.equal(bun.source, 'a.md', 'first source wins so the row is read-order independent');
 });
 
-test('buildCorpus attaches the classifySkipIf label to every row', () => {
+test('buildCorpus attaches the classifySpikeSkipIf label to every row', () => {
   const corpus = buildCorpus([
     { cmd: 'bun test scripts/x.test.mjs', source: 'a.md' },
     { cmd: "grep -q 'Marker' src/x.md", source: 'b.md' },
   ]);
   const labels = corpus.map((r) => r.label).sort();
   assert.deepEqual(labels, ['behavioural', 'loose']);
-  // The label must come from the production function, not from a copy of it.
-  for (const row of corpus) assert.equal(row.label, classifySkipIf(row.cmd));
+  // The label must come from the frozen snapshot, not from a copy of it.
+  for (const row of corpus) assert.equal(row.label, classifySpikeSkipIf(row.cmd));
 });
 
 test('buildCorpus sorts by stable id so a re-run is byte-identical', () => {
@@ -106,7 +106,7 @@ test('the CLI writes valid JSON, one row per unique command, sorted by id', () =
     assert.equal(typeof row.id, 'string');
     assert.equal(typeof row.cmd, 'string');
     assert.ok(['behavioural', 'loose'].includes(row.label), `unexpected label ${row.label}`);
-    assert.equal(row.label, classifySkipIf(row.cmd), 'the label must agree with the production classifier');
+    assert.equal(row.label, classifySpikeSkipIf(row.cmd), 'the label must agree with the frozen classifier snapshot');
     assert.equal(typeof row.source, 'string');
     assert.equal(typeof row.project, 'string');
   }

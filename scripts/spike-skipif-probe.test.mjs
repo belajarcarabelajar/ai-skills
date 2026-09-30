@@ -4,11 +4,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { summarize, verdictFor, PRICE_PER_MTOK } from './spike-skipif-probe.mjs';
-import { classifySkipIf } from './ultra-plan-runner.mjs';
+import { classifySpikeSkipIf } from './spike-skipif-classifier.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
-test('summarize scores a corpus against the production classifier', () => {
+test('summarize scores a corpus against the frozen classifier snapshot', () => {
   const corpus = [
     { id: 'a', cmd: 'bun test x.test.mjs', label: 'behavioural' },
     { id: 'b', cmd: "grep -q 'M' f.md", label: 'loose' },
@@ -128,12 +128,12 @@ test('the probe replays the committed cassette and reproduces the committed scor
   assert.equal(replayed.summarize.verdict.verdict, saved.verdict.verdict);
 });
 
-test('every reference label agrees with the production classifier', () => {
+test('every reference label agrees with the frozen classifier snapshot', () => {
   const corpusFile = path.join(ROOT, 'spike-out', 'corpus.json');
   if (!fs.existsSync(corpusFile)) return;
   const corpus = JSON.parse(fs.readFileSync(corpusFile, 'utf8'));
   for (const row of corpus) {
-    assert.equal(row.label, classifySkipIf(row.cmd), `stale label on ${row.cmd}`);
+    assert.equal(row.label, classifySpikeSkipIf(row.cmd), `stale label on ${row.cmd}`);
   }
 });
 

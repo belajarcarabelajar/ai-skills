@@ -1,10 +1,18 @@
 #!/usr/bin/env node
 // Spike T4 — the two-class probe.
 //
-// 200 real commands, each labelled by the production `classifySkipIf`, each also
-// classified by Jev. The output is agreement, calibration, latency, and a
+// 200 real commands, each labelled by the frozen `classifySpikeSkipIf`, each
+// also classified by Jev. The output is agreement, calibration, latency, and a
 // recomputed cost figure — plus the full disagreement list, because the gate in
 // the plan turns on whether any disagreement is a case where the regex is wrong.
+//
+// The reference label comes from `./spike-skipif-classifier.mjs`, a frozen
+// snapshot, NOT from the live `classifySkipIf` in `./ultra-plan-runner.mjs`.
+// The live function is changing — `sentinel`, `unknown`, and a widened
+// `FILE_PROBE` are all coming — and each of those changes invalidates rows of
+// the committed corpus. Pointing this probe at the live function would not
+// measure a different system; it would stop this report from being about the
+// system it is published as being about.
 //
 // Requests are serialised. Two hundred concurrent calls would measure the queue
 // and the rate limiter, not the model, and the latency figure is one of the
@@ -15,7 +23,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { classify, deriveVerdict, CASSETTE_FILE, scanCassette } from './spike-jev-client.mjs';
 import { expectedCalibrationError, brierScore, accuracy, confusion } from './spike-calibration.mjs';
-import { classifySkipIf } from './ultra-plan-runner.mjs';
+import { classifySpikeSkipIf } from './spike-skipif-classifier.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -45,8 +53,8 @@ export function summarize(corpus, results, { latency = [], retried = 0 } = {}) {
     if (!row) {
       throw new Error(`summarize: result ${res.id} has no corpus row; a dropped row would silently inflate agreement`);
     }
-    if (row.label !== classifySkipIf(row.cmd)) {
-      throw new Error(`summarize: corpus label for ${res.id} is stale relative to classifySkipIf`);
+    if (row.label !== classifySpikeSkipIf(row.cmd)) {
+      throw new Error(`summarize: corpus label for ${res.id} is stale relative to classifySpikeSkipIf`);
     }
     const v = res.verdict;
     pairs.push({ p: v.p, correct: v.correct });
@@ -149,10 +157,10 @@ export async function runProbe({ corpus, mode, out, cassette = CASSETTE_FILE }) 
     }
   }
 
-  // The reference label is the production function, so the corpus's stored label
-  // is only a cache. Re-derive it here so a stale corpus cannot quietly skew the
-  // agreement number.
-  const reference = corpus.map((r) => ({ ...r, label: classifySkipIf(r.cmd) }));
+  // The reference label is the frozen function of the freeze date, so the
+  // corpus's stored label is only a cache. Re-derive it here so a stale corpus
+  // cannot quietly skew the agreement number.
+  const reference = corpus.map((r) => ({ ...r, label: classifySpikeSkipIf(r.cmd) }));
 
   const summarizeOut = summarize(reference, results, { latency, retried });
   const verdict = verdictFor({

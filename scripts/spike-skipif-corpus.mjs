@@ -2,25 +2,35 @@
 // Spike T1 — extract and label the skip_if corpus.
 //
 // Every `run[].cmd` this workspace's plans declare is a command a person wrote
-// and believed was runnable. Labelling each one with the production
-// `classifySkipIf` gives a reference label that is already in production and
-// already unit-tested, so the probe in T4 compares a model against a fact
-// rather than against another opinion.
+// and believed was runnable. Labelling each one with the frozen
+// `classifySpikeSkipIf` gives a reference label that was already in production
+// and already unit-tested when this corpus was recorded, so the probe in T4
+// compares a model against a fact rather than against another opinion.
+//
+// The classifier is imported from `./spike-skipif-classifier.mjs`, NOT from
+// `./ultra-plan-runner.mjs`. The live `classifySkipIf` is changing — it gains
+// `sentinel` and `unknown`, and its `FILE_PROBE` widens — and every one of those
+// changes makes rows of this corpus stale. The committed 200-row corpus and
+// the published 0.995 are the record of one classifier; re-importing the live
+// one would silently point the record at a different thing.
 //
 // The YAML subset is parsed by importing the runner's own parser. A second
 // parser in this repository would be a second answer to "what does a plan say",
-// and the two would eventually disagree.
+// and the two would eventually disagree. That parser is the right thing to keep
+// importing even while the classifier is frozen separately — the freeze is about
+// one function, not about the runner.
 
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { extractFrontmatter, parseUltraPlanYaml, classifySkipIf } from './ultra-plan-runner.mjs';
+import { extractFrontmatter, parseUltraPlanYaml } from './ultra-plan-runner.mjs';
+import { classifySpikeSkipIf } from './spike-skipif-classifier.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DEFAULT_VAULT = path.join(process.env.HOME || '', 'Dokumen', 'Obsidian Vault');
 
-// `empty` is a third classifySkipIf return, but it only fires on a blank or
+// `empty` is a third classifySpikeSkipIf return, but it only fires on a blank or
 // non-string command. Those rows are dropped during normalisation, so a
 // harvested corpus is necessarily two-class. Labelling it as anything else
 // would invent a class with no examples to measure.
@@ -42,7 +52,7 @@ export function buildCorpus(rows) {
     if (cmd === '') continue;
     // First source wins, so the row does not depend on directory read order.
     if (!byCmd.has(cmd)) {
-      const label = classifySkipIf(cmd);
+      const label = classifySpikeSkipIf(cmd);
       byCmd.set(cmd, {
         id: stableId(cmd),
         cmd,

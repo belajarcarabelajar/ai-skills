@@ -9,6 +9,7 @@
     "test": "bun test scripts/",
     "plan:check": "bun scripts/ultra-plan-runner.mjs",
     "contract:check": "bun scripts/check-runner-contract.mjs",
+    "audit:skipif": "bun scripts/skipif-registry-audit.mjs",
     "plan:run": "bun scripts/ultra-plan-runner.mjs --execute",
     "snippets:status": "bun scripts/sync-snippets.mjs --status",
     "snippets:check": "bun scripts/sync-snippets.mjs --check",

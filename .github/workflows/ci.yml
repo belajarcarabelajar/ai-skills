@@ -85,10 +85,14 @@ jobs:
           path: diagrams/
         if-no-files-found: warn
 
-      # The mirror-drift gate and the plan-lifecycle audit are absent from this
-      # file on purpose: both need the developer's own Obsidian vault and Snipset
-      # database, which a hosted runner does not have. `bun run ci` covers what
-      # is portable, and the local command below is the one that closes the loop.
+      # The mirror-drift gate, the plan-lifecycle audit, and the skip_if registry
+      # audit are absent from this file on purpose: all three walk the
+      # developer's own Obsidian vault via plans.publish.json (the first two
+      # also need the real Snipset database), which a hosted runner does not
+      # have. On a runner with no vault the registry enumerates nothing, and the
+      # skipif audit exits 1 with "nothing measured" — which would be a red build
+      # reporting the absence of data as a defect. `bun run ci` covers what is
+      # portable, and the local commands below are the ones that close the loop.
       - name: Run Skill Validation Script
         run: bun scripts/validate-skill.mjs
 

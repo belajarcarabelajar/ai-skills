@@ -939,6 +939,128 @@ test('a stale exemption is itself an error, so the allowlist cannot become perma
   assert.ok(errors.some((e) => /allow_loose_skip_if names "T1"/.test(e)), errors.join(' | '));
 });
 
+// ---------- T4: `unknown` warns instead of passing silently ----------
+//
+// `classifySkipIf` already returns `unknown` for a command that matches neither
+// rule. Before T4 nothing read that class: it fell through validation untouched,
+// so an unrecognised `skip_if` was as invisible as a real test run. T4 names it —
+// as a warning, per task, with the remediation. Never as an error, and that is
+// the load-bearing half: 14 tasks in 7 plans would stop running, four of those
+// plans in repositories this one does not own.
+//
+// The tests below come in pairs on purpose. A test that only checks the happy
+// path passes just as happily if the warning is emitted unconditionally, or if
+// `unknown` is escalated to an error. Each of those two failure modes gets its
+// own lock below.
+const isUnknownWarning = (w) => /matches neither the evidence rule nor the file-probe rule/.test(w);
+
+test('an unknown skip_if is reported as a warning naming the task and the command, and not as an error', () => {
+  const { errors, warnings } = validatePlan({
+    schema: 'ultra-plan/v1',
+    tasks: [
+      { id: 'T2', depends_on: [], skip_if: 'bash scripts/kwin-effect-control.sh --verify evidence/anim-02-kwin-control.txt' },
+      { id: 'T4', depends_on: [], skip_if: 'pacman -Q rtkit >/dev/null 2>&1' },
+      { id: 'T5', depends_on: [], skip_if: 'cmp -s a b' },
+    ],
+  }, null);
+  assert.deepEqual(errors, [], 'an unknown skip_if must not become unrunnable');
+  // Three tasks, three rows to repair independently. One aggregate warning would
+  // read fine and be useless: the debt only closes when each of the 14 registry
+  // rows is adjudicated on its own.
+  const mine = warnings.filter(isUnknownWarning);
+  assert.equal(mine.length, 3, 'one warning per unknown row, not one aggregate');
+  for (const [id, cmd] of [
+    ['T2', 'bash scripts/kwin-effect-control.sh --verify evidence/anim-02-kwin-control.txt'],
+    ['T4', 'pacman -Q rtkit >/dev/null 2>&1'],
+    ['T5', 'cmp -s a b'],
+  ]) {
+    assert.ok(
+      mine.some((w) => w.includes(id) && w.includes(cmd)),
+      `no warning names both ${id} and its command; got: ${mine.join(' | ')}`,
+    );
+  }
+});
+
+test('the unknown warning says what to do about it', () => {
+  const { warnings } = validatePlan({
+    schema: 'ultra-plan/v1',
+    tasks: [{ id: 'T4', depends_on: [], skip_if: 'pacman -Q rtkit >/dev/null 2>&1' }],
+  }, null);
+  const w = warnings.find(isUnknownWarning);
+  assert.ok(w, 'expected an unknown warning');
+  // Both remedies are named, because both are correct answers to different rows:
+  // name the tool in a recognised form, or admit the command has no exit status
+  // worth asserting and use the documented sentinel.
+  assert.match(w, /name the tool in a form the rule recognises/i, w);
+  assert.match(w, /skip_if: "false"/, w);
+  assert.match(w, /cannot tell whether it fails on behaviour/, w);
+});
+
+test('the loose error is unchanged, character for character', () => {
+  // The regression lock for "do not reword". This message is load-bearing for
+  // anyone who has read it, so T4 branches on the class around it rather than
+  // rewriting it. If this string ever changes, that is a deliberate act, not a
+  // side effect of adding a branch next door.
+  const { errors } = validatePlan({
+    schema: 'ultra-plan/v1',
+    tasks: [{ id: 'T3', depends_on: [], skip_if: "grep -q 'Marker' src/x.md" }],
+  }, null);
+  const expected = 'task T3 skip_if is a file-content probe: "grep -q \'Marker\' src/x.md". '
+    + 'It proves a string is present, not that the behaviour works — it survives the string moving into a comment. '
+    + 'Use a command that fails on behaviour, or add this task id to defaults.allow_loose_skip_if '
+    + 'to grandfather an existing plan.';
+  assert.deepEqual(errors, [expected]);
+});
+
+test('a sentinel produces no unknown warning, and neither does a behavioural skip_if', () => {
+  // The distinction the five classes exist for. `"false"` is a deliberate
+  // no-command marker; `bun test` is a real tool run. Neither is a command the
+  // classifier failed to understand, so neither is reported as one. A test that
+  // only covered the unknown rows would pass with the warning keyed off "not
+  // behavioural" — which would light up 77 sentinels and every probe at once.
+  const { warnings } = validatePlan({
+    schema: 'ultra-plan/v1',
+    tasks: [
+      { id: 'S1', depends_on: [], skip_if: 'false' },
+      { id: 'S2', depends_on: [], skip_if: ' false ' },
+      { id: 'B1', depends_on: [], skip_if: 'bun test a.test.ts' },
+      { id: 'B2', depends_on: [], skip_if: "bun test a.test.ts 2>&1 | grep -q 'passes'" },
+      { id: 'L1', depends_on: [], skip_if: 'test -f out.txt' },
+    ],
+  }, null);
+  assert.deepEqual(warnings.filter(isUnknownWarning), []);
+});
+
+test('NEGATIVE CONTROL: a plan with no unknown rows carries no unknown warning', () => {
+  // Without this, every test above would also pass against an unconditional
+  // `warnings.push(...)`. This is the one test that says the warning is earned.
+  const { warnings } = validatePlan({
+    schema: 'ultra-plan/v1',
+    tasks: [
+      { id: 'T1', depends_on: [], skip_if: 'bun test a.test.ts' },
+      { id: 'T2', depends_on: [], skip_if: 'false' },
+      { id: 'T3', depends_on: [], run: [{ cmd: 'bun test a.test.ts' }] },
+    ],
+  }, null);
+  assert.deepEqual(warnings.filter(isUnknownWarning), [], warnings.join(' | '));
+});
+
+test('a plan whose only defect is an unknown skip_if still validates clean', () => {
+  // The property that keeps 14 tasks in 7 plans runnable. Promoting `unknown` to
+  // an error would fail exactly here, which is why this test exists separately
+  // from the first one: it asserts the absence of the error, not the presence
+  // of the warning.
+  const { errors } = validatePlan({
+    schema: 'ultra-plan/v1',
+    runner_contract: true,
+    tasks: [
+      { id: 'T2', depends_on: [], skip_if: 'bash scripts/plasma-anim-baseline.sh --verify evidence/anim-02.txt' },
+      { id: 'T4', depends_on: [], skip_if: 'pacman -Q rtkit >/dev/null 2>&1' },
+    ],
+  }, null);
+  assert.deepEqual(errors, []);
+});
+
 test('on_precondition_fail: halt-plan stops independent tasks too', () => {
   const { status } = runPlan(
     [

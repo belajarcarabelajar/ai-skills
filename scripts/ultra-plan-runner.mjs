@@ -528,20 +528,54 @@ export function validatePlan(plan, body) {
       warnings.push(`task ${t.id} declares skip_if but no run[]: the runner reports NEEDS-AGENT `
         + 'and the agent executes the prose steps itself.');
     }
-    if (t.skip_if && classifySkipIf(t.skip_if) === 'loose') {
-      // A text probe is a false-pass channel, not a warning: plan-mark-done
-      // ticks the task on this claim alone. Existing plans are grandfathered by
-      // naming the task in defaults.allow_loose_skip_if, and a name that is no
-      // longer needed is an error too, so the allowlist cannot quietly become a
-      // permanent blanket.
-      if (looseAllowed.has(t.id)) {
-        usedExemptions.add(t.id);
-      } else {
-        errors.push(`task ${t.id} skip_if is a file-content probe: "${t.skip_if}". It proves a string is `
-          + 'present, not that the behaviour works — it survives the string moving into a comment. '
-          + 'Use a command that fails on behaviour, or add this task id to defaults.allow_loose_skip_if '
-          + 'to grandfather an existing plan.');
+    if (t.skip_if) {
+      const cls = classifySkipIf(t.skip_if);
+      if (cls === 'loose') {
+        // A text probe is a false-pass channel, not a warning: plan-mark-done
+        // ticks the task on this claim alone. Existing plans are grandfathered by
+        // naming the task in defaults.allow_loose_skip_if, and a name that is no
+        // longer needed is an error too, so the allowlist cannot quietly become a
+        // permanent blanket.
+        //
+        // The message is verbatim as it has always read. It is load-bearing for
+        // anyone who has seen it, and a test pins it character for character, so
+        // rewording it is a deliberate act rather than a side effect of adding a
+        // branch next door.
+        if (looseAllowed.has(t.id)) {
+          usedExemptions.add(t.id);
+        } else {
+          errors.push(`task ${t.id} skip_if is a file-content probe: "${t.skip_if}". It proves a string is `
+            + 'present, not that the behaviour works — it survives the string moving into a comment. '
+            + 'Use a command that fails on behaviour, or add this task id to defaults.allow_loose_skip_if '
+            + 'to grandfather an existing plan.');
+        }
+      } else if (cls === 'unknown') {
+        // The command matches neither rule, so the runner cannot tell whether it
+        // fails on behaviour. That is a different defect from `loose` and it gets
+        // a different severity, for a reason measured rather than assumed:
+        // 14 tasks in 7 plans carry an unclassifiable `skip_if`, and four of those
+        // plans live in `ram-audit`, `PS2` and `fasttrack` — repositories this one
+        // does not own. Erroring here would be one commit in this repository
+        // deciding that someone else's plan cannot run.
+        //
+        // So: warn, per row, with the remediation. The debt becomes visible and
+        // individually actionable; promoting this to an error is a follow-up that
+        // lands after the 14 rows are repaired at source. `bun
+        // scripts/skipif-registry-audit.mjs` re-derives the list on demand.
+        //
+        // Both remedies are named because both are correct answers to different
+        // rows: some commands should name a tool the rule recognises, and some
+        // genuinely have no exit status worth asserting — `pacman -Q rtkit`
+        // asserts a package is installed, which no code change can regress — and
+        // for those the documented answer is the `skip_if: "false"` sentinel.
+        warnings.push(`task ${t.id} skip_if matches neither the evidence rule nor the file-probe rule, `
+          + `so the runner cannot tell whether it fails on behaviour: "${t.skip_if}". `
+          + 'Name the tool in a form the rule recognises, or, if the command genuinely has no exit status '
+          + 'worth asserting, use skip_if: "false".');
       }
+      // `empty`, `sentinel` and `behavioural` need nothing said about them. A
+      // sentinel in particular is a deliberate no-command marker and must not be
+      // confused with a command nobody could classify.
     }
   }
   for (const id of looseAllowed) {

@@ -195,6 +195,13 @@ if (import.meta.main) {
   //
   // So replay carries the previous value forward and records its own timestamp
   // separately, which is the fact it is actually asserting.
+  //
+  // And a replay that finds nothing new writes nothing at all. Otherwise every
+  // verification run leaves `replayedAt` a second newer in the working tree, a
+  // committed evidence file diffs on each read, and the next person learns to
+  // ignore a dirty diff — the precise habit that lets a real change hide. The
+  // write still happens whenever the re-derived numbers differ from what is on
+  // disk, which is the only case where the file has something to say.
   const previous = fs.existsSync(out) ? JSON.parse(fs.readFileSync(out, 'utf8')) : null;
   const payload = {
     probe: 'jev-skipif-two-class',
@@ -206,8 +213,17 @@ if (import.meta.main) {
     cassetteClean: scan,
     ...run.summarize,
   };
-  fs.mkdirSync(path.dirname(out), { recursive: true });
-  fs.writeFileSync(out, `${JSON.stringify(payload, null, 2)}\n`);
+
+  const strip = ({ replayedAt, ...rest }) => rest;
+  const unchanged = mode === 'replay'
+    && previous
+    && JSON.stringify(strip(payload)) === JSON.stringify(strip(previous));
+  if (unchanged) {
+    console.log('write          skipped — replay re-derived exactly what is on disk');
+  } else {
+    fs.mkdirSync(path.dirname(out), { recursive: true });
+    fs.writeFileSync(out, `${JSON.stringify(payload, null, 2)}\n`);
+  }
 
   const s = run.summarize;
   console.log(`model           ${run.model}`);

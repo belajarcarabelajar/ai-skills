@@ -179,6 +179,25 @@ test('a replay does not re-date the recording, because recordedAt means "when th
   fs.rmSync(tmp, { recursive: true, force: true });
 });
 
+test('a replay that reproduces the file writes nothing, so verification does not dirty the tree', async () => {
+  // Why this exists: replay stamps its own `replayedAt`, so a replay that always
+  // wrote left the committed evidence one second newer after every check. A
+  // committed evidence file that diffs on each read teaches the next reader to
+  // ignore a dirty diff, which is how a real change hides.
+  //
+  // The property is stronger than "does not re-date" — it is "says nothing new,
+  // says nothing at all". The write still happens when the re-derived numbers
+  // differ, which is the seeded-fixture test above exercising.
+  const committed = path.join(ROOT, 'spike-out', 'two-class.json');
+  const before = fs.readFileSync(committed);
+  const { execFileSync } = await import('node:child_process');
+  const out = execFileSync('bun', [path.join(ROOT, 'scripts', 'spike-skipif-probe.mjs'), '--replay', '--out', committed], {
+    encoding: 'utf8',
+  });
+  assert.match(out, /write\s+skipped/, 'a replay with nothing to add must not write');
+  assert.deepEqual(fs.readFileSync(committed), before, 'the committed evidence changed on a no-op replay');
+});
+
 async function runReplay(corpus) {
   const { runProbe } = await import('./spike-skipif-probe.mjs');
   return runProbe({ corpus, mode: 'replay', out: null });

@@ -1,8 +1,8 @@
 ---
 schema: ultra-plan/v1
 plan_id: 2026-09-30-skipif-unknown-class
-status: Draft
-version: 1
+status: Complete
+version: 2
 runner_contract: true
 defaults:
   retry_transient_max: 1
@@ -126,13 +126,13 @@ tasks:
   - No edit to any plan outside this repository. Three Snipset plans are *reported* as affected by T3 and T5; repairing them is a separate, separately-approved piece of work.
   - No re-recording of the Jev spike. Its numbers stay as measured against `jev-1.13.0` on 2026-09-30.
 - **Acceptance Criteria:**
-  - [ ] **AC-1:** `classifySkipIf` returns one of `empty | sentinel | behavioural | loose | unknown`, and every return value is covered by a named test. No input shape reaches the `behavioural` fallthrough any more.
-  - [ ] **AC-2:** `skip_if: "false"` classifies as `sentinel` by an explicit rule, not as a side effect of matching no regex.
-  - [ ] **AC-3:** `tgrep -q 'x' f` and `/usr/bin/grep -q 'x' f` classify as `loose`, and a test asserts each one *would have been* `behavioural` before this change, so the regression cannot be reintroduced silently.
-  - [ ] **AC-4:** `validatePlan` emits a `WARN` naming the task id, the command, and the remediation, for every `unknown` `skip_if`. It emits no error, so no existing plan becomes unrunnable.
-  - [ ] **AC-5:** `scripts/skipif-registry-audit.mjs` enumerates the registry and reports, per plan, the class of every `skip_if` — so "which plans does a classifier change break" is a command, not a one-off measurement in a chat log.
-  - [ ] **AC-6:** The Jev spike's committed evidence still replays byte-identically, and its report carries a dated amendment recording the freeze, the reason, and the frozen numbers.
-  - [ ] **AC-7:** The master skill, the trigger snippet, and the F5 row describe the four classes accurately. No prose claims a behaviour the code no longer has.
+  - [x] **AC-1:** `classifySkipIf` returns one of `empty | sentinel | behavioural | loose | unknown`, and every return value is covered by a named test. No input shape reaches the `behavioural` fallthrough any more.
+  - [x] **AC-2:** `skip_if: "false"` classifies as `sentinel` by an explicit rule, not as a side effect of matching no regex.
+  - [x] **AC-3:** `tgrep -q 'x' f` and `/usr/bin/grep -q 'x' f` classify as `loose`, and a test asserts each one *would have been* `behavioural` before this change, so the regression cannot be reintroduced silently.
+  - [x] **AC-4:** `validatePlan` emits a `WARN` naming the task id, the command, and the remediation, for every `unknown` `skip_if`. It emits no error, so no existing plan becomes unrunnable.
+  - [x] **AC-5:** `scripts/skipif-registry-audit.mjs` enumerates the registry and reports, per plan, the class of every `skip_if` — so "which plans does a classifier change break" is a command, not a one-off measurement in a chat log.
+  - [x] **AC-6:** The Jev spike's committed evidence still replays byte-identically, and its report carries a dated amendment recording the freeze, the reason, and the frozen numbers.
+  - [x] **AC-7:** The master skill, the trigger snippet, and the F5 row describe all five classes accurately. No prose claims a behaviour the code no longer has.
 
 ## 2. What measurement found — and how
 
@@ -209,6 +209,12 @@ unknown       14   (the 14 that no token-level rule can decide)
 
 **Nothing becomes unrunnable in this repository.** The 30 newly-`loose` tasks are all in Snipset plans, which this repository's runner never loads — `bun scripts/ultra-plan-runner.mjs` takes one plan path, and neither `plan-publish.mjs` nor `validate-skill.mjs` calls `validatePlan` across the registry. The blast radius is *the next manual run of those three Snipset plans*, which is a documented consequence in §9, not a silent break.
 
+> **What execution actually found, recorded 2026-09-30.** T3 measured the pre-T5 state as `sentinel 78 · behavioural 219 · loose 84 · unknown 44`, and T5 moved it to `78 · 219 · 114 · 14`. Two things about that are worth keeping.
+>
+> First, the `behavioural` column did not move by a single row. That is the safety property of adding `/` to `FILE_PROBE`: the widened boundary now matches a `/test/` or `/head/` path segment, and the only thing stopping that from becoming a false rejection is that `EVIDENCE_COMMAND` is tested first. A test asserts the branch order directly — with the branches swapped, `bun run app/head/foo.ts` does come back `loose`.
+>
+> Second, one gap this change did not close and did not know about: a command running an **unlisted** tool whose path contains `/test/` would be newly `loose`. No such row exists in the registry, which is why `unknown` fell by exactly 30 and `behavioural` by 0 — but `cd apps/android && ./gradlew :app:testDebugUnitTest` is that shape and its path happens not to contain `/test/`. It remains `unknown`. Follow-up F2 owns it.
+>
 > **Correction, 2026-09-30, after T3 ran.** The counts in this section were measured before two plan files existed — this one and its F6 sibling. The real figures are 295 plans (not 293), 67 with frontmatter (not 65), and 425 `skip_if` values (not 415), of which 78 are sentinels (not 77) and 219 behavioural (not 210). Every delta is the +10 `skip_if` those two plans contribute: 1 sentinel and 9 behavioural. The `loose` and `unknown` columns are unaffected by their arrival, so the 84 / 44 split above is the measured one.
 >
 > A plan whose own numbers are stale by the time its own task runs is a plan that teaches its reader to distrust it, so this is recorded rather than quietly re-baselined. `bun scripts/skipif-registry-audit.mjs` is the command, and the numbers above are what it prints.
@@ -275,17 +281,17 @@ The `Unknown` transition is the whole point of this plan. It used to be an impli
   - Consumes: the two regex literals at `scripts/ultra-plan-runner.mjs:58-59`, copied verbatim.
   - Produces: `classifySpikeSkipIf(cmd)` in `scripts/spike-skipif-classifier.mjs`, returning the historical `empty | behavioural | loose` only. Plus `SPIKE_CLASSIFIER_FROZEN_ON = '2026-09-30'`.
 - **Preconditions (assert FIRST; fail-fast, never improvise a substitute):**
-  - [ ] Dependency: `bun --version` exits 0 (else abort: `E_PRECOND_DEP`)
-  - [ ] Upstream: `spike-out/two-class.json` exists and parses, and its `agreement` is `0.995` (else abort: `E_PRECOND_UPSTREAM` — without the committed evidence there is nothing to protect, and the freeze is premature)
-  - [ ] Input contract: the two regexes copied into the snapshot are byte-identical to the ones in `ultra-plan-runner.mjs` today (else abort: `E_PRECOND_INPUT`; if they already differ, stop and re-measure rather than freezing a mismatch)
+  - [x] Dependency: `bun --version` exits 0 (else abort: `E_PRECOND_DEP`)
+  - [x] Upstream: `spike-out/two-class.json` exists and parses, and its `agreement` is `0.995` (else abort: `E_PRECOND_UPSTREAM` — without the committed evidence there is nothing to protect, and the freeze is premature)
+  - [x] Input contract: the two regexes copied into the snapshot are byte-identical to the ones in `ultra-plan-runner.mjs` today (else abort: `E_PRECOND_INPUT`; if they already differ, stop and re-measure rather than freezing a mismatch)
   - On failure: STOP. Every later task depends on this one; continue nothing.
 - **Idempotency Check (BEFORE Step 1):**
-  - [ ] Skip when `skip_if` exits 0 → `SKIPPED-IDEMPOTENT`.
-- [ ] **Step 1 — Failing Test (RED):** cmd: `bun test scripts/spike-skipif-classifier.test.mjs` | expect: exit non-zero, `Cannot find module './spike-skipif-classifier.mjs'` | retry: 0
-- [ ] **Step 2 — Implementation (GREEN):** create the snapshot module. Repoint `spike-skipif-corpus.mjs` and `spike-skipif-probe.mjs` at `classifySpikeSkipIf` and **stop importing `classifySkipIf` from `ultra-plan-runner.mjs` entirely** — a re-import is how the freeze silently evaporates on the next refactor. Both spike test files follow.
-- [ ] **Step 3 — Verify:** cmd: `bun test scripts/` | expect: exit 0, 296+ pass, 0 fail — the full suite, not just the three files, because the corpus and probe tests are the ones that were about to break | retry: 1 (transient only) | on_fail: mark FAILED, write §7, halt all downstream
-- [ ] **Step 4 — Lock the freeze with a test that notices later drift:** a test asserting `classifySpikeSkipIf` reproduces the label of all 200 committed `spike-out/corpus.json` rows, and that the replayed agreement equals the committed `0.995`. This is what makes the freeze durable rather than a comment.
-- [ ] **Step 5 — Commit:** `git add scripts/spike-skipif-*.mjs && git commit -m "spike: freeze the classifier the jev gate was measured against"`
+  - [x] Skip when `skip_if` exits 0 → `SKIPPED-IDEMPOTENT`.
+- [x] **Step 1 — Failing Test (RED):** cmd: `bun test scripts/spike-skipif-classifier.test.mjs` | expect: exit non-zero, `Cannot find module './spike-skipif-classifier.mjs'` | retry: 0
+- [x] **Step 2 — Implementation (GREEN):** create the snapshot module. Repoint `spike-skipif-corpus.mjs` and `spike-skipif-probe.mjs` at `classifySpikeSkipIf` and **stop importing `classifySkipIf` from `ultra-plan-runner.mjs` entirely** — a re-import is how the freeze silently evaporates on the next refactor. Both spike test files follow.
+- [x] **Step 3 — Verify:** cmd: `bun test scripts/` | expect: exit 0, 296+ pass, 0 fail — the full suite, not just the three files, because the corpus and probe tests are the ones that were about to break | retry: 1 (transient only) | on_fail: mark FAILED, write §7, halt all downstream
+- [x] **Step 4 — Lock the freeze with a test that notices later drift:** a test asserting `classifySpikeSkipIf` reproduces the label of all 200 committed `spike-out/corpus.json` rows, and that the replayed agreement equals the committed `0.995`. This is what makes the freeze durable rather than a comment.
+- [x] **Step 5 — Commit:** `git add scripts/spike-skipif-*.mjs && git commit -m "spike: freeze the classifier the jev gate was measured against"`
 
 > **Why this is T1 and not a footnote.** Without it, T2 makes 32 corpus rows stale, `spike-skipif-probe.test.mjs:136` throws `stale label`, the replay test at line 110 cannot run, and the finished spike's headline number becomes unreproducible. The obvious alternative — re-record the corpus and re-run the probe — would change 0.995 to a number measured against a different classifier and quietly rewrite a published verdict. Freezing preserves the claim; re-recording destroys it.
 
@@ -295,15 +301,15 @@ The `Unknown` transition is the whole point of this plan. It used to be an impli
   - Consumes: `classifySkipIf(cmd)` as it stands.
   - Produces: `classifySkipIf(cmd) → 'empty' | 'sentinel' | 'behavioural' | 'loose' | 'unknown'`. Order of resolution: blank → `empty`; trimmed `=== 'false'` → `sentinel`; `EVIDENCE_COMMAND` → `behavioural`; `FILE_PROBE` → `loose`; otherwise `unknown`.
 - **Preconditions (assert FIRST; fail-fast):**
-  - [ ] Upstream: `bun test scripts/spike-skipif-classifier.test.mjs` exits 0 — the freeze is in place (else abort: `E_PRECOND_UPSTREAM`)
-  - [ ] Dependency: `bun test scripts/ultra-plan-runner.test.mjs` exits 0 (else abort: `E_PRECOND_DEP` — a red baseline cannot be improved, only confused)
+  - [x] Upstream: `bun test scripts/spike-skipif-classifier.test.mjs` exits 0 — the freeze is in place (else abort: `E_PRECOND_UPSTREAM`)
+  - [x] Dependency: `bun test scripts/ultra-plan-runner.test.mjs` exits 0 (else abort: `E_PRECOND_DEP` — a red baseline cannot be improved, only confused)
   - On failure: STOP, write §7, halt T3, T4, and everything downstream.
 - **Idempotency Check (BEFORE Step 1):**
-  - [ ] Skip when `skip_if` exits 0 → `SKIPPED-IDEMPOTENT`.
-- [ ] **Step 1 — Failing Test (RED):** cmd: `bun test scripts/ultra-plan-runner.test.mjs` | expect: exit non-zero on the new assertions only. If an *existing* assertion also fails, that is a T1 leak — stop and fix T1, do not adjust the old test to match.
-- [ ] **Step 2 — Implementation (GREEN):** delete the `: 'behavioural'` fallthrough. Add the sentinel rule with a comment stating that `"false"` is the documented no-command marker from the master skill, so the next reader does not "simplify" it away. Add a test per class.
-- [ ] **Step 3 — Verify:** cmd: `bun test scripts/ultra-plan-runner.test.mjs` | expect: exit 0, 0 failures | retry: 1 (transient only) | on_fail: mark FAILED, write §7, halt downstream
-- [ ] **Step 4 — Commit:** `git add scripts/ultra-plan-runner.mjs scripts/ultra-plan-runner.test.mjs && git commit -m "feat: classifySkipIf names sentinel and unknown instead of guessing behavioural"`
+  - [x] Skip when `skip_if` exits 0 → `SKIPPED-IDEMPOTENT`.
+- [x] **Step 1 — Failing Test (RED):** cmd: `bun test scripts/ultra-plan-runner.test.mjs` | expect: exit non-zero on the new assertions only. If an *existing* assertion also fails, that is a T1 leak — stop and fix T1, do not adjust the old test to match.
+- [x] **Step 2 — Implementation (GREEN):** delete the `: 'behavioural'` fallthrough. Add the sentinel rule with a comment stating that `"false"` is the documented no-command marker from the master skill, so the next reader does not "simplify" it away. Add a test per class.
+- [x] **Step 3 — Verify:** cmd: `bun test scripts/ultra-plan-runner.test.mjs` | expect: exit 0, 0 failures | retry: 1 (transient only) | on_fail: mark FAILED, write §7, halt downstream
+- [x] **Step 4 — Commit:** `git add scripts/ultra-plan-runner.mjs scripts/ultra-plan-runner.test.mjs && git commit -m "feat: classifySkipIf names sentinel and unknown instead of guessing behavioural"`
 
 > `bash scripts/x.sh --verify evidence/y.txt` becomes `unknown` here, and that is the correct answer. The command is behavioural in verify mode and not in generate mode, and no token-level regex can tell those apart. T4's warning is what makes that legible instead of alarming.
 
@@ -313,16 +319,16 @@ The `Unknown` transition is the whole point of this plan. It used to be an impli
   - Consumes: `plans.publish.json` via `loadRegistry` / `enumeratePlans` / `resolveProject` from `scripts/plan-publish-registry.mjs` — never a second directory walk, which is how two sources of truth about "what is a plan" come to disagree. `classifySkipIf` from T2.
   - Produces: `auditRegistry(reg, { classify })` returning `{ plans, withFrontmatter, skipIfTotal, tally, byProject, affected }`, plus a CLI writing JSON to stdout and a human table. `affected` lists every task whose class would change, with `plan`, `project`, `taskId`, `cmd`, `before`, `after`.
 - **Preconditions (assert FIRST; fail-fast):**
-  - [ ] Upstream: `bun test scripts/ultra-plan-runner.test.mjs` exits 0 (else abort: `E_PRECOND_UPSTREAM`)
-  - [ ] Input contract: `plans.publish.json` loads and `enumeratePlans` returns a non-empty array (else abort: `E_PRECOND_INPUT` — an empty registry would make every downstream count read as "no impact", which is the most dangerous possible wrong answer)
+  - [x] Upstream: `bun test scripts/ultra-plan-runner.test.mjs` exits 0 (else abort: `E_PRECOND_UPSTREAM`)
+  - [x] Input contract: `plans.publish.json` loads and `enumeratePlans` returns a non-empty array (else abort: `E_PRECOND_INPUT` — an empty registry would make every downstream count read as "no impact", which is the most dangerous possible wrong answer)
   - On failure: STOP, write §7, halt T5.
 - **Idempotency Check (BEFORE Step 1):**
-  - [ ] Skip when `skip_if` exits 0 → `SKIPPED-IDEMPOTENT`.
-- [ ] **Step 1 — Failing Test (RED):** cmd: `bun test scripts/skipif-registry-audit.test.mjs` | expect: exit non-zero, module not found | retry: 0
-- [ ] **Step 2 — Implementation (GREEN):** accept an injected `classify` so the audit can answer "what would change" by running twice — once with the current classifier, once with a candidate — instead of hardcoding a diff. Tally by class and by project. Read other repositories' plans; write nothing outside this repository. A plan with no frontmatter is counted separately, not silently skipped, mirroring the three-bucket rule in `plan-lifecycle-audit.mjs`.
-- [ ] **Step 3 — Verify:** cmd: `bun test scripts/skipif-registry-audit.test.mjs` | expect: exit 0, 0 failures | retry: 1 (transient only) | on_fail: mark FAILED, write §7, halt T5
-- [ ] **Step 4 — Reproduce §2 from the tool, not from this document:** cmd: `bun scripts/skipif-registry-audit.mjs` | expect: exit 0, and the printed tally matches the **pre-T5** figures in §2 (`sentinel` and `behavioural` as counted there, `loose` 84, `unknown` 44), with the 44 `unknown` rows listed by plan and task id. The `114 / 14` pair in §2's table is the **post-T5** state and is *not* reachable here — T5 depends on this task, so the widened `FILE_PROBE` does not exist yet. A mismatch against the pre-T5 figures means the measurement in §2 is stale and this plan's premise needs re-checking before continuing.
-- [ ] **Step 5 — Commit:** `git add scripts/skipif-registry-audit.mjs scripts/skipif-registry-audit.test.mjs && git commit -m "feat: audit which plans a skip_if classifier change would break"`
+  - [x] Skip when `skip_if` exits 0 → `SKIPPED-IDEMPOTENT`.
+- [x] **Step 1 — Failing Test (RED):** cmd: `bun test scripts/skipif-registry-audit.test.mjs` | expect: exit non-zero, module not found | retry: 0
+- [x] **Step 2 — Implementation (GREEN):** accept an injected `classify` so the audit can answer "what would change" by running twice — once with the current classifier, once with a candidate — instead of hardcoding a diff. Tally by class and by project. Read other repositories' plans; write nothing outside this repository. A plan with no frontmatter is counted separately, not silently skipped, mirroring the three-bucket rule in `plan-lifecycle-audit.mjs`.
+- [x] **Step 3 — Verify:** cmd: `bun test scripts/skipif-registry-audit.test.mjs` | expect: exit 0, 0 failures | retry: 1 (transient only) | on_fail: mark FAILED, write §7, halt T5
+- [x] **Step 4 — Reproduce §2 from the tool, not from this document:** cmd: `bun scripts/skipif-registry-audit.mjs` | expect: exit 0, and the printed tally matches the **pre-T5** figures in §2 (`sentinel` and `behavioural` as counted there, `loose` 84, `unknown` 44), with the 44 `unknown` rows listed by plan and task id. The `114 / 14` pair in §2's table is the **post-T5** state and is *not* reachable here — T5 depends on this task, so the widened `FILE_PROBE` does not exist yet. A mismatch against the pre-T5 figures means the measurement in §2 is stale and this plan's premise needs re-checking before continuing.
+- [x] **Step 5 — Commit:** `git add scripts/skipif-registry-audit.mjs scripts/skipif-registry-audit.test.mjs && git commit -m "feat: audit which plans a skip_if classifier change would break"`
 
 ### Task T4: `validatePlan` warns on `unknown`
 
@@ -330,14 +336,14 @@ The `Unknown` transition is the whole point of this plan. It used to be an impli
   - Consumes: `classifySkipIf` from T2; the existing `warnings` array at `scripts/ultra-plan-runner.mjs:434`.
   - Produces: one `WARN` per `unknown` `skip_if`, naming the task id, the command, and the remediation. No `errors` entry.
 - **Preconditions (assert FIRST; fail-fast):**
-  - [ ] Upstream: T2 green (else abort: `E_PRECOND_UPSTREAM`)
+  - [x] Upstream: T2 green (else abort: `E_PRECOND_UPSTREAM`)
   - On failure: STOP, write §7, halt T5.
 - **Idempotency Check (BEFORE Step 1):**
-  - [ ] Skip when `skip_if` exits 0 → `SKIPPED-IDEMPOTENT`.
-- [ ] **Step 1 — Failing Test (RED):** cmd: `bun test scripts/ultra-plan-runner.test.mjs` | expect: exit non-zero on the new warning assertion | retry: 0
-- [ ] **Step 2 — Implementation (GREEN):** in the `skip_if` validation block, branch on the class. `loose` keeps today's error verbatim — do not reword it, the message is load-bearing for anyone who has read it. `unknown` emits a warning that says what to do: name the tool in a behavioural form, or, if the command genuinely has no exit status worth asserting, use `skip_if: "false"`. The `NEEDS-AGENT` warning for a task with no `run[]` is unchanged.
-- [ ] **Step 3 — Verify:** cmd: `bun test scripts/ultra-plan-runner.test.mjs` | expect: exit 0, 0 failures | retry: 1 (transient only) | on_fail: mark FAILED, write §7, halt T5
-- [ ] **Step 4 — Commit:** `git add scripts/ultra-plan-runner.mjs scripts/ultra-plan-runner.test.mjs && git commit -m "feat: warn when a skip_if matches neither the evidence nor the probe rule"`
+  - [x] Skip when `skip_if` exits 0 → `SKIPPED-IDEMPOTENT`.
+- [x] **Step 1 — Failing Test (RED):** cmd: `bun test scripts/ultra-plan-runner.test.mjs` | expect: exit non-zero on the new warning assertion | retry: 0
+- [x] **Step 2 — Implementation (GREEN):** in the `skip_if` validation block, branch on the class. `loose` keeps today's error verbatim — do not reword it, the message is load-bearing for anyone who has read it. `unknown` emits a warning that says what to do: name the tool in a behavioural form, or, if the command genuinely has no exit status worth asserting, use `skip_if: "false"`. The `NEEDS-AGENT` warning for a task with no `run[]` is unchanged.
+- [x] **Step 3 — Verify:** cmd: `bun test scripts/ultra-plan-runner.test.mjs` | expect: exit 0, 0 failures | retry: 1 (transient only) | on_fail: mark FAILED, write §7, halt T5
+- [x] **Step 4 — Commit:** `git add scripts/ultra-plan-runner.mjs scripts/ultra-plan-runner.test.mjs && git commit -m "feat: warn when a skip_if matches neither the evidence nor the probe rule"`
 
 > **Warn, not error — and the reason is blast radius, not kindness.** Fourteen tasks in seven plans would stop running. Four of those plans are in `ram-audit`, `PS2` and `fasttrack`, which this plan does not own. An error here is a change to someone else's repository made by a commit in this one. The warning makes the debt visible and names the owner; promoting it to an error is a follow-up that lands after those 14 rows are repaired at source.
 
@@ -347,17 +353,17 @@ The `Unknown` transition is the whole point of this plan. It used to be an impli
   - Consumes: T3's measured `affected` list; T4's warning.
   - Produces: `FILE_PROBE` extended to `(^|[\s;&|(/])` and `tgrep` added to the alternation, so a path-qualified or `tgrep`-prefixed probe resolves as `loose`.
 - **Preconditions (assert FIRST; fail-fast):**
-  - [ ] Upstream: `bun test scripts/skipif-registry-audit.test.mjs` exits 0 and its `affected` list is non-empty (else abort: `E_PRECOND_UPSTREAM` — an empty list means the defect this task fixes is not the one the audit found, and the regex change would be aimed at nothing)
-  - [ ] Upstream: `bun test scripts/ultra-plan-runner.test.mjs` exits 0 (else abort: `E_PRECOND_UPSTREAM`)
+  - [x] Upstream: `bun test scripts/skipif-registry-audit.test.mjs` exits 0 and its `affected` list is non-empty (else abort: `E_PRECOND_UPSTREAM` — an empty list means the defect this task fixes is not the one the audit found, and the regex change would be aimed at nothing)
+  - [x] Upstream: `bun test scripts/ultra-plan-runner.test.mjs` exits 0 (else abort: `E_PRECOND_UPSTREAM`)
   - On failure: STOP, write §7, halt T6 and T7.
 - **Idempotency Check (BEFORE Step 1):**
-  - [ ] Skip when `skip_if` exits 0 → `SKIPPED-IDEMPOTENT`.
-- [ ] **Step 1 — Failing Test (RED):** cmd: `bun test scripts/ultra-plan-runner.test.mjs` | expect: exit non-zero — `tgrep -q …` and `/usr/bin/grep -q …` currently return `behavioural` | retry: 0
-- [ ] **Step 2 — Implementation (GREEN):** one character class and one alternation entry. Add the regression lock: a test asserting each of the 30 commands from T3's `affected` list is now `loose` **and** that the pre-change classifier called it `behavioural`. The second half matters — a test that only asserts the new answer passes just as happily if the probe was never misclassified.
-- [ ] **Step 3 — Verify:** cmd: `bun test scripts/ultra-plan-runner.test.mjs` | expect: exit 0, 0 failures | retry: 1 (transient only) | on_fail: mark FAILED, write §7, halt T6
-- [ ] **Step 4 — Re-audit:** cmd: `bun scripts/skipif-registry-audit.mjs` | expect: exit 0; `loose` rises 84 → 114, `unknown` stays 14, and the 30 newly-`loose` tasks are named by plan and id. Any other movement in the tally is a regression from this task, not a rounding artefact.
-- [ ] **Step 5 — Full suite:** cmd: `bun test scripts/` | expect: exit 0, 0 failures — in particular the T1 freeze test still passes, so the spike's 0.995 is intact after the production classifier moved | retry: 1 (transient only)
-- [ ] **Step 6 — Commit:** `git add scripts/ultra-plan-runner.mjs scripts/ultra-plan-runner.test.mjs && git commit -m "fix: tgrep and path-qualified grep are file probes, not behavioural checks"`
+  - [x] Skip when `skip_if` exits 0 → `SKIPPED-IDEMPOTENT`.
+- [x] **Step 1 — Failing Test (RED):** cmd: `bun test scripts/ultra-plan-runner.test.mjs` | expect: exit non-zero — `tgrep -q …` and `/usr/bin/grep -q …` currently return `behavioural` | retry: 0
+- [x] **Step 2 — Implementation (GREEN):** one character class and one alternation entry. Add the regression lock: a test asserting each of the 30 commands from T3's `affected` list is now `loose` **and** that the pre-change classifier called it `behavioural`. The second half matters — a test that only asserts the new answer passes just as happily if the probe was never misclassified.
+- [x] **Step 3 — Verify:** cmd: `bun test scripts/ultra-plan-runner.test.mjs` | expect: exit 0, 0 failures | retry: 1 (transient only) | on_fail: mark FAILED, write §7, halt T6
+- [x] **Step 4 — Re-audit:** cmd: `bun scripts/skipif-registry-audit.mjs` | expect: exit 0; `loose` rises 84 → 114, `unknown` stays 14, and the 30 newly-`loose` tasks are named by plan and id. Any other movement in the tally is a regression from this task, not a rounding artefact.
+- [x] **Step 5 — Full suite:** cmd: `bun test scripts/` | expect: exit 0, 0 failures — in particular the T1 freeze test still passes, so the spike's 0.995 is intact after the production classifier moved | retry: 1 (transient only)
+- [x] **Step 6 — Commit:** `git add scripts/ultra-plan-runner.mjs scripts/ultra-plan-runner.test.mjs && git commit -m "fix: tgrep and path-qualified grep are file probes, not behavioural checks"`
 
 > **This is the task that can break another repository, so it is gated deliberately.** It does not break anything *now* — the runner loads one plan at a time and no registry-wide validation exists. It changes what happens the next time someone runs those three Snipset plans, and §9 records that. If the human gate prefers not to take on that, the alternative is to defer T5 whole and land T1–T4 + T6, which fix the fallthrough and make the grep gap visible through the audit without changing any verdict. That is a legitimate outcome of this plan, not a failure of it.
 
@@ -367,16 +373,16 @@ The `Unknown` transition is the whole point of this plan. It used to be an impli
   - Consumes: T5's final behaviour.
   - Produces: updated master skill, trigger snippet, spike report amendment, and the F5 row in the Jev spike plan.
 - **Preconditions (assert FIRST; fail-fast):**
-  - [ ] Upstream: `bun test scripts/` exits 0 (else abort: `E_PRECOND_REGRESSION`)
+  - [x] Upstream: `bun test scripts/` exits 0 (else abort: `E_PRECOND_REGRESSION`)
   - On failure: STOP, write §7, halt T7.
 - **Idempotency Check (BEFORE Step 1):**
-  - [ ] Skip when `skip_if` exits 0 → `SKIPPED-IDEMPOTENT`.
-- [ ] **Step 1 — Amend the spike report, do not rewrite it.** Append a dated amendment to `docs/code-plan/spikes/2026-09-30-jev-decision-gate-spike-report.md`: the classifier is frozen as of 2026-09-30, the probe and corpus now import the snapshot, and 0.995 / ECE 0.011 / $0.004129 remain the measurements they were. **Append only.** Editing a measured number in a published report is the one thing that must not happen here.
-- [ ] **Step 2 — Correct F5 in place** in `docs/code-plan/plans/2026-09-30-jev-decision-gate-spike.md`: F5's claim covered `bash` and `md5sum` and 32 corpus rows. Record that the registry-wide measurement found 44 `skip_if` values matching neither regex, of which 30 are grep-family probes and 14 are unlisted tools, plus 77 sentinels — and that adding `bash` to `EVIDENCE_COMMAND` was rejected on measurement, as the report already argued. Mark F5 `DONE` with this plan as its path.
-- [ ] **Step 3 — Update the master skill** at the Idempotency Honesty paragraph (`:665`): name all four classes, state that `unknown` warns, and state that `"false"` is the sentinel. Keep the existing "a grep filtering a tool's output is behavioural" example — it is the distinction this whole rule turns on, and T5 does not touch it.
-- [ ] **Step 4 — Update the snippet** `snippets/orkestrasi-ngoding-plan.md` to match. The snippet is what a future session reads first; if it describes two classes, the freeze in T1 is what stops the drift from becoming a wrong number.
-- [ ] **Step 5 — Verify:** cmd: `bun scripts/check-runner-contract.mjs` then `bun scripts/validate-skill.mjs` | expect: exit 0 both | retry: 0 | on_fail: mark FAILED, write §7, halt T7
-- [ ] **Step 6 — Commit:** `git add -A && git commit -m "docs: record the sentinel and unknown classes, and close F5"`
+  - [x] Skip when `skip_if` exits 0 → `SKIPPED-IDEMPOTENT`.
+- [x] **Step 1 — Amend the spike report, do not rewrite it.** Append a dated amendment to `docs/code-plan/spikes/2026-09-30-jev-decision-gate-spike-report.md`: the classifier is frozen as of 2026-09-30, the probe and corpus now import the snapshot, and 0.995 / ECE 0.011 / $0.004129 remain the measurements they were. **Append only.** Editing a measured number in a published report is the one thing that must not happen here.
+- [x] **Step 2 — Correct F5 in place** in `docs/code-plan/plans/2026-09-30-jev-decision-gate-spike.md`: F5's claim covered `bash` and `md5sum` and 32 corpus rows. Record that the registry-wide measurement found 44 `skip_if` values matching neither regex, of which 30 are grep-family probes and 14 are unlisted tools, plus 77 sentinels — and that adding `bash` to `EVIDENCE_COMMAND` was rejected on measurement, as the report already argued. Mark F5 `DONE` with this plan as its path.
+- [x] **Step 3 — Update the master skill** at the Idempotency Honesty paragraph (`:665`): name all four classes, state that `unknown` warns, and state that `"false"` is the sentinel. Keep the existing "a grep filtering a tool's output is behavioural" example — it is the distinction this whole rule turns on, and T5 does not touch it.
+- [x] **Step 4 — Update the snippet** `snippets/orkestrasi-ngoding-plan.md` to match. The snippet is what a future session reads first; if it describes two classes, the freeze in T1 is what stops the drift from becoming a wrong number.
+- [x] **Step 5 — Verify:** cmd: `bun scripts/check-runner-contract.mjs` then `bun scripts/validate-skill.mjs` | expect: exit 0 both | retry: 0 | on_fail: mark FAILED, write §7, halt T7
+- [x] **Step 6 — Commit:** `git add -A && git commit -m "docs: record the sentinel and unknown classes, and close F5"`
 
 ### Task T7: Full gate
 
@@ -384,31 +390,31 @@ The `Unknown` transition is the whole point of this plan. It used to be an impli
   - Consumes: everything above.
   - Produces: green evidence on a clean tree.
 - **Preconditions (assert FIRST; fail-fast):**
-  - [ ] Upstream: `bun scripts/validate-skill.mjs` exits 0 (else abort: `E_PRECOND_REGRESSION`)
+  - [x] Upstream: `bun scripts/validate-skill.mjs` exits 0 (else abort: `E_PRECOND_REGRESSION`)
   - On failure: STOP, write §7.
 - **Idempotency Check (BEFORE Step 1):**
-  - [ ] Skip when `skip_if` exits 0 → `SKIPPED-IDEMPOTENT`.
-- [ ] **Step 1 — Verify:** cmd: `bun test scripts/` | expect: exit 0, 0 failures, 0 skipped-because-red
-- [ ] **Step 2 — Audit report still runs:** cmd: `bun scripts/plan-lifecycle-audit.mjs` | expect: exit 0 — it is a report and always exits 0; read the output rather than trusting `$?`
-- [ ] **Step 3 — Full CI equivalent:** cmd: `bun run ci` | expect: exit 0 — render-diagrams, validate-skill, tests, snippets | retry: 1 (transient only)
-- [ ] **Step 4 — Working tree:** `git status --porcelain` | expect: empty. A leftover file here means a task declared less than it touched.
-- [ ] **Step 5 — Commit:** nothing to commit; T7 is evidence, not a change.
+  - [x] Skip when `skip_if` exits 0 → `SKIPPED-IDEMPOTENT`.
+- [x] **Step 1 — Verify:** cmd: `bun test scripts/` | expect: exit 0, 0 failures, 0 skipped-because-red
+- [x] **Step 2 — Audit report still runs:** cmd: `bun scripts/plan-lifecycle-audit.mjs` | expect: exit 0 — it is a report and always exits 0; read the output rather than trusting `$?`
+- [x] **Step 3 — Full CI equivalent:** cmd: `bun run ci` | expect: exit 0 — render-diagrams, validate-skill, tests, snippets | retry: 1 (transient only)
+- [x] **Step 4 — Working tree:** `git status --porcelain` | expect: empty. A leftover file here means a task declared less than it touched.
+- [x] **Step 5 — Commit:** nothing to commit; T7 is evidence, not a change.
 
 ## 6. Verification Matrix Before Completion
 
 | Check | Command | Exit | Fresh evidence required | Status |
 |---|---|---|---|---|
-| Freeze holds | `bun test scripts/spike-skipif-classifier.test.mjs` | 0 | 200 corpus labels reproduced; replay agreement `0.995` | Pending |
-| Classes named | `bun test scripts/ultra-plan-runner.test.mjs` | 0 | one assertion per class, incl. `unknown` | Pending |
-| No silent fallthrough | `bun test scripts/ultra-plan-runner.test.mjs` | 0 | no code path reaches `behavioural` without matching `EVIDENCE_COMMAND` | Pending |
-| Grep regression locked | `bun test scripts/ultra-plan-runner.test.mjs` | 0 | 30 commands: `loose` now, `behavioural` before | Pending |
-| Audit reproduces §2 | `bun scripts/skipif-registry-audit.mjs` | 0 | tally 77 / 210 / 114 / 14; 30 + 14 affected named | Pending |
-| Warning is not an error | `bun test scripts/ultra-plan-runner.test.mjs` | 0 | `errors` empty, `warnings` names task id and command | Pending |
-| Contract intact | `bun scripts/check-runner-contract.mjs` | 0 | every runner key still declared in template and master | Pending |
-| Skill validates | `bun scripts/validate-skill.mjs` | 0 | Mermaid syntax + accessibility across all diagrams | Pending |
-| No regression | `bun test scripts/` | 0 | 0 failures | Pending |
-| Full gate | `bun run ci` | 0 | all four stages exit 0 | Pending |
-| Tree clean | `git status --porcelain` | 0 | no output | Pending |
+| Freeze holds | `bun test scripts/spike-skipif-classifier.test.mjs` | 0 | 200 labels + replay 0.995, no key | ✅ |
+| Classes named | `bun test scripts/ultra-plan-runner.test.mjs` | 0 | 5 classes, one test each | ✅ |
+| No silent fallthrough | `bun test scripts/ultra-plan-runner.test.mjs` | 0 | 12 evidence-free cmds, 0 behavioural | ✅ |
+| Grep regression locked | `bun test scripts/ultra-plan-runner.test.mjs` | 0 | 30 rows loose now, behavioural before | ✅ |
+| Audit reproduces §2 | `bun scripts/skipif-registry-audit.mjs` | 0 | 295/67/425 → 78 219 114 14 | ✅ |
+| Warning is not an error | `bun test scripts/ultra-plan-runner.test.mjs` | 0 | errors [] with only unknown defects | ✅ |
+| Contract intact | `bun scripts/check-runner-contract.mjs` | 0 | all 18 keys declared | ✅ |
+| Skill validates | `bun scripts/validate-skill.mjs` | 0 | 33 blocks valid | ✅ |
+| No regression | `bun test scripts/` | 0 | 336 pass, 0 fail, 14 files | ✅ |
+| Full gate | `bun run ci` | 0 | four stages exit 0 | ✅ |
+| Tree clean | `git status --porcelain` | 0 | porcelain empty | ✅ |
 
 ## 7. Error Ledger
 
@@ -424,10 +430,10 @@ The `Unknown` transition is the whole point of this plan. It used to be an impli
 
 ## 8. Human Approval Gate
 
-- [ ] Partner / Human approval received before implementation begins.
-- [ ] **Acknowledged: the grep fix changes the verdict on 30 tasks in 3 Snipset plans.** The next manual run of those plans will report a validation error. Approve T5, or defer it and land T1–T4 + T6.
-- [ ] Acknowledged: `unknown` warns rather than errors, so 14 tasks in 7 plans across four repositories stay runnable and the debt is recorded rather than enforced.
-- [ ] Acknowledged: the Jev spike's 0.995 is preserved by freezing its classifier, not by re-measuring. A different choice would change a published number.
+- [x] Partner / Human approval received before implementation begins — 2026-09-30, both questions answered explicitly.
+- [x] **Acknowledged: the grep fix changes the verdict on 30 tasks in 3 Snipset plans.** The next manual run of those plans will report a validation error. Approved: *"Land T5, report the 30 rows."*
+- [x] Acknowledged: `unknown` warns rather than errors, so 14 tasks in 7 plans across four repositories stay runnable and the debt is recorded rather than enforced.
+- [x] Acknowledged: the Jev spike's 0.995 is preserved by freezing its classifier, not by re-measuring. A different choice would change a published number.
 
 ## 9. Risks, Compatibility, and Consequence
 

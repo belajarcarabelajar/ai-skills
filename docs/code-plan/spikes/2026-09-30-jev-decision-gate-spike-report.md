@@ -152,6 +152,29 @@ Why this and not the 4-tier authorization gate that the first version of this pl
 
 **Cost framing:** at $0.0000207 per call and 273 ms, one call per design phase is invisible. The entire argument against Jev was cost against an in-process regex, and that argument does not apply to a decision that has no regex.
 
+### Correction: what the first draft of this section got wrong
+
+An earlier draft of this report claimed that `classifySkipIf` mislabels four shapes — `test -f`, `! grep -q`, `head … | grep`, and `test $(grep -c …)`. That claim was made from a single example and was checked against the whole corpus afterwards. It was wrong on all four:
+
+| Shape | Rows | Labels observed |
+|---|---|---|
+| `test -f` / `test -s` | 19 | all `loose` |
+| `! grep -q` | 12 | all `loose` |
+| `head -n 1 … \| grep` | 12 | all `loose` |
+| `test $(grep -c …) -eq N` | 1 | `loose` |
+
+All four are correctly `loose`: each one still exits 0 after the behaviour it appears to check is reverted, which is exactly what the rule's comment at `scripts/ultra-plan-runner.mjs:51` forbids. No production fix was needed for those shapes, and follow-up F4 in the plan was dropped rather than implemented.
+
+What the corpus did reveal is a different and smaller gap, recorded as F5: `bash` and `md5sum` are absent from `EVIDENCE_COMMAND`, so 32 rows are labelled `behavioural` only by the default fallthrough. Running the scripts settles the question in one direction for verify mode and the other for generate mode:
+
+| Command | Exit | Behaviour? |
+|---|---|---|
+| `bash scripts/plasma-anim-baseline.sh --verify <missing>` | 1 | yes |
+| `bash scripts/plasma-anim-baseline.sh --verify <junk>` | 1 (13 missing keys) | yes |
+| `bash scripts/plasma-anim-baseline.sh <path>` | 0, writes the file | no |
+
+So adding `bash` to `EVIDENCE_COMMAND` would widen the gap rather than close it. The actual fix is to stop defaulting an unmatched command to `behavioural`, which changes the validator and can invalidate plans that pass today — hence a separate plan.
+
 ## 7. Epistemic unknowns
 
 **Known unknowns addressed:**

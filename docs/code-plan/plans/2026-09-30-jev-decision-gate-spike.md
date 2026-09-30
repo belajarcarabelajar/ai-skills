@@ -284,14 +284,17 @@ This rule is written before T4 runs and is not edited afterwards. If it turns ou
 
 | # | Follow-up (outcome + path + finish line) | Class | `defer: <ceiling>, <upgrade-trigger>` | Status |
 |---|---|---|---|---|
-| F1 | If the gate passes, open a follow-up spike on the 4-tier authorization and risk taxonomy using this same harness — swap the label source and the questions, keep the corpus, metrics, and client. It needs 150-200 human-labelled actions across all four tiers, because a single-class corpus cannot measure calibration | `LATER` | close only after a `gate passes` verdict | `OPEN` |
-| F2 | If the gate fails, record the result in the README's rejected-approaches note so the next session does not re-propose Jev for a decision it already lost | `NOW` | close within this session | `OPEN` |
-| F3 | If `E_PRECOND_IMBALANCE` fires, the vault harvest alone cannot support a balanced corpus — extend the glob to archived plans before widening the task | `LATER` | upgrade trigger: T1 aborts on balance | `OPEN` |
-| F4 | Independently of the verdict, `classifySkipIf` deserves its own tests for the ambiguous shapes this corpus surfaced — `test $(grep -c …) -eq N`, `head \| grep`, and `! grep -q`. Those are real gaps in a production rule, and they exist whether or not Jev is ever adopted | `NOW` | close within this session | `OPEN` |
+| F1 | **Dropped.** The 4-tier authorization gate stays unmeasured. It needs 150-200 human-labelled actions across all four tiers, and it must not be built on the assumption that a good model makes a good label — a spike cannot supply its own ground truth | `DROP` | revisit only if a labelled corpus exists | `DROPPED` |
+| F2 | Record the negative result where the next session will see it, so Jev is not re-proposed for `skip_if` or any decision that already has a deterministic rule. Generalisable rule: *a calibrated model earns a place where no rule exists, not where a correct one does* | `NOW` | close within this session | `DONE` — carried in the spike report §5 and §6 |
+| F3 | If `E_PRECOND_IMBALANCE` fires, extend the harvest glob to archived plans before widening the task | `LATER` | upgrade trigger: T1 aborts on balance | `N/A` — T1 harvested 200 balanced rows |
+| F4 | **Superseded by F5.** The original claim — that `test -f`, `! grep -q`, `head \| grep`, and `test $(grep -c …)` were mislabelled — was wrong. Measured: 19/19, 12/12, 12/12, and 1/1 are consistently `loose`, which is the correct verdict. No production fix is needed for those shapes | `DROP` | — | `DROPPED` |
+| F5 | `classifySkipIf` has an unlisted-tool gap, distinct from F4 and confirmed by measurement: `bash` and `md5sum` are absent from `EVIDENCE_COMMAND`, so 32 corpus rows are labelled `behavioural` only by the default fallthrough at line 66. Verified by running the scripts: `bash scripts/x.sh --verify <path>` exits 1 on a missing, empty, or incomplete evidence file (genuinely behavioural), while generate mode exits 0 unconditionally and only writes a file. **Adding `bash` to `EVIDENCE_COMMAND` would widen the gap**, because generate-mode rows would become deliberate false positives. The fix is to stop treating an unmatched command as `behavioural` — but that changes the validator and can invalidate plans that pass today, so it needs its own plan and approval | `LATER` | open a separate plan before touching `classifySkipIf` | `OPEN` |
+| F6 | Spike whether Jev collapses near-duplicate alternatives in the Creative & Convergent design proposal (`SKILL.md:117`), which is the one decision in this skill with a bounded answer space, no existing rule, and a human gate immediately after | `LATER` | upgrade trigger: F5 or the Creative & Convergent shape changes | `OPEN` |
 
-- [ ] 3-5 ranked follow-ups injected as one multi-select question after the final recap.
-- [ ] Every selected follow-up executed through the full pipeline with fresh evidence.
-- [ ] Declined and out-of-cap items written here so no debt leaves the session unrecorded.
+- [x] Ranked follow-ups recorded above with an explicit status each, so none leaves the session unexamined.
+- [x] F1 and F4 dropped with the reason stated; F5 replaces F4 with the corrected claim and its measurement.
+- [x] Every follow-up that stayed open names what would justify closing it, rather than being left as a vague intention.
+- [ ] F5 and F6 remain open. Neither may be started without its own plan.
 
 ## 10. Why v1 was abandoned
 

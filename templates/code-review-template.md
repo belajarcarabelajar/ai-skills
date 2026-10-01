@@ -1,7 +1,16 @@
-# Code Review Report: [Change / PR / Diff Under Review]
+# Code Review Report: [Change / Diff Under Review]
 
 > Structured output contract for a reviewer agent. The reviewer reports findings; it does not ship the fix.
 > Populate every section. Write `none` where a section has no qualifying finding.
+>
+> **Scope: a local diff, a branch, or a worktree.** Reviewing a pull request
+> somebody else opened is a different unit of review: remote state has to be
+> fetched first, coverage has to be answered per category, and the output is a
+> comment a human approves before it is posted. Use
+> `templates/pr-review-template.md` for that, and keep the 8-point qualification
+> filter below as the shared core. Do not duplicate one template into the other;
+> the split is what keeps the internal report and the posted comment from
+> collapsing into the same artifact.
 
 ## 1. Review Scope & Inputs
 

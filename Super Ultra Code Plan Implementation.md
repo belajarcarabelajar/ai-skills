@@ -250,6 +250,62 @@ These rules apply to every path and support the four skill components without re
 - Mandatory Pre-Execution Todo Breakdown:
   - Before writing the first line of code or running stateful mutation commands, the agent MUST explicitly output an itemized to-do list / checklist (`[ ] Task 1: ...`, `[ ] Task 2: ...`) mapping out each sequential phase (reproduction/failing test, implementation, verification test, review).
   - Real-Time Todo State Transition: Each item must be visibly updated (`[x]`) immediately upon completion with fresh verification evidence cited before proceeding to check off or start the next item. Never execute multiple tasks in an opaque block without itemized checklist progression.
+  - **The harness's own todo tool is mandatory, in every mode, and the file checklist is the backup, not the replacement.** See `📋 Harness Todo List` for the tool names, the discovery step, the degradation rule, and why both artifacts exist.
+
+## 📋 Harness Todo List
+> The plan file is the durable record. The harness todo list is the live one. A session that keeps only the file has no visible progress; a session that keeps only the tool has nothing that survives a compaction or a harness switch.
+
+### The measured constraint that shapes this
+OpenCode's `general` subagent has **full tool access except todo** (verified against `opencode.ai/docs/agents/`, retrieved 2026-10-01). So a subagent dispatched for a chunk **cannot** hold a todo list, and asking it to maintain one produces a fabricated list in its report rather than a real one. Consequences, all mandatory:
+
+- **The parent owns the todo list, always.** Subagents receive a chunk and return a report. They never get a todo list to maintain.
+- **The list is per session, not per subagent.** One list covering the session's chunks, mirroring the one-PR-per-session rule. Ten subagents updating ten lists is ten lists nobody reconciles.
+- **Not seeing a dispatched subagent's progress is by design.** Its progress arrives as its report at the gather checkpoint. Look at the parent's own list, not for a subagent's.
+
+### Tool names, verified 2026-10-01
+Do not guess a tool name. Check the connected tool catalog first, then fall back to this table.
+
+| Harness | Todo tool | Notes |
+|---|---|---|
+| OpenCode | `todowrite` | Permission key `"todowrite": "allow"`. The primary harness for this repository. |
+| Claude Code | `TodoWrite` | Same shape: a list of items with a status. |
+| Gemini / Antigravity | `update_plan` | Named differently, behaves the same. |
+| Anything else | discover it | Enumerate the tool catalog. If there is genuinely none, apply the degradation rule below. |
+
+- **Discover before assuming.** A tool in another harness's catalog does not exist in this one, and a wrong name is a tool-not-found error mid-task rather than a clean fallback. The Unrecognized Entity Rule applies to tool names exactly as it applies to libraries.
+- **`todowrite` is available in the Plan agent.** OpenCode's Plan agent restricts `file edits` and `bash` to `ask`; the todo tool is not on that restricted list. A planning session gets a todo list too, which is the point: the plan phase is where the phases get enumerated.
+- **If the tool is denied by a permission or a sandbox, report the denial** naming the specific rule that caused it (see Automated Review Rejection Protocol), then apply the degradation rule. Never retry a denied tool and never silently drop the list.
+
+### What goes in the list
+The list mirrors the approved scope, one item per independently verifiable unit, at the same granularity as the chunking. An item that cannot fail on its own cannot be checked on its own.
+
+```
+[ ] Reproduce: failing test proving the bug            (expect_exit 1)
+[ ] Implement: minimal fix in <path>
+[ ] Verify: targeted suite green, 0 regressions
+[ ] Review: parent diff audit, independent reviewer
+[ ] Deliver: commit on the session branch, open the PR
+[ ] Sweep: session-close debt sweep
+```
+
+- Every item names a **finish line**, not a topic. "Fix the auth module" is not an item. "Add `session.test.ts` covering token refresh and make it pass" is.
+- Items are `pending` to `in_progress` to `completed`, and **exactly one is `in_progress` at a time**. Two in progress is two threads, and neither gets the parent's attention.
+- An item is marked completed **with its evidence cited in the same update**: command, exit code, result. Marking complete and citing later is the same false pass the runner's `skip_if` rules exist to prevent.
+- A newly discovered item is **added**, never substituted for the current one. Silent substitution is how a session ends with a green list that does not match the work done.
+
+### Both artifacts, deliberately
+
+| Artifact | Lifetime | Purpose |
+|---|---|---|
+| Harness todo list | The session; lost on compaction or harness switch | Live progress the user watches. Makes a long silent run legible. |
+| Plan file checklist | Permanent, in version control | The durable record. Survives compaction, a handoff, and the next session. |
+
+- **The file checklist is never removed because the tool exists.** A compaction, a crash, or a switch to a harness without a todo tool takes the live list with it, and the plan file is what a resumed session reads.
+- **The tool list is never removed because the file exists.** The plan file is not rendered as progress, and someone watching a pane cannot see a checkbox in a file they do not have open. The tool exists precisely so the list is visible without asking.
+- When they disagree, **the plan file wins** and the tool list is corrected to match. The file is the source of truth; the tool is a view of it.
+
+### Degradation when there is no todo tool
+If the runtime genuinely has none, or it is denied: render the list as an explicit `[ ]` / `[x]` block in the reply, update it visibly at each checkpoint, and say in one plain line that the runtime has no todo tool. **Never skip the list because the widget is missing.** The list is the contract; the tool is only how it is displayed. This is the same rule the debt sweep already follows for its multi-select question.
 - Update the state at task start, after each meaningful checkpoint, before compaction, and before handoff. Keep completed work and evidence separate from assumptions and planned work.
 - A resumed task must read the latest state, inspect the current files and diff, and continue from the last verified checkpoint rather than replaying already completed work.
 - Unattended Continuation Rule: when the user is not watching (scheduled run, "check back later", unanswered question), take the most reasonable reading, state it in one line, and continue. Stop only for decisions that are irreversible and could reasonably go either way; do the preparatory work, state the decision, and wait. A question never stalls cheap reversible progress.
@@ -371,6 +427,14 @@ These rules apply to every path and support the four skill components without re
   - Context propagation: a child receives only what it needs to execute its chunk (task contract, permitted files, required tests, prior decisions it must honor) so fan-out stays cheap and reports stay legible. Include enough that it never has to guess an invariant it cannot see.
   - Legible reports: any message a human will read must stand on its own, with clear task names, plain sentences, and real paths. No shorthand-only references to "the file above" or "the earlier task".
 - Every delegated task needs a clear scope, inputs, expected output, verification method, and review checkpoint (`templates/subagent-contract-template.md`).
+- **Git Ownership Is Parent-Only (Non-Negotiable).** A subagent edits files and runs tests. It never runs `git commit`, `git add`, `git checkout`, `git switch`, `git merge`, `git rebase`, `git stash`, `git reset`, `git push`, `gh`, or any other command that writes git state. The parent owns every write to the index, the branch, and the remote.
+  - Why this is a rule and not a preference: with ten subagents on one branch, each staging its own files, `git add` interleaves. The index is shared mutable state with no per-writer lock, so two agents staging at once produce a commit containing a half-applied change from the other. The result is not a merge conflict the author can see; it is a commit that was never tested in that shape.
+  - The parent's integration step per chunk is: read the chunk's `git diff -- <permitted paths>`, confirm only those paths changed, stage exactly those paths by name (never `git add .`), and commit. Staging by explicit path is what makes the Parent Diff Audit Gate mechanical instead of a review of whatever happened to be in the tree.
+  - A subagent that reports "I committed my work so it is safe" has violated this. The commit is not the deliverable; the tested file state is. Undo it with `git reset --soft HEAD~1` and keep the changes.
+- **One Session, One Branch, One Worktree.** The branch name and the worktree path are **derived by a tool, never chosen by the agent**: `bun scripts/pr-registry.mjs claim --plan <plan-id> --session <slug>` prints both, and the parent creates the worktree with `git worktree add <path> -b <branch> origin/<base>` before dispatching anything. `git worktree prune` runs first, because a path left behind by a dead session makes `git worktree add` fail for the next one.
+  - Subagents write only inside that worktree. Their `cwd` is the worktree, so a relative path in a contract means what it says.
+  - Twenty concurrent sessions are twenty claims. The registry refuses a duplicate branch or a duplicate worktree at claim time, at load time, and at save time, so a collision is an error naming both sessions rather than two agents quietly overwriting one ref.
+  - A worktree lives **beside** its repository, never inside it. A nested worktree is picked up by the parent's watchers, formatters, and test globs, which then operate on two copies of the same file.
 - If the runtime supports asynchronous subagents, dispatch the full batch, continue safe independent parent-side work while they run, and collect all results at the defined review checkpoint.
 - Parent Dispatch Discipline: the batch manifest (chunk id, owner, target files, expected output, verification command) is written before dispatch. Re-dispatch only the failing chunk after the audit gate; do not restart the whole batch for one red chunk. A stalled chunk is reaped and re-dispatched on its own, never alongside a live duplicate, and never twice unchanged (see the Stalled Subagent & Stale-Writer Guardrail).
 - Subagent Orchestration & Isolation Standard:
@@ -450,13 +514,14 @@ flowchart TD
 - Stop for destructive actions, hard-to-reverse actions, genuine scope changes, or ambiguity where different interpretations would materially change the result.
 - Autonomous Completion Bias (approved work only): After approval of intent or plan, bias toward carrying the intended task to full completion and persist until the goal is done. Do not stop to re-ask permission for reversible steps already covered by the approved scope; complete all independent work while blocked items await a user decision. Do not treat an isolated difficulty as an excuse to abandon approved work.
 - Isolated Worktree & Merge-Conflict Handling: When approved work touches files the user may be actively using, or the change is large, experimental, or risky, carry it out in an isolated worktree/checkout or feature branch so the user's tree stays usable. Resolve merge conflicts arising from approved changes locally and reversibly, and remove the temporary worktree or branch after integration.
-- Draft PR as Externally Visible Publication: Creating a draft or full PR is externally visible publication, so it still requires explicit confirmation or inclusion in the approved plan/rollout; it is not silently authorized by the autonomous completion bias above.
+- Draft PR as Externally Visible Publication: Creating a draft or full PR is externally visible publication, so it still requires explicit confirmation or inclusion in the approved plan/rollout; it is not silently authorized by the autonomous completion bias above. When a session's approved scope already names the pull request as its deliverable, that is the inclusion, and asking again per PR is the twenty-times-repeated question this rule exists to prevent. The standing gate is on **merging into the base branch**, which always waits for a human.
 - Action-Phrase = Stated Intent, Not a Capability Question: When the user writes an action request ("can you...", "I want you to...", "help me...", "please add...", "fix..."), treat it as an instruction carrying intent to do the work. Do not reply with mere capability acknowledgment ("Yes, I can") or an offer to continue, and do not stop at a partial, "helpful enough" outcome to save time or tokens. Respond by classifying and advancing through the applicable path (Spike/Bounded/Architectural) with concrete next steps. An action phrase states the intent but does not by itself bypass the mandatory design→approval gates of the path; once that approval is given, complete sustained work to the intended outcome rather than stopping at an intermediate milestone.
 - Concrete-Reviewable Approval & Homework-First: Before asking the user clarifying questions, complete the read-only investigation and preparation needed to make the question or proposed action concrete and reviewable (inspect the repo, configs, docs, and prior decisions; state what was inspected). Within an approved milestone, finish the required reversible work first so the approval you request is the final step for that milestone, not a mid-execution check-in. Do not ask permission for reversible, read-only, review, or fix work already authorized by context or an earlier approval, and do not add unsolicited warnings, disclaimers, or safety checklists for hypothetical risk. This does not change milestone ordering: full implementation for a milestone still begins only after its design→approval gate.
 - Finishing & Git Hygiene Protocol:
   - Working tree verification: Run `git status` to confirm only expected files are touched, with zero unintended edits.
   - Purge iteration artifacts: Remove temporary scratch files, debug scripts, reproduction logs, and ad-hoc test files outside the repository's permanent test suite.
   - Conventional commit standard: Structure commit messages with standard prefixes (`feat:`, `fix:`, `refactor:`, `docs:`, `chore:`) providing a clear rationale.
+  - Never commit or push directly to the base branch, and never `--force` a session branch that already has a PR. A one-line fix is a small session with its own branch, not an exception to this rule. The session's branch and worktree are derived by `bun scripts/pr-registry.mjs claim`; see `5.5️⃣ 📤 Pull Request Delivery, Review & Batch Merge`.
   - Commit author policy: All commits must use the primary author name `Iwan Kurniawan`. Check and verify the author email from each respective repository's git config (`git config user.email` or `.git/config`).
   - No co-author trailers: Never insert `Co-authored-by:` or any AI assistant attribution trailers in commit messages or pull requests unless explicitly requested by the user.
   - Clean handoff: State exact modified files, fresh verification evidence (commands + exit codes), and remaining user actions.
@@ -534,6 +599,8 @@ Apply the gates relevant to the approved scope. Record `N/A` with a reason when 
 
 ### 👀 Review, Diff & Publication
 - Review the final diff, changed-file list, status, and generated artifacts before completion. Confirm that only approved files and behavior changed.
+- A session ends in a pull request on its own branch, never in a commit on the working branch. See `5.5️⃣ 📤 Pull Request Delivery, Review & Batch Merge` for the isolation contract, the state machine, the body rules, and the ordered batch merge. Two related contracts live there and are not restated here: Git writes are parent-only (a subagent never commits, stages, or pushes), and a session's branch and worktree names are derived by `bun scripts/pr-registry.mjs claim` rather than chosen.
+- Reviewing somebody else's pull request follows `templates/pr-review-template.md`. Reviewing your own local diff follows this section and `templates/code-review-template.md`; the difference is only what has to be fetched first and what gets posted.
 - Post-Execution Final Code Review & Temp-File Purge: After plan execution completes and before any completion claim, run a dedicated final code review that (1) verifies each executed task against its acceptance criteria and cited evidence, (2) deletes every script, log, fixture, scratch file, or temporary/helper artifact created during execution unless it is an explicit deliverable or part of the approved change, and (3) re-scans the worktree and final diff to confirm the deleted files are absent and only approved files remain.
 - Autonomous Code Review Rubric & 8-Point Bug Qualification Filter: reviewer agents emit this contract via `templates/code-review-template.md`.
   - An issue is a genuine review bug ONLY if it meets all 8 qualification criteria:
@@ -826,7 +893,7 @@ Task template:
 - [ ] Step 2: Run — verify fail | cmd: `<single runnable command>` | expect: exit <non-zero> | retry: 0 | on_fail: n/a (failure is expected here)
 - [ ] Step 3: Write minimal implementation [code]
 - [ ] Step 4: Run — verify pass | cmd: `<single runnable command>` | expect: exit 0, 0 failures | retry: 1 (transient only) | on_fail: mark task FAILED, write Error Ledger, halt only downstream tasks (those with this id in `depends_on`); independent tasks keep running
-- [ ] Step 5: Commit [git commands]
+- [ ] Step 5: Commit — the PARENT commits, never a subagent. Stage by explicit path, never `git add .`, and never on the base branch: `git add <exact/path> && git commit -m "<conventional message>"`. The branch and worktree come from `bun scripts/pr-registry.mjs claim`, so this task's work lands on the session's single PR rather than a per-task branch.
 ```
 Deterministic step mapping: one execution step maps to exactly one runnable shell command (1-to-1). Never fold multiple non-chained commands into a single step. Each executable step carries `cmd`, `expect` (exit code / count), `retry` (explicit integer, transient-only), and `on_fail` (route, never silent). `retry: 0` means no retry; the word "bounded" is banned in favor of an integer. These four fields live in `tasks[].run[]` in the frontmatter, which is the copy the runner executes; the `- [ ] Step N` checklist in the task body is the human-readable copy of the same steps. When the two disagree, the frontmatter wins and the checklist is the defect.
 No placeholders — banned: TBD, TODO, "implement later", "add appropriate error handling", "similar to Task N", steps without code, undefined references.
@@ -843,6 +910,8 @@ Execution handoff — subagent fan-out is the default:
   1. **Immediately after `bun scripts/ultra-plan-runner.mjs <plan.md>` prints `Validation: OK`, and before requesting approval.** The plan lands in the vault at `status: Draft` while the human is still deciding, so review happens in Obsidian — where they are looking — instead of only in a repository directory they have to go find.
   2. **Again after approval, and before `bun scripts/ultra-plan-runner.mjs <plan.md> --execute`.** The mirror then carries the approved state.
   3. **After execution and after the Session-Close Debt Sweep.** Close the plan in three sub-steps: apply the task ticks, set `status: Complete`, publish again. The ticks are applied by `bun scripts/plan-mark-done.mjs <plan.md> --from <runner.log>`, which reads the runner's own recorded statuses and refuses to tick anything the runner recorded as `NEEDS-AGENT`, `READY (dry-run)`, `HALTED-UPSTREAM` or `FAILED-*`. Capture the runner output to a log first; that log is the evidence.
+
+  **The same three steps also drive the GitHub issue mirror**, run immediately after the vault publish of the same step. See `🐙 Plan → GitHub Issue` below. The two mirrors share the trigger and the ordering, and they are separate scripts on purpose: one is a file write on this machine, the other is a network write to somebody else's API, and merging them would mean one exit code that cannot say which failed.
   Do not skip step 1 because approval feels close. The whole reason the trigger moved earlier is that the authoring and approval window is exactly when a human wants to read the plan, and it is currently the window in which the vault has no copy at all.
 - **Step 3 is not optional bookkeeping.** Without it the mirror keeps the step-2 snapshot forever, so a plan whose work is finished reads `status: Draft` in the vault. That is a known and measurable state — `bun scripts/plan-lifecycle-audit.mjs` counts exactly how many plans are in it and why — not something to be guessed at.
 - **The runner never writes to a plan file.** `ultra-plan-runner.mjs` reads the plan, prints a ledger, and exits; it has no write path at all. So ticking is a separate, explicit step, and that separation is deliberate: a checkbox that the runner could set itself would be a claim rather than a record.
@@ -875,6 +944,58 @@ flowchart LR
     Mirror --> Stage["Stage the single file\nfor Obsidian Git"]
     Stage --> Commit(["Obsidian Git\ncommits the mirror"])
     Mirror -.-> NoReadback["Mirror is never\nread back as an input"]
+```
+
+## 🐙 Plan → GitHub Issue
+> The second derived copy. The Obsidian mirror makes a plan searchable and readable; the issue makes its **history** searchable: who opened it, when it was approved, what was closed and when, and every comment in one timeline that GitHub already indexes, notifies, and links from the commit.
+
+### Same rule as the vault mirror: one way, forever
+The project repository is the source of truth. The issue body **is** the plan text, byte for byte, plus a machine-readable trailer. Nothing is ever read back from GitHub into the plan.
+
+- **A summary body is banned.** A summary is a second source of truth that drifts the moment the plan changes, and then the issue is quietly wrong. The body is the plan, and its `source_hash` is what makes "is this issue current?" answerable from the issue alone.
+- **An issue comment is a discussion about the plan, never an edit to it.** A decision reached in a comment crosses back into the repository as an edit to the plan file. The comment is where the deliberation happens; the plan is where the decision lives.
+- **The issue number lives in `plan.issues.json`, never in the plan's frontmatter.** This is load-bearing. The vault mirror hashes the entire plan text, so writing an issue number into the plan would change `source_hash` and instantly make every vault mirror stale. A sidecar keeps the plan byte-stable.
+- **A hand-closed issue is not authoritative.** The issue is derived state, so the plan wins: an in-progress plan whose issue was closed by hand reopens it on the next sync. Closing the issue to tidy a board must not permanently detach a plan from its mirror.
+
+```bash
+bun scripts/plan-issue-sync.mjs docs/code-plan/plans/YYYY-MM-DD-<feature>.md
+bun scripts/plan-issue-sync.mjs --check <plan.md>...   # drift report, never writes
+bun scripts/plan-issue-sync.mjs --status                # table, always exit 0
+```
+
+### The state mapping is derived from the plan, never chosen
+| Plan `status` | Issue state |
+|---|---|
+| `Draft`, `Approved`, `InProgress`, `Verification` | open |
+| `Blocked` | open. Blocked means unfinished, so closing it would report done. |
+| `Complete` | closed |
+
+- The sync is a pure decision over `(recorded entry, plan text, plan status)`, resolving to exactly one of `create`, `update-body`, `update-state`, `update-and-state`, or `current`. That is what makes running it twice safe, and it is why the whole matrix is unit-tested without a network.
+- **`current` is the real no-op** and performs zero `gh` calls. A duplicate issue in a real repository is the failure this prevents, and a body edit never silently closes or reopens the issue.
+- **The body goes on stdin** via `--body-file -`, never on argv. On argv a 10 KB plan hits `ARG_MAX` and goes through the shell's quoting rules, so the bytes stop being identical to the plan, which is the entire premise.
+- **A project with no configured repository is refused, not guessed.** `plan.issues.json` maps project name to `owner/repo` explicitly. A plan filed under the wrong repository is worse than one that is not filed.
+- **A plan with no `status:` in its frontmatter is refused**, because there is no state to derive.
+- **A failure here does not invalidate the plan.** The plan is valid and saved in the project; the issue is derived state, exactly like the vault mirror. Report the failure and its exit code, and do not hand-create the issue as a workaround, because a hand-created issue carries no trailer and so reads as permanent drift.
+- `gh` must be authenticated before the first sync, not discovered at issue-creation time. `gh auth status` once, at the start of the session.
+
+```mermaid
+flowchart TD
+    accTitle: Plan mirrored to a GitHub issue, one way
+    accDescr: A finished plan is published to the vault and then synced to a GitHub issue, where a pure decision over the recorded entry, the plan text, and the plan status resolves to create, update the body, change the state, both, or nothing at all, with the issue number kept in a sidecar so the plan text stays byte-stable.
+    Plan["Plan reaches a publish trigger<br/>validation, approval, or close"] --> Vault["Vault publish<br/>byte copy plus PARA properties"]
+    Vault --> Sync["plan-issue-sync<br/>derive one action"]
+    Sync --> Decision{"Recorded entry<br/>vs plan text and status"}
+    Decision -->|"nothing recorded"| Create["gh issue create<br/>body on stdin"]
+    Decision -->|"hash differs"| Body["gh issue edit<br/>title plus body"]
+    Decision -->|"status differs"| State["gh issue edit<br/>open or closed"]
+    Decision -->|"both differ"| Both["gh issue edit<br/>body plus state, one call"]
+    Decision -->|"identical"| Current["current<br/>zero gh calls"]
+    Create --> Record["Record number, url,<br/>hash, state in plan.issues.json"]
+    Body --> Record
+    State --> Record
+    Both --> Record
+    Record -.-> NoReadback["Never read back<br/>into the plan"]
+    Current -.-> NoReadback
 ```
 
 ## 4️⃣ 🧪 Test-Driven Development (Iron Law)
@@ -1016,6 +1137,147 @@ flowchart TD
 ```
 
 Red flags: "should", "probably", "seems to", satisfaction expressed pre-verification, trusting agent reports without diff check, "I'm tired", "just this once".
+
+## 5.5️⃣ 📤 Pull Request Delivery, Review & Batch Merge
+> 📤 **Component 5 — Delivery:** a session ends in a pull request on its own branch, never in a commit on the working branch. This is the stage that makes twenty concurrent sessions survivable: isolation, review, and an ordered merge are the only things standing between twenty agents and twenty silently clobbering each other.
+
+### Why a PR and not a commit
+Three failure modes appear the moment more than one session touches one repository, and none of them raises an error at the git level, because each individual command is valid:
+
+| Failure | What actually happens | Where it is prevented |
+|---|---|---|
+| Two sessions on one branch | The second push fast-forwards or is rejected; the agent reaches for `--force` and the first session's PR now carries the second session's commits | Derived branch names, refused at claim time |
+| Two sessions in one worktree | `git worktree add` fails, or the second session works inside the first session's checkout and both diffs become garbage | Derived worktree paths, refused at claim time and at load time |
+| Merging in finish order | A session that depends on another lands first, then conflicts with the rest of the batch | Topological merge order from a recorded `depends_on` graph |
+
+So the naming is computed rather than chosen, and the order is computed rather than remembered.
+
+### 5.1 Isolation, before any subagent is dispatched
+```bash
+# One claim per session. It prints the branch and the worktree path.
+bun scripts/pr-registry.mjs claim --plan <plan-id> --session <session-slug> \
+  [--repo <repo-root>] [--depends-on <slug>,<slug>]
+
+# Then, in the repository, before dispatch:
+git worktree prune
+git fetch origin main
+git worktree add <printed-worktree> -b <printed-branch> origin/main
+```
+
+- The claim is **idempotent**. A retried claim after a crashed session returns the same slot instead of allocating a second one, because the names are a pure function of the two inputs.
+- `--depends-on` is only accepted for sessions that already hold a slot. An unclaimable dependency would make the merge order unprovable, so it is refused at claim time rather than discovered at merge time.
+- Every subagent's working directory is that worktree. Nothing is dispatched before it exists.
+- The parent dispatches with the worktree path in the contract, so a subagent cannot resolve a relative path against the main checkout.
+
+### 5.2 The session state machine
+`pr-registry.mjs` holds the session state, and the states exist to make two specific mistakes impossible:
+
+```
+isolated → active → verified → open → merged
+```
+
+| State | Meaning | How it is reached |
+|---|---|---|
+| `isolated` | Branch and worktree exist, nothing written | `claim` |
+| `active` | Subagents are writing inside the worktree | `state <s> active` |
+| `verified` | Local evidence is green, parent diff audit passed | `state <s> verified` |
+| `open` | The PR exists on the remote | `pr <s> --number <N>` |
+| `merged` | The PR reached the base branch | `state <s> merged` |
+
+- **A PR number cannot be recorded before `verified`.** `setPr` throws otherwise. Recording a PR implies the work is finished and checked, so `isolated → open` would skip the gate that makes a merge safe.
+- **Only an `open` session can merge**, and only if it has a PR number. A green local run is not a mergeable session; a mergeable session is a green local run *and* a PR.
+- **`merged` is terminal.** Reverting or redoing a session is a new session with a new branch, never a state edit. Letting the registry file "un-merge" would hide a revert from the merge order.
+- **Recording a PR moves `verified → open` automatically.** A PR that exists while the session is still `isolated` is a state contradiction, so the tool refuses to represent it.
+
+### 5.3 Opening the PR
+Follow `templates/pull-request-template.md` for the body.
+
+- **Write the body to a file, post with `--body-file`.** Passing multi-line markdown through `--body` on a command line is error-prone with newlines, backticks, shell quoting, and checkbox markers. `--body-file` handles all of it.
+- **The body is in the codebase's language, not the language the request arrived in** (see Artifact Language Follows the Codebase). A translated PR body breaks `grep` for the next reviewer.
+- **No em dash anywhere in the body, the commit messages, or user-visible strings in the diff** (see the copy rule). This scan blocks the PR, not just the session.
+- Title is imperative and names the outcome, not the mechanism. `fix: null deref in retry loop`, not `update retry code`.
+- Draft (`--draft`) when the session is genuinely incomplete. A draft is not a smaller completion claim; it is an honest one. Never leave a session draft when its evidence is green, because a draft that nobody un-drafts is a session that silently never lands.
+- Record it immediately: `bun scripts/pr-registry.mjs pr <session> --number <N>`. A PR that exists but is not in the registry is invisible to the merge order, which means it never gets merged.
+- **`gh` must be authenticated before the first push, not discovered at PR time.** `gh auth status` once per session, at the start. A missing token discovered after twenty commits is a much worse place to find out than before the first one.
+
+```bash
+gh pr create --base main --head <branch> \
+  --title "<imperative title>" \
+  --body-file <path-to-pr-body.md>
+```
+
+### 5.4 Reviewing a PR
+Use `templates/pr-review-template.md` for the report. Two things make it deterministic rather than a matter of reviewer taste:
+
+**Every input is fetched and recorded before any judgement.** Metadata, diff, commits, existing review comments, prior verdicts, and CI status. A row marked "not consulted" with a reason is honest; a row left blank is indistinguishable from a row that was checked and found clean, and it reads as the latter.
+
+**Remote CI status is reported, never adopted.** This repository's checks run locally by policy, so a green remote run is the author's evidence about a commit, not this reviewer's evidence about the working tree. Reading it as a verification result is the same error as pushing to trigger someone else's runner.
+
+**Line anchoring is part of the finding, not formatting.** A comment anchored to a line the PR did not touch either fails to post or degrades into a general remark that looks specific. Every finding names a changed line and the correct side.
+
+**The verdict is binary and derived.** `not correct` if and only if there is at least one blocking (`P0`/`P1`) finding. No third state, no "looks good overall". A verdict names the specific checkable condition that would change it, because "after the author addresses comments" is not a condition.
+
+**Generating a review and posting it are two acts.** The posted comment is a shorter artifact than the internal report: verdict, blocking findings, and nothing else. Internal reasoning and praise stay in the report. Posting is externally visible publication and waits for a human to read the exact text first. A reviewer that posts its own draft has skipped the only gate that exists on this stage.
+
+### 5.5 Merging a batch of twenty PRs
+```bash
+bun scripts/pr-registry.mjs order        # the merge order, computed from depends_on
+bun scripts/pr-registry.mjs surface <s>  # what must rebase first, and what blocks it
+```
+
+- **Order is topological, from the recorded `depends_on` graph, never chronological.** Ties break on session name so the same registry always yields the same order. A timestamp tiebreak would make the printed plan unreproducible and two runs of one registry would disagree.
+- **Already-merged sessions drop out and stop blocking their dependents.** That is the plan's own blast-radius rule applied to merges: a session waiting on nothing should still be able to land.
+- **A dependency cycle is refused with the cycle named.** There is no valid order for a cycle; the remedy is to split a session, not to pick an arbitrary one.
+- **Rebase before each merge, not once at the start.** The base branch moves with every merge, so a branch rebased at position 3 is already behind by position 7. `surface <s>` reports which sessions landed since the branch was cut.
+- **Verify locally after every single merge.** Twenty merges followed by one test run at the end means nineteen merges ship unverified. The check after merge N is the evidence for merge N, and it is cheap because the session was already verified once.
+- **One merge at a time.** A batch merge is an unverified batch.
+- **A conflict is resolved in the session's branch, never on the base branch.** Rebase the session branch onto `origin/<base>`, resolve there, re-run that session's verification, push, then merge. Editing the base branch directly to "fix" a conflict is how a conflict becomes an unreviewable change nobody can attribute to a session.
+- **If a session cannot be made mergeable, it does not merge.** Mark it and move to the next one in the order. A blocked session is a status, not a reason to freeze nineteen others.
+
+### What is never allowed on this stage
+- Committing or pushing directly to the base branch. There is no exception for a one-line fix; the exception is a separate session with its own branch.
+- A hand-written branch or worktree name. Derived or nothing.
+- `--force` or `--force-with-lease` on a session branch. A force push on a branch that already has a PR rewrites review history; rebase-and-push only onto a branch with no PR yet.
+- Force-merging a conflicted PR to clear a queue. A conflict is information.
+- A review verdict written into a plan mirror or a vault note. It belongs in the PR and in the source plan, both of which survive the next publish.
+- Merging on the strength of a green remote CI run, or on a subagent's self-report of success.
+
+```mermaid
+flowchart TD
+    accTitle: Session isolation, pull request delivery, and ordered batch merge
+    accDescr: Each session claims a derived branch and worktree, subagents write only inside it, local verification and the parent diff audit gate the pull request, a reviewer fetches the remote state and returns a binary verdict, and the batch merges in topological order with a rebase and a local check before every individual merge.
+    subgraph Per["Per session, N sessions run concurrently"]
+        Claim["pr-registry claim<br/>derived branch + worktree"] --> Wt["git worktree add<br/>from origin/main"]
+        Wt --> Fan["Subagents write in the worktree<br/>never touch git state"]
+        Fan --> Verify["Local verification<br/>zero-tolerance clean pass"]
+        Verify --> Audit{"Parent diff audit<br/>stage by explicit path"}
+        Audit -->|"Red"| Redo["Re-chunk, re-dispatch<br/>only that scope"]
+        Redo --> Verify
+        Audit -->|"Green"| State["state: verified"]
+        State --> Pr["gh pr create --body-file<br/>record the number"]
+    end
+    Pr --> Rev{"Review verdict"}
+    Rev -->|"not correct"| Fix["Author fixes in the<br/>session branch"]
+    Fix --> Pr
+    Rev -->|"correct"| Open["Session: open<br/>queued for merge"]
+    subgraph Batch["Batch merge, strictly sequential"]
+        Open --> Order["pr-registry order<br/>topological from depends_on"]
+        Order --> Surf["pr-registry surface<br/>what must rebase first"]
+        Surf --> Rebase["Rebase session branch<br/>onto origin/main"]
+        Rebase --> Conflict{"Conflict?"}
+        Conflict -->|"Yes"| Resolve["Resolve in the session branch<br/>never on the base branch"]
+        Resolve --> Recheck["Re-run that session's<br/>local verification"]
+        Conflict -->|"No"| Recheck
+        Recheck --> Merge["Merge this one PR"]
+        Merge --> Post["Re-run verification<br/>on the new base"]
+        Post --> More{"Sessions left?"}
+        More -->|"Yes"| Order
+        More -->|"No"| Blocked{"Any session<br/>not mergeable?"}
+        Blocked -->|"Yes"| Report["Report it, move on<br/>do not freeze the batch"]
+        Blocked -->|"No"| Done(["Batch landed<br/>with per-merge evidence"])
+    end
+```
+
 ## 6️⃣ 🧹 Session-Close Debt Sweep & Follow-Up Injection (Mandatory)
 > 🧹 **Closing stage — zero-debt session:** once the plan is `Done 100%` and the evidence gate is green, the agent mines everything it learned during planning and execution, turns it into a short list of concrete follow-ups that can be finished right now, and asks the user to pick them with a single tap. Reporting alone is a failed close: the deliverable of this stage is a question the user answers with a checkbox, not a paragraph they must retype.
 
@@ -1026,6 +1288,7 @@ A SESSION ENDS WITH ZERO UNEXAMINED CODING DEBT
 ### 🧾 6.1 Preconditions — the plan must be finished first
 - The approved plan is `Done 100%` per the Plan Completion Saturation Rule. Every task carries fresh evidence; nothing sits at "mostly done". The sweep is the step *after* a finished plan, never a substitute for finishing it.
 - The Verification gate passed with fresh evidence, git hygiene is done, and the final diff has been audited. Starting the sweep on unverified work converts a completion claim into a bigger unverified claim.
+- The session's pull request exists and its number is recorded in the registry (`bun scripts/pr-registry.mjs pr <session> --number <N>`). A follow-up selected in the sweep is a new chunk of work on the same branch, so an unrecorded PR means the follow-up work has nowhere to land.
 - Anything that is genuinely `Blocked` by an external dependency is excluded from follow-up candidates and instead reported with the exact unblock condition. A blocked item is not a follow-up question; asking the user to "also fix" it is noise.
 
 ### 🔍 6.2 Harvest — collect debt candidates from the whole session
@@ -1111,6 +1374,15 @@ flowchart TD
 | "A subagent went quiet, so I re-dispatched it" | Silence is not evidence of a stall, and re-dispatching on top of a live original creates two writers on one file. Measure mtime and processes, reap the stale writer, then re-chunk rather than re-run |
 | "The stalled agent can keep going, I'll work around it" | A stalled agent holding a write scope will clobber an inline edit on its next write. Terminate it, confirm it is gone, then take over |
 | "Re-running the same chunk will probably work this time" | Two stalls means the chunk is too big. Split it into bounded single-purpose units with an output cap |
+| "A subagent committed its work so it wouldn't be lost" | Git writes are parent-only. A commit is not the deliverable, the tested file state is. `git reset --soft HEAD~1` and keep the changes |
+| "I'll name the branch something obvious" | Branch and worktree names are derived by `pr-registry claim`. Two panes picking their own names is how one PR ends up carrying another session's commits |
+| "This task is one PR, so let me open one per subagent" | One PR per session. Twenty subagents inside one session are one PR; twenty sessions are twenty PRs |
+| "Pushing so CI can tell me if it builds" | Checks run locally on the machine holding the tree. A PR triggers a remote run, but its result is the author's evidence about a commit, not this session's verification |
+| "All twenty look green, let me merge them in one batch and test at the end" | One merge at a time, each with its own rebase and its own local check. Twenty merges then one test means nineteen unverified merges |
+| "This PR conflicts, let me fix it on main so it goes through" | Conflicts are resolved in the session's branch, then re-verified. Editing the base branch produces a change no session can attribute or review |
+| "It's only a one-line fix, let me just commit to main" | There is no direct-to-base exception. A small change is a small session with its own branch and PR |
+| "The reviewer approved it, so I can merge without re-checking" | An approval is not a rebase and not a local check. The base moved since the review; verify again after the merge |
+| "I'll post my own review draft since I wrote it" | Generating a review and posting it are two acts. A human reads the exact text before it becomes externally visible |
 | "Finishing a stalled chunk inline because the task is small" | Task size is not the test. The test is whether the parent already holds the whole contract and the remainder is precisely specified. State the reason at handoff either way |
 | "Should work now" | Run verification, then claim |
 | "Em dash for emphasis in user copy" | Reads as AI-generated. Use a period, colon, comma, or parentheses instead |

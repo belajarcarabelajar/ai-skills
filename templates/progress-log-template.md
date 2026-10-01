@@ -1,5 +1,16 @@
 # Progress Log: [Task Name]
 
+> Two checklists exist for every task and **both are required**. The harness todo
+> list (`todowrite` in OpenCode, `TodoWrite` in Claude Code, `update_plan` in
+> Gemini) is the live one a user watches in a pane. The checklist in this file is
+> the durable one that survives a compaction, a crash, and a switch to a harness
+> with no todo tool. Neither replaces the other; when they disagree, this file
+> wins and the tool list is corrected to match.
+>
+> The PARENT owns the todo list. OpenCode's `general` subagent has full tool
+> access except todo, so a subagent cannot hold one, and the list is per session
+> rather than per subagent.
+
 > Persistent task state. Update this file after EVERY meaningful checkpoint.
 > This is the single source of truth for task progress across all sessions.
 

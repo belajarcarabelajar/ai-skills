@@ -1,5 +1,5 @@
 {
-  "$comment": "Maps trigger-prompt source files to their Snipset database slots. Source of truth is the markdown file; the database is a derived copy. Run `bun run snippets:check` in CI to catch drift, `bun run snippets:push` to update the database. Normalization rules are documented in scripts/sync-snippets.mjs and must match on both sides, so em dashes and arrow glyphs in the source do not create false drift.",
+  "$comment": "Maps trigger-prompt source files to their Snipset database slots. Source of truth is the markdown file; the database is a derived copy. Run `bun run snippets:check` in CI to catch drift, `bun run snippets:push` to update the database. Normalization rules are documented in scripts/sync-snippets.mjs and must match on both sides, so em dashes and arrow glyphs in the source do not create false drift. A NEW slot is a one-time create, not an update: `snipset snippet update` only works on a uuid that already exists, so provision it once with `snipset snippet add --name <name> --keyword <keyword> --group 'Agentic Coding AI' --description <description> --content \"$(bun -e \"import {readFileSync} from 'fs'; import {extractPromptBody} from './scripts/sync-snippets.mjs'; process.stdout.write(extractPromptBody(readFileSync('<source>','utf8')))\")\"`, then paste the returned uuid here and run `bun run snippets:push`. The uuid is chosen by the database, not by this file, so it cannot be pre-generated. Prerequisite: `snipset doctor` must report `schema_match: true`, otherwise every write is refused with 'schema mismatch: unexpected columns' and the slot cannot be created at all.",
   "version": 1,
   "group": "Agentic Coding AI",
   "snippets": [
@@ -16,6 +16,13 @@
       "keyword": "';",
       "name": "Debug Agent Prompt",
       "description": "RCA + WAJIB hypothesis-parallel subagent fan-out. Source: ai-skills/snippets/orkestrasi-debugging.md"
+    },
+    {
+      "source": "snippets/orkestrasi-pr.md",
+      "uuid": "d365786a-3107-4f90-b324-00433b366104",
+      "keyword": "pr",
+      "name": "PR Delivery and Batch Merge",
+      "description": "Isolated worktree + branch, one PR per session, derived naming via pr-registry, topological batch merge with per-merge rebase and local verification. Source: ai-skills/snippets/orkestrasi-pr.md"
     }
   ]
 }

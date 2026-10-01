@@ -8,6 +8,18 @@
 - **Subagent Role:** [e.g. Database Migrator / Component Refactorer]
 - **Parent Goal:** [Link to active plan and parent milestone]
 - **Delegation Mode:** `share` | `branch` | `isolated-files`
+- **Session slot:** [from `bun scripts/pr-registry.mjs claim`]
+- **Working directory:** [the session worktree path. Every relative path in this contract resolves inside it.]
+- **Head branch:** `ai/<plan-id>/<session-slug>`
+
+## 1a. Git Boundary (read before dispatch)
+You edit files and run tests. You do **not** touch git state.
+
+- **Never run:** `git commit`, `git add`, `git checkout`, `git switch`, `git merge`, `git rebase`, `git stash`, `git reset`, `git push`, `gh`, or any other command that writes git state.
+- **Why:** the git index is shared mutable state with no per-writer lock. Two subagents staging at once produce a commit containing a half-applied change from the other, and that commit was never tested in that shape.
+- **Do not commit "to be safe."** The deliverable is the tested file state, not the commit. If you already committed, say so in your report so the parent can `git reset --soft HEAD~1` and keep the changes.
+- **Stay inside your permitted files.** A file outside the list is a report, not an edit: name it in your report and let the parent decide.
+- Your report states what you changed and the verification output. The parent stages, commits, and pushes.
 
 ## 1b. Task Chunking & Fan-Out Plan (written before dispatch)
 The parent chunks the work into the smallest independently verifiable units, then assigns one unit per subagent. Target 10+ narrow subagents when the task supports it.
@@ -93,3 +105,12 @@ sequenceDiagram
 - [ ] No hardcoded secrets, temporary scratch files, or mock outputs left behind.
 - [ ] Targeted tests executed fresh by parent and exited 0.
 - [ ] Output integrated into parent task state log.
+- [ ] Integrated by explicit path (`git add <path>`), never `git add .`.
+- [ ] Committed by the parent on the session branch, never on the base branch.
+
+## 8. Session Integration
+
+- [ ] `bun scripts/pr-registry.mjs state <session> verified` set before any PR number is recorded.
+- [ ] PR body follows `templates/pull-request-template.md`, written to a file, posted with `--body-file`.
+- [ ] `bun scripts/pr-registry.mjs pr <session> --number <N>` recorded, so this session appears in the merge order.
+- [ ] Follow-ups selected in the Step 6 debt sweep land on this same branch and PR, not on a second PR.

@@ -38,6 +38,25 @@ try {
   errors++;
 }
 
+// 0b-bis. `gh` is the tool the PR delivery stage calls, so it is checked here for
+// the same reason tgrep is. This block did not exist while `gh` was an unused
+// prerequisite in install.sh, which is exactly how a mandatory dependency rots
+// into a decorative one: nothing referenced it, so nothing noticed it was
+// missing. Now the skill names `gh pr create` and `gh pr view`, so a machine
+// without it cannot finish a session.
+//
+// Auth is deliberately NOT checked. `gh auth status` reaches the network and can
+// prompt, and a validation script that blocks on a credential is a script that
+// fails for a reason unrelated to the repository. The skill tells the agent to
+// run `gh auth status` once at the start of a session, where a human is present.
+try {
+  const ghOut = execSync('gh --version 2>&1', { encoding: 'utf8' }).trim().split('\n')[0];
+  console.log(`✅ Prerequisite verified: ${ghOut}`);
+} catch (err) {
+  console.error('❌ Prerequisite missing: gh (GitHub CLI). The PR delivery stage calls `gh pr create`; without it a session cannot open its PR.');
+  errors++;
+}
+
 // 1. Check Master File & Frontmatter
 const masterPath = path.join(rootDir, 'Super Ultra Code Plan Implementation.md');
 if (!fs.existsSync(masterPath)) {
@@ -127,6 +146,8 @@ const requiredTemplates = [
   'code-review-template.md',
   'deep-research-report-template.md',
   'follow-up-injection-template.md',
+  'pull-request-template.md',
+  'pr-review-template.md',
 ];
 
 for (const tmpl of requiredTemplates) {
@@ -149,6 +170,8 @@ const mermaidRequiredTemplates = [
   'subagent-contract-template.md',
   'code-review-template.md',
   'follow-up-injection-template.md',
+  'pull-request-template.md',
+  'pr-review-template.md',
 ];
 for (const tmpl of mermaidRequiredTemplates) {
   const p = path.join(rootDir, 'templates', tmpl);
@@ -166,7 +189,15 @@ for (const tmpl of mermaidRequiredTemplates) {
 // 3c. Trigger snippets must carry the mandatory subagent contract.
 // A trigger prompt that omits it is the most common cause of an agent quietly
 // implementing everything inline, so its absence is a build failure.
-const requiredSnippetTerms = [
+//
+// The terms are per-snippet, not one global list. The first draft used a single
+// array applied to every snippet, which is only correct while every snippet has
+// the same job. The PR snippet drives a different phase: it owns the isolation
+// contract, the PR body rules, and the ordered batch merge, and forcing the
+// plan snippet's vocabulary onto it would be asserting something untrue about
+// what that file is for. The shared terms stay shared; the phase-specific ones
+// are named per entry.
+const subagentContractTerms = [
   'SUBAGENT-FIRST',
   'TASK-CHUNKING',
   'BATCH MANIFEST',
@@ -177,11 +208,33 @@ const requiredSnippetTerms = [
   'PARENT DIFF AUDIT GATE',
   'subagent-contract-template.md',
 ];
-const requiredSnippets = [
-  'orkestrasi-ngoding-plan.md',
-  'orkestrasi-debugging.md',
-];
-for (const snip of requiredSnippets) {
+
+// Every snippet drives delegated work, so the fan-out terms are shared. These
+// extra terms are what make each snippet's own phase enforceable.
+const snippetContracts = {
+  'orkestrasi-ngoding-plan.md': [
+    'todowrite',                  // the harness todo tool, not just a file checklist
+    'plan-issue-sync.mjs',        // the plan is mirrored to a GitHub issue
+  ],
+  'orkestrasi-debugging.md': [
+    'todowrite',
+    'plan-issue-sync.mjs',
+  ],
+  'orkestrasi-pr.md': [
+    'todowrite',
+    'pr-registry.mjs claim',      // isolation is derived, not chosen
+    'worktree add',               // the worktree is created before any write
+    'GIT WRITES ARE PARENT-ONLY', // no subagent touches git state
+    'pull-request-template.md',   // the body has a contract
+    '--body-file',                // never --body
+    'pr-registry.mjs order',      // topological merge order
+    'pr-review-template.md',      // the review path is its own contract
+  ],
+};
+
+const requiredSnippets = Object.keys(snippetContracts);
+
+for (const [snip, extraTerms] of Object.entries(snippetContracts)) {
   const p = path.join(rootDir, 'snippets', snip);
   if (!fs.existsSync(p)) {
     console.error(`❌ Missing trigger snippet: snippets/${snip}`);
@@ -189,11 +242,12 @@ for (const snip of requiredSnippets) {
     continue;
   }
   const body = fs.readFileSync(p, 'utf8');
-  const missing = requiredSnippetTerms.filter((term) => !body.includes(term));
+  const required = [...subagentContractTerms, ...extraTerms];
+  const missing = required.filter((term) => !body.includes(term));
   if (missing.length === 0) {
-    console.log(`✅ Trigger snippet carries the subagent contract: snippets/${snip}`);
+    console.log(`✅ Trigger snippet carries its contract: snippets/${snip}${extraTerms.length ? ` (+${extraTerms.length} phase terms)` : ''}`);
   } else {
-    console.error(`❌ snippets/${snip} is missing required subagent terms: ${missing.join(', ')}`);
+    console.error(`❌ snippets/${snip} is missing required terms: ${missing.join(', ')}`);
     errors++;
   }
 }
@@ -238,6 +292,203 @@ for (const snip of requiredSnippets) {
   } else {
     console.error(`❌ snippets/${snip} uses a prohibited runtime: ${banned.join(', ')} (use bun)`);
     errors++;
+  }
+}
+
+// 3g. Mandatory PR delivery contract. Without this stage, a session ends in a
+// commit on the working branch, and two concurrent sessions collide in ways no
+// git command rejects: two agents on one ref, two agents in one worktree, and a
+// batch merged in finish order. Each individual command is valid, so nothing
+// downstream reports the collision.
+//
+// The check asserts the pieces separately because they fail separately: a skill
+// that keeps the prose but loses the tool, or keeps the tool but loses the
+// "never on the base branch" rule, is exactly the half-migrated state this
+// block exists to catch.
+//
+// Revert: delete this block, the two PR templates, `pr-registry.mjs` and its
+// test, the `5.5️⃣` section in the master skill, the PR snippet and its manifest
+// entry, and the `pr:*` scripts in package.json.
+{
+  const prContract = [
+    // The stage heading, line-anchored. A plain substring test is satisfied by
+    // any cross-reference to the section, so deleting the section while leaving
+    // a pointer behind would still pass.
+    { label: 'master skill PR delivery heading', file: masterPath, needle: '^## 5\\.5️⃣.*Pull Request Delivery', multiline: true },
+    { label: 'master skill claims a derived branch', file: masterPath, needle: 'pr-registry.mjs claim' },
+    { label: 'master skill forbids subagent git writes', file: masterPath, needle: 'Git Ownership Is Parent-Only' },
+    { label: 'master skill names the PR template', file: masterPath, needle: 'templates/pull-request-template.md' },
+    { label: 'master skill names the review template', file: masterPath, needle: 'templates/pr-review-template.md' },
+    { label: 'master skill requires a body file', file: masterPath, needle: '--body-file' },
+    { label: 'master skill computes merge order', file: masterPath, needle: 'pr-registry.mjs order' },
+    { label: 'master skill requires per-merge verification', file: masterPath, needle: 'pr-registry.mjs surface' },
+  ];
+  if (!fs.existsSync(masterPath)) {
+    console.error('❌ PR delivery contract cannot be checked: the master file is missing (see section 1).');
+  } else {
+    for (const c of prContract) {
+      const body = fs.readFileSync(c.file, 'utf8');
+      const present = c.multiline ? new RegExp(c.needle, 'm').test(body) : body.includes(c.needle);
+      if (present) {
+        console.log(`✅ PR delivery contract present: ${c.label}`);
+      } else {
+        console.error(`❌ PR delivery contract missing: ${c.label} — ${c.multiline ? 'pattern' : 'literal'} "${c.needle}" not found in ${path.relative(rootDir, c.file)}.`);
+        errors++;
+      }
+    }
+  }
+
+  // The allocator and the merge-order resolver are the deterministic half of the
+  // stage. Prose that says "pick a unique branch name" is a request, not a
+  // guarantee; the tool refusing a collision is the guarantee.
+  for (const scr of ['scripts/pr-registry.mjs', 'scripts/pr-registry.test.mjs']) {
+    if (fs.existsSync(path.join(rootDir, scr))) {
+      console.log(`✅ Script present: ${scr}`);
+    } else {
+      console.error(`❌ Missing ${scr} (the PR delivery stage names this tool; prose without it is a request, not a guarantee).`);
+      errors++;
+    }
+  }
+
+  // State names are a contract between the skill and the tool. The skill tells an
+  // agent to walk isolated -> active -> verified -> open -> merged, so a rename
+  // in the tool that leaves the skill naming old states produces instructions no
+  // command accepts.
+  const registryPath = path.join(rootDir, 'scripts', 'pr-registry.mjs');
+  if (fs.existsSync(registryPath) && fs.existsSync(masterPath)) {
+    let states = null;
+    try {
+      states = (await import(registryPath)).SESSION_STATES;
+    } catch (e) {
+      console.error(`❌ Cannot load scripts/pr-registry.mjs to read SESSION_STATES: ${e.message}`);
+      errors++;
+    }
+    const masterBody = fs.readFileSync(masterPath, 'utf8');
+    if (Array.isArray(states)) {
+      const missing = states.filter((s) => !masterBody.includes(`\`${s}\``));
+      if (missing.length === 0) {
+        console.log(`✅ Session state names agree: all ${states.length} states appear in the master skill.`);
+      } else {
+        console.error(`❌ pr-registry.mjs exports states the master skill never names: ${missing.map((s) => `\`${s}\``).join(', ')}. The skill would instruct an agent to run a transition the tool refuses.`);
+        errors++;
+      }
+    }
+  }
+}
+
+// 3h. Mandatory plan-issue mirror contract. The vault mirror makes a plan
+// readable; the issue mirror makes its history searchable. Without this section
+// the second mirror does not exist, and the answer to "when was this approved,
+// what got closed, who said what" lives only in a git log nobody reads.
+//
+// The check asserts the pieces separately for the same reason 3g does: a skill
+// that keeps the prose but drops the tool is the half-migrated state this block
+// exists to catch.
+//
+// Revert: delete this block, `plan.issues.json`, `plan-issue-sync.mjs` and its
+// test, the `🐙 Plan → GitHub Issue` section in the master skill, and the
+// `issue:*` scripts in package.json.
+{
+  const issueContract = [
+    { label: 'master skill issue-mirror heading', file: masterPath, needle: '^## 🐙 Plan → GitHub Issue$', multiline: true },
+    { label: 'master skill names the issue sync CLI', file: masterPath, needle: 'plan-issue-sync.mjs' },
+    { label: 'master skill states the state mapping', file: masterPath, needle: 'Blocked' },
+    { label: 'master skill keeps the issue number out of the plan', file: masterPath, needle: 'plan.issues.json' },
+    { label: 'master skill forbids a summary body', file: masterPath, needle: 'A summary body is banned' },
+  ];
+  if (!fs.existsSync(masterPath)) {
+    console.error('❌ Plan-issue contract cannot be checked: the master file is missing (see section 1).');
+  } else {
+    for (const c of issueContract) {
+      const body = fs.readFileSync(c.file, 'utf8');
+      const present = c.multiline ? new RegExp(c.needle, 'm').test(body) : body.includes(c.needle);
+      if (present) {
+        console.log(`✅ Plan-issue contract present: ${c.label}`);
+      } else {
+        console.error(`❌ Plan-issue contract missing: ${c.label} — ${c.multiline ? 'pattern' : 'literal'} "${c.needle}" not found in ${path.relative(rootDir, c.file)}.`);
+        errors++;
+      }
+    }
+  }
+
+  for (const scr of ['scripts/plan-issue-sync.mjs', 'scripts/plan-issue-sync.test.mjs']) {
+    if (fs.existsSync(path.join(rootDir, scr))) {
+      console.log(`✅ Script present: ${scr}`);
+    } else {
+      console.error(`❌ Missing ${scr} (the plan-issue mirror names this tool; prose without it is a request, not a guarantee).`);
+      errors++;
+    }
+  }
+
+  // The config is a real file, not a default. A plan filed under a guessed
+  // repository is worse than one that is not filed, so the mapping from project
+  // to owner/repo has to be checked in rather than assumed at runtime.
+  const issuesConfigPath = path.join(rootDir, 'plan.issues.json');
+  if (!fs.existsSync(issuesConfigPath)) {
+    console.error('❌ Missing plan.issues.json (project to owner/repo mapping; the issue sync cannot resolve a repository without it).');
+    errors++;
+  } else {
+    try {
+      const parsed = JSON.parse(fs.readFileSync(issuesConfigPath, 'utf8'));
+      const projects = parsed.projects ?? {};
+      if (parsed.version !== 1) {
+        console.error(`❌ plan.issues.json has unsupported version ${JSON.stringify(parsed.version)}; this repository writes version 1.`);
+        errors++;
+      } else if (Object.keys(projects).length === 0) {
+        console.error('❌ plan.issues.json declares no projects, so every plan sync would be refused. Add at least {"projects": {"<project>": "owner/repo"}}.');
+        errors++;
+      } else {
+        const bad = Object.entries(projects).filter(([, v]) => !/^[\w.-]+\/[\w.-]+$/.test(String(v)));
+        if (bad.length) {
+          console.error(`❌ plan.issues.json projects entries must be "owner/repo": ${bad.map(([k, v]) => `${k}=${JSON.stringify(v)}`).join(', ')}`);
+          errors++;
+        } else {
+          console.log(`✅ Plan-issue registry valid: ${Object.keys(projects).length} project(s) mapped to a repository.`);
+        }
+      }
+    } catch (e) {
+      console.error(`❌ plan.issues.json is not valid JSON: ${e.message}`);
+      errors++;
+    }
+  }
+}
+
+// 3i. Mandatory harness todo list contract.
+//
+// The measured failure this guards against: the skill mandates an itemized
+// checklist, an agent reads that, and produces `[ ]` lines in a file while the
+// harness's own todo tool is never called. The user watching a pane sees no
+// progress at all, and nothing in the repository notices, because a checklist in
+// prose looks exactly like a fulfilled contract from the outside.
+//
+// The tool name is asserted because it is the thing most likely to rot: a wrong
+// name is a tool-not-found error mid-task, not a clean degradation. It was
+// verified against opencode.ai/docs on 2026-10-01, not recalled.
+//
+// Revert: delete this block and the `📋 Harness Todo List` section in the master
+// skill, and drop the third bullet of Mandatory Pre-Execution Todo Breakdown.
+{
+  const todoContract = [
+    { label: 'master skill todo section heading', needle: '^## 📋 Harness Todo List$', multiline: true },
+    { label: 'OpenCode todo tool name', needle: 'todowrite' },
+    { label: 'tool discovery before assuming', needle: 'Discover before assuming' },
+    { label: 'degradation when no tool exists', needle: 'Degradation when there is no todo tool' },
+    { label: 'both artifacts kept deliberately', needle: 'Both artifacts, deliberately' },
+    { label: 'the subagent-has-no-todo constraint', needle: 'except todo' },
+  ];
+  if (!fs.existsSync(masterPath)) {
+    console.error('❌ Todo contract cannot be checked: the master file is missing (see section 1).');
+  } else {
+    const masterBody = fs.readFileSync(masterPath, 'utf8');
+    for (const c of todoContract) {
+      const present = c.multiline ? new RegExp(c.needle, 'm').test(masterBody) : masterBody.includes(c.needle);
+      if (present) {
+        console.log(`✅ Harness todo contract present: ${c.label}`);
+      } else {
+        console.error(`❌ Harness todo contract missing: ${c.label} — ${c.multiline ? 'pattern' : 'literal'} "${c.needle}" not found in the master skill.`);
+        errors++;
+      }
+    }
   }
 }
 
@@ -287,11 +538,14 @@ for (const snip of requiredSnippets) {
           console.error(`❌ snippets.manifest.json references a missing file: ${e.source}`);
           errors++;
         }
-        // Every tracked source must itself carry the subagent contract, so a
-        // database copy can never be the only place the rules exist.
+        // Every tracked source must itself carry the contract for its own phase,
+        // so a database copy can never be the only place the rules exist.
         if (e.source && fs.existsSync(path.join(rootDir, e.source))) {
+          const snip = path.basename(e.source);
+          const extra = snippetContracts[snip];
+          if (!extra) continue;
           const body = fs.readFileSync(path.join(rootDir, e.source), 'utf8');
-          const missing = requiredSnippetTerms.filter((term) => !body.includes(term));
+          const missing = [...subagentContractTerms, ...extra].filter((term) => !body.includes(term));
           if (missing.length > 0) {
             console.error(`❌ ${e.source} is tracked in the manifest but is missing: ${missing.join(', ')}`);
             errors++;
@@ -305,6 +559,16 @@ for (const snip of requiredSnippets) {
         if (!entries.some((e) => e.source === rel)) {
           console.error(`❌ ${rel} is not tracked in snippets.manifest.json; it can never reach the database`);
           errors++;
+        }
+      }
+      // A keyword is a global trigger across the whole Snipset install, not a
+      // per-file label, so a collision silently shadows another snippet rather
+      // than failing. The existing keywords are two-character punctuation
+      // sequences, which is why the check below warns on a short one instead of
+      // only rejecting exact duplicates.
+      for (const e of entries) {
+        if (typeof e.keyword === 'string' && e.keyword.length < 3) {
+          console.warn(`⚠️  ${e.source}: keyword ${JSON.stringify(e.keyword)} is ${e.keyword.length} character(s). It works, and it is unique today, but a 1-2 character global trigger is easy to shadow by an unrelated snippet added later.`);
         }
       }
       if (errors === before) {

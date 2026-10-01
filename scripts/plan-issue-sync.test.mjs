@@ -312,17 +312,43 @@ test('no create or edit passes --json, which real gh rejects', () => {
   });
 });
 
-test('a body-and-state change is one edit, not three', () => {
-  // Three sequential edits would mean three chances to half-apply, and GitHub
-  // records each as a separate event in the issue timeline.
+test('a body-and-state change edits once, then closes', () => {
+  // gh 2.102.0 removed `gh issue edit --state`, so this is now necessarily two calls.
+  // The invariant that survives is: exactly one `issue edit` (never a second edit that
+  // could half-apply a title or body), and the state change is a separate close/reopen
+  // that happens only after the edit succeeded.
   withFakeGh(RECORD_AND_ECHO_URL, (g) => {
     const r = applyAction({ kind: 'update-and-state', number: 7, title: 'T', body: 'B', repo: 'u/r', close: true }, ghRunner());
     assert.equal(r.ok, true);
     assert.equal(r.closed, true);
     const argv = g.argv();
-    assert.match(argv, /--state closed/);
+    assert.match(argv, /issue close 7/);
+    assert.doesNotMatch(argv, /--state/, 'gh 2.102.0 removed --state; passing it is a hard error');
     assert.match(argv, /--title T/);
     assert.equal((argv.match(/issue edit/g) || []).length, 1, 'exactly one edit call');
+  });
+});
+
+test('a failed body edit does not go on to close the issue', () => {
+  // Half-applying in the other order would close the issue while leaving the previous
+  // plan text on it, which reads as "done" for work that never landed.
+  const calls = [];
+  const run = (args) => {
+    calls.push(args.join(' '));
+    if (args[1] === 'edit') return { ok: false, status: 1, out: '', err: 'boom' };
+    return { ok: true, status: 0, out: 'https://github.com/u/r/issues/7' };
+  };
+  const r = applyAction({ kind: 'update-and-state', number: 7, title: 'T', body: 'B', repo: 'u/r', close: true }, run);
+  assert.equal(r.ok, false);
+  assert.equal(calls.filter((c) => c.startsWith('issue close')).length, 0, 'must not close after a failed edit');
+});
+
+test('reopening an issue uses issue reopen, not an --state flag', () => {
+  withFakeGh(RECORD_AND_ECHO_URL, (g) => {
+    const r = applyAction({ kind: 'update-state', number: 7, url: 'u', close: false, repo: 'u/r' }, ghRunner());
+    assert.equal(r.ok, true);
+    assert.match(g.argv(), /issue reopen 7/);
+    assert.doesNotMatch(g.argv(), /--state/);
   });
 });
 
@@ -483,7 +509,8 @@ test('the recorded state follows the plan, not the previous entry', () => {
       }), { planPath: f.full, repoRoot: f.repoRoot, run: ghRunner() });
       assert.equal(res.action, 'update-and-state');
       assert.equal(res.cfg.issues[PLAN_REL].state, 'closed');
-      assert.match(g.argv(), /--state closed/);
+      assert.match(g.argv(), /issue close 9/);
+      assert.doesNotMatch(g.argv(), /--state/);
     });
   } finally {
     f.cleanup();

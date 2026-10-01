@@ -248,8 +248,16 @@ export function deriveAction({ entry, planText, status, key, id, repo }) {
 
 // ---------- executor ----------
 
-export function applyAction(action, run) {
-  switch (action.kind) {
+// gh 2.102.0 (2026-09-30) removed `gh issue edit --state`; open/close are now
+// dedicated subcommands. Keeping the mapping in one place means a future gh flag
+// change is a one-line fix here rather than a hunt through every call site.
+function setIssueState(action, run) {
+  return action.close
+    ? run(['issue', 'close', String(action.number), '--repo', action.repo])
+    : run(['issue', 'reopen', String(action.number), '--repo', action.repo]);
+}
+
+export function applyAction(action, run) {  switch (action.kind) {
     case 'current':
       return { ok: true, skipped: true, number: action.number, url: action.url };
     case 'create': {
@@ -267,16 +275,19 @@ export function applyAction(action, run) {
       return { ok: true, number: action.number, url: r.url ?? action.url };
     }
     case 'update-state': {
-      const r = run(['issue', 'edit', String(action.number), '--repo', action.repo, '--state', action.close ? 'closed' : 'open']);
+      const r = setIssueState(action, run);
       if (!r.ok) return { ok: false, error: r.err };
       return { ok: true, number: action.number, url: r.url ?? action.url, closed: action.close };
     }
     case 'update-and-state': {
-      const r = run([
-        'issue', 'edit', String(action.number), '--repo', action.repo,
-        '--title', action.title, '--body-file', '-',
-        '--state', action.close ? 'closed' : 'open',
-      ], action.body);
+      // gh 2.102.0 (2026-09-30) removed `gh issue edit --state`, so title+body and
+      // the state transition are now necessarily two calls. The edit goes first: if
+      // it fails we return without touching the state, so a failed sync leaves the
+      // previous body and the previous open/closed state consistent with each other
+      // rather than half-applied in the other order.
+      const e = run(['issue', 'edit', String(action.number), '--repo', action.repo, '--title', action.title, '--body-file', '-'], action.body);
+      if (!e.ok) return { ok: false, error: e.err };
+      const r = setIssueState(action, run);
       if (!r.ok) return { ok: false, error: r.err };
       return { ok: true, number: action.number, url: r.url ?? action.url, closed: action.close };
     }

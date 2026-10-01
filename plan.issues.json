@@ -1,7 +1,18 @@
 {
   "version": 1,
   "projects": {
-    "ai-skills": "belajarcarabelajar/ai-skills"
+    "ai-skills": "belajarcarabelajar/ai-skills",
+    "Snipset": "belajarcarabelajar/Snipset"
   },
-  "issues": {}
+  "issues": {
+    "docs/code-plan/plans/2026-10-01-clipboard-polling-sensitive-log-spam.md": {
+      "number": 441,
+      "url": "https://github.com/belajarcarabelajar/Snipset/issues/441",
+      "hash": "4cf33167",
+      "state": "closed",
+      "status": "Complete",
+      "repo": "belajarcarabelajar/Snipset",
+      "synced_at": "2026-10-01T11:29:48.690Z"
+    }
+  }
 }

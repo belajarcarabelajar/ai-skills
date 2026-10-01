@@ -63,7 +63,7 @@ not carried as part of this PR.
 - [ ] Every finding that met the 8-point qualification filter is either fixed in
       this PR or listed in section 7. A finding is never closed verbally.
 
-**Reviewer verdict:** `correct` | `not correct` — [one to three sentences of
+**Reviewer verdict:** `correct` | `not correct`. [One to three sentences of
 justification, plus the conditions that would change it]
 
 ## 6. Risk, Rollout, Rollback
@@ -83,7 +83,7 @@ justification, plus the conditions that would change it]
 Observed while working, deliberately not fixed here. Each is a debt item, so
 each carries a ceiling and a trigger.
 
-- `[path:line]` [issue] — `defer: <ceiling>, <upgrade-trigger>`
+- `[path:line]` [issue]. `defer: <ceiling>, <upgrade-trigger>`
 
 ## 8. Checklist
 

@@ -1,4 +1,4 @@
-# PR Review Report: [#<number> — <title>]
+# PR Review Report: [#<number>: <title>]
 
 > Reviewer output contract for a pull request somebody else opened. The
 > internal-diff review lives in `templates/code-review-template.md` and is not

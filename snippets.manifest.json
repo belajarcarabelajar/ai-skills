@@ -23,6 +23,13 @@
       "keyword": "pr",
       "name": "PR Delivery and Batch Merge",
       "description": "Isolated worktree + branch, one PR per session, derived naming via pr-registry, topological batch merge with per-merge rebase and local verification. Source: ai-skills/snippets/orkestrasi-pr.md"
+    },
+    {
+      "source": "snippets/orkestrasi-pr-review.md",
+      "uuid": "70fe751b-7e98-4b9d-bedc-0271363cc958",
+      "keyword": "prr",
+      "name": "PR Review Standalone",
+      "description": "Review-only by default; merges to main only when pre-authorized and every safe gate passes (correct verdict, green checks, mergeable). Source: ai-skills/snippets/orkestrasi-pr-review.md"
     }
   ]
 }

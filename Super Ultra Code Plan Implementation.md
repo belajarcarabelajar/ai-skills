@@ -150,6 +150,27 @@ Invoke the workflow when at least one of the following is true. The decision tou
 
 The report follows the structure defined in `templates/deep-research-report-template.md`. It opens with an executive summary paragraph, develops three to seven `##` themes with `###` subsections, and closes with a synthesis. Every claim is grounded in an inline citation of the form `[n]`. Mathematical notation uses LaTeX delimiters. Lists are converted to prose; tables are used for multi-axis comparisons. The report length matches the scope of the question, not a fixed minimum.
 
+### 🕸️ Codebase Graph Preflight — graphify (optional)
+
+<!-- Added 2026-10-01. Scoped to Deep Research only; deliberately NOT wired
+     into TDD, systematic debugging, verification, or the debt sweep.
+     Revert: delete this subsection. Nothing else references it — no template,
+     example, script, or validator check depends on it. -->
+
+When a research question is about the active project's own code — how a subsystem works, what calls what, why two modules are coupled — check for a knowledge graph before re-reading raw files:
+
+```bash
+test -f graphify-out/graph.json && graphify query "<question>"
+```
+
+- `graphify query "<question>"` — scoped subgraph for a broad question.
+- `graphify path "A" "B"` — the relationship between two named things.
+- `graphify explain "<concept>"` — one concept in isolation.
+
+**Conditional and non-mandatory.** The graph is built on demand and is not present by default, so check for the file; never assume it exists and never treat a missing graph as a failure. If it is absent, or `graphify` is not installed, or the question is not about the code, fall back to normal file reading — which is the default and always correct. A scoped subgraph is usually far smaller than `GRAPH_REPORT.md` or raw grep output, so when the graph is there, prefer it; that is a size argument, not a claim about wall-clock speed.
+
+**Graph results are leads, not evidence.** Cite the source file the graph names, and read it before asserting anything about it. Never report a graph result the tool did not actually produce, and never cite `graphify-out/GRAPH_REPORT.md` for a fact you did not read there.
+
 ### 🌐 Web Evidence & Retrieval — TinyFish
 
 <!-- Integrated 2026-10-01 into this master skill, absorbing the separate

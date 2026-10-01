@@ -115,12 +115,19 @@ ai-skills/
 │   ├── plan-publish-registry.test.mjs           # Config, project resolution, enumeration tests
 │   ├── plan-publish-frontmatter.mjs             # Pure ultra-plan/v1 -> PARA frontmatter transform
 │   ├── plan-publish-frontmatter.test.mjs        # Merge rules, related-link, title fallback tests
+│   ├── pr-registry.mjs                          # PR session slots: derived branch/worktree, state machine, merge order
+│   ├── pr-registry.test.mjs                     # Collision, terminal-state, and merge-order guards
+│   ├── plan-issue-sync.mjs                      # Plan -> GitHub issue mirror (one-way, hash-keyed)
+│   ├── plan-issue-sync.test.mjs                 # Action-matrix and real-argv/stdin guards
 │   └── plan-mirror-check.sh                     # Local drift watchdog (systemd --user timer, check only)
 ├── snippets.manifest.json                      # Maps trigger prompts to Snipset database slots
 ├── plans.publish.json                          # Vault path, destination template, and project roots for the plan mirror
+├── plan.issues.json                            # Project -> owner/repo for the plan-issue mirror (committed config)
+├── pr.registry.json                            # Live PR session slots (gitignored; per-machine coordination state)
 ├── snippets/                                    # Copy-paste trigger prompts
 │   ├── orkestrasi-ngoding-plan.md               # Plan + TDD + mandatory subagent fan-out
-│   └── orkestrasi-debugging.md                  # RCA + mandatory hypothesis-parallel subagent fan-out
+│   ├── orkestrasi-debugging.md                  # RCA + mandatory hypothesis-parallel subagent fan-out
+│   └── orkestrasi-pr.md                         # PR delivery, review, and topological batch merge
 ├── templates/                                   # Companion templates (blank scaffolds)
 │   ├── implementation-plan-template.md          # Visual work breakdown & task mapping
 │   ├── spike-report-template.md                 # Timeboxed exploratory spike & hypotheses
@@ -132,7 +139,9 @@ ai-skills/
 │   ├── subagent-contract-template.md            # Subagent task contract & parent audit gate
 │   ├── code-review-template.md                  # Reviewer output contract & verdict
 │   ├── deep-research-report-template.md         # Citation-grounded long-form research report
-│   └── follow-up-injection-template.md          # Session-close debt sweep & follow-up question
+│   ├── follow-up-injection-template.md          # Session-close debt sweep & follow-up question
+│   ├── pull-request-template.md                 # PR body, local evidence table, delivery metadata
+│   └── pr-review-template.md                    # Remote PR review, coverage table, binary verdict
 └── skills/
     └── super-ultra-code-plan/                   # Full skill package with bundled templates & examples
         ├── SKILL.md -> ../../Super Ultra Code Plan Implementation.md
@@ -257,6 +266,8 @@ Agents can instantly scaffold structured artifacts using the ready-to-use templa
 - **[`spike-report-template.md`](templates/spike-report-template.md)**: Hypothesis testing flow, epistemic unknowns exploration, and architectural trade-off evaluations.
 - **[`systematic-debugging-log-template.md`](templates/systematic-debugging-log-template.md)**: 4-phase RCA state machine (REPRODUCE -> DIAGNOSE -> FIX -> VERIFY) and bug reproduction log.
 - **[`verification-checklist-template.md`](templates/verification-checklist-template.md)**: Evidence gate flowchart, pre-completion checks (test logs, zero warnings, build pass, git hygiene).
+- **[`pull-request-template.md`](templates/pull-request-template.md)**: delivery metadata, acceptance-criteria-to-evidence table, local verification evidence, independent review, risk and rollback, deferred debt.
+- **[`pr-review-template.md`](templates/pr-review-template.md)**: remote PR target, fetched-state record, coverage table, findings anchored to changed lines, merge readiness, binary verdict, and what gets posted.
 - **[`handoff-template.md`](templates/handoff-template.md)**: Session handoff document - fill at the end of every session so the next session can resume exactly where you left off (last verified state, next action, open decisions, blockers).
 - **[`progress-log-template.md`](templates/progress-log-template.md)**: Persistent task state log - the single source of truth for a task across multiple sessions (checklist, decisions, evidence trail, session log).
 - **[`adr-template.md`](templates/adr-template.md)**: Architecture Decision Record (ADR) - structured decision tree, alternative trade-off comparison, and consequences.
@@ -362,15 +373,256 @@ which is the part a finished plan can no longer explain.
 
 ---
 
+## Plan Mirroring: Obsidian and GitHub Issues
+
+A plan gets two derived copies, and both are one-way. The project repository is
+the source of truth; every other copy is derived state that is regenerated, never
+edited.
+
+| Copy | What it buys | Idempotency key |
+|---|---|---|
+| Obsidian note | Searchable, readable, rendered Mermaid, graph-linked | `source_hash` recorded in the note's own frontmatter |
+| GitHub issue | **History**: who opened it, when it was approved, what closed and when, every comment in one timeline GitHub already indexes and links from the commit | Issue number recorded in `plan.issues.json` |
+
+The issue body **is** the plan text, byte for byte, plus a machine-readable
+trailer carrying the plan id, key, source path, status, and hash. A summary body
+is banned: a summary is a second source of truth that goes quietly stale the
+moment the plan changes, and then the issue is wrong in a way nothing reports.
+The trailer is what makes "is this issue current?" answerable from the issue alone.
+
+### Three things that will bite you, and why they are built this way
+
+**The issue number is never written into the plan's frontmatter.** The vault mirror
+hashes the entire plan text, so injecting a number would change `source_hash` and
+instantly make every vault mirror stale, which blocks `--execute` with exit 3. The
+number lives in a sidecar, `plan.issues.json`, which is why the plan file stays
+byte-stable.
+
+**The body goes on stdin, never on argv.** A 10 KB plan body on the command line
+hits `ARG_MAX` and goes through the shell's quoting rules, so the bytes stop being
+identical to the plan, which is the entire premise of the mirror. Every write uses
+`--body-file -`.
+
+**The issue state is derived from the plan's `status`, never chosen.**
+
+| Plan `status` | Issue state | Why |
+|---|---|---|
+| `Draft`, `Approved`, `InProgress`, `Verification` | open | |
+| `Blocked` | open | Blocked work is not done. Closing it would report finished work. |
+| `Complete` | closed | |
+
+A hand-closed issue does not win, because the issue is derived state. An
+in-progress plan whose issue somebody closed by hand reopens it on the next sync,
+so tidying a board never permanently detaches a plan from its mirror.
+
+### The decision is pure, which is why it is tested without a network
+
+`syncOne` resolves to exactly one of five actions, from `(recorded entry, plan
+text, plan status)`:
+
+| Action | Trigger | Effect |
+|---|---|---|
+| `create` | nothing recorded | one `gh issue create`, body on stdin |
+| `update-body` | hash differs | one `gh issue edit` with title and body |
+| `update-state` | open/closed differs | one `gh issue edit --state` |
+| `update-and-state` | both differ | **one** edit call, not three |
+| `current` | nothing differs | **zero** `gh` calls |
+
+`current` is the real no-op and is reported as its own kind, so `--check` and
+`--status` can tell "already current" from "dry run wrote nothing". Running the
+sync twice performs no second write, which is what stops a duplicate issue from
+appearing in a real repository.
+
+```bash
+bun run issue:sync <plan.md>...     # create or sync
+bun run issue:check <plan.md>...     # drift report, never writes, exit 1 on drift
+bun run issue:status                 # table of every recorded link, always exit 0
+```
+
+A project with no entry in `plan.issues.json` is **refused, not guessed**: a plan
+filed under the wrong repository is worse than one that is not filed. A plan with
+no `status:` in its frontmatter is refused too, because there is no state to
+derive. A sync failure does not invalidate the plan; report the exit code, and do
+not hand-create the issue as a workaround, because a hand-made issue carries no
+trailer and so reads as permanent drift.
+
+> `plan.issues.json` holds the `project -> owner/repo` mapping and **is** committed,
+> because it is configuration. The recorded issue links it accumulates are live
+> coordination state; point `PLAN_ISSUES_CONFIG` at a gitignored copy
+> (`plan.issues.local.json`) on a machine that syncs plans, so twenty sessions
+> writing one file cannot collide in version control.
+
+---
+
+## Harness Todo List
+
+The skill mandates an itemized checklist. That alone is not enough, and the gap is
+specific: an agent reads "output a checklist", writes `[ ]` lines into a plan file,
+and **never calls the harness's own todo tool**. Someone watching the pane sees no
+progress at all, and nothing in the repository notices, because a checklist in prose
+looks exactly like a fulfilled contract from the outside.
+
+So both artifacts are required, deliberately:
+
+| Artifact | Lifetime | Purpose |
+|---|---|---|
+| Harness todo list | The session; lost on compaction or harness switch | Live progress the user watches |
+| Plan file checklist | Permanent, in version control | The durable record a resumed session reads |
+
+| Harness | Todo tool |
+|---|---|
+| OpenCode | `todowrite` (permission key `"todowrite": "allow"`) |
+| Claude Code | `TodoWrite` |
+| Gemini / Antigravity | `update_plan` |
+| Anything else | enumerate the tool catalog, then apply the degradation rule |
+
+Verified against `opencode.ai/docs` on 2026-10-01 rather than recalled. Discover
+the tool name in the connected catalog first: a tool that exists in another
+harness's catalog does not exist in this one, and a wrong name is a
+tool-not-found error mid-task rather than a clean fallback.
+
+**The list is required in every mode**, including a planning session that will not
+touch code. `todowrite` is not on OpenCode's Plan-agent restricted list (which
+covers `file edits` and `bash`), and the planning phase is exactly where the phases
+get enumerated.
+
+### The measured constraint that decides ownership
+
+OpenCode's `general` subagent has **full tool access except todo**. So:
+
+- **The parent owns the todo list, always.** A subagent gets a chunk and returns a
+  report. Asking it to maintain a list produces a fabricated one in its report.
+- **The list is per session, not per subagent.** Ten subagents updating ten lists is
+  ten lists nobody reconciles. This mirrors the one-PR-per-session rule.
+- **Not seeing a dispatched subagent's progress is by design.** It arrives as the
+  report at the gather checkpoint.
+
+### Rules that keep the list honest
+
+- One item per independently verifiable unit, at chunking granularity. An item that
+  cannot fail on its own cannot be checked on its own.
+- Every item names a **finish line**, not a topic. "Add `session.test.ts` covering
+  token refresh and make it pass" is an item. "Fix the auth module" is not.
+- **Exactly one item `in_progress` at a time.** Two in progress is two threads, and
+  neither gets the parent's attention.
+- Completion is recorded **with its evidence in the same update**: command, exit
+  code, result. Marking complete and citing later is the same false pass the
+  runner's `skip_if` rules exist to prevent.
+- A newly discovered item is **added**, never substituted for the current one.
+  Silent substitution is how a session ends with a green list that does not match
+  the work done.
+- When the list and the plan file disagree, **the plan file wins** and the tool list
+  is corrected. The file is the source of truth; the tool is a view of it.
+
+**Degradation:** if the runtime has no todo tool, or it is denied, render the list
+as an explicit `[ ]` / `[x]` block in the reply, update it at every checkpoint, and
+say in one line that the runtime has no todo tool. Never skip the list because the
+widget is missing. The list is the contract; the tool is only how it is displayed.
+
+---
+
+## Pull Request Delivery & Batch Merge
+
+A session ends in a pull request on its own branch, never in a commit on the working
+branch. That is what makes running twenty or more sessions at once survivable, and the
+reason is mechanical: when more than one session touches one repository, three failures
+appear, and **none of them raises an error at the git level**, because each individual
+command is valid on its own.
+
+| Failure | What actually happens | Prevented by |
+|---|---|---|
+| Two sessions on one branch | The second push fast-forwards or is rejected, the agent reaches for `--force`, and the first session's PR now carries the second session's commits | Branch names **derived** by `pr-registry claim`, duplicate refused at claim, load, and save time |
+| Two sessions in one worktree | `git worktree add` fails, or the second session works inside the first session's checkout and both diffs become garbage | Worktree paths derived the same way, and the worktree sits *beside* the repository, never inside it |
+| Merging in finish order | A session that depends on another lands first, then conflicts with the rest of the batch | Topological order computed from a recorded `depends_on` graph, ties broken on name so the order is reproducible |
+
+### Two ownership rules that make concurrency safe
+
+**Git writes are parent-only.** A subagent edits files and runs tests. It never runs
+`git commit`, `git add`, `git checkout`, `git switch`, `git merge`, `git rebase`,
+`git stash`, `git reset`, `git push`, or `gh`. The git index is shared mutable state
+with no per-writer lock, so two subagents staging at once produce a commit containing a
+half-applied change from the other, and that commit was never tested in that shape. The
+parent integrates per chunk by reading `git diff -- <permitted paths>` and staging by
+explicit path, never `git add .`.
+
+**One session, one PR.** Twenty subagents inside one session are one PR. Twenty sessions
+are twenty PRs. One PR per subagent turns a twenty-session run into a two-hundred-PR
+merge queue.
+
+### The session state machine
+
+`pr-registry.mjs` holds the state, and the states exist to make two specific mistakes
+impossible:
+
+```
+isolated → active → verified → open → merged
+```
+
+| Constraint | Why it is a hard error |
+|---|---|
+| A PR number cannot be recorded before `verified` | Recording one implies the work is finished and checked, so `isolated → open` would skip the gate that makes a merge safe |
+| Only an `open` session with a PR can merge | A green local run alone is not a mergeable session |
+| `merged` is terminal | Reverting or redoing a session is a new session with a new branch. A file that can "un-merge" hides the revert from the merge order |
+| A duplicate branch or worktree is refused | A registry that reports success for a layout that will lose work is worse than no registry |
+
+```bash
+bun scripts/pr-registry.mjs claim --plan <plan-id> --session <slug> [--depends-on <slug>,<slug>]
+bun scripts/pr-registry.mjs state <session> <isolated|active|verified|open|merged>
+bun scripts/pr-registry.mjs pr <session> --number 42
+bun scripts/pr-registry.mjs order       # topological merge order
+bun scripts/pr-registry.mjs surface w3  # what must rebase first, what blocks it
+bun scripts/pr-registry.mjs status
+```
+
+`claim` prints the exact `git worktree add` command to run, and is idempotent: a retried
+claim after a crashed session returns the same slot rather than allocating a second one.
+`pr.registry.json` is **gitignored** on purpose. It is per-machine live state recording
+which branch each running session holds right now; committing it would merge twenty
+machines' in-flight sessions into one file and guarantee a conflict on the next claim.
+
+### Merging twenty PRs
+
+One at a time, in the order `order` prints, and each merge carries its own evidence:
+
+1. Rebase that session's branch onto `origin/main` **immediately before its own merge**.
+   The base moves with every merge, so a branch rebased at position 3 is already behind
+   by position 7. `surface <s>` reports which sessions landed since the branch was cut.
+2. Resolve any conflict **in the session's branch**, never on the base branch, then
+   re-run that session's verification. Editing the base to "fix" a conflict produces a
+   change no session can attribute or review.
+3. Merge this one PR.
+4. Re-run the local check on the new base. That run is the evidence for *that* merge.
+
+Batching twenty merges and testing at the end leaves nineteen of them unverified. A
+session that cannot be made mergeable is reported and skipped while the batch proceeds;
+it is a status, not a reason to freeze nineteen others. Already-merged sessions drop out
+of the order and stop blocking their dependents, and a dependency cycle is refused with
+the cycle named, because no valid order exists for one.
+
+### Two boundaries this stage does not cross
+
+**Remote CI is reported, never adopted.** This repository's checks run locally by policy,
+so a green GitHub Actions run is the author's evidence about a commit, not this session's
+evidence about the working tree. Reading it as verification is the same error as pushing
+to trigger someone else's runner.
+
+**Generating a review and posting it are two acts.** The posted comment is a shorter
+artifact than the internal report: verdict, blocking findings, nothing else. A human
+reads the exact text first. See [`templates/pr-review-template.md`](templates/pr-review-template.md)
+for the coverage table, the line-anchoring rule, and the binary verdict.
+
+---
+
 ## Trigger Snippets
 
-Copy-paste prompts for the two most common entry points. They live in
+Copy-paste prompts for the three entry points. They live in
 [`snippets/`](snippets/) and are the fastest way to activate the skill correctly.
 
 - **[`orkestrasi-ngoding-plan.md`](snippets/orkestrasi-ngoding-plan.md)**: plan generation, TDD execution, and the mandatory subagent pipeline.
 - **[`orkestrasi-debugging.md`](snippets/orkestrasi-debugging.md)**: root cause analysis with hypothesis-parallel investigation, and the mandatory subagent pipeline.
+- **[`orkestrasi-pr.md`](snippets/orkestrasi-pr.md)**: PR delivery from a finished session, PR review, and the ordered batch merge.
 
-Both snippets carry the same subagent rules, because the most common failure is an agent
+All three carry the same subagent rules, because the most common failure is an agent
 that reads a trigger prompt, never sees a subagent requirement in it, and quietly
 implements everything inline. Each one states the eight-step pipeline explicitly:
 task-chunking, batch manifest, high fan-out floor, non-overlapping scopes, nested
@@ -379,7 +631,9 @@ allowed only as a written exception.
 
 The debugging variant chunks by **hypothesis** rather than by file, so competing
 explanations are tested in parallel and a disproven cause is discarded without
-contaminating the others.
+contaminating the others. The PR variant adds the terms specific to its own phase:
+derived isolation, parent-only git ownership, the PR body contract, `--body-file`, the
+topological merge order, and the separate review contract.
 
 ### Keeping the database in sync
 
@@ -393,6 +647,31 @@ bun run snippets:status   # table of local vs database hashes
 bun run snippets:check    # exit 1 on drift (also runs in CI)
 bun run snippets:push     # write local content to the database
 ```
+
+### Adding a new snippet is a create, not an update
+
+`sync-snippets.mjs` only ever calls `snippet update`, which requires a uuid that
+**already exists**. So a new trigger prompt needs its database slot provisioned once,
+by hand, before `snippets:push` can do anything with it:
+
+```bash
+# 1. the CLI must agree with the database schema, or every write is refused
+snipset doctor            # schema_match must be true
+
+# 2. create the slot, taking the body from the file (never retyping it)
+snipset snippet add \
+  --name "<name>" --keyword "<keyword>" --group "Agentic Coding AI" \
+  --description "<description>" \
+  --content "$(bun -e "import {readFileSync} from 'fs'; import {extractPromptBody} from './scripts/sync-snippets.mjs'; process.stdout.write(extractPromptBody(readFileSync('snippets/<file>.md','utf8')))")"
+
+# 3. paste the uuid the database returns into snippets.manifest.json, then
+bun run snippets:push
+```
+
+The uuid is **chosen by the database**, so it cannot be pre-generated and written into
+the manifest ahead of time. A manifest entry whose uuid does not exist yet reports
+`snippet not found` from `snippets:check`, which is the correct verdict: the database
+genuinely has no copy, and the agent would receive nothing when the snippet is triggered.
 
 Both sides are normalized before comparison (em dash, curly quotes, rightwards arrow,
 CRLF, trailing whitespace), so a typographic character in the Markdown source is not
@@ -420,7 +699,16 @@ publisher never reads a mirror back as an input, so a stale mirror can rot visib
 bun run mirror:publish <plan.md>...   # mirror the named plans (or pass the flags below directly)
 bun run mirror:check                  # exit 1 on drift or a missing mirror
 bun run mirror:status                 # table of every plan and its mirror state, always exit 0
+bun run issue:sync <plan.md>...       # the same plan, mirrored to a GitHub issue
+bun run issue:check <plan.md>...      # issue drift report, never writes
+bun run issue:status                  # table of recorded plan-issue links, always exit 0
 ```
+
+A plan has **two** derived copies, both one-way: this Obsidian note, and a GitHub
+issue carrying the same text. Run the issue sync immediately after each
+`mirror:publish` for the same trigger, so the two never drift apart. See
+[Plan Mirroring](#plan-mirroring-obsidian-and-github-issues) for the state mapping
+and the three traps that shape the implementation.
 
 - **`mirror:publish`** writes one file per plan and stages it in the vault with `git add` when
   `stageInVault` is on, so obsidian-git (configured with `autoCommitOnlyStaged: true`) commits

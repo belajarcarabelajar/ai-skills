@@ -229,6 +229,7 @@ const snippetContracts = {
     '--body-file',                // never --body
     'pr-registry.mjs order',      // topological merge order
     'pr-review-template.md',      // the review path is its own contract
+    'plan-issue-sync.mjs',        // the plan's issue closes after the sweep, not before
   ],
 };
 

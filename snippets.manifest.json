@@ -19,7 +19,7 @@
     },
     {
       "source": "snippets/orkestrasi-pr.md",
-      "uuid": "d365786a-3107-4f90-b324-00433b366104",
+      "uuid": "e9b1be28-b4b0-4de4-98a3-3296ec0489c1",
       "keyword": "pr",
       "name": "PR Delivery and Batch Merge",
       "description": "Isolated worktree + branch, one PR per session, derived naming via pr-registry, topological batch merge with per-merge rebase and local verification. Source: ai-skills/snippets/orkestrasi-pr.md"

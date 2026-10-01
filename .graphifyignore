@@ -1,0 +1,50 @@
+# ============================================================
+# ai-skills — .graphifyignore
+# Created: 2026-10-01
+# ============================================================
+#
+# HOW TO READ THIS FILE
+#
+# graphify (CLI: ~/.local/bin/graphify, v0.9.73) reads this file using
+# .gitignore syntax. Its patterns are merged with .gitignore, and are
+# evaluated LAST, so where the two disagree this file wins.
+#
+# Scope note: unlike the Obsidian Vault, this repository has no
+# credential-bearing directories and no restricted scopes. These entries
+# exist to keep generated, vendored, and VCS-internal files out of the
+# knowledge graph. There is no cloud-extraction boundary declared here
+# yet — if one is added, revisit this file before the first cloud run.
+#
+# Facts below were checked on 2026-10-01 against this working copy.
+#
+# ------------------------------------------------------------
+# GROUP 1 — TOOL BUILD OUTPUT
+# ------------------------------------------------------------
+# graphify's own output directory. Ingesting it would feed generated
+# artifacts back into the graph. AGENTS.md at the repo root describes
+# this project's graph as living in graphify-out/, but the directory does
+# not exist in the working copy as of 2026-10-01. The pattern is kept so
+# it holds as soon as the graph is first built.
+graphify-out/
+
+# ------------------------------------------------------------
+# GROUP 2 — INSTALLED DEPENDENCIES
+# ------------------------------------------------------------
+# Vendored third-party packages, not project source. Present in the
+# working copy. Pulling these in would add tens of thousands of
+# third-party files to the graph and drown out project code.
+node_modules/
+
+# ------------------------------------------------------------
+# GROUP 3 — VCS INTERNALS
+# ------------------------------------------------------------
+# Object store and refs; not project source. Present in the working copy.
+.git/
+
+# ------------------------------------------------------------
+# GROUP 4 — SPIKE / THROWAWAY OUTPUT
+# ------------------------------------------------------------
+# spike-out/ holds output from throwaway spike runs rather than
+# maintained project artifacts, so it is excluded to keep the graph
+# describing the real repository. Present in the working copy.
+spike-out/

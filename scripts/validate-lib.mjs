@@ -57,6 +57,11 @@ export const SNIPPET_CONTRACTS = {
     'gh pr diff',
     'gh pr checks',
   ],
+  'orkestrasi-brainstorm.md': [
+    'todowrite',
+    'brainstorm-intent-template.md',
+    'question',
+  ],
 };
 
 export const REQUIRED_SNIPPETS = Object.keys(SNIPPET_CONTRACTS);

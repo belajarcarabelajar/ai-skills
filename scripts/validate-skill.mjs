@@ -5,6 +5,14 @@ import os from 'os';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
 import { checkRunnerContract } from './check-runner-contract.mjs';
+import {
+  SUBAGENT_CONTRACT_TERMS as subagentContractTerms,
+  SNIPPET_CONTRACTS as snippetContracts,
+  TINYFISH_LADDER_NEED,
+  BANNED_RUNTIME_SNIPPETS,
+  hasStrictMermaidFence,
+  extractMermaidBlocksStrict,
+} from './validate-lib.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -177,7 +185,10 @@ for (const tmpl of mermaidRequiredTemplates) {
   const p = path.join(rootDir, 'templates', tmpl);
   if (fs.existsSync(p)) {
     const content = fs.readFileSync(p, 'utf8');
-    if (/```mermaid[\s\S]*?```/.test(content)) {
+    // Strict fence: must match what scripts/render-diagrams.sh extracts
+    // (/^```mermaid[ \t]*$/). A loose /```mermaid/ substring test accepts
+    // fences the renderer never picks up (e.g. ```mermaid {config}).
+    if (hasStrictMermaidFence(content)) {
       console.log(`✅ Mermaid present: templates/${tmpl}`);
     } else {
       console.error(`❌ templates/${tmpl} must contain at least one \`\`\`mermaid diagram (planning always uses Mermaid).`);
@@ -196,41 +207,10 @@ for (const tmpl of mermaidRequiredTemplates) {
 // contract, the PR body rules, and the ordered batch merge, and forcing the
 // plan snippet's vocabulary onto it would be asserting something untrue about
 // what that file is for. The shared terms stay shared; the phase-specific ones
-// are named per entry.
-const subagentContractTerms = [
-  'SUBAGENT-FIRST',
-  'TASK-CHUNKING',
-  'BATCH MANIFEST',
-  'HIGH FAN-OUT FLOOR',
-  'NON-OVERLAPPING',
-  'NESTED FAN-OUT',
-  'GATHER & SYNTHESIZE',
-  'PARENT DIFF AUDIT GATE',
-  'subagent-contract-template.md',
-];
-
-// Every snippet drives delegated work, so the fan-out terms are shared. These
-// extra terms are what make each snippet's own phase enforceable.
-const snippetContracts = {
-  'orkestrasi-ngoding-plan.md': [
-    'todowrite',                  // the harness todo tool, not just a file checklist
-    'plan-issue-sync.mjs',        // the plan is mirrored to a GitHub issue
-  ],
-  'orkestrasi-debugging.md': [
-    'todowrite',
-    'plan-issue-sync.mjs',
-  ],
-  'orkestrasi-pr.md': [
-    'todowrite',
-    'pr-registry.mjs claim',      // isolation is derived, not chosen
-    'worktree add',               // the worktree is created before any write
-    'GIT WRITES ARE PARENT-ONLY', // no subagent touches git state
-    'pull-request-template.md',   // the body has a contract
-    '--body-file',                // never --body
-    'pr-registry.mjs order',      // topological merge order
-    'pr-review-template.md',      // the review path is its own contract
-  ],
-};
+// are named per entry. The review snippet (orkestrasi-pr-review.md) owns the
+// review path: review + code-review templates and the gh evidence inputs.
+// Canonical definitions live in scripts/validate-lib.mjs so unit tests can pin
+// them; this file imports them rather than redefining them.
 
 const requiredSnippets = Object.keys(snippetContracts);
 
@@ -268,7 +248,7 @@ for (const snip of requiredSnippets) {
   // Require the ladder's free rungs by name, not the word "TinyFish" alone: a
   // snippet naming the product but not the tools still leaves the escalation
   // order undefined, and the escalation order is the part that costs nothing.
-  const need = ['TinyFish', 'search', 'fetch_content'];
+  const need = TINYFISH_LADDER_NEED;
   const missing = need.filter((n) => !body.includes(n));
   if (missing.length === 0) {
     console.log(`✅ Trigger snippet names the TinyFish evidence ladder: snippets/${snip}`);
@@ -285,7 +265,7 @@ for (const snip of requiredSnippets) {
   const p = path.join(rootDir, 'snippets', snip);
   if (!fs.existsSync(p)) continue;
   const body = fs.readFileSync(p, 'utf8');
-  const banned = ['node scripts/', 'npm install', 'npm test', 'npx ']
+  const banned = BANNED_RUNTIME_SNIPPETS
     .filter((needle) => body.includes(needle));
   if (banned.length === 0) {
     console.log(`✅ Trigger snippet respects the Bun runtime rule: snippets/${snip}`);
@@ -786,12 +766,10 @@ if (!mmdcAvailable) {
 
   for (const mdFile of mdFiles) {
     const content = fs.readFileSync(mdFile, 'utf8');
-    const blocks = [];
-    const blockRe = /```mermaid\n([\s\S]*?)```/g;
-    let match;
-    while ((match = blockRe.exec(content)) !== null) {
-      blocks.push(match[1].trim());
-    }
+    // Strict extraction mirroring scripts/render-diagrams.sh awk
+    // (/^```mermaid[ \t]*$/ open, /^```[ \t]*$/ close). Canonical
+    // implementation lives in scripts/validate-lib.mjs.
+    const blocks = extractMermaidBlocksStrict(content);
 
     for (let i = 0; i < blocks.length; i++) {
       const rel = path.relative(rootDir, mdFile);

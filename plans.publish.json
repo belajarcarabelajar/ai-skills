@@ -7,7 +7,7 @@
     { "name": "Snipset", "root": "/home/belajarcarabelajar/Proyek/Snipset", "mirror": true, "worktrees": ["/home/belajarcarabelajar/Proyek/Snipset-seo"] },
     { "name": "ram-audit", "root": "/home/belajarcarabelajar/ram-audit", "mirror": true },
     { "name": "ai-skills", "root": "/home/belajarcarabelajar/ai-skills", "mirror": true },
-    { "name": "dawnbook", "root": "/home/belajarcarabelajar/dawnbook", "mirror": true },
+    { "name": "dawnbook", "root": "/home/belajarcarabelajar/Proyek/dawnbook", "mirror": true },
     { "name": "PS2", "root": "/home/belajarcarabelajar/Games/PS2", "mirror": true },
     { "name": "fasttrack", "root": "/home/belajarcarabelajar/Proyek/fasttrack", "mirror": true },
     { "name": "vault", "root": "/home/belajarcarabelajar/Dokumen/Obsidian Vault", "mirror": false }

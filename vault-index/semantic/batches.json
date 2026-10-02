@@ -1,7 +1,9 @@
 {
   "generated": "2026-10-02, after N8n removal (3a968b2) and tmp-test exclusion",
   "note": "rem-* ids. 31 tool-test transcripts removed by .graphifyignore GROUP 7. Files already extracted into a committed chunk are excluded.",
-  "root": "/home/belajarcarabelajar/Dokumen/Obsidian Vault",
+  "root": "/home/belajarcarabelajar/Documents/conversations-archive",
+  "vaultRoot": "/home/belajarcarabelajar/Dokumen/Obsidian Vault",
+  "rootNote": "root points at conversations-archive because 05 - Conversations/ was moved out of the vault on 2026-10-02 (commit 51b7a59) after 50 files >1MB OOMed Obsidian's metadata cache at ~3.9GB. 965 of the 997 worklist files live there. The 32 files that exist only under vaultRoot are vault plans and wiki concepts and are NOT reachable from root; resolve those against vaultRoot. Batch ids rem-001..rem-087 are unchanged -- this edit only moves where paths resolve. Do NOT regenerate this file: it is positional, and the plan's hazard note (2026-10-02 run) records that regenerating mid-flight silently re-points in-progress chunks at different files.",
   "total": 251,
   "files": 997,
   "alreadyExtracted": 51,

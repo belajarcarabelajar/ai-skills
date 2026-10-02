@@ -11,7 +11,8 @@
 - **Parent Goal:** `docs/code-plan/plans/2026-10-02-subagent-driven-vault-index.md`
 - **Delegation Mode:** `isolated-files` — your chunk file is yours alone
 - **Working directory:** `/home/belajarcarabelajar/ai-skills`
-- **Vault root:** `/home/belajarcarabelajar/Dokumen/Obsidian Vault`
+- **Vault root (transcripts):** `/home/belajarcarabelajar/Documents/conversations-archive`
+- **Vault root (plans, wiki, notes):** `/home/belajarcarabelajar/Dokumen/Obsidian Vault`
 
 ### 1a. Git Boundary
 

@@ -46,11 +46,11 @@
     "docs/code-plan/plans/2026-10-02-dashboard-frontend-audit.md": {
       "number": 2,
       "url": "https://github.com/belajarcarabelajar/terminal-log-intelligence/issues/2",
-      "hash": "8b3fc68e",
-      "state": "open",
-      "status": "Approved",
+      "hash": "5d294c60",
+      "state": "closed",
+      "status": "Complete",
       "repo": "belajarcarabelajar/terminal-log-intelligence",
-      "synced_at": "2026-10-02T01:23:09.486Z"
+      "synced_at": "2026-10-02T01:52:43.146Z"
     },
     "docs/code-plan/plans/2026-10-02-opencode-history-to-obsidian.md": {
       "number": 3,
@@ -64,11 +64,20 @@
     "docs/code-plan/plans/2026-10-02-access-code-email-gate.md": {
       "number": 4,
       "url": "https://github.com/belajarcarabelajar/fasttrack/issues/4",
-      "hash": "f6eb2a28",
+      "hash": "1a4c9f23",
+      "state": "closed",
+      "status": "Complete",
+      "repo": "belajarcarabelajar/fasttrack",
+      "synced_at": "2026-10-02T02:06:05.212Z"
+    },
+    "docs/code-plan/plans/2026-10-02-subagent-driven-vault-index.md": {
+      "number": 4,
+      "url": "https://github.com/belajarcarabelajar/ai-skills/issues/4",
+      "hash": "4f83d09f",
       "state": "open",
       "status": "Approved",
-      "repo": "belajarcarabelajar/fasttrack",
-      "synced_at": "2026-10-02T01:20:28.773Z"
+      "repo": "belajarcarabelajar/ai-skills",
+      "synced_at": "2026-10-02T02:44:01.281Z"
     }
   }
 }

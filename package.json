@@ -23,6 +23,7 @@
     "mirror:publish": "bun scripts/plan-publish.mjs",
     "mirror:check": "bun scripts/plan-publish.mjs --check --all",
     "mirror:status": "bun scripts/plan-publish.mjs --status",
+    "export:history": "bun scripts/export-opencode-history.mjs",
     "ci": "bash scripts/render-diagrams.sh && bun scripts/validate-skill.mjs && bun test scripts/ && bun scripts/sync-snippets.mjs --check"
   },
   "devDependencies": {

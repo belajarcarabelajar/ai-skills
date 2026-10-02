@@ -2,7 +2,9 @@
   "version": 1,
   "projects": {
     "ai-skills": "belajarcarabelajar/ai-skills",
-    "Snipset": "belajarcarabelajar/Snipset"
+    "Snipset": "belajarcarabelajar/Snipset",
+    "terminal-log-intelligence": "belajarcarabelajar/terminal-log-intelligence",
+    "fasttrack": "belajarcarabelajar/fasttrack"
   },
   "issues": {
     "docs/code-plan/plans/2026-10-01-clipboard-polling-sensitive-log-spam.md": {
@@ -13,6 +15,60 @@
       "status": "Complete",
       "repo": "belajarcarabelajar/Snipset",
       "synced_at": "2026-10-01T11:29:48.690Z"
+    },
+    "docs/code-plan/plans/2026-10-02-ai-companion-linux-portability-audit.md": {
+      "number": 445,
+      "url": "https://github.com/belajarcarabelajar/Snipset/issues/445",
+      "hash": "907c577a",
+      "state": "closed",
+      "status": "Complete",
+      "repo": "belajarcarabelajar/Snipset",
+      "synced_at": "2026-10-01T23:26:12.129Z"
+    },
+    "docs/code-plan/plans/2026-10-02-arch-linux-port.md": {
+      "number": 1,
+      "url": "https://github.com/belajarcarabelajar/terminal-log-intelligence/issues/1",
+      "hash": "f6e4ad44",
+      "state": "closed",
+      "status": "Complete",
+      "repo": "belajarcarabelajar/terminal-log-intelligence",
+      "synced_at": "2026-10-01T23:37:25.266Z"
+    },
+    "docs/code-plan/plans/2026-10-02-access-code-fallback-login.md": {
+      "number": 1,
+      "url": "https://github.com/belajarcarabelajar/fasttrack/issues/1",
+      "hash": "db1efd00",
+      "state": "closed",
+      "status": "Complete",
+      "repo": "belajarcarabelajar/fasttrack",
+      "synced_at": "2026-10-02T01:03:43.308Z"
+    },
+    "docs/code-plan/plans/2026-10-02-dashboard-frontend-audit.md": {
+      "number": 2,
+      "url": "https://github.com/belajarcarabelajar/terminal-log-intelligence/issues/2",
+      "hash": "108572f5",
+      "state": "open",
+      "status": "Approved",
+      "repo": "belajarcarabelajar/terminal-log-intelligence",
+      "synced_at": "2026-10-02T00:27:12.945Z"
+    },
+    "docs/code-plan/plans/2026-10-02-opencode-history-to-obsidian.md": {
+      "number": 3,
+      "url": "https://github.com/belajarcarabelajar/ai-skills/issues/3",
+      "hash": "1d558e54",
+      "state": "open",
+      "status": "Approved",
+      "repo": "belajarcarabelajar/ai-skills",
+      "synced_at": "2026-10-02T00:41:59.035Z"
+    },
+    "docs/code-plan/plans/2026-10-02-access-code-email-gate.md": {
+      "number": 4,
+      "url": "https://github.com/belajarcarabelajar/fasttrack/issues/4",
+      "hash": "007228fd",
+      "state": "open",
+      "status": "Draft",
+      "repo": "belajarcarabelajar/fasttrack",
+      "synced_at": "2026-10-02T01:19:49.107Z"
     }
   }
 }

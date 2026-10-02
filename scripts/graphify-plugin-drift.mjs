@@ -63,7 +63,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 
-import { normalise } from './agents-md-current.mjs';
+import { UV_TOOL_SITE_PACKAGES, normalise } from './agents-md-current.mjs';
 
 /**
  * Fallback location of the installed graphify package.
@@ -74,9 +74,7 @@ import { normalise } from './agents-md-current.mjs';
  * without any visible sign, so treat it as a floor and let the discovered lookup
  * win.
  */
-export { UV_TOOL_SITE_PACKAGES } from './agents-md-current.mjs';
-
-import { UV_TOOL_SITE_PACKAGES } from './agents-md-current.mjs';
+export { UV_TOOL_SITE_PACKAGES };
 
 /**
  * Locate the Python module that OWNS the plugin text.

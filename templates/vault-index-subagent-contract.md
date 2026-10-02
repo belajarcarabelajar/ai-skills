@@ -86,6 +86,47 @@ These are the decisions that make this layer worth a model, and the ones a parse
 - **Do not invent.** If the note does not say it, it is not in the graph. A concept you inferred from general knowledge rather than read here is a hallucination with a file path attached, which is worse than a missing node.
 - **Transcripts are not plans.** Roughly half the corpus is `05 - Conversations/`, raw session logs. A discarded approach discussed in a transcript is worth a concept node; a tool invocation is not.
 
+## 5a. Id reuse — check before you invent
+
+Node ids are the graph's primary keys. Two chunks emitting different nodes
+under one id silently unions two claims; two chunks emitting the same claim
+under different ids silently fragments it. Both are invisible at merge, and
+both are worse than either alternative being obviously wrong.
+
+Node ids carry a `concept--` / `rationale--` prefix, so searching a bare slug
+misses. Use the script — it matches on substring and prints which chunk
+emitted each id:
+
+```bash
+cd /home/belajarcarabelajar/ai-skills
+bun scripts/vault-index-ids.mjs tgrep          # by subject or slug fragment
+bun scripts/vault-index-ids.mjs                # list every id
+bun scripts/vault-index-ids.mjs --owner=concept--exact-id
+```
+
+Run it once per candidate slug, plus one for the note's main subject. A hit
+means **read that chunk's node** before deciding — the label text alone will
+not tell you whether it is the same claim.
+
+Then the rule:
+
+- **Reuse an id when another chunk emitted the SAME claim.** Same fact, same
+  mechanism, same finding — even if worded differently and from a different
+  session. Union them.
+- **Do not reuse on adjacency.** Two notes touching the same subsystem make
+  different claims. Adjacent is not the same.
+- **A narrower claim gets its own id.** If an existing node is the general case
+  and yours is the specific one, emit a new id. A later reader looking for the
+  specific claim should find it, not have to settle for the general one.
+- **When you reuse, keep your own `rationale` if the note states its own
+  reason.** Do not import the other chunk's. Attributing a reason the note
+  never gave is the same error as inventing a node.
+- **Verify by reading the cited line**, not by matching slug text. Two slugs can
+  look identical and mean different things.
+
+If you cannot read the existing ids, say so in your report. Do not quietly
+emit batch-local generics and let the merge discover the collisions.
+
 ## 6. Verification — run this yourself before reporting
 
 From `/home/belajarcarabelajar/ai-skills`:

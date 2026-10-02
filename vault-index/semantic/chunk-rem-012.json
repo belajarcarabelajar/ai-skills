@@ -103,8 +103,13 @@
       "label": "Parent diff audit gate",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - sinkronisasi-riwayat-opencode-ke-obsidian [ses_f060b17deffej7q80pv7ZH1uH8].md",
-      "source_location": "L628",
-      "norm_label": "parent diff audit gate"
+      "source_location": "L8909",
+      "norm_label": "parent diff audit gate",
+      "summary": "The parent runs the gate against every subagent claim before integrating it, and this session shows why: C3 reported that graphify falls back to the host agent's tokens when no Gemini key is set, but the CLI actually errored with \"no LLM API key found\", contradicting the installed SKILL.md line 170. Verification is routine rather than ceremonial — before Wave 2 the parent states 'no self-reported success gets integrated unverified', and for C5/T5 it ran `git status --short` for scope plus re-ran `scripts/lib/inline-spills.test.mjs` itself (29 pass, 0 fail) instead of trusting the report.",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-10-02 - sinkronisasi-riwayat-opencode-ke-obsidian [ses_f060b17deffej7q80pv7ZH1uH8].md:L8913] Gate applied because the subagent's host-agent-fallback claim was wrong: the headless `graphify extract` CLI has no host-agent path",
+        "[05 - Conversations/home-belajarcarabelajar/2026-10-02 - sinkronisasi-riwayat-opencode-ke-obsidian [ses_f060b17deffej7q80pv7ZH1uH8].md:L2846] Gate applied because the opencode.ai docs describe a newer version than the installed v2.0.20, which has no `export` and no `db` subcommand"
+      ]
     }
   ],
   "links": [

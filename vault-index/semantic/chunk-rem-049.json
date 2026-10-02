@@ -1,0 +1,305 @@
+{
+  "batch": "rem-049",
+  "batch_id": "rem-049",
+  "vault_root": "/home/belajarcarabelajar/Dokumen/Obsidian Vault",
+  "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+  "nodes": [
+    {
+      "id": "concept--session-close-debt-sweep-and-follow-up-injection",
+      "label": "Session-Close Debt Sweep & Follow-Up Injection",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L4389",
+      "norm_label": "session-close debt sweep and follow-up injection"
+    },
+    {
+      "id": "concept--plan-completion-saturation-rule",
+      "label": "Plan Completion Saturation Rule",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L4387",
+      "norm_label": "plan completion saturation rule"
+    },
+    {
+      "id": "concept--follow-up-injection-template",
+      "label": "follow-up-injection-template.md",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L4399",
+      "norm_label": "follow-up injection template"
+    },
+    {
+      "id": "concept--mermaid-mmdc-missing-is-a-hard-error",
+      "label": "mmdc missing is a hard error, not a silently skipped gate",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L12273",
+      "norm_label": "mmdc missing is a hard error not a silently skipped gate"
+    },
+    {
+      "id": "concept--mermaid-depends-on-edge-contract",
+      "label": "Structural depends_on/arrow edge contract in ultra-plan-runner",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L12261",
+      "norm_label": "structural depends_on/arrow edge contract in ultra-plan-runner"
+    },
+    {
+      "id": "concept--mermaid-config-file-as-single-source-of-truth",
+      "label": "mermaid.config.json and mermaid.dark.config.json as the theming single source of truth",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L12271",
+      "norm_label": "mermaid config file as single source of truth"
+    },
+    {
+      "id": "concept--acctitle-accdescr-accessibility",
+      "label": "accTitle/accDescr produce title+desc with aria-labelledby in the rendered SVG",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L8776",
+      "norm_label": "acctitle/accdescr accessibility in rendered svg"
+    },
+    {
+      "id": "concept--recursive-variable-font-embedding",
+      "label": "Recursive Variable chosen for its four-face variable-font embedding",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L9457",
+      "norm_label": "recursive variable font embedding"
+    },
+    {
+      "id": "concept--committed-light-dark-hero-image",
+      "label": "Two hero SVGs excluded from gitignore and swapped by prefers-color-scheme",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L12255",
+      "norm_label": "committed light/dark hero image"
+    },
+    {
+      "id": "concept--skill-md-symlink-duplicate-render",
+      "label": "SKILL.md symlink made 6 of 23 rendered SVGs duplicates",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L12278",
+      "norm_label": "skill.md symlink duplicate render"
+    },
+    {
+      "id": "concept--awk-manifest-truncation-in-render-loop",
+      "label": "awk redirect inside a loop truncates the render manifest every iteration",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L12279",
+      "norm_label": "awk manifest truncation in render loop"
+    },
+    {
+      "id": "concept--ci-migration-to-bun-and-node-22",
+      "label": "CI migrated from npm/npx/Node 20 to bun install --frozen-lockfile/Node 22 with mermaid-cli 12",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L12258",
+      "norm_label": "ci migration to bun and node 22"
+    },
+    {
+      "id": "concept--execution-is-subagent-first-trigger-snippet",
+      "label": "EXECUTION IS SUBAGENT-FIRST, MANDATORY block in the plan trigger snippet",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L13422",
+      "norm_label": "execution is subagent-first trigger snippet"
+    },
+    {
+      "id": "concept--investigation-is-subagent-first-trigger-snippet",
+      "label": "INVESTIGATION IS SUBAGENT-FIRST, MANDATORY block in the debugging trigger snippet",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L13424",
+      "norm_label": "investigation is subagent-first trigger snippet"
+    },
+    {
+      "id": "concept--chunk-by-hypothesis-not-by-file",
+      "label": "Chunk by hypothesis, not by file",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L13426",
+      "norm_label": "chunk by hypothesis not by file"
+    },
+    {
+      "id": "concept--lexical-subagent-term-validator-guard",
+      "label": "Validator fails the build when a trigger snippet loses one of the nine mandatory sub-agent terms",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L13439",
+      "norm_label": "lexical subagent term validator guard"
+    },
+    {
+      "id": "concept--snippets-manifest-json",
+      "label": "snippets.manifest.json mapping each markdown file to its database slot",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L15872",
+      "norm_label": "snippets manifest json"
+    },
+    {
+      "id": "concept--snippet-database-sync-drift-check",
+      "label": "scripts/sync-snippets.mjs with status/check/push against the Snipset snippet database",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L15874",
+      "norm_label": "snippet database sync drift check"
+    },
+    {
+      "id": "rationale--no-coding-debt-may-survive-a-session",
+      "label": "No coding debt may survive the session, so the sweep asks 3-5 follow-up questions",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L23",
+      "norm_label": "no coding debt may survive a session"
+    },
+    {
+      "id": "rationale--user-should-only-tick-boxes-not-type-follow-ups",
+      "label": "The user should only tick boxes rather than typing follow-up questions by hand",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L25",
+      "norm_label": "user should only tick boxes not type follow-ups"
+    },
+    {
+      "id": "rationale--ninety-percent-is-not-a-valid-state",
+      "label": "A task at 90 percent is not a valid state, only Blocked or DEFERRED with a reason",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L4387",
+      "norm_label": "ninety percent is not a valid state"
+    },
+    {
+      "id": "rationale--a-gate-that-passes-without-proving-anything-is-no-gate",
+      "label": "A gate that reports success without proving anything is the same as having no gate",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L12274",
+      "norm_label": "a gate that passes without proving anything is no gate"
+    },
+    {
+      "id": "rationale--joined-blocks-make-grep-match-diagram-labels",
+      "label": "Joining all blocks into one string let unrelated diagram labels satisfy the contract and never checked depends_on edges at all",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L6041",
+      "norm_label": "joined blocks make grep match diagram labels"
+    },
+    {
+      "id": "rationale--two-config-files-because-t-dark-breaks-theme-variables",
+      "label": "Passing -t dark over a config produced light nodes on a dark background, so two separate config files are correct",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L12281",
+      "norm_label": "two config files because -t dark breaks theme variables"
+    },
+    {
+      "id": "rationale--smallest-embedded-font-chosen-because-base64-inlining-inflates-svg",
+      "label": "Mermaid 12 inlines the webfont as base64 and grew each SVG from 12 KB to 197 KB, so the four-face font was chosen over the twenty-face one",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L9457",
+      "norm_label": "smallest embedded font chosen because base64 inlining inflates svg"
+    },
+    {
+      "id": "rationale--only-hero-svg-committed-because-github-renders-mermaid-natively",
+      "label": "GitHub renders Mermaid blocks natively, so committing the other SVGs would only add duplicate megabytes",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L12255",
+      "norm_label": "only hero svg committed because github renders mermaid natively"
+    },
+    {
+      "id": "rationale--ci-must-not-use-the-runtimes-the-skill-prohibits",
+      "label": "The workflow ran npm install and npx while the master skill declares both strictly prohibited",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L6035",
+      "norm_label": "ci must not use the runtimes the skill prohibits"
+    },
+    {
+      "id": "rationale--trigger-snippet-is-read-as-a-standalone-instruction",
+      "label": "The trigger prompt is read by the agent as a standalone instruction, so a rule living only in the master file is not carried over",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L13418",
+      "norm_label": "trigger snippet is read as a standalone instruction"
+    },
+    {
+      "id": "rationale--short-stack-trace-is-not-a-reason-to-skip-fan-out",
+      "label": "A short stack trace is explicitly not a valid reason to skip fan-out, because a short trace with several possible causes is the best case to fan out",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L13429",
+      "norm_label": "short stack trace is not a reason to skip fan-out"
+    },
+    {
+      "id": "rationale--lexical-guard-proves-presence-not-behaviour",
+      "label": "The guard is lexical, not semantic: it proves the terms are present, not that the agent really fixed anything",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L13443",
+      "norm_label": "lexical guard proves presence not behaviour"
+    },
+    {
+      "id": "rationale--two-sided-normalization-or-every-edit-looks-like-drift",
+      "label": "Markdown files use em dashes and typographic punctuation while the database stores ASCII, so without normalizing both sides every edit reports false drift",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L15886",
+      "norm_label": "two-sided normalization or every edit looks like drift"
+    },
+    {
+      "id": "rationale--unreachable-database-is-a-boundary-not-a-drift-failure",
+      "label": "The snippet database does not exist on a CI runner, so a missing CLI is reported as unreachable and exits zero rather than as a content failure",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L15888",
+      "norm_label": "unreachable database is a boundary not a drift failure"
+    },
+    {
+      "id": "rationale--em-dash-removed-from-agent-facing-copy",
+      "label": "Em dashes are replaced with hyphens before a snippet reaches the database because the master skill bans them in user-visible copy as reading as generative text",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
+      "source_location": "L14232",
+      "norm_label": "em dash removed from agent-facing copy"
+    }
+  ],
+  "links": [
+    { "source": "concept--session-close-debt-sweep-and-follow-up-injection", "target": "concept--plan-completion-saturation-rule", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--session-close-debt-sweep-and-follow-up-injection", "target": "concept--follow-up-injection-template", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--session-close-debt-sweep-and-follow-up-injection", "target": "concept--execution-is-subagent-first-trigger-snippet", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--mermaid-mmdc-missing-is-a-hard-error", "target": "concept--snippet-database-sync-drift-check", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--mermaid-mmdc-missing-is-a-hard-error", "target": "concept--ci-migration-to-bun-and-node-22", "relation": "conceptually_related_to", "confidence": "INFERRED" },
+    { "source": "concept--mermaid-config-file-as-single-source-of-truth", "target": "concept--acctitle-accdescr-accessibility", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--recursive-variable-font-embedding", "target": "concept--committed-light-dark-hero-image", "relation": "conceptually_related_to", "confidence": "INFERRED" },
+    { "source": "concept--skill-md-symlink-duplicate-render", "target": "concept--committed-light-dark-hero-image", "relation": "conceptually_related_to", "confidence": "INFERRED" },
+    { "source": "concept--awk-manifest-truncation-in-render-loop", "target": "concept--committed-light-dark-hero-image", "relation": "conceptually_related_to", "confidence": "INFERRED" },
+    { "source": "concept--execution-is-subagent-first-trigger-snippet", "target": "concept--investigation-is-subagent-first-trigger-snippet", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--investigation-is-subagent-first-trigger-snippet", "target": "concept--chunk-by-hypothesis-not-by-file", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--investigation-is-subagent-first-trigger-snippet", "target": "concept--lexical-subagent-term-validator-guard", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--lexical-subagent-term-validator-guard", "target": "concept--snippets-manifest-json", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--snippets-manifest-json", "target": "concept--snippet-database-sync-drift-check", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "rationale--no-coding-debt-may-survive-a-session", "target": "concept--session-close-debt-sweep-and-follow-up-injection", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--user-should-only-tick-boxes-not-type-follow-ups", "target": "concept--session-close-debt-sweep-and-follow-up-injection", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--ninety-percent-is-not-a-valid-state", "target": "concept--plan-completion-saturation-rule", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--a-gate-that-passes-without-proving-anything-is-no-gate", "target": "concept--mermaid-mmdc-missing-is-a-hard-error", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--a-gate-that-passes-without-proving-anything-is-no-gate", "target": "concept--snippet-database-sync-drift-check", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--joined-blocks-make-grep-match-diagram-labels", "target": "concept--mermaid-depends-on-edge-contract", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--two-config-files-because-t-dark-breaks-theme-variables", "target": "concept--mermaid-config-file-as-single-source-of-truth", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--smallest-embedded-font-chosen-because-base64-inlining-inflates-svg", "target": "concept--recursive-variable-font-embedding", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--only-hero-svg-committed-because-github-renders-mermaid-natively", "target": "concept--committed-light-dark-hero-image", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--ci-must-not-use-the-runtimes-the-skill-prohibits", "target": "concept--ci-migration-to-bun-and-node-22", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--trigger-snippet-is-read-as-a-standalone-instruction", "target": "concept--execution-is-subagent-first-trigger-snippet", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--trigger-snippet-is-read-as-a-standalone-instruction", "target": "concept--investigation-is-subagent-first-trigger-snippet", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--short-stack-trace-is-not-a-reason-to-skip-fan-out", "target": "concept--investigation-is-subagent-first-trigger-snippet", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--lexical-guard-proves-presence-not-behaviour", "target": "concept--lexical-subagent-term-validator-guard", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--two-sided-normalization-or-every-edit-looks-like-drift", "target": "concept--snippet-database-sync-drift-check", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--unreachable-database-is-a-boundary-not-a-drift-failure", "target": "concept--snippet-database-sync-drift-check", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--em-dash-removed-from-agent-facing-copy", "target": "concept--snippet-database-sync-drift-check", "relation": "rationale_for", "confidence": "EXTRACTED" }
+  ]
+}

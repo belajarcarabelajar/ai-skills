@@ -1,0 +1,164 @@
+{
+  "batch_id": "rem-057",
+  "vault_root": "/home/belajarcarabelajar/Dokumen/Obsidian Vault",
+  "nodes": [
+    {
+      "id": "concept--embed-identity-carried-by-the-referer-header",
+      "label": "Embedded player API Client identity is carried by the HTTP Referer header",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c10-deep-research-report [ses_f24ec700cffe0vLgSj3nIz33P0].md",
+      "source_location": "L3822",
+      "norm_label": "embedded player api client identity carried by the http referer header"
+    },
+    {
+      "id": "concept--origin-player-var-is-optional-not-the-fix",
+      "label": "The origin playerVar is an optional security measure, not the fix for embed failure",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c10-deep-research-report [ses_f24ec700cffe0vLgSj3nIz33P0].md",
+      "source_location": "L14124",
+      "norm_label": "the origin playervar is an optional security measure not the fix for embed failure"
+    },
+    {
+      "id": "concept--webkitgtk-eme-private-no-widevine-option",
+      "label": "WebKitGTK EME is a private experimental option wired to GStreamer Thunder, with no Widevine option",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c10-deep-research-report [ses_f24ec700cffe0vLgSj3nIz33P0].md",
+      "source_location": "L7226",
+      "norm_label": "webkitgtk eme is a private experimental option wired to gstreamer thunder with no widevine option"
+    },
+    {
+      "id": "concept--measured-zero-hit-search-as-negative-evidence",
+      "label": "A measured zero-hit search is citable negative evidence, distinct from silence",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c10-deep-research-report [ses_f24ec700cffe0vLgSj3nIz33P0].md",
+      "source_location": "L7699",
+      "norm_label": "a measured zero-hit search is citable negative evidence distinct from silence"
+    },
+    {
+      "id": "rationale--log-the-code-first-because-every-conclusion-is-conditional-on-it",
+      "label": "Log the onError code first because every causal conclusion is conditional on it",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c10-deep-research-report [ses_f24ec700cffe0vLgSj3nIz33P0].md",
+      "source_location": "L14603",
+      "norm_label": "log the onerror code first because every causal conclusion is conditional on it"
+    },
+    {
+      "id": "rationale--origin-tuning-failed-and-only-the-http-protocol-fixed-it",
+      "label": "Adding origin alone did not fix the failure; serving over real http://localhost did",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c10-deep-research-report [ses_f24ec700cffe0vLgSj3nIz33P0].md",
+      "source_location": "L12683",
+      "norm_label": "adding origin alone did not fix the failure serving over real http localhost did"
+    },
+    {
+      "id": "concept--ntfs-dirty-flag-blocks-read-write-mount",
+      "label": "An NTFS dirty flag makes ntfs3 refuse a read-write mount",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - gagal-mounting-dev-sda4-wrong-fs-type [ses_f134759cfffeAsLL7i0uBBHKgV].md",
+      "source_location": "L386",
+      "norm_label": "an ntfs dirty flag makes ntfs3 refuse a read-write mount"
+    },
+    {
+      "id": "concept--generic-mount-error-masks-real-cause",
+      "label": "The wrong fs type / bad superblock mount error is a generic message masking the real cause",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - gagal-mounting-dev-sda4-wrong-fs-type [ses_f134759cfffeAsLL7i0uBBHKgV].md",
+      "source_location": "L388",
+      "norm_label": "the wrong fs type bad superblock mount error is a generic message masking the real cause"
+    },
+    {
+      "id": "concept--windows-fast-startup-sets-the-ntfs-dirty-flag",
+      "label": "Windows Fast Startup and hibernate are the usual source of the NTFS dirty flag",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - gagal-mounting-dev-sda4-wrong-fs-type [ses_f134759cfffeAsLL7i0uBBHKgV].md",
+      "source_location": "L406",
+      "norm_label": "windows fast startup and hibernate are the usual source of the ntfs dirty flag"
+    },
+    {
+      "id": "concept--ntfsfix-d-clears-dirty-flag-but-is-not-chkdsk",
+      "label": "ntfsfix -d only clears the dirty flag and is not a replacement for chkdsk",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - gagal-mounting-dev-sda4-wrong-fs-type [ses_f134759cfffeAsLL7i0uBBHKgV].md",
+      "source_location": "L407",
+      "norm_label": "ntfsfix -d only clears the dirty flag and is not a replacement for chkdsk"
+    },
+    {
+      "id": "rationale--healthy-sibling-partition-rules-out-cable-or-usb",
+      "label": "sda2 mounting normally as the same filesystem rules out a cable or USB fault",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - gagal-mounting-dev-sda4-wrong-fs-type [ses_f134759cfffeAsLL7i0uBBHKgV].md",
+      "source_location": "L385",
+      "norm_label": "sda2 mounting normally as the same filesystem rules out a cable or usb fault"
+    },
+    {
+      "id": "rationale--read-only-mount-first-because-it-changes-nothing",
+      "label": "Mount read-only first because it changes nothing on disk",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - gagal-mounting-dev-sda4-wrong-fs-type [ses_f134759cfffeAsLL7i0uBBHKgV].md",
+      "source_location": "L390",
+      "norm_label": "mount read-only first because it changes nothing on disk"
+    }
+  ],
+  "links": [
+    {
+      "source": "rationale--log-the-code-first-because-every-conclusion-is-conditional-on-it",
+      "target": "concept--embed-identity-carried-by-the-referer-header",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--origin-tuning-failed-and-only-the-http-protocol-fixed-it",
+      "target": "concept--origin-player-var-is-optional-not-the-fix",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--origin-player-var-is-optional-not-the-fix",
+      "target": "concept--embed-identity-carried-by-the-referer-header",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--webkitgtk-eme-private-no-widevine-option",
+      "target": "concept--embed-identity-carried-by-the-referer-header",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--measured-zero-hit-search-as-negative-evidence",
+      "target": "concept--webkitgtk-eme-private-no-widevine-option",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--healthy-sibling-partition-rules-out-cable-or-usb",
+      "target": "concept--ntfs-dirty-flag-blocks-read-write-mount",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--read-only-mount-first-because-it-changes-nothing",
+      "target": "concept--ntfs-dirty-flag-blocks-read-write-mount",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--generic-mount-error-masks-real-cause",
+      "target": "concept--ntfs-dirty-flag-blocks-read-write-mount",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--windows-fast-startup-sets-the-ntfs-dirty-flag",
+      "target": "concept--ntfs-dirty-flag-blocks-read-write-mount",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--ntfsfix-d-clears-dirty-flag-but-is-not-chkdsk",
+      "target": "concept--ntfs-dirty-flag-blocks-read-write-mount",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    }
+  ]
+}

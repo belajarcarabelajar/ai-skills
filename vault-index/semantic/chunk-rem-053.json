@@ -1,0 +1,442 @@
+{
+  "batch": "rem-053",
+  "nodes": [
+    {
+      "id": "concept--run-key-makes-the-runner-an-executor",
+      "label": "run[] as the execution key that never existed",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
+      "source_location": "L3628",
+      "norm_label": "run[] as the execution key that never existed",
+      "description": "executePlan() needs tasks[].run[]; the key is in no template, no plan, and no test, so an --execute run performed zero task steps and only skip_if probes ran."
+    },
+    {
+      "id": "concept--determinism-split-validate-vs-execute",
+      "label": "Determinism split: high at validating, near zero at executing",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
+      "source_location": "L3676",
+      "norm_label": "determinism split: high at validating, near zero at executing",
+      "description": "Plan validation scored 9/10 and integrity gates 9/10, while execution scored 2/10 and small-task scope 1/10."
+    },
+    {
+      "id": "concept--documented-but-unread-plan-fields",
+      "label": "Documented-but-unread plan fields",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
+      "source_location": "L3630",
+      "norm_label": "documented-but-unread plan fields",
+      "description": "files, idempotency_key, verify_exit and defaults.on_precondition_fail were documented in SKILL.md and never read by the runner."
+    },
+    {
+      "id": "concept--block-style-run-breaks-the-plan-yaml-parser",
+      "label": "Block-style run: breaks the plan YAML parser",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
+      "source_location": "L3636",
+      "norm_label": "block-style run: breaks the plan yaml parser",
+      "description": "A 2-task plan written as run: with block-style items parsed as tasks=5 with three 'task with no id' errors; only the flow style run: [{...}] worked."
+    },
+    {
+      "id": "concept--loose-skip-if-text-probe",
+      "label": "Loose skip_if: a text probe accepted as a behavioural check",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
+      "source_location": "L3658",
+      "norm_label": "loose skip_if: a text probe accepted as a behavioural check",
+      "description": "skip_if: grep -q 'Plan Publish Gate' <source file> exits 0 and plan-mark-done ticks the task, although the string may only sit in a comment."
+    },
+    {
+      "id": "concept--green-ci-proves-no-contract",
+      "label": "Green CI proves no contract",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
+      "source_location": "L3664",
+      "norm_label": "green ci proves no contract",
+      "description": "202 tests passed and bun run ci was green while the doc-runner gap was live, because validate-skill.mjs had no check comparing which fields the runner reads against which the template declares."
+    },
+    {
+      "id": "concept--schema-runner-contract-key-export",
+      "label": "Schema-runner contract: export RUNNER_CONTRACT_KEYS and assert them in the template",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
+      "source_location": "L3674",
+      "norm_label": "schema-runner contract: export runner_contract_keys and assert them in the template",
+      "description": "One contract test -- every key executePlan reads must appear in the template -- would have caught the original finding on its own."
+    },
+    {
+      "id": "concept--bounded-path-has-no-plan-file",
+      "label": "Bounded path produces no plan file at all",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
+      "source_location": "L3656",
+      "norm_label": "bounded path produces no plan file at all",
+      "description": "The determinism surface is inverted relative to risk: the most-used Bounded path writes no plan document, so nothing there can be validated; only Architectural has a runner."
+    },
+    {
+      "id": "concept--prose-steps-are-the-llm-handoff-point",
+      "label": "Prose steps are the handoff point where the LLM substitutes commands",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
+      "source_location": "L3660",
+      "norm_label": "prose steps are the handoff point where the llm substitutes commands",
+      "description": "'One step equals one command' is advice, not a check: the agent must read prose, extract a command, and run it."
+    },
+    {
+      "id": "concept--coercescalar-strips-quotes-without-escapes",
+      "label": "coerceScalar strips quotes without processing escapes",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
+      "source_location": "L7999",
+      "norm_label": "coercescalar strips quotes without processing escapes",
+      "description": "A real parser bug found only because the agent's own plan was executed: a backslash reached the shell doubled and the step failed silently as an exit mismatch."
+    },
+    {
+      "id": "concept--retracted-missing-svg-title-desc-claim",
+      "label": "Retracted claim that rendered SVG lacks title/desc",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
+      "source_location": "L14195",
+      "norm_label": "retracted claim that rendered svg lacks title/desc",
+      "description": "The false claim reported to the user was that rendered SVG carries no <title>/<desc>; it was retracted after a re-test showed both tags present, wired via aria-labelledby."
+    },
+    {
+      "id": "concept--a11y-gate-reads-rendered-svg-not-source",
+      "label": "a11y gate reads the rendered SVG, not the Mermaid source",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
+      "source_location": "L14185",
+      "norm_label": "a11y gate reads the rendered svg, not the mermaid source",
+      "description": "validate-skill.mjs now checks the rendered SVG for title/desc plus aria wiring, because a source-only regex passes even when the render drops the wiring."
+    },
+    {
+      "id": "concept--no-hosted-runner-free-tier-quota",
+      "label": "No hosted runner: GitHub Actions frozen to manual on free-tier quota",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
+      "source_location": "L9162",
+      "norm_label": "no hosted runner: github actions frozen to manual on free-tier quota",
+      "description": "The push and pull_request triggers on main were removed so every push stops burning Actions minutes, with the revert written into the workflow header."
+    },
+    {
+      "id": "concept--validate-only-the-changed-mermaid-block",
+      "label": "Validate only the changed Mermaid block instead of re-rendering all 26",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
+      "source_location": "L8576",
+      "norm_label": "validate only the changed mermaid block instead of re-rendering all 26",
+      "description": "Rendering 26 blocks through a headless browser is the expensive part; the 25 unchanged blocks were proven byte-identical to HEAD so only the 1 new block needed a render."
+    },
+    {
+      "id": "concept--contract-check-split-from-full-validate",
+      "label": "Contract check split into its own ~30ms command",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
+      "source_location": "L14187",
+      "norm_label": "contract check split into its own ~30ms command",
+      "description": "bun run contract:check is separated from the full render, with a negative control: replacing run: must fail and the tree must be clean afterwards."
+    },
+    {
+      "id": "concept--grandfather-existing-loose-skip-if",
+      "label": "Grandfather existing loose skip_if so a new hard error does not break old plans",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
+      "source_location": "L12107",
+      "norm_label": "grandfather existing loose skip_if so a new hard error does not break old plans",
+      "description": "6 loose skip_ifs in 3 plan files were allowlisted with written reasons because turning the warning into an error would have broken plans that already existed."
+    },
+    {
+      "id": "rationale--determinism-is-only-real-where-the-runner-reads",
+      "label": "Determinism is only real where the runner actually reads the key",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
+      "source_location": "L3628",
+      "norm_label": "determinism is only real where the runner actually reads the key",
+      "description": "Because run[] existed only as prose, the skill was very good at refusing to run a nonsensical plan and had no mechanism at all for running a sensible one."
+    },
+    {
+      "id": "rationale--unread-fields-are-the-doc-runner-gap",
+      "label": "Fields the runner never reads are a documentation claim, not a contract",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
+      "source_location": "L3630",
+      "norm_label": "fields the runner never reads are a documentation claim, not a contract",
+      "description": "4 of the 6 documented fields were never read, so the documentation described a contract the runner did not implement."
+    },
+    {
+      "id": "rationale--text-presence-proves-string-exists-not-behaviour-works",
+      "label": "A text-presence probe proves the string exists, not that the behaviour works",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
+      "source_location": "L4354",
+      "norm_label": "a text-presence probe proves the string exists, not that the behaviour works",
+      "description": "The lint message spells out why a grep over a source or doc file is loose: the word can sit in a comment, and the runner accepts the exit 0 with no cross-check."
+    },
+    {
+      "id": "rationale--green-suite-without-contract-check-is-vacuous",
+      "label": "A green suite with no contract check is vacuous",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
+      "source_location": "L3664",
+      "norm_label": "a green suite with no contract check is vacuous",
+      "description": "202 passing tests coexisted with the live doc-runner gap, so the test count was not evidence of the contract."
+    },
+    {
+      "id": "rationale--largest-hole-sat-in-the-most-used-path",
+      "label": "The largest hole sat in the most frequently used path",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
+      "source_location": "L3656",
+      "norm_label": "the largest hole sat in the most frequently used path",
+      "description": "The Bounded path writes no plan document, so the determinism surface is inverted relative to where the risk actually is."
+    },
+    {
+      "id": "rationale--prose-rules-are-the-softest-and-the-most-important",
+      "label": "The most important anti-drift rules are also the softest",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
+      "source_location": "L3662",
+      "norm_label": "the most important anti-drift rules are also the softest",
+      "description": "Subagent-first, the 10-subagent floor, chunking and the parent diff audit are all prose 200+ lines deep, while the most repetitive rule, Mermaid, is machine-checked."
+    },
+    {
+      "id": "rationale--own-plan-execution-surfaced-the-parser-bug",
+      "label": "The agent's own plan being executed is what surfaced the parser bug",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
+      "source_location": "L14193",
+      "norm_label": "the agent's own plan being executed is what surfaced the parser bug",
+      "description": "The coerceScalar escape bug only appeared once the new run[] path executed the very plan that implemented it."
+    },
+    {
+      "id": "rationale--one-failed-tool-is-not-a-finding",
+      "label": "One failed tool call is not a finding",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
+      "source_location": "L11058",
+      "norm_label": "one failed tool call is not a finding",
+      "description": "A single grep returning empty was mistaken for absent tags; the conclusion was drawn from one failed tool, which is the error AGENTS.md rule 3 warns about."
+    },
+    {
+      "id": "rationale--source-regex-cannot-prove-the-render",
+      "label": "A source regex cannot prove the render",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
+      "source_location": "L14185",
+      "norm_label": "a source regex cannot prove the render",
+      "description": "validate-skill.mjs only regexed the Mermaid source, so it passed while never checking that the rendered SVG actually carries the aria wiring."
+    },
+    {
+      "id": "rationale--push-trigger-burns-free-tier-minutes",
+      "label": "Every push burns free-tier Actions minutes",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
+      "source_location": "L9162",
+      "norm_label": "every push burns free-tier actions minutes",
+      "description": "The user reported the free package quota drains fast, so the push and pull_request triggers on main were removed and the local path became the only path."
+    },
+    {
+      "id": "rationale--headless-render-is-the-expensive-part",
+      "label": "Rendering every Mermaid block through a headless browser is the expensive part",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
+      "source_location": "L8389",
+      "norm_label": "rendering every mermaid block through a headless browser is the expensive part",
+      "description": "The cheap path was chosen because mmdc rendering is what costs, so the agent separated which blocks actually changed before spending the browser."
+    },
+    {
+      "id": "rationale--check-must-be-seen-failing-before-it-is-believed",
+      "label": "A check that has only ever passed is indistinguishable from one that does nothing",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
+      "source_location": "L6724",
+      "norm_label": "a check that has only ever passed is indistinguishable from one that does nothing",
+      "description": "The contract check was sabotaged by renaming run: to runx: so it could be seen failing before being trusted."
+    },
+    {
+      "id": "rationale--new-hard-error-breaks-every-plan-that-predates-it",
+      "label": "A new hard error breaks every plan that predates it",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
+      "source_location": "L12107",
+      "norm_label": "a new hard error breaks every plan that predates it",
+      "description": "Turning the loose skip_if warning into an error would have broken 6 existing probes, so they were grandfathered with written reasons."
+    }
+  ],
+  "links": [
+    {
+      "source": "rationale--determinism-is-only-real-where-the-runner-reads",
+      "target": "concept--run-key-makes-the-runner-an-executor",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--unread-fields-are-the-doc-runner-gap",
+      "target": "concept--documented-but-unread-plan-fields",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--text-presence-proves-string-exists-not-behaviour-works",
+      "target": "concept--loose-skip-if-text-probe",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--green-suite-without-contract-check-is-vacuous",
+      "target": "concept--green-ci-proves-no-contract",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--largest-hole-sat-in-the-most-used-path",
+      "target": "concept--determinism-split-validate-vs-execute",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--prose-rules-are-the-softest-and-the-most-important",
+      "target": "concept--prose-steps-are-the-llm-handoff-point",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--own-plan-execution-surfaced-the-parser-bug",
+      "target": "concept--coercescalar-strips-quotes-without-escapes",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--one-failed-tool-is-not-a-finding",
+      "target": "concept--retracted-missing-svg-title-desc-claim",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--source-regex-cannot-prove-the-render",
+      "target": "concept--a11y-gate-reads-rendered-svg-not-source",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--push-trigger-burns-free-tier-minutes",
+      "target": "concept--no-hosted-runner-free-tier-quota",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--headless-render-is-the-expensive-part",
+      "target": "concept--validate-only-the-changed-mermaid-block",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--check-must-be-seen-failing-before-it-is-believed",
+      "target": "concept--contract-check-split-from-full-validate",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--new-hard-error-breaks-every-plan-that-predates-it",
+      "target": "concept--grandfather-existing-loose-skip-if",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--run-key-makes-the-runner-an-executor",
+      "target": "concept--determinism-split-validate-vs-execute",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--run-key-makes-the-runner-an-executor",
+      "target": "concept--documented-but-unread-plan-fields",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--run-key-makes-the-runner-an-executor",
+      "target": "concept--block-style-run-breaks-the-plan-yaml-parser",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--run-key-makes-the-runner-an-executor",
+      "target": "concept--loose-skip-if-text-probe",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--determinism-split-validate-vs-execute",
+      "target": "concept--documented-but-unread-plan-fields",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--determinism-split-validate-vs-execute",
+      "target": "concept--green-ci-proves-no-contract",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--determinism-split-validate-vs-execute",
+      "target": "concept--prose-steps-are-the-llm-handoff-point",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--determinism-split-validate-vs-execute",
+      "target": "concept--bounded-path-has-no-plan-file",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--documented-but-unread-plan-fields",
+      "target": "concept--schema-runner-contract-key-export",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--loose-skip-if-text-probe",
+      "target": "concept--grandfather-existing-loose-skip-if",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--block-style-run-breaks-the-plan-yaml-parser",
+      "target": "concept--coercescalar-strips-quotes-without-escapes",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--a11y-gate-reads-rendered-svg-not-source",
+      "target": "concept--retracted-missing-svg-title-desc-claim",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--validate-only-the-changed-mermaid-block",
+      "target": "concept--a11y-gate-reads-rendered-svg-not-source",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--no-hosted-runner-free-tier-quota",
+      "target": "concept--validate-only-the-changed-mermaid-block",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--contract-check-split-from-full-validate",
+      "target": "concept--schema-runner-contract-key-export",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--contract-check-split-from-full-validate",
+      "target": "concept--validate-only-the-changed-mermaid-block",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    }
+  ]
+}

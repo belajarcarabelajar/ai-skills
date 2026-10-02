@@ -1,0 +1,515 @@
+{
+  "batch_id": "rem-056",
+  "vault_root": "/home/belajarcarabelajar/Dokumen/Obsidian Vault",
+  "nodes": [
+    {
+      "id": "concept--bun-cwd-run-exits-zero-without-running-the-script",
+      "label": "bun --cwd apps/learn run <script> prints usage and exits 0, a false pass",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - fix-root-package-scripts [ses_f123039d6ffeRCUrnp5alwgtfd].md",
+      "source_location": "L22",
+      "norm_label": "bun --cwd apps/learn run <script> prints usage and exits 0, a false pass",
+      "summary": "The four root scripts of the fasttrack repo used `bun --cwd apps/learn run <script>`, which on Bun v1.4.2 prints its usage text and exits 0. Every green exit code from those scripts was therefore meaningless: the script never ran."
+    },
+    {
+      "id": "concept--bun-filter-workspace-script-invocation",
+      "label": "bun --filter <package> <script> is the genuine workspace script form",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - fix-root-package-scripts [ses_f123039d6ffeRCUrnp5alwgtfd].md",
+      "source_location": "L25",
+      "norm_label": "bun --filter <package> <script> is the genuine workspace script form",
+      "summary": "The replacement wiring for build, typecheck and lint: `bun --filter fasttrack-learn <name>`. Verified exit 0 with real output for typecheck, and a real build completion, so failure propagates instead of being swallowed."
+    },
+    {
+      "id": "concept--root-bun-test-discovers-suites-that-filter-cannot-reach",
+      "label": "Root bun test discovers the suites that --filter cannot reach",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - fix-root-package-scripts [ses_f123039d6ffeRCUrnp5alwgtfd].md",
+      "source_location": "L26",
+      "norm_label": "root bun test discovers the suites that --filter cannot reach",
+      "summary": "Because apps/learn declares no test script, `--filter` can never run its suites. Running `bun test` from the repo root instead discovers scripts/skills-lib.test.ts and apps/learn/src/lib/*.test.ts: 24 tests across 3 files, 0 failures."
+    },
+    {
+      "id": "concept--a-pipe-reports-the-last-command-exit-code-not-the-tools",
+      "label": "A pipe into tail reports tail's own status, so every wrapped command reads 0",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - fix-root-package-scripts [ses_f123039d6ffeRCUrnp5alwgtfd].md",
+      "source_location": "L746",
+      "norm_label": "a pipe into tail reports tail's own status, so every wrapped command reads 0",
+      "summary": "The first pass measured every exit code through `| tail`, which reports tail's status and is always 0. It was the negative control that exposed this. All five commands were re-run with redirect-to-file plus an explicit `echo $?`."
+    },
+    {
+      "id": "concept--nonexistent-script-name-as-a-negative-control-for-failure-propagation",
+      "label": "A nonexistent script name as a negative control proves the wiring propagates failure",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - fix-root-package-scripts [ses_f123039d6ffeRCUrnp5alwgtfd].md",
+      "source_location": "L744",
+      "norm_label": "a nonexistent script name as a negative control proves the wiring propagates failure",
+      "summary": "`bun --filter fasttrack-learn nonexistent-script` exits 1 with error: Script not found. This is the control that distinguishes real wiring from another false pass, and it is what caught the pipe-masking error in the same pass."
+    },
+    {
+      "id": "rationale--apps-learn-has-no-test-script-so-filter-cannot-work-for-it",
+      "label": "apps/learn has no test script, so --filter cannot work for it",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - fix-root-package-scripts [ses_f123039d6ffeRCUrnp5alwgtfd].md",
+      "source_location": "L26",
+      "norm_label": "apps/learn has no test script, so --filter cannot work for it",
+      "summary": "This is the stated reason the test script was not rewritten to the --filter form used by the other three: there is no per-package test script for the filter to resolve, so root `bun test` was pointed at the real suites instead."
+    },
+    {
+      "id": "rationale--pipe-masking-was-reading-tail-always-zero-so-every-exit-was-re-measured",
+      "label": "Pipe masking reports tail's status, always 0, so all five exits were re-measured with redirect to file",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - fix-root-package-scripts [ses_f123039d6ffeRCUrnp5alwgtfd].md",
+      "source_location": "L746",
+      "norm_label": "pipe masking reports tail's status, always 0, so all five exits were re-measured with redirect to file",
+      "summary": "Stated in the note's own words as the reason the whole evidence table was rebuilt: the first pass read exits through pipes, so every command looked green regardless of what it did."
+    },
+    {
+      "id": "rationale--break-nothing-and-use-a-bad-script-name-instead-to-prove-failure",
+      "label": "Temporarily break nothing; a bad script name proves failure without touching the tree",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - fix-root-package-scripts [ses_f123039d6ffeRCUrnp5alwgtfd].md",
+      "source_location": "L27",
+      "norm_label": "temporarily break nothing; a bad script name proves failure without touching the tree",
+      "summary": "The instruction gives the reason the negative control is a nonexistent script name rather than a deliberate break: the proof must not require mutating the working tree."
+    },
+
+    {
+      "id": "concept--embed-clipboard-delete-trigger-bumps-the-row-instead-of-removing-it",
+      "label": "embed_clipboard_delete bumps a bookkeeping row to pending instead of removing it",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md",
+      "source_location": "L10297",
+      "norm_label": "embed_clipboard_delete bumps a bookkeeping row to pending instead of removing it",
+      "summary": "The real mechanism of the embedding leak was not a missing delete. The AFTER DELETE trigger sets revision=revision+1, embedded_revision=NULL, attempts=0, next_attempt_at=0 on the metadata row instead of deleting it, so 2020 of 2521 rows pointed at entries that no longer existed. Fixed with a set-based prune across all three delete paths."
+    },
+    {
+      "id": "concept--loadmore-slice-cap-evicts-the-newest-already-loaded-entries",
+      "label": "loadMore caps with slice(length - 200) and drops the newest already-loaded entries",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md",
+      "source_location": "L10301",
+      "norm_label": "loadmore caps with slice(length - 200) and drops the newest already-loaded entries",
+      "summary": "pollNewItems keeps slice(0, 200) but loadMore keeps slice(combined.length - 200). Because the backend orders created_at DESC and loadMore appends older pages at the end, the tail slice keeps the oldest 200 and evicts the newest already-loaded ones. With 501 entries this fires on the third scroll; the RED test caught it as `expected 180 to be 200`."
+    },
+    {
+      "id": "concept--magic-menu-telegram-button-gated-on-the-token-row",
+      "label": "The Magic Menu gates its Telegram button on the telegram_bot_token row, hiding it while the bot is paired",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md",
+      "source_location": "L10314",
+      "norm_label": "the magic menu gates its telegram button on the telegram_bot_token row, hiding it while the bot is paired",
+      "summary": "telegram_bot_token has no row at all while telegram_chat_id, telegram_paired_at and telegram_last_update_id (960287701) all exist. Gating a paired bot's button on the presence of the secret row rather than on pairing state is what hides it."
+    },
+    {
+      "id": "concept--control-api-settings-unset-denylist-covered-only-vault-and-mfa",
+      "label": "POST /settings/unset accepted any preference key; its denylist covered only vault_* and mfa_*",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md",
+      "source_location": "L11587",
+      "norm_label": "post /settings/unset accepted any preference key; its denylist covered only vault_* and mfa_*",
+      "summary": "The only traced code path that can delete a preference row outright, and it accepted any key. This matches the live state exactly: 0 rows for the token, 3 sibling preferences present. Fixed with an exact match, 4 regression tests, and a 403 message that names the token."
+    },
+    {
+      "id": "concept--bookkeeping-cleanup-must-never-fail-a-successful-delete",
+      "label": "A mandatory bookkeeping prune turned a successful delete into an error when the table was absent",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md",
+      "source_location": "L10307",
+      "norm_label": "a mandatory bookkeeping prune turned a successful delete into an error when the table was absent",
+      "summary": "Making the embedding prune mandatory meant a missing embedding_metadata table turned delete_clipboard_entry into Err, which silently disabled the moderation worker's auto-delete. The prune is now best-effort with its own regression test."
+    },
+    {
+      "id": "concept--insert-trigger-created-the-row-the-purge-test-called-an-orphan",
+      "label": "An insert trigger created the row the purge test asserted was an orphan",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md",
+      "source_location": "L10308",
+      "norm_label": "an insert trigger created the row the purge test asserted was an orphan",
+      "summary": "The T5 test asserted zero embedding rows after a purge and observed one. The single surviving row was legitimate: the prune had removed every orphan correctly. The test expectation was wrong, not the fix."
+    },
+    {
+      "id": "concept--lazy-retention-purge-is-by-design-not-a-bug",
+      "label": "Retention purge runs only on capture or a preference write, so overdue entries are lazy by design",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md",
+      "source_location": "L5911",
+      "norm_label": "retention purge runs only on capture or a preference write, so overdue entries are lazy by design",
+      "summary": "Three entries older than 7 days survived a 7-day retention setting. The suspected cause, RFC3339 timestamps failing to parse in the DELETE predicate, was disproved by testing the predicate directly. Entries survive until the next capture, so this is lazy enforcement rather than a bug."
+    },
+    {
+      "id": "concept--plan-run-commands-must-be-cwd-independent",
+      "label": "run[] commands written CWD-relative fail because the runner executes from the ai-skills repo",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md",
+      "source_location": "L10310",
+      "norm_label": "run[] commands written cwd-relative fail because the runner executes from the ai-skills repo",
+      "summary": "The runner re-executed already-completed steps and reported failures because the plan's commands assumed the project repo root as CWD. All ten commands were rewritten with explicit absolute paths, which changed the runner record to the honest SKIPPED-IDEMPOTENT state."
+    },
+    {
+      "id": "concept--live-sqlite-pruned-under-a-busy-timeout-after-a-verified-hot-backup",
+      "label": "Verified hot backup, then prune the live SQLite file under a 10s busy timeout with the app running",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md",
+      "source_location": "L11597",
+      "norm_label": "verified hot backup, then prune the live sqlite file under a 10s busy timeout with the app running",
+      "summary": "The backup was taken with SQLite's hot-backup API and verified (integrity_check ok, 501 clipboard rows, 2521 embed rows matching live). The prune then succeeded under WAL with a 10 s busy timeout without closing Snipset: 2020 orphans to 0, 2521 to 501 rows, all 501 live entries untouched."
+    },
+    {
+      "id": "concept--global-db-lock-test-deadlock",
+      "label": "Self-deadlock from holding the global DB lock in a test",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md",
+      "source_location": "L6751",
+      "norm_label": "self-deadlock from holding the global db lock in a test",
+      "summary": "Reused id. The RED test held the DB lock guard while calling add_clipboard_entry, which re-locks the same mutex, so nextest hung past 20 minutes instead of failing. A RED that hangs is failing for the wrong reason; the guard has to be dropped first."
+    },
+    {
+      "id": "concept--zero-subagent-compiler-policy",
+      "label": "Zero-subagent compiler policy",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md",
+      "source_location": "L5985",
+      "norm_label": "zero subagent compiler policy",
+      "summary": "Reused id. AGENTS.md forbids delegating any cargo/rustc/clippy/nextest command to a subagent, so T3, T4, T5 and T9 were run inline in the parent over ssh on vps-bcb even though the skill mandates subagent-first execution."
+    },
+    {
+      "id": "concept--overlapping-write-scopes-rule-out-parallel-subagent-dispatch",
+      "label": "Two tasks touching the same file are overlapping write scopes, so they cannot be dispatched in parallel",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md",
+      "source_location": "L5989",
+      "norm_label": "two tasks touching the same file are overlapping write scopes, so they cannot be dispatched in parallel",
+      "summary": "T4 and T5 both modify clipboard_mutations.rs and T6 and T7 both modify the web loader, so strict non-overlapping workspaces rules out parallelising them. That, plus the compiler policy, is the explicit stated reason for falling below the 10-subagent fan-out floor."
+    },
+    {
+      "id": "concept--pure-kernel-extraction-to-test-untested-semantic-search",
+      "label": "A pure rank_stored kernel was extracted so the untested semantic search path could be covered",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md",
+      "source_location": "L11611",
+      "norm_label": "a pure rank_stored kernel was extracted so the untested semantic search path could be covered",
+      "summary": "embedding_search.rs had no test module at all, so the whole semantic search path was unverified. The filter body was lifted verbatim into a pure rank_stored(), then covered for the two defensive exclusions: dimension-mismatched vectors from a model swap are dropped rather than scored 0.0, and non-finite scores never reach a sort order."
+    },
+    {
+      "id": "concept--subagent-flagged-that-the-reproduction-route-unmounts-the-page",
+      "label": "The T7 subagent showed navigating to Settings unmounts ClipboardPage, so the stale header cannot reproduce that way",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md",
+      "source_location": "L7808",
+      "norm_label": "the t7 subagent showed navigating to settings unmounts clipboardpage, so the stale header cannot reproduce that way",
+      "summary": "The premise of the retention-display staleness task was wrong: the route a user takes to change the setting unmounts the page, so loadEnabled re-runs anyway. Reported as a defensive fix rather than a user-visible bug fix."
+    },
+    {
+      "id": "concept--exact-entry-count-from-a-snapshot-copy-of-the-live-db",
+      "label": "501 entries measured from a read-only snapshot copy of the live database, never an estimate",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md",
+      "source_location": "L10291",
+      "norm_label": "501 entries measured from a read-only snapshot copy of the live database, never an estimate",
+      "summary": "Text 260, Typed 143, Image 56, RichText 23, Link 14, Code 5, range 2026-09-20 21:51 to 2026-09-27 21:43 UTC, exactly 1 favorite. Measured by copying db + wal + shm so the running app was never locked, written or restarted."
+    },
+    {
+      "id": "concept--magic-menu-sees-only-what-reaches-the-system-clipboard",
+      "label": "A Snipset-captured screenshot reaches the Magic Menu only if it also reaches the system clipboard",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md",
+      "source_location": "L5916",
+      "norm_label": "a snipset-captured screenshot reaches the magic menu only if it also reaches the system clipboard",
+      "summary": "A copied image does auto-land in the Magic Menu and lazy-loads its thumbnail. Region captures go to activity/worker.rs instead, so the clipboard monitor is the sole writer path. By design, not a defect."
+    },
+
+    {
+      "id": "rationale--the-trigger-bump-is-correct-for-edits",
+      "label": "The bump was kept because a revision bump is the correct behaviour for edits",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md",
+      "source_location": "L10297",
+      "norm_label": "the bump was kept because a revision bump is the correct behaviour for edits",
+      "summary": "Stated reason the fix was a set-based prune on all three delete paths rather than replacing the trigger: an edit genuinely must re-queue the row, so only the delete case needed a complementary reaper."
+    },
+    {
+      "id": "rationale--orphans-are-never-selected-because-the-worker-query-joins-from-the-source-table",
+      "label": "The worker query is a LEFT JOIN rooted at clipboard_history, so orphan rows are never selected, retried or reaped",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md",
+      "source_location": "L4563",
+      "norm_label": "the worker query is a left join rooted at clipboard_history, so orphan rows are never selected, retried or reaped",
+      "summary": "This is why the leak is storage and scan cost rather than queue starvation, and it corrects the earlier guess that the orphans were starving the embed worker."
+    },
+    {
+      "id": "rationale--the-denylist-matches-exactly-so-other-telegram-settings-stay-manageable",
+      "label": "Matched exactly, not by prefix, so the other telegram_* settings stay manageable",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md",
+      "source_location": "L11589",
+      "norm_label": "matched exactly, not by prefix, so the other telegram_* settings stay manageable",
+      "summary": "The stated reason for not using a telegram_* prefix denylist, and for also updating the three error messages that claimed only vault and MFA were app-only."
+    },
+    {
+      "id": "rationale--a-test-harness-without-the-embedding-table-turned-the-delete-into-an-error",
+      "label": "That harness has a bare schema without embedding_metadata, so the prune statement failed with no such table",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md",
+      "source_location": "L9491",
+      "norm_label": "that harness has a bare schema without embedding_metadata, so the prune statement failed with no such table",
+      "summary": "The root cause of the moderation worker regression: delete_clipboard_entry_with_conn returned Err, the worker logged a warning and rolled back, so deleted_ids came back empty. A test-harness schema gap, but it exposed a real robustness bug in production code."
+    },
+    {
+      "id": "rationale--only-the-integration-run-caught-it-because-unit-tests-use-a-full-schema",
+      "label": "Unit tests missed it; the T9 integration run caught the broken auto-delete",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md",
+      "source_location": "L10307",
+      "norm_label": "unit tests missed it; the t9 integration run caught the broken auto-delete",
+      "summary": "The reason a regression test was added for this exact failure mode rather than relying on the existing suite: the unit tests all use the full schema, so only the wider run exposed it."
+    },
+    {
+      "id": "rationale--telegram-left-report-only-because-fixing-the-pairing-flow-exceeds-a-small-fix",
+      "label": "Report-only, because fixing the pairing flow is beyond a small fix",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md",
+      "source_location": "L5922",
+      "norm_label": "report-only, because fixing the pairing flow is beyond a small fix",
+      "summary": "The stated reason the Telegram defect was documented rather than repaired inside the user's explicit do-not-break-the-workflow constraint."
+    },
+    {
+      "id": "rationale--re-pairing-needs-the-bot-token-which-the-agent-must-never-type",
+      "label": "Re-pairing needs the bot token, which the agent never handles",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md",
+      "source_location": "L11591",
+      "norm_label": "re-pairing needs the bot token, which the agent never handles",
+      "summary": "Why one manual step was handed back to the user even after the code was fixed: rewriting the token row is a credential entry, and the credential hand-off rule forbids the agent doing it."
+    },
+    {
+      "id": "rationale--an-after-insert-trigger-creates-a-metadata-row-for-every-insert",
+      "label": "embed_clipboard_insert fires AFTER INSERT on clipboard_history and creates a metadata row for every entry",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md",
+      "source_location": "L8588",
+      "norm_label": "embed_clipboard_insert fires after insert on clipboard_history and creates a metadata row for every entry",
+      "summary": "The stated reason one row survived the purge: the three test inserts each created their own metadata row, so the surviving entry legitimately owned the one row that was left."
+    },
+    {
+      "id": "rationale--t7-became-a-defensive-fix-not-a-user-visible-bug-fix",
+      "label": "T7 is a defensive fix, not a user-visible bug fix, because the reproduction path does not hold",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md",
+      "source_location": "L7812",
+      "norm_label": "t7 is a defensive fix, not a user-visible bug fix, because the reproduction path does not hold",
+      "summary": "The stated reason the final report downgrades T7 instead of counting it as a fixed bug."
+    },
+    {
+      "id": "rationale--tests-that-re-implement-the-logic-do-not-test-shipped-code",
+      "label": "The alternative was tests that re-implement the logic and therefore do not test shipped code",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md",
+      "source_location": "L11620",
+      "norm_label": "the alternative was tests that re-implement the logic and therefore do not test shipped code",
+      "summary": "The stated reason a production refactor was accepted inside a follow-up framed as test-only: the verbatim lift was audited and judged behaviour-preserving."
+    },
+    {
+      "id": "rationale--the-runner-executes-from-the-ai-skills-repo-not-the-project-root",
+      "label": "The runner ran from ai-skills, where apps/web does not exist, so the CWD-relative command failed",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md",
+      "source_location": "L9879",
+      "norm_label": "the runner ran from ai-skills, where apps/web does not exist, so the cwd-relative command failed",
+      "summary": "The diagnosed root cause of the runner's false failures, and why it mattered beyond cosmetics: plan-mark-done applies ticks from what the runner recorded, so a wrong record ticks the wrong state."
+    },
+    {
+      "id": "rationale--the-count-had-to-be-measured-because-an-estimate-was-forbidden",
+      "label": "必须实测条目总数，不能靠猜测说两百多或三三百多",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md",
+      "source_location": "L35",
+      "norm_label": "必须实测条目总数，不能靠猜测说两百多或三三百多",
+      "summary": "The requester's own stated reason the number had to come from a query against the live database rather than from the UI or an approximation: guessing was explicitly ruled out and a precise count was required."
+    }
+  ],
+  "links": [
+    {
+      "source": "rationale--apps-learn-has-no-test-script-so-filter-cannot-work-for-it",
+      "target": "concept--root-bun-test-discovers-suites-that-filter-cannot-reach",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--pipe-masking-was-reading-tail-always-zero-so-every-exit-was-re-measured",
+      "target": "concept--a-pipe-reports-the-last-command-exit-code-not-the-tools",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--break-nothing-and-use-a-bad-script-name-instead-to-prove-failure",
+      "target": "concept--nonexistent-script-name-as-a-negative-control-for-failure-propagation",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--bun-cwd-run-exits-zero-without-running-the-script",
+      "target": "concept--bun-filter-workspace-script-invocation",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--bun-cwd-run-exits-zero-without-running-the-script",
+      "target": "concept--a-pipe-reports-the-last-command-exit-code-not-the-tools",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--bun-filter-workspace-script-invocation",
+      "target": "concept--root-bun-test-discovers-suites-that-filter-cannot-reach",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--bun-filter-workspace-script-invocation",
+      "target": "concept--nonexistent-script-name-as-a-negative-control-for-failure-propagation",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+
+    {
+      "source": "rationale--the-trigger-bump-is-correct-for-edits",
+      "target": "concept--embed-clipboard-delete-trigger-bumps-the-row-instead-of-removing-it",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--orphans-are-never-selected-because-the-worker-query-joins-from-the-source-table",
+      "target": "concept--embed-clipboard-delete-trigger-bumps-the-row-instead-of-removing-it",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--the-denylist-matches-exactly-so-other-telegram-settings-stay-manageable",
+      "target": "concept--control-api-settings-unset-denylist-covered-only-vault-and-mfa",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--a-test-harness-without-the-embedding-table-turned-the-delete-into-an-error",
+      "target": "concept--bookkeeping-cleanup-must-never-fail-a-successful-delete",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--only-the-integration-run-caught-it-because-unit-tests-use-a-full-schema",
+      "target": "concept--bookkeeping-cleanup-must-never-fail-a-successful-delete",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--telegram-left-report-only-because-fixing-the-pairing-flow-exceeds-a-small-fix",
+      "target": "concept--magic-menu-telegram-button-gated-on-the-token-row",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--re-pairing-needs-the-bot-token-which-the-agent-must-never-type",
+      "target": "concept--magic-menu-telegram-button-gated-on-the-token-row",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--an-after-insert-trigger-creates-a-metadata-row-for-every-insert",
+      "target": "concept--insert-trigger-created-the-row-the-purge-test-called-an-orphan",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--t7-became-a-defensive-fix-not-a-user-visible-bug-fix",
+      "target": "concept--subagent-flagged-that-the-reproduction-route-unmounts-the-page",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--tests-that-re-implement-the-logic-do-not-test-shipped-code",
+      "target": "concept--pure-kernel-extraction-to-test-untested-semantic-search",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--the-runner-executes-from-the-ai-skills-repo-not-the-project-root",
+      "target": "concept--plan-run-commands-must-be-cwd-independent",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--the-count-had-to-be-measured-because-an-estimate-was-forbidden",
+      "target": "concept--exact-entry-count-from-a-snapshot-copy-of-the-live-db",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--embed-clipboard-delete-trigger-bumps-the-row-instead-of-removing-it",
+      "target": "concept--insert-trigger-created-the-row-the-purge-test-called-an-orphan",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--embed-clipboard-delete-trigger-bumps-the-row-instead-of-removing-it",
+      "target": "concept--bookkeeping-cleanup-must-never-fail-a-successful-delete",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--embed-clipboard-delete-trigger-bumps-the-row-instead-of-removing-it",
+      "target": "concept--live-sqlite-pruned-under-a-busy-timeout-after-a-verified-hot-backup",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--embed-clipboard-delete-trigger-bumps-the-row-instead-of-removing-it",
+      "target": "concept--pure-kernel-extraction-to-test-untested-semantic-search",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--loadmore-slice-cap-evicts-the-newest-already-loaded-entries",
+      "target": "concept--exact-entry-count-from-a-snapshot-copy-of-the-live-db",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--magic-menu-telegram-button-gated-on-the-token-row",
+      "target": "concept--control-api-settings-unset-denylist-covered-only-vault-and-mfa",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--lazy-retention-purge-is-by-design-not-a-bug",
+      "target": "concept--subagent-flagged-that-the-reproduction-route-unmounts-the-page",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--global-db-lock-test-deadlock",
+      "target": "concept--insert-trigger-created-the-row-the-purge-test-called-an-orphan",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--zero-subagent-compiler-policy",
+      "target": "concept--overlapping-write-scopes-rule-out-parallel-subagent-dispatch",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--bookkeeping-cleanup-must-never-fail-a-successful-delete",
+      "target": "concept--insert-trigger-created-the-row-the-purge-test-called-an-orphan",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--exact-entry-count-from-a-snapshot-copy-of-the-live-db",
+      "target": "concept--live-sqlite-pruned-under-a-busy-timeout-after-a-verified-hot-backup",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    }
+  ]
+}

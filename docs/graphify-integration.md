@@ -272,17 +272,18 @@ Because §1's content-leaves-the-machine fact is true, and because the only
 control over *which* content leaves is this file, an over-broad pattern is a data
 exfiltration bug and not a slow build. Nothing in the CLI will warn you.
 
-### 4.3 The vault trade-off, measured
+### 4.3 The vault trade-off, measured — **updated 2026-10-03**
 
-Obsidian vault corpus: **3087 markdown files / 42.0 MB** total.
+Obsidian vault corpus: **3087 markdown files / 42.0 MB** total (2026-10-01).
 
 | Scope | Files | Size | ~Tokens |
 |---|---|---|---|
 | Full vault | 3087 | 42.0 MB | UNMEASURED at full scope |
-| Under the vault's strict `.graphifyignore` | 1312 | 11.4 MB | ~2.86 M |
+| **Under the vault's strict `.graphifyignore` (2026-10-01)** | **1312** | **11.4 MB** | **~2.86 M** |
+| **Under the vault's strict `.graphifyignore` (2026-10-03, after T9)** | **1585** | **—** | **—** |
 | Same, but without the `sources/` exclusion | 2539 | — | ~6.90 M |
 
-The strict file excludes these four paths:
+The strict file excludes these four paths (unchanged since 2026-10-01):
 
 - `Satset/`
 - `90 - System/Legacy/`
@@ -297,12 +298,22 @@ difference. Both were wrong. The verified position is:
 - **1227 is the file count inside `03 - Resources/LLM Wiki/sources/`
   specifically** — one exclusion set, not the total.
 - The vault total is **3087 md files / 42.0 MB**; under the strict
-  `.graphifyignore`, **1312 files / 11.4 MB / ~2.86 M tokens remain.**
+  `.graphifyignore` (2026-10-01), **1312 files / 11.4 MB / ~2.86 M tokens remain.**
+- Under the strict `.graphifyignore` (2026-10-03, after the N8n raw-capture
+  deletion in commit `3a968b2` and the `.graphifyignore` GROUP 7 addition in
+  `c20b3be`), **1585 files remain eligible.**
 
 So the excluded total is the complement of the measured remainder, and this file
 does not quote a separate measured number for it. If a future session needs one,
 derive it once from the two measured counts and label it as arithmetic — do not
 resurrect "1227" as a total.
+
+**Note on the 2026-10-02 plan's 2360 figure:** the plan measured
+`graphify.detect.detect()` on the vault root, which counts *all* files the
+detector sees (including `.txt`, `.yaml`, etc.). The T9 manifest uses a
+narrower extension filter (`.md`, `.mdx`, `.pdf`), so its 1585 eligible files
+are a subset of the 2360 the plan reported. Both are measured; the difference is
+the extension filter, not a corpus change.
 
 #### 4.3.1 `03 - Resources/Attachments/` — added, measured reason
 
@@ -466,13 +477,24 @@ a **404** on this machine, even when `--model gpt-oss:120b-cloud` was passed.
 Fix: use the `OLLAMA_MODEL` environment variable. That **does** work. It is the
 one place `OLLAMA_MODEL` is mandatory rather than optional.
 
-### 6.4 Markdown extraction requires an LLM backend
+### 6.4 Markdown extraction requires an LLM backend — **updated 2026-10-03**
 
 There is **no local-only mode for `.md`**. `--code-only` skips docs entirely, so
 it is not a substitute. Combined with §5 (local models unusable), the result is
 that an "AST-only, free" knowledge graph of a markdown vault is **not
-achievable** on this machine. Plan for cloud cost and cloud egress, or do not
-index the vault.
+achievable** on this machine **via the cloud-LLM extraction path**. Plan for
+cloud cost and cloud egress, or do not index the vault.
+
+**2026-10-03 update: the subagent path changes this picture.** T7 in
+`docs/code-plan/plans/2026-10-02-subagent-driven-vault-index.md` shows the
+structural layer (documents, headings, wikilinks) needs **no model at all** —
+it is a deterministic parse of frontmatter and markdown syntax. T8 shows the
+semantic layer (concepts, rationale, cross-file links) can be run locally by
+fan-out subagents against the vault, producing 271 chunk files that merge into
+the same graph format. The subagent path is free (no LLM API calls), deterministic,
+and was measured on 1,585 eligible files: 20,214 nodes / 18,812 links with
+degree-0 1,358. Keep the original measurement above and add the subagent path
+beside it rather than deleting it.
 
 ### 6.5 No `--no-graphifyignore`
 

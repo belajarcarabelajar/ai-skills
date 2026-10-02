@@ -78,6 +78,15 @@
       "status": "Approved",
       "repo": "belajarcarabelajar/ai-skills",
       "synced_at": "2026-10-02T04:12:56.248Z"
+    },
+    "docs/code-plan/plans/2026-10-02-linux-docs-coverage.md": {
+      "number": 446,
+      "url": "https://github.com/belajarcarabelajar/Snipset/issues/446",
+      "hash": "530081ac",
+      "state": "closed",
+      "status": "Complete",
+      "repo": "belajarcarabelajar/Snipset",
+      "synced_at": "2026-10-02T15:14:07.010Z"
     }
   }
 }

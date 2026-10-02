@@ -9,7 +9,7 @@
       "source_location": "L37",
       "norm_label": "derive expectation from app source not a hardcoded list",
       "summary": "The new integration test init_column_shapes_match_what_the_desktop_app_declares computes every expectation at run time by parsing the app's own CREATE TABLE blocks in apps/desktop/src-tauri/src/database/schema.rs and the ALTER TABLE column definitions in schema_migrations.rs, resolved from env!(\"CARGO_MANIFEST_DIR\"). It then runs the real snipset binary through the existing run helper and compares against pragma_table_info. No expected column list, type, or default is written into the test.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md:L37] A test that restates the list shares the blind spot it is supposed to catch, so the expectation has to come from the source that actually decides the live shape; this mirrors the philosophy already stated in fingerprint_test.rs."
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md:L37] 1. The test must NOT hardcode any expected column list, type, or default. It must derive the expectation from the desktop app's own source, which is the thing that actually decides the live shape. This mirrors the philosophy already stated in `crates/snipset-cli/tests/fingerprint_test.rs`, including its rationale that a test restating the list shares the blind spot. Read that file first and follow its conventions, including its narrow-parser-fails-loudly style."
     },
     {
       "id": "concept--column-definition-catch-all",
@@ -19,7 +19,7 @@
       "source_location": "L28",
       "norm_label": "column definition catch all arm",
       "summary": "Reused id. Same claim, counted independently in this session. The listed arms of column_definition in crates/snipset-cli/src/db/init.rs cover only some names; everything else falls to `_ => format!(\"{column} TEXT\")` and is emitted as a bare nullable TEXT. That is how twelve columns come out with the wrong declared type, NOT NULL flag, or DEFAULT compared with what the desktop app declares, including research_tag which the app declares INTEGER NOT NULL DEFAULT 0.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md:L28] The constants are only column NAMES and the type comes from column_definition, so adding a name without a matching arm changes the emitted schema with nothing on the name-level check noticing."
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md:L28] `snipset init` builds its `CREATE TABLE` from the same constants that form the CLI's schema fingerprint (`crates/snipset-cli/src/db/fingerprint.rs`, consumed by `create_table` in `crates/snipset-cli/src/db/init.rs`). Those constants are only column NAMES. The type of each emitted column comes from `column_definition` in `init.rs`, which has a catch-all `_ => format!(\"{column} TEXT\")`. Several columns therefore come out with the wrong declared type or the wrong DEFAULT compared to what the desktop app declares, and because the fingerprint only compares names, every existing test still passes."
     },
     {
       "id": "concept--fingerprint-name-vs-shape-agreement",
@@ -35,11 +35,12 @@
       "label": "Assert on columns only; the deliberate foreign key and index differences are out of scope",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md",
-      "source_location": "L51",
+      "source_location": "L09150",
       "norm_label": "assert on columns only; the deliberate foreign key and index differences are out of scope",
       "summary": "A deliberate scope limit on the parity test: it compares declared type, notnull and dflt_value for every column the app declares, and asserts nothing about table constraints, foreign keys, indexes, triggers or row order. Structural differences found during the work were recorded in the report instead: the CLI's snippets table lacks FOREIGN KEY (group_id) REFERENCES groups(uuid), and it creates none of idx_snippets_keyword, idx_snippets_group_id or idx_snippets_created_at, so the app's uniqueness constraint on keyword does not exist in an init-created database. Column order was checked and matches.",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md:L00051] The CLI's `snippets` table deliberately lacks the app's `FOREIGN KEY (group_id) REFERENCES groups(uuid)` clause; that structural difference is out of scope and asserting on it would create a permanent red test."
+        "The report files the structural differences as noticed but not asserted: [05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md:L09150] - The CLI's `snippets` lacks `FOREIGN KEY (group_id) REFERENCES groups(uuid)`. [05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md:L09151] - The CLI creates no indexes on `snippets` (`idx_snippets_keyword`, `idx_snippets_group_id`, `idx_snippets_created_at`), so the app's uniqueness constraint on `keyword` does not exist in an init-created database. [05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md:L09152] - Column order matches, so no divergence there.",
+        "The scope statement itself, read back out of the test file: [05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md:L07066] // Scope: COLUMNS ONLY. Table constraints, foreign keys, indexes, triggers, and [05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md:L07067] // column order are out of scope. In particular the CLI's `snippets` table has no"
       ]
     },
     {
@@ -50,7 +51,7 @@
       "source_location": "L53",
       "norm_label": "a schema parser that yields zero columns must fail the test loudly",
       "summary": "Vacuity guard on the narrow parsers. Both the CREATE TABLE block reader and the migration-array reader assert their anchor occurs exactly once and assert the extracted column list is non-empty, so a parser that silently stops matching (anchor renamed, indentation changed, array restructured) turns the test red instead of green. The task also required a column definition to fail to parse rather than be skipped, in the narrow-parser-fails-loudly style already used in fingerprint_test.rs.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md:L53] A parser that yields zero columns would make every per-column loop a no-op and the parity test would pass while checking nothing; fingerprint_test.rs has the precedent."
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md:L53] 8. Guard against a vacuous test. If the parser yields zero columns for a table, the test must fail loudly rather than pass. `fingerprint_test.rs` has an existing precedent for this; follow it."
     },
     {
       "id": "concept--not-null-never-inferred-from-primary-key",
@@ -72,7 +73,7 @@
       "source_location": "L9144",
       "norm_label": "default literals compared with one outer quote pair stripped from both sides, none kept distinct from empty",
       "summary": "Judgement call on dflt_value comparison. The app-side literal is kept verbatim including its quotes because pragma_table_info returns DEFAULT 'Text' as 'Text' with quotes. For the comparison itself one matching outer quote pair is stripped from both sides, so a pure quoting difference cannot fail the test, while the <none> sentinel stays distinct from the empty literal so DEFAULT '' and no default remain different facts. Raw literals are printed in the failure report.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md:L9144] Stripping one matching outer pair from both sides keeps a quoting difference from failing the test, but collapsing <none> into the empty literal would erase the distinction between DEFAULT '' and no default at all."
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md:L9144] - **`DEFAULT 'Text'`**: kept verbatim including quotes on the app side, since `dflt_value` returns `'Text'` with quotes. For *comparison* I strip one matching outer quote pair from **both** sides so a quoting difference alone cannot fail the test, but `<none>` stays distinct from the empty literal, so `DEFAULT ''` and no default remain different facts. Raw literals are printed in the failure report."
     },
     {
       "id": "concept--schema-sources-currently-agree-so-the-disagreement-branch-is-dead",
@@ -82,7 +83,7 @@
       "source_location": "L9140",
       "norm_label": "schema.rs and the migration arrays currently agree, so the reconciliation disagreement branch never fires",
       "summary": "The test reconciles two sources into one expectation per column: the CREATE TABLE IF NOT EXISTS groups/snippets blocks in schema.rs, which are authoritative for a fresh database, and the group_cols / snippet_cols migration arrays, which cover columns added after the table was created. Where a column appears in both, the two parsed shapes are compared and a disagreement is reported rather than one being silently preferred. Measured result for groups (12 columns) and snippets (26 columns): the two sources agree on every shared column, is_deleted being INTEGER DEFAULT 0 in both and image_data TEXT in both, so the disagreement branch is implemented but currently dead.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md:L9140] Agreement between the two sources was verified rather than assumed, and the cross-check is kept so a future divergence surfaces instead of being silently resolved in favour of one file."
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md:L9140] - **The two sources currently agree on every shared column.** I verified this rather than assuming: `is_deleted` is `INTEGER DEFAULT 0` in *both* `schema.rs` and the migration arrays, and `image_data` is `TEXT` in both. The reconciliation still compares them and reports a disagreement rather than silently preferring one, but that branch is currently dead."
     },
     {
       "id": "concept--requested-red-test-arrived-green-after-the-parent-fix-landed",
@@ -92,7 +93,7 @@
       "source_location": "L9133",
       "norm_label": "the requested red parity test arrived green because the parent session fixed the production code mid-flight",
       "summary": "The task specified that the test must be RED on delivery, must not be weakened until green, and must not get an allowlist of known-divergent columns. It turned out green anyway: while the subagent was working, the parent session fixed column_definition in crates/snipset-cli/src/db/init.rs (commit 2030dbccc, later rebased as 824a83e7b) and committed the test. Re-simulating the exact parsers against real SQLite gives zero divergences against the fixed code. The deliverable is therefore the GREEN control at this stage, and the twelve-column table in the report is the pre-fix evidence the test caught.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md:L9133] The expected RED evidence no longer existed to be captured, because the production fix the test was meant to expose landed while the test was being written."
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md:L9133] **Important: the test is no longer red.** While I was working, the parent session fixed `column_definition` in `crates/snipset-cli/src/db/init.rs` (commit `2030dbccc`) and committed my test. Re-running my simulation against that fixed code gives 0 divergences. My test is therefore the GREEN control at this stage, not the RED evidence you expected. The 12-column list above is what the test caught before the production fix landed."
     },
     {
       "id": "concept--a-simulation-of-the-parser-misled-with-filter-vs-take-while",
@@ -102,18 +103,18 @@
       "source_location": "L9146",
       "norm_label": "a hand-written simulation of the parser misled the fix: filter instead of take_while produced a false alarm",
       "summary": "The declared-type parser was briefly changed to also stop at NULL and KEY, with a doc comment claiming this was needed to prevent false failures on TEXT NOT NULL and TEXT PRIMARY KEY. Re-running the simulation with the original keyword-only terminator set gave identical output on every sample, which falsified the premise. take_while stops at NOT and at PRIMARY and never reaches their operands, so the original code was already correct; the Python simulation had used a filter comprehension, which does keep scanning, and that was the actual defect. Both edits were reverted and the inaccurate comment removed.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md:L9146] A comment asserting a bug the code never had is worse than no comment, so the change was reverted once the simulation rather than the Rust was shown to be wrong."
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md:L9146] - **Declared type**: leading token run up to the first constraint keyword via `take_while`. I briefly \"fixed\" this to also stop at `NULL`/`KEY`, then reverted: `take_while` already stops at `NOT`/`PRIMARY` and never reaches their operands. My simulation had used a filter, which is what produced the false alarm."
     },
     {
       "id": "concept--zero-subagent-compiler-policy",
       "label": "Zero-subagent compiler policy",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md",
-      "source_location": "L23",
+      "source_location": "L09156",
       "norm_label": "zero subagent compiler policy",
       "summary": "Reused id. Same claim. The first hard constraint of the task, quoted from the repository AGENTS.md: no cargo, rustc, clippy, nextest, mold or bun, locally or over ssh, and no ssh at all. Verification was therefore re-reading plus simulating both parsers and pragma_table_info against real SQLite in Python. Compilation and the actual test run are explicitly reported as unverified.",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md:L00023] You cannot verify your own work compiles; that is deliberate, the parent does it."
+        "Verification, in the note's own final report: [05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md:L09156] Per the zero-compiler policy I did not run `cargo`, `clippy`, or `nextest`. I verified logic by re-reading and by simulating both parsers plus `pragma_table_info` against real SQLite in Python. Compilation and the actual test run are unconfirmed."
       ]
     },
     {
@@ -133,18 +134,19 @@
       "source_location": "L4400",
       "norm_label": "a vendored skill copy carries an upstream / refresh / revert provenance footer",
       "summary": "skills/use-tinyfish/SKILL.md in the ai-skills repository is a copy of the file tinyfish connect wrote to ~/.agents/skills/use-tinyfish, appended with a Provenance section naming the upstream (tinyfish-io/tinyfish-cookbook, skill use-tinyfish), the exact command to re-run and re-copy to refresh it, and the full revert path: rm -rf the skill dir, drop the block from install.sh, re-run install.sh, and optionally remove the deployed copies under ~/.agents/skills, ~/.config/opencode/skills, ~/.gemini/config/skills and ~/.claude/skills. install.sh section 6b deploys it as a single-file skill to every harness target, with the ~/.claude target conditional like the rest of the script.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-30 - tinyfish-setup-and-connection-check [ses_f0db9f30cffeJYpA76JszqgVJy].md:L4800] The revert instructions are written into the SKILL.md footer and the install.sh section 6b comment rather than left in the session, because the next session cannot read this conversation."
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-30 - tinyfish-setup-and-connection-check [ses_f0db9f30cffeJYpA76JszqgVJy].md:L4800] **Not mine:** `plans.publish.json` shows modified (dawnbook path fix) — was already dirty before I started, left untouched. Commit when ready; revert for my part is in the SKILL.md footer + `install.sh` §6b comment."
     },
     {
       "id": "concept--deep-research-must-name-one-evidence-tool",
       "label": "The deep-research workflow must name one evidence tool, enforced by a validator check",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-30 - tinyfish-setup-and-connection-check [ses_f0db9f30cffeJYpA76JszqgVJy].md",
-      "source_location": "L5550",
+      "source_location": "L05612",
       "norm_label": "the deep research workflow must name one evidence tool, enforced by a validator check",
       "summary": "The ai-skills repository was changed from tool-agnostic research to TinyFish-mandated research in three places that must agree: an Evidence Gathering section in templates/deep-research-report-template.md, an Evidence Gathering subsection in the master skill (Super Ultra Code Plan Implementation.md), and a new check 3f in scripts/validate-skill.mjs that fails unless the literal use-tinyfish is present in both files. Every inline citation index must map to a source actually retrieved through that ladder, and a cited-but-unfetched source fails the report exactly like an unread one.",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar/2026-09-30 - tinyfish-setup-and-connection-check [ses_f0db9f30cffeJYpA76JszqgVJy].md:L05550] Deep-research evidence contract: the workflow must name its evidence tool.\\n// Without a named tool each agent improvises its own browsing and citations stop\\n// being reproducible."
+        "The report's own change table names the three places that must agree: [05 - Conversations/home-belajarcarabelajar/2026-09-30 - tinyfish-setup-and-connection-check [ses_f0db9f30cffeJYpA76JszqgVJy].md:L05612] | `templates/deep-research-report-template.md` | Seksi **Evidence Gathering**: tangga `search` → `fetch` → `agent` via skill `use-tinyfish`; tiap sitasi wajib dari sumber yang benar diambil | [05 - Conversations/home-belajarcarabelajar/2026-09-30 - tinyfish-setup-and-connection-check [ses_f0db9f30cffeJYpA76JszqgVJy].md:L05613] | `Super Ultra Code Plan Implementation.md` | Subseksi **Evidence Gathering** di Deep Research Workflow, menunjuk ke template + skill vendored | [05 - Conversations/home-belajarcarabelajar/2026-09-30 - tinyfish-setup-and-connection-check [ses_f0db9f30cffeJYpA76JszqgVJy].md:L05614] | `scripts/validate-skill.mjs` | Cek kontrak `3f`: master + template harus menyebut `use-tinyfish`, gaya sama seperti guard debt-sweep |",
+        "The validator run that printed both halves of the contract: [05 - Conversations/home-belajarcarabelajar/2026-09-30 - tinyfish-setup-and-connection-check [ses_f0db9f30cffeJYpA76JszqgVJy].md:L05585] ✅ Deep-research evidence contract present: master skill evidence subsection [05 - Conversations/home-belajarcarabelajar/2026-09-30 - tinyfish-setup-and-connection-check [ses_f0db9f30cffeJYpA76JszqgVJy].md:L05586] ✅ Deep-research evidence contract present: deep-research template evidence section"
       ]
     },
     {
@@ -155,7 +157,7 @@
       "source_location": "L5488",
       "norm_label": "lightest tool ladder search fetch agent",
       "summary": "The prescribed escalation order inside the Evidence Gathering section: search to discover sources, fetch the best results for full content, and escalate to agent only for pages that need interaction such as forms, login or dynamic extraction. The rule is stated as never starting with the heaviest tool.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-30 - tinyfish-setup-and-connection-check [ses_f0db9f30cffeJYpA76JszqgVJy].md:L5488] Search and fetch are the cheap retrieval tools and agent is the paid browser automation path, so the order is fixed so the expensive one is never the entry point."
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-30 - tinyfish-setup-and-connection-check [ses_f0db9f30cffeJYpA76JszqgVJy].md:L5488] Follow the lightest-tool ladder: `search` to discover sources, then `fetch` the\\nbest results for full content. Escalate to `agent` only for pages that need\\ninteraction (forms, login, dynamic extraction); never start with the heaviest\\ntool. Every inline citation index must map to a source actually retrieved this\\nway — a cited-but-unfetched source fails the report exactly like an unread one."
     },
     {
       "id": "concept--deliberately-not-touching-snippets-to-avoid-database-drift",
@@ -165,7 +167,7 @@
       "source_location": "L5618",
       "norm_label": "deep research rule changes went in the template, not in the snippets, to avoid snipset database drift",
       "summary": "The two snippet files under snippets/ were deliberately left untouched even though they invoke the deep-research phase. Editing the shared template instead makes both of them carry the new TinyFish evidence rule for free, and keeps `bun run snippets:check` reporting the trigger prompts as matching the Snipset database rather than as drift.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-30 - tinyfish-setup-and-connection-check [ses_f0db9f30cffeJYpA76JszqgVJy].md:L5618] Both snippets call the deep-research phase via the template, so the rule travels without editing the files that are synced against the Snipset database and triggering drift."
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-30 - tinyfish-setup-and-connection-check [ses_f0db9f30cffeJYpA76JszqgVJy].md:L5618] Sengaja tidak menyentuh `snippets/*.md` — keduanya memanggil fase deep-research via template, jadi aturan TinyFish ikut terbawa tanpa memicu drift database. Cara revert tertulis di komentar tiap file yang diubah."
     },
     {
       "id": "concept--selective-commit-excludes-unrelated-wip",
@@ -175,7 +177,7 @@
       "source_location": "L5785",
       "norm_label": "selective commit excludes unrelated wip",
       "summary": "Reused id. Same claim. Commit aa5d6ec staged exactly six paths (README.md, the master skill, install.sh, scripts/validate-skill.mjs, templates/deep-research-report-template.md and the new skills/use-tinyfish) for 322 insertions. plans.publish.json, which carried an unrelated dawnbook root path fix and was already dirty before the session began, was left unstaged and left dirty after the push.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-30 - tinyfish-setup-and-connection-check [ses_f0db9f30cffeJYpA76JszqgVJy].md:L5785] plans.publish.json was pre-existing dirt from a dawnbook path fix, not part of this work, so it was deliberately kept out of the commit."
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-30 - tinyfish-setup-and-connection-check [ses_f0db9f30cffeJYpA76JszqgVJy].md:L5785] Sengaja tidak ikut-commit `plans.publish.json` — itu kotoran lama (fix path dawnbook) yang sudah ada sebelum saya mulai, bukan bagian kerjaan ini."
     }
   ],
   "links": [

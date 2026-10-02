@@ -1,0 +1,578 @@
+{
+  "nodes": [
+    {
+      "id": "concept--managed-oomswaplimit-dropped-by-systemd-261",
+      "label": "ManagedOOMSwapLimit silently dropped by systemd 261",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L7198",
+      "norm_label": "managedoomswaplimit silently dropped by systemd 261"
+    },
+    {
+      "id": "concept--oomd-dropin-directory-name-must-match-the-reader",
+      "label": "An oomd drop-in directory name that does not match what systemd-oomd reads",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L7199",
+      "norm_label": "an oomd drop-in directory name that does not match what systemd-oomd reads"
+    },
+    {
+      "id": "concept--systemd-262-still-lacks-managed-oomswaplimit",
+      "label": "systemd 262 still has no ManagedOOMSwapLimit, so the upgrade does not restore the dropped key",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L17014",
+      "norm_label": "systemd 262 still has no managedoomswaplimit, so the upgrade does not restore the dropped key"
+    },
+    {
+      "id": "concept--oomd-key-unverifiable-without-a-real-pressure-event",
+      "label": "An oomd key that is valid but unprovable without a real pressure event",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L9819",
+      "norm_label": "an oomd key that is valid but unprovable without a real pressure event"
+    },
+    {
+      "id": "concept--usr-owned-by-uid-1000-escalation-surface",
+      "label": "/usr and /usr/bin owned by uid 1000 is an escalation surface, not a RAM issue",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L7200",
+      "norm_label": "/usr and /usr/bin owned by uid 1000 is an escalation surface, not a ram issue"
+    },
+    {
+      "id": "concept--ownership-scan-positive-control",
+      "label": "Positive control proving the ownership scan can detect rather than being permission-blocked",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L10529",
+      "norm_label": "positive control proving the ownership scan can detect rather than being permission-blocked"
+    },
+    {
+      "id": "concept--missing-rtkit-drops-pipewire-to-rt-priority-1",
+      "label": "Missing rtkit drops PipeWire to RT priority 1",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L7201",
+      "norm_label": "missing rtkit drops pipewire to rt priority 1"
+    },
+    {
+      "id": "concept--wireplumber-rt1-is-correct-as-session-manager",
+      "label": "wireplumber at RT priority 1 is correct because it is the session manager, not the audio data path",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L10562",
+      "norm_label": "wireplumber at rt priority 1 is correct because it is the session manager, not the audio data path"
+    },
+    {
+      "id": "concept--error-count-must-start-when-the-fix-activated",
+      "label": "Error counts must start when the fix activated, not at boot",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L10549",
+      "norm_label": "error counts must start when the fix activated, not at boot"
+    },
+    {
+      "id": "concept--zram-resident-limit-as-swap-cap",
+      "label": "zram with no resident limit as a swap safety cap",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L7202",
+      "norm_label": "zram with no resident limit as a swap safety cap"
+    },
+    {
+      "id": "concept--healthy-page-cache-is-not-memory-waste",
+      "label": "Healthy page cache is not memory waste",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L14644",
+      "norm_label": "healthy page cache is not memory waste"
+    },
+    {
+      "id": "concept--ollama-rss-is-mostly-page-cache",
+      "label": "ollama's 253 MiB RSS is really 21 MiB PSS with the rest page cache",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L14574",
+      "norm_label": "ollama's 253 mib rss is really 21 mib pss with the rest page cache"
+    },
+    {
+      "id": "concept--ollama-memorymax-as-safety-cap-not-saving",
+      "label": "ollama MemoryMax=infinity in system.slice, which oomd does not police",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L7204",
+      "norm_label": "ollama memorymax=infinity in system.slice, which oomd does not police"
+    },
+    {
+      "id": "concept--systemd-boot-uki-and-conf-entry-are-two-boot-paths",
+      "label": "systemd-boot lists a .conf type #1 entry and a self-contained UKI as two separate boot paths",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L14557",
+      "norm_label": "systemd-boot lists a .conf type #1 entry and a self-contained uki as two separate boot paths"
+    },
+    {
+      "id": "concept--objcopy-argument-order-overwrote-uki-fallback",
+      "label": "objcopy with in-file and out-file reversed overwrote the UKI fallback",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L15370",
+      "norm_label": "objcopy with in-file and out-file reversed overwrote the uki fallback"
+    },
+    {
+      "id": "concept--page-cluster-zero-disables-readahead-batching",
+      "label": "vm.page-cluster=0 disables readahead batching",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L7215",
+      "norm_label": "vm.page-cluster=0 disables readahead batching"
+    },
+    {
+      "id": "concept--max-swappiness-key-never-existed-in-mainline",
+      "label": "max_swappiness never existed in mainline; 5.8 changed the bound from one_hundred to two_hundred",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L8485",
+      "norm_label": "max_swappiness never existed in mainline; 5.8 changed the bound from one_hundred to two_hundred"
+    },
+    {
+      "id": "concept--per-zone-wmarks-setup-replaced-per-cpu-watermarks",
+      "label": "__setup_per_zone_wmarks() is the operative function; setup_per_cpu_watermarks() does not exist in 7.2.7",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L8486",
+      "norm_label": "__setup_per_zone_wmarks() is the operative function; setup_per_cpu_watermarks() does not exist in 7.2.7"
+    },
+    {
+      "id": "concept--audit-instrument-defects-manufacture-false-symptoms",
+      "label": "Every audit instrument except objcopy was itself defective and manufactured the false symptoms",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L18485",
+      "norm_label": "every audit instrument except objcopy was itself defective and manufactured the false symptoms"
+    },
+    {
+      "id": "concept--stable-size-samples-disprove-a-hung-agent",
+      "label": "Stable file size across repeated samples disproves a hung agent",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L7737",
+      "norm_label": "stable file size across repeated samples disproves a hung agent"
+    },
+    {
+      "id": "concept--plasmashell-owns-panel-layout-in-memory",
+      "label": "Plasma writes the panel layout from plasmashell memory, so editing the file edits output rather than input",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L20399",
+      "norm_label": "plasma writes the panel layout from plasmashell memory, so editing the file edits output rather than input"
+    },
+    {
+      "id": "concept--plasmoid-removal-justified-by-command-evidence",
+      "label": "Removing a plasmoid only after the backing device, package or daemon is shown absent by command",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L13384",
+      "norm_label": "removing a plasmoid only after the backing device, package or daemon is shown absent by command"
+    },
+    {
+      "id": "concept--xdg-desktop-portal-gtk-is-load-bearing-for-gtk4",
+      "label": "xdg-desktop-portal-gtk is load-bearing because gtk4 hard-depends on it",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L7213",
+      "norm_label": "xdg-desktop-portal-gtk is load-bearing because gtk4 hard-depends on it"
+    },
+    {
+      "id": "concept--sddm-x11-greeter-is-the-documented-default",
+      "label": "SDDM's X11 greeter is the documented default for 0.21 while Wayland remains experimental",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L7214",
+      "norm_label": "sddm's x11 greeter is the documented default for 0.21 while wayland remains experimental"
+    },
+    {
+      "id": "concept--orphan-packages-reported-not-deleted",
+      "label": "Orphaned build dependencies reported rather than deleted, and both kernel module directories confirmed in use",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L17052",
+      "norm_label": "orphaned build dependencies reported rather than deleted, and both kernel module directories confirmed in use"
+    },
+    {
+      "id": "concept--system-audit-zero-mutations-under-hard-gate",
+      "label": "Zero system mutations while the hard gate stayed closed on a 12-task audit plan",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L8477",
+      "norm_label": "zero system mutations while the hard gate stayed closed on a 12-task audit plan"
+    },
+    {
+      "id": "rationale--dropped-oomd-key-means-protection-erodes-silently",
+      "label": "A silently dropped oomd key means the user's OOM protection erodes with no visible error",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L14653",
+      "norm_label": "a silently dropped oomd key means the user's oom protection erodes with no visible error"
+    },
+    {
+      "id": "rationale--usr-ownership-is-a-security-issue-not-a-ram-issue",
+      "label": "Root-owned /usr is worth fixing regardless of its RAM cost because user-writable binaries that root executes are replaceable",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L20380",
+      "norm_label": "root-owned /usr is worth fixing regardless of its ram cost because user-writable binaries that root executes are replaceable"
+    },
+    {
+      "id": "rationale--chown-fixes-the-symptom-not-the-cause",
+      "label": "chown repairs the symptom without explaining the cause, and the untouched /usr/lib and /usr/share rule out a recursive chown",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L10572",
+      "norm_label": "chown repairs the symptom without explaining the cause, and the untouched /usr/lib and /usr/share rule out a recursive chown"
+    },
+    {
+      "id": "rationale--ownership-scan-scope-bounded-to-two-paths",
+      "label": "The repair was scoped to two paths because a 249,811-entry scan found exactly two non-root paths under /usr",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L14871",
+      "norm_label": "the repair was scoped to two paths because a 249,811-entry scan found exactly two non-root paths under /usr"
+    },
+    {
+      "id": "rationale--cache-drop-is-the-forbidden-optimization",
+      "label": "Dropping the cache is the one optimization the user forbade, so it was rejected outright",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L14576",
+      "norm_label": "dropping the cache is the one optimization the user forbade, so it was rejected outright"
+    },
+    {
+      "id": "rationale--zram-ratio-makes-swappiness-tuning-worthless",
+      "label": "A 4.3-5.7x zram ratio means 1 GiB of swap costs only 167 MiB of real RAM, so the swappiness change had nothing to buy",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L14645",
+      "norm_label": "a 4.3-5.7x zram ratio means 1 gib of swap costs only 167 mib of real ram, so the swappiness change had nothing to buy"
+    },
+    {
+      "id": "rationale--ollama-cap-is-a-safety-bound-not-a-saving",
+      "label": "The ollama MemoryMax cap was a safety limit rather than a saving, because ollama's real footprint was already 21 MiB",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L14578",
+      "norm_label": "the ollama memorymax cap was a safety limit rather than a saving, because ollama's real footprint was already 21 mib"
+    },
+    {
+      "id": "rationale--no-gpu-present-so-gpu-tuning-is-inert",
+      "label": "The requested GPU tuning of ollama was inert because the machine has only an Intel iGPU and the ollama build is CPU-only",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L14665",
+      "norm_label": "the requested gpu tuning of ollama was inert because the machine has only an intel igpu and the ollama build is cpu-only"
+    },
+    {
+      "id": "rationale--rtkit-errors-predate-its-activation",
+      "label": "The twelfth rtkit error was at boot time while rtkit only activated at 20:57:37, so errors after activation were zero",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L10552",
+      "norm_label": "the twelfth rtkit error was at boot time while rtkit only activated at 20:57:37, so errors after activation were zero"
+    },
+    {
+      "id": "rationale--uki-fallback-already-existed-so-t10-was-cancelled",
+      "label": "The stock-kernel boot task was cancelled because the UKI fallback already existed and mkinitcpio would overwrite it",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L14878",
+      "norm_label": "the stock-kernel boot task was cancelled because the uki fallback already existed and mkinitcpio would overwrite it"
+    },
+    {
+      "id": "rationale--no-integrity-check-after-objcopy-delayed-detection",
+      "label": "No integrity verification ran after objcopy, and bootctl list only 40 minutes later showed the entry as reported/absent",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L15373",
+      "norm_label": "no integrity verification ran after objcopy, and bootctl list only 40 minutes later showed the entry as reported/absent"
+    },
+    {
+      "id": "rationale--no-seek-cost-to-amortise-readahead-batching",
+      "label": "page-cluster=0 was the clearest defect in the sysctl file because it kills readahead batching with no seek cost left to amortise it",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L7215",
+      "norm_label": "page-cluster=0 was the clearest defect in the sysctl file because it kills readahead batching with no seek cost left to amortise it"
+    },
+    {
+      "id": "rationale--instrument-fix-not-system-fix",
+      "label": "Every wrong reading was written to a backlog so the instrument gets fixed, rather than the system being changed to match a bad measurement",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L20395",
+      "norm_label": "every wrong reading was written to a backlog so the instrument gets fixed, rather than the system being changed to match a bad measurement"
+    },
+    {
+      "id": "rationale--plain-ls-piped-to-tail-can-drop-the-error-line",
+      "label": "Piping ls through tail -n +4 dropped the single error line, which made an unreadable directory look empty",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L15578",
+      "norm_label": "piping ls through tail -n +4 dropped the single error line, which made an unreadable directory look empty"
+    },
+    {
+      "id": "rationale--three-silent-applets-are-cheaper-than-a-layout-fight",
+      "label": "Three silent applets worth about 20-40 MiB on a machine with 5.4 GiB free were left alone because only the GUI can win against plasmashell",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L20399",
+      "norm_label": "three silent applets worth about 20-40 mib on a machine with 5.4 gib free were left alone because only the gui can win against plasmashell"
+    },
+    {
+      "id": "rationale--camera-indicator-kept-because-the-device-exists",
+      "label": "The camera indicator was kept because /dev/video0 and /dev/video1 exist, so it backs a real privacy function",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L13390",
+      "norm_label": "the camera indicator was kept because /dev/video0 and /dev/video1 exist, so it backs a real privacy function"
+    },
+    {
+      "id": "rationale--gtk4-hard-depends-on-the-gtk-portal",
+      "label": "Removing the GTK portal was rejected because gtk4 hard-depends on it, so the waste was load-bearing",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L7213",
+      "norm_label": "removing the gtk portal was rejected because gtk4 hard-depends on it, so the waste was load-bearing"
+    },
+    {
+      "id": "rationale--sddm-wayland-greeter-still-experimental",
+      "label": "Switching the greeter to Wayland was rejected because it is still experimental and 48 MiB does not justify the login risk",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L7214",
+      "norm_label": "switching the greeter to wayland was rejected because it is still experimental and 48 mib does not justify the login risk"
+    },
+    {
+      "id": "rationale--premise-checked-against-mainline-source",
+      "label": "The research report's premises were checked against mainline source and two of its named things turned out never to have existed",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L8483",
+      "norm_label": "the research report's premises were checked against mainline source and two of its named things turned out never to have existed"
+    },
+    {
+      "id": "rationale--only-a-forceable-corruption-justifies-touching-kernels",
+      "label": "The remove-unused-kernel recommendation was downgraded to do-not-touch because an unreadable /boot made the risk unquantifiable",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
+      "source_location": "L3545",
+      "norm_label": "the remove-unused-kernel recommendation was downgraded to do-not-touch because an unreadable /boot made the risk unquantifiable"
+    }
+  ],
+  "links": [
+    {
+      "source": "concept--managed-oomswaplimit-dropped-by-systemd-261",
+      "target": "concept--oomd-dropin-directory-name-must-match-the-reader",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--systemd-262-still-lacks-managed-oomswaplimit",
+      "target": "concept--managed-oomswaplimit-dropped-by-systemd-261",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--oomd-key-unverifiable-without-a-real-pressure-event",
+      "target": "concept--oomd-dropin-directory-name-must-match-the-reader",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--ollama-memorymax-as-safety-cap-not-saving",
+      "target": "concept--healthy-page-cache-is-not-memory-waste",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--ownership-scan-positive-control",
+      "target": "concept--usr-owned-by-uid-1000-escalation-surface",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--wireplumber-rt1-is-correct-as-session-manager",
+      "target": "concept--missing-rtkit-drops-pipewire-to-rt-priority-1",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--error-count-must-start-when-the-fix-activated",
+      "target": "concept--missing-rtkit-drops-pipewire-to-rt-priority-1",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--zram-resident-limit-as-swap-cap",
+      "target": "concept--healthy-page-cache-is-not-memory-waste",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--ollama-rss-is-mostly-page-cache",
+      "target": "concept--healthy-page-cache-is-not-memory-waste",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--ollama-memorymax-as-safety-cap-not-saving",
+      "target": "concept--ollama-rss-is-mostly-page-cache",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--objcopy-argument-order-overwrote-uki-fallback",
+      "target": "concept--systemd-boot-uki-and-conf-entry-are-two-boot-paths",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--stable-size-samples-disprove-a-hung-agent",
+      "target": "concept--error-count-must-start-when-the-fix-activated",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--plasmoid-removal-justified-by-command-evidence",
+      "target": "concept--plasmashell-owns-panel-layout-in-memory",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--per-zone-wmarks-setup-replaced-per-cpu-watermarks",
+      "target": "concept--max-swappiness-key-never-existed-in-mainline",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--dropped-oomd-key-means-protection-erodes-silently",
+      "target": "concept--managed-oomswaplimit-dropped-by-systemd-261",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--usr-ownership-is-a-security-issue-not-a-ram-issue",
+      "target": "concept--usr-owned-by-uid-1000-escalation-surface",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--chown-fixes-the-symptom-not-the-cause",
+      "target": "concept--usr-owned-by-uid-1000-escalation-surface",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--ownership-scan-scope-bounded-to-two-paths",
+      "target": "concept--ownership-scan-positive-control",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--cache-drop-is-the-forbidden-optimization",
+      "target": "concept--healthy-page-cache-is-not-memory-waste",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--zram-ratio-makes-swappiness-tuning-worthless",
+      "target": "concept--healthy-page-cache-is-not-memory-waste",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--ollama-cap-is-a-safety-bound-not-a-saving",
+      "target": "concept--ollama-memorymax-as-safety-cap-not-saving",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--no-gpu-present-so-gpu-tuning-is-inert",
+      "target": "concept--ollama-rss-is-mostly-page-cache",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--rtkit-errors-predate-its-activation",
+      "target": "concept--error-count-must-start-when-the-fix-activated",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--uki-fallback-already-existed-so-t10-was-cancelled",
+      "target": "concept--systemd-boot-uki-and-conf-entry-are-two-boot-paths",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--no-integrity-check-after-objcopy-delayed-detection",
+      "target": "concept--objcopy-argument-order-overwrote-uki-fallback",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--no-seek-cost-to-amortise-readahead-batching",
+      "target": "concept--page-cluster-zero-disables-readahead-batching",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--instrument-fix-not-system-fix",
+      "target": "concept--audit-instrument-defects-manufacture-false-symptoms",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--plain-ls-piped-to-tail-can-drop-the-error-line",
+      "target": "concept--audit-instrument-defects-manufacture-false-symptoms",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--three-silent-applets-are-cheaper-than-a-layout-fight",
+      "target": "concept--plasmashell-owns-panel-layout-in-memory",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--camera-indicator-kept-because-the-device-exists",
+      "target": "concept--plasmoid-removal-justified-by-command-evidence",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--gtk4-hard-depends-on-the-gtk-portal",
+      "target": "concept--xdg-desktop-portal-gtk-is-load-bearing-for-gtk4",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--sddm-wayland-greeter-still-experimental",
+      "target": "concept--sddm-x11-greeter-is-the-documented-default",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--premise-checked-against-mainline-source",
+      "target": "concept--max-swappiness-key-never-existed-in-mainline",
+      "relation": "rationale_for",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "rationale--only-a-forceable-corruption-justifies-touching-kernels",
+      "target": "concept--system-audit-zero-mutations-under-hard-gate",
+      "relation": "rationale_for",
+      "confidence": "INFERRED"
+    }
+  ]
+}

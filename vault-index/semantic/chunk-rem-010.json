@@ -13,6 +13,15 @@
       ]
     },
     {
+      "id": "concept--arboard-wayland-data-control-feature",
+      "label": "arboard is built without the `wayland-data-control` feature, so its Linux backend falls back to X11",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-arch-snipset [ses_f1d12d2deffeIXx71eca2M8vc4].md",
+      "source_location": "L6966",
+      "norm_label": "arboard is built without the `wayland-data-control` feature, so its linux backend falls back to x11",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-arch-snipset [ses_f1d12d2deffeIXx71eca2M8vc4].md:L6966] And Snipset's `#{clipboard}` read path uses **arboard with no `wayland-data-control` feature** → arboard falls back to the **X11** clipboard (`arboard/src/platform/linux/mod.rs:145`)."
+    },
+    {
       "id": "concept--simulate-copy-windows-only",
       "label": "Windows-only simulate_copy selection capture",
       "file_type": "concept",

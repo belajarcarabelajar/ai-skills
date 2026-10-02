@@ -53,6 +53,15 @@
       "norm_label": "a working artifact parked in the plans directory is published as if it were a plan"
     },
     {
+      "id": "concept--plans-enumeration-globs-any-md-under-docs-code-plan-plans",
+      "label": "enumeratePlans globs any *.md under docs/code-plan/plans/, so a non-plan file parked there is published",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md",
+      "source_location": "L6668",
+      "norm_label": "enumerateplans globs any *.md under docs/code-plan/plans/, so a non-plan file parked there is published",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md:L6668] Wait — but is it? If a `.md` that isn't a plan sits in plans/, it gets published. Given 228 have no frontmatter, we can't filter by schema. So the `.md` glob is the only workable rule. The manifest is the only offender and it's mine. Parent fix."
+    },
+    {
       "id": "concept--publisher-must-stage-for-autocommit",
       "label": "The publisher stages the mirror file itself because auto-commit only covers staged paths",
       "file_type": "concept",
@@ -144,7 +153,7 @@
     },
     {
       "source": "concept--working-artifact-in-plans-dir-gets-published",
-      "target": "rationale--glob-scoped-to-project-plans",
+      "target": "concept--plans-enumeration-globs-any-md-under-docs-code-plan-plans",
       "relation": "conceptually_related_to",
       "confidence": "INFERRED"
     },

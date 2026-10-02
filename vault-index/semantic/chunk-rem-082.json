@@ -121,7 +121,7 @@
     },
     {
       "source": "concept--visible-faq-copy-is-english-on-indonesian-pages",
-      "target": "rationale--never-machine-translate-indonesian-copy",
+      "target": "concept--derive-json-ld-from-the-rendered-title",
       "relation": "conceptually_related_to",
       "confidence": "EXTRACTED"
     },

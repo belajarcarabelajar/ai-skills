@@ -104,7 +104,7 @@
     },
     {
       "source": "concept--toast-owns-cue-exclusion",
-      "target": "rationale--info-toasts-already-click-through-button",
+      "target": "concept--info-toasts-stay-silent",
       "relation": "conceptually_related_to",
       "confidence": "EXTRACTED"
     },

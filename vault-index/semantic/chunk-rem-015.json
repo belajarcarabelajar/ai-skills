@@ -1,0 +1,368 @@
+{
+  "nodes": [
+    {
+      "id": "concept--plan-finish-publish-trigger",
+      "label": "Publish the plan when the plan document is finished, not after execution",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - sinkronisasi-plan-dengan-obsidian-terbaru [ses_f20bc6e8fffea5kBDg0wj6NeSc].md",
+      "source_location": "L2264",
+      "norm_label": "publish the plan when the plan document is finished, not after execution"
+    },
+    {
+      "id": "concept--mirror-freshness-gate-on-execute",
+      "label": "ultra-plan-runner --execute refuses to start on a stale vault mirror (exit 3)",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - sinkronisasi-plan-dengan-obsidian-terbaru [ses_f20bc6e8fffea5kBDg0wj6NeSc].md",
+      "source_location": "L4046",
+      "norm_label": "ultra-plan-runner --execute refuses to start on a stale vault mirror (exit 3)"
+    },
+    {
+      "id": "concept--planfreshness-shared-verdict",
+      "label": "planFreshness() shared freshness verdict gives the check and the gate one code path",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - sinkronisasi-plan-dengan-obsidian-terbaru [ses_f20bc6e8fffea5kBDg0wj6NeSc].md",
+      "source_location": "L6470",
+      "norm_label": "planfreshness() shared freshness verdict gives the check and the gate one code path"
+    },
+    {
+      "id": "concept--three-stage-plan-publish-pipeline",
+      "label": "Three-stage plan publish pipeline: Draft, after approval, after execution",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - sinkronisasi-plan-dengan-obsidian-terbaru [ses_f20bc6e8fffea5kBDg0wj6NeSc].md",
+      "source_location": "L7163",
+      "norm_label": "three-stage plan publish pipeline: draft, after approval, after execution"
+    },
+    {
+      "id": "concept--post-execution-vault-sync-gap",
+      "label": "Post-execution vault sync gap: the mechanism propagates status but no rule triggered it",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - sinkronisasi-plan-dengan-obsidian-terbaru [ses_f20bc6e8fffea5kBDg0wj6NeSc].md",
+      "source_location": "L7136",
+      "norm_label": "post-execution vault sync gap: the mechanism propagates status but no rule triggered it"
+    },
+    {
+      "id": "concept--lifecycle-status-fallback-vs-claim",
+      "label": "Mirror status Draft as publisher fallback default versus a real lifecycle claim",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - sinkronisasi-plan-dengan-obsidian-terbaru [ses_f20bc6e8fffea5kBDg0wj6NeSc].md",
+      "source_location": "L7302",
+      "norm_label": "mirror status draft as publisher fallback default versus a real lifecycle claim"
+    },
+    {
+      "id": "concept--plan-mark-done-from-runner-record",
+      "label": "plan-mark-done.mjs ticks steps from the runner record, not from an assertion",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - sinkronisasi-plan-dengan-obsidian-terbaru [ses_f20bc6e8fffea5kBDg0wj6NeSc].md",
+      "source_location": "L7842",
+      "norm_label": "plan-mark-done.mjs ticks steps from the runner record, not from an assertion"
+    },
+    {
+      "id": "concept--plan-lifecycle-audit",
+      "label": "plan-lifecycle-audit.mjs counts plan lifecycle causes separately",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - sinkronisasi-plan-dengan-obsidian-terbaru [ses_f20bc6e8fffea5kBDg0wj6NeSc].md",
+      "source_location": "L11472",
+      "norm_label": "plan-lifecycle-audit.mjs counts plan lifecycle causes separately"
+    },
+    {
+      "id": "concept--stale-status-report-mode",
+      "label": "--stale-status report mode with CONTRADICTED, FULLY-TICKED and STALE-DRAFT signals",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - sinkronisasi-plan-dengan-obsidian-terbaru [ses_f20bc6e8fffea5kBDg0wj6NeSc].md",
+      "source_location": "L11739",
+      "norm_label": "--stale-status report mode with contradicted, fully-ticked and stale-draft signals"
+    },
+    {
+      "id": "concept--lint-gate-frozen-scope-split",
+      "label": "Vault lint gate splits zero-outgoing into active (gating) and frozen (reported)",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - sinkronisasi-plan-dengan-obsidian-terbaru [ses_f20bc6e8fffea5kBDg0wj6NeSc].md",
+      "source_location": "L21543",
+      "norm_label": "vault lint gate splits zero-outgoing into active (gating) and frozen (reported)"
+    },
+    {
+      "id": "concept--green-is-not-delivered",
+      "label": "All acceptance criteria green does not mean the goal was delivered",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - sinkronisasi-plan-dengan-obsidian-terbaru [ses_f20bc6e8fffea5kBDg0wj6NeSc].md",
+      "source_location": "L20459",
+      "norm_label": "all acceptance criteria green does not mean the goal was delivered"
+    },
+    {
+      "id": "concept--published-vs-updated-mirror-property",
+      "label": "Mirror updated means published today, not plan changed today",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - sinkronisasi-plan-dengan-obsidian-terbaru [ses_f20bc6e8fffea5kBDg0wj6NeSc].md",
+      "source_location": "L7155",
+      "norm_label": "mirror updated means published today, not plan changed today"
+    },
+    {
+      "id": "concept--push-ownership-and-visibility-audit",
+      "label": "Pre-push audit of remote visibility and ownership of uncommitted files",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - sinkronisasi-plan-dengan-obsidian-terbaru [ses_f20bc6e8fffea5kBDg0wj6NeSc].md",
+      "source_location": "L23460",
+      "norm_label": "pre-push audit of remote visibility and ownership of uncommitted files"
+    },
+    {
+      "id": "concept--parent-diff-audit-gate",
+      "label": "Parent diff audit gate",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - sinkronisasi-plan-dengan-obsidian-terbaru [ses_f20bc6e8fffea5kBDg0wj6NeSc].md",
+      "source_location": "L9214",
+      "norm_label": "parent diff audit gate"
+    },
+
+    {
+      "id": "rationale--publish-at-plan-finish-not-after-execution",
+      "label": "Publish at plan-finished so review in Obsidian can run in parallel with execution",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - sinkronisasi-plan-dengan-obsidian-terbaru [ses_f20bc6e8fffea5kBDg0wj6NeSc].md",
+      "source_location": "L2264",
+      "norm_label": "publish at plan-finished so review in obsidian can run in parallel with execution"
+    },
+    {
+      "id": "rationale--distinct-exit-code-3-for-mirror-gate",
+      "label": "A distinct exit code 3 so callers can tell a mirror-gate block from validation failure",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - sinkronisasi-plan-dengan-obsidian-terbaru [ses_f20bc6e8fffea5kBDg0wj6NeSc].md",
+      "source_location": "L3168",
+      "norm_label": "a distinct exit code 3 so callers can tell a mirror-gate block from validation failure"
+    },
+    {
+      "id": "rationale--gate-fails-closed-on-unresolvable-registry",
+      "label": "The gate fails closed when the registry cannot be resolved, because the point is that no plan executes that is not in Obsidian",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - sinkronisasi-plan-dengan-obsidian-terbaru [ses_f20bc6e8fffea5kBDg0wj6NeSc].md",
+      "source_location": "L6476",
+      "norm_label": "the gate fails closed when the registry cannot be resolved"
+    },
+    {
+      "id": "rationale--dry-run-never-gated",
+      "label": "Dry-run is never gated so plan validation keeps working on a machine without the vault",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - sinkronisasi-plan-dengan-obsidian-terbaru [ses_f20bc6e8fffea5kBDg0wj6NeSc].md",
+      "source_location": "L6477",
+      "norm_label": "dry-run is never gated so plan validation keeps working without the vault"
+    },
+    {
+      "id": "rationale--mirror-read-only-review-verdict-in-source",
+      "label": "The mirror is read-only and overwritten on re-publish, so a review verdict belongs in the source plan",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - sinkronisasi-plan-dengan-obsidian-terbaru [ses_f20bc6e8fffea5kBDg0wj6NeSc].md",
+      "source_location": "L3190",
+      "norm_label": "the mirror is read-only and overwritten on re-publish, so a review verdict belongs in the source plan"
+    },
+    {
+      "id": "rationale--keep-updated-add-published-not-rename",
+      "label": "updated is required by the vault page contract, so published was added beside it rather than renamed over it",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - sinkronisasi-plan-dengan-obsidian-terbaru [ses_f20bc6e8fffea5kBDg0wj6NeSc].md",
+      "source_location": "L7817",
+      "norm_label": "updated is required by the vault page contract, so published was added beside it"
+    },
+    {
+      "id": "rationale--untracked-plans-have-no-lifecycle-claim",
+      "label": "The 227 plans with no frontmatter carry no lifecycle state, so inventing one would be fabrication",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - sinkronisasi-plan-dengan-obsidian-terbaru [ses_f20bc6e8fffea5kBDg0wj6NeSc].md",
+      "source_location": "L7306",
+      "norm_label": "the 227 plans with no frontmatter carry no lifecycle state, so inventing one would be fabrication"
+    },
+    {
+      "id": "rationale--defer-backfill-of-227-plans",
+      "label": "Backfilling 227 plan files stayed deferred because the risk of damage exceeds the benefit",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - sinkronisasi-plan-dengan-obsidian-terbaru [ses_f20bc6e8fffea5kBDg0wj6NeSc].md",
+      "source_location": "L21272",
+      "norm_label": "backfilling 227 plan files stayed deferred because the risk of damage exceeds the benefit"
+    },
+    {
+      "id": "rationale--fix-commit-is-not-completion-evidence",
+      "label": "A fix(...) commit touching a plan file is not evidence the plan is finished; it can be half the work plus a plan edit",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - sinkronisasi-plan-dengan-obsidian-terbaru [ses_f20bc6e8fffea5kBDg0wj6NeSc].md",
+      "source_location": "L8864",
+      "norm_label": "a fix(...) commit touching a plan file is not evidence the plan is finished"
+    },
+    {
+      "id": "rationale--all-green-is-not-goal-delivered",
+      "label": "The user-facing error mapping is still reachable on Linux but the diagnostic logging the plan existed for is not, so the verdict is PARTIAL",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - sinkronisasi-plan-dengan-obsidian-terbaru [ses_f20bc6e8fffea5kBDg0wj6NeSc].md",
+      "source_location": "L20461",
+      "norm_label": "the error mapping is reachable on linux but the diagnostic logging the plan existed for is not"
+    },
+    {
+      "id": "rationale--lint-gate-splits-frozen-from-active-scope",
+      "label": "Most zero-outgoing files sit in folders the vault schema forbids editing, so gating on them made the verdict meaningless",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - sinkronisasi-plan-dengan-obsidian-terbaru [ses_f20bc6e8fffea5kBDg0wj6NeSc].md",
+      "source_location": "L21541",
+      "norm_label": "most zero-outgoing files sit in folders the vault schema forbids editing"
+    },
+    {
+      "id": "rationale--stale-status-exits-zero-as-report",
+      "label": "--stale-status must always exit 0 because it is a report, not a gate",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - sinkronisasi-plan-dengan-obsidian-terbaru [ses_f20bc6e8fffea5kBDg0wj6NeSc].md",
+      "source_location": "L11743",
+      "norm_label": "--stale-status must always exit 0 because it is a report, not a gate"
+    },
+    {
+      "id": "rationale--skip-if-must-target-its-own-work",
+      "label": "A skip_if that greps a different file than the task edits cannot see its own work, so it is not a safety net",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - sinkronisasi-plan-dengan-obsidian-terbaru [ses_f20bc6e8fffea5kBDg0wj6NeSc].md",
+      "source_location": "L11480",
+      "norm_label": "a skip_if that greps a different file than the task edits cannot see its own work"
+    }
+  ],
+  "links": [
+    {
+      "source": "rationale--publish-at-plan-finish-not-after-execution",
+      "target": "concept--plan-finish-publish-trigger",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--distinct-exit-code-3-for-mirror-gate",
+      "target": "concept--mirror-freshness-gate-on-execute",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--gate-fails-closed-on-unresolvable-registry",
+      "target": "concept--mirror-freshness-gate-on-execute",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--dry-run-never-gated",
+      "target": "concept--mirror-freshness-gate-on-execute",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--mirror-read-only-review-verdict-in-source",
+      "target": "concept--three-stage-plan-publish-pipeline",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--keep-updated-add-published-not-rename",
+      "target": "concept--published-vs-updated-mirror-property",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--untracked-plans-have-no-lifecycle-claim",
+      "target": "concept--lifecycle-status-fallback-vs-claim",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--defer-backfill-of-227-plans",
+      "target": "concept--plan-lifecycle-audit",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--fix-commit-is-not-completion-evidence",
+      "target": "concept--plan-mark-done-from-runner-record",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--all-green-is-not-goal-delivered",
+      "target": "concept--green-is-not-delivered",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--lint-gate-splits-frozen-from-active-scope",
+      "target": "concept--lint-gate-frozen-scope-split",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--stale-status-exits-zero-as-report",
+      "target": "concept--stale-status-report-mode",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--skip-if-must-target-its-own-work",
+      "target": "concept--plan-finish-publish-trigger",
+      "relation": "rationale_for",
+      "confidence": "INFERRED"
+    },
+
+    {
+      "source": "concept--plan-finish-publish-trigger",
+      "target": "concept--three-stage-plan-publish-pipeline",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--mirror-freshness-gate-on-execute",
+      "target": "concept--plan-finish-publish-trigger",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--mirror-freshness-gate-on-execute",
+      "target": "concept--planfreshness-shared-verdict",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--post-execution-vault-sync-gap",
+      "target": "concept--three-stage-plan-publish-pipeline",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--post-execution-vault-sync-gap",
+      "target": "concept--lifecycle-status-fallback-vs-claim",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--post-execution-vault-sync-gap",
+      "target": "concept--published-vs-updated-mirror-property",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--lifecycle-status-fallback-vs-claim",
+      "target": "concept--plan-lifecycle-audit",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--plan-lifecycle-audit",
+      "target": "concept--stale-status-report-mode",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--plan-mark-done-from-runner-record",
+      "target": "concept--three-stage-plan-publish-pipeline",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--lint-gate-frozen-scope-split",
+      "target": "concept--frozen-source-evidence-layer",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--green-is-not-delivered",
+      "target": "concept--parent-diff-audit-gate",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    }
+  ]
+}

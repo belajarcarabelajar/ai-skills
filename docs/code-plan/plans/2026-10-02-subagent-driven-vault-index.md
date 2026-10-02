@@ -593,11 +593,14 @@ Recorded so a fresh session continues instead of re-deriving. Everything below i
 | Where it stands | |
 |---|---|
 | Plan state | `Approved`. T1–T6 and T11 **complete**. T7 complete. T8 **in progress**. |
-| Commits | `26a91a2` tooling · `ce2ab59` structural layer + wave 1 · `99edb67` narration filter · `dd0694c` wave 2 · `94d7e1f` rem wave + section 6 restored · `0a7fc0c` worklist regenerated |
-| Chunks landed | 31 files `vault-index/semantic/chunk-*.json`, all passing `validateChunk` |
-| Totals | **806 nodes · 739 links · 800 distinct ids · 53 distinct source files** · 0 failing · 0 missing `source_file` |
-| Full suite | `bun test scripts/` → 934 pass / 0 fail across 34 files |
-| Worklist | `vault-index/semantic/batches.json`, ids `rem-001 … rem-251` |
+| Commits | tooling `26a91a2` · structural layer `ce2ab59` · narration filter `99edb67` · wave 2 `dd0694c` · worklist `0a7fc0c` / `584803e` · debt sweep `eaa5ba8` F3, `60fa515` F7, `7da0cb1` F6 · validator fix `13988e3` · wave 21 `17d7b8c` |
+| Chunks landed | **79 files** `vault-index/semantic/chunk-*.json`, all passing `validateChunk` |
+| Totals | **1,889 nodes · 1,689 links · 1,806 distinct ids · 83 deliberate id reuses** · 0 failing |
+| By type | 1,211 `concept` · 678 `rationale` |
+| Full suite | `bun test scripts/` → 993 pass / 0 fail across 36 files |
+| Worklist | `vault-index/semantic/batches.json`, 251 batches, ids `rem-001 … rem-251` |
+| Progress | **79 of 251 batches.** Next after the current wave: `rem-064` |
+| Remote | `ai-skills` pushed to `origin/main` at `13988e3`. Everything after that is local, unpushed. |
 
 **To resume:** read `templates/vault-index-subagent-contract.md`, then dispatch on `batches.json`. The prompt needs four things only — the batch id, the filter command, the output path, and the verify command. Skip any `rem-*` whose `chunk-rem-*.json` already exists.
 
@@ -610,12 +613,12 @@ Recorded so a fresh session continues instead of re-deriving. Everything below i
 | # | Follow-up (outcome + path + finish line) | Class | `defer: <ceiling>, <upgrade-trigger>` | Status |
 |---|---|---|---|---|
 | F1 | Give the vault a runnable test entrypoint — 13 `test_*.py` files and 7 scripts with no manifest | LATER | `defer: 1 session, <next vault code change>` | `OPEN` |
-| F2 | Delete the 5.5 MB of stale debug artifacts in the vault's `graphify-out/` (`graph-clean.html`, `graph-test.html`, `graph.orig.html`) | NOW | — | `OPEN` |
-| F3 | Correct the stale rationale in the vault's `.graphifyignore` GROUP 2, which still describes a `.gitignore` gap that `9bbf822` already fixed | NOW | — | `OPEN` |
-| F4 | Remove `AGENTS.md.bak-cf-20260929` and `CLAUDE.md.bak-cf-20260929` from the vault, or re-home them per the machine-level note that says they were moved to `/tmp` | NOW | — | `OPEN` |
-| F5 | Add a per-session index runner for the 283-batch corpus, so T7 resumes from `vault-index/manifest.json` without an agent having to reconstruct the wave state | LATER | `defer: 1 session, <T7 interrupted mid-run>` | `OPEN` |
-| F6 | Decide what `.opencode/plugins/graphify.js` in `ai-skills` should be: the hand-adapted committed version, or the vendored 0.9.73 one that `graphify install` writes over it. The vendored copy contradicts its own comment, drops the local `@opencode/plugin` NOTE, and changes the plugin's export shape. Re-running `graphify install --project` without deciding this silently reverts the adaptation | NOW | — | `OPEN` |
-| F7 | Decide the fate of the vault graph's **1,299 unattributable nodes** (1,269 `source_file: null`, 30 `source_file: ""`, of which 1,185 carry edges). They cannot be verified against disk, `explain` cannot link them to a file, and they fail T1's own `source_file` rule. T4 preserves them because deleting a fifth of the vault is worse than keeping ghosts. Either drop them in T8, or re-attribute them by label match against the new chunks | NOW | — | `OPEN` |
+| F2 | Delete the 5.5 MB of stale debug artifacts in the vault's `graphify-out/` (`graph-clean.html`, `graph-test.html`, `graph.orig.html`) | NOW | — | `DONE` — 4 MB freed; `graph.orig.html` was md5-identical to the live one |
+| F3 | Correct the stale rationale in the vault's `.graphifyignore` GROUP 2, which still describes a `.gitignore` gap that `9bbf822` already fixed | NOW | — | `DONE` — `eaa5ba8`, 14 narration-filter tests, mutation-tested |
+| F4 | Remove `AGENTS.md.bak-cf-20260929` and `CLAUDE.md.bak-cf-20260929` from the vault, or re-home them per the machine-level note that says they were moved to `/tmp` | NOW | — | `DONE` — moved to `/tmp/snipset-agent-tmp/backups-20260929/`, not deleted: their content differs from the live files |
+| F5 | Add a per-session index runner for the 283-batch corpus, so T7 resumes from `vault-index/manifest.json` without an agent having to reconstruct the wave state | LATER | `defer: 1 session, <T7 interrupted mid-run>` | `PARTIAL` — `batches.json` plus per-file `validateChunk` covers the need; a runner was not built |
+| F6 | Decide what `.opencode/plugins/graphify.js` in `ai-skills` should be: the hand-adapted committed version, or the vendored 0.9.73 one that `graphify install` writes over it. The vendored copy contradicts its own comment, drops the local `@opencode/plugin` NOTE, and changes the plugin's export shape. Re-running `graphify install --project` without deciding this silently reverts the adaptation | NOW | — | `DONE` — `7da0cb1`, 25-test drift tripwire |
+| F7 | Decide the fate of the vault graph's **1,299 unattributable nodes** (1,269 `source_file: null`, 30 `source_file: ""`, of which 1,185 carry edges). They cannot be verified against disk, `explain` cannot link them to a file, and they fail T1's own `source_file` rule. T4 preserves them because deleting a fifth of the vault is worse than keeping ghosts. Either drop them in T8, or re-attribute them by label match against the new chunks | NOW | — | `DONE` — `60fa515`, 20 tests. Default mode `reattribute`, 453 of 1,299 recovered, because `drop`'s failure mode is an invisible missing path while `reattribute`'s is a visible wrong one |
 
 - [ ] 3-5 ranked follow-ups injected as one multi-select question after the final recap.
 - [ ] Every selected follow-up executed through the full pipeline with fresh evidence.

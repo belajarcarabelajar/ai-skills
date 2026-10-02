@@ -730,6 +730,22 @@ Flags the CLI itself understands, for when you call `bun scripts/plan-publish.mj
 | `--today YYYY-MM-DD` | Overrides the `updated` frontmatter value. It exists to make that property deterministic in tests; without it the value is today's local date. |
 | `PLAN_PUBLISH_CONFIG` | Environment variable holding the path to `plans.publish.json`. It is the only way to point the tool at a different vault or a different set of project roots. |
 
+Two more environment variables are host seams, so scripts that need a
+machine-specific path can run on a machine that is not this one:
+
+| Variable | Read by | Default |
+|---|---|---|
+| `OBSIDIAN_VAULT` | `spike-skipif-corpus.mjs` | `$HOME/Dokumen/Obsidian Vault` |
+| `GRAPHIFY_SITE_PACKAGES` | `vault-index.mjs` | this machine's uv tool layout |
+| `GRAPHIFY_PYTHON` | `vault-index.mjs` | `python3` |
+
+`bun test scripts/` **skips, rather than fails,** the tests whose premise the
+current host cannot satisfy: a checkout elsewhere, a machine without the
+graphify detector installed, or a machine without the vault. The skip carries
+its reason, so an absent prerequisite is never reported as a defect — and,
+equally, never counted as a pass. Set the relevant variable to run those tests
+here.
+
 Exit codes: `0` success or idempotent skip, `1` drift / missing mirror / refused destination /
 transform failure, `2` usage error.
 

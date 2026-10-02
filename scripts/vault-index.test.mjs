@@ -44,6 +44,7 @@ import {
   GRAPHIFY_SITE_PACKAGES,
   DEFAULT_BUCKETS,
   DEFAULT_EXTENSIONS,
+  graphifyAvailable,
   listEligible,
   readManifest,
   scan,
@@ -68,9 +69,35 @@ import {
 // pass their own, larger, budget and are unaffected.
 const SPAWN_TIMEOUT_MS = 60_000;
 
-/** `test` with a ceiling that survives a loaded machine. */
+// ---------- host capability ----------
+//
+// The `spawning` tests below are the ones that actually cross into python: they
+// import `graphify` and assert on what it walked. The site-packages default in
+// the module is one machine's uv layout, so on a host without that install
+// every one of those spawns dies with `ModuleNotFoundError` — a red file
+// reporting "this host has no graphify" as a bug in the worklist arithmetic.
+// The probe asks the module itself whether its boundary is usable (and honours
+// `GRAPHIFY_SITE_PACKAGES` / `GRAPHIFY_PYTHON`), and when it is not the
+// `spawning` tests skip with the reason, exactly as the `live vault` tests at
+// the bottom of this file already do. On a host WITH graphify nothing changes:
+// the fixtures are synthetic and every assertion still runs.
+//
+// The tests that do NOT cross the boundary — the two root-validation throws,
+// the snippet-source check, the three readManifest checks, and the
+// missing-interpreter check — stay plain `test` and run everywhere, so this
+// gate hides no behaviour that can be checked without graphify.
+const GRAPHIFY_READY = graphifyAvailable();
+
+/** `test` for a case that needs the graphify detector; skips when it is absent. */
 function spawning(name, fn) {
-  test(name, { timeout: SPAWN_TIMEOUT_MS }, fn);
+  test(
+    name,
+    {
+      timeout: SPAWN_TIMEOUT_MS,
+      ...(GRAPHIFY_READY ? {} : { skip: `graphify is not importable via ${GRAPHIFY_SITE_PACKAGES}` }),
+    },
+    fn,
+  );
 }
 
 // ---------- fixture ----------
@@ -182,7 +209,7 @@ spawning('the eligible list is sorted, so two runs diff cleanly', () => {
   assert.deepEqual(first, [...first].sort(), 'result is not in sorted order');
 });
 
-spawning('a root that does not exist throws a named error rather than returning []', () => {
+test('a root that does not exist throws a named error rather than returning []', () => {
   const missing = join(tmpdir(), 'vault-index-definitely-absent-9f2a');
 
   // The specific hazard: detect() does not raise on a missing root. It warns on
@@ -199,14 +226,14 @@ spawning('a root that does not exist throws a named error rather than returning 
   );
 });
 
-spawning('a root that is a file, not a directory, throws too', () => {
+test('a root that is a file, not a directory, throws too', () => {
   const root = makeFixture();
   const notADir = join(root, 'notes', 'alpha.md');
 
   assert.throws(() => listEligible(notADir), /vault-index/);
 });
 
-spawning('the python layer is handed a Path, never a str', () => {
+test('the python layer is handed a Path, never a str', () => {
   // The failure this guards is measured, not hypothetical: detect() opens with
   // `root.resolve()`, which does not exist on str, so a string root dies with
   // AttributeError. The test asserts the guarantee structurally — the module
@@ -224,7 +251,7 @@ spawning('the python layer is handed a Path, never a str', () => {
 
 // ---------- readManifest ----------
 
-spawning('readManifest returns repo-relative keys from graphify-out/manifest.json', () => {
+test('readManifest returns repo-relative keys from graphify-out/manifest.json', () => {
   const root = makeFixtureWithManifest();
 
   const manifest = readManifest(root);
@@ -233,7 +260,7 @@ spawning('readManifest returns repo-relative keys from graphify-out/manifest.jso
   assert.equal(manifest.size, 1);
 });
 
-spawning('a repo with no manifest yields an empty set rather than throwing', () => {
+test('a repo with no manifest yields an empty set rather than throwing', () => {
   const root = makeFixture();
 
   // A first run has nothing indexed yet, which is the normal starting state
@@ -242,7 +269,7 @@ spawning('a repo with no manifest yields an empty set rather than throwing', () 
   assert.deepEqual([...readManifest(root)], []);
 });
 
-spawning('a corrupt manifest throws, because silently indexing nothing loses work', () => {
+test('a corrupt manifest throws, because silently indexing nothing loses work', () => {
   const root = makeFixture();
   mkdirSync(join(root, 'graphify-out'), { recursive: true });
   writeFileSync(join(root, 'graphify-out', 'manifest.json'), '{ this is not json');
@@ -352,7 +379,7 @@ spawning('a python failure surfaces as a named error carrying stderr', () => {
   }
 });
 
-spawning('the python binary can be overridden, so a missing interpreter is nameable', () => {
+test('the python binary can be overridden, so a missing interpreter is nameable', () => {
   const root = makeFixture();
 
   assert.throws(
@@ -374,7 +401,11 @@ const VAULT = '/home/belajarcarabelajar/Dokumen/Obsidian Vault';
 // alone reports 572 eligible and has done since the move -- not a boundary
 // failure, just a corpus that is no longer there.
 const ARCHIVE = '/home/belajarcarabelajar/Documents/conversations-archive';
-const live = existsSync(VAULT) && existsSync(ARCHIVE) ? test : test.skip;
+// Both halves are required: the live tests scan the real corpus THROUGH the
+// detector, so a host with the vault but no graphify would fail them for the
+// same "not installed here" reason the spawning tests now skip on. The vault
+// check alone was enough while this file only ever ran on one machine.
+const live = existsSync(VAULT) && existsSync(ARCHIVE) && GRAPHIFY_READY ? test : test.skip;
 
 live('the real vault reports the numbers measured on 2026-10-02', { timeout: 300_000 }, () => {
   // Asserted as a band, not an exact figure, and deliberately so. The exact

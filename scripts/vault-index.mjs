@@ -69,9 +69,34 @@ import { basename, isAbsolute, join, relative, resolve, sep } from 'node:path';
  * a dedicated virtualenv would pin this module to one uv tool install, and the
  * only thing being imported is a pure-python detector that needs nothing the
  * system interpreter lacks.
+ *
+ * The default is this machine's uv tool layout. `GRAPHIFY_SITE_PACKAGES` (and
+ * `GRAPHIFY_PYTHON`, read just below) override both halves of the dependency so
+ * the module can run on a host whose graphify lives elsewhere. Without the
+ * seam the only usable value would be one machine's absolute path, which is
+ * exactly what made the suite red on every other host. A per-call
+ * `opts.sitePackages` still wins over the environment.
  */
 export const GRAPHIFY_SITE_PACKAGES =
+  process.env.GRAPHIFY_SITE_PACKAGES ||
   '/home/belajarcarabelajar/.local/share/uv/tools/graphifyy/lib/python3.14/site-packages';
+
+/**
+ * The interpreter that runs `PYTHON_SNIPPET`, from a per-call override, then
+ * the environment, then `python3`.
+ *
+ * One resolver rather than a `??` chain repeated in the probe and the detector:
+ * `graphifyAvailable` must ask the same question the detector will, or it can
+ * report a host ready and then fail on the first real spawn.
+ */
+function pythonBinary(opts) {
+  return opts.python ?? process.env.GRAPHIFY_PYTHON ?? 'python3';
+}
+
+/** The site-packages directory to inject, from a per-call override then the env. */
+function sitePackagesDir(opts) {
+  return opts.sitePackages ?? GRAPHIFY_SITE_PACKAGES;
+}
 
 /**
  * Buckets consulted from `detect()`. `document` and `paper` are the two that
@@ -221,8 +246,8 @@ function resolveRoot(root) {
  * whole class of quoting bug.
  */
 function runDetect(absRoot, opts) {
-  const python = opts.python ?? 'python3';
-  const sitePackages = opts.sitePackages ?? GRAPHIFY_SITE_PACKAGES;
+  const python = pythonBinary(opts);
+  const sitePackages = sitePackagesDir(opts);
 
   const res = spawnSync(python, ['-c', PYTHON_SNIPPET, absRoot, sitePackages], {
     encoding: 'utf8',
@@ -261,6 +286,35 @@ function runDetect(absRoot, opts) {
     throw new VaultIndexError('the detector output was not an object');
   }
   return parsed;
+}
+
+/**
+ * Can this host run the detector at all?
+ *
+ * The detector needs two things that are machine-specific: an interpreter and a
+ * `graphify` package reachable on `sys.path`. Where either is missing, every
+ * call that crosses the boundary fails, and a test suite that asserted on those
+ * calls would be red for a reason that has nothing to do with this module — it
+ * would be reporting "this host has no graphify" as a bug in the worklist
+ * arithmetic.
+ *
+ * The probe imports the package the same way `PYTHON_SNIPPET` does, so it
+ * answers the module's own capability rather than guessing from a path that
+ * happens to exist. `spawnSync` with argv, never a shell string: the
+ * site-packages directory is data and stays data. A missing interpreter is a
+ * `false`, not a throw — this is the question "is the boundary usable", and an
+ * unusable boundary is the answer, not an error.
+ *
+ * @param {{python?: string, sitePackages?: string}} [opts]
+ * @returns {boolean}
+ */
+export function graphifyAvailable(opts = {}) {
+  const probe = spawnSync(
+    pythonBinary(opts),
+    ['-c', 'import sys; sys.path.insert(0, sys.argv[1]); import graphify', sitePackagesDir(opts)],
+    { encoding: 'utf8' },
+  );
+  return probe.status === 0;
 }
 
 /**

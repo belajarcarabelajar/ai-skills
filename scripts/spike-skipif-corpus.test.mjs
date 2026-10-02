@@ -4,11 +4,22 @@ import path from 'node:path';
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
-import { normalizeCmd, stableId, buildCorpus, balanceOf } from './spike-skipif-corpus.mjs';
+import { normalizeCmd, stableId, buildCorpus, balanceOf, resolveVault } from './spike-skipif-corpus.mjs';
 import { classifySpikeSkipIf } from './spike-skipif-classifier.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CLI = path.join(ROOT, 'scripts', 'spike-skipif-corpus.mjs');
+
+// The CLI tests below harvest the real vault; the hermetic ones above build
+// their own rows. Without a vault `collect()` fails closed with
+// `E_PRECOND_VAULT`, and a suite that reported that as a red test would be
+// reporting "this host has no vault" as a corpus defect. The min-rows test is
+// the sharpest case: it asserts exit 1 with `/E_PRECOND/`, which the missing
+// vault satisfies for the wrong reason. All three are skipped, with the reason,
+// when the vault is absent — the same convention the vault-live tests use in
+// vault-index.test.mjs. Set `OBSIDIAN_VAULT` to point them at a vault elsewhere.
+const VAULT = resolveVault();
+const live = fs.existsSync(VAULT) ? test : test.skip;
 
 test('normalizeCmd collapses whitespace but never reorders segments', () => {
   assert.equal(normalizeCmd('  bun   test    scripts/  '), 'bun test scripts/');
@@ -84,7 +95,7 @@ test('balanceOf flags a degenerate corpus so the CLI can refuse it', () => {
   assert.equal(balanceOf(oneClass).degenerate, true, 'a single-class corpus cannot measure calibration');
 });
 
-test('the CLI harvests the vault and reports a balanced corpus', () => {
+live('the CLI harvests the vault and reports a balanced corpus', () => {
   const r = spawnSync('bun', [CLI, '--stats'], { cwd: ROOT, encoding: 'utf8' });
   assert.equal(r.status, 0, r.stdout + r.stderr);
   const stats = JSON.parse(r.stdout);
@@ -93,7 +104,7 @@ test('the CLI harvests the vault and reports a balanced corpus', () => {
   assert.ok(stats.behavioural > 0 && stats.loose > 0);
 });
 
-test('the CLI writes valid JSON, one row per unique command, sorted by id', () => {
+live('the CLI writes valid JSON, one row per unique command, sorted by id', () => {
   const out = path.join(ROOT, 'spike-out', 'corpus.test.json');
   const r = spawnSync('bun', [CLI, '--out', out], { cwd: ROOT, encoding: 'utf8' });
   assert.equal(r.status, 0, r.stdout + r.stderr);
@@ -113,7 +124,7 @@ test('the CLI writes valid JSON, one row per unique command, sorted by id', () =
   fs.rmSync(out, { force: true });
 });
 
-test('the CLI exits non-zero on a degenerate corpus rather than emitting it', () => {
+live('the CLI exits non-zero on a degenerate corpus rather than emitting it', () => {
   // The negative control. T1's E_PRECOND_IMBALANCE guard only means something
   // if it can actually fail, and v1 shipped a 77-row corpus that cleared its
   // size threshold while measuring nothing.

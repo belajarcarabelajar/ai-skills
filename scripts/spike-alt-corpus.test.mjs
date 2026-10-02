@@ -13,6 +13,26 @@ import {
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CLI = path.join(ROOT, 'scripts', 'spike-alt-corpus.mjs');
 
+// The real-corpus tests below harvest the workspace through plans.publish.json,
+// which enumerates the sibling projects by absolute path. On a clone that cannot
+// see those projects (a CI runner, a VPS) the registry yields no sets: the
+// measured-harvest test would fail on `sets.length !== 2`, and the loops over an
+// empty harvest would pass vacuously. Both are wrong, so the tests that assert
+// on the real corpus skip with the reason instead of manufacturing confidence.
+//
+// The recorded measurement is tied to two specific plans (the clipboard
+// profanity filter and the release-pinning follow-up), so `liveRecorded` is
+// narrower than `liveCorpus`: it runs only where both are actually harvested,
+// which is the premise the recorded numbers were produced under.
+const harvestedSets = harvest();
+const hasRealCorpus = harvestedSets.length > 0;
+const hasRecordedCorpus =
+  harvestedSets.length === 2 &&
+  harvestedSets.some((s) => s.key === 'profanity') &&
+  harvestedSets.some((s) => s.key === 'pinning');
+const liveCorpus = hasRealCorpus ? test : test.skip;
+const liveRecorded = hasRecordedCorpus ? test : test.skip;
+
 test('an alternative is found through every markdown wrapper a plan uses', () => {
   const md = [
     '### Trade-offs',
@@ -53,7 +73,7 @@ test('normalizeBody collapses whitespace so a re-wrapped paragraph is the same r
   assert.equal(normalizeBody('  a\n\n  b   c '), 'a b c');
 });
 
-test('the corpus is byte-identical on a re-run, which is what makes skip_if mean anything', () => {
+liveCorpus('the corpus is byte-identical on a re-run, which is what makes skip_if mean anything', () => {
   const sets = harvest();
   const a = JSON.stringify(buildCorpus(sets));
   const b = JSON.stringify(buildCorpus(harvest()));
@@ -63,7 +83,7 @@ test('the corpus is byte-identical on a re-run, which is what makes skip_if mean
   assert.equal(JSON.stringify(buildCorpus(reversed)), a);
 });
 
-test('every row carries both texts verbatim and a provenance string', () => {
+liveCorpus('every row carries both texts verbatim and a provenance string', () => {
   for (const row of buildCorpus(harvest())) {
     assert.ok(row.a.length >= MIN_BODY, `row ${row.id} lost its first text`);
     assert.ok(row.b.length >= MIN_BODY, `row ${row.id} lost its second text`);
@@ -157,7 +177,7 @@ test('the balance check would exit zero on a populated corpus', () => {
   assert.equal(classBalance(rows).nearDuplicate, 1);
 });
 
-test('the measured harvest matches what the plan recorded', () => {
+liveRecorded('the measured harvest matches what the plan recorded', () => {
   // Plan §2, reproduced. If these move, the plan's premise has changed and the
   // spike needs re-reading before anything else runs.
   const sets = harvest();
@@ -173,7 +193,7 @@ test('the measured harvest matches what the plan recorded', () => {
   assert.equal(bal.degenerate, true);
 });
 
-test('no row in the real corpus is synthetic — nothing here was paraphrased to make a class', () => {
+liveCorpus('no row in the real corpus is synthetic — nothing here was paraphrased to make a class', () => {
   for (const row of buildCorpus(harvest())) {
     assert.equal(row.synthetic, false, 'a paraphrased restatement would be synthetic and excluded');
   }

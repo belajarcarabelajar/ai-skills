@@ -26,6 +26,17 @@ const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 
 const VAULT = '/home/belajarcarabelajar/Dokumen/Obsidian Vault';
 
+// The real registry names every project root by absolute path, so the two
+// "real registry" tests below only have a subject where those roots exist. On a
+// clone elsewhere (a CI runner, a VPS) this checkout is not the ai-skills root
+// the config registers, and enumeratePlans() reads no plans at all: asserting
+// then would report the checkout's location as a routing bug, while an empty
+// enumeration would pass vacuously. Both gates derive their answer from the
+// registry rather than a hardcoded host, so they run on the machine that owns
+// the checkouts and skip, with the reason, everywhere else.
+const selfProject = loadRegistry().projects.find((p) => path.resolve(p.root) === rootDir);
+const realPlans = enumeratePlans(loadRegistry());
+
 // Build a registry of the shape loadRegistry() returns, with every project root
 // under a fresh temp directory. `rootRel` is relative to that temp base, so
 // nested roots can be expressed without depending on the base before it exists.
@@ -262,11 +273,15 @@ test('resolveProject throws naming the plan path when no project matches', () =>
   cleanup(f);
 });
 
-test('resolveProject routes a real repo plan to the ai-skills project', () => {
-  const registry = loadRegistry();
-  const p = resolveProject(registry, path.join(rootDir, 'docs', 'code-plan', 'plans', '2026-09-26-plan-publish-to-obsidian.md'));
-  assert.equal(p.name, 'ai-skills');
-});
+test(
+  'resolveProject routes a real repo plan to the ai-skills project',
+  { skip: selfProject ? false : `${rootDir} is not a registered project root in plans.publish.json` },
+  () => {
+    const registry = loadRegistry();
+    const p = resolveProject(registry, path.join(rootDir, 'docs', 'code-plan', 'plans', '2026-09-26-plan-publish-to-obsidian.md'));
+    assert.equal(p.name, 'ai-skills');
+  },
+);
 
 test('resolveProject routes a worktree plan to the project that owns the worktree', () => {
   const f = fixture('wt-route', [
@@ -360,14 +375,18 @@ test('enumeratePlans never enumerates a worktree, so history is not mirrored twi
   cleanup(f);
 });
 
-test('enumeratePlans over the real registry returns each plan once', () => {
-  const registry = loadRegistry();
-  const found = enumeratePlans(registry);
-  assert.equal(new Set(found).size, found.length, 'enumeration must not yield duplicates');
-  const fromWorktrees = found.filter((p) => /Snipset-seo/.test(p));
-  assert.deepEqual(fromWorktrees, [],
-    'no registered worktree may contribute to enumeration');
-});
+test(
+  'enumeratePlans over the real registry returns each plan once',
+  { skip: realPlans.length ? false : 'no registered project root holds a plans directory on this host' },
+  () => {
+    const registry = loadRegistry();
+    const found = enumeratePlans(registry);
+    assert.equal(new Set(found).size, found.length, 'enumeration must not yield duplicates');
+    const fromWorktrees = found.filter((p) => /Snipset-seo/.test(p));
+    assert.deepEqual(fromWorktrees, [],
+      'no registered worktree may contribute to enumeration');
+  },
+);
 
 // ---------- destPathFor ----------
 

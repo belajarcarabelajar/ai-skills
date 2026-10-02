@@ -28,7 +28,20 @@ import { extractFrontmatter, parseUltraPlanYaml } from './ultra-plan-runner.mjs'
 import { classifySpikeSkipIf } from './spike-skipif-classifier.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const DEFAULT_VAULT = path.join(process.env.HOME || '', 'Dokumen', 'Obsidian Vault');
+export const DEFAULT_VAULT = path.join(process.env.HOME || '', 'Dokumen', 'Obsidian Vault');
+
+/**
+ * The vault to harvest, honouring the `OBSIDIAN_VAULT` seam.
+ *
+ * One resolver rather than a `process.env.OBSIDIAN_VAULT || DEFAULT_VAULT`
+ * scattered through the file: the test file has to ask the same question the
+ * CLI answers, and a second copy of the expression is how the two drift apart.
+ * The seam also lets the test decide, without spawning the CLI, whether the
+ * vault this module needs is present on the current host at all.
+ */
+export function resolveVault() {
+  return process.env.OBSIDIAN_VAULT || DEFAULT_VAULT;
+}
 
 // `empty` is a third classifySpikeSkipIf return, but it only fires on a blank or
 // non-string command. Those rows are dropped during normalisation, so a
@@ -104,7 +117,7 @@ function rowsFromFile(file, project) {
   const md = fs.readFileSync(file, 'utf8');
   const { frontmatter } = extractFrontmatter(md);
   const plan = parseUltraPlanYaml(frontmatter);
-  const rel = path.relative(project === 'ai-skills' ? ROOT : (process.env.OBSIDIAN_VAULT || DEFAULT_VAULT), file);
+  const rel = path.relative(project === 'ai-skills' ? ROOT : resolveVault(), file);
   const rows = [];
   for (const task of plan.tasks || []) {
     for (const step of task.run || []) {
@@ -116,7 +129,7 @@ function rowsFromFile(file, project) {
   return rows;
 }
 
-export function collect(vault = process.env.OBSIDIAN_VAULT || DEFAULT_VAULT) {
+export function collect(vault = resolveVault()) {
   if (!fs.existsSync(vault)) {
     throw new Error(`E_PRECOND_VAULT: vault not found at ${vault}`);
   }

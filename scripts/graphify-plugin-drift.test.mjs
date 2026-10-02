@@ -44,6 +44,16 @@ import {
   vendoredPlugin,
 } from './graphify-plugin-drift.mjs';
 
+// ---------- host capability ----------
+//
+// Everything below that reads the INSTALLED graphify — the discovery test and
+// the two live tests at the bottom — has no subject on a host where graphify is
+// not installed: `PLUGIN_SOURCE` falls back to one machine's uv layout, and the
+// discovery test would assert that a path under it exists. The gate is asked
+// once here and shared, so the file still runs on a machine without graphify
+// while the synthetic-fixture tests above keep running everywhere.
+const installedPresent = existsSync(PLUGIN_SOURCE);
+
 // ---------- fixtures ----------
 
 // Every test builds its own tree. `bun test` does not guarantee file order
@@ -250,11 +260,15 @@ test('vendoredPlugin throws naming the path when install.py cannot be read', () 
   assert.throws(() => vendoredPlugin({ sourcePath: missing }), /no-such-install\.py/);
 });
 
-test('discoverPluginSource resolves an existing install.py under the uv tool layout', () => {
-  const found = discoverPluginSource();
-  assert.ok(existsSync(found), `expected an existing install.py, looked at ${found}`);
-  assert.match(found, /site-packages[\\/]graphify[\\/]install\.py$/);
-});
+test(
+  'discoverPluginSource resolves an existing install.py under the uv tool layout',
+  { skip: installedPresent ? false : `graphify is not installed; looked at ${PLUGIN_SOURCE}` },
+  () => {
+    const found = discoverPluginSource();
+    assert.ok(existsSync(found), `expected an existing install.py, looked at ${found}`);
+    assert.match(found, /site-packages[\\/]graphify[\\/]install\.py$/);
+  },
+);
 
 // ---------- shape and contradiction classifiers ----------
 
@@ -427,8 +441,6 @@ test('line-ending differences alone are not drift', () => {
 // Reading the installed source is not a drift assertion — it cannot go stale in
 // a way that means anything, because it IS the reference. It is skipped when
 // graphify is not installed so this file still runs on a machine without it.
-const installedPresent = existsSync(PLUGIN_SOURCE);
-
 test(
   'the installed install.py yields an extractable plugin (skipped when graphify is absent)',
   { skip: installedPresent ? false : `graphify is not installed; looked at ${PLUGIN_SOURCE}` },

@@ -458,6 +458,10 @@ export function scan(root, opts = {}) {
     eligible,
     indexed,
     worklist,
+    // The paths the detector excluded, surfaced so a caller can prove no node's
+    // source_file falls under an excluded prefix without re-implementing the
+    // ignore rules. Eligible is already the complement; this is the other half.
+    ignored,
     counts: {
       eligible: eligible.length,
       indexed: indexed.length,

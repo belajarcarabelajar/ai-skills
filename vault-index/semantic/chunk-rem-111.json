@@ -1,0 +1,261 @@
+{
+  "batch": "rem-111",
+  "nodes": [
+    {
+      "id": "concept--reachesplayaudio-follows-calls-only-so-bare-handler-refs-read-as-silent",
+      "label": "reachesPlayAudio follows calls only, so a bare onClick={handler} reference is reported as a silent control",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-features-settings-cues [ses_f17b26724ffe4s4NL81X00dnos].md",
+      "source_location": "L10502",
+      "norm_label": "reachesplayaudio follows calls only, so a bare onclick={handler} reference is reported as a silent control",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-features-settings-cues [ses_f17b26724ffe4s4NL81X00dnos].md:L10502] \"`reachesPlayAudio` only matches `name(` sites, so every bare `onClick={handler}` and every `useCallback`-wrapped handler is reported silent — 16 of my 24 entries, and most of A8's, are that, not real gaps\". Most of this chunk's queue was detector false positives rather than unwired controls, and fixing the resolution would shrink both the queue and the register."
+    },
+    {
+      "id": "concept--named-regex-dead-branch",
+      "label": "named regex tested against a braced body can never match",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-features-settings-cues [ses_f17b26724ffe4s4NL81X00dnos].md",
+      "source_location": "L10502",
+      "norm_label": "named regex tested against a braced body can never match",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-features-settings-cues [ses_f17b26724ffe4s4NL81X00dnos].md:L10502] \"the `named` resolution at test line 436 is **dead code** — `body` always starts with the `{` of `onClick={`, so `/^\\s*(\\w+)\\s*$/` can never match, which is why `raisesToast` is also always `false` for bare references\". The same defect that hides the cue also hides the toast, so a bare reference to a toasting handler registers as an ordinary silent gap."
+    },
+    {
+      "id": "concept--matcher-coverage-is-not-owner-coverage",
+      "label": "Matcher coverage is not manifest coverage, so an owner test passes anyway",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-features-settings-cues [ses_f17b26724ffe4s4NL81X00dnos].md",
+      "source_location": "L10500",
+      "norm_label": "matcher coverage is not manifest coverage, so an owner test passes anyway",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-features-settings-cues [ses_f17b26724ffe4s4NL81X00dnos].md:L10500] \"`AudioSettingsSection.tsx` is in A1's group but in NO chunk's file list. 11 of my 35 queue entries are that file, and `GROUP_MATCHERS` claims them for `features/Settings`, so the detector's \\\"exactly one owner\\\" test passes while no agent can edit them. They need re-chunking.\" The same line records that `AudioSettingsSection.tsx:855` is a bare `onClick={handleTestBrowserTts}`, so whoever takes the file should read the handler before treating it as a real gap."
+    },
+    {
+      "id": "concept--self-sounding-class-word-extended-to-bare-reference-false-positives",
+      "label": "self-sounding was extended by concurrent chunks to mean the handler already cues, not that the element plays the cue under test",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-features-settings-cues [ses_f17b26724ffe4s4NL81X00dnos].md",
+      "source_location": "L10480",
+      "norm_label": "self-sounding was extended by concurrent chunks to mean the handler already cues, not that the element plays the cue under test",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-features-settings-cues [ses_f17b26724ffe4s4NL81X00dnos].md:L10480] \"13 × `self-sounding`, 4 × `toast-owns-cue`. All 16 are the **same root cause**: the handler already plays exactly one cue, so a call-site cue would double-fire.\" A register entry is a permanent record, so the blind spot belongs in the detector rather than in sixteen exclusions."
+    },
+    {
+      "id": "concept--cue-a-polling-handler-at-the-click-site-not-inside",
+      "label": "A handler shared by a click and a periodic tick is cued at the click site, not inside the handler",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-features-settings-cues [ses_f17b26724ffe4s4NL81X00dnos].md",
+      "source_location": "L10475",
+      "norm_label": "a handler shared by a click and a periodic tick is cued at the click site, not inside the handler",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-features-settings-cues [ses_f17b26724ffe4s4NL81X00dnos].md:L10475] \"`SystemDiagnosticsSection` Refresh is cued at the click site rather than in `fetchLogsAndMetadata`, because that function is also the 3s auto-refresh tick and the post-action refetch — a cue inside it would machine-gun.\" The pull in the other direction is recorded at L10477 of the same file: \"the detector only follows `name(` sites, so a bare reference hides the cue I put in the handler\", which is why two bare `onClick={handler}` sites had to become arrow functions."
+    },
+    {
+      "id": "concept--red-suite-attributed-to-a-concurrent-sibling-by-stashing",
+      "label": "The two non-zero suite runs were attributed to concurrent sibling subagents, confirmed by stashing this agent's changes",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-features-settings-cues [ses_f17b26724ffe4s4NL81X00dnos].md",
+      "source_location": "L10497",
+      "norm_label": "the two non-zero suite runs were attributed to concurrent sibling subagents, confirmed by stashing this agent's changes",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-features-settings-cues [ses_f17b26724ffe4s4NL81X00dnos].md:L10497] \"both a 1s `findBy*` timeout waiting for `getDistributionChannel()` to resolve\" and \"Load average was 15.3 on 8 CPUs during the failures (9 parallel agents) and 9.4 during the clean run\", both on the cited line. The stated method was to stash only the 4 owned source files and get \"3/3 clean directory runs\", restore and get \"run 1 clean, run 2 that timeout, run 3 failed on A2's brand-new `features/Settings/ai/settingsAiControls.audio.test.tsx` (not my file)\", then \"5/5 clean on the 4 directly-affected files and a final 56/56\"."
+    },
+    {
+      "id": "concept--shared-contract-test-lost-update-clobber",
+      "label": "A stale-snapshot rewrite of the shared contract test reverts a peer's completed queue edit",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-features-settings-cues [ses_f17b26724ffe4s4NL81X00dnos].md",
+      "source_location": "L10501",
+      "norm_label": "a stale-snapshot rewrite of the shared contract test reverts a peer's completed queue edit",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-features-settings-cues [ses_f17b26724ffe4s4NL81X00dnos].md:L10501] \"My `KNOWN_GAPS` removal was reverted once and my `EXCLUSION_REGISTER` append wiped once, both by another agent rewriting the file from a stale snapshot.\" This defeats the append-only rule the batch brief set for that file, so the stated remedy is that the parent re-verifies the shared state after the batch settles rather than trusting any single agent's report."
+    },
+    {
+      "id": "concept--combined-short-flag-cluster-fell-through-to-catch-all-delegate",
+      "label": "The wrapper had no branch for combined short-flag clusters, so grep -rn silently fell through to the catch-all delegate",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - set-tgrep-as-default-search-command [ses_f16aafeacffe6TkaP4jl5u2iDd].md",
+      "source_location": "L2527",
+      "norm_label": "the wrapper had no branch for combined short-flag clusters, so grep -rn silently fell through to the catch-all delegate",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - set-tgrep-as-default-search-command [ses_f16aafeacffe6TkaP4jl5u2iDd].md:L2527] \"`-rn` is a *combined* short flag. The `case` matches `-r` and `-n` separately but has no branch for `-rn`, so it falls into the catch-all `-*) delegate`.\" L3681 records the effect and the fix together: combined flags `-rn`, `-in`, `-rni` meant \"**`grep -rn pat .` silently used GNU grep**\", repaired by splitting clusters of verified-safe characters and still delegating anything containing value-taking (`A B C m e`) or ambiguous (`P z E u`) flags."
+    },
+    {
+      "id": "concept--tgrep-dash-e-means-encoding-not-extended-regexp",
+      "label": "In tgrep -E means --encoding, so passing grep's -E through killed the search",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - set-tgrep-as-default-search-command [ses_f16aafeacffe6TkaP4jl5u2iDd].md",
+      "source_location": "L3682",
+      "norm_label": "in tgrep -e means --encoding, so passing grep's -e through killed the search",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - set-tgrep-as-default-search-command [ses_f16aafeacffe6TkaP4jl5u2iDd].md:L3682] \"In tgrep `-E` means `--encoding`, not extended-regexp → `grep -E -r pat .` died with `unsupported encoding: pat`, exit 2\". The fix is to drop `-E` entirely rather than translate it, because tgrep's default regex is already ERE-like. This is a same-letter different-meaning collision, so a flag name that agrees between the two tools is not evidence that the flag means the same thing."
+    },
+    {
+      "id": "concept--bre-dialect-patterns-silently-return-zero-matches",
+      "label": "BRE-dialect patterns reach tgrep and return zero matches silently, which reads as 'not found'",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - set-tgrep-as-default-search-command [ses_f16aafeacffe6TkaP4jl5u2iDd].md",
+      "source_location": "L4470",
+      "norm_label": "bre-dialect patterns reach tgrep and return zero matches silently, which reads as 'not found'",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - set-tgrep-as-default-search-command [ses_f16aafeacffe6TkaP4jl5u2iDd].md:L4470] \"Wrapper hanya memeriksa **flag**, tidak memeriksa **sintaks pola**. tgrep pakai Rust regex (ERE-like), sedangkan `grep` tanpa `-E` itu BRE\". Measured per case at L4474-L4476 — `foo\\|bar`, `foo\\+` and `a\\{2,3\\}` each gave **kosong** with exit 1 — and L4479 states the consequence: \"Exit 1 + tanpa output itu identik dengan \\\"tidak ditemukan\\\". Jadi `grep -rn 'TODO\\|FIXME' .` akan melapor **tidak ada yang cocok**, padahal ada.\" The fix is a guard on pattern syntax, not on flags; delegating is correct for those patterns."
+    },
+    {
+      "id": "concept--confounded-ab-compared-indexed-against-no-index",
+      "label": "Comparing indexed against --no-index changes two variables at once and produced a wrong root cause",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - set-tgrep-as-default-search-command [ses_f16aafeacffe6TkaP4jl5u2iDd].md",
+      "source_location": "L3684",
+      "norm_label": "comparing indexed against --no-index changes two variables at once and produced a wrong root cause",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - set-tgrep-as-default-search-command [ses_f16aafeacffe6TkaP4jl5u2iDd].md:L03700] \"I first told you the Snipset index was ~20x slower than a plain scan. That was wrong — I compared `indexed` against `--no-index`, which changed two variables at once. The index was never the bottleneck; the `-rn` delegation was. Moving the index aside changed nothing on its own, which is what exposed the real cause.\" A near-null result from moving the suspect aside is what falsified the hypothesis, and the same session had already recorded at L1441 and L1502 that the first two attempts were \"not a fair comparison\" and \"Output got truncated and numbers are inconsistent\"."
+      ]
+    },
+    {
+      "id": "concept--tgrep-index-includes-gitignored-files",
+      "label": "The tgrep index includes gitignored node_modules and dist while a live scan respects .gitignore",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - set-tgrep-as-default-search-command [ses_f16aafeacffe6TkaP4jl5u2iDd].md",
+      "source_location": "L1668",
+      "norm_label": "the tgrep index includes gitignored node_modules and dist while a live scan respects .gitignore",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - set-tgrep-as-default-search-command [ses_f16aafeacffe6TkaP4jl5u2iDd].md:L1668] \"Root cause found: the index includes `node_modules/` and `dist/` (231 extra files), while a fresh scan excludes them.\" The same behaviour is recorded as deliberate rather than as a defect at L6358: \"hasil **tidak** akan selalu sama dengan GNU grep di repo git, karena tgrep menghormati `.gitignore` (nggak masuk `node_modules/`, `dist/`) sedangkan GNU grep menelusuri semuanya. Itu perilaku yang benar\". So an indexed and an unindexed run are not comparable on match count, and the index was moved aside to a dated backup."
+    },
+    {
+      "id": "concept--tgrep-has-no-stdin-support",
+      "label": "tgrep has no stdin support: '-' fails and piped input is ignored in favour of scanning the directory",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - set-tgrep-as-default-search-command [ses_f16aafeacffe6TkaP4jl5u2iDd].md",
+      "source_location": "L431",
+      "norm_label": "tgrep has no stdin support: '-' fails and piped input is ignored in favour of scanning the directory",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - set-tgrep-as-default-search-command [ses_f16aafeacffe6TkaP4jl5u2iDd].md:L00438] \"Confirmed: tgrep has **no stdin support** (`-` fails, and piped input gets ignored — it searched the directory). That matters because `cmd | grep foo` is a common pattern.\" This is the reason stdin stays delegated to GNU grep rather than approximated, and L3698 preserves the path as \"`grep pat` → still GNU grep (tgrep has no stdin; `-` isn't supported)\"."
+      ]
+    },
+    {
+      "id": "concept--sd-is-not-a-drop-in-sed",
+      "label": "sd is not a drop-in sed: it rewrites files in place by default",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - set-tgrep-as-default-search-command [ses_f16aafeacffe6TkaP4jl5u2iDd].md",
+      "source_location": "L4198",
+      "norm_label": "sd is not a drop-in sed: it rewrites files in place by default",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - set-tgrep-as-default-search-command [ses_f16aafeacffe6TkaP4jl5u2iDd].md:L04214] \"A transparent `sed` → `sd` wrapper would silently turn every read-only command you type into a destructive file rewrite. `grep` → tgrep got away with a wrapper because search is side-effect-free; substitution is not.\" The three supporting rows were re-measured rather than assumed — L4194 \"file went `a a a` → `X X X`\", L4195 \"`sed 's/a/X/'` → `X a a` vs `sd a X` → `X X X`. No flag reconciles these\" — and L4196 records that sed's script commands (`2d`, `2q`, `y/ab/ba/`, `2i\\`, `1!d`) have no sd equivalent at all."
+      ]
+    },
+    {
+      "id": "concept--sed-path-shim-would-break-build-scripts",
+      "label": "A PATH shim for sed would be inherited by build systems, which call sed with -n, p and \\1",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - set-tgrep-as-default-search-command [ses_f16aafeacffe6TkaP4jl5u2iDd].md",
+      "source_location": "L4202",
+      "norm_label": "a path shim for sed would be inherited by build systems, which call sed with -n, p and \\1",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - set-tgrep-as-default-search-command [ses_f16aafeacffe6TkaP4jl5u2iDd].md:L04218] \"I gave `grep` a **PATH shim** at `~/.local/bin/grep`, which every process inherits — build scripts included. That was safe only because the wrapper delegates anything risky back to GNU grep. For `sed` that same approach would be destructive, and this machine would actually hit it\". L4210 names the callers and the disqualifiers: `sed -n '2,25p' \"$0\"` in an installer self-extracting header, `sed -nE 's/.../\\1/p' package.json` and `sed 's/\\r$//' .env` in `scripts/deploy/*.sh`, `scripts/ops/provision-vps.sh` and `distribution/snipset-cli/install.sh`, plus CMake's own modules — \"`-n`, `p`, and `\\1` alone rule it out\", so sed stays reachable as `/usr/bin/sed` and is only reached interactively through `alias ssd='sd -p'`."
+      ]
+    },
+    {
+      "id": "concept--firefox-blocks-popups-by-default",
+      "label": "Firefox blocks pop-ups by default and only user-click-triggered ones usually pass",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - pop-up-tertentu-di-mozilla-tidak-muncul [ses_f31258c0dffe0h7O4p650nC8Di].md",
+      "source_location": "L36",
+      "norm_label": "firefox blocks pop-ups by default and only user-click-triggered ones usually pass",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-23 - pop-up-tertentu-di-mozilla-tidak-muncul [ses_f31258c0dffe0h7O4p650nC8Di].md:L36] \"Karena Firefox memblokir pop-up secara default.\" The stated reason particular pop-ups fail is given at L38: \"Hanya pop-up yang dipicu klik user yang biasanya lolos. Pop-up otomatis saat load, `window.open()` tanpa interaksi, redirect berantai, atau iklan, akan diblokir.\" The per-site permission path is marked Recommended over globally clearing the block, but no reason for that preference is stated, so none is recorded."
+    }
+  ],
+  "links": [
+    {
+      "source": "concept--reachesplayaudio-follows-calls-only-so-bare-handler-refs-read-as-silent",
+      "target": "concept--named-regex-dead-branch",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--named-regex-dead-branch",
+      "target": "concept--self-sounding-class-word-extended-to-bare-reference-false-positives",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--reachesplayaudio-follows-calls-only-so-bare-handler-refs-read-as-silent",
+      "target": "concept--detector-fix-makes-self-sounding-exclusions-stale",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--matcher-coverage-is-not-owner-coverage",
+      "target": "concept--audio-cue-coverage-detector",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--cue-a-polling-handler-at-the-click-site-not-inside",
+      "target": "concept--reachesplayaudio-follows-calls-only-so-bare-handler-refs-read-as-silent",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--shared-contract-test-lost-update-clobber",
+      "target": "concept--audio-cue-coverage-detector",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--shared-contract-test-lost-update-clobber",
+      "target": "concept--parallel-agent-locale-write-race",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--red-suite-attributed-to-a-concurrent-sibling-by-stashing",
+      "target": "concept--shared-contract-test-lost-update-clobber",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--combined-short-flag-cluster-fell-through-to-catch-all-delegate",
+      "target": "concept--tgrep-dash-e-means-encoding-not-extended-regexp",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--combined-short-flag-cluster-fell-through-to-catch-all-delegate",
+      "target": "concept--short-flag-cluster-leaks-rnE-to-gnu-grep",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--confounded-ab-compared-indexed-against-no-index",
+      "target": "concept--combined-short-flag-cluster-fell-through-to-catch-all-delegate",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--bre-dialect-patterns-silently-return-zero-matches",
+      "target": "concept--tgrep-dash-e-means-encoding-not-extended-regexp",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--bre-dialect-patterns-silently-return-zero-matches",
+      "target": "concept--tgrep-wrapper-false-negatives",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--tgrep-has-no-stdin-support",
+      "target": "concept--rg-rg-to-ripgrep-grep-to-tgrep-division-of-labour",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--tgrep-index-includes-gitignored-files",
+      "target": "concept--tgrep-index-staleness",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--sd-is-not-a-drop-in-sed",
+      "target": "concept--sed-path-shim-would-break-build-scripts",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--sed-path-shim-would-break-build-scripts",
+      "target": "concept--conservative-grep-wrapper-delegates-risky-flags",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    }
+  ]
+}

@@ -1,0 +1,209 @@
+{
+  "batch": "rem-058",
+  "nodes": [
+    {
+      "id": "concept--independent-platform-versioning",
+      "label": "Independent platform versioning",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t12-release-history-and-tooling [ses_f1d9670aeffeec0wbGK9b1oift].md",
+      "source_location": "L53",
+      "norm_label": "independent platform versioning"
+    },
+    {
+      "id": "concept--namespaced-platform-tag-scheme",
+      "label": "Namespaced platform tag scheme",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t12-release-history-and-tooling [ses_f1d9670aeffeec0wbGK9b1oift].md",
+      "source_location": "L57",
+      "norm_label": "namespaced platform tag scheme"
+    },
+    {
+      "id": "concept--windows-source-vs-published-version",
+      "label": "Windows source-vs-published version distinction",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t12-release-history-and-tooling [ses_f1d9670aeffeec0wbGK9b1oift].md",
+      "source_location": "L55",
+      "norm_label": "windows source-vs-published version distinction"
+    },
+    {
+      "id": "concept--platform-scoped-release-tooling-contract",
+      "label": "Platform-scoped release tooling contract (explicit --platform)",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t12-release-history-and-tooling [ses_f1d9670aeffeec0wbGK9b1oift].md",
+      "source_location": "L61",
+      "norm_label": "platform-scoped release tooling contract (explicit --platform)"
+    },
+    {
+      "id": "concept--platform-scoped-changelog-attribution",
+      "label": "Platform-scoped changelog attribution",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t12-release-history-and-tooling [ses_f1d9670aeffeec0wbGK9b1oift].md",
+      "source_location": "L69",
+      "norm_label": "platform-scoped changelog attribution"
+    },
+    {
+      "id": "concept--static-source-level-contract-test",
+      "label": "Static source-level contract test as a substitute for runtime execution",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t12-release-history-and-tooling [ses_f1d9670aeffeec0wbGK9b1oift].md",
+      "source_location": "L13762",
+      "norm_label": "static source-level contract test as a substitute for runtime execution"
+    },
+    {
+      "id": "rationale--never-fabricate-release-metadata",
+      "label": "Package managers must be fed the published version because source and published already diverge",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t12-release-history-and-tooling [ses_f1d9670aeffeec0wbGK9b1oift].md",
+      "source_location": "L67",
+      "norm_label": "package managers must be fed the published version because source and published already diverge"
+    },
+    {
+      "id": "rationale--historical-records-windows-attribution",
+      "label": "Historical changelog records attributed to Windows because every one resolves to a bare v tag",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t12-release-history-and-tooling [ses_f1d9670aeffeec0wbGK9b1oift].md",
+      "source_location": "L13738",
+      "norm_label": "historical changelog records attributed to windows because every one resolves to a bare v tag"
+    },
+    {
+      "id": "rationale--power-shell-verified-only-at-source-level",
+      "label": "PowerShell generators could only be verified at source level because no pwsh exists on the host",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t12-release-history-and-tooling [ses_f1d9670aeffeec0wbGK9b1oift].md",
+      "source_location": "L13762",
+      "norm_label": "powershell generators could only be verified at source level because no pwsh exists on the host"
+    },
+    {
+      "id": "concept--github-actions-billing-block",
+      "label": "GitHub Actions billing block presenting as a zero-step job failure",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c9-ci-gate-coverage-review [ses_f083c33b1ffejml6AAF80f5OGj].md",
+      "source_location": "L789",
+      "norm_label": "github actions billing block presenting as a zero-step job failure"
+    },
+    {
+      "id": "concept--temporarily-disabled-github-actions-workflows",
+      "label": "Temporarily disabled GitHub Actions workflows",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c9-ci-gate-coverage-review [ses_f083c33b1ffejml6AAF80f5OGj].md",
+      "source_location": "L791",
+      "norm_label": "temporarily disabled github actions workflows"
+    },
+    {
+      "id": "concept--merge-gate-check-taxonomy",
+      "label": "Merge-gate check taxonomy (RED / PENDING / no checks)",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c9-ci-gate-coverage-review [ses_f083c33b1ffejml6AAF80f5OGj].md",
+      "source_location": "L797",
+      "norm_label": "merge-gate check taxonomy (red / pending / no checks)"
+    },
+    {
+      "id": "rationale--zero-step-jobs-mean-billing-not-test-failure",
+      "label": "Zero-step 3-second jobs were a billing cancellation rather than a real test failure",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c9-ci-gate-coverage-review [ses_f083c33b1ffejml6AAF80f5OGj].md",
+      "source_location": "L789",
+      "norm_label": "zero-step 3-second jobs were a billing cancellation rather than a real test failure"
+    },
+    {
+      "id": "rationale--workflows-disabled-for-runner-minute-limit",
+      "label": "Security and dispatch workflows were disabled because the GitHub Actions runner-minute limit was exhausted",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c9-ci-gate-coverage-review [ses_f083c33b1ffejml6AAF80f5OGj].md",
+      "source_location": "L791",
+      "norm_label": "security and dispatch workflows were disabled because the github actions runner-minute limit was exhausted"
+    }
+  ],
+  "links": [
+    {
+      "source": "concept--independent-platform-versioning",
+      "target": "concept--namespaced-platform-tag-scheme",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--independent-platform-versioning",
+      "target": "concept--windows-source-vs-published-version",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--independent-platform-versioning",
+      "target": "concept--platform-scoped-release-tooling-contract",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--independent-platform-versioning",
+      "target": "concept--platform-scoped-changelog-attribution",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--namespaced-platform-tag-scheme",
+      "target": "concept--platform-scoped-changelog-attribution",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--platform-scoped-release-tooling-contract",
+      "target": "concept--static-source-level-contract-test",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "rationale--never-fabricate-release-metadata",
+      "target": "concept--windows-source-vs-published-version",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--never-fabricate-release-metadata",
+      "target": "concept--platform-scoped-release-tooling-contract",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--historical-records-windows-attribution",
+      "target": "concept--platform-scoped-changelog-attribution",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--power-shell-verified-only-at-source-level",
+      "target": "concept--static-source-level-contract-test",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--github-actions-billing-block",
+      "target": "concept--merge-gate-check-taxonomy",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--github-actions-billing-block",
+      "target": "concept--temporarily-disabled-github-actions-workflows",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--temporarily-disabled-github-actions-workflows",
+      "target": "concept--merge-gate-check-taxonomy",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "rationale--zero-step-jobs-mean-billing-not-test-failure",
+      "target": "concept--github-actions-billing-block",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--workflows-disabled-for-runner-minute-limit",
+      "target": "concept--temporarily-disabled-github-actions-workflows",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    }
+  ]
+}

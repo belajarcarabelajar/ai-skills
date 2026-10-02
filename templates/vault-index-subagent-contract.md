@@ -174,17 +174,21 @@ emit batch-local generics and let the merge discover the collisions.
 From `/home/belajarcarabelajar/ai-skills`:
 
 ```bash
-bun -e "
-import { validateChunk } from './scripts/lib/chunk-schema.mjs';
-import { readFileSync } from 'node:fs';
-const c = JSON.parse(readFileSync('vault-index/semantic/chunk-<NNN>.json','utf8'));
-const r = validateChunk(c);
-console.log(JSON.stringify(r, null, 2));
-process.exit(r.ok ? 0 : 1);
-"
+./scripts/verify-chunk.sh <NNN>
 ```
 
 Exit 0 means your chunk counts. A non-zero exit means the parent discards it and re-dispatches you, which is the most expensive outcome available to you. Run it.
+
+**Use this script, not a bare `validateChunk(c)`.** Endpoint resolution is
+conditional: `validateChunk` only counts a `crossChunk` or `dangling` endpoint
+when you pass it `knownNodeIds`, and a bare call reports neither. So the plain
+form cannot see a link that points at a node in another batch, and will happily
+print `"dangling": 0` on a chunk whose link endpoint exists nowhere at all.
+Measured on `chunk-rem-086.json`: two cross-chunk endpoints, both resolving
+correctly, and a bare `validateChunk` reporting `crossChunk: 0` anyway. The
+script reads every chunk in `vault-index/semantic/`, passes the union in, and
+separately lists endpoints that resolve to nothing — which is the failure the
+bare form is structurally blind to.
 
 ## 7. Report back
 

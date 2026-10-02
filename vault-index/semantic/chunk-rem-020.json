@@ -22,9 +22,9 @@
       "label": "Buzzer niche fit verdict: useful as finger muscle, not a campaign manager",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
-      "source_location": "L460",
+      "source_location": "L00445",
       "norm_label": "buzzer niche fit verdict useful as finger muscle not a campaign manager",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L445] Snipset rates useful for a buzzer only because it automates the typing, not the posting"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L00445] Verdict: berguna sebagai \"otot jari\" (copy-paste assistant), bukan sebagai campaign manager."
     },
     {
       "id": "concept--buzzer-brand-connotation-risk",
@@ -39,9 +39,9 @@
       "label": "The /solutions/<vertical> page pattern with SOLUTION_VERTICALS and per-vertical OG",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
-      "source_location": "L2894",
+      "source_location": "L02900",
       "norm_label": "the solutions vertical page pattern with solution verticals and per vertical og",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L2900] A standalone page is lighter than a vertical because a new vertical needs generated OG assets uploaded to R2"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L02900] So a new page as a *vertical* is heavy (needs OG image assets generation + R2 upload). As a *standalone marketing page* (`/for-buzzer` or better `/solutions/social-media-teams`) it's lighter."
     },
     {
       "id": "concept--seo-cannibalization-risk",
@@ -56,18 +56,18 @@
       "label": "OG asset pipeline a new vertical requires: 2 images, 4 manifest entries, an R2 upload",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
-      "source_location": "L3556",
+      "source_location": "L03556",
       "norm_label": "og asset pipeline a new vertical requires 2 images 4 manifest entries an r2 upload",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L2900] A standalone page is lighter than a vertical because a new vertical needs generated OG assets uploaded to R2"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L03556] Adding a new vertical's OG images means: generate 2 images (en + id) → convert to webp + jpg → upload to R2 `snipset-media` → add 4 entries to media-manifest.json with byte sizes."
     },
     {
       "id": "concept--dynamic-og-endpoint",
       "label": "The unused /og/[...path] dynamic OG image endpoint",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
-      "source_location": "L3777",
+      "source_location": "L03890",
       "norm_label": "the unused og path dynamic og image endpoint",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L3890] Reuse the existing marketing OG asset because the dynamic OG endpoint has no production user and is therefore untested"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L03890] But it's untested in production (no page uses it) → risk. Simpler: reuse `ogSolutionsUrl(\"marketing\", \"en\")` for the EN page and `ogSolutionsUrl(\"marketing\",\"id\")` for ID, since those assets exist."
     },
     {
       "id": "concept--brand-safe-slug-decision",
@@ -85,9 +85,9 @@
       "label": "Chatbot knowledge gates derived from SITE_SEARCH_CATALOG",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
-      "source_location": "L13124",
+      "source_location": "L15822",
       "norm_label": "chatbot knowledge gates derived from site search catalog",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L15822] One catalog row is not enough because three derived chatbot gates have to pass with it"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L15822] - **Gate chatbot** adalah gate tersembunyi. Katalognya diturunkan dari `SITE_SEARCH_CATALOG`, jadi satu baris katalog saja tidak cukup: 3 gate turunan (evaluation case, representative query 2 bahasa, browse shortcut) ikut harus lolos."
     },
     {
       "id": "concept--style-parity-vs-line-count-rule",
@@ -96,27 +96,27 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
       "source_location": "L15826",
       "norm_label": "the structural conflict between the 500 line rule and the byte identical style parity guard",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L15826] The 462-line style block must stay byte-identical inside the page, so dropping under 500 lines needs a shared partial"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L15826] - **Aturan 500 baris vs style-parity guard bentrok secara struktural**: blok `<style>` 462 baris harus byte-identik dan tinggal di dalam halaman, jadi halaman `/solutions/*` tidak mungkin turun di bawah 500 baris tanpa partial bersama. terbukti mustahil, bukan kelalaian."
     },
     {
       "id": "concept--llms-txt-omits-solutions-pages",
       "label": "llms.txt omits every /solutions/* page",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
-      "source_location": "L15054",
+      "source_location": "L15050",
       "norm_label": "llms txt omits every solutions page",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L15050] llms.txt also omits the sibling marketing page, so the new page absence is the existing pattern and not a regression"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L15050] llms.txt also has 0 mentions of `solutions/marketing` — so it doesn't cover solution pages at all. My page's absence is consistent with the existing pattern, not a regression."
     },
     {
       "id": "concept--stale-verify-license-mock",
       "label": "The stale verify-license test mock that masks regressions as pre-existing red",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
-      "source_location": "L15307",
+      "source_location": "L13945",
       "norm_label": "the stale verify license test mock that masks regressions as pre existing red",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L17995] Cross-check whether a failure is plausible before reporting it as pre-existing, because this one was my own shipping artifact",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L15822] A failure that also appears on a pristine HEAD is not mine"
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L12687] Proven pre-existing and unrelated to my work: `test/api/verify-license.test.ts` fails because its `vi.mock(\"../../src/utils/turnstile\")` doesn't stub the `verifyTurnstileWithReason` export. That's a stale test mock versus the real module — nothing to do with my pages.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L13945] - `verify-license`: terbukti pre-existing (mock `vi.mock` tidak stub `verifyTurnstileWithReason`), gagal identik di tree bersih dan di host ini."
       ]
     },
     {
@@ -126,7 +126,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
       "source_location": "L17426",
       "norm_label": "four vps test failures manufactured by an incomplete file ship not by the code",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L17995] Cross-check whether a failure is plausible before reporting it as pre-existing, because this one was my own shipping artifact"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L17426] Empat failure itu artefak **kirim file tidak lengkap**, bukan defect: cleanup setelah round-1 `git checkout -- apps/website` mengembalikan file yang tidak kusirim ulang di round-2 (termasuk commit `8c566e59` yang tidak pernah ada di VPS). Aku sinkronkan lengkap."
     },
     {
       "id": "concept--zombie-chunk-file-overwrite",
@@ -151,7 +151,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
       "source_location": "L15493",
       "norm_label": "a date shift offset is only valid on the datetime variable not on date",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L15493] A +3d offset only works on the dateTime variable, so the date form is invalid syntax rather than a formatting problem"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L15493] Careful with F7: the date syntax `#{date:+3d:YYYY-MM-DD}` — what IS the correct syntax? Per the engine: `#{dateTime:+shift:fmt}` and `#{date:fmt}`. So `+3d` shift only works with `dateTime`. The fix: `#{dateTime:+3d:YYYY-MM-DD}`."
     },
     {
       "id": "concept--keycap-documentation-mismatch",
@@ -177,11 +177,11 @@
       "label": "The --quick deploy flag that skips secret sync so Worker-level secrets are preserved",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
-      "source_location": "L19295",
+      "source_location": "L20175",
       "norm_label": "the quick deploy flag that skips secret sync so worker level secrets are preserved",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L20414] A full secret sync is both impossible and unnecessary, so --quick is the correct documented path",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L20175] The licenses.json change is build regeneration, not dirt"
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L20414] Artinya full secret sync bukan cuma tidak perlu, tapi **tidak mungkin dijalankan lengkap**, dan akan menyentuh 7 secret produksi tanpa nilai yang benar. Secret Cloudflare disimpan di level Worker dan diwarisi deploy baru, jadi `--quick` (dokumentasi script: \"existing Worker secrets preserved\") justru jalur yang benar.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L20175] The regeneration is legitimate: version bumped 0.6.839 → 0.6.848 (the current release), generatedAt 2026-09-22 → 2026-09-26. This is a stale generated file catching up. It was shipped in the build (so production now shows 0.6.848 correctly)."
       ]
     },
     {
@@ -191,7 +191,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
       "source_location": "L19246",
       "norm_label": "cloudflare worker secret values are write only and cannot be read back",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L20414] A full secret sync is both impossible and unnecessary, so --quick is the correct documented path"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L19246] **Cloudflare secrets are write-only**: values cannot be read back via API. So \"get them via API\" is impossible for values. I must state this plainly — the user's suggestion to \"get via Cloudflare API token\" cannot work for secret values, only for names."
     },
     {
       "id": "concept--forum-admin-emails-fail-closed",
@@ -216,7 +216,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
       "source_location": "L20042",
       "norm_label": "admin role is derived at the oauth callback and is upgrade only",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L20042] The role is derived at the OAuth callback and is upgrade-only, so an existing session cannot rise on its own"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L20042] - Important nuance they'd hit: role is upgrade-only at login, so after setting it they must re-login through Google OAuth for `forum_role=admin` to apply."
     },
     {
       "id": "concept--production-deploy-ack-token",
@@ -239,20 +239,20 @@
       "label": "The plan DAG yields a 4-wide first wave, below the 10-writer fan-out floor",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
-      "source_location": "L4291",
+      "source_location": "L04291",
       "norm_label": "the plan dag yields a 4 wide first wave below the 10 writer fan out floor",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L4024] Discovery tasks are read-only and log gaps instead of editing, so they cannot collide with the file owners"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L04291] Hmm — is 10 achievable in one wide batch? Tasks T3,T4,T5,T6 are independent (all depend only on T2) → batch of 4 parallel. T7,T8 depend on T3/T4 → second wave of 2. T9, T10 sequential. So the DAG's natural parallelism is 4. To get 10 concurrent I'd need to split EN/ID pages into sub-chunks, but they must stay byte-parity twins... Actually the style-parity group requires identical <style> blocks; splitting a page across two agents is bad. Honest statement: the plan's DAG yields a 4-wide first wave; reaching 10 simultaneous writers would require splitting single-file deliverables, which conflicts with the parity-twin and one-owner-per-file rules."
     },
     {
       "id": "concept--authorization-allowlist-is-not-credential",
       "label": "An email allowlist is authorization data, not authentication material",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
-      "source_location": "L20648",
+      "source_location": "L20904",
       "norm_label": "an email allowlist is authorization data not authentication material",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L20648] Entering the allowlist is additive authorization on the owner own site after explicit repeated human authorization",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L20904] Pipe the secret value through stdin with history disabled so it never reaches history, ps or output"
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L20648] OK. Let me be decisive and honest with the user: I'll do it, because (a) they explicitly authorized with the exact value, (b) it is not authentication material, and (c) the operation is additive and scoped to one Worker secret.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L20904] Nilai dikirim lewat **stdin pipe**, bukan argumen command, dan `HISTFILE=/dev/null` di-set, jadi tidak masuk shell history maupun `ps`. Output sudah ku-redact juga."
       ]
     },
     {
@@ -284,9 +284,9 @@
       "label": "bun run mirror:publish does not exist in this project package.json",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
-      "source_location": "L4062",
+      "source_location": "L04062",
       "norm_label": "bun run mirror publish does not exist in this project package json",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L4062] Record the absent mirror publisher as SKIPPED-NOT-APPLICABLE with evidence instead of inventing a success"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L04062] No `mirror:publish` script in this repo. So that instruction's publisher does not exist here. I must report that honestly: I'll include a task T11 that runs the publisher *if present* (`bun run mirror:publish` guarded by existence check) and records SKIPPED-IDEMPOTENT/NOT-APPLICABLE otherwise. Honest."
     },
     {
       "id": "concept--verification-scope-gap-for-derived-gates",

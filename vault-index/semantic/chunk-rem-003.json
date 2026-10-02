@@ -6,9 +6,9 @@
       "label": "Obsidian Git auto-backup",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md",
-      "source_location": "L21634",
+      "source_location": "L4438",
       "norm_label": "obsidian git auto-backup",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L4438] Auto backup after file change berarti commit 10 menit setelah berhenti mengedit"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L04438] Auto backup after file change auto commit after autoSaveInterval after stopping edits. If true, auto commit 10 min after stopping edits."
     },
     {
       "id": "concept--gh-auth-git-credential",
@@ -17,25 +17,25 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md",
       "source_location": "L3423",
       "norm_label": "gh auth git-credential as plugin auth",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L3423] Obsidian Git cukup memakai global git credential helper, jadi tidak perlu token disimpan"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L03423] Obsidian Git when pushing uses git command and credential helper. No need store token."
     },
     {
       "id": "concept--machine-specific-obsidian-workspace-state",
       "label": "Machine-specific Obsidian workspace state",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md",
-      "source_location": "L5391",
+      "source_location": "L5401",
       "norm_label": "machine-specific obsidian workspace state",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L5393] workspace.json berubah tiap Obsidian start, jadi akan ter-stage tiap auto backup dan menghasilkan commit tiap 10 menit"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L05401] saat Obsidian dibuka, plugin Git mengubah `workspace.json` dan mode executable `obsidian_askpass.sh` [05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L05390] Maybe we can leave workspace dirty but auto plugin will stage it every auto backup, resulting commit every 10 min."
     },
     {
       "id": "concept--obsidian-sigbus-crash-wayland",
       "label": "Obsidian Electron SIGBUS crash under Wayland",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md",
-      "source_location": "L21710",
+      "source_location": "L17097",
       "norm_label": "obsidian electron sigbus crash under wayland",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L21710] Crash berulang dikaitkan dengan tekanan memori, indexing Miyo, dan perilaku GPU/Wayland; --disable-gpu dipakai sebagai mitigasi"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L17097] Crash `SIGBUS/BUS_ADRERR` terjadi ketika sistem sedang dalam **tekanan memori tinggi**: [05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L17102] - Miyo sedang aktif [05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L18157] GPU acceleration dimatikan"
     },
     {
       "id": "concept--ollama-model-residency-memory-pressure",
@@ -44,16 +44,16 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md",
       "source_location": "L17101",
       "norm_label": "resident ollama model memory pressure",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L17101] Ollama embedding model menahan sekitar 1,9 GB dan swap hampir penuh saat crash terjadi"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L17100] - Swap hampir penuh [05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L17101] - Ollama embedding model memakai sekitar **1,9 GB**"
     },
     {
       "id": "concept--obsidian-copilot",
       "label": "Obsidian Copilot plugin",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md",
-      "source_location": "L18118",
+      "source_location": "L17644",
       "norm_label": "obsidian copilot plugin",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L21641] Copilot dihapus karena dinilai membebani memori dan resource"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L17644] Hapuskan saja copilot secara total, malah menuhin memori."
     },
     {
       "id": "concept--copilot-v4-miyo-indexing",
@@ -62,7 +62,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md",
       "source_location": "L17177",
       "norm_label": "copilot v4 delegates indexing to miyo",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L17177] Miyo dipilih karena Copilot 4.0.11 menghapus semantic indexing bawaan dan memakai Miyo sebagai layanan search/index terpisah"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L17177] Saya memilih Miyo karena plugin **Copilot versi 4.0.11** sudah mengubah sistemnya: [05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L17180] - **Semantic indexing bawaan Copilot sudah dihapus.** [05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L17181] - Copilot sekarang menggunakan Miyo sebagai layanan search/index terpisah."
     },
     {
       "id": "concept--vector-search-ollama-embeddings",
@@ -101,9 +101,9 @@
       "label": "Karpathy LLM wiki method",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md",
-      "source_location": "L21758",
+      "source_location": "L34004",
       "norm_label": "karpathy llm wiki method",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L34004] Vector search tetap dipakai untuk discovery, wiki graph untuk compounding, jadi plugin Karpathy tidak dipasang"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L34004] ### keep vector search for discovery; wiki graph for compounding [05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L34005] ### not install Karpathy plugin"
     },
     {
       "id": "concept--vector-search-discovery-vs-wiki-graph",
@@ -118,9 +118,9 @@
       "label": "Restricted source quarantine",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md",
-      "source_location": "L49600",
+      "source_location": "L49692",
       "norm_label": "restricted source quarantine",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L49692] Audit menemukan credential, private key, cookie, recovery code, dan data keuangan di Satset/ sehingga dikecualikan dari Vector Search dan LLM ingestion"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L49692] tetapi audit menemukan potential credential, private key, cookie, recovery code, dan financial data di dalamnya. Scope tersebut sudah dikecualikan dari Vector Search dan LLM ingestion,"
     },
     {
       "id": "concept--vector-search-index-no-resume",
@@ -135,9 +135,9 @@
       "label": "Vector Search resume checkpoint",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md",
-      "source_location": "L64759",
+      "source_location": "L64746",
       "norm_label": "vector search resume checkpoint",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L64746] Tidak ada checkpoint per file atau per batch, jadi progress baru hilang bila Obsidian dibunuh saat rebuild"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L64746] - Tidak ada checkpoint per file atau per batch. [05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L64748] - Jika Obsidian di-kill saat rebuild, progress baru hilang."
     },
     {
       "id": "concept--vector-search-per-file-progress",
@@ -160,9 +160,9 @@
       "label": "Ollama CPUQuota throttling via systemd drop-in",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md",
-      "source_location": "L76448",
+      "source_location": "L74792",
       "norm_label": "ollama cpuquota throttling via systemd drop-in",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L74792] Konfigurasi embedding terlalu keras membuat listrik PC tidak stabil, jadi harus pelan agar user bisa kerja di latar belakang"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L74792] bro embedding config lu terlalu keras sehingga bikin daya listrik PC ini gak stabil, pelan2 lah biar gw bisa kerja dilatar belakang"
     },
     {
       "id": "concept--startupwmclass-taskbar-grouping",
@@ -171,16 +171,16 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md",
       "source_location": "L21326",
       "norm_label": "startupwmclass taskbar grouping",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L21326] Window Obsidian punya WM_CLASS md.obsidian.Obsidian sementara launcher mengklaim obsidian, jadi KDE tidak menyatukan ikon"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L21326] Aha StartupWMClass mismatch. Set `StartupWMClass=md.obsidian.Obsidian` not obsidian."
     },
     {
       "id": "concept--single-embedding-index-ownership",
       "label": "Single owner for the embedding index",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md",
-      "source_location": "L56735",
+      "source_location": "L56757",
       "norm_label": "single owner for the embedding index",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L56757] Kalau OpenCode memanggil Ollama untuk embedding sendiri, akan ada dua sistem index yang bisa tidak sinkron"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L56757] Kalau OpenCode memanggil Ollama untuk membuat embedding sendiri, akan ada dua sistem index yang bisa tidak sinkron."
     }
   ],
   "links": [

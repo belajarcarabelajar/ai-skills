@@ -1,0 +1,373 @@
+{
+  "batch": "rem-031",
+  "nodes": [
+    {
+      "id": "concept--access-code-fallback-login",
+      "label": "Access-code fallback login as a second session-issuance path",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md",
+      "source_location": "L15513",
+      "norm_label": "access code fallback login as a second session issuance path"
+    },
+    {
+      "id": "concept--synthetic-shared-user-row",
+      "label": "Synthetic shared user row satisfies the existing gate unchanged",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md",
+      "source_location": "L15528",
+      "norm_label": "synthetic shared user row satisfies the existing gate unchanged"
+    },
+    {
+      "id": "concept--code-login-brute-force-lockout",
+      "label": "D1-backed code-login lockout with the lockout check before the code comparison",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md",
+      "source_location": "L10911",
+      "norm_label": "d1 backed code login brute force lockout with the lockout check before the code comparison"
+    },
+    {
+      "id": "concept--astro-checkorigin-as-csrf-defense",
+      "label": "Astro security.checkOrigin is what blocks the cross-site code-login POST",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md",
+      "source_location": "L10738",
+      "norm_label": "astro security.checkorigin is what blocks the cross site code login post"
+    },
+    {
+      "id": "concept--cloudflare-workers-mock-seam",
+      "label": "cloudflare:workers as the mock.module seam instead of lib/auth.ts",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md",
+      "source_location": "L13309",
+      "norm_label": "cloudflare workers as the mock.module seam instead of lib auth.ts"
+    },
+    {
+      "id": "concept--unreproduced-post-deploy-code-endpoint-404",
+      "label": "A post-deploy 404 of the code endpoint whose cause was never reproduced",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md",
+      "source_location": "L15006",
+      "norm_label": "a post deploy 404 of the code endpoint whose cause was never reproduced"
+    },
+    {
+      "id": "concept--code-plus-email-entitlement-gate",
+      "label": "Access code demoted to a second factor behind an email_entitlements grant",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md",
+      "source_location": "L18991",
+      "norm_label": "access code demoted to a second factor behind an email entitlements grant"
+    },
+    {
+      "id": "concept--unique-email-collision-forces-callback-patch",
+      "label": "UNIQUE(email) collision forces an ON CONFLICT(email) clause in the Google callback",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md",
+      "source_location": "L18352",
+      "norm_label": "unique email collision forces an on conflict email clause in the google callback"
+    },
+    {
+      "id": "concept--split-email-collation-identity-split",
+      "label": "email_entitlements is COLLATE NOCASE but users.email is not, so unnormalized emails split one identity into two rows",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md",
+      "source_location": "L19001",
+      "norm_label": "email entitlements is collate nocase but users email is not so unnormalized emails split one identity into two rows"
+    },
+    {
+      "id": "concept--generic-401-blocks-customer-enumeration",
+      "label": "One generic 401 for both a wrong code and an unregistered email",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md",
+      "source_location": "L19003",
+      "norm_label": "one generic 401 for both a wrong code and an unregistered email"
+    },
+    {
+      "id": "concept--cf-d1-migrations-apply-requires-database-id",
+      "label": "cf d1 migrations apply requires the database UUID, not its name",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md",
+      "source_location": "L7004",
+      "norm_label": "cf d1 migrations apply requires the database uuid not its name"
+    },
+    {
+      "id": "concept--em-dash-repo-convention-beats-skill-template",
+      "label": "Repo em-dash convention overrides the PR template's no-em-dash rule",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md",
+      "source_location": "L16371",
+      "norm_label": "repo em dash convention overrides the pr template no em dash rule"
+    },
+    {
+      "id": "rationale--code-login-needs-someone-in-users",
+      "label": "A code login needs someone in users, because sessions.user_id is a foreign key and the gate requires an entitled plan",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md",
+      "source_location": "L5123",
+      "norm_label": "a code login needs someone in users because sessions user id is a foreign key and the gate requires an entitled plan"
+    },
+    {
+      "id": "rationale--upsert-repairs-instead-of-silently-skipping",
+      "label": "ON CONFLICT DO UPDATE replaces INSERT OR IGNORE, which would skip an existing row and never repair plan='pro' while still looking successful",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md",
+      "source_location": "L9365",
+      "norm_label": "on conflict do update replaces insert or ignore which would skip an existing row and never repair plan pro while still looking successful"
+    },
+    {
+      "id": "rationale--lockout-precedes-code-comparison",
+      "label": "The lockout check runs before the code comparison, so a locked-out attacker cannot use the response to learn the code is right",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md",
+      "source_location": "L15526",
+      "norm_label": "the lockout check runs before the code comparison so a locked out attacker cannot use the response to learn the code is right"
+    },
+    {
+      "id": "rationale--window-anchored-on-first-failure",
+      "label": "Anchoring the lockout window on first_failed_at stops the window sliding, so the deadline cannot recede forever",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md",
+      "source_location": "L9363",
+      "norm_label": "anchoring the lockout window on first failed at stops the window sliding so the deadline cannot recede forever"
+    },
+    {
+      "id": "rationale--astro-checkorigin-is-the-only-csrf-defense",
+      "label": "No CSRF token was ever written; the POST is protected only because Astro blocks the cross-origin request, and any scripted client must send Origin",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md",
+      "source_location": "L11915",
+      "norm_label": "no csrf token was ever written the post is protected only because astro blocks the cross origin request and any scripted client must send origin"
+    },
+    {
+      "id": "rationale--mock-module-is-process-wide",
+      "label": "mock.module is process-wide, so six test files were fighting over lib/auth.ts and hand-copying its helpers, causing 33 spurious failures",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md",
+      "source_location": "L15539",
+      "norm_label": "mock module is process wide so six test files were fighting over lib auth ts and hand copying its helpers causing 33 spurious failures"
+    },
+    {
+      "id": "rationale--mitigate-an-unreproducible-failure-with-a-probe",
+      "label": "A deploy probe was added because the 404 could not be reproduced, so the class of silent failure is mitigated rather than explained",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md",
+      "source_location": "L15537",
+      "norm_label": "a deploy probe was added because the 404 could not be reproduced so the class of silent failure is mitigated rather than explained"
+    },
+    {
+      "id": "rationale--rotate-rather-than-rewrite-history",
+      "label": "Rotate the code instead of rewriting git history, because the value guards paid content and a rewrite force-pushes published commits",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md",
+      "source_location": "L17961",
+      "norm_label": "rotate the code instead of rewriting git history because the value guards paid content and a rewrite force pushes published commits"
+    },
+    {
+      "id": "rationale--leaked-code-alone-must-not-grant-access",
+      "label": "A leaked code must grant nothing on its own, so the code became a second factor and the 121 previously unused email grants became the actual gate",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md",
+      "source_location": "L18991",
+      "norm_label": "a leaked code must grant nothing on its own so the code became a second factor and the 121 previously unused email grants became the actual gate"
+    },
+    {
+      "id": "rationale--grant-is-the-plan-authority-not-users-plan",
+      "label": "The code path writes no plan at all, so the email grant is the single source of truth and no 'pro' constant is hard coded",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md",
+      "source_location": "L19005",
+      "norm_label": "the code path writes no plan at all so the email grant is the single source of truth and no pro constant is hard coded"
+    },
+    {
+      "id": "rationale--identical-error-blocks-an-email-oracle",
+      "label": "Wrong code and unregistered email must share one message, because distinct messages turn the endpoint into a tool for discovering who is a customer",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md",
+      "source_location": "L19003",
+      "norm_label": "wrong code and unregistered email must share one message because distinct messages turn the endpoint into a tool for discovering who is a customer"
+    },
+    {
+      "id": "rationale--normalize-email-on-both-paths",
+      "label": "Both login paths must trim().toLowerCase() the email, because the split collation silently produces two rows for one person",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md",
+      "source_location": "L19001",
+      "norm_label": "both login paths must trim lower case the email because the split collation silently produces two rows for one person"
+    },
+    {
+      "id": "rationale--foreign-key-and-unique-constraint-force-the-callback-change",
+      "label": "callback.ts had to change because sessions.user_id forces a users row and UNIQUE(email) then 500s the Google login of anyone who entered by code first",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md",
+      "source_location": "L18999",
+      "norm_label": "callback ts had to change because sessions user id forces a users row and unique email then 500s the google login of anyone who entered by code first"
+    },
+    {
+      "id": "rationale--readme-database-name-would-fail-at-execution",
+      "label": "The repo README's name-based migration command would have failed at execution time, after the migration file was already written",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md",
+      "source_location": "L7004",
+      "norm_label": "the repo readme name based migration command would have failed at execution time after the migration file was already written"
+    },
+    {
+      "id": "rationale--repo-convention-outranks-generic-default",
+      "label": "The skill's precedence puts the active project overlay above generic defaults, so four pre-existing renderers beat the template's stylistic rule",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md",
+      "source_location": "L16371",
+      "norm_label": "the skill precedence puts the active project overlay above generic defaults so four pre existing renderers beat the template stylistic rule"
+    }
+  ],
+  "links": [
+    {
+      "source": "concept--synthetic-shared-user-row",
+      "target": "concept--access-code-fallback-login",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--code-login-brute-force-lockout",
+      "target": "concept--access-code-fallback-login",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--astro-checkorigin-as-csrf-defense",
+      "target": "concept--access-code-fallback-login",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--code-plus-email-entitlement-gate",
+      "target": "concept--synthetic-shared-user-row",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--unique-email-collision-forces-callback-patch",
+      "target": "concept--code-plus-email-entitlement-gate",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--split-email-collation-identity-split",
+      "target": "concept--unique-email-collision-forces-callback-patch",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--generic-401-blocks-customer-enumeration",
+      "target": "concept--code-plus-email-entitlement-gate",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--generic-401-blocks-customer-enumeration",
+      "target": "concept--code-login-brute-force-lockout",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--unreproduced-post-deploy-code-endpoint-404",
+      "target": "concept--access-code-fallback-login",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--cf-d1-migrations-apply-requires-database-id",
+      "target": "concept--code-login-brute-force-lockout",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "rationale--code-login-needs-someone-in-users",
+      "target": "concept--synthetic-shared-user-row",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--upsert-repairs-instead-of-silently-skipping",
+      "target": "concept--synthetic-shared-user-row",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--lockout-precedes-code-comparison",
+      "target": "concept--code-login-brute-force-lockout",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--window-anchored-on-first-failure",
+      "target": "concept--code-login-brute-force-lockout",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--astro-checkorigin-is-the-only-csrf-defense",
+      "target": "concept--astro-checkorigin-as-csrf-defense",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--mock-module-is-process-wide",
+      "target": "concept--cloudflare-workers-mock-seam",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--mitigate-an-unreproducible-failure-with-a-probe",
+      "target": "concept--unreproduced-post-deploy-code-endpoint-404",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--rotate-rather-than-rewrite-history",
+      "target": "concept--access-code-fallback-login",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--leaked-code-alone-must-not-grant-access",
+      "target": "concept--code-plus-email-entitlement-gate",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--grant-is-the-plan-authority-not-users-plan",
+      "target": "concept--code-plus-email-entitlement-gate",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--identical-error-blocks-an-email-oracle",
+      "target": "concept--generic-401-blocks-customer-enumeration",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--normalize-email-on-both-paths",
+      "target": "concept--split-email-collation-identity-split",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--foreign-key-and-unique-constraint-force-the-callback-change",
+      "target": "concept--unique-email-collision-forces-callback-patch",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--readme-database-name-would-fail-at-execution",
+      "target": "concept--cf-d1-migrations-apply-requires-database-id",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--repo-convention-outranks-generic-default",
+      "target": "concept--em-dash-repo-convention-beats-skill-template",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    }
+  ]
+}

@@ -102,6 +102,14 @@ export const RELATIONS = Object.freeze([
  */
 export const CONFIDENCES = Object.freeze(['EXTRACTED', 'INFERRED', 'AMBIGUOUS']);
 
+/**
+ * The complete top-level shape of a chunk. Anything else is a contract
+ * violation -- see the unknown-top-level-key check in validateChunk for why
+ * that is an error rather than a tolerance.
+ */
+export const CHUNK_TOP_LEVEL_KEYS = Object.freeze(['nodes', 'links']);
+const CHUNK_TOP_LEVEL_KEY_SET = new Set(CHUNK_TOP_LEVEL_KEYS);
+
 // Sets for membership tests. Built once from the frozen arrays rather than
 // stored alongside them, so there is exactly one source of truth for what the
 // vocabularies contain and no way for a set to fall out of sync with its list.
@@ -190,6 +198,36 @@ export function validateChunk(chunk, opts = {}) {
   const linksOk = Array.isArray(links);
   if (!nodesOk) errors.push('nodes-not-array: chunk.nodes must be an array');
   if (!linksOk) errors.push('links-not-array: chunk.links must be an array');
+
+  // Unknown top-level keys that HOLD NODES OR LINKS are an error, not a shrug.
+  //
+  // Found in production 2026-10-02: a subagent emitted rationale nodes under a
+  // top-level `rationales` key instead of folding them into `nodes`. This
+  // validator ignored the extra key, returned ok:true, and every rationale
+  // endpoint became dangling at merge -- seven silently broken edges reported
+  // as a clean chunk.
+  //
+  // The rule is deliberately narrow. Chunks legitimately carry descriptive
+  // provenance at the top level (`batch`, `batch_id`, `source_file`,
+  // `vault_root`), and rejecting those would fail 38 of 63 committed chunks
+  // over nothing. What must not pass is an array of node-shaped or link-shaped
+  // objects hiding outside `nodes` and `links`, because that is content the
+  // merger will never see and nothing downstream can report it missing.
+  for (const [key, value] of Object.entries(chunk)) {
+    if (CHUNK_TOP_LEVEL_KEY_SET.has(key) || key === 'stats') continue;
+    if (!Array.isArray(value) || value.length === 0) continue;
+    const sample = value.find((v) => v && typeof v === 'object');
+    if (!sample) continue;
+    const nodeShaped = typeof sample.id === 'string' && typeof sample.file_type === 'string';
+    const linkShaped =
+      typeof sample.source === 'string' && typeof sample.target === 'string';
+    if (nodeShaped || linkShaped) {
+      errors.push(
+        `hidden-content-key: "${key}" holds ${nodeShaped ? 'node' : 'link'}-shaped objects ` +
+          `outside "nodes"/"links"; the merger will never see them`,
+      );
+    }
+  }
 
   // ---------- nodes ----------
 

@@ -77,6 +77,21 @@ note names as such. "Fail-closed signature verification" is a mechanism and
 deserves a node. "We chose fail-closed because the mirror lacked signatures" is
 a why and does not.
 
+**Corollary, and it bites immediately: a why about another chunk's concept
+cannot be expressed in this schema.** Your chunk is your own file, so you can
+only attach a rationale to a node you also own. If the concept the note
+explains was emitted by a different batch, you have no node to hang the reason
+on — and leaving it as a standalone `rationale` node plus a `rationale_for`
+edge that crosses a chunk boundary produces an edge the merger must resolve
+across chunks. Measured 2026-10-02 on `chunk-rem-017.json`: two `rationale--`
+nodes whose `rationale_for` targets live in `chunk-rem-004.json`, invisible to a
+per-chunk fold and left unattached.
+
+So: attribute the why onto a concept **in your own batch**. If the note's
+subject is genuinely something another batch owns, emit the concept node here
+too — the merger unions duplicate ids on purpose, and that union is what makes
+the attachment possible. Do not emit a why that dangles.
+
 | Relation | Direction | Meaning |
 |---|---|---|
 | `conceptually_related_to` | concept → concept | two ideas a reader would want side by side |

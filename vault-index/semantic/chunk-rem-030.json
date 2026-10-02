@@ -62,7 +62,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - telegram-bot-image-sync-verification [ses_f0b3fdf5cffe6ChADDBarmxvb7].md",
       "source_location": "L12108",
       "norm_label": "regression guard proven to fail on the reverted production fix",
-      "summary": "The first repro test passed with the bug present, discovered by reverting F1 on the VPS and seeing all 55 tests stay green. It was replaced first by a documented source-shape guard, then by an injectable acquisition seam, and the replacement was proved by simulating the regression on the VPS: the test failed naming the defect, then passed again on revert."
+      "summary": "The first repro test passed with the bug present, discovered by reverting F1 on the VPS and seeing all 55 tests stay green. It was replaced first by a documented source-shape guard, then by an injectable acquisition seam, and the replacement was proved by simulating the regression on the VPS: the test failed naming the defect, then passed again on revert.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - telegram-bot-image-sync-verification [ses_f0b3fdf5cffe6ChADDBarmxvb7].md:L12108] A guard only ever observed passing is indistinguishable from one that does nothing"
     },
     {
       "id": "concept--verification-against-an-incomplete-remote-tree",
@@ -80,34 +81,11 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - telegram-bot-image-sync-verification [ses_f0b3fdf5cffe6ChADDBarmxvb7].md",
       "source_location": "L13728",
       "norm_label": "unbounded per ip rate limit map in the proxy worker",
-      "summary": "The Cloudflare proxy worker's rateHits map was never pruned, so every distinct client IP left a permanent entry. Fixed with a threshold-gated sweep that reuses the same expiry predicate as the lookup, so the two cannot drift semantically."
-    },
-    {
-      "id": "rationale--guard-never-observed-failing",
-      "label": "A guard only ever observed passing is indistinguishable from one that does nothing",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - telegram-bot-image-sync-verification [ses_f0b3fdf5cffe6ChADDBarmxvb7].md",
-      "source_location": "L12108",
-      "norm_label": "a guard only ever observed passing is indistinguishable from one that does nothing",
-      "summary": "Reused id. Stated reason here: a test that cannot fail on the bug is worthless, so the guard had to be replaced and then re-proved RED on the reverted code before it counted."
-    },
-    {
-      "id": "rationale--threshold-gated-sweep-over-per-request-pruning",
-      "label": "Sweep the rate-limit map on a threshold rather than on every request",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - telegram-bot-image-sync-verification [ses_f0b3fdf5cffe6ChADDBarmxvb7].md",
-      "source_location": "L13728",
-      "norm_label": "sweep the rate limit map on a threshold rather than on every request",
-      "summary": "Threshold-gated rather than per-request because the entry count is unbounded in exactly the case that matters, someone rotating IPs."
-    },
-    {
-      "id": "rationale--abuse-guard-not-raised-on-an-inference",
-      "label": "A real abuse guard is not raised on arithmetic inference alone",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - telegram-bot-image-sync-verification [ses_f0b3fdf5cffe6ChADDBarmxvb7].md",
-      "source_location": "L13732",
-      "norm_label": "a real abuse guard is not raised on arithmetic inference alone",
-      "summary": "RATE_LIMIT was deliberately left at 60: the case for raising it is arithmetic (poll_pairing can emit about 60 requests in 30 s, exactly at the cap) and not an observed 429. Raising a real abuse guard on an inference would mask the symptom, so the honest fix, the client's 500 ms error-path sleep, was left in the backlog instead."
+      "summary": "The Cloudflare proxy worker's rateHits map was never pruned, so every distinct client IP left a permanent entry. Fixed with a threshold-gated sweep that reuses the same expiry predicate as the lookup, so the two cannot drift semantically.",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - telegram-bot-image-sync-verification [ses_f0b3fdf5cffe6ChADDBarmxvb7].md:L13728] Sweep the rate-limit map on a threshold rather than on every request",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - telegram-bot-image-sync-verification [ses_f0b3fdf5cffe6ChADDBarmxvb7].md:L13732] A real abuse guard is not raised on arithmetic inference alone"
+      ]
     }
   ],
   "links": [
@@ -140,24 +118,6 @@
       "target": "concept--regression-guard-that-fails-on-the-broken-code",
       "relation": "conceptually_related_to",
       "confidence": "INFERRED"
-    },
-    {
-      "source": "rationale--guard-never-observed-failing",
-      "target": "concept--regression-guard-that-fails-on-the-broken-code",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--threshold-gated-sweep-over-per-request-pruning",
-      "target": "concept--unbounded-proxy-ratelimit-map",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--abuse-guard-not-raised-on-an-inference",
-      "target": "concept--unbounded-proxy-ratelimit-map",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
     }
   ]
 }

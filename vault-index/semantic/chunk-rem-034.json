@@ -23,7 +23,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - perbaikan-sistem-login-rusak [ses_f0cb21c35ffesBRnzbaIrhI8OK].md",
       "source_location": "L8233",
-      "norm_label": "stale free row shadows an email pro grant"
+      "norm_label": "stale free row shadows an email pro grant",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - perbaikan-sistem-login-rusak [ses_f0cb21c35ffesBRnzbaIrhI8OK].md:L8237] T5 was born because verification found the middleware still shadowing the grant, producing a session then lockout loop"
     },
     {
       "id": "concept--unconditional-secure-cookie-breaks-http-dev",
@@ -47,7 +48,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - perbaikan-sistem-login-rusak [ses_f0cb21c35ffesBRnzbaIrhI8OK].md",
       "source_location": "L5490",
-      "norm_label": "selective commit excludes unrelated wip"
+      "norm_label": "selective commit excludes unrelated wip",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - perbaikan-sistem-login-rusak [ses_f0cb21c35ffesBRnzbaIrhI8OK].md:L5499] middleware.ts was excluded from the commit so unrelated uncommitted gating work would not be mixed in"
     },
     {
       "id": "concept--session-status-and-logout-api",
@@ -63,7 +65,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - perbaikan-sistem-login-rusak [ses_f0cb21c35ffesBRnzbaIrhI8OK].md",
       "source_location": "L15622",
-      "norm_label": "prerendered middleware redirect baked into a static file"
+      "norm_label": "prerendered middleware redirect baked into a static file",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - perbaikan-sistem-login-rusak [ses_f0cb21c35ffesBRnzbaIrhI8OK].md:L15622] The baked redirect is safe content but bad HTTP semantics because a bot sees 200"
     },
     {
       "id": "concept--run-worker-first-defeated-by-asset-layer",
@@ -79,7 +82,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - perbaikan-sistem-login-rusak [ses_f0cb21c35ffesBRnzbaIrhI8OK].md",
       "source_location": "L17536",
-      "norm_label": "tracks moved to ssr to restore middleware gating"
+      "norm_label": "tracks moved to ssr to restore middleware gating",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - perbaikan-sistem-login-rusak [ses_f0cb21c35ffesBRnzbaIrhI8OK].md:L17541] A buyer reads raw markdown without the Starlight chrome until F9, stated as an honest tradeoff"
     },
     {
       "id": "concept--html-entity-escaping-in-downloaded-references",
@@ -87,7 +91,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - perbaikan-sistem-login-rusak [ses_f0cb21c35ffesBRnzbaIrhI8OK].md",
       "source_location": "L24859",
-      "norm_label": "html entity escaping in downloaded skill references"
+      "norm_label": "html entity escaping in downloaded skill references",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - perbaikan-sistem-login-rusak [ses_f0cb21c35ffesBRnzbaIrhI8OK].md:L24859] Agents had been reading raw &#123; entities, which was the source of the divergence from the GUI"
     },
     {
       "id": "concept--gui-canonical-download-must-match",
@@ -111,55 +116,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - perbaikan-sistem-login-rusak [ses_f0cb21c35ffesBRnzbaIrhI8OK].md",
       "source_location": "L24860",
-      "norm_label": "compatibility frontmatter field"
-    },
-    {
-      "id": "rationale--t5-born-from-verification-not-plan",
-      "label": "T5 was born because verification found the middleware still shadowing the grant, producing a session then lockout loop",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - perbaikan-sistem-login-rusak [ses_f0cb21c35ffesBRnzbaIrhI8OK].md",
-      "source_location": "L8237",
-      "norm_label": "t5 was born because verification found the middleware still shadowing the grant, producing a session then lockout loop"
-    },
-    {
-      "id": "rationale--exclude-middleware-ts-to-avoid-mixing-wip",
-      "label": "middleware.ts was excluded from the commit so unrelated uncommitted gating work would not be mixed in",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - perbaikan-sistem-login-rusak [ses_f0cb21c35ffesBRnzbaIrhI8OK].md",
-      "source_location": "L5499",
-      "norm_label": "middleware.ts was excluded from the commit so unrelated uncommitted gating work would not be mixed in"
-    },
-    {
-      "id": "rationale--baked-redirect-is-safe-but-bad-http-semantics",
-      "label": "The baked redirect is safe content but bad HTTP semantics because a bot sees 200",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - perbaikan-sistem-login-rusak [ses_f0cb21c35ffesBRnzbaIrhI8OK].md",
-      "source_location": "L15622",
-      "norm_label": "the baked redirect is safe content but bad http semantics because a bot sees 200"
-    },
-    {
-      "id": "rationale--raw-markdown-tradeoff-until-f9",
-      "label": "A buyer reads raw markdown without the Starlight chrome until F9, stated as an honest tradeoff",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - perbaikan-sistem-login-rusak [ses_f0cb21c35ffesBRnzbaIrhI8OK].md",
-      "source_location": "L17541",
-      "norm_label": "a buyer reads raw markdown without the starlight chrome until f9, stated as an honest tradeoff"
-    },
-    {
-      "id": "rationale--raw-entities-were-the-source-of-divergence",
-      "label": "Agents had been reading raw &#123; entities, which was the source of the divergence from the GUI",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - perbaikan-sistem-login-rusak [ses_f0cb21c35ffesBRnzbaIrhI8OK].md",
-      "source_location": "L24859",
-      "norm_label": "agents had been reading raw &#123; entities, which was the source of the divergence from the gui"
-    },
-    {
-      "id": "rationale--compatibility-read-from-official-spec",
-      "label": "compatibility was read from the official agentskills.io spec rather than invented",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - perbaikan-sistem-login-rusak [ses_f0cb21c35ffesBRnzbaIrhI8OK].md",
-      "source_location": "L24860",
-      "norm_label": "compatibility was read from the official agentskills.io spec rather than invented"
+      "norm_label": "compatibility frontmatter field",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - perbaikan-sistem-login-rusak [ses_f0cb21c35ffesBRnzbaIrhI8OK].md:L24860] compatibility was read from the official agentskills.io spec rather than invented"
     }
   ],
   "links": [
@@ -228,42 +186,6 @@
       "target": "concept--fixture-invariant-test-over-all-skills",
       "relation": "conceptually_related_to",
       "confidence": "INFERRED"
-    },
-    {
-      "source": "rationale--t5-born-from-verification-not-plan",
-      "target": "concept--stale-free-row-shadows-email-pro-grant",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--exclude-middleware-ts-to-avoid-mixing-wip",
-      "target": "concept--selective-commit-excludes-unrelated-wip",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--baked-redirect-is-safe-but-bad-http-semantics",
-      "target": "concept--prerendered-middleware-redirect-baked-to-static",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--raw-markdown-tradeoff-until-f9",
-      "target": "concept--tracks-moved-to-ssr-to-restore-middleware-gating",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--raw-entities-were-the-source-of-divergence",
-      "target": "concept--html-entity-escaping-in-downloaded-references",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--compatibility-read-from-official-spec",
-      "target": "concept--compatibility-frontmatter-field",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
     }
   ]
 }

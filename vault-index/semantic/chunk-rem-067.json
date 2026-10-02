@@ -6,7 +6,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - r5-waiting-room-layout-bypass [ses_f16b747c6ffe34ZUtY2QTNMUgr].md",
       "source_location": "L80",
-      "norm_label": "no page under src/pages/ may hand-write its own <head> or <title>; head ownership belongs to the shared layout"
+      "norm_label": "no page under src/pages/ may hand-write its own <head> or <title>; head ownership belongs to the shared layout",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - r5-waiting-room-layout-bypass [ses_f16b747c6ffe34ZUtY2QTNMUgr].md:L78] A test that asserts this one file looks right will not catch the next page that hand-writes a <head>"
     },
     {
       "id": "concept--pagelayout-migration-changes-waiting-room-behaviour",
@@ -14,7 +15,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - r5-waiting-room-layout-bypass [ses_f16b747c6ffe34ZUtY2QTNMUgr].md",
       "source_location": "L8861",
-      "norm_label": "a full pagelayout migration of the standalone waiting-room page definitively changes its visible behaviour"
+      "norm_label": "a full pagelayout migration of the standalone waiting-room page definitively changes its visible behaviour",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - r5-waiting-room-layout-bypass [ses_f16b747c6ffe34ZUtY2QTNMUgr].md:L8843] BaseLayout renders a bare <body> with no passthrough, so data-default-target would be lost and the countdown could not start for a first-time visitor"
     },
     {
       "id": "concept--chrome-free-standalone-layout-as-the-narrower-option",
@@ -33,22 +35,6 @@
       "norm_label": "an /id/ page listed in without_en_twin gets one hreflang=\"id\" alternate, not the three-link hreflang set"
     },
     {
-      "id": "rationale--guard-the-invariant-not-the-file",
-      "label": "A test that asserts this one file looks right will not catch the next page that hand-writes a <head>",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - r5-waiting-room-layout-bypass [ses_f16b747c6ffe34ZUtY2QTNMUgr].md",
-      "source_location": "L78",
-      "norm_label": "a test that asserts this one file looks right will not catch the next page that hand-writes a <head>"
-    },
-    {
-      "id": "rationale--forcing-the-layout-migration-breaks-the-countdown",
-      "label": "BaseLayout renders a bare <body> with no passthrough, so data-default-target would be lost and the countdown could not start for a first-time visitor",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - r5-waiting-room-layout-bypass [ses_f16b747c6ffe34ZUtY2QTNMUgr].md",
-      "source_location": "L8843",
-      "norm_label": "baselayout renders a bare <body> with no passthrough, so data-default-target would be lost and the countdown could not start for a first-time visitor"
-    },
-    {
       "id": "concept--indonesian-has-no-plural-category",
       "label": "Indonesian has no grammatical plural category, so a count === 1 ? A : B branch is wrong for id even when both strings are translated",
       "file_type": "concept",
@@ -62,7 +48,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c6c-plural-branches [ses_f20bd0056ffehf3w2vV54dN5PY].md",
       "source_location": "L4891",
-      "norm_label": "an existing dictionary unit pair is reusable only when its english string matches the raw literal exactly; a wrong-noun pair would change what english renders"
+      "norm_label": "an existing dictionary unit pair is reusable only when its english string matches the raw literal exactly; a wrong-noun pair would change what english renders",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c6c-plural-branches [ses_f20bd0056ffehf3w2vV54dN5PY].md:L4885] sessionsCount exists but is plural-only, so reusing it changes English at n=1, which the task forbids"
     },
     {
       "id": "concept--report-needed-dictionary-keys-instead-of-adding-them",
@@ -87,29 +74,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c6c-plural-branches [ses_f20bd0056ffehf3w2vV54dN5PY].md",
       "source_location": "L57",
       "norm_label": "red probe outside the repo"
-    },
-    {
-      "id": "rationale--plural-only-key-would-change-english-at-count-one",
-      "label": "sessionsCount exists but is plural-only, so reusing it changes English at n=1, which the task forbids",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c6c-plural-branches [ses_f20bd0056ffehf3w2vV54dN5PY].md",
-      "source_location": "L4885",
-      "norm_label": "sessionscount exists but is plural-only, so reusing it changes english at n=1, which the task forbids"
     }
   ],
   "links": [
-    {
-      "source": "rationale--guard-the-invariant-not-the-file",
-      "target": "concept--page-head-ownership-invariant",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--forcing-the-layout-migration-breaks-the-countdown",
-      "target": "concept--pagelayout-migration-changes-waiting-room-behaviour",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--pagelayout-migration-changes-waiting-room-behaviour",
       "target": "concept--page-head-ownership-invariant",
@@ -132,12 +99,6 @@
       "source": "concept--indonesian-has-no-plural-category",
       "target": "concept--reuse-an-i18n-unit-pair-only-when-its-english-string-matches-exactly",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--plural-only-key-would-change-english-at-count-one",
-      "target": "concept--reuse-an-i18n-unit-pair-only-when-its-english-string-matches-exactly",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {

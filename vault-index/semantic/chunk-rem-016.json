@@ -7,7 +7,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - integrasi-jev-di-ai-skills-untuk-akurasi [ses_f103b5b86ffelSWs8r5QGtpvvf].md",
       "source_location": "L1175",
-      "norm_label": "rule beats model placement"
+      "norm_label": "rule beats model placement",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - integrasi-jev-di-ai-skills-untuk-akurasi [ses_f103b5b86ffelSWs8r5QGtpvvf].md:L1163] Agreement alone does not justify a network call"
     },
     {
       "id": "concept--classifyskipif-default-fallthrough",
@@ -15,7 +16,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - integrasi-jev-di-ai-skills-untuk-akurasi [ses_f103b5b86ffelSWs8r5QGtpvvf].md",
       "source_location": "L1173",
-      "norm_label": "classifyskipif default fallthrough"
+      "norm_label": "classifyskipif default fallthrough",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - integrasi-jev-di-ai-skills-untuk-akurasi [ses_f103b5b86ffelSWs8r5QGtpvvf].md:L7004] Adding bash to EVIDENCE_COMMAND widens the gap"
     },
     {
       "id": "concept--grep-family-probe-false-pass",
@@ -39,7 +41,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - integrasi-jev-di-ai-skills-untuk-akurasi [ses_f103b5b86ffelSWs8r5QGtpvvf].md",
       "source_location": "L9098",
-      "norm_label": "warn before error for the unknown class"
+      "norm_label": "warn before error for the unknown class",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - integrasi-jev-di-ai-skills-untuk-akurasi [ses_f103b5b86ffelSWs8r5QGtpvvf].md:L9098] Unknown warns rather than errors in phase 1"
     },
     {
       "id": "concept--frozen-spike-classifier-snapshot",
@@ -47,7 +50,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - integrasi-jev-di-ai-skills-untuk-akurasi [ses_f103b5b86ffelSWs8r5QGtpvvf].md",
       "source_location": "L8265",
-      "norm_label": "frozen spike classifier snapshot"
+      "norm_label": "frozen spike classifier snapshot",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - integrasi-jev-di-ai-skills-untuk-akurasi [ses_f103b5b86ffelSWs8r5QGtpvvf].md:L8265] Freeze the classifier before changing it"
     },
     {
       "id": "concept--degenerate-corpus",
@@ -55,7 +59,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - integrasi-jev-di-ai-skills-untuk-akurasi [ses_f103b5b86ffelSWs8r5QGtpvvf].md",
       "source_location": "L9116",
-      "norm_label": "degenerate corpus"
+      "norm_label": "degenerate corpus",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - integrasi-jev-di-ai-skills-untuk-akurasi [ses_f103b5b86ffelSWs8r5QGtpvvf].md:L8267] Do not fabricate the dedupe corpus"
     },
     {
       "id": "concept--cross-set-pair-exclusion",
@@ -88,46 +93,6 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - integrasi-jev-di-ai-skills-untuk-akurasi [ses_f103b5b86ffelSWs8r5QGtpvvf].md",
       "source_location": "L7972",
       "norm_label": "lexical baseline as comparator"
-    },
-    {
-      "id": "rationale--agreement-alone-does-not-justify-a-network-call",
-      "label": "Agreement alone does not justify a network call",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - integrasi-jev-di-ai-skills-untuk-akurasi [ses_f103b5b86ffelSWs8r5QGtpvvf].md",
-      "source_location": "L1163",
-      "norm_label": "agreement alone does not justify a network call"
-    },
-    {
-      "id": "rationale--adding-bash-widens-the-gap",
-      "label": "Adding bash to EVIDENCE_COMMAND widens the gap",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - integrasi-jev-di-ai-skills-untuk-akurasi [ses_f103b5b86ffelSWs8r5QGtpvvf].md",
-      "source_location": "L7004",
-      "norm_label": "adding bash to evidence command widens the gap"
-    },
-    {
-      "id": "rationale--freeze-the-classifier-before-changing-it",
-      "label": "Freeze the classifier before changing it",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - integrasi-jev-di-ai-skills-untuk-akurasi [ses_f103b5b86ffelSWs8r5QGtpvvf].md",
-      "source_location": "L8265",
-      "norm_label": "freeze the classifier before changing it"
-    },
-    {
-      "id": "rationale--do-not-fabricate-the-dedupe-corpus",
-      "label": "Do not fabricate the dedupe corpus",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - integrasi-jev-di-ai-skills-untuk-akurasi [ses_f103b5b86ffelSWs8r5QGtpvvf].md",
-      "source_location": "L8267",
-      "norm_label": "do not fabricate the dedupe corpus"
-    },
-    {
-      "id": "rationale--unknown-warns-not-errors-phase-1",
-      "label": "Unknown warns rather than errors in phase 1",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - integrasi-jev-di-ai-skills-untuk-akurasi [ses_f103b5b86ffelSWs8r5QGtpvvf].md",
-      "source_location": "L9098",
-      "norm_label": "unknown warns not errors phase 1"
     }
   ],
   "links": [
@@ -189,36 +154,6 @@
       "source": "concept--order-independent-pair-key",
       "target": "concept--degenerate-corpus",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--agreement-alone-does-not-justify-a-network-call",
-      "target": "concept--rule-beats-model-placement",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--adding-bash-widens-the-gap",
-      "target": "concept--classifyskipif-default-fallthrough",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--freeze-the-classifier-before-changing-it",
-      "target": "concept--frozen-spike-classifier-snapshot",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--do-not-fabricate-the-dedupe-corpus",
-      "target": "concept--degenerate-corpus",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--unknown-warns-not-errors-phase-1",
-      "target": "concept--warn-before-error-for-unknown-class",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     }
   ]

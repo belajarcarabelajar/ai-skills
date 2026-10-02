@@ -16,7 +16,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - r1-yt-dlp-invocation-contract [ses_f24bc733dffebZDP0NqZI3L9Rq].md",
       "source_location": "L32361",
       "norm_label": "googlevideo url expiry, ip binding and signature",
-      "summary": "A resolved googlevideo media URL is time-limited, IP-bound and signed on three axes, which the note calls the biggest architectural constraint of the whole path. A real URL pasted in yt-dlp issue #14936 contains `expire=<unix ts>`, `ip=<client IP>`, `sparams=expire,ei,ip,id,itag,...`, `lsig=` and `sig=`, and returns HTTP 403 when replayed (closed as not_planned by maintainer bashonly). The official FAQ states that in many cases requests for the video must come from the same IP address and with the same cookies and/or HTTP headers. The commonly quoted 6 h TTL is derived, not documented: in #14936 `expire - met` = 1762604258 - 1762582658 = exactly 21600 s, but yt-dlp never parses `expire` and YouTube publishes no TTL, so it is medium confidence and must not be treated as a contract."
+      "summary": "A resolved googlevideo media URL is time-limited, IP-bound and signed on three axes, which the note calls the biggest architectural constraint of the whole path. A real URL pasted in yt-dlp issue #14936 contains `expire=<unix ts>`, `ip=<client IP>`, `sparams=expire,ei,ip,id,itag,...`, `lsig=` and `sig=`, and returns HTTP 403 when replayed (closed as not_planned by maintainer bashonly). The official FAQ states that in many cases requests for the video must come from the same IP address and with the same cookies and/or HTTP headers. The commonly quoted 6 h TTL is derived, not documented: in #14936 `expire - met` = 1762604258 - 1762582658 = exactly 21600 s, but yt-dlp never parses `expire` and YouTube publishes no TTL, so it is medium confidence and must not be treated as a contract.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - r1-yt-dlp-invocation-contract [ses_f24bc733dffebZDP0NqZI3L9Rq].md:L32366] Resolve the media URL at play time and never cache it"
     },
     {
       "id": "concept--googlevideo-http-header-requirements",
@@ -25,7 +26,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - r1-yt-dlp-invocation-contract [ses_f24bc733dffebZDP0NqZI3L9Rq].md",
       "source_location": "L32370",
       "norm_label": "googlevideo http header requirements: user-agent yes, referer no",
-      "summary": "For a `*.googlevideo.com/videoplayback` request, a browser-like User-Agent is always sent and Referer is neither sent nor required. `std_headers` contains `User-Agent` from `random_user_agent()` (a Chrome 145-151 string on Windows), plus Accept, Accept-Language and Sec-Fetch-Mode, and no Referer; the YouTube extractor sets no per-format `http_headers` for media formats (the only `http_headers` read in `_video.py` is for the PO-token request). Cookies are needed only for private, age-restricted or members-only content. The note is explicit that the realistic 403 cause is not a header at all: it is IP binding, `n`-challenge throttling, or a missing GVS PO Token, where `_report_pot_format_skipped` states skipped formats 'require a GVS PO Token which was not provided. They will be skipped as they may yield HTTP Error 403.'"
+      "summary": "For a `*.googlevideo.com/videoplayback` request, a browser-like User-Agent is always sent and Referer is neither sent nor required. `std_headers` contains `User-Agent` from `random_user_agent()` (a Chrome 145-151 string on Windows), plus Accept, Accept-Language and Sec-Fetch-Mode, and no Referer; the YouTube extractor sets no per-format `http_headers` for media formats (the only `http_headers` read in `_video.py` is for the PO-token request). Cookies are needed only for private, age-restricted or members-only content. The note is explicit that the realistic 403 cause is not a header at all: it is IP binding, `n`-challenge throttling, or a missing GVS PO Token, where `_report_pot_format_skipped` states skipped formats 'require a GVS PO Token which was not provided. They will be skipped as they may yield HTTP Error 403.'",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - r1-yt-dlp-invocation-contract [ses_f24bc733dffebZDP0NqZI3L9Rq].md:L32371] Referer is not signed into direct media URLs"
     },
     {
       "id": "concept--googlevideo-http-range-support",
@@ -79,55 +81,11 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - r1-yt-dlp-invocation-contract [ses_f24bc733dffebZDP0NqZI3L9Rq].md",
       "source_location": "L32418",
       "norm_label": "yt-dlp exit-code and stderr error contract",
-      "summary": "The complete set of exit codes, per maintainer pukkandan: 0 success, 100 yt-dlp must restart for update to complete, 101 download cancelled by --max-downloads and similar, 2 error in user-provided options, 1 any other error. Confirmed against current source: `_exit(1)` for CookieLoadError/DownloadError/UnsafeExecExpansionError, `_exit(2, ...)` for optparse errors, `_download_retcode = 100` on updater exception, `return 101` on DownloadCancelled. There is no per-error-class exit code and no `error` key in the JSON info dict, so mapping to user-facing messages must be done on stderr text, whose format is `ERROR: ` + `[ie_key ]` + `video_id: ` + `orig_msg` + optional `(caused by ...)`, with a bug-report blurb appended for unexpected errors only (`expected=True` suppresses it). Concrete classes: `Video unavailable`; 'Playback on other websites has been disabled by the video owner (web_embedded player response playability status: UNPLAYABLE)' as the closest analogue to YouTube IFrame error 153 and a high-priority pinned known issue (#17497); private detected from badge `PRIVACY_PRIVATE` / `videoDetails.isPrivate` and surfaced as `availability`; age gate matched on substrings 'confirm your age', 'age-restricted', 'age_verification_required'; bot check as error #10128, intractable, guidance being a different IP or a PO Token provider; rate limit `This content isn't available, try again later.` (#11426) capped near 300 videos/hour for guest sessions; blocked IP as `All player responses are invalid. Your IP is likely being blocked by Youtube`. `--ignore-errors`/`-i` makes the exit code unreliable for batch use, so prefer one invocation per video, and `--newline`/`--no-progress` are needed when capturing stderr because progress uses `\\r`."
-    },
-    {
-      "id": "rationale--referer-is-not-signed-into-media-urls",
-      "label": "Referer is not signed into direct media URLs",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - r1-yt-dlp-invocation-contract [ses_f24bc733dffebZDP0NqZI3L9Rq].md",
-      "source_location": "L32371",
-      "norm_label": "referer is not signed into direct media urls",
-      "summary": "Referer is not required for the googlevideo media request because `std_headers` contains no Referer and the YouTube extractor sets no per-format `http_headers` for media formats, while the signed field set is `sparams=expire,ei,ip,id,itag,...` - the IP is what is signed, and serving from the same machine satisfies it. The FAQ's 'some sites also require a common user agent' is scoped to sites, and the Cloudflare-403 FAQ entry is about Cloudflare, not the googlevideo CDN. Confidence is high that a browser-like UA is sent and Referer is not needed; medium on the negative claim that no YouTube statement declares Referer optional, since that is inferred from yt-dlp's own working behaviour."
-    },
-    {
-      "id": "rationale--resolve-media-url-at-play-time-never-cache",
-      "label": "Resolve the media URL at play time and never cache it",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - r1-yt-dlp-invocation-contract [ses_f24bc733dffebZDP0NqZI3L9Rq].md",
-      "source_location": "L32366",
-      "norm_label": "resolve the media url at play time and never cache it",
-      "summary": "Because the resolved URL is bound to the issuing IP, carries an absolute expiry timestamp and an HMAC signature over the query, replaying it later returns 403: the FAQ requires requests for the video to come from the same IP with the same cookies and/or headers, and issue #14936 shows a replayed URL 403-ing. The note's stated implication for the app is that the URL must be fetched at play time, from the same host and IP, and re-fetched on 403 - never cached."
-    },
-    {
-      "id": "rationale--no-per-error-class-exit-code-exists",
-      "label": "There is no per-error-class exit code, so map errors on message text",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - r1-yt-dlp-invocation-contract [ses_f24bc733dffebZDP0NqZI3L9Rq].md",
-      "source_location": "L32428",
-      "norm_label": "there is no per-error-class exit code, so map errors on message text",
-      "summary": "Mapping yt-dlp failures to user-facing messages has to happen on the message text because exit codes are coarse (1 covers any other error) and the info dict carries no `error` key - the pending-error field is the private `__pending_error`, popped before output. Where a machine-readable signal exists it is preferred over string matching: `availability` (`needs_auth`, `private`, `subscriber_only`, ...) and `playable_in_embed` are named as far more reliable fields than matching stderr substrings. The reason strings themselves come verbatim from YouTube's `playabilityStatus.reason`, not from yt-dlp, and are locale and version dependent, which is why their exact wording is only medium confidence."
+      "summary": "The complete set of exit codes, per maintainer pukkandan: 0 success, 100 yt-dlp must restart for update to complete, 101 download cancelled by --max-downloads and similar, 2 error in user-provided options, 1 any other error. Confirmed against current source: `_exit(1)` for CookieLoadError/DownloadError/UnsafeExecExpansionError, `_exit(2, ...)` for optparse errors, `_download_retcode = 100` on updater exception, `return 101` on DownloadCancelled. There is no per-error-class exit code and no `error` key in the JSON info dict, so mapping to user-facing messages must be done on stderr text, whose format is `ERROR: ` + `[ie_key ]` + `video_id: ` + `orig_msg` + optional `(caused by ...)`, with a bug-report blurb appended for unexpected errors only (`expected=True` suppresses it). Concrete classes: `Video unavailable`; 'Playback on other websites has been disabled by the video owner (web_embedded player response playability status: UNPLAYABLE)' as the closest analogue to YouTube IFrame error 153 and a high-priority pinned known issue (#17497); private detected from badge `PRIVACY_PRIVATE` / `videoDetails.isPrivate` and surfaced as `availability`; age gate matched on substrings 'confirm your age', 'age-restricted', 'age_verification_required'; bot check as error #10128, intractable, guidance being a different IP or a PO Token provider; rate limit `This content isn't available, try again later.` (#11426) capped near 300 videos/hour for guest sessions; blocked IP as `All player responses are invalid. Your IP is likely being blocked by Youtube`. `--ignore-errors`/`-i` makes the exit code unreliable for batch use, so prefer one invocation per video, and `--newline`/`--no-progress` are needed when capturing stderr because progress uses `\\r`.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - r1-yt-dlp-invocation-contract [ses_f24bc733dffebZDP0NqZI3L9Rq].md:L32428] There is no per-error-class exit code, so map errors on message text"
     }
   ],
   "links": [
-    {
-      "source": "rationale--referer-is-not-signed-into-media-urls",
-      "target": "concept--googlevideo-http-header-requirements",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--resolve-media-url-at-play-time-never-cache",
-      "target": "concept--googlevideo-url-expiry-ip-binding-and-signature",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--no-per-error-class-exit-code-exists",
-      "target": "concept--yt-dlp-exit-code-and-stderr-contract",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--googlevideo-http-header-requirements",
       "target": "concept--googlevideo-url-expiry-ip-binding-and-signature",

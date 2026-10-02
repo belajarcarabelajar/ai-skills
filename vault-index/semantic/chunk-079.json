@@ -7,7 +7,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - lint-group-d-other-apps [ses_f25618c8bffeQr2qw8IxVX9F4M].md",
       "source_location": "L32",
-      "norm_label": "stale eslint-disable directive deletion"
+      "norm_label": "stale eslint-disable directive deletion",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - lint-group-d-other-apps [ses_f25618c8bffeQr2qw8IxVX9F4M].md:L32] A directive ESLint calls unused is evidence the code under it is already clean"
     },
     {
       "id": "concept--optional-catch-binding",
@@ -15,7 +16,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - lint-group-d-other-apps [ses_f25618c8bffeQr2qw8IxVX9F4M].md",
       "source_location": "L973",
-      "norm_label": "optional catch binding"
+      "norm_label": "optional catch binding",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - lint-group-d-other-apps [ses_f25618c8bffeQr2qw8IxVX9F4M].md:L2650] Optional catch binding is the exact-equivalent fix because the binding is never referenced"
     },
     {
       "id": "concept--side-effect-only-helper-call",
@@ -23,7 +25,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - lint-group-d-other-apps [ses_f25618c8bffeQr2qw8IxVX9F4M].md",
       "source_location": "L2661",
-      "norm_label": "side-effect-only helper call"
+      "norm_label": "side-effect-only helper call",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - lint-group-d-other-apps [ses_f25618c8bffeQr2qw8IxVX9F4M].md:L2661] Dropping the assignment keeps the side effect that the loop actually needs"
     },
     {
       "id": "concept--structural-type-narrowing-instead-of-any",
@@ -31,7 +34,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - lint-group-d-other-apps [ses_f25618c8bffeQr2qw8IxVX9F4M].md",
       "source_location": "L2663",
-      "norm_label": "structural type narrowing instead of any"
+      "norm_label": "structural type narrowing instead of any",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - lint-group-d-other-apps [ses_f25618c8bffeQr2qw8IxVX9F4M].md:L2663] An intersection type is the right fix because it changes no runtime behaviour"
     },
     {
       "id": "concept--head-baseline-attribution",
@@ -39,47 +43,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - lint-group-d-other-apps [ses_f25618c8bffeQr2qw8IxVX9F4M].md",
       "source_location": "L2702",
-      "norm_label": "head-baseline attribution"
-    },
-    {
-      "id": "rationale--eslint-disable-stale-means-code-is-clean",
-      "label": "A directive ESLint calls unused is evidence the code under it is already clean",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - lint-group-d-other-apps [ses_f25618c8bffeQr2qw8IxVX9F4M].md",
-      "source_location": "L32",
-      "norm_label": "an unused eslint directive is evidence the code under it is already clean"
-    },
-    {
-      "id": "rationale--optional-catch-binding-is-exactly-equivalent",
-      "label": "Optional catch binding is the exact-equivalent fix because the binding is never referenced",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - lint-group-d-other-apps [ses_f25618c8bffeQr2qw8IxVX9F4M].md",
-      "source_location": "L2650",
-      "norm_label": "optional catch binding is exactly behaviourally equivalent when the binding is never referenced"
-    },
-    {
-      "id": "rationale--drop-assignment-keep-side-effect",
-      "label": "Dropping the assignment keeps the side effect that the loop actually needs",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - lint-group-d-other-apps [ses_f25618c8bffeQr2qw8IxVX9F4M].md",
-      "source_location": "L2661",
-      "norm_label": "drop the assignment but keep the call because the side effect is what the caller needs"
-    },
-    {
-      "id": "rationale--intersection-type-has-zero-runtime-change",
-      "label": "An intersection type is the right fix because it changes no runtime behaviour",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - lint-group-d-other-apps [ses_f25618c8bffeQr2qw8IxVX9F4M].md",
-      "source_location": "L2663",
-      "norm_label": "an intersection type changes no runtime behaviour while removing the any"
-    },
-    {
-      "id": "rationale--prettier-write-would-exceed-scope",
-      "label": "Running prettier --write would be restructuring beyond what the warning requires",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - lint-group-d-other-apps [ses_f25618c8bffeQr2qw8IxVX9F4M].md",
-      "source_location": "L2716",
-      "norm_label": "running prettier --write would restructure beyond what the warning requires"
+      "norm_label": "head-baseline attribution",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - lint-group-d-other-apps [ses_f25618c8bffeQr2qw8IxVX9F4M].md:L2716] Running prettier --write would be restructuring beyond what the warning requires"
     },
     {
       "id": "concept--frontmatter-only-byte-range-write",
@@ -95,7 +60,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md",
       "source_location": "L16188",
-      "norm_label": "explicit write allowlist with default-deny"
+      "norm_label": "explicit write allowlist with default-deny",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md:L16123] The plan must name which tree it edits so the immutable-sources clause stays auditable"
     },
     {
       "id": "concept--raw-text-frontmatter-manipulation",
@@ -103,7 +69,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md",
       "source_location": "L16189",
-      "norm_label": "raw-text frontmatter manipulation"
+      "norm_label": "raw-text frontmatter manipulation",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md:L16267] The flat scalar parser destroys related block lists and unquoted items"
     },
     {
       "id": "concept--normalization-manifest-with-revert",
@@ -119,7 +86,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md",
       "source_location": "L16191",
-      "norm_label": "no body-derived strings in frontmatter"
+      "norm_label": "no body-derived strings in frontmatter",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md:L16191] First-paragraph text is the only channel through which redacted audit context could leak"
     },
     {
       "id": "concept--idempotent-normalization-pass",
@@ -135,7 +103,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md",
       "source_location": "L16192",
-      "norm_label": "no renames during normalization"
+      "norm_label": "no renames during normalization",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md:L16192] Not renaming keeps Obsidian link rewriting out of the picture"
     },
     {
       "id": "concept--status-key-collision-maturity-rename",
@@ -143,7 +112,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md",
       "source_location": "L16115",
-      "norm_label": "status key collision and maturity rename"
+      "norm_label": "status key collision and maturity rename",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md:L16113] status: archive reads as PARA Archive and would suggest moving 649 files"
     },
     {
       "id": "concept--frontmatter-dialect-coexistence",
@@ -159,7 +129,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md",
       "source_location": "L16143",
-      "norm_label": "prune-stamp exclusion for updated"
+      "norm_label": "prune-stamp exclusion for updated",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md:L16143] A prune stamp is a tool event rather than a content change"
     },
     {
       "id": "concept--related-shape-only-normalization",
@@ -167,7 +138,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md",
       "source_location": "L16141",
-      "norm_label": "shape-only normalization of related"
+      "norm_label": "shape-only normalization of related",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md:L16141] Automatically generated related entries would fabricate graph structure"
     },
     {
       "id": "concept--related-monotonicity-invariant",
@@ -191,152 +163,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md",
       "source_location": "L16137",
-      "norm_label": "folder-derived para value"
-    },
-    {
-      "id": "rationale--status-archive-looks-like-para-archive",
-      "label": "status: archive reads as PARA Archive and would suggest moving 649 files",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md",
-      "source_location": "L16113",
-      "norm_label": "status archive reads as para archive and would suggest moving files"
-    },
-    {
-      "id": "rationale--prune-stamp-is-a-tool-event",
-      "label": "A prune stamp is a tool event rather than a content change",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md",
-      "source_location": "L16143",
-      "norm_label": "a prune stamp is a tool event rather than a content change"
-    },
-    {
-      "id": "rationale--scalar-parser-destroys-list-values",
-      "label": "The flat scalar parser destroys related block lists and unquoted items",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md",
-      "source_location": "L16267",
-      "norm_label": "the flat scalar parser destroys related block lists and unquoted items"
-    },
-    {
-      "id": "rationale--synthetic-links-fabricate-graph-structure",
-      "label": "Automatically generated related entries would fabricate graph structure",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md",
-      "source_location": "L16141",
-      "norm_label": "automatically generated related entries would fabricate graph structure"
-    },
-    {
-      "id": "rationale--redacted-context-leak-channel",
-      "label": "First-paragraph text is the only channel through which redacted audit context could leak",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md",
-      "source_location": "L16191",
-      "norm_label": "first-paragraph text is the only channel through which redacted audit context could leak"
-    },
-    {
-      "id": "rationale--no-renames-avoid-link-churn",
-      "label": "Not renaming keeps Obsidian link rewriting out of the picture",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md",
-      "source_location": "L16192",
-      "norm_label": "not renaming keeps obsidian link rewriting out of the picture"
-    },
-    {
-      "id": "rationale--folder-para-implies-no-move",
-      "label": "A folder-derived para records location and implies no move",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md",
-      "source_location": "L16137",
-      "norm_label": "a folder-derived para records location and implies no move"
-    },
-    {
-      "id": "rationale--immutable-sources-clause-must-stay-auditable",
-      "label": "The plan must name which tree it edits so the immutable-sources clause stays auditable",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md",
-      "source_location": "L16123",
-      "norm_label": "the plan must name which tree it edits so the immutable-sources clause stays auditable"
+      "norm_label": "folder-derived para value",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md:L16137] A folder-derived para records location and implies no move"
     }
   ],
   "links": [
-    {
-      "source": "rationale--eslint-disable-stale-means-code-is-clean",
-      "target": "concept--stale-eslint-disable-directive-deletion",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--optional-catch-binding-is-exactly-equivalent",
-      "target": "concept--optional-catch-binding",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--drop-assignment-keep-side-effect",
-      "target": "concept--side-effect-only-helper-call",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--intersection-type-has-zero-runtime-change",
-      "target": "concept--structural-type-narrowing-instead-of-any",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--prettier-write-would-exceed-scope",
-      "target": "concept--head-baseline-attribution",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--status-archive-looks-like-para-archive",
-      "target": "concept--status-key-collision-maturity-rename",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--prune-stamp-is-a-tool-event",
-      "target": "concept--prune-stamp-exclusion",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--scalar-parser-destroys-list-values",
-      "target": "concept--raw-text-frontmatter-manipulation",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--synthetic-links-fabricate-graph-structure",
-      "target": "concept--related-shape-only-normalization",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--redacted-context-leak-channel",
-      "target": "concept--no-body-derived-frontmatter-strings",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--no-renames-avoid-link-churn",
-      "target": "concept--no-rename-during-normalization",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--folder-para-implies-no-move",
-      "target": "concept--folder-derived-para",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--immutable-sources-clause-must-stay-auditable",
-      "target": "concept--allowlist-default-deny",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--optional-catch-binding",
       "target": "concept--stale-eslint-disable-directive-deletion",

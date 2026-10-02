@@ -6,15 +6,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - obsidian [ses_f1d1f7010ffeMMXqgy117zIbta].md",
       "source_location": "L1353",
-      "norm_label": "artifact language follows the codebase, never the prompt"
-    },
-    {
-      "id": "rationale--translated-artifact-breaks-grep-and-review-scanning",
-      "label": "A translated artifact is a defect rather than a courtesy because it breaks grep, breaks reviewer scanning, and silently diverges from the files it sits next to",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - obsidian [ses_f1d1f7010ffeMMXqgy117zIbta].md",
-      "source_location": "L1353",
-      "norm_label": "a translated artifact is a defect rather than a courtesy because it breaks grep, breaks reviewer scanning, and silently diverges from the files it sits next to"
+      "norm_label": "artifact language follows the codebase, never the prompt",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - obsidian [ses_f1d1f7010ffeMMXqgy117zIbta].md:L1353] A translated artifact is a defect rather than a courtesy because it breaks grep, breaks reviewer scanning, and silently diverges from the files it sits next to"
     },
     {
       "id": "concept--never-translate-the-vault-plan-mirror",
@@ -22,15 +15,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - obsidian [ses_f1d1f7010ffeMMXqgy117zIbta].md",
       "source_location": "L1491",
-      "norm_label": "the vault plan mirror is a byte copy and is never translated on the way in"
-    },
-    {
-      "id": "rationale--byte-copy-mirror-plus-whole-text-source-hash-makes-a-translation-read-stale",
-      "label": "mergeFrontmatter copies the plan text unchanged and source_hash covers that whole text, so a translated mirror reads as stale on the next --check, blocks --execute with exit 3, and fails the daily drift timer",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - obsidian [ses_f1d1f7010ffeMMXqgy117zIbta].md",
-      "source_location": "L1357",
-      "norm_label": "mergefrontmatter copies the plan text unchanged and source_hash covers that whole text, so a translated mirror reads as stale on the next --check, blocks --execute with exit 3, and fails the daily drift timer"
+      "norm_label": "the vault plan mirror is a byte copy and is never translated on the way in",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - obsidian [ses_f1d1f7010ffeMMXqgy117zIbta].md:L1357] mergeFrontmatter copies the plan text unchanged and source_hash covers that whole text, so a translated mirror reads as stale on the next --check, blocks --execute with exit 3, and fails the daily drift timer"
     },
     {
       "id": "concept--non-repo-language-deliberation-note-outside-plans-dir",
@@ -38,15 +24,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - obsidian [ses_f1d1f7010ffeMMXqgy117zIbta].md",
       "source_location": "L3333",
-      "norm_label": "a deliberation note in a non-repository language lives at 01 - projects/{project}/notes/<plan-id>.notes.md and is vault-native"
-    },
-    {
-      "id": "rationale--notes-dir-is-safe-by-construction-because-destdirtemplate-writes-only-plans",
-      "label": "The notes directory is chosen for structural safety rather than convention: destDirTemplate only ever writes plans/, so notes/ can never be overwritten by a publish and can never register as drift",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - obsidian [ses_f1d1f7010ffeMMXqgy117zIbta].md",
-      "source_location": "L3335",
-      "norm_label": "the notes directory is chosen for structural safety rather than convention: destdirtemplate only ever writes plans/, so notes/ can never be overwritten by a publish and can never register as drift"
+      "norm_label": "a deliberation note in a non-repository language lives at 01 - projects/{project}/notes/<plan-id>.notes.md and is vault-native",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - obsidian [ses_f1d1f7010ffeMMXqgy117zIbta].md:L3335] The notes directory is chosen for structural safety rather than convention: destDirTemplate only ever writes plans/, so notes/ can never be overwritten by a publish and can never register as drift"
     },
     {
       "id": "concept--word-level-diff-proves-no-english-token-lost",
@@ -54,15 +33,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - obsidian [ses_f1d1f7010ffeMMXqgy117zIbta].md",
       "source_location": "L4482",
-      "norm_label": "a word-level before/after diff over the converted files proves no english token was lost, only indonesian removed and english added"
-    },
-    {
-      "id": "rationale--first-word-diff-was-empty-because-second-tr-read-stdin",
-      "label": "The first word-level diff looked like a mass deletion of English because the second tr read from stdin that the first stage had already consumed, so the after-list was empty",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - obsidian [ses_f1d1f7010ffeMMXqgy117zIbta].md",
-      "source_location": "L3843",
-      "norm_label": "the first word-level diff looked like a mass deletion of english because the second tr read from stdin that the first stage had already consumed, so the after-list was empty"
+      "norm_label": "a word-level before/after diff over the converted files proves no english token was lost, only indonesian removed and english added",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - obsidian [ses_f1d1f7010ffeMMXqgy117zIbta].md:L3843] The first word-level diff looked like a mass deletion of English because the second tr read from stdin that the first stage had already consumed, so the after-list was empty"
     },
     {
       "id": "concept--nav-loading-progress-bar-with-aria-busy",
@@ -78,15 +50,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - production-ready-ui-audit-and-loading-spinners [ses_f0bd1b41effeBRBBW1nRb03EtD].md",
       "source_location": "L7673",
-      "norm_label": "content negotiation on skill.md links: browsers get a rendered html viewer, download links are pinned to ?raw=1, and curl and ai tools keep byte-identical raw markdown"
-    },
-    {
-      "id": "rationale--download-anchors-pinned-to-raw-query-so-downloads-do-not-break",
-      "label": "162 track-page download anchors were pinned to ?raw=1 so switching browsers to the HTML viewer did not break the existing raw download button",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - production-ready-ui-audit-and-loading-spinners [ses_f0bd1b41effeBRBBW1nRb03EtD].md",
-      "source_location": "L7677",
-      "norm_label": "162 track-page download anchors were pinned to ?raw=1 so switching browsers to the html viewer did not break the existing raw download button"
+      "norm_label": "content negotiation on skill.md links: browsers get a rendered html viewer, download links are pinned to ?raw=1, and curl and ai tools keep byte-identical raw markdown",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - production-ready-ui-audit-and-loading-spinners [ses_f0bd1b41effeBRBBW1nRb03EtD].md:L7677] 162 track-page download anchors were pinned to ?raw=1 so switching browsers to the HTML viewer did not break the existing raw download button"
     },
     {
       "id": "concept--prerendered-middleware-redirect-baked-to-static",
@@ -110,15 +75,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - production-ready-ui-audit-and-loading-spinners [ses_f0bd1b41effeBRBBW1nRb03EtD].md",
       "source_location": "L9008",
-      "norm_label": "a 200 html interstitial with zero-delay meta-refresh and location.replace is served to browsers while 302 with a location header is kept for curl, fetch and ai tools"
-    },
-    {
-      "id": "rationale--curl-and-ai-tools-still-need-the-302-location-header",
-      "label": "curl, fetch and AI tools still receive a real 302 because they need the machine-readable Location header, and that path was not broken",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - production-ready-ui-audit-and-loading-spinners [ses_f0bd1b41effeBRBBW1nRb03EtD].md",
-      "source_location": "L9010",
-      "norm_label": "curl, fetch and ai tools still receive a real 302 because they need the machine-readable location header, and that path was not broken"
+      "norm_label": "a 200 html interstitial with zero-delay meta-refresh and location.replace is served to browsers while 302 with a location header is kept for curl, fetch and ai tools",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - production-ready-ui-audit-and-loading-spinners [ses_f0bd1b41effeBRBBW1nRb03EtD].md:L9010] curl, fetch and AI tools still receive a real 302 because they need the machine-readable Location header, and that path was not broken"
     },
     {
       "id": "concept--strip-dev-comments-from-inlined-css",
@@ -126,15 +84,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - production-ready-ui-audit-and-loading-spinners [ses_f0bd1b41effeBRBBW1nRb03EtD].md",
       "source_location": "L7679",
-      "norm_label": "dev comments are stripped from inlined css at render time so t1/revert notes do not ship to end users"
-    },
-    {
-      "id": "rationale--inline-css-is-client-visible-by-design",
-      "label": "The inline style block is client-visible by design because the track page is a standalone SSR string that does not load custom.css, so a T2/Revert comment is a session note for the next session rather than user-facing copy",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - production-ready-ui-audit-and-loading-spinners [ses_f0bd1b41effeBRBBW1nRb03EtD].md",
-      "source_location": "L4700",
-      "norm_label": "the inline style block is client-visible by design because the track page is a standalone ssr string that does not load custom.css, so a t2/revert comment is a session note for the next session rather than user-facing copy"
+      "norm_label": "dev comments are stripped from inlined css at render time so t1/revert notes do not ship to end users",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - production-ready-ui-audit-and-loading-spinners [ses_f0bd1b41effeBRBBW1nRb03EtD].md:L4700] The inline style block is client-visible by design because the track page is a standalone SSR string that does not load custom.css, so a T2/Revert comment is a session note for the next session rather than user-facing copy"
     }
   ],
   "links": [
@@ -157,30 +108,6 @@
       "confidence": "INFERRED"
     },
     {
-      "source": "rationale--translated-artifact-breaks-grep-and-review-scanning",
-      "target": "concept--artifact-language-from-target-repo",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--byte-copy-mirror-plus-whole-text-source-hash-makes-a-translation-read-stale",
-      "target": "concept--never-translate-the-vault-plan-mirror",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--notes-dir-is-safe-by-construction-because-destdirtemplate-writes-only-plans",
-      "target": "concept--non-repo-language-deliberation-note-outside-plans-dir",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--first-word-diff-was-empty-because-second-tr-read-stdin",
-      "target": "concept--word-level-diff-proves-no-english-token-lost",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
       "source": "concept--raw-markdown-link-content-negotiation-viewer-vs-raw",
       "target": "concept--html-interstitial-status-200-for-browsers-302-for-machines",
       "relation": "conceptually_related_to",
@@ -196,24 +123,6 @@
       "source": "concept--astro-catch-all-route-shadows-the-static-skills-index",
       "target": "concept--prerendered-middleware-redirect-baked-to-static",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--download-anchors-pinned-to-raw-query-so-downloads-do-not-break",
-      "target": "concept--raw-markdown-link-content-negotiation-viewer-vs-raw",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--curl-and-ai-tools-still-need-the-302-location-header",
-      "target": "concept--html-interstitial-status-200-for-browsers-302-for-machines",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--inline-css-is-client-visible-by-design",
-      "target": "concept--strip-dev-comments-from-inlined-css",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     }
   ]

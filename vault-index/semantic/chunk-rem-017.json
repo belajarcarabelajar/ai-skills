@@ -7,7 +7,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
       "source_location": "L4501",
-      "norm_label": "pcsx2 config enum semantics read from upstream source"
+      "norm_label": "pcsx2 config enum semantics read from upstream source",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L5090] Every load-bearing config fact was resolved from upstream source, which is stronger evidence than a secondary guide",
+        "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L4516] Checking the source killed two working hypotheses: accurate blending was already the cheapest default and linear_present_mode was BilinearSmooth, not FSR"
+      ]
     },
     {
       "id": "concept--inert-software-renderer-thread-settings",
@@ -23,7 +27,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
       "source_location": "L4558",
-      "norm_label": "measurement step before any graphics optimization"
+      "norm_label": "measurement step before any graphics optimization",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L4907] Without a baseline the audit cannot say whether graphics settings are the bottleneck, so the plan leads with making measurement possible"
     },
     {
       "id": "concept--no-gamepad-blocks-automated-benchmark",
@@ -31,7 +36,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
       "source_location": "L4706",
-      "norm_label": "absent gamepad blocks automated in-game benchmarking"
+      "norm_label": "absent gamepad blocks automated in-game benchmarking",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L8044] The missing controller is a proven environment limit, not an excuse: the OSD numbers were turned on precisely so the human could supply them"
     },
     {
       "id": "concept--memory-pressure-as-emulator-bottleneck",
@@ -39,7 +45,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
       "source_location": "L4895",
-      "norm_label": "memory pressure, not gpu load, is the emulator bottleneck"
+      "norm_label": "memory pressure, not gpu load, is the emulator bottleneck",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L4895] 2.87 GB available with zram three-quarters full and swappiness 180 makes swap thrash the likelier cause of stutter, and it has nothing to do with graphics settings"
     },
     {
       "id": "concept--osd-stats-prerequisite-for-gpu-decisions",
@@ -55,7 +62,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
       "source_location": "L5716",
-      "norm_label": "python assertion suite as a tdd cycle over a config file"
+      "norm_label": "python assertion suite as a tdd cycle over a config file",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L5686] The verifier was written in Python because python3 is explicitly an evidence command, while bash only reaches the behavioural classification by default fallthrough"
     },
     {
       "id": "concept--mermaid-depends-on-contract-positive-control",
@@ -71,7 +79,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
       "source_location": "L8918",
-      "norm_label": "retracted claim that setup-linux.md carried the wrong pcsx2 version"
+      "norm_label": "retracted claim that setup-linux.md carried the wrong pcsx2 version",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L8918] The binary reports v2.8.2 itself, which overrode the earlier reading of the AppImage strings and cancelled the doc fix"
     },
     {
       "id": "concept--stable-channel-over-nightly",
@@ -79,7 +88,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
       "source_location": "L9573",
-      "norm_label": "stay on the stable channel rather than the nightly build"
+      "norm_label": "stay on the stable channel rather than the nightly build",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L9577] Do not chase the nightly for performance, because on a machine this modest stability is worth more than daily prerelease experiments"
     },
     {
       "id": "concept--pin-records-appimage-mount-path",
@@ -87,7 +97,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
       "source_location": "L9885",
-      "norm_label": "pinning an appimage while it runs records its ephemeral mount path"
+      "norm_label": "pinning an appimage while it runs records its ephemeral mount path",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L9890] Pin from the application menu, not from the running window, because the window path is the one that produces a stale entry"
     },
     {
       "id": "concept--icon-lookup-by-window-name-fallback",
@@ -103,7 +114,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
       "source_location": "L11032",
-      "norm_label": "plasmashell restart required for the taskbar icon to re-render"
+      "norm_label": "plasmashell restart required for the taskbar icon to re-render",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L11032] Refreshing the KDE icon cache alone changed nothing because the live task manager still held the previous render"
     },
     {
       "id": "concept--artifact-language-from-target-repo",
@@ -111,7 +123,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
       "source_location": "L5773",
-      "norm_label": "artifact language taken from the target repository, not the prompt"
+      "norm_label": "artifact language taken from the target repository, not the prompt",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L5773] The plan is written in Indonesian because SETUP-LINUX.md is already Indonesian, since the surrounding repository language governs the artifact"
     },
     {
       "id": "concept--skipped-debt-sweep-after-declined-interaction",
@@ -119,63 +132,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
       "source_location": "L8924",
-      "norm_label": "skipping the debt-sweep question set after the user declined the interactive step"
-    },
-    {
-      "id": "rationale--upstream-source-beats-secondary-guides",
-      "label": "Every load-bearing config fact was resolved from upstream source, which is stronger evidence than a secondary guide",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
-      "source_location": "L5090",
-      "norm_label": "every load-bearing config fact was resolved from upstream source, which is stronger evidence than a secondary guide"
-    },
-    {
-      "id": "rationale--source-check-killed-both-working-hypotheses",
-      "label": "Checking the source killed two working hypotheses: accurate blending was already the cheapest default and linear_present_mode was BilinearSmooth, not FSR",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
-      "source_location": "L4516",
-      "norm_label": "checking the source killed two working hypotheses: accurate blending was already the cheapest default and linear_present_mode was bilinearsmooth, not fsr"
-    },
-    {
-      "id": "rationale--python-in-evidence-command-not-bash",
-      "label": "The verifier was written in Python because python3 is explicitly an evidence command, while bash only reaches the behavioural classification by default fallthrough",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
-      "source_location": "L5686",
-      "norm_label": "the verifier was written in python because python3 is explicitly an evidence command, while bash only reaches the behavioural classification by default fallthrough"
-    },
-    {
-      "id": "rationale--measurement-precedes-knob-tuning",
-      "label": "Without a baseline the audit cannot say whether graphics settings are the bottleneck, so the plan leads with making measurement possible",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
-      "source_location": "L4907",
-      "norm_label": "without a baseline the audit cannot say whether graphics settings are the bottleneck, so the plan leads with making measurement possible"
-    },
-    {
-      "id": "rationale--no-controller-is-an-environment-limit",
-      "label": "The missing controller is a proven environment limit, not an excuse: the OSD numbers were turned on precisely so the human could supply them",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
-      "source_location": "L8044",
-      "norm_label": "the missing controller is a proven environment limit, not an excuse: the osd numbers were turned on precisely so the human could supply them"
-    },
-    {
-      "id": "rationale--zram-full-beats-gpu-settings-as-cause",
-      "label": "2.87 GB available with zram three-quarters full and swappiness 180 makes swap thrash the likelier cause of stutter, and it has nothing to do with graphics settings",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
-      "source_location": "L4895",
-      "norm_label": "2.87 gb available with zram three-quarters full and swappiness 180 makes swap thrash the likelier cause of stutter, and it has nothing to do with graphics settings"
-    },
-    {
-      "id": "rationale--pin-from-application-menu-not-running-window",
-      "label": "Pin from the application menu, not from the running window, because the window path is the one that produces a stale entry",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
-      "source_location": "L9890",
-      "norm_label": "pin from the application menu, not from the running window, because the window path is the one that produces a stale entry"
+      "norm_label": "skipping the debt-sweep question set after the user declined the interactive step",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L8924] Repeating the declined interactive step as a checkbox is forbidden, so every follow-up was written into the plan backlog instead"
     },
     {
       "id": "rationale--startupwmclass-value-read-from-appimage-not-guessed",
@@ -186,97 +144,15 @@
       "norm_label": "startupwmclass was taken from the appimage's own bundled desktop file, extracted and read rather than invented"
     },
     {
-      "id": "rationale--live-plasmashell-holds-the-old-render",
-      "label": "Refreshing the KDE icon cache alone changed nothing because the live task manager still held the previous render",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
-      "source_location": "L11032",
-      "norm_label": "refreshing the kde icon cache alone changed nothing because the live task manager still held the previous render"
-    },
-    {
-      "id": "rationale--binary-self-report-overrides-strings-guess",
-      "label": "The binary reports v2.8.2 itself, which overrode the earlier reading of the AppImage strings and cancelled the doc fix",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
-      "source_location": "L8918",
-      "norm_label": "the binary reports v2.8.2 itself, which overrode the earlier reading of the appimage strings and cancelled the doc fix"
-    },
-    {
-      "id": "rationale--stability-beats-nightly-performance",
-      "label": "Do not chase the nightly for performance, because on a machine this modest stability is worth more than daily prerelease experiments",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
-      "source_location": "L9577",
-      "norm_label": "do not chase the nightly for performance, because on a machine this modest stability is worth more than daily prerelease experiments"
-    },
-    {
       "id": "rationale--register-project-or-publish-gate-throws",
       "label": "The publish gate can only be unblocked by adding the project to plans.publish.json, which edits another repository and therefore needs separate approval",
       "file_type": "rationale",
       "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
       "source_location": "L5504",
       "norm_label": "the publish gate can only be unblocked by adding the project to plans.publish.json, which edits another repository and therefore needs separate approval"
-    },
-    {
-      "id": "rationale--repo-language-not-prompt-language",
-      "label": "The plan is written in Indonesian because SETUP-LINUX.md is already Indonesian, since the surrounding repository language governs the artifact",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
-      "source_location": "L5773",
-      "norm_label": "the plan is written in indonesian because setup-linux.md is already indonesian, since the surrounding repository language governs the artifact"
-    },
-    {
-      "id": "rationale--do-not-re-ask-a-declined-interaction",
-      "label": "Repeating the declined interactive step as a checkbox is forbidden, so every follow-up was written into the plan backlog instead",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
-      "source_location": "L8924",
-      "norm_label": "repeating the declined interactive step as a checkbox is forbidden, so every follow-up was written into the plan backlog instead"
     }
   ],
   "links": [
-    {
-      "source": "rationale--upstream-source-beats-secondary-guides",
-      "target": "concept--pcsx2-config-enum-semantics-from-upstream-source",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--source-check-killed-both-working-hypotheses",
-      "target": "concept--pcsx2-config-enum-semantics-from-upstream-source",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--python-in-evidence-command-not-bash",
-      "target": "concept--config-assertion-suite-as-tdd",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--measurement-precedes-knob-tuning",
-      "target": "concept--measurement-before-optimization",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--no-controller-is-an-environment-limit",
-      "target": "concept--no-gamepad-blocks-automated-benchmark",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--zram-full-beats-gpu-settings-as-cause",
-      "target": "concept--memory-pressure-as-emulator-bottleneck",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--pin-from-application-menu-not-running-window",
-      "target": "concept--pin-records-appimage-mount-path",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "rationale--startupwmclass-value-read-from-appimage-not-guessed",
       "target": "concept--startupwmclass-taskbar-grouping",
@@ -284,38 +160,8 @@
       "confidence": "EXTRACTED"
     },
     {
-      "source": "rationale--live-plasmashell-holds-the-old-render",
-      "target": "concept--plasmashell-restart-required-for-icon-rerender",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--binary-self-report-overrides-strings-guess",
-      "target": "concept--retracted-version-mismatch-claim",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--stability-beats-nightly-performance",
-      "target": "concept--stable-channel-over-nightly",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
       "source": "rationale--register-project-or-publish-gate-throws",
       "target": "concept--plan-publish-registry-prefix-routing",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--repo-language-not-prompt-language",
-      "target": "concept--artifact-language-from-target-repo",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--do-not-re-ask-a-declined-interaction",
-      "target": "concept--skipped-debt-sweep-after-declined-interaction",
       "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },

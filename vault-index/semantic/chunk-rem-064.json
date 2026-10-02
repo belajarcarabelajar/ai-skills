@@ -9,7 +9,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - investigate-voiceselector-and-chunk-watchdog-debts [ses_f258317e5ffe1mZUF6ZMJHXI2m].md",
       "source_location": "L3397",
       "norm_label": "voiceselector.tsx is dead code: zero production mounts",
-      "description": "VERDICT: Dead code, safe to delete. Every VoiceSelector identifier in the repo is self-definition, its own test, one comment in browserSpeechSynthesis.ts:18, research prose (a different repo's file at citation [16]), and 4 plan/RCA docs. Negative results on every mounting mechanism: no .storybook/ directory exists, apps/website has no matches, the complete React.lazy set is enumerated in main.tsx:21-39 and App.tsx:23-39 and VoiceSelector is in none of them, no string-based registry entry, TtsLiveDemoCard.tsx:29-33 imports TtsVoiceProfilePicker and not VoiceSelector, no barrel re-export. Functional risk if deleted: zero for users. tts-single-column-layout.test.ts:39 reads speech.css off disk rather than the component, so it keeps passing after deletion."
+      "description": "VERDICT: Dead code, safe to delete. Every VoiceSelector identifier in the repo is self-definition, its own test, one comment in browserSpeechSynthesis.ts:18, research prose (a different repo's file at citation [16]), and 4 plan/RCA docs. Negative results on every mounting mechanism: no .storybook/ directory exists, apps/website has no matches, the complete React.lazy set is enumerated in main.tsx:21-39 and App.tsx:23-39 and VoiceSelector is in none of them, no string-based registry entry, TtsLiveDemoCard.tsx:29-33 imports TtsVoiceProfilePicker and not VoiceSelector, no barrel re-export. Functional risk if deleted: zero for users. tts-single-column-layout.test.ts:39 reads speech.css off disk rather than the component, so it keeps passing after deletion.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - investigate-voiceselector-and-chunk-watchdog-debts [ses_f258317e5ffe1mZUF6ZMJHXI2m].md:L3427] The unmounted-component keep was a deliberate recorded scope decision"
     },
     {
       "id": "concept--voiceselector-loading-state-on-permanently-empty-list",
@@ -27,7 +28,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - investigate-voiceselector-and-chunk-watchdog-debts [ses_f258317e5ffe1mZUF6ZMJHXI2m].md",
       "source_location": "L3458",
       "norm_label": "onchunktimeout watchdog: specified and ticked complete in the plan, never implemented in code",
-      "description": "VERDICT: Real gap, should be implemented. The 2026-09-18 Indonesian Google voice profile plan, Task 5 lines 137-151, ticks all four sub-items [x]: add chunkTimeoutMs?: number and onChunkTimeout?: (index: number) => void to ChunkQueueOptions defaulting to Math.max(6000, chunk.length * 80); on timeout clear the pending utterance reference, call window.speechSynthesis.cancel(), emit onChunkTimeout and continue with the next chunk; surface the timeout path in TtsLiveDemoCard via a non-blocking status line. The risk register at :234 lists the hang as a documented Chrome defect and the approval record at :215 lists \"chunk watchdog\" among approved items. The code has none of it: ChunkQueueOptions (browserSpeechSynthesis.ts:135-143) has exactly seven fields and no timeout fields; speakChunkQueue (:388-403) is a bare sequential for loop whose only exit from chunk i is await this.speak(...); the promise inside speak resolves from exactly two places, utterance.onend and utterance.onerror for canceled/interrupted. This is a plan-checklist integrity failure, not a missing nicety."
+      "description": "VERDICT: Real gap, should be implemented. The 2026-09-18 Indonesian Google voice profile plan, Task 5 lines 137-151, ticks all four sub-items [x]: add chunkTimeoutMs?: number and onChunkTimeout?: (index: number) => void to ChunkQueueOptions defaulting to Math.max(6000, chunk.length * 80); on timeout clear the pending utterance reference, call window.speechSynthesis.cancel(), emit onChunkTimeout and continue with the next chunk; surface the timeout path in TtsLiveDemoCard via a non-blocking status line. The risk register at :234 lists the hang as a documented Chrome defect and the approval record at :215 lists \"chunk watchdog\" among approved items. The code has none of it: ChunkQueueOptions (browserSpeechSynthesis.ts:135-143) has exactly seven fields and no timeout fields; speakChunkQueue (:388-403) is a bare sequential for loop whose only exit from chunk i is await this.speak(...); the promise inside speak resolves from exactly two places, utterance.onend and utterance.onerror for canceled/interrupted. This is a plan-checklist integrity failure, not a missing nicety.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - investigate-voiceselector-and-chunk-watchdog-debts [ses_f258317e5ffe1mZUF6ZMJHXI2m].md:L3472] Because the queue chains each chunk off the previous onend, a watchdog is a functional requirement"
     },
     {
       "id": "concept--chrome-google-voice-never-fires-speech-events",
@@ -45,7 +47,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - investigate-voiceselector-and-chunk-watchdog-debts [ses_f258317e5ffe1mZUF6ZMJHXI2m].md",
       "source_location": "L3485",
       "norm_label": "an onend-chained chunk queue wedges permanently when onend never fires",
-      "description": "If onend never fires, the await at browserSpeechSynthesis.ts:394 never returns, so speakChunkQueue never reaches :401 and shouldStop is never re-evaluated — the stop-signal guard cannot rescue the queue because the loop is parked inside the await, not at a checkpoint. TtsLiveDemoCard sets status \"playing\" at :196, the Playing pill at :339-343 is gated on it, and handlePlay early-returns at :193, so the UI shows Playing indefinitely. handleStop (:171-180) does recover the UI — it sets stopRef.current, calls cancel() and unconditionally setStatus(\"idle\") + resetPlaybackState() without awaiting the wedged promise — but cancel() (:420-425) only calls window.speechSynthesis.cancel() and nulls _activeUtterance, so the old speakChunkQueue invocation and its handlePlay closure leak forever, one per stall. The single-chunk path at :241-247 calls speak directly and is more exposed: no queue, no onChunk, no checkpoint at all. _activeUtterance (:158-159) is the anti-GC reference and under a stall it is retained, which is correct for the [12] workaround but never released except by cancel(); the auto-resume at :368-371 repairs a phantom paused engine, not a phantom speaking one, so it cannot break a stall."
+      "description": "If onend never fires, the await at browserSpeechSynthesis.ts:394 never returns, so speakChunkQueue never reaches :401 and shouldStop is never re-evaluated — the stop-signal guard cannot rescue the queue because the loop is parked inside the await, not at a checkpoint. TtsLiveDemoCard sets status \"playing\" at :196, the Playing pill at :339-343 is gated on it, and handlePlay early-returns at :193, so the UI shows Playing indefinitely. handleStop (:171-180) does recover the UI — it sets stopRef.current, calls cancel() and unconditionally setStatus(\"idle\") + resetPlaybackState() without awaiting the wedged promise — but cancel() (:420-425) only calls window.speechSynthesis.cancel() and nulls _activeUtterance, so the old speakChunkQueue invocation and its handlePlay closure leak forever, one per stall. The single-chunk path at :241-247 calls speak directly and is more exposed: no queue, no onChunk, no checkpoint at all. _activeUtterance (:158-159) is the anti-GC reference and under a stall it is retained, which is correct for the [12] workaround but never released except by cancel(); the auto-resume at :368-371 repairs a phantom paused engine, not a phantom speaking one, so it cannot break a stall.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - investigate-voiceselector-and-chunk-watchdog-debts [ses_f258317e5ffe1mZUF6ZMJHXI2m].md:L3515] Skip-versus-abort on timeout is a product decision because skipping garbles output"
     },
     {
       "id": "concept--playback-skipped-copy-shipped-without-its-code",
@@ -64,33 +67,6 @@
       "source_location": "L3391",
       "norm_label": "git log -s provenance unverified: no shell tool in the read-only session",
       "description": "This session has no shell/execute tool, so git log -S could not be executed; the repo's own RCA/progress records were substituted as evidence instead. The static evidence is conclusive in direction — a repo-wide grep for onChunkTimeout returns matches only in the plan document, and the orphaned i18n key proves Task 6 landed — but whether an unmerged branch holds a partial implementation is the one thing git log --all -S should confirm. Per AGENTS.md rule 7, do not act on the inferred timeline without that measurement. Requested before deleting VoiceSelector: git log --all -S onChunkTimeout and git log -S VoiceSelector -- apps/web/src."
-    },
-    {
-      "id": "rationale--keep-was-a-recorded-scope-decision-not-an-oversight",
-      "label": "The unmounted-component keep was a deliberate recorded scope decision",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - investigate-voiceselector-and-chunk-watchdog-debts [ses_f258317e5ffe1mZUF6ZMJHXI2m].md",
-      "source_location": "L3427",
-      "norm_label": "the unmounted-component keep was a deliberate recorded scope decision",
-      "description": "The three-way duplication was resolved by owner decision and only the profile picker was kept: RCA :91 \"TtsLiveDemoCard now mounts only the availability-filtered TtsVoiceProfilePicker; the raw VoiceSelector was removed from the Audio page\", RCA :112 \"Unused-but-kept per approved scope\", progress :68 \"| VoiceSelector component file | Keep (unmounted) | Delete component and test | Approved scope said keep available |\". So the keep was a deliberate, recorded scope decision, not an oversight — which is exactly why the debt exists today. Reversing it needs re-confirmation by the owner, not an engineering assumption."
-    },
-    {
-      "id": "rationale--onend-chained-queue-makes-a-watchdog-load-bearing",
-      "label": "Because the queue chains each chunk off the previous onend, a watchdog is a functional requirement",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - investigate-voiceselector-and-chunk-watchdog-debts [ses_f258317e5ffe1mZUF6ZMJHXI2m].md",
-      "source_location": "L3472",
-      "norm_label": "because the queue chains each chunk off the previous onend, a watchdog is a functional requirement",
-      "description": "The note's own stated reason, quoted from research :11: Snipset's chunk queue chains each chunk from the previous chunk's onend, so a silent event failure would stall the queue rather than simply truncate audio, which makes a watchdog or timeout guard a functional requirement of the profile feature rather than an optional hardening [15][12]. Without it the headline benefit of the voice-profile work is silently defeated on the platform where the preferred voice is actually available."
-    },
-    {
-      "id": "rationale--skip-vs-abort-is-a-product-decision",
-      "label": "Skip-versus-abort on timeout is a product decision because skipping garbles output",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - investigate-voiceselector-and-chunk-watchdog-debts [ses_f258317e5ffe1mZUF6ZMJHXI2m].md",
-      "source_location": "L3515",
-      "norm_label": "skip-versus-abort on timeout is a product decision because skipping garbles output",
-      "description": "Watchdog scope and default are a product decision: Math.max(6000, len * 80) and \"degrade to the next chunk\" versus \"abort the whole playback\" — silently skipping a chunk produces garbled output, while aborting is louder but safer. The plan chose skip; confirm it still holds now that a fallback-voice policy has since removed fallbacks (availability-rca.md:62)."
     },
     {
       "id": "concept--usetranslation-hard-default-to-english",
@@ -126,7 +102,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23b-overlay-window-language [ses_f209aeb49ffeAF5ENM1L52u4DG].md",
       "source_location": "L36",
       "norm_label": "prefer the reactive useoverlaylanguage hook over the one-shot resolveoverlaylang",
-      "description": "Use useOverlayLanguage for components, resolveOverlayLang for module-scope code outside a component; a one-shot read misses a language change that happens after the window opened, which is exactly the bug class being fixed. Outcome across all 17 files in the slice: useOverlayLanguage (reactive) in every one, never resolveOverlayLang, because no file in this slice has module-scope translation code. Four files take lang as a prop instead to keep one IPC read per window (AiSnippetMagicMenuEditingView, SessionList, FloatingSidebarHeader, FloatingSidebarFooter); MfaMagicMenu uses 3 hooks rather than 2 prop interfaces plus 3 call-site edits; FloatingSidebar/index.tsx forwards to 3 children so the read happens once instead of four times."
+      "description": "Use useOverlayLanguage for components, resolveOverlayLang for module-scope code outside a component; a one-shot read misses a language change that happens after the window opened, which is exactly the bug class being fixed. Outcome across all 17 files in the slice: useOverlayLanguage (reactive) in every one, never resolveOverlayLang, because no file in this slice has module-scope translation code. Four files take lang as a prop instead to keep one IPC read per window (AiSnippetMagicMenuEditingView, SessionList, FloatingSidebarHeader, FloatingSidebarFooter); MfaMagicMenu uses 3 hooks rather than 2 prop interfaces plus 3 call-site edits; FloatingSidebar/index.tsx forwards to 3 children so the read happens once instead of four times.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23b-overlay-window-language [ses_f209aeb49ffeAF5ENM1L52u4DG].md:L11739] A one-shot read misses a language change after the window opened, which is the bug class being fixed"
     },
     {
       "id": "concept--main-tsx-left-in-unpropagated-lang-ledger",
@@ -144,7 +121,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23b-overlay-window-language [ses_f209aeb49ffeAF5ENM1L52u4DG].md",
       "source_location": "L65",
       "norm_label": "red probe outside the repo",
-      "description": "The defect was proven with a throwaway probe under /tmp/opencode/d23b/, never in the repo: symlink src and the repo-root node_modules into the temp dir, write a vitest config with root at apps/web, set localStorage[\"snipset-lang\"] = \"id\" and have the get_preferences mock return { language: \"id\" }, then render and show English output. All 18 components rendered English under those conditions across 112 distinct changed t() keys. Dictionary sanity was asserted first: en(\"copied\") = \"Copied!\" vs id(\"copied\") = \"Tersalin!\"."
+      "description": "The defect was proven with a throwaway probe under /tmp/opencode/d23b/, never in the repo: symlink src and the repo-root node_modules into the temp dir, write a vitest config with root at apps/web, set localStorage[\"snipset-lang\"] = \"id\" and have the get_preferences mock return { language: \"id\" }, then render and show English output. All 18 components rendered English under those conditions across 112 distinct changed t() keys. Dictionary sanity was asserted first: en(\"copied\") = \"Copied!\" vs id(\"copied\") = \"Tersalin!\".",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23b-overlay-window-language [ses_f209aeb49ffeAF5ENM1L52u4DG].md:L65] Host default locale would false pass"
     },
     {
       "id": "concept--probe-include-glob-ignored-by-vitest-ran-the-full-suite",
@@ -162,7 +140,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23b-overlay-window-language [ses_f209aeb49ffeAF5ENM1L52u4DG].md",
       "source_location": "L11771",
       "norm_label": "tasks/magicmenutaskrow and tasks/nlptokenspreview are dead duplicates of the live magic_menu_tasks components",
-      "description": "Verified and left alone per the brief's report-don't-fix instruction. components/tasks/MagicMenuTaskRow.tsx is referenced only by its own test; the live component is components/magic_menu_tasks/TaskRow.tsx. components/tasks/NlpTokensPreview.tsx is referenced only by its own test; the live one is components/magic_menu_tasks/NlpTokensPreview.tsx, used at MagicMenuTasks.tsx:7. A third candidate, ClipboardMagicMenuItem.tsx, was assumed dead in the brief but is NOT: it is imported at ClipboardMagicMenu.tsx:9 and rendered at :226."
+      "description": "Verified and left alone per the brief's report-don't-fix instruction. components/tasks/MagicMenuTaskRow.tsx is referenced only by its own test; the live component is components/magic_menu_tasks/TaskRow.tsx. components/tasks/NlpTokensPreview.tsx is referenced only by its own test; the live one is components/magic_menu_tasks/NlpTokensPreview.tsx, used at MagicMenuTasks.tsx:7. A third candidate, ClipboardMagicMenuItem.tsx, was assumed dead in the brief but is NOT: it is imported at ClipboardMagicMenu.tsx:9 and rendered at :226.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23b-overlay-window-language [ses_f209aeb49ffeAF5ENM1L52u4DG].md:L57] Do not resurrect or delete dead code"
     },
     {
       "id": "concept--companion-cards-need-the-overlay-hook-because-their-parent-does-not-forward-lang",
@@ -181,42 +160,9 @@
       "source_location": "L11782",
       "norm_label": "i18n completeness.test.ts failures are stale-ledger state from concurrent chunks, none in this slice",
       "description": "src/i18n/completeness.test.ts exited 1 with 6 failed / 18 passed, expected from stale ledger entries because both completeness.test.ts and completenessNewBudgets.ts were being edited by other chunks at the time. None of the 6 involve the 17 files in this slice. The 8 remaining hard-locked useTranslation() call sites are in ActivationScreen, ClipboardViewModal, HighlightPopup, SmartFormModal, ActionCardRenderer, VisualInspectModal, AdminDashboard and VaultSecurityPanel. The 12 unpropagated-lang entries include components/MagicMenuTasks.tsx: 1, already recorded at completenessNewBudgets.ts:314 — the live budget is {} while the scan finds 12. The other 4 failures are a Rust error-code dictionary, a raw-Err() budget, a t(\"key\") literal inside the budgets file and a parent-fallback ledger. Not edited."
-    },
-    {
-      "id": "rationale--host-default-locale-would-false-pass",
-      "label": "Host default locale would false pass",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23b-overlay-window-language [ses_f209aeb49ffeAF5ENM1L52u4DG].md",
-      "source_location": "L65",
-      "norm_label": "host default locale would false pass",
-      "description": "This host's default locale is already id-ID, so never rely on a bare toLocale* to demonstrate the bug — it would accidentally pass. The RED probe therefore sets both localStorage[\"snipset-lang\"] = \"id\" and the get_preferences mock to { language: \"id\" }, and no bare toLocale* was used anywhere in it."
-    },
-    {
-      "id": "rationale--reactive-hook-misses-nothing-after-the-window-opens",
-      "label": "A one-shot read misses a language change after the window opened, which is the bug class being fixed",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23b-overlay-window-language [ses_f209aeb49ffeAF5ENM1L52u4DG].md",
-      "source_location": "L11739",
-      "norm_label": "a one-shot read misses a language change after the window opened, which is the bug class being fixed",
-      "description": "No file in this slice has module-scope translation code, so a one-shot was never needed; resolveOverlayLang would miss a language change that happens after the window opened, which is the exact bug class. All 17 files use useOverlayLanguage (reactive), never resolveOverlayLang."
-    },
-    {
-      "id": "rationale--do-not-resurrect-or-delete-dead-code",
-      "label": "Do not resurrect or delete dead code",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23b-overlay-window-language [ses_f209aeb49ffeAF5ENM1L52u4DG].md",
-      "source_location": "L57",
-      "norm_label": "do not resurrect or delete dead code",
-      "description": "DEAD CODE — report, do not fix. Verify whether ClipboardMagicMenuItem.tsx, components/tasks/MagicMenuTaskRow.tsx and components/tasks/NlpTokensPreview.tsx have zero production callers; if so, leave them and list them. The verification falsified the brief's assumption about ClipboardMagicMenuItem.tsx, which is live."
     }
   ],
   "links": [
-    {
-      "source": "rationale--keep-was-a-recorded-scope-decision-not-an-oversight",
-      "target": "concept--voiceselector-unmounted-dead-component",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--voiceselector-loading-state-on-permanently-empty-list",
       "target": "concept--voiceselector-unmounted-dead-component",
@@ -228,12 +174,6 @@
       "target": "concept--voiceselector-unmounted-dead-component",
       "relation": "conceptually_related_to",
       "confidence": "INFERRED"
-    },
-    {
-      "source": "rationale--onend-chained-queue-makes-a-watchdog-load-bearing",
-      "target": "concept--onchunktimeout-watchdog-specified-never-implemented",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
     },
     {
       "source": "concept--onchunktimeout-watchdog-specified-never-implemented",
@@ -251,12 +191,6 @@
       "source": "concept--onend-chained-chunk-queue-wedges-forever",
       "target": "concept--chrome-google-voice-never-fires-speech-events",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--skip-vs-abort-is-a-product-decision",
-      "target": "concept--onend-chained-chunk-queue-wedges-forever",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {
@@ -278,12 +212,6 @@
       "confidence": "EXTRACTED"
     },
     {
-      "source": "rationale--reactive-hook-misses-nothing-after-the-window-opens",
-      "target": "concept--reactive-hook-over-one-shot-resolve",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
       "source": "concept--main-tsx-left-in-unpropagated-lang-ledger",
       "target": "concept--reactive-hook-over-one-shot-resolve",
       "relation": "conceptually_related_to",
@@ -296,21 +224,9 @@
       "confidence": "EXTRACTED"
     },
     {
-      "source": "rationale--host-default-locale-would-false-pass",
-      "target": "concept--red-probe-outside-the-repo",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
       "source": "concept--companion-cards-need-the-overlay-hook-because-their-parent-does-not-forward-lang",
       "target": "concept--use-overlay-language-localstorage-hook",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--do-not-resurrect-or-delete-dead-code",
-      "target": "concept--dead-duplicate-task-components",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {

@@ -6,7 +6,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t7b-family-budgets-and-cut-fix [ses_f167e9379ffeAgCtoPSuNmhuTg].md",
       "source_location": "L33",
-      "norm_label": "per content family title budget, not per locale"
+      "norm_label": "per content family title budget, not per locale",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t7b-family-budgets-and-cut-fix [ses_f167e9379ffeAgCtoPSuNmhuTg].md:L33] The floor stays because the 29 too-short titles are a copy problem, and a higher floor would only relabel them as failures"
     },
     {
       "id": "concept--generated-versus-handwritten-title-classification",
@@ -14,7 +15,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t7b-family-budgets-and-cut-fix [ses_f167e9379ffeAgCtoPSuNmhuTg].md",
       "source_location": "L42",
-      "norm_label": "generated versus hand-written title classification"
+      "norm_label": "generated versus hand-written title classification",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t7b-family-budgets-and-cut-fix [ses_f167e9379ffeAgCtoPSuNmhuTg].md:L42] Truncating hand-written prose is machine-editing Indonesian copy whatever the mechanism, so it is forbidden"
     },
     {
       "id": "concept--dangling-function-word-cut-defect",
@@ -30,7 +32,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t7b-family-budgets-and-cut-fix [ses_f167e9379ffeAgCtoPSuNmhuTg].md",
       "source_location": "L52",
-      "norm_label": "locale-aware function word lists, english and indonesian kept separate"
+      "norm_label": "locale-aware function word lists, english and indonesian kept separate",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t7b-family-budgets-and-cut-fix [ses_f167e9379ffeAgCtoPSuNmhuTg].md:L11417] localeOf errs towards English because a missed trim costs a few characters while a wrong trim costs a real word"
     },
     {
       "id": "concept--measurement-artifact-circularity-caveat",
@@ -46,7 +49,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t7b-family-budgets-and-cut-fix [ses_f167e9379ffeAgCtoPSuNmhuTg].md",
       "source_location": "L11356",
-      "norm_label": "live rss feed as source of raw pre-truncation titles"
+      "norm_label": "live rss feed as source of raw pre-truncation titles",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t7b-family-budgets-and-cut-fix [ses_f167e9379ffeAgCtoPSuNmhuTg].md:L64] A hand-written list of the six known-bad titles proves nothing about the seventh"
     },
     {
       "id": "concept--raw-title-budget-derived-from-suffix-length",
@@ -54,7 +58,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t7b-family-budgets-and-cut-fix [ses_f167e9379ffeAgCtoPSuNmhuTg].md",
       "source_location": "L11384",
-      "norm_label": "raw title budget derived by subtracting default_site_suffix length from title_ceiling"
+      "norm_label": "raw title budget derived by subtracting default_site_suffix length from title_ceiling",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t7b-family-budgets-and-cut-fix [ses_f167e9379ffeAgCtoPSuNmhuTg].md:L6303] Raising the ceiling from 70 to 80 incidentally fixes five of the six dangling-word defects by no longer cutting; only the bracket defect needs code"
     },
     {
       "id": "concept--hardcoded-budget-literal-at-blog-post-call-sites",
@@ -70,7 +75,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t7b-family-budgets-and-cut-fix [ses_f167e9379ffeAgCtoPSuNmhuTg].md",
       "source_location": "L11400",
-      "norm_label": "repaircut: drop trailing function word and whole open bracketed run after a word-boundary cut"
+      "norm_label": "repaircut: drop trailing function word and whole open bracketed run after a word-boundary cut",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t7b-family-budgets-and-cut-fix [ses_f167e9379ffeAgCtoPSuNmhuTg].md:L11413] An unclosed bracket is fixed by dropping the parenthetical, because inventing a character the author never wrote is worse than losing a clause"
     },
     {
       "id": "concept--d1-taxonomy-titles-bypass-blog-title-helper",
@@ -87,54 +93,6 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t7b-family-budgets-and-cut-fix [ses_f167e9379ffeAgCtoPSuNmhuTg].md",
       "source_location": "L11470",
       "norm_label": "classifytitlefamily: a single-sourced title family classifier exported so test and code cannot diverge"
-    },
-    {
-      "id": "rationale--floor-left-where-it-is-because-too-short-titles-are-a-copy-problem",
-      "label": "The floor stays because the 29 too-short titles are a copy problem, and a higher floor would only relabel them as failures",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t7b-family-budgets-and-cut-fix [ses_f167e9379ffeAgCtoPSuNmhuTg].md",
-      "source_location": "L33",
-      "norm_label": "the floor stays because the 29 too-short titles are a copy problem, and a higher floor would only relabel them as failures"
-    },
-    {
-      "id": "rationale--no-machine-edit-of-handwritten-or-indonesian-copy",
-      "label": "Truncating hand-written prose is machine-editing Indonesian copy whatever the mechanism, so it is forbidden",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t7b-family-budgets-and-cut-fix [ses_f167e9379ffeAgCtoPSuNmhuTg].md",
-      "source_location": "L42",
-      "norm_label": "truncating hand-written prose is machine-editing indonesian copy whatever the mechanism, so it is forbidden"
-    },
-    {
-      "id": "rationale--structural-corpus-test-not-a-hardcoded-bad-list",
-      "label": "A hand-written list of the six known-bad titles proves nothing about the seventh",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t7b-family-budgets-and-cut-fix [ses_f167e9379ffeAgCtoPSuNmhuTg].md",
-      "source_location": "L64",
-      "norm_label": "a hand-written list of the six known-bad titles proves nothing about the seventh"
-    },
-    {
-      "id": "rationale--drop-parenthetical-rather-than-synthesise-closing-bracket",
-      "label": "An unclosed bracket is fixed by dropping the parenthetical, because inventing a character the author never wrote is worse than losing a clause",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t7b-family-budgets-and-cut-fix [ses_f167e9379ffeAgCtoPSuNmhuTg].md",
-      "source_location": "L11413",
-      "norm_label": "an unclosed bracket is fixed by dropping the parenthetical, because inventing a character the author never wrote is worse than losing a clause"
-    },
-    {
-      "id": "rationale--locale-detection-errs-towards-english",
-      "label": "localeOf errs towards English because a missed trim costs a few characters while a wrong trim costs a real word",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t7b-family-budgets-and-cut-fix [ses_f167e9379ffeAgCtoPSuNmhuTg].md",
-      "source_location": "L11417",
-      "norm_label": "localeof errs towards english because a missed trim costs a few characters while a wrong trim costs a real word"
-    },
-    {
-      "id": "rationale--raising-ceiling-to-80-incidentally-fixes-five-of-six-dangling-defects",
-      "label": "Raising the ceiling from 70 to 80 incidentally fixes five of the six dangling-word defects by no longer cutting; only the bracket defect needs code",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t7b-family-budgets-and-cut-fix [ses_f167e9379ffeAgCtoPSuNmhuTg].md",
-      "source_location": "L6303",
-      "norm_label": "raising the ceiling from 70 to 80 incidentally fixes five of the six dangling-word defects by no longer cutting; only the bracket defect needs code"
     },
     {
       "id": "concept--workerd-platform-binary-optional-dependencies",
@@ -174,32 +132,14 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c4-workerd-optional-dep-review [ses_f083c33a4ffeFakF4Ek2WypT60].md",
       "source_location": "L809",
-      "norm_label": "bun install --frozen-lockfile as a dependency coherence gate across ci and deploy scripts"
-    },
-    {
-      "id": "rationale--frozen-lockfile-errors-on-specifier-mismatch",
-      "label": "Bun errors rather than silently reinstalling when the lockfile is frozen and the package.json specifier changed",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c4-workerd-optional-dep-review [ses_f083c33a4ffeFakF4Ek2WypT60].md",
-      "source_location": "L783",
-      "norm_label": "bun errors rather than silently reinstalling when the lockfile is frozen and the package.json specifier changed"
-    },
-    {
-      "id": "rationale--verdict-blocking-because-unmodified-lockfile-breaks-every-frozen-install",
-      "label": "The verdict is blocking because every frozen-lockfile call site fails on the L43 specifier mismatch while bun.lock is unmodified",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c4-workerd-optional-dep-review [ses_f083c33a4ffeFakF4Ek2WypT60].md",
-      "source_location": "L809",
-      "norm_label": "the verdict is blocking because every frozen-lockfile call site fails on the l43 specifier mismatch while bun.lock is unmodified"
+      "norm_label": "bun install --frozen-lockfile as a dependency coherence gate across ci and deploy scripts",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c4-workerd-optional-dep-review [ses_f083c33a4ffeFakF4Ek2WypT60].md:L783] Bun errors rather than silently reinstalling when the lockfile is frozen and the package.json specifier changed",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c4-workerd-optional-dep-review [ses_f083c33a4ffeFakF4Ek2WypT60].md:L809] The verdict is blocking because every frozen-lockfile call site fails on the L43 specifier mismatch while bun.lock is unmodified"
+      ]
     }
   ],
   "links": [
-    {
-      "source": "rationale--floor-left-where-it-is-because-too-short-titles-are-a-copy-problem",
-      "target": "concept--per-content-family-title-budget",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--per-content-family-title-budget",
       "target": "concept--generated-versus-handwritten-title-classification",
@@ -210,12 +150,6 @@
       "source": "concept--per-content-family-title-budget",
       "target": "concept--raw-title-budget-derived-from-suffix-length",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--no-machine-edit-of-handwritten-or-indonesian-copy",
-      "target": "concept--generated-versus-handwritten-title-classification",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {
@@ -267,33 +201,9 @@
       "confidence": "EXTRACTED"
     },
     {
-      "source": "rationale--drop-parenthetical-rather-than-synthesise-closing-bracket",
-      "target": "concept--cut-repair-drops-trailing-function-word-and-open-bracket",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--locale-detection-errs-towards-english",
-      "target": "concept--locale-aware-function-word-lists",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--raising-ceiling-to-80-incidentally-fixes-five-of-six-dangling-defects",
-      "target": "concept--raw-title-budget-derived-from-suffix-length",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
       "source": "concept--measurement-artifact-circularity-caveat",
       "target": "concept--live-rss-recovery-of-raw-pretruncation-titles",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--structural-corpus-test-not-a-hardcoded-bad-list",
-      "target": "concept--live-rss-recovery-of-raw-pretruncation-titles",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {
@@ -324,18 +234,6 @@
       "source": "concept--frozen-lockfile-lockfile-coherence-gate",
       "target": "concept--exact-pin-conflict-root-vs-transitive-workerd",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--frozen-lockfile-errors-on-specifier-mismatch",
-      "target": "concept--frozen-lockfile-lockfile-coherence-gate",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--verdict-blocking-because-unmodified-lockfile-breaks-every-frozen-install",
-      "target": "concept--frozen-lockfile-lockfile-coherence-gate",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     }
   ]

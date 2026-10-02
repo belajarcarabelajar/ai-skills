@@ -6,7 +6,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md",
       "source_location": "L35",
-      "norm_label": "i18n out-of-scope register"
+      "norm_label": "i18n out-of-scope register",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md:L35] Write the register down because nobody recorded the scope decision"
     },
     {
       "id": "concept--single-error-choke-point",
@@ -14,7 +15,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md",
       "source_location": "L40",
-      "norm_label": "single error choke point"
+      "norm_label": "single error choke point",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md:L49] Route errors through the choke point first because it is one edit"
     },
     {
       "id": "concept--tauri-coupled-locale-library",
@@ -22,7 +24,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md",
       "source_location": "L39",
-      "norm_label": "tauri-coupled locale library"
+      "norm_label": "tauri-coupled locale library",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md:L39] Tauri coupling is why the CLI cannot reuse the desktop locale library"
     },
     {
       "id": "concept--mcp-tool-description-localisation-exclusion",
@@ -30,7 +33,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md",
       "source_location": "L49",
-      "norm_label": "mcp tool description localisation exclusion"
+      "norm_label": "mcp tool description localisation exclusion",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md:L49] MCP tool descriptions are read by LLM clients, not humans"
     },
     {
       "id": "concept--unreproducible-audit-metric",
@@ -38,7 +42,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md",
       "source_location": "L1149",
-      "norm_label": "unreproducible audit metric"
+      "norm_label": "unreproducible audit metric",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md:L874] Cite reproducible counts instead of copying a brief number forward"
     },
     {
       "id": "concept--word-boundary-locale-grep",
@@ -46,7 +51,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md",
       "source_location": "L1152",
-      "norm_label": "word-boundary locale grep"
+      "norm_label": "word-boundary locale grep",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md:L1461] A bare substring search for lang returns false positives from language"
     },
     {
       "id": "concept--cli-english-only-by-decision",
@@ -57,60 +63,13 @@
       "norm_label": "cli english-only by decision"
     },
     {
-      "id": "rationale--register-prevents-re-audit",
-      "label": "Write the register down because nobody recorded the scope decision",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md",
-      "source_location": "L35",
-      "norm_label": "write the register down because nobody recorded the scope decision"
-    },
-    {
-      "id": "rationale--sourced-metrics-over-inherited-counts",
-      "label": "Cite reproducible counts instead of copying a brief number forward",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md",
-      "source_location": "L874",
-      "norm_label": "cite reproducible counts instead of copying a brief number forward"
-    },
-    {
-      "id": "rationale--choke-point-first-sequencing",
-      "label": "Route errors through the choke point first because it is one edit",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md",
-      "source_location": "L49",
-      "norm_label": "route errors through the choke point first because it is one edit"
-    },
-    {
-      "id": "rationale--mcp-descriptions-read-by-llm-clients",
-      "label": "MCP tool descriptions are read by LLM clients, not humans",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md",
-      "source_location": "L49",
-      "norm_label": "mcp tool descriptions are read by llm clients, not humans"
-    },
-    {
-      "id": "rationale--tauri-coupling-blocks-cli-reuse",
-      "label": "Tauri coupling is why the CLI cannot reuse the desktop locale library",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md",
-      "source_location": "L39",
-      "norm_label": "tauri coupling is why the cli cannot reuse the desktop locale library"
-    },
-    {
-      "id": "rationale--word-boundary-search-precision",
-      "label": "A bare substring search for lang returns false positives from language",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md",
-      "source_location": "L1461",
-      "norm_label": "a bare substring search for lang returns false positives from language"
-    },
-    {
       "id": "concept--independent-platform-versioning",
       "label": "Independent platform versioning",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
       "source_location": "L53",
-      "norm_label": "independent platform versioning"
+      "norm_label": "independent platform versioning",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L53] The Windows flow consumes the Windows authority only"
     },
     {
       "id": "concept--windows-platform-authority",
@@ -126,7 +85,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
       "source_location": "L3910",
-      "norm_label": "windows-namespaced tag trigger"
+      "norm_label": "windows-namespaced tag trigger",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L3910] Legacy bare v stays readable but must not build a Windows release"
     },
     {
       "id": "concept--windows-compatibility-aggregate",
@@ -150,7 +110,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
       "source_location": "L4326",
-      "norm_label": "stale aggregate refused, not clobbered"
+      "norm_label": "stale aggregate refused, not clobbered",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L58] A stale aggregate must be refused rather than clobbered"
     },
     {
       "id": "concept--build-free-producer-dry-run",
@@ -158,7 +119,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
       "source_location": "L57",
-      "norm_label": "build-free producer dry-run"
+      "norm_label": "build-free producer dry-run",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L9779] A dry run should validate everything it can and state what it cannot",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L9753] A dry run must not perform a persistent write"
+      ]
     },
     {
       "id": "concept--windows-owned-state-rollback",
@@ -166,7 +131,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
       "source_location": "L58",
-      "norm_label": "windows-owned state rollback"
+      "norm_label": "windows-owned state rollback",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L8712] Atomic tmp-plus-rename means only the file that succeeded needs restoring"
     },
     {
       "id": "concept--minisign-signature-fail-closed",
@@ -174,7 +140,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
       "source_location": "L12689",
-      "norm_label": "minisign signature fail-closed"
+      "norm_label": "minisign signature fail-closed",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L12689] A soft warning lets an unsigned release through; throw instead"
     },
     {
       "id": "concept--embedded-producer-script-execution",
@@ -182,7 +149,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
       "source_location": "L4718",
-      "norm_label": "embedded producer script execution"
+      "norm_label": "embedded producer script execution",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L12674] Run the JS embedded in the PowerShell so the test drives production code"
     },
     {
       "id": "concept--source-level-only-powershell-assertion",
@@ -190,7 +158,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
       "source_location": "L69",
-      "norm_label": "source-level-only powershell assertion"
+      "norm_label": "source-level-only powershell assertion",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L12686] No pwsh on this host, so PowerShell claims are not runtime evidence"
     },
     {
       "id": "concept--bash-metacharacter-free-embedded-js",
@@ -198,7 +167,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
       "source_location": "L4209",
-      "norm_label": "bash-metacharacter-free embedded js"
+      "norm_label": "bash-metacharacter-free embedded js",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L4209] Bash single-quote wrapping forbids quotes, dollars and backticks in the payload"
     },
     {
       "id": "concept--explicit-platform-and-version-required",
@@ -206,7 +176,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
       "source_location": "L47",
-      "norm_label": "explicit --platform and --version required"
+      "norm_label": "explicit --platform and --version required",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L47] Ignoring the version argument was a bug, so the call now fails loudly"
     },
     {
       "id": "concept--text-parsed-workflow-trigger-contract",
@@ -214,7 +185,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
       "source_location": "L4689",
-      "norm_label": "text-parsed workflow trigger contract"
+      "norm_label": "text-parsed workflow trigger contract",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L4689] Parse the workflow as text because yaml is only a transitive dependency"
     },
     {
       "id": "concept--mandatory-powershell-param-ci-hazard",
@@ -222,150 +194,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
       "source_location": "L11351",
-      "norm_label": "mandatory powershell param ci hazard"
-    },
-    {
-      "id": "rationale--windows-authority-only",
-      "label": "The Windows flow consumes the Windows authority only",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
-      "source_location": "L53",
-      "norm_label": "the windows flow consumes the windows authority only"
-    },
-    {
-      "id": "rationale--drop-bare-v-as-a-producer-trigger",
-      "label": "Legacy bare v stays readable but must not build a Windows release",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
-      "source_location": "L3910",
-      "norm_label": "legacy bare v stays readable but must not build a windows release"
-    },
-    {
-      "id": "rationale--conflict-detection-over-clobber",
-      "label": "A stale aggregate must be refused rather than clobbered",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
-      "source_location": "L58",
-      "norm_label": "a stale aggregate must be refused rather than clobbered"
-    },
-    {
-      "id": "rationale--dry-run-validates-whatever-it-can",
-      "label": "A dry run should validate everything it can and state what it cannot",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
-      "source_location": "L9779",
-      "norm_label": "a dry run should validate everything it can and state what it cannot"
-    },
-    {
-      "id": "rationale--dry-run-writes-nothing",
-      "label": "A dry run must not perform a persistent write",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
-      "source_location": "L9753",
-      "norm_label": "a dry run must not perform a persistent write"
-    },
-    {
-      "id": "rationale--fail-closed-over-soft-warning",
-      "label": "A soft warning lets an unsigned release through; throw instead",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
-      "source_location": "L12689",
-      "norm_label": "a soft warning lets an unsigned release through; throw instead"
-    },
-    {
-      "id": "rationale--execute-the-real-embedded-script",
-      "label": "Run the JS embedded in the PowerShell so the test drives production code",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
-      "source_location": "L12674",
-      "norm_label": "run the js embedded in the powershell so the test drives production code"
-    },
-    {
-      "id": "rationale--label-source-level-only",
-      "label": "No pwsh on this host, so PowerShell claims are not runtime evidence",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
-      "source_location": "L12686",
-      "norm_label": "no pwsh on this host, so powershell claims are not runtime evidence"
-    },
-    {
-      "id": "rationale--no-metacharacters-in-bash-quoted-js",
-      "label": "Bash single-quote wrapping forbids quotes, dollars and backticks in the payload",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
-      "source_location": "L4209",
-      "norm_label": "bash single-quote wrapping forbids quotes, dollars and backticks in the payload"
-    },
-    {
-      "id": "rationale--text-parse-not-yaml-dependency",
-      "label": "Parse the workflow as text because yaml is only a transitive dependency",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
-      "source_location": "L4689",
-      "norm_label": "parse the workflow as text because yaml is only a transitive dependency"
-    },
-    {
-      "id": "rationale--mandatory-param-would-hang-ci",
-      "label": "A Mandatory param prompts and fails when CI invokes the script with no arguments",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
-      "source_location": "L11351",
-      "norm_label": "a mandatory param prompts and fails when ci invokes the script with no arguments"
-    },
-    {
-      "id": "rationale--explicit-args-fail-loudly",
-      "label": "Ignoring the version argument was a bug, so the call now fails loudly",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
-      "source_location": "L47",
-      "norm_label": "ignoring the version argument was a bug, so the call now fails loudly"
-    },
-    {
-      "id": "rationale--rollback-restores-only-written-files",
-      "label": "Atomic tmp-plus-rename means only the file that succeeded needs restoring",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
-      "source_location": "L8712",
-      "norm_label": "atomic tmp-plus-rename means only the file that succeeded needs restoring"
+      "norm_label": "mandatory powershell param ci hazard",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L11351] A Mandatory param prompts and fails when CI invokes the script with no arguments"
     }
   ],
   "links": [
-    {
-      "source": "rationale--register-prevents-re-audit",
-      "target": "concept--i18n-out-of-scope-register",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--sourced-metrics-over-inherited-counts",
-      "target": "concept--unreproducible-audit-metric",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--choke-point-first-sequencing",
-      "target": "concept--single-error-choke-point",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--mcp-descriptions-read-by-llm-clients",
-      "target": "concept--mcp-tool-description-localisation-exclusion",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--tauri-coupling-blocks-cli-reuse",
-      "target": "concept--tauri-coupled-locale-library",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--word-boundary-search-precision",
-      "target": "concept--word-boundary-locale-grep",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--i18n-out-of-scope-register",
       "target": "concept--cli-english-only-by-decision",
@@ -394,84 +227,6 @@
       "source": "concept--single-error-choke-point",
       "target": "concept--unreproducible-audit-metric",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--windows-authority-only",
-      "target": "concept--independent-platform-versioning",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--drop-bare-v-as-a-producer-trigger",
-      "target": "concept--windows-namespaced-tag-trigger",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--conflict-detection-over-clobber",
-      "target": "concept--stale-aggregate-refused-not-clobbered",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--dry-run-validates-whatever-it-can",
-      "target": "concept--build-free-producer-dry-run",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--dry-run-writes-nothing",
-      "target": "concept--build-free-producer-dry-run",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--fail-closed-over-soft-warning",
-      "target": "concept--minisign-signature-fail-closed",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--execute-the-real-embedded-script",
-      "target": "concept--embedded-producer-script-execution",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--label-source-level-only",
-      "target": "concept--source-level-only-powershell-assertion",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--no-metacharacters-in-bash-quoted-js",
-      "target": "concept--bash-metacharacter-free-embedded-js",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--text-parse-not-yaml-dependency",
-      "target": "concept--text-parsed-workflow-trigger-contract",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--mandatory-param-would-hang-ci",
-      "target": "concept--mandatory-powershell-param-ci-hazard",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--explicit-args-fail-loudly",
-      "target": "concept--explicit-platform-and-version-required",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--rollback-restores-only-written-files",
-      "target": "concept--windows-owned-state-rollback",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {

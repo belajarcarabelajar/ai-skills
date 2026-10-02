@@ -14,7 +14,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
       "source_location": "L9657",
-      "norm_label": "unavailability indistinguishable from zero"
+      "norm_label": "unavailability indistinguishable from zero",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L14963] Statistics the app never collected were rendered as real measurements"
     },
     {
       "id": "concept--capture-availability-contract",
@@ -22,7 +23,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
       "source_location": "L14965",
-      "norm_label": "captureavailability contract block"
+      "norm_label": "captureavailability contract block",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L14965] Resolved input_density_supported at compile time because the Linux gap is structural"
     },
     {
       "id": "concept--deep-work-fabrication",
@@ -38,7 +40,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
       "source_location": "L9656",
-      "norm_label": "linux capture provider input-density gate"
+      "norm_label": "linux capture provider input-density gate",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L9656] The Linux input-density gap is a hardcoded contract, not a runtime condition"
     },
     {
       "id": "concept--derive-focus-session-queue-gating",
@@ -46,7 +49,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
       "source_location": "L24847",
-      "norm_label": "derive_focus_session gated on queue items"
+      "norm_label": "derive_focus_session gated on queue items",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L24847] Derived sessions come from raw_events, so the derive pass must not sit behind the empty-queue return"
     },
     {
       "id": "concept--kdotool-foreground-detection",
@@ -54,7 +58,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
       "source_location": "L9658",
-      "norm_label": "kdotool foreground detection on kde wayland"
+      "norm_label": "kdotool foreground detection on kde wayland",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L9674] Without kdotool even app-level contexts stay empty"
     },
     {
       "id": "concept--wayland-input-density-availability",
@@ -62,7 +67,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
       "source_location": "L9673",
-      "norm_label": "wayland input density availability"
+      "norm_label": "wayland input density availability",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L14992] Raw evdev input density needs input-group access that the Arch Wiki calls trivial keylogging, so it is the user's call"
     },
     {
       "id": "concept--journal-statistic-missing-from-tab",
@@ -78,7 +84,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
       "source_location": "L24152",
-      "norm_label": "formatduelabel utc/local day mismatch"
+      "norm_label": "formatduelabel utc/local day mismatch",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L24152] Writers emit a UTC day while the reader anchored today to the local day, so Today became Yesterday at UTC+7",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L24156] Switching the three getters to local dates was rejected because it would desynchronise the UI from the backend"
+      ]
     },
     {
       "id": "concept--hardcoded-vps-checkout-path-in-tests",
@@ -86,7 +96,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
       "source_location": "L22724",
-      "norm_label": "hardcoded vps checkout path in tests"
+      "norm_label": "hardcoded vps checkout path in tests",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L22728] Substituting this machine's path would pass locally and then break on the VPS and in CI"
     },
     {
       "id": "concept--ancestor-walk-shared-helper",
@@ -102,7 +113,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
       "source_location": "L29196",
-      "norm_label": "crash audit of 2026-09-26"
+      "norm_label": "crash audit of 2026-09-26",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L29196] A journal that stops mid-normal-activity with no panic, no OOM and no shutdown is a hard reset, not a killed process",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L29204] Three failed boots at an identical ~17s phase point below the OS point at firmware or hardware, not userspace"
+      ]
     },
     {
       "id": "concept--machine-profile-documentation-gap",
@@ -110,7 +125,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
       "source_location": "L29510",
-      "norm_label": "wrong machine profile in agents.md"
+      "norm_label": "wrong machine profile in agents.md",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L29510] The guardrails were calibrated for a 4-core/6GB WSL2 box while the host is 8-core/7.6GB native Linux"
     },
     {
       "id": "concept--heavy-suite-ban-on-interactive-host",
@@ -118,7 +134,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
       "source_location": "L29979",
-      "norm_label": "heavy-suite ban on the interactive host"
+      "norm_label": "heavy-suite ban on the interactive host",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L29512] Every RAM guardrail was about cargo/Rust and none warned that the 579-file frontend suite is also heavy"
     },
     {
       "id": "concept--sanctioned-heavy-verification-runner",
@@ -126,7 +143,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
       "source_location": "L29908",
-      "norm_label": "sanctioned heavy verification runner"
+      "norm_label": "sanctioned heavy verification runner",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L30727] The runner verifies remote SHA equals local HEAD before running, after it once linted a stale tree and reported a false pass"
     },
     {
       "id": "concept--systemd-oomd-unarmed",
@@ -134,7 +152,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
       "source_location": "L30977",
-      "norm_label": "systemd-oomd running but unarmed"
+      "norm_label": "systemd-oomd running but unarmed",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L30977] systemd-oomd was already running but had no ManagedOOMMemoryPressure anywhere, so it would never kill anything",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L30979] Arming systemd-oomd is the robust fix rather than writing a custom watchdog"
+      ]
     },
     {
       "id": "concept--pressure-stall-information-arming",
@@ -142,7 +164,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
       "source_location": "L31349",
-      "norm_label": "psi-based oomd arming thresholds"
+      "norm_label": "psi-based oomd arming thresholds",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L31349] The 80% limit resolved to 3.2GB of stalled memory under PSI semantics, not raw usage"
     },
     {
       "id": "concept--health-snapshot-logging",
@@ -150,7 +173,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
       "source_location": "L33682",
-      "norm_label": "host health snapshot logging"
+      "norm_label": "host health snapshot logging",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L33693] Nice=19, CPUWeight=1, MemoryMax=32M and a read-and-append script mean the logger cannot itself cause the slowness it is meant to diagnose"
     },
     {
       "id": "concept--prettier-has-no-shell-grammar",
@@ -158,7 +182,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
       "source_location": "L37713",
-      "norm_label": "prettier has no shell grammar"
+      "norm_label": "prettier has no shell grammar",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L37715] Prettier skips .sh when scanning a directory, so the No parser could be inferred error is a CLI quirk rather than a broken repo"
     },
     {
       "id": "concept--shellcheck-zero-finding-baseline",
@@ -166,7 +191,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
       "source_location": "L37719",
-      "norm_label": "shellcheck zero-finding baseline"
+      "norm_label": "shellcheck zero-finding baseline",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L37743] The shellcheck gate was proven to actually fail by inserting a broken script, so the clean result is not a silent no-op"
     },
     {
       "id": "concept--shellcheck-version-skew",
@@ -182,7 +208,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
       "source_location": "L37731",
-      "norm_label": "nullglob-off glob hazard versus find"
+      "norm_label": "nullglob-off glob hazard versus find",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L37731] With nullglob off a glob expands to a literal /path/* for an empty ndk/ directory, which passes the prerequisite check and continues a broken build"
     },
     {
       "id": "concept--sc2001-line-anchor-suppression",
@@ -190,7 +217,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
       "source_location": "L37737",
-      "norm_label": "sc2001 line-anchor suppression trap"
+      "norm_label": "sc2001 line-anchor suppression trap",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L37737] In ${VAR//^/ } the caret is a line anchor, so shellcheck's suggested expansion is a silent no-op that would strip deploy-script indentation"
     },
     {
       "id": "concept--concurrent-session-clobber",
@@ -198,7 +226,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
       "source_location": "L12483",
-      "norm_label": "concurrent session clobbering shared locale files"
+      "norm_label": "concurrent session clobbering shared locale files",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L12489] Because another agent was editing the same locale files seconds earlier, further edits and any commit had to stop rather than race",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L24164] git add -A silently swept the dependency-wave fix into a formatting-only commit, caught and amended before pushing"
+      ]
     },
     {
       "id": "concept--evidence-before-acceptance",
@@ -206,7 +238,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
       "source_location": "L9661",
-      "norm_label": "verify subagent and blame claims before accepting them"
+      "norm_label": "verify subagent and blame claims before accepting them",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L29202] Blame was accepted for a previous crash without ever being verified, and both the blame and the memory theory turned out wrong"
     },
     {
       "id": "concept--tgrep-wrapper-false-negatives",
@@ -214,271 +247,166 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
       "source_location": "L14994",
-      "norm_label": "tgrep wrapper false negatives"
-    },
-
-    {
-      "id": "rationale--unavailability-must-not-read-as-zero",
-      "label": "Statistics the app never collected were rendered as real measurements",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L14963",
-      "norm_label": "statistics the app never collected were rendered as real measurements"
-    },
-    {
-      "id": "rationale--compile-time-platform-resolution",
-      "label": "Resolved input_density_supported at compile time because the Linux gap is structural",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L14965",
-      "norm_label": "resolved input_density_supported at compile time because the linux gap is structural"
-    },
-    {
-      "id": "rationale--linux-gap-structural-not-runtime",
-      "label": "The Linux input-density gap is a hardcoded contract, not a runtime condition",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L9656",
-      "norm_label": "the linux input-density gap is a hardcoded contract, not a runtime condition"
-    },
-    {
-      "id": "rationale--derive-from-raw-events-not-queue",
-      "label": "Derived sessions come from raw_events, so the derive pass must not sit behind the empty-queue return",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L24847",
-      "norm_label": "derived sessions come from raw_events, so the derive pass must not sit behind the empty-queue return"
-    },
-    {
-      "id": "rationale--kdotool-absent-blocks-app-contexts",
-      "label": "Without kdotool even app-level contexts stay empty",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L9674",
-      "norm_label": "without kdotool even app-level contexts stay empty"
-    },
-    {
-      "id": "rationale--input-group-permission-is-user-call",
-      "label": "Raw evdev input density needs input-group access that the Arch Wiki calls trivial keylogging, so it is the user's call",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L14992",
-      "norm_label": "raw evdev input density needs input-group access that the arch wiki calls trivial keylogging, so it is the user's call"
-    },
-    {
-      "id": "rationale--utc-day-boundary-labels-today-as-yesterday",
-      "label": "Writers emit a UTC day while the reader anchored today to the local day, so Today became Yesterday at UTC+7",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L24152",
-      "norm_label": "writers emit a utc day while the reader anchored today to the local day, so today became yesterday at utc+7"
-    },
-    {
-      "id": "rationale--reject-local-date-getter-fix",
-      "label": "Switching the three getters to local dates was rejected because it would desynchronise the UI from the backend",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L24156",
-      "norm_label": "switching the three getters to local dates was rejected because it would desynchronise the ui from the backend"
-    },
-    {
-      "id": "rationale--ancestor-walk-over-machine-path",
-      "label": "Substituting this machine's path would pass locally and then break on the VPS and in CI",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L22728",
-      "norm_label": "substituting this machine's path would pass locally and then break on the vps and in ci"
-    },
-    {
-      "id": "rationale--journal-dead-stop-signs-hard-reset",
-      "label": "A journal that stops mid-normal-activity with no panic, no OOM and no shutdown is a hard reset, not a killed process",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L29196",
-      "norm_label": "a journal that stops mid-normal-activity with no panic, no oom and no shutdown is a hard reset, not a killed process"
-    },
-    {
-      "id": "rationale--firmware-suspected-not-userspace",
-      "label": "Three failed boots at an identical ~17s phase point below the OS point at firmware or hardware, not userspace",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L29204",
-      "norm_label": "three failed boots at an identical ~17s phase point below the os point at firmware or hardware, not userspace"
-    },
-    {
-      "id": "rationale--blame-accepted-before-verification",
-      "label": "Blame was accepted for a previous crash without ever being verified, and both the blame and the memory theory turned out wrong",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L29202",
-      "norm_label": "blame was accepted for a previous crash without ever being verified, and both the blame and the memory theory turned out wrong"
-    },
-    {
-      "id": "rationale--guardrails-calibrated-for-wrong-host",
-      "label": "The guardrails were calibrated for a 4-core/6GB WSL2 box while the host is 8-core/7.6GB native Linux",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L29510",
-      "norm_label": "the guardrails were calibrated for a 4-core/6gb wsl2 box while the host is 8-core/7.6gb native linux"
-    },
-    {
-      "id": "rationale--frontend-suite-was-undocumented-hole",
-      "label": "Every RAM guardrail was about cargo/Rust and none warned that the 579-file frontend suite is also heavy",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L29512",
-      "norm_label": "every ram guardrail was about cargo/rust and none warned that the 579-file frontend suite is also heavy"
-    },
-    {
-      "id": "rationale--remote-sha-must-equal-local-head",
-      "label": "The runner verifies remote SHA equals local HEAD before running, after it once linted a stale tree and reported a false pass",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L30727",
-      "norm_label": "the runner verifies remote sha equals local head before running, after it once linted a stale tree and reported a false pass"
-    },
-    {
-      "id": "rationale--oomd-runs-but-unarmed",
-      "label": "systemd-oomd was already running but had no ManagedOOMMemoryPressure anywhere, so it would never kill anything",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L30977",
-      "norm_label": "systemd-oomd was already running but had no managedoommemorypressure anywhere, so it would never kill anything"
-    },
-    {
-      "id": "rationale--arm-existing-daemon-not-custom-watchdog",
-      "label": "Arming systemd-oomd is the robust fix rather than writing a custom watchdog",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L30979",
-      "norm_label": "arming systemd-oomd is the robust fix rather than writing a custom watchdog"
-    },
-    {
-      "id": "rationale--pressure-limit-is-stalled-not-raw",
-      "label": "The 80% limit resolved to 3.2GB of stalled memory under PSI semantics, not raw usage",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L31349",
-      "norm_label": "the 80% limit resolved to 3.2gb of stalled memory under psi semantics, not raw usage"
-    },
-    {
-      "id": "rationale--snapshot-service-cannot-cause-slowness",
-      "label": "Nice=19, CPUWeight=1, MemoryMax=32M and a read-and-append script mean the logger cannot itself cause the slowness it is meant to diagnose",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L33693",
-      "norm_label": "nice=19, cpuweight=1, memorymax=32m and a read-and-append script mean the logger cannot itself cause the slowness it is meant to diagnose"
-    },
-    {
-      "id": "rationale--prettier-skips-sh-files-when-scanning",
-      "label": "Prettier skips .sh when scanning a directory, so the No parser could be inferred error is a CLI quirk rather than a broken repo",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L37715",
-      "norm_label": "prettier skips .sh when scanning a directory, so the no parser could be inferred error is a cli quirk rather than a broken repo"
-    },
-    {
-      "id": "rationale--nullglob-off-glob-yields-literal-path",
-      "label": "With nullglob off a glob expands to a literal /path/* for an empty ndk/ directory, which passes the prerequisite check and continues a broken build",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L37731",
-      "norm_label": "with nullglob off a glob expands to a literal /path/* for an empty ndk/ directory, which passes the prerequisite check and continues a broken build"
-    },
-    {
-      "id": "rationale--caret-is-line-anchor-not-literal",
-      "label": "In ${VAR//^/ } the caret is a line anchor, so shellcheck's suggested expansion is a silent no-op that would strip deploy-script indentation",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L37737",
-      "norm_label": "in ${var//^/ } the caret is a line anchor, so shellcheck's suggested expansion is a silent no-op that would strip deploy-script indentation"
-    },
-    {
-      "id": "rationale--gate-must-be-proven-to-fail",
-      "label": "The shellcheck gate was proven to actually fail by inserting a broken script, so the clean result is not a silent no-op",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L37743",
-      "norm_label": "the shellcheck gate was proven to actually fail by inserting a broken script, so the clean result is not a silent no-op"
-    },
-    {
-      "id": "rationale--stop-dont-race-concurrent-session",
-      "label": "Because another agent was editing the same locale files seconds earlier, further edits and any commit had to stop rather than race",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L12489",
-      "norm_label": "because another agent was editing the same locale files seconds earlier, further edits and any commit had to stop rather than race"
-    },
-    {
-      "id": "rationale--git-add-a-swept-a-foreign-fix",
-      "label": "git add -A silently swept the dependency-wave fix into a formatting-only commit, caught and amended before pushing",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L24164",
-      "norm_label": "git add -a silently swept the dependency-wave fix into a formatting-only commit, caught and amended before pushing"
-    },
-    {
-      "id": "rationale--tgrep-wrapper-mangles-alternation",
-      "label": "A false negative came from the tgrep wrapper mangling a multi-alternation pattern, so GNU grep is used for verification",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L29502",
-      "norm_label": "a false negative came from the tgrep wrapper mangling a multi-alternation pattern, so gnu grep is used for verification"
+      "norm_label": "tgrep wrapper false negatives",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L29502] A false negative came from the tgrep wrapper mangling a multi-alternation pattern, so GNU grep is used for verification"
     }
   ],
   "links": [
-    { "source": "rationale--unavailability-must-not-read-as-zero", "target": "concept--unavailability-indistinguishable-from-zero", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--compile-time-platform-resolution", "target": "concept--capture-availability-contract", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--linux-gap-structural-not-runtime", "target": "concept--linux-capture-provider-input-density-gate", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--derive-from-raw-events-not-queue", "target": "concept--derive-focus-session-queue-gating", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--kdotool-absent-blocks-app-contexts", "target": "concept--kdotool-foreground-detection", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--input-group-permission-is-user-call", "target": "concept--wayland-input-density-availability", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--utc-day-boundary-labels-today-as-yesterday", "target": "concept--format-due-label-utc-local-mix", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--reject-local-date-getter-fix", "target": "concept--format-due-label-utc-local-mix", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--ancestor-walk-over-machine-path", "target": "concept--hardcoded-vps-checkout-path-in-tests", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--journal-dead-stop-signs-hard-reset", "target": "concept--crash-audit-2026-09-26", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--firmware-suspected-not-userspace", "target": "concept--crash-audit-2026-09-26", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--blame-accepted-before-verification", "target": "concept--evidence-before-acceptance", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--guardrails-calibrated-for-wrong-host", "target": "concept--machine-profile-documentation-gap", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--frontend-suite-was-undocumented-hole", "target": "concept--heavy-suite-ban-on-interactive-host", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--remote-sha-must-equal-local-head", "target": "concept--sanctioned-heavy-verification-runner", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--oomd-runs-but-unarmed", "target": "concept--systemd-oomd-unarmed", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--arm-existing-daemon-not-custom-watchdog", "target": "concept--systemd-oomd-unarmed", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--pressure-limit-is-stalled-not-raw", "target": "concept--pressure-stall-information-arming", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--snapshot-service-cannot-cause-slowness", "target": "concept--health-snapshot-logging", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--prettier-skips-sh-files-when-scanning", "target": "concept--prettier-has-no-shell-grammar", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--nullglob-off-glob-yields-literal-path", "target": "concept--nullglob-hazard-vs-find", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--caret-is-line-anchor-not-literal", "target": "concept--sc2001-line-anchor-suppression", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--gate-must-be-proven-to-fail", "target": "concept--shellcheck-zero-finding-baseline", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--stop-dont-race-concurrent-session", "target": "concept--concurrent-session-clobber", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--git-add-a-swept-a-foreign-fix", "target": "concept--concurrent-session-clobber", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--tgrep-wrapper-mangles-alternation", "target": "concept--tgrep-wrapper-false-negatives", "relation": "rationale_for", "confidence": "EXTRACTED" },
-
-    { "source": "concept--unavailability-indistinguishable-from-zero", "target": "concept--digital-tracker-statistics-linux", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--capture-availability-contract", "target": "concept--unavailability-indistinguishable-from-zero", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--deep-work-fabrication", "target": "concept--unavailability-indistinguishable-from-zero", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--deep-work-fabrication", "target": "concept--digital-tracker-statistics-linux", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--linux-capture-provider-input-density-gate", "target": "concept--digital-tracker-statistics-linux", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--derive-focus-session-queue-gating", "target": "concept--linux-capture-provider-input-density-gate", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--kdotool-foreground-detection", "target": "concept--digital-tracker-statistics-linux", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--wayland-input-density-availability", "target": "concept--linux-capture-provider-input-density-gate", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--wayland-input-density-availability", "target": "concept--kdotool-foreground-detection", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--journal-statistic-missing-from-tab", "target": "concept--digital-tracker-statistics-linux", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--journal-statistic-missing-from-tab", "target": "concept--unavailability-indistinguishable-from-zero", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--ancestor-walk-shared-helper", "target": "concept--hardcoded-vps-checkout-path-in-tests", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--machine-profile-documentation-gap", "target": "concept--crash-audit-2026-09-26", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--machine-profile-documentation-gap", "target": "concept--heavy-suite-ban-on-interactive-host", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--heavy-suite-ban-on-interactive-host", "target": "concept--sanctioned-heavy-verification-runner", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--pressure-stall-information-arming", "target": "concept--heavy-suite-ban-on-interactive-host", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--systemd-oomd-unarmed", "target": "concept--pressure-stall-information-arming", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--health-snapshot-logging", "target": "concept--crash-audit-2026-09-26", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--health-snapshot-logging", "target": "concept--systemd-oomd-unarmed", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--hardcoded-vps-checkout-path-in-tests", "target": "concept--sanctioned-heavy-verification-runner", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--prettier-has-no-shell-grammar", "target": "concept--shellcheck-zero-finding-baseline", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--shellcheck-version-skew", "target": "concept--shellcheck-zero-finding-baseline", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--nullglob-hazard-vs-find", "target": "concept--shellcheck-zero-finding-baseline", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--sc2001-line-anchor-suppression", "target": "concept--shellcheck-zero-finding-baseline", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--tgrep-wrapper-false-negatives", "target": "concept--evidence-before-acceptance", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--concurrent-session-clobber", "target": "concept--evidence-before-acceptance", "relation": "conceptually_related_to", "confidence": "INFERRED" }
+    {
+      "source": "concept--unavailability-indistinguishable-from-zero",
+      "target": "concept--digital-tracker-statistics-linux",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--capture-availability-contract",
+      "target": "concept--unavailability-indistinguishable-from-zero",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--deep-work-fabrication",
+      "target": "concept--unavailability-indistinguishable-from-zero",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--deep-work-fabrication",
+      "target": "concept--digital-tracker-statistics-linux",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--linux-capture-provider-input-density-gate",
+      "target": "concept--digital-tracker-statistics-linux",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--derive-focus-session-queue-gating",
+      "target": "concept--linux-capture-provider-input-density-gate",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--kdotool-foreground-detection",
+      "target": "concept--digital-tracker-statistics-linux",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--wayland-input-density-availability",
+      "target": "concept--linux-capture-provider-input-density-gate",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--wayland-input-density-availability",
+      "target": "concept--kdotool-foreground-detection",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--journal-statistic-missing-from-tab",
+      "target": "concept--digital-tracker-statistics-linux",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--journal-statistic-missing-from-tab",
+      "target": "concept--unavailability-indistinguishable-from-zero",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--ancestor-walk-shared-helper",
+      "target": "concept--hardcoded-vps-checkout-path-in-tests",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--machine-profile-documentation-gap",
+      "target": "concept--crash-audit-2026-09-26",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--machine-profile-documentation-gap",
+      "target": "concept--heavy-suite-ban-on-interactive-host",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--heavy-suite-ban-on-interactive-host",
+      "target": "concept--sanctioned-heavy-verification-runner",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--pressure-stall-information-arming",
+      "target": "concept--heavy-suite-ban-on-interactive-host",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--systemd-oomd-unarmed",
+      "target": "concept--pressure-stall-information-arming",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--health-snapshot-logging",
+      "target": "concept--crash-audit-2026-09-26",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--health-snapshot-logging",
+      "target": "concept--systemd-oomd-unarmed",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--hardcoded-vps-checkout-path-in-tests",
+      "target": "concept--sanctioned-heavy-verification-runner",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--prettier-has-no-shell-grammar",
+      "target": "concept--shellcheck-zero-finding-baseline",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--shellcheck-version-skew",
+      "target": "concept--shellcheck-zero-finding-baseline",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--nullglob-hazard-vs-find",
+      "target": "concept--shellcheck-zero-finding-baseline",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--sc2001-line-anchor-suppression",
+      "target": "concept--shellcheck-zero-finding-baseline",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--tgrep-wrapper-false-negatives",
+      "target": "concept--evidence-before-acceptance",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--concurrent-session-clobber",
+      "target": "concept--evidence-before-acceptance",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    }
   ]
 }

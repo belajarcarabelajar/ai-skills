@@ -80,15 +80,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - connecting-opencode-to-zcode-endpoint [ses_f10ec7a39ffez3Lf5z5alrCVTD].md",
       "source_location": "L9876",
-      "norm_label": "zcode start plan inference gateway blocks non zcode clients with code 3012"
-    },
-    {
-      "id": "rationale--refused-to-loop-on-circumventing-the-zcode-anti-abuse-control",
-      "label": "Looping was refused because the only way past code 3012 is to make requests indistinguishable from the ZCode desktop client, which is automating an attempt to circumvent bot detection",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - connecting-opencode-to-zcode-endpoint [ses_f10ec7a39ffez3Lf5z5alrCVTD].md",
-      "source_location": "L11318",
-      "norm_label": "refused to loop on circumventing the zcode anti abuse control"
+      "norm_label": "zcode start plan inference gateway blocks non zcode clients with code 3012",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - connecting-opencode-to-zcode-endpoint [ses_f10ec7a39ffez3Lf5z5alrCVTD].md:L11318] Looping was refused because the only way past code 3012 is to make requests indistinguishable from the ZCode desktop client, which is automating an attempt to circumvent bot detection"
     },
     {
       "id": "concept--agentrouter-key-revoked-with-unauthorized-client-detected",
@@ -232,12 +225,6 @@
       "source": "concept--zcode-start-plan-quota-is-bound-to-the-oauth-session-not-the-api-key",
       "target": "concept--zcode-start-plan-inference-gateway-blocks-non-zcode-clients-with-code-3012",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--refused-to-loop-on-circumventing-the-zcode-anti-abuse-control",
-      "target": "concept--zcode-start-plan-inference-gateway-blocks-non-zcode-clients-with-code-3012",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {

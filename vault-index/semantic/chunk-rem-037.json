@@ -18,7 +18,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md",
       "source_location": "L7599",
       "norm_label": "rename stops at persisted contract",
-      "summary": "research_mode_enabled (preference key), research_tag (DB column), set_research_tag_cmd (CLI-facing) and the RESEARCH_* error strings are left named for research. Only tab label, tab id, the 40 en/id strings, the group badge and the modal hint change. Repeated at the end: the renamed-everything promise is deliberately narrower than it sounds."
+      "summary": "research_mode_enabled (preference key), research_tag (DB column), set_research_tag_cmd (CLI-facing) and the RESEARCH_* error strings are left named for research. Only tab label, tab id, the 40 en/id strings, the group badge and the modal hint change. Repeated at the end: the renamed-everything promise is deliberately narrower than it sounds.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md:L7599] Persisted identifiers are renamed only with a migration and CLI parity work"
     },
     {
       "id": "concept--single-round-trip-command-with-partial-failure-degrade",
@@ -27,7 +28,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md",
       "source_location": "L7600",
       "norm_label": "single round trip command with partial failure degrade",
-      "summary": "get_customer_support_overview returns mode, days, active_days, csat: Option<CsatSummary>, recent_conversations and snippets in one call. A failed CSAT aggregate sets that one field to null and the trend still renders; export moved to a separate command wired only at the click handler."
+      "summary": "get_customer_support_overview returns mode, days, active_days, csat: Option<CsatSummary>, recent_conversations and snippets in one call. A failed CSAT aggregate sets that one field to null and the trend still renders; export moved to a separate command wired only at the click handler.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md:L7600] A slow mode check gated the whole tab and one rejection blanked everything"
     },
     {
       "id": "concept--frozen-cross-chunk-contract-before-fanout",
@@ -36,7 +38,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md",
       "source_location": "L5872",
       "norm_label": "frozen cross chunk contract before fanout",
-      "summary": "The tab chunk needs i18n keys, the chart component and backend command names that other chunks own. The parent writes the exact key names, values, command names, struct fields and props into the manifest first, so every chunk codes against a frozen contract instead of waiting on a sibling. One documented ordering constraint survived: the i18n chunk lands first because the rest verify against its keys."
+      "summary": "The tab chunk needs i18n keys, the chart component and backend command names that other chunks own. The parent writes the exact key names, values, command names, struct fields and props into the manifest first, so every chunk codes against a frozen contract instead of waiting on a sibling. One documented ordering constraint survived: the i18n chunk lands first because the rest verify against its keys.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md:L6007] Freeze the contract so a chunk never waits on a sibling"
     },
     {
       "id": "concept--unowned-test-files-block-the-audit-gate",
@@ -45,7 +48,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md",
       "source_location": "L8032",
       "norm_label": "unowned test files block the audit gate",
-      "summary": "GroupModal.test.tsx, SnippetsSidebar.test.tsx, ResearchModeToggle.test.tsx and StatisticsPage.test.tsx assert the old key names but no chunk was permitted to edit them, so the gate would have been blocked on red assertions nobody could fix. Fixed by re-chunking as one follow-up rather than loosening scope."
+      "summary": "GroupModal.test.tsx, SnippetsSidebar.test.tsx, ResearchModeToggle.test.tsx and StatisticsPage.test.tsx assert the old key names but no chunk was permitted to edit them, so the gate would have been blocked on red assertions nobody could fix. Fixed by re-chunking as one follow-up rather than loosening scope.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md:L8032] Red for a reason that is not a product defect still blocks the gate"
     },
     {
       "id": "concept--svg-chart-requires-screen-reader-data-table",
@@ -54,7 +58,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md",
       "source_location": "L6891",
       "norm_label": "svg chart requires screen reader data table",
-      "summary": "Two primary sources, W3C WAI Complex Images and USWDS Data visualizations, land on the same requirement: the SVG is aria-hidden with an sr-only data table as the accessible equivalent, using a clip-based visually-hidden pattern rather than display:none. Parent-verified after the fact that no display:none sits on the table."
+      "summary": "Two primary sources, W3C WAI Complex Images and USWDS Data visualizations, land on the same requirement: the SVG is aria-hidden with an sr-only data table as the accessible equivalent, using a clip-based visually-hidden pattern rather than display:none. Parent-verified after the fact that no display:none sits on the table.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md:L7601] The data table is the accessible equivalent both sources require, not a nice-to-have"
     },
     {
       "id": "concept--prehashed-source-id-avoids-double-hash",
@@ -63,7 +68,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md",
       "source_location": "L6923",
       "norm_label": "prehashed source id avoids double hash",
-      "summary": "analytics_events.source_id is already an opaque hashed id, so feeding it back through submit_csat_response would hash it twice. Resolved with a second command submit_csat_for_source that records the already-opaque value, keeping each command with one clear contract instead of a double-hash bug."
+      "summary": "analytics_events.source_id is already an opaque hashed id, so feeding it back through submit_csat_response would hash it twice. Resolved with a second command submit_csat_for_source that records the already-opaque value, keeping each command with one clear contract instead of a double-hash bug.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md:L6939] Re-hashing an already opaque id is harmless but semantically sloppy"
     },
     {
       "id": "concept--deep-link-tab-gate-silently-falls-back",
@@ -81,7 +87,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md",
       "source_location": "L11475",
       "norm_label": "absence from narrow grep is not evidence",
-      "summary": "The parent claimed a Rust subagent had skipped its tests on the strength of a grep for fn test_ returning 13. The seven tests were on disk at lines 1152-1357, named without the prefix. The subagent that had been re-dispatched to write them corrected the parent, and a chunk was dispatched for work that already existed. Stated as: infer absence from a search matching only one convention, then act on it, is the defect."
+      "summary": "The parent claimed a Rust subagent had skipped its tests on the strength of a grep for fn test_ returning 13. The seven tests were on disk at lines 1152-1357, named without the prefix. The subagent that had been re-dispatched to write them corrected the parent, and a chunk was dispatched for work that already existed. Stated as: infer absence from a search matching only one convention, then act on it, is the defect.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md:L11475] A search matching one naming convention is not a search for the tests"
     },
     {
       "id": "concept--parent-verifies-subagent-reports-independently",
@@ -99,7 +106,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md",
       "source_location": "L12150",
       "norm_label": "debug derive transitivity forces layer widening",
-      "summary": "A test used {:?} on Vec<SupportConversationCandidate>, which does not compile because the struct derives Serialize and not Debug. Adding Debug to all four new structs for consistency then demanded Debug on ResearchDayRow and CsatSummary, which live in the database layer this change deliberately does not touch. Corrected to derive on only the two leaf structs the failing assertion formats."
+      "summary": "A test used {:?} on Vec<SupportConversationCandidate>, which does not compile because the struct derives Serialize and not Debug. Adding Debug to all four new structs for consistency then demanded Debug on ResearchDayRow and CsatSummary, which live in the database layer this change deliberately does not touch. Corrected to derive on only the two leaf structs the failing assertion formats.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md:L12390] rustfmt --check was clean and would never have found the derive error"
     },
     {
       "id": "concept--byte-equivalence-test-pins-serializer-refactor",
@@ -108,7 +116,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md",
       "source_location": "L13118",
       "norm_label": "byte equivalence test pins serializer refactor",
-      "summary": "serialize_research_rows was extracted so both the old and new export commands share it, and get_research_export was reduced to a byte-identical 4-line delegation. test_export_customer_support_report_matches_get_research_export is what actually proves the shared serializer did not change the JSON or CSV output format, and it only runs on the VPS."
+      "summary": "serialize_research_rows was extracted so both the old and new export commands share it, and get_research_export was reduced to a byte-identical 4-line delegation. test_export_customer_support_report_matches_get_research_export is what actually proves the shared serializer did not change the JSON or CSV output format, and it only runs on the VPS.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md:L10585] A refactor with no equivalence test is the shape of a silent regression"
     },
     {
       "id": "concept--chart-bar-density-defect-found-only-by-rendering",
@@ -117,7 +126,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md",
       "source_location": "L14207",
       "norm_label": "chart bar density defect found only by rendering",
-      "summary": "12/12 DOM tests, a clean typecheck and parent re-inspection all passed while the chart was unusable: rendering to static SVG and measuring showed 162 bars at 1.07px on a 720px plot, with axis labels clustered at the right edge and the final day labelled as if it were a boundary. A chart of hairline bars is still the raw-looking view the user complained about."
+      "summary": "12/12 DOM tests, a clean typecheck and parent re-inspection all passed while the chart was unusable: rendering to static SVG and measuring showed 162 bars at 1.07px on a 720px plot, with axis labels clustered at the right edge and the final day labelled as if it were a boundary. A chart of hairline bars is still the raw-looking view the user complained about.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md:L14209] Rendering 162 hairline bars does not fix a view that reads raw"
     },
     {
       "id": "concept--chart-bucket-ladder-for-long-ranges",
@@ -144,7 +154,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md",
       "source_location": "L14545",
       "norm_label": "duplicate i18n keys shadow shared keys",
-      "summary": "cancel, save, description and createGroup already exist in main.ts and are used by roughly ten components each. Creating four duplicates was a defect the change itself introduced; the fix was to repoint at the shared keys, which then broke the modal's own tests because their mockT stub still carried the removed duplicates."
+      "summary": "cancel, save, description and createGroup already exist in main.ts and are used by roughly ten components each. Creating four duplicates was a defect the change itself introduced; the fix was to repoint at the shared keys, which then broke the modal's own tests because their mockT stub still carried the removed duplicates.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md:L14545] Four duplicate keys make the codebase worse, not better"
     },
     {
       "id": "concept--isolated-vps-worktree-for-concurrent-session",
@@ -153,7 +164,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md",
       "source_location": "L9984",
       "norm_label": "isolated vps worktree for concurrent session",
-      "summary": "Reused id. The VPS fast-forward aborted because of the other session's uncommitted work, so rather than stash or checkout files that were not its own, a separate worktree was created at the exact base commit and the other session's dirty tree left untouched."
+      "summary": "Reused id. The VPS fast-forward aborted because of the other session's uncommitted work, so rather than stash or checkout files that were not its own, a separate worktree was created at the exact base commit and the other session's dirty tree left untouched.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md:L10019] Another session's uncommitted files are not mine to stash or check out"
     },
     {
       "id": "concept--tauri-build-prerequisite-provisioning",
@@ -189,154 +201,100 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md",
       "source_location": "L16318",
       "norm_label": "verify merge by content not sha ancestry",
-      "summary": "Reused id. The pushed commit dd42b4148 was not found in origin/main, and the assistant refused to guess why. Checking content settled it: four CustomerSupport files present, ResearchStatisticsTab gone, and the two commits rebased to cba7aa647 and 92d358a3c, so the SHAs changed while the content landed whole."
-    },
-    {
-      "id": "rationale--rename-stops-at-persisted-contract",
-      "label": "Persisted identifiers are renamed only with a migration and CLI parity work",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md",
-      "source_location": "L7599",
-      "norm_label": "rename stops at persisted contract",
-      "summary": "Stated in the note's own words: research_mode_enabled, research_tag, set_research_tag_cmd and the RESEARCH_* error strings are persisted contract, and renaming those needs a migration plus CLI parity work, so they stay."
-    },
-    {
-      "id": "rationale--one-round-trip-replaces-serial-mode-gate",
-      "label": "A slow mode check gated the whole tab and one rejection blanked everything",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md",
-      "source_location": "L7600",
-      "norm_label": "one round trip replaces serial mode gate",
-      "summary": "The old code fired get_research_mode, then only if true fired a Promise.all of two more, so a slow mode check gated the entire tab and any single rejection blanked everything. CSAT, ticket ref and snippet UUID were three hand-typed text inputs on top of that."
-    },
-    {
-      "id": "rationale--frozen-contract-so-chunks-never-block",
-      "label": "Freeze the contract so a chunk never waits on a sibling",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md",
-      "source_location": "L6007",
-      "norm_label": "frozen contract so chunks never block",
-      "summary": "Stated directly: now let me freeze the shared contract before fanning out, so chunks never block on each other. The tab chunk depends on keys, the chart and command names owned by other chunks, and a red chunk could otherwise not be verified in isolation."
-    },
-    {
-      "id": "rationale--test-files-assert-renamed-keys-need-an-owner",
-      "label": "Red for a reason that is not a product defect still blocks the gate",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md",
-      "source_location": "L8032",
-      "norm_label": "test files asserting renamed keys need an owner",
-      "summary": "The stated reason for re-chunking rather than absorbing: four test files that assert the old key names now have no owner, which means the audit gate would be blocked on red assertions nobody is allowed to fix. That is a manifest gap, and the fix is a re-chunk, not a reason to loosen scope."
-    },
-    {
-      "id": "rationale--accessible-table-required-not-optional",
-      "label": "The data table is the accessible equivalent both sources require, not a nice-to-have",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md",
-      "source_location": "L7601",
-      "norm_label": "accessible table required not optional",
-      "summary": "Read in full via TinyFish from W3C WAI Complex Images and the USWDS data-visualization guidance: the chart's accessibility is not a style preference. That is why the exact-numbers view stays, and why it uses a clip-based visually-hidden pattern rather than display:none."
-    },
-    {
-      "id": "rationale--prehashed-ref-not-re-hashed",
-      "label": "Re-hashing an already opaque id is harmless but semantically sloppy",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md",
-      "source_location": "L6939",
-      "summary": "Two commands is ugly, but each has a clear contract and no double-hash bug, which is recorded as an explicit decision rather than left implicit.",
-      "norm_label": "prehashed ref not rehashed"
-    },
-    {
-      "id": "rationale--narrow-grep-cannot-prove-absence",
-      "label": "A search matching one naming convention is not a search for the tests",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md",
-      "source_location": "L11475",
-      "norm_label": "narrow grep cannot prove absence",
-      "summary": "The parent states the correction as its own error: the probe was the defect, not the subagent. Inferred absence from a search that only matched one naming convention, then re-dispatched a chunk to write tests that already existed."
-    },
-    {
-      "id": "rationale--rustfmt-clean-but-compiler-found-derive-error",
-      "label": "rustfmt --check was clean and would never have found the derive error",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md",
-      "source_location": "L12390",
-      "norm_label": "rustfmt clean but compiler found derive error",
-      "summary": "The note offers this as the whole argument for the mandatory VPS compile: the derive error was found by cargo and nothing else, and the same error class is exactly what a green frontend suite says nothing about."
-    },
-    {
-      "id": "rationale--equivalence-test-because-refactor-changes-bytes",
-      "label": "A refactor with no equivalence test is the shape of a silent regression",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md",
-      "source_location": "L10585",
-      "norm_label": "equivalence test because refactor changes bytes",
-      "summary": "The export must produce byte-identical JSON and CSV to the existing command. Without that test, if the shared serializer changed the CSV format, nothing would catch it."
-    },
-    {
-      "id": "rationale--render-to-measure-because-dom-cannot-measure",
-      "label": "Rendering 162 hairline bars does not fix a view that reads raw",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md",
-      "source_location": "L14209",
-      "norm_label": "render to measure because dom cannot measure",
-      "summary": "The whole premise of the task is that this chart fixes a view that reads raw, so the measured geometry is the acceptance criterion, not the passing DOM assertions. Stated as I am not shipping that as verified."
-    },
-    {
-      "id": "rationale--shared-i18n-keys-already-used-by-ten-components",
-      "label": "Four duplicate keys make the codebase worse, not better",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md",
-      "source_location": "L14545",
-      "norm_label": "shared i18n keys already used by ten components",
-      "summary": "cancel, save, description and createGroup already exist and are used by roughly ten components each, so creating duplicates was a real defect introduced by this change. The subagent reporting the collision was right, and the fix was to repoint rather than accept."
-    },
-    {
-      "id": "rationale--isolated-worktree-over-stashing-another-session",
-      "label": "Another session's uncommitted files are not mine to stash or check out",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md",
-      "source_location": "L10019",
-      "norm_label": "isolated worktree over stashing another session",
-      "summary": "The fast-forward aborted on the other session's uncommitted work. Since only two files needed typechecking and they were identical across the two commits apart from its own edits, a separate worktree at the exact base commit was the clean approach, leaving the dirty tree untouched."
-    },
-    {
-      "id": "rationale--verify-merged-content-not-sha-ancestry",
-      "label": "Content equality proves the work landed where ancestry cannot",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md",
-      "source_location": "L16318",
-      "norm_label": "verify merged content not sha ancestry",
-      "summary": "Reused id. The pushed SHA was absent from origin/main and the note declined to guess the cause, checking main's contents instead and finding the squash-or-rebase explanation consistent with the files being present."
+      "summary": "Reused id. The pushed commit dd42b4148 was not found in origin/main, and the assistant refused to guess why. Checking content settled it: four CustomerSupport files present, ResearchStatisticsTab gone, and the two commits rebased to cba7aa647 and 92d358a3c, so the SHAs changed while the content landed whole.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md:L16318] Content equality proves the work landed where ancestry cannot"
     }
   ],
   "links": [
-    { "source": "concept--research-mode-to-customer-support-key-rename", "target": "concept--rename-stops-at-persisted-contract", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
-    { "source": "rationale--rename-stops-at-persisted-contract", "target": "concept--rename-stops-at-persisted-contract", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--one-round-trip-replaces-serial-mode-gate", "target": "concept--single-round-trip-command-with-partial-failure-degrade", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "concept--single-round-trip-command-with-partial-failure-degrade", "target": "concept--prehashed-source-id-avoids-double-hash", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
-    { "source": "rationale--prehashed-ref-not-re-hashed", "target": "concept--prehashed-source-id-avoids-double-hash", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--frozen-contract-so-chunks-never-block", "target": "concept--frozen-cross-chunk-contract-before-fanout", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "concept--frozen-cross-chunk-contract-before-fanout", "target": "concept--high-fan-out-floor", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "rationale--test-files-assert-renamed-keys-need-an-owner", "target": "concept--unowned-test-files-block-the-audit-gate", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "concept--unowned-test-files-block-the-audit-gate", "target": "concept--research-mode-to-customer-support-key-rename", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
-    { "source": "rationale--accessible-table-required-not-optional", "target": "concept--svg-chart-requires-screen-reader-data-table", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "concept--deep-link-tab-gate-silently-falls-back", "target": "concept--research-mode-to-customer-support-key-rename", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
-    { "source": "rationale--narrow-grep-cannot-prove-absence", "target": "concept--absence-from-narrow-grep-is-not-evidence", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "concept--absence-from-narrow-grep-is-not-evidence", "target": "concept--verify-checks-self-consistency-not-truth", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--parent-verifies-subagent-reports-independently", "target": "concept--subagent-corrects-parent-premise", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--parent-verifies-subagent-reports-independently", "target": "concept--frozen-cross-chunk-contract-before-fanout", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
-    { "source": "rationale--rustfmt-clean-but-compiler-found-derive-error", "target": "concept--debug-derive-transitivity-forces-layer-widening", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "concept--debug-derive-transitivity-forces-layer-widening", "target": "concept--zero-subagent-compiler-policy", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "rationale--equivalence-test-because-refactor-changes-bytes", "target": "concept--byte-equivalence-test-pins-serializer-refactor", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--render-to-measure-because-dom-cannot-measure", "target": "concept--chart-bar-density-defect-found-only-by-rendering", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "concept--chart-bar-density-defect-found-only-by-rendering", "target": "concept--chart-bucket-ladder-for-long-ranges", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
-    { "source": "concept--chart-bucket-ladder-for-long-ranges", "target": "concept--svg-chart-requires-screen-reader-data-table", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
-    { "source": "concept--i18n-guard-matches-arrow-function-gt", "target": "concept--i18n-scanner-ascii-only-char-class", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--duplicate-i18n-keys-shadow-shared-keys", "target": "concept--single-file-scope-forces-i18n-key-reuse", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "rationale--shared-i18n-keys-already-used-by-ten-components", "target": "concept--duplicate-i18n-keys-shadow-shared-keys", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--isolated-worktree-over-stashing-another-session", "target": "concept--isolated-vps-worktree-for-concurrent-session", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "concept--tauri-build-prerequisite-provisioning", "target": "concept--isolated-vps-worktree-for-concurrent-session", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
-    { "source": "concept--version-flag-launches-gui-instance", "target": "concept--pgrep-self-match-false-running-signal", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "rationale--verify-merged-content-not-sha-ancestry", "target": "concept--verify-merge-by-content-not-sha-ancestry", "relation": "rationale_for", "confidence": "EXTRACTED" }
+    {
+      "source": "concept--research-mode-to-customer-support-key-rename",
+      "target": "concept--rename-stops-at-persisted-contract",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--single-round-trip-command-with-partial-failure-degrade",
+      "target": "concept--prehashed-source-id-avoids-double-hash",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--frozen-cross-chunk-contract-before-fanout",
+      "target": "concept--high-fan-out-floor",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--unowned-test-files-block-the-audit-gate",
+      "target": "concept--research-mode-to-customer-support-key-rename",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--deep-link-tab-gate-silently-falls-back",
+      "target": "concept--research-mode-to-customer-support-key-rename",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--absence-from-narrow-grep-is-not-evidence",
+      "target": "concept--verify-checks-self-consistency-not-truth",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--parent-verifies-subagent-reports-independently",
+      "target": "concept--subagent-corrects-parent-premise",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--parent-verifies-subagent-reports-independently",
+      "target": "concept--frozen-cross-chunk-contract-before-fanout",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--debug-derive-transitivity-forces-layer-widening",
+      "target": "concept--zero-subagent-compiler-policy",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--chart-bar-density-defect-found-only-by-rendering",
+      "target": "concept--chart-bucket-ladder-for-long-ranges",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--chart-bucket-ladder-for-long-ranges",
+      "target": "concept--svg-chart-requires-screen-reader-data-table",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--i18n-guard-matches-arrow-function-gt",
+      "target": "concept--i18n-scanner-ascii-only-char-class",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--duplicate-i18n-keys-shadow-shared-keys",
+      "target": "concept--single-file-scope-forces-i18n-key-reuse",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--tauri-build-prerequisite-provisioning",
+      "target": "concept--isolated-vps-worktree-for-concurrent-session",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--version-flag-launches-gui-instance",
+      "target": "concept--pgrep-self-match-false-running-signal",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    }
   ]
 }

@@ -6,15 +6,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md",
       "source_location": "L5043",
-      "norm_label": "subagents do not commit; the parent commits"
-    },
-    {
-      "id": "rationale--parent-commits-to-avoid-index-lock-race",
-      "label": "Parallel git commits in one repository race on .git/index.lock, so commit ownership moved to the parent and was batched per repo after the diff audit",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md",
-      "source_location": "L5450",
-      "norm_label": "parallel git commits in one repository race on .git/index.lock, so commit ownership moved to the parent and was batched per repo after the diff audit"
+      "norm_label": "subagents do not commit; the parent commits",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md:L5450] Parallel git commits in one repository race on .git/index.lock, so commit ownership moved to the parent and was batched per repo after the diff audit"
     },
     {
       "id": "concept--source-hash-only-freshness-never-invalidates",
@@ -22,15 +15,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md",
       "source_location": "L10129",
-      "norm_label": "source_hash-only freshness never invalidates a stale mirror"
-    },
-    {
-      "id": "rationale--publisher-version-constant-not-byte-compare",
-      "label": "A publisher_version constant is the cheapest correct freshness signal because byte comparison is defeated by the updated:today field rolling over daily and would republish every mirror for no reason",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md",
-      "source_location": "L10385",
-      "norm_label": "a publisher_version constant is the cheapest correct freshness signal because byte comparison is defeated by the updated:today field rolling over daily and would republish every mirror for no reason"
+      "norm_label": "source_hash-only freshness never invalidates a stale mirror",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md:L10385] A publisher_version constant is the cheapest correct freshness signal because byte comparison is defeated by the updated:today field rolling over daily and would republish every mirror for no reason"
     },
     {
       "id": "concept--pinned-vault-frontmatter-vocabulary",
@@ -38,15 +24,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md",
       "source_location": "L1488",
-      "norm_label": "mirror frontmatter reuses observed vault vocabulary type: note and para: project"
-    },
-    {
-      "id": "rationale--no-new-type-value-without-explicit-approval",
-      "label": "Introducing type: plan would be a schema change requiring explicit approval, so the mirror stays identifiable through the already-blessed source_path, source_hash and project properties instead",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md",
-      "source_location": "L6495",
-      "norm_label": "introducing type: plan would be a schema change requiring explicit approval, so the mirror stays identifiable through the already-blessed source_path, source_hash and project properties instead"
+      "norm_label": "mirror frontmatter reuses observed vault vocabulary type: note and para: project",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md:L6495] Introducing type: plan would be a schema change requiring explicit approval, so the mirror stays identifiable through the already-blessed source_path, source_hash and project properties instead"
     },
     {
       "id": "concept--most-plans-predate-ultra-plan-schema",
@@ -54,15 +33,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md",
       "source_location": "L6466",
-      "norm_label": "most plan files predate the ultra-plan/v1 schema"
-    },
-    {
-      "id": "rationale--schema-filter-would-skip-most-of-the-corpus",
-      "label": "Filtering enumeration by declared schema was rejected because only 40 of the files declare ultra-plan/v1, so the filter would have silently skipped the rest of the corpus",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md",
-      "source_location": "L6468",
-      "norm_label": "filtering enumeration by declared schema was rejected because only 40 of the files declare ultra-plan/v1, so the filter would have silently skipped the rest of the corpus"
+      "norm_label": "most plan files predate the ultra-plan/v1 schema",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md:L6468] Filtering enumeration by declared schema was rejected because only 40 of the files declare ultra-plan/v1, so the filter would have silently skipped the rest of the corpus"
     },
     {
       "id": "concept--bare-stem-wikilink-ambiguity",
@@ -94,15 +66,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md",
       "source_location": "L13910",
-      "norm_label": "a green reachability test whose glob never matched the new hub"
-    },
-    {
-      "id": "rationale--widen-the-glob-not-the-expectation-list",
-      "label": "Widening the glob was chosen over adding a string to the expected-hub list, because adding a string leaves the test green while the glob stays blind and the next hub under 90 - System becomes invisible again",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md",
-      "source_location": "L13910",
-      "norm_label": "widening the glob was chosen over adding a string to the expected-hub list, because adding a string leaves the test green while the glob stays blind and the next hub under 90 - System becomes invisible again"
+      "norm_label": "a green reachability test whose glob never matched the new hub",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md:L13910] Widening the glob was chosen over adding a string to the expected-hub list, because adding a string leaves the test green while the glob stays blind and the next hub under 90 - System becomes invisible again"
     },
     {
       "id": "concept--lint-exempt-pages-cannot-be-proven-orphan",
@@ -118,15 +83,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md",
       "source_location": "L57131",
-      "norm_label": "declining a revert as diagnostic theater"
-    },
-    {
-      "id": "rationale--isolation-already-closed-by-untouched-workflows",
-      "label": "The variable was already closed by two workflows the change never touched failing identically, so reverting would restore a known-broken gate while adding no information",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md",
-      "source_location": "L57131",
-      "norm_label": "the variable was already closed by two workflows the change never touched failing identically, so reverting would restore a known-broken gate while adding no information"
+      "norm_label": "declining a revert as diagnostic theater",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md:L57131] The variable was already closed by two workflows the change never touched failing identically, so reverting would restore a known-broken gate while adding no information"
     },
     {
       "id": "concept--zero-step-in-three-seconds-is-runner-unreachable",
@@ -134,15 +92,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md",
       "source_location": "L17379",
-      "norm_label": "zero recorded steps in three seconds is the signature of a job that never reached a runner"
-    },
-    {
-      "id": "rationale--dependabot-dynamic-runs-are-not-a-control",
-      "label": "The only successful runs were GitHub-internal Dependabot version-update events, so they are not a control that the account can obtain a runner",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md",
-      "source_location": "L18482",
-      "norm_label": "the only successful runs were GitHub-internal Dependabot version-update events, so they are not a control that the account can obtain a runner"
+      "norm_label": "zero recorded steps in three seconds is the signature of a job that never reached a runner",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md:L18482] The only successful runs were GitHub-internal Dependabot version-update events, so they are not a control that the account can obtain a runner"
     },
     {
       "id": "concept--backup-gate-reports-does-not-block",
@@ -150,66 +101,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md",
       "source_location": "L16191",
-      "norm_label": "backup gate reports sensitive tracked paths instead of blocking"
-    },
-    {
-      "id": "rationale--private-repo-means-release-and-history-share-an-audience",
-      "label": "The repository is private, so the release and the git history have the same audience and blocking buys no protection the archive does not already have",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md",
-      "source_location": "L16191",
-      "norm_label": "the repository is private, so the release and the git history have the same audience and blocking buys no protection the archive does not already have"
+      "norm_label": "backup gate reports sensitive tracked paths instead of blocking",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md:L16191] The repository is private, so the release and the git history have the same audience and blocking buys no protection the archive does not already have"
     }
   ],
   "links": [
-    {
-      "source": "rationale--parent-commits-to-avoid-index-lock-race",
-      "target": "concept--subagents-do-not-commit-parent-commits",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--publisher-version-constant-not-byte-compare",
-      "target": "concept--source-hash-only-freshness-never-invalidates",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--no-new-type-value-without-explicit-approval",
-      "target": "concept--pinned-vault-frontmatter-vocabulary",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--schema-filter-would-skip-most-of-the-corpus",
-      "target": "concept--most-plans-predate-ultra-plan-schema",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--widen-the-glob-not-the-expectation-list",
-      "target": "concept--green-test-with-blind-glob",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--isolation-already-closed-by-untouched-workflows",
-      "target": "concept--decline-revert-as-diagnostic-theater",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--dependabot-dynamic-runs-are-not-a-control",
-      "target": "concept--zero-step-in-three-seconds-is-runner-unreachable",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--private-repo-means-release-and-history-share-an-audience",
-      "target": "concept--backup-gate-reports-does-not-block",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--source-hash-only-freshness-never-invalidates",
       "target": "concept--source-path-and-source-hash-provenance",

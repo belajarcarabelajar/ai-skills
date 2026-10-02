@@ -107,16 +107,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - widen-vault-reachability-scope [ses_f217dd475ffezDFQEpyyNO5Hnf].md",
       "source_location": "L33",
       "norm_label": "green test with blind glob",
-      "summary": "Reused id. `90 - System/Audits/index.md` is a real hub with an inbound wikilink from `90 - System/index.md`, but it matched neither pinned hub shape, so the reachability test passed with a real hub at zero coverage -- precisely the failure the test exists to prevent, because `vault_lint.scan_vault`'s orphan filter exempts any file named `index.md` and therefore structurally cannot report an unreachable hub page. The test is genuinely the only detector, which a teeth test asserts directly with a positive control so the fixture cannot pass for the wrong reason."
-    },
-    {
-      "id": "rationale--widen-the-glob-not-the-expectation-list",
-      "label": "Widen the glob, not the expected-hub list",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - widen-vault-reachability-scope [ses_f217dd475ffezDFQEpyyNO5Hnf].md",
-      "source_location": "L42",
-      "norm_label": "widen the glob not the expectation list",
-      "summary": "Reused id, same reason restated here as a working instruction: appending the literal `90 - System/Audits/index.md` to EXPECTED_HUBS would make the test pass while leaving the glob blind, so the next hub created under `90 - System/` is invisible again. The glob is what has to widen -- to `90 - System/*/index.md` alongside `01 - Projects/*/index.md` -- and set equality against EXPECTED_HUBS turns that widening from a loosening into a tightening, because a newly created hub nobody registered must fail rather than pass quietly."
+      "summary": "Reused id. `90 - System/Audits/index.md` is a real hub with an inbound wikilink from `90 - System/index.md`, but it matched neither pinned hub shape, so the reachability test passed with a real hub at zero coverage -- precisely the failure the test exists to prevent, because `vault_lint.scan_vault`'s orphan filter exempts any file named `index.md` and therefore structurally cannot report an unreachable hub page. The test is genuinely the only detector, which a teeth test asserts directly with a positive control so the fixture cannot pass for the wrong reason.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - widen-vault-reachability-scope [ses_f217dd475ffezDFQEpyyNO5Hnf].md:L42] Widen the glob, not the expected-hub list"
     },
     {
       "id": "concept--explicit-exclusion-instead-of-relying-on-glob-depth",
@@ -134,25 +126,11 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - widen-vault-reachability-scope [ses_f217dd475ffezDFQEpyyNO5Hnf].md",
       "source_location": "L2541",
       "norm_label": "widened shape must be seen red under a mutant",
-      "summary": "Nine new tests were added, then evidence was produced rather than assumed: narrowing `SYSTEM_HUB_GLOB` to a non-matching pattern, subprocess-isolated, gives 7 RED / 9 GREEN under the mutant and 0 RED / 16 GREEN real. The seven that go red are the real glob-teeth; the nine that stay green are glob-independent by design (positive control, linter-blindness proof, leaf-exclusion guard, set-vanished direction) and are explicitly not counted as widening-teeth. One test was initially filtered out by a name mismatch ('discovers' rather than 'widened_shape') and the filter was corrected rather than the count reported as complete."
-    },
-    {
-      "id": "rationale--red-green-needs-a-hash-proved-restore",
-      "label": "A real-vault red/green needs a hash-proved restore",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - widen-vault-reachability-scope [ses_f217dd475ffezDFQEpyyNO5Hnf].md",
-      "source_location": "L2561",
-      "norm_label": "red green needs a hash proved restore",
-      "summary": "Step 4 required removing the Audits inbound link from `90 - System/index.md`, confirming the test goes red and names the hub, then restoring. The sha256 is recorded before and after -- `ef296f43ce83718a865153d57ac391bd5bc5f0142168408294e0f8396afc9bc2`, 1049 bytes both times -- because that file had been edited by another agent earlier the same day, so a clean restore genuinely had to be demonstrated rather than assumed. mtime did change, which is the expected trace of the temporary edit. During the red window `broken_links` stayed at 1986 and Audits was absent from `orphan_files`, confirming the linter reports nothing and the test is the only detector."
+      "summary": "Nine new tests were added, then evidence was produced rather than assumed: narrowing `SYSTEM_HUB_GLOB` to a non-matching pattern, subprocess-isolated, gives 7 RED / 9 GREEN under the mutant and 0 RED / 16 GREEN real. The seven that go red are the real glob-teeth; the nine that stay green are glob-independent by design (positive control, linter-blindness proof, leaf-exclusion guard, set-vanished direction) and are explicitly not counted as widening-teeth. One test was initially filtered out by a name mismatch ('discovers' rather than 'widened_shape') and the filter was corrected rather than the count reported as complete.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - widen-vault-reachability-scope [ses_f217dd475ffezDFQEpyyNO5Hnf].md:L2561] A real-vault red/green needs a hash-proved restore"
     }
   ],
   "links": [
-    {
-      "source": "rationale--widen-the-glob-not-the-expectation-list",
-      "target": "concept--green-test-with-blind-glob",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--clipboard-poll-dedup-bypassed-on-the-sensitive-path",
       "target": "concept--rejection-counts-as-handled-for-the-dedup-marker",
@@ -193,12 +171,6 @@
       "source": "concept--explicit-exclusion-instead-of-relying-on-glob-depth",
       "target": "concept--green-test-with-blind-glob",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--red-green-needs-a-hash-proved-restore",
-      "target": "concept--widened-shape-must-be-seen-red-under-a-mutant",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {

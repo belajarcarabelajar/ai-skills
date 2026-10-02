@@ -22,7 +22,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
       "source_location": "L2327",
-      "norm_label": "high fan-out floor"
+      "norm_label": "high fan-out floor",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md:L2327] Ten small chunks beat five massive ones",
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md:L2340] RAM/timeout guardrails kept above the fan-out default"
+      ]
     },
     {
       "id": "concept--gather-and-synthesize-loop",
@@ -62,7 +66,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
       "source_location": "L4596",
-      "norm_label": "harness prompt triage"
+      "norm_label": "harness prompt triage",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md:L4628] Codex-desktop-specific rules break other harnesses",
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md:L4627] Our super-skill already exceeds the pasted protocol content"
+      ]
     },
     {
       "id": "concept--portable-instruction-content",
@@ -70,7 +78,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
       "source_location": "L4580",
-      "norm_label": "portable instruction content"
+      "norm_label": "portable instruction content",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md:L4580] Only 12-15% of the pasted material is portable instruction content"
     },
     {
       "id": "concept--completion-audit",
@@ -110,7 +119,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
       "source_location": "L4607",
-      "norm_label": "pre-approval specificity"
+      "norm_label": "pre-approval specificity",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md:L4634] New authorization rules must stay inside one Authority domain"
     },
     {
       "id": "concept--credential-handoff",
@@ -118,7 +128,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
       "source_location": "L4608",
-      "norm_label": "credential hand-off"
+      "norm_label": "credential hand-off",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md:L4629] The five-category browser confirmation matrix is too heavy for a coding skill"
     },
     {
       "id": "concept--least-privilege-permission-requests",
@@ -142,7 +153,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
       "source_location": "L4616",
-      "norm_label": "review exhaustiveness"
+      "norm_label": "review exhaustiveness",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md:L4526] The existing review rubric already covers most of the imported rubric"
     },
     {
       "id": "concept--compaction-continuity",
@@ -159,121 +171,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
       "source_location": "L4621",
       "norm_label": "self-contained final answer"
-    },
-    {
-      "id": "rationale--ten-small-chunks-beat-five-massive",
-      "label": "Ten small chunks beat five massive ones",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
-      "source_location": "L2327",
-      "norm_label": "ten small chunks beat five massive ones"
-    },
-    {
-      "id": "rationale--guardrails-stay-above-fan-out",
-      "label": "RAM/timeout guardrails kept above the fan-out default",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
-      "source_location": "L2340",
-      "norm_label": "ram/timeout guardrails kept above the fan-out default"
-    },
-    {
-      "id": "rationale--desktop-specific-material-breaks-other-harnesses",
-      "label": "Codex-desktop-specific rules break other harnesses",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
-      "source_location": "L4628",
-      "norm_label": "codex-desktop-specific rules break other harnesses"
-    },
-    {
-      "id": "rationale--super-skill-already-superset",
-      "label": "Our super-skill already exceeds the pasted protocol content",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
-      "source_location": "L4627",
-      "norm_label": "our super-skill already exceeds the pasted protocol content"
-    },
-    {
-      "id": "rationale--only-12-15-percent-portable",
-      "label": "Only 12-15% of the pasted material is portable instruction content",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
-      "source_location": "L4580",
-      "norm_label": "only 12-15% of the pasted material is portable instruction content"
-    },
-    {
-      "id": "rationale--keep-one-authorization-domain",
-      "label": "New authorization rules must stay inside one Authority domain",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
-      "source_location": "L4634",
-      "norm_label": "new authorization rules must stay inside one authority domain"
-    },
-    {
-      "id": "rationale--confirmation-matrix-too-heavy",
-      "label": "The five-category browser confirmation matrix is too heavy for a coding skill",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
-      "source_location": "L4629",
-      "norm_label": "the five-category browser confirmation matrix is too heavy for a coding skill"
-    },
-    {
-      "id": "rationale--review-rubric-already-covers-most",
-      "label": "The existing review rubric already covers most of the imported rubric",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
-      "source_location": "L4526",
-      "norm_label": "the existing review rubric already covers most of the imported rubric"
     }
   ],
   "links": [
-    {
-      "source": "rationale--ten-small-chunks-beat-five-massive",
-      "target": "concept--high-fan-out-floor",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--guardrails-stay-above-fan-out",
-      "target": "concept--high-fan-out-floor",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--desktop-specific-material-breaks-other-harnesses",
-      "target": "concept--harness-prompt-triage",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--super-skill-already-superset",
-      "target": "concept--harness-prompt-triage",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--only-12-15-percent-portable",
-      "target": "concept--portable-instruction-content",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--keep-one-authorization-domain",
-      "target": "concept--pre-approval-specificity",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--confirmation-matrix-too-heavy",
-      "target": "concept--credential-handoff",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--review-rubric-already-covers-most",
-      "target": "concept--review-exhaustiveness",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--task-chunking-principle",
       "target": "concept--subagent-first-default",

@@ -8,7 +8,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - fu4-explicit-status-on-silent-paths [ses_f0b0c7cfaffeu4kbzprwtbuUSC].md",
       "source_location": "L10724",
-      "norm_label": "ollama availability probe returns true on any http response including 401 and 500"
+      "norm_label": "ollama availability probe returns true on any http response including 401 and 500",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - fu4-explicit-status-on-silent-paths [ses_f0b0c7cfaffeu4kbzprwtbuUSC].md:L10726] Kept the probe returning true rather than is_success(), because flipping it would change the UI from Online to Offline"
     },
     {
       "id": "concept--status-check-grep-false-positive-from-as-u16-comparison",
@@ -32,23 +33,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - fu4-explicit-status-on-silent-paths [ses_f0b0c7cfaffeu4kbzprwtbuUSC].md",
       "source_location": "L10761",
-      "norm_label": "device status catch all arm collapses 403 404 429 and 5xx into device status unknown with no log"
-    },
-    {
-      "id": "rationale--observability-only-forbids-flipping-the-probe-to-is-success",
-      "label": "Kept the probe returning true rather than is_success(), because flipping it would change the UI from Online to Offline",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - fu4-explicit-status-on-silent-paths [ses_f0b0c7cfaffeu4kbzprwtbuUSC].md",
-      "source_location": "L10726",
-      "norm_label": "kept the probe returning true rather than is success because flipping it would change the ui from online to offline"
-    },
-    {
-      "id": "rationale--transport-error-arm-left-silent-because-it-carries-no-status-code",
-      "label": "Left the device_status transport-error arm silent because it has no status code and would warn on every Settings open without Ollama",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - fu4-explicit-status-on-silent-paths [ses_f0b0c7cfaffeu4kbzprwtbuUSC].md",
-      "source_location": "L10766",
-      "norm_label": "left the device status transport error arm silent because it has no status code and would warn on every settings open without ollama"
+      "norm_label": "device status catch all arm collapses 403 404 429 and 5xx into device status unknown with no log",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - fu4-explicit-status-on-silent-paths [ses_f0b0c7cfaffeu4kbzprwtbuUSC].md:L10766] Left the device_status transport-error arm silent because it has no status code and would warn on every Settings open without Ollama"
     },
     {
       "id": "concept--reuse-existing-enum-arms-over-adding-new-ones",
@@ -56,7 +42,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-01 - author-f3-csat-event-patch [ses_f0a90bfe4ffeBLZI5V20IczZr8].md",
       "source_location": "L2743",
-      "norm_label": "csat reuses the existing aichat feature success outcome and aichat surface instead of adding enum arms"
+      "norm_label": "csat reuses the existing aichat feature success outcome and aichat surface instead of adding enum arms",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-10-01 - author-f3-csat-event-patch [ses_f0a90bfe4ffeBLZI5V20IczZr8].md:L2744] Added one AnalyticsAction::CsatResponded arm because no reusable generic Action variant exists — the existing ones conflate quality with behaviour"
     },
     {
       "id": "concept--validate-event-source-id-whitelist-rejects-conversation-prefix",
@@ -72,38 +59,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-01 - author-f3-csat-event-patch [ses_f0a90bfe4ffeBLZI5V20IczZr8].md",
       "source_location": "L2823",
-      "norm_label": "a csat response is one row ai chat csat responded success conversation sha256 hex quantity score 1 to 5"
-    },
-    {
-      "id": "rationale--no-reusable-action-variant-because-existing-arms-conflate-quality-with-behaviour",
-      "label": "Added one AnalyticsAction::CsatResponded arm because no reusable generic Action variant exists — the existing ones conflate quality with behaviour",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-01 - author-f3-csat-event-patch [ses_f0a90bfe4ffeBLZI5V20IczZr8].md",
-      "source_location": "L2744",
-      "norm_label": "added one analytics action csat responded arm because no reusable generic action variant exists the existing ones conflate quality with behaviour"
-    },
-    {
-      "id": "rationale--opaque-source-id-so-the-csat-ledger-cannot-be-reversed-to-content",
-      "label": "The conversation ref goes through opaque_source_id because that one-way SHA-256 stops the ledger being reversed to content",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-01 - author-f3-csat-event-patch [ses_f0a90bfe4ffeBLZI5V20IczZr8].md",
-      "source_location": "L2824",
-      "norm_label": "the conversation ref goes through opaque source id because that one way sha256 stops the ledger being reversed to content"
+      "norm_label": "a csat response is one row ai chat csat responded success conversation sha256 hex quantity score 1 to 5",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-10-01 - author-f3-csat-event-patch [ses_f0a90bfe4ffeBLZI5V20IczZr8].md:L2824] The conversation ref goes through opaque_source_id because that one-way SHA-256 stops the ledger being reversed to content"
     }
   ],
   "links": [
-    {
-      "source": "rationale--observability-only-forbids-flipping-the-probe-to-is-success",
-      "target": "concept--ollama-availability-probe-returns-true-on-any-http-response",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--transport-error-arm-left-silent-because-it-carries-no-status-code",
-      "target": "concept--device-status-unknown-arm-swallows-unexpected-http-status",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--ollama-availability-probe-returns-true-on-any-http-response",
       "target": "concept--todoist-retry-branch-swallows-the-status-code",
@@ -120,18 +80,6 @@
       "source": "concept--device-status-unknown-arm-swallows-unexpected-http-status",
       "target": "concept--ollama-availability-probe-returns-true-on-any-http-response",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--no-reusable-action-variant-because-existing-arms-conflate-quality-with-behaviour",
-      "target": "concept--reuse-existing-enum-arms-over-adding-new-ones",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--opaque-source-id-so-the-csat-ledger-cannot-be-reversed-to-content",
-      "target": "concept--csat-response-stored-as-one-hashed-metadata-row",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {

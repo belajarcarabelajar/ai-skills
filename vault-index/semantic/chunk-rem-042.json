@@ -15,7 +15,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - dukungan-appimage-snipset-di-arch-linux [ses_f307e386bffeYlPW4CvAW2eqoU].md",
       "source_location": "L7613",
-      "norm_label": "ggml_native=off instead of ggml_avx512=off"
+      "norm_label": "ggml_native=off instead of ggml_avx512=off",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - dukungan-appimage-snipset-di-arch-linux [ses_f307e386bffeYlPW4CvAW2eqoU].md:L7613] GGML_NATIVE defaults ON and compiles the whole baseline with -march=native, so AVX512=OFF alone was not enough",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - dukungan-appimage-snipset-di-arch-linux [ses_f307e386bffeYlPW4CvAW2eqoU].md:L4267] cargo clean -p whisper-rs-sys is required for the flag to actually take effect, because the old cache keeps the AVX512 objects"
+      ]
     },
     {
       "id": "concept--dispatch-path-evex-guard",
@@ -23,7 +27,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - dukungan-appimage-snipset-di-arch-linux [ses_f307e386bffeYlPW4CvAW2eqoU].md",
       "source_location": "L7614",
-      "norm_label": "post build evex guard scoped to the ggml dispatch path"
+      "norm_label": "post build evex guard scoped to the ggml dispatch path",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - dukungan-appimage-snipset-di-arch-linux [ses_f307e386bffeYlPW4CvAW2eqoU].md:L7614] The guard was narrowed to the dispatch path because whole-binary EVEX scans false-positive on dormant AVX512 in upstream variant kernels"
     },
     {
       "id": "concept--appimage-bundled-webkit-renderer-abort",
@@ -31,7 +36,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - dukungan-appimage-snipset-di-arch-linux [ses_f307e386bffeYlPW4CvAW2eqoU].md",
       "source_location": "L8575",
-      "norm_label": "appimage bundled webkit renderer abort"
+      "norm_label": "appimage bundled webkit renderer abort",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - dukungan-appimage-snipset-di-arch-linux [ses_f307e386bffeYlPW4CvAW2eqoU].md:L8577] Prefer the system WebKit over the AppImage's bundled copy"
     },
     {
       "id": "concept--arch-deb-to-aur-instead-of-appimage",
@@ -47,7 +53,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - dukungan-appimage-snipset-di-arch-linux [ses_f307e386bffeYlPW4CvAW2eqoU].md",
       "source_location": "L21753",
-      "norm_label": "overlay focus blackhole swallowing menu clicks"
+      "norm_label": "overlay focus blackhole swallowing menu clicks",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - dukungan-appimage-snipset-di-arch-linux [ses_f307e386bffeYlPW4CvAW2eqoU].md:L16321] Clicks vanish into an overlay window that is focused while the compositor reports it invisible, which is why the main window looks frozen"
     },
     {
       "id": "concept--webview-watchdog-silent-window-reload",
@@ -55,55 +62,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - dukungan-appimage-snipset-di-arch-linux [ses_f307e386bffeYlPW4CvAW2eqoU].md",
       "source_location": "L25169",
-      "norm_label": "webview watchdog silent window reload"
-    },
-    {
-      "id": "rationale--ggml-native-default-on-defeats-avx512-off",
-      "label": "GGML_NATIVE defaults ON and compiles the whole baseline with -march=native, so AVX512=OFF alone was not enough",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - dukungan-appimage-snipset-di-arch-linux [ses_f307e386bffeYlPW4CvAW2eqoU].md",
-      "source_location": "L7613",
-      "norm_label": "ggml_native defaults on and compiles the whole baseline with -march=native, so avx512=off alone was not enough"
-    },
-    {
-      "id": "rationale--whole-binary-evex-scan-false-positives",
-      "label": "The guard was narrowed to the dispatch path because whole-binary EVEX scans false-positive on dormant AVX512 in upstream variant kernels",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - dukungan-appimage-snipset-di-arch-linux [ses_f307e386bffeYlPW4CvAW2eqoU].md",
-      "source_location": "L7614",
-      "norm_label": "the guard was narrowed to the dispatch path because whole binary evex scans false positive on dormant avx512 in upstream variant kernels"
-    },
-    {
-      "id": "rationale--cargo-clean-purge-needed-for-env-flag",
-      "label": "cargo clean -p whisper-rs-sys is required for the flag to actually take effect, because the old cache keeps the AVX512 objects",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - dukungan-appimage-snipset-di-arch-linux [ses_f307e386bffeYlPW4CvAW2eqoU].md",
-      "source_location": "L4267",
-      "norm_label": "cargo clean -p whisper-rs-sys is required for the flag to actually take effect, because the old cache keeps the avx512 objects"
-    },
-    {
-      "id": "rationale--prefer-system-webkit-over-bundled",
-      "label": "Prefer the system WebKit over the AppImage's bundled copy",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - dukungan-appimage-snipset-di-arch-linux [ses_f307e386bffeYlPW4CvAW2eqoU].md",
-      "source_location": "L8577",
-      "norm_label": "prefer the system webkit over the appimage's bundled copy"
-    },
-    {
-      "id": "rationale--focused-invisible-overlay-window-eats-clicks",
-      "label": "Clicks vanish into an overlay window that is focused while the compositor reports it invisible, which is why the main window looks frozen",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - dukungan-appimage-snipset-di-arch-linux [ses_f307e386bffeYlPW4CvAW2eqoU].md",
-      "source_location": "L16321",
-      "norm_label": "clicks vanish into an overlay window that is focused while the compositor reports it invisible, which is why the main window looks frozen"
-    },
-    {
-      "id": "rationale--reload-cap-avoids-reload-furnace",
-      "label": "The 5-reload cap lets a page that never survives degrade to periodic flashes instead of a reload furnace",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - dukungan-appimage-snipset-di-arch-linux [ses_f307e386bffeYlPW4CvAW2eqoU].md",
-      "source_location": "L25169",
-      "norm_label": "the 5 reload cap lets a page that never survives degrade to periodic flashes instead of a reload furnace"
+      "norm_label": "webview watchdog silent window reload",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - dukungan-appimage-snipset-di-arch-linux [ses_f307e386bffeYlPW4CvAW2eqoU].md:L25169] The 5-reload cap lets a page that never survives degrade to periodic flashes instead of a reload furnace"
     }
   ],
   "links": [
@@ -136,42 +96,6 @@
       "relation": "conceptually_related_to",
       "target": "concept--webview-watchdog-silent-window-reload",
       "confidence": "INFERRED"
-    },
-    {
-      "source": "rationale--ggml-native-default-on-defeats-avx512-off",
-      "relation": "rationale_for",
-      "target": "concept--ggml-native-off-over-avx512-off",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--whole-binary-evex-scan-false-positives",
-      "relation": "rationale_for",
-      "target": "concept--dispatch-path-evex-guard",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--cargo-clean-purge-needed-for-env-flag",
-      "relation": "rationale_for",
-      "target": "concept--ggml-native-off-over-avx512-off",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--prefer-system-webkit-over-bundled",
-      "relation": "rationale_for",
-      "target": "concept--appimage-bundled-webkit-renderer-abort",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--focused-invisible-overlay-window-eats-clicks",
-      "relation": "rationale_for",
-      "target": "concept--overlay-focus-blackhole",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--reload-cap-avoids-reload-furnace",
-      "relation": "rationale_for",
-      "target": "concept--webview-watchdog-silent-window-reload",
-      "confidence": "EXTRACTED"
     }
   ]
 }

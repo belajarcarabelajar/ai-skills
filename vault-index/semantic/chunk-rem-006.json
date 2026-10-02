@@ -7,7 +7,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf",
       "source_location": "L321",
-      "norm_label": "data flow diagram"
+      "norm_label": "data flow diagram",
+      "rationale": [
+        "[05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf:L288] Documentation tools exist to reduce complexity and onboard new team members",
+        "[05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf:L303] Both DFDs and flowcharts must be learned because both are used by IS professionals and both appear on professional exams"
+      ]
     },
     {
       "id": "concept--flowchart",
@@ -15,7 +19,12 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf",
       "source_location": "L1489",
-      "norm_label": "flowchart"
+      "norm_label": "flowchart",
+      "rationale": [
+        "[05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf:L288] Documentation tools exist to reduce complexity and onboard new team members",
+        "[05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf:L303] Both DFDs and flowcharts must be learned because both are used by IS professionals and both appear on professional exams",
+        "[05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf:L1499] Sarbanes-Oxley 2002 raised the importance of flowcharts by requiring companies to document business processes and internal control procedures"
+      ]
     },
     {
       "id": "concept--document-flowchart",
@@ -63,7 +72,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf",
       "source_location": "L2050",
-      "norm_label": "internal control flowchart"
+      "norm_label": "internal control flowchart",
+      "rationale": "[05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf:L2050] Document flowcharts are used to evaluate the adequacy of internal controls and to reveal control weaknesses and inefficiencies"
     },
     {
       "id": "concept--flowchart-symbol-set",
@@ -79,47 +89,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf",
       "source_location": "L2568",
-      "norm_label": "logical versus physical emphasis in system documentation"
-    },
-    {
-      "id": "rationale--documentation-tools-simplify-and-onboard",
-      "label": "Documentation tools exist to reduce complexity and onboard new team members",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf",
-      "source_location": "L288",
-      "norm_label": "documentation tools exist to reduce complexity and onboard new team members"
-    },
-    {
-      "id": "rationale--dfd-logical-flowchart-physical",
-      "label": "Physical process changes alter the flowchart but barely touch the DFD, so pick the tool by the viewer's information needs",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf",
-      "source_location": "L2758",
-      "norm_label": "physical process changes alter the flowchart but barely touch the dfd, so pick the tool by the viewer's information needs"
-    },
-    {
-      "id": "rationale--learn-both-documentation-tools",
-      "label": "Both DFDs and flowcharts must be learned because both are used by IS professionals and both appear on professional exams",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf",
-      "source_location": "L303",
-      "norm_label": "both dfds and flowcharts must be learned because both are used by is professionals and both appear on professional exams"
-    },
-    {
-      "id": "rationale--internal-control-flowcharts-expose-weaknesses",
-      "label": "Document flowcharts are used to evaluate the adequacy of internal controls and to reveal control weaknesses and inefficiencies",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf",
-      "source_location": "L2050",
-      "norm_label": "document flowcharts are used to evaluate the adequacy of internal controls and to reveal control weaknesses and inefficiencies"
-    },
-    {
-      "id": "rationale--sarbanes-oxley-raised-flowchart-importance",
-      "label": "Sarbanes-Oxley 2002 raised the importance of flowcharts by requiring companies to document business processes and internal control procedures",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf",
-      "source_location": "L1499",
-      "norm_label": "sarbanes-oxley 2002 raised the importance of flowcharts by requiring companies to document business processes and internal control procedures"
+      "norm_label": "logical versus physical emphasis in system documentation",
+      "rationale": "[05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf:L2758] Physical process changes alter the flowchart but barely touch the DFD, so pick the tool by the viewer's information needs"
     }
   ],
   "links": [
@@ -193,48 +164,6 @@
       "source": "concept--program-flowchart",
       "target": "concept--system-flowchart",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--documentation-tools-simplify-and-onboard",
-      "target": "concept--data-flow-diagram",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--documentation-tools-simplify-and-onboard",
-      "target": "concept--flowchart",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--dfd-logical-flowchart-physical",
-      "target": "concept--logical-versus-physical-system-documentation",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--learn-both-documentation-tools",
-      "target": "concept--data-flow-diagram",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--learn-both-documentation-tools",
-      "target": "concept--flowchart",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--internal-control-flowcharts-expose-weaknesses",
-      "target": "concept--internal-control-flowchart",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--sarbanes-oxley-raised-flowchart-importance",
-      "target": "concept--flowchart",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     }
   ]

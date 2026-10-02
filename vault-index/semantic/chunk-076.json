@@ -8,7 +8,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - c7-diagnostics-false-claims [ses_f0bcb4e8effeNPOSes7w2f1yiD].md",
       "source_location": "L15526",
       "norm_label": "http diagnostic inspector fabricated diagnostics",
-      "summary": "The drawer in apps/website/src/components/NotFoundApp.tsx:212-237 renders six hardcoded JSX text literals as if they were measured server diagnostics. Verdict CONFIRMED: at least two are provably false for this deployment, one is unimplemented anywhere in the repo, one is unverifiable from the repo."
+      "summary": "The drawer in apps/website/src/components/NotFoundApp.tsx:212-237 renders six hardcoded JSX text literals as if they were measured server diagnostics. Verdict CONFIRMED: at least two are provably false for this deployment, one is unimplemented anywhere in the repo, one is unverifiable from the repo.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - c7-diagnostics-false-claims [ses_f0bcb4e8effeNPOSes7w2f1yiD].md:L01591] No measurement API is ever called by the drawer"
     },
     {
       "id": "concept--evidence-over-claims-rule",
@@ -35,7 +36,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - c7-diagnostics-false-claims [ses_f0bcb4e8effeNPOSes7w2f1yiD].md",
       "source_location": "L01550",
       "norm_label": "astro hybrid output mode",
-      "summary": "astro.config.mjs:251 declares output: \"static\" with the config's own comment that pages with `export const prerender = false` are served as SSR via the Cloudflare adapter. 87 such pages exist, so the deployment is hybrid, but 404.astro has no prerender directive and is prerendered to static HTML."
+      "summary": "astro.config.mjs:251 declares output: \"static\" with the config's own comment that pages with `export const prerender = false` are served as SSR via the Cloudflare adapter. 87 such pages exist, so the deployment is hybrid, but 404.astro has no prerender directive and is prerendered to static HTML.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - c7-diagnostics-false-claims [ses_f0bcb4e8effeNPOSes7w2f1yiD].md:L01555] Deployment is hybrid, not purely static"
     },
     {
       "id": "concept--client-load-pre-hydration-window",
@@ -45,24 +47,6 @@
       "source_location": "L01605",
       "norm_label": "client load pre hydration window",
       "summary": "NotFoundApp is a client:load island. showDiagnostics starts false, so the drawer is absent from the prerendered HTML and the toggle button does nothing until hydration, by which time useEffect has set currentPath. The {currentPath || \"N/A\"} fallback is therefore effectively unreachable in a hydrated browser, and reachable only in a non-browser render."
-    },
-    {
-      "id": "rationale--no-measurement-apis-in-the-drawer",
-      "label": "No measurement API is ever called by the drawer",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - c7-diagnostics-false-claims [ses_f0bcb4e8effeNPOSes7w2f1yiD].md",
-      "source_location": "L01591",
-      "norm_label": "no measurement api is ever called by the drawer",
-      "summary": "The stated reason the six rows are fabricated rather than measured: exit 1 from `rg -n 'fetch\\(|new Response|\\.status\\b|Response\\('` means there is no fetch, no Response object, no status read, no XMLHttpRequest, and no server-injected prop. The only props are locale and strings; the factual rows are JSX text literals compiled into the static bundle and visible in View Source."
-    },
-    {
-      "id": "rationale--hybrid-deployment-not-purely-static",
-      "label": "Deployment is hybrid, not purely static",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - c7-diagnostics-false-claims [ses_f0bcb4e8effeNPOSes7w2f1yiD].md",
-      "source_location": "L01555",
-      "norm_label": "hybrid deployment not purely static",
-      "summary": "Why the hypothesis's 'there is no SSR' framing was rejected as partly wrong: rg finds 87 pages with prerender = false and adapter: cloudflare(...) at line 259, so SSR does exist in the deployment. Line 221's 'SSR / Static' is not descriptively wrong about the site overall, only about the prerendered page rendering it, and is a string with no measurement behind it either way."
     },
     {
       "id": "concept--column-definition-catch-all",
@@ -80,7 +64,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - correct-two-false-doc-claims [ses_f08b9ea6fffeFn8e4nIIXAodVl].md",
       "source_location": "L02392",
       "norm_label": "fingerprint name versus shape agreement",
-      "summary": "GROUP_COLUMNS and SNIPPET_COLUMNS are shared by the desktop app's schema and by `snipset init`'s CREATE TABLE builder, so the two sides agree on column NAMES automatically and by construction. Declared shape is a separate mechanism and nothing about a name alone forces type, NOT NULL, or DEFAULT to agree."
+      "summary": "GROUP_COLUMNS and SNIPPET_COLUMNS are shared by the desktop app's schema and by `snipset init`'s CREATE TABLE builder, so the two sides agree on column NAMES automatically and by construction. Declared shape is a separate mechanism and nothing about a name alone forces type, NOT NULL, or DEFAULT to agree.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - correct-two-false-doc-claims [ses_f08b9ea6fffeFn8e4nIIXAodVl].md:L00034] Names agree automatically; shapes come from column_definition"
     },
     {
       "id": "concept--dual-schema-declaration",
@@ -89,7 +74,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - correct-two-false-doc-claims [ses_f08b9ea6fffeFn8e4nIIXAodVl].md",
       "source_location": "L02779",
       "norm_label": "column declared in both base create table and migration array",
-      "summary": "Commit f7ee4eef1 added research_tag to schema.rs's base CREATE TABLE and to the group_cols array in schema_migrations.rs at the same time. A database created by that release already has the column; an older database gets the same position from ALTER TABLE. Both positions agree, which is why the asserted cid holds on either path."
+      "summary": "Commit f7ee4eef1 added research_tag to schema.rs's base CREATE TABLE and to the group_cols array in schema_migrations.rs at the same time. A database created by that release already has the column; an older database gets the same position from ALTER TABLE. Both positions agree, which is why the asserted cid holds on either path.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - correct-two-false-doc-claims [ses_f08b9ea6fffeFn8e4nIIXAodVl].md:L02904] cid 11 holds on either path, from agreement of two sources"
     },
     {
       "id": "concept--cid-order-is-not-migration-order",
@@ -107,7 +93,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - correct-two-false-doc-claims [ses_f08b9ea6fffeFn8e4nIIXAodVl].md",
       "source_location": "L02824",
       "norm_label": "from create table hand maintained subset",
-      "summary": "The 15-name list guarding `the_fingerprint_declares_no_column_the_app_never_creates` is not a transcription of the base CREATE TABLE. It omits 6 groups base columns and 4 snippets base columns, all of which are in a migration array, and it lists is_favorite even though the migration array also carries it. It is a deliberately incomplete hand-maintained allowlist; completeness against the base schema is not asserted and the forward checks cannot cover it."
+      "summary": "The 15-name list guarding `the_fingerprint_declares_no_column_the_app_never_creates` is not a transcription of the base CREATE TABLE. It omits 6 groups base columns and 4 snippets base columns, all of which are in a migration array, and it lists is_favorite even though the migration array also carries it. It is a deliberately incomplete hand-maintained allowlist; completeness against the base schema is not asserted and the forward checks cannot cover it.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - correct-two-false-doc-claims [ses_f08b9ea6fffeFn8e4nIIXAodVl].md:L10228] The subset list still passes because every omission is migrated"
     },
     {
       "id": "concept--set-based-fingerprint-difference",
@@ -125,58 +112,11 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - correct-two-false-doc-claims [ses_f08b9ea6fffeFn8e4nIIXAodVl].md",
       "source_location": "L09578",
       "norm_label": "concurrent rebase discarded working tree edits",
-      "summary": "A rebase mid-task by the parent session reset the worktree: HEAD hashes changed (2ff5df447 -> 78c990c89), earlier commits reappeared as 2030dbccc and 824a83e7b, and the chunk's uncommitted edits were discarded. The four corrections in the final report are the re-applied, re-verified set, not the first round."
-    },
-    {
-      "id": "rationale--names-agree-but-shapes-diverge",
-      "label": "Names agree automatically; shapes come from column_definition",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - correct-two-false-doc-claims [ses_f08b9ea6fffeFn8e4nIIXAodVl].md",
-      "source_location": "L00034",
-      "norm_label": "names agree automatically shapes come from column definition",
-      "summary": "The stated reason the 'the two stay consistent automatically' doc claim was false beyond column NAMES: `snipset init` maps every name through column_definition, whose catch-all emits TEXT for any unlisted column, so a name can be present on both sides while type, NOT NULL, and DEFAULT all differ. Measured: research_tag is INTEGER NOT NULL DEFAULT 0 in the app and TEXT with no default in init."
-    },
-    {
-      "id": "rationale--cid-11-holds-either-path",
-      "label": "cid 11 holds on either path, from agreement of two sources",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - correct-two-false-doc-claims [ses_f08b9ea6fffeFn8e4nIIXAodVl].md",
-      "source_location": "L02904",
-      "norm_label": "cid 11 holds on either path from agreement of two sources",
-      "summary": "The verified reason the position assertion passes: a database created by the release already has research_tag at cid 11 straight after is_deleted, and an older database reaches the same cid 11 from ALTER TABLE ADD COLUMN, which appends. So the position holds either way, but the reason is the agreement of the two sources, not the migration alone."
-    },
-    {
-      "id": "rationale--subset-check-still-passes",
-      "label": "The subset list still passes because every omission is migrated",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - correct-two-false-doc-claims [ses_f08b9ea6fffeFn8e4nIIXAodVl].md",
-      "source_location": "L10228",
-      "norm_label": "subset list still passes because every omission is migrated",
-      "summary": "Why an incomplete FROM_CREATE_TABLE list is not a defect in the check: all 10 omitted base columns are in a migration array, so the assertion still passes. The prose was wrong about what the list was, not about what it does, which is why the comment was reworded rather than the list expanded."
-    },
-    {
-      "id": "rationale--rebase-cost-an-editing-round",
-      "label": "Rebase cost an editing round",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - correct-two-false-doc-claims [ses_f08b9ea6fffeFn8e4nIIXAodVl].md",
-      "source_location": "L10261",
-      "norm_label": "rebase cost an editing round",
-      "summary": "A rebase mid-task reset the working tree and discarded an earlier round of edits; the four edits reported are the re-applied, re-verified set. Recorded as a process note in the deliverable so the parent knows the diff was produced twice."
+      "summary": "A rebase mid-task by the parent session reset the worktree: HEAD hashes changed (2ff5df447 -> 78c990c89), earlier commits reappeared as 2030dbccc and 824a83e7b, and the chunk's uncommitted edits were discarded. The four corrections in the final report are the re-applied, re-verified set, not the first round.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - correct-two-false-doc-claims [ses_f08b9ea6fffeFn8e4nIIXAodVl].md:L10261] Rebase cost an editing round"
     }
   ],
   "links": [
-    {
-      "source": "rationale--no-measurement-apis-in-the-drawer",
-      "target": "concept--http-diagnostic-inspector-fabricated-diagnostics",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--hybrid-deployment-not-purely-static",
-      "target": "concept--astro-hybrid-static-output",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--http-diagnostic-inspector-fabricated-diagnostics",
       "target": "concept--evidence-over-claims-rule",
@@ -199,30 +139,6 @@
       "source": "concept--astro-hybrid-static-output",
       "target": "concept--client-load-pre-hydration-window",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--names-agree-but-shapes-diverge",
-      "target": "concept--fingerprint-name-vs-shape-agreement",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--cid-11-holds-either-path",
-      "target": "concept--dual-schema-declaration",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--subset-check-still-passes",
-      "target": "concept--from-create-table-allowlist-subset",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--rebase-cost-an-editing-round",
-      "target": "concept--concurrent-rebase-discarded-edits",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {

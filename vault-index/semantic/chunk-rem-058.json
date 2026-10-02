@@ -23,7 +23,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t12-release-history-and-tooling [ses_f1d9670aeffeec0wbGK9b1oift].md",
       "source_location": "L55",
-      "norm_label": "windows source-vs-published version distinction"
+      "norm_label": "windows source-vs-published version distinction",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t12-release-history-and-tooling [ses_f1d9670aeffeec0wbGK9b1oift].md:L67] Package managers must be fed the published version because source and published already diverge"
     },
     {
       "id": "concept--platform-scoped-release-tooling-contract",
@@ -31,7 +32,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t12-release-history-and-tooling [ses_f1d9670aeffeec0wbGK9b1oift].md",
       "source_location": "L61",
-      "norm_label": "platform-scoped release tooling contract (explicit --platform)"
+      "norm_label": "platform-scoped release tooling contract (explicit --platform)",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t12-release-history-and-tooling [ses_f1d9670aeffeec0wbGK9b1oift].md:L67] Package managers must be fed the published version because source and published already diverge"
     },
     {
       "id": "concept--platform-scoped-changelog-attribution",
@@ -39,7 +41,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t12-release-history-and-tooling [ses_f1d9670aeffeec0wbGK9b1oift].md",
       "source_location": "L69",
-      "norm_label": "platform-scoped changelog attribution"
+      "norm_label": "platform-scoped changelog attribution",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t12-release-history-and-tooling [ses_f1d9670aeffeec0wbGK9b1oift].md:L13738] Historical changelog records attributed to Windows because every one resolves to a bare v tag"
     },
     {
       "id": "concept--static-source-level-contract-test",
@@ -47,31 +50,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t12-release-history-and-tooling [ses_f1d9670aeffeec0wbGK9b1oift].md",
       "source_location": "L13762",
-      "norm_label": "static source-level contract test as a substitute for runtime execution"
-    },
-    {
-      "id": "rationale--never-fabricate-release-metadata",
-      "label": "Package managers must be fed the published version because source and published already diverge",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t12-release-history-and-tooling [ses_f1d9670aeffeec0wbGK9b1oift].md",
-      "source_location": "L67",
-      "norm_label": "package managers must be fed the published version because source and published already diverge"
-    },
-    {
-      "id": "rationale--historical-records-windows-attribution",
-      "label": "Historical changelog records attributed to Windows because every one resolves to a bare v tag",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t12-release-history-and-tooling [ses_f1d9670aeffeec0wbGK9b1oift].md",
-      "source_location": "L13738",
-      "norm_label": "historical changelog records attributed to windows because every one resolves to a bare v tag"
-    },
-    {
-      "id": "rationale--power-shell-verified-only-at-source-level",
-      "label": "PowerShell generators could only be verified at source level because no pwsh exists on the host",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t12-release-history-and-tooling [ses_f1d9670aeffeec0wbGK9b1oift].md",
-      "source_location": "L13762",
-      "norm_label": "powershell generators could only be verified at source level because no pwsh exists on the host"
+      "norm_label": "static source-level contract test as a substitute for runtime execution",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t12-release-history-and-tooling [ses_f1d9670aeffeec0wbGK9b1oift].md:L13762] PowerShell generators could only be verified at source level because no pwsh exists on the host"
     },
     {
       "id": "concept--github-actions-billing-block",
@@ -79,7 +59,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c9-ci-gate-coverage-review [ses_f083c33b1ffejml6AAF80f5OGj].md",
       "source_location": "L789",
-      "norm_label": "github actions billing block presenting as a zero-step job failure"
+      "norm_label": "github actions billing block presenting as a zero-step job failure",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c9-ci-gate-coverage-review [ses_f083c33b1ffejml6AAF80f5OGj].md:L789] Zero-step 3-second jobs were a billing cancellation rather than a real test failure"
     },
     {
       "id": "concept--temporarily-disabled-github-actions-workflows",
@@ -87,7 +68,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c9-ci-gate-coverage-review [ses_f083c33b1ffejml6AAF80f5OGj].md",
       "source_location": "L791",
-      "norm_label": "temporarily disabled github actions workflows"
+      "norm_label": "temporarily disabled github actions workflows",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c9-ci-gate-coverage-review [ses_f083c33b1ffejml6AAF80f5OGj].md:L791] Security and dispatch workflows were disabled because the GitHub Actions runner-minute limit was exhausted"
     },
     {
       "id": "concept--merge-gate-check-taxonomy",
@@ -96,22 +78,6 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c9-ci-gate-coverage-review [ses_f083c33b1ffejml6AAF80f5OGj].md",
       "source_location": "L797",
       "norm_label": "merge-gate check taxonomy (red / pending / no checks)"
-    },
-    {
-      "id": "rationale--zero-step-jobs-mean-billing-not-test-failure",
-      "label": "Zero-step 3-second jobs were a billing cancellation rather than a real test failure",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c9-ci-gate-coverage-review [ses_f083c33b1ffejml6AAF80f5OGj].md",
-      "source_location": "L789",
-      "norm_label": "zero-step 3-second jobs were a billing cancellation rather than a real test failure"
-    },
-    {
-      "id": "rationale--workflows-disabled-for-runner-minute-limit",
-      "label": "Security and dispatch workflows were disabled because the GitHub Actions runner-minute limit was exhausted",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c9-ci-gate-coverage-review [ses_f083c33b1ffejml6AAF80f5OGj].md",
-      "source_location": "L791",
-      "norm_label": "security and dispatch workflows were disabled because the github actions runner-minute limit was exhausted"
     }
   ],
   "links": [
@@ -152,30 +118,6 @@
       "confidence": "INFERRED"
     },
     {
-      "source": "rationale--never-fabricate-release-metadata",
-      "target": "concept--windows-source-vs-published-version",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--never-fabricate-release-metadata",
-      "target": "concept--platform-scoped-release-tooling-contract",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--historical-records-windows-attribution",
-      "target": "concept--platform-scoped-changelog-attribution",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--power-shell-verified-only-at-source-level",
-      "target": "concept--static-source-level-contract-test",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
       "source": "concept--github-actions-billing-block",
       "target": "concept--merge-gate-check-taxonomy",
       "relation": "conceptually_related_to",
@@ -192,18 +134,6 @@
       "target": "concept--merge-gate-check-taxonomy",
       "relation": "conceptually_related_to",
       "confidence": "INFERRED"
-    },
-    {
-      "source": "rationale--zero-step-jobs-mean-billing-not-test-failure",
-      "target": "concept--github-actions-billing-block",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--workflows-disabled-for-runner-minute-limit",
-      "target": "concept--temporarily-disabled-github-actions-workflows",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
     }
   ]
 }

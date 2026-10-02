@@ -7,15 +7,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md",
       "source_location": "L12402",
-      "norm_label": "content-based para audit from first paragraph and title"
-    },
-    {
-      "id": "rationale--content-not-title-only-for-para-classification",
-      "label": "Audit reads the first meaningful paragraph and title rather than the title alone, because a title carries too little context to place a note in P, A, R, or Archive",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md",
-      "source_location": "L21",
-      "norm_label": "audit reads the first meaningful paragraph and title rather than the title alone"
+      "norm_label": "content-based para audit from first paragraph and title",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md:L21] Audit reads the first meaningful paragraph and title rather than the title alone, because a title carries too little context to place a note in P, A, R, or Archive"
     },
     {
       "id": "concept--restricted-scope-not-enumerated-by-design",
@@ -23,15 +16,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md",
       "source_location": "L7749",
-      "norm_label": "restricted scopes reported as not enumerated by design rather than given a count"
-    },
-    {
-      "id": "rationale--a-restricted-count-implies-traversal-that-never-happened",
-      "label": "A numeric count for a restricted scope would imply a recursive traversal that the audit deliberately refused to perform, so the report says not enumerated by design instead",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md",
-      "source_location": "L12486",
-      "norm_label": "a numeric count for a restricted scope would imply a recursive traversal that never happened"
+      "norm_label": "restricted scopes reported as not enumerated by design rather than given a count",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md:L12486] A numeric count for a restricted scope would imply a recursive traversal that the audit deliberately refused to perform, so the report says not enumerated by design instead"
     },
     {
       "id": "concept--attachments-subtree-as-scope-exclusion",
@@ -47,15 +33,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md",
       "source_location": "L10796",
-      "norm_label": "audit output prefix excluded from its own content sample"
-    },
-    {
-      "id": "rationale--scanning-own-report-made-coverage-non-deterministic",
-      "label": "Regenerating the report made the next scan count the report itself, so coverage drifted from 2,196 to 2,197; excluding the output prefix keeps coverage stable and stops the report auditing itself",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md",
-      "source_location": "L10784",
-      "norm_label": "scanning own report made coverage non-deterministic"
+      "norm_label": "audit output prefix excluded from its own content sample",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md:L10784] Regenerating the report made the next scan count the report itself, so coverage drifted from 2,196 to 2,197; excluding the output prefix keeps coverage stable and stops the report auditing itself"
     },
     {
       "id": "concept--baseline-reconciliation-before-remediation",
@@ -63,15 +42,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md",
       "source_location": "L13631",
-      "norm_label": "baseline reconciliation task before any remediation is planned"
-    },
-    {
-      "id": "rationale--audit-json-and-verification-record-disagree",
-      "label": "The latest audit JSON and the committed verification record disagree on category counts, so the first remediation task reconciles the baseline instead of trusting either file",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md",
-      "source_location": "L13586",
-      "norm_label": "audit json and verification record disagree"
+      "norm_label": "baseline reconciliation task before any remediation is planned",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md:L13586] The latest audit JSON and the committed verification record disagree on category counts, so the first remediation task reconciles the baseline instead of trusting either file"
     },
     {
       "id": "concept--count-only-detector-branch-classification",
@@ -79,23 +51,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md",
       "source_location": "L18341",
-      "norm_label": "count-only classification of the 452 exclusions into branch classes"
-    },
-    {
-      "id": "rationale--exclusion-count-is-not-a-secret-count",
-      "label": "The 452 figure mixes filename-based and content-based exclusions and is not 452 active secrets; the count-only scan resolved it to 436 record IDs, 3 topic references, and 13 literal credential-shaped pages",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md",
-      "source_location": "L14142",
-      "norm_label": "exclusion count is not a secret count"
-    },
-    {
-      "id": "rationale--measured-composition-overrides-subagent-estimate",
-      "label": "The subagent estimate of 441/22/10 was not claimed as fact; running the count-only scan produced 436/3/13 and the measured figures were used with the estimate recorded as a discrepancy",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md",
-      "source_location": "L17803",
-      "norm_label": "measured composition overrides subagent estimate"
+      "norm_label": "count-only classification of the 452 exclusions into branch classes",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md:L14142] The 452 figure mixes filename-based and content-based exclusions and is not 452 active secrets; the count-only scan resolved it to 436 record IDs, 3 topic references, and 13 literal credential-shaped pages",
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md:L17803] The subagent estimate of 441/22/10 was not claimed as fact; running the count-only scan produced 436/3/13 and the measured figures were used with the estimate recorded as a discrepancy"
+      ]
     },
     {
       "id": "concept--resolver-measurement-before-link-repair",
@@ -103,15 +63,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md",
       "source_location": "L14769",
-      "norm_label": "link repair gated behind correcting the basename-only resolver measurement"
-    },
-    {
-      "id": "rationale--basename-only-resolution-manufactures-false-orphans",
-      "label": "Basename-only link resolution manufactures false orphans and ambiguity, so link counts cannot be repaired until the measurement instrument is corrected",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md",
-      "source_location": "L15057",
-      "norm_label": "basename-only resolution manufactures false orphans"
+      "norm_label": "link repair gated behind correcting the basename-only resolver measurement",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md:L15057] Basename-only link resolution manufactures false orphans and ambiguity, so link counts cannot be repaired until the measurement instrument is corrected"
     },
     {
       "id": "concept--raw-satset-capture-immutable-body-and-frontmatter",
@@ -119,15 +72,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md",
       "source_location": "L17295",
-      "norm_label": "satset_id raw captures read-only on body and frontmatter"
-    },
-    {
-      "id": "rationale--bulk-metadata-pass-falsifies-raw-captures",
-      "label": "Roughly 420 satset_id captures are raw captures whose frontmatter is part of the capture record, so a bulk metadata pass must not touch body or frontmatter there",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md",
-      "source_location": "L14130",
-      "norm_label": "bulk metadata pass falsifies raw captures"
+      "norm_label": "satset_id raw captures read-only on body and frontmatter",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md:L14130] Roughly 420 satset_id captures are raw captures whose frontmatter is part of the capture record, so a bulk metadata pass must not touch body or frontmatter there"
     },
     {
       "id": "concept--status-versus-maturity-schema-decision",
@@ -135,15 +81,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md",
       "source_location": "L15806",
-      "norm_label": "status versus maturity schema decision required before normalization"
-    },
-    {
-      "id": "rationale--status-field-collides-semantically-with-para-archive",
-      "label": "Writing status from the metadata normalizer collides with the existing semantic meaning of status in the vault, so a human schema decision is required before any status is written",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md",
-      "source_location": "L16741",
-      "norm_label": "status field collides semantically with para archive"
+      "norm_label": "status versus maturity schema decision required before normalization",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md:L16741] Writing status from the metadata normalizer collides with the existing semantic meaning of status in the vault, so a human schema decision is required before any status is written"
     },
     {
       "id": "concept--staged-remediation-without-bulk-moves",
@@ -151,15 +90,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md",
       "source_location": "L12651",
-      "norm_label": "staged remediation plan with manifests, boundaries, and rollback instead of bulk moves"
-    },
-    {
-      "id": "rationale--thirty-six-recommendations-are-not-safe-to-run-at-once",
-      "label": "Remediation spanning credential safety, metadata, the LLM Wiki, and possible file moves is only safe when sequencing, manifest, boundary, and rollback are designed explicitly rather than running all 36 recommendations at once",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md",
-      "source_location": "L12651",
-      "norm_label": "thirty-six recommendations are not safe to run at once"
+      "norm_label": "staged remediation plan with manifests, boundaries, and rollback instead of bulk moves",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md:L12651] Remediation spanning credential safety, metadata, the LLM Wiki, and possible file moves is only safe when sequencing, manifest, boundary, and rollback are designed explicitly rather than running all 36 recommendations at once"
     },
     {
       "id": "concept--credential-rotation-handoff-to-user",
@@ -167,15 +99,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md",
       "source_location": "L12487",
-      "norm_label": "credential rotation handed off to the user as an external follow-up"
-    },
-    {
-      "id": "rationale--rotation-cannot-be-performed-inside-the-vault",
-      "label": "Credential-bearing material was found in the active wiki scope and rotation is impossible from inside the vault, so the value is not reproduced and rotation stays an external follow-up",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md",
-      "source_location": "L14019",
-      "norm_label": "rotation cannot be performed inside the vault"
+      "norm_label": "credential rotation handed off to the user as an external follow-up",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md:L14019] Credential-bearing material was found in the active wiki scope and rotation is impossible from inside the vault, so the value is not reproduced and rotation stays an external follow-up"
     },
     {
       "id": "concept--disagreement-recorded-not-moved",
@@ -183,7 +108,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md",
       "source_location": "L12477",
-      "norm_label": "para category disagreement recorded without moving the file"
+      "norm_label": "para category disagreement recorded without moving the file",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md:L12470] 02 - Areas and 04 - Archives were found empty and the recommendation is a decision, not an automatic creation or a bulk move"
     },
     {
       "id": "concept--twelve-read-only-subagents-with-parent-verification",
@@ -191,15 +117,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md",
       "source_location": "L5060",
-      "norm_label": "twelve read-only subagents with parent verification"
-    },
-    {
-      "id": "rationale--subagents-read-only-to-avoid-write-conflict",
-      "label": "Subagents were confined to read-only inspection because parent-owned implementation avoids a write-write conflict on shared files, and the parent still verified their claims itself",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md",
-      "source_location": "L5060",
-      "norm_label": "subagents read-only to avoid write conflict"
+      "norm_label": "twelve read-only subagents with parent verification",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md:L5060] Subagents were confined to read-only inspection because parent-owned implementation avoids a write-write conflict on shared files, and the parent still verified their claims itself"
     },
     {
       "id": "concept--para-metadata-contract-gap",
@@ -208,39 +127,13 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md",
       "source_location": "L12464",
       "norm_label": "vault-wide para metadata contract gap"
-    },
-    {
-      "id": "rationale--empty-areas-and-archives-marked-audit-target-not-auto-created",
-      "label": "02 - Areas and 04 - Archives were found empty and the recommendation is a decision, not an automatic creation or a bulk move",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md",
-      "source_location": "L12470",
-      "norm_label": "empty areas and archives are a decision not an automatic creation"
     }
   ],
   "links": [
     {
-      "source": "rationale--content-not-title-only-for-para-classification",
-      "target": "concept--content-based-para-audit",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--a-restricted-count-implies-traversal-that-never-happened",
-      "target": "concept--restricted-scope-not-enumerated-by-design",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
       "source": "concept--attachments-subtree-as-scope-exclusion",
       "target": "concept--restricted-scope-not-enumerated-by-design",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--scanning-own-report-made-coverage-non-deterministic",
-      "target": "concept--audit-output-self-exclusion",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {
@@ -250,27 +143,9 @@
       "confidence": "INFERRED"
     },
     {
-      "source": "rationale--audit-json-and-verification-record-disagree",
-      "target": "concept--baseline-reconciliation-before-remediation",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
       "source": "concept--baseline-reconciliation-before-remediation",
       "target": "concept--count-only-detector-branch-classification",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--exclusion-count-is-not-a-secret-count",
-      "target": "concept--count-only-detector-branch-classification",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--measured-composition-overrides-subagent-estimate",
-      "target": "concept--count-only-detector-branch-classification",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {
@@ -280,33 +155,9 @@
       "confidence": "INFERRED"
     },
     {
-      "source": "rationale--rotation-cannot-be-performed-inside-the-vault",
-      "target": "concept--credential-rotation-handoff-to-user",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--basename-only-resolution-manufactures-false-orphans",
-      "target": "concept--resolver-measurement-before-link-repair",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--bulk-metadata-pass-falsifies-raw-captures",
-      "target": "concept--raw-satset-capture-immutable-body-and-frontmatter",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
       "source": "concept--raw-satset-capture-immutable-body-and-frontmatter",
       "target": "concept--para-metadata-contract-gap",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--status-field-collides-semantically-with-para-archive",
-      "target": "concept--status-versus-maturity-schema-decision",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {
@@ -319,12 +170,6 @@
       "source": "concept--para-metadata-contract-gap",
       "target": "concept--content-based-para-audit",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--thirty-six-recommendations-are-not-safe-to-run-at-once",
-      "target": "concept--staged-remediation-without-bulk-moves",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {
@@ -346,21 +191,9 @@
       "confidence": "EXTRACTED"
     },
     {
-      "source": "rationale--subagents-read-only-to-avoid-write-conflict",
-      "target": "concept--twelve-read-only-subagents-with-parent-verification",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
       "source": "concept--twelve-read-only-subagents-with-parent-verification",
       "target": "concept--staged-remediation-without-bulk-moves",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--empty-areas-and-archives-marked-audit-target-not-auto-created",
-      "target": "concept--disagreement-recorded-not-moved",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {

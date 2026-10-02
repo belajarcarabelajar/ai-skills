@@ -23,7 +23,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
       "source_location": "L15130",
-      "norm_label": "seo audit fan out architecture"
+      "norm_label": "seo audit fan out architecture",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L15114] Latency, not quota, is the constraint"
     },
     {
       "id": "concept--url-inspection-quota",
@@ -31,7 +32,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
       "source_location": "L15114",
-      "norm_label": "url inspection api quota"
+      "norm_label": "url inspection api quota",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L15114] Latency, not quota, is the constraint"
     },
     {
       "id": "concept--indexing-api-unsupported-use",
@@ -39,7 +41,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
       "source_location": "L15115",
-      "norm_label": "indexing api unsupported use"
+      "norm_label": "indexing api unsupported use",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L15115] Indexing API publish path removed, not gated"
     },
     {
       "id": "concept--core-web-vitals-75th-percentile",
@@ -47,7 +50,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
       "source_location": "L15116",
-      "norm_label": "core web vitals 75th percentile"
+      "norm_label": "core web vitals 75th percentile",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L15116] Core Web Vitals judged on 28-day field data"
     },
     {
       "id": "concept--positive-control-for-extractors",
@@ -71,7 +75,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
       "source_location": "L30942",
-      "norm_label": "plan publish registry prefix routing"
+      "norm_label": "plan publish registry prefix routing",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L30963] No supported way to publish worktree plans to the parent project folder"
     },
     {
       "id": "concept--worktree-routing-enumeration-asymmetry",
@@ -79,7 +84,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
       "source_location": "L33020",
-      "norm_label": "worktree routing enumeration asymmetry"
+      "norm_label": "worktree routing enumeration asymmetry",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L33020] A worktree holds the whole recorded history, so enumerating it re-files everything"
     },
     {
       "id": "concept--lcp-preload-cache-key-duplication",
@@ -87,7 +93,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
       "source_location": "L40215",
-      "norm_label": "lcp preload cache key duplication"
+      "norm_label": "lcp preload cache key duplication",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L40375] fetchpriority is the positive authorial LCP claim, loading=eager is not"
     },
     {
       "id": "concept--blog-tags-slug-global-unique",
@@ -95,7 +102,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
       "source_location": "L50459",
-      "norm_label": "blog tags slug global unique constraint"
+      "norm_label": "blog tags slug global unique constraint",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L50470] Taxonomy locale pass-through turns 16 live 200s into 302s"
     },
     {
       "id": "concept--d1-rejects-like-use-instr",
@@ -103,7 +111,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
       "source_location": "L61786",
-      "norm_label": "d1 rejects like use instr"
+      "norm_label": "d1 rejects like use instr",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L61743] A blanket 1200x630 backfill would falsify 8 of 10 covers",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L61745] upload-cover is not the only path a cover arrives by"
+      ]
     },
     {
       "id": "concept--rollback-success-traffic-anomaly",
@@ -119,7 +131,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
       "source_location": "L55714",
-      "norm_label": "deploy dirty ack policy"
+      "norm_label": "deploy dirty ack policy",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L55714] Dirty-ack ships unreviewed changes, which is exactly what policy forbids",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L55797] The licenses.json change is build regeneration, not dirt"
+      ]
     },
     {
       "id": "concept--vps-first-compilation-policy",
@@ -127,7 +143,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
       "source_location": "L61832",
-      "norm_label": "vps first compilation policy"
+      "norm_label": "vps first compilation policy",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L61808] Docs deploy needs maudit, which needs cargo, which is forbidden on this host"
     },
     {
       "id": "concept--rationale--unverified-extractor-manufactures-findings",
@@ -136,186 +153,12 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
       "source_location": "L15122",
       "norm_label": "an unverified extractor is a machine for manufacturing findings"
-    },
-    {
-      "id": "rationale--latency-not-quota-is-the-constraint",
-      "label": "Latency, not quota, is the constraint",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
-      "source_location": "L15114",
-      "norm_label": "latency not quota is the constraint"
-    },
-    {
-      "id": "rationale--indexing-api-removed-not-gated",
-      "label": "Indexing API publish path removed, not gated",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
-      "source_location": "L15115",
-      "norm_label": "indexing api publish path removed not gated"
-    },
-    {
-      "id": "rationale--cvw-judged-on-field-data",
-      "label": "Core Web Vitals judged on 28-day field data",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
-      "source_location": "L15116",
-      "norm_label": "core web vitals judged on 28-day field data"
-    },
-    {
-      "id": "rationale--no-supported-way-to-publish-worktree-plans",
-      "label": "No supported way to publish worktree plans to the parent project folder",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
-      "source_location": "L30963",
-      "norm_label": "no supported way to publish worktree plans to the parent project folder"
-    },
-    {
-      "id": "rationale--worktree-holds-the-whole-recorded-history",
-      "label": "A worktree holds the whole recorded history, so enumerating it re-files everything",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
-      "source_location": "L33020",
-      "norm_label": "a worktree holds the whole recorded history so enumerating it re-files everything"
-    },
-    {
-      "id": "rationale--fetchpriority-is-the-positive-authorial-lcp-claim",
-      "label": "fetchpriority is the positive authorial LCP claim, loading=eager is not",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
-      "source_location": "L40375",
-      "norm_label": "fetchpriority is the positive authorial lcp claim loading eager is not"
-    },
-    {
-      "id": "rationale--locale-pass-through-breaks-16-live-urls",
-      "label": "Taxonomy locale pass-through turns 16 live 200s into 302s",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
-      "source_location": "L50470",
-      "norm_label": "taxonomy locale pass through turns 16 live 200s into 302s"
-    },
-    {
-      "id": "rationale--dirty-ack-ships-unreviewed-changes",
-      "label": "Dirty-ack ships unreviewed changes, which is exactly what policy forbids",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
-      "source_location": "L55714",
-      "norm_label": "dirty ack ships unreviewed changes which is exactly what policy forbids"
-    },
-    {
-      "id": "rationale--licenses-json-change-is-build-regeneration",
-      "label": "The licenses.json change is build regeneration, not dirt",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
-      "source_location": "L55797",
-      "norm_label": "the licenses json change is build regeneration not dirt"
-    },
-    {
-      "id": "rationale--blanket-1200x630-backfill-would-falsify-8-of-10-covers",
-      "label": "A blanket 1200x630 backfill would falsify 8 of 10 covers",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
-      "source_location": "L61743",
-      "norm_label": "a blanket 1200x630 backfill would falsify 8 of 10 covers"
-    },
-    {
-      "id": "rationale--upload-cover-is-not-the-only-entry-path",
-      "label": "upload-cover is not the only path a cover arrives by",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
-      "source_location": "L61745",
-      "norm_label": "upload cover is not the only path a cover arrives by"
-    },
-    {
-      "id": "rationale--docs-deploy-needs-maudit-from-cargo",
-      "label": "Docs deploy needs maudit, which needs cargo, which is forbidden on this host",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
-      "source_location": "L61808",
-      "norm_label": "docs deploy needs maudit from cargo which is forbidden on this host"
     }
   ],
   "links": [
     {
-      "source": "rationale--latency-not-quota-is-the-constraint",
-      "target": "concept--url-inspection-quota",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--latency-not-quota-is-the-constraint",
-      "target": "concept--seo-audit-fan-out-architecture",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--indexing-api-removed-not-gated",
-      "target": "concept--indexing-api-unsupported-use",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--cvw-judged-on-field-data",
-      "target": "concept--core-web-vitals-75th-percentile",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
       "source": "rationale--unverified-extractor-manufactures-findings",
       "target": "concept--positive-control-for-extractors",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--no-supported-way-to-publish-worktree-plans",
-      "target": "concept--plan-publish-registry-prefix-routing",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--worktree-holds-the-whole-recorded-history",
-      "target": "concept--worktree-routing-enumeration-asymmetry",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--fetchpriority-is-the-positive-authorial-lcp-claim",
-      "target": "concept--lcp-preload-cache-key-duplication",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--locale-pass-through-breaks-16-live-urls",
-      "target": "concept--blog-tags-slug-global-unique",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--dirty-ack-ships-unreviewed-changes",
-      "target": "concept--deploy-dirty-ack-policy",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--licenses-json-change-is-build-regeneration",
-      "target": "concept--deploy-dirty-ack-policy",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--blanket-1200x630-backfill-would-falsify-8-of-10-covers",
-      "target": "concept--d1-rejects-like-use-instr",
-      "relation": "rationale_for",
-      "confidence": "INFERRED"
-    },
-    {
-      "source": "rationale--upload-cover-is-not-the-only-entry-path",
-      "target": "concept--d1-rejects-like-use-instr",
-      "relation": "rationale_for",
-      "confidence": "INFERRED"
-    },
-    {
-      "source": "rationale--docs-deploy-needs-maudit-from-cargo",
-      "target": "concept--vps-first-compilation-policy",
       "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },

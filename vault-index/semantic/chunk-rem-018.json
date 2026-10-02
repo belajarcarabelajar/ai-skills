@@ -23,7 +23,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md",
       "source_location": "L37398",
-      "norm_label": "copilot index snapshots as obsolete plugin state"
+      "norm_label": "copilot index snapshots as obsolete plugin state",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md:L37398] The index files are obsolete plugin state rather than user knowledge"
     },
     {
       "id": "concept--copilot-conversation-log-disposal",
@@ -31,7 +32,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md",
       "source_location": "L37399",
-      "norm_label": "copilot conversation logs as disposable history"
+      "norm_label": "copilot conversation logs as disposable history",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md:L37445] 14 records are failed requests and the other four are already represented by their source notes"
     },
     {
       "id": "concept--copilot-prompt-frontmatter-stripping",
@@ -39,7 +41,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md",
       "source_location": "L37469",
-      "norm_label": "stripping copilot command frontmatter before prompt migration"
+      "norm_label": "stripping copilot command frontmatter before prompt migration",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md:L37477] Archive the prompt bundle rather than placing all 15 files in the live wiki if Copilot is no longer used"
     },
     {
       "id": "concept--satset-id-deduplication",
@@ -47,7 +50,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md",
       "source_location": "L37481",
-      "norm_label": "satset_id duplicate groups as a dedup key"
+      "norm_label": "satset_id duplicate groups as a dedup key",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md:L37413] 545 of 546 Satset files carry satset_id, which is what marks them as obsolete plugin export",
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md:L37495] A filename or satset_id match must be checked against canonical content before any copy"
+      ]
     },
     {
       "id": "concept--canonical-url-plus-section-dedup-key",
@@ -55,7 +62,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md",
       "source_location": "L28121",
-      "norm_label": "canonical_url + section as the dedup key, language as an attribute"
+      "norm_label": "canonical_url + section as the dedup key, language as an attribute",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md:L28124] Language belongs as an attribute, not as an independent knowledge entry"
     },
     {
       "id": "concept--para-llm-wiki-migration-destination-map",
@@ -71,7 +79,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md",
       "source_location": "L37695",
-      "norm_label": "sanitized credential record: type, service, rotation date, manager pointer"
+      "norm_label": "sanitized credential record: type, service, rotation date, manager pointer",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md:L37695] Document the credential type, service, rotation date and manager pointer, never the secret value"
     },
     {
       "id": "concept--secret-purge-outlives-copilot-scope",
@@ -79,7 +88,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md",
       "source_location": "L37701",
-      "norm_label": "secret exposure outliving the audited /copilot scope"
+      "norm_label": "secret exposure outliving the audited /copilot scope",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md:L37701] The Copilot indexes show the same credential-bearing filenames under wiki/sources, so removing only /copilot would not remediate the exposure"
     },
     {
       "id": "concept--prompt-injection-from-migrated-agent-prompts",
@@ -87,7 +97,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md",
       "source_location": "L37713",
-      "norm_label": "prompt injection and instruction contamination from migrated agent prompts"
+      "norm_label": "prompt injection and instruction contamination from migrated agent prompts",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md:L37713] Agentic coding, journal and visual-generation prompts may be retrieved by an LLM as trusted instructions rather than quoted source material"
     },
     {
       "id": "concept--plugin-state-contamination",
@@ -95,7 +106,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md",
       "source_location": "L37721",
-      "norm_label": "plugin-state contamination as a migration risk"
+      "norm_label": "plugin-state contamination as a migration risk",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md:L37721] satset_id, generated tags, Copilot epochs, model keys and status fields are not durable knowledge metadata"
     },
     {
       "id": "concept--search-poisoning-by-exact-title-files",
@@ -103,164 +115,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md",
       "source_location": "L37726",
-      "norm_label": "search poisoning by exact-title and repeated-keyword files"
-    },
-    {
-      "id": "rationale--index-snapshots-are-not-user-knowledge",
-      "label": "The index files are obsolete plugin state rather than user knowledge",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md",
-      "source_location": "L37398",
-      "norm_label": "the index files are obsolete plugin state rather than user knowledge"
-    },
-    {
-      "id": "rationale--satset-id-marks-obsolete-plugin-export",
-      "label": "545 of 546 Satset files carry satset_id, which is what marks them as obsolete plugin export",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md",
-      "source_location": "L37413",
-      "norm_label": "545 of 546 satset files carry satset_id, which is what marks them as obsolete plugin export"
-    },
-    {
-      "id": "rationale--failed-and-representable-conversations",
-      "label": "14 records are failed requests and the other four are already represented by their source notes",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md",
-      "source_location": "L37445",
-      "norm_label": "14 records are failed requests and the other four are already represented by their source notes"
-    },
-    {
-      "id": "rationale--archive-prompt-bundle-not-live-wiki",
-      "label": "Archive the prompt bundle rather than placing all 15 files in the live wiki if Copilot is no longer used",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md",
-      "source_location": "L37477",
-      "norm_label": "archive the prompt bundle rather than placing all 15 files in the live wiki if copilot is no longer used"
-    },
-    {
-      "id": "rationale--id-match-must-be-checked-against-canonical",
-      "label": "A filename or satset_id match must be checked against canonical content before any copy",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md",
-      "source_location": "L37495",
-      "norm_label": "a filename or satset_id match must be checked against canonical content before any copy"
-    },
-    {
-      "id": "rationale--language-is-not-a-knowledge-entry",
-      "label": "Language belongs as an attribute, not as an independent knowledge entry",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md",
-      "source_location": "L28124",
-      "norm_label": "language belongs as an attribute, not as an independent knowledge entry"
-    },
-    {
-      "id": "rationale--deleting-copilot-alone-does-not-remediate",
-      "label": "The Copilot indexes show the same credential-bearing filenames under wiki/sources, so removing only /copilot would not remediate the exposure",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md",
-      "source_location": "L37701",
-      "norm_label": "the copilot indexes show the same credential-bearing filenames under wiki/sources, so removing only /copilot would not remediate the exposure"
-    },
-    {
-      "id": "rationale--document-the-credential-not-the-value",
-      "label": "Document the credential type, service, rotation date and manager pointer, never the secret value",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md",
-      "source_location": "L37695",
-      "norm_label": "document the credential type, service, rotation date and manager pointer, never the secret value"
-    },
-    {
-      "id": "rationale--prompts-retrieved-as-trusted-instructions",
-      "label": "Agentic coding, journal and visual-generation prompts may be retrieved by an LLM as trusted instructions rather than quoted source material",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md",
-      "source_location": "L37713",
-      "norm_label": "agentic coding, journal and visual-generation prompts may be retrieved by an llm as trusted instructions rather than quoted source material"
-    },
-    {
-      "id": "rationale--plugin-metadata-is-not-durable-knowledge",
-      "label": "satset_id, generated tags, Copilot epochs, model keys and status fields are not durable knowledge metadata",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md",
-      "source_location": "L37721",
-      "norm_label": "satset_id, generated tags, copilot epochs, model keys and status fields are not durable knowledge metadata"
-    },
-    {
-      "id": "rationale--duplicate-titles-dilute-retrieval",
-      "label": "Exact-title and repeated keyword files can dominate LLM retrieval without adding unique information",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md",
-      "source_location": "L37726",
-      "norm_label": "exact-title and repeated keyword files can dominate llm retrieval without adding unique information"
+      "norm_label": "search poisoning by exact-title and repeated-keyword files",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md:L37726] Exact-title and repeated keyword files can dominate LLM retrieval without adding unique information"
     }
   ],
   "links": [
-    {
-      "source": "rationale--index-snapshots-are-not-user-knowledge",
-      "target": "concept--copilot-index-snapshots-as-obsolete-plugin-state",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--satset-id-marks-obsolete-plugin-export",
-      "target": "concept--satset-id-deduplication",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--failed-and-representable-conversations",
-      "target": "concept--copilot-conversation-log-disposal",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--archive-prompt-bundle-not-live-wiki",
-      "target": "concept--copilot-prompt-frontmatter-stripping",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--id-match-must-be-checked-against-canonical",
-      "target": "concept--satset-id-deduplication",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--language-is-not-a-knowledge-entry",
-      "target": "concept--canonical-url-plus-section-dedup-key",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--deleting-copilot-alone-does-not-remediate",
-      "target": "concept--secret-purge-outlives-copilot-scope",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--document-the-credential-not-the-value",
-      "target": "concept--sanitized-secret-documentation-record",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--prompts-retrieved-as-trusted-instructions",
-      "target": "concept--prompt-injection-from-migrated-agent-prompts",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--plugin-metadata-is-not-durable-knowledge",
-      "target": "concept--plugin-state-contamination",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--duplicate-titles-dilute-retrieval",
-      "target": "concept--search-poisoning-by-exact-title-files",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--copilot-not-migrated-as-a-unit",
       "target": "concept--copilot-index-snapshots-as-obsolete-plugin-state",

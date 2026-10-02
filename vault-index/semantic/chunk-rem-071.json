@@ -14,7 +14,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - d5-toast-and-primitive-sounds [ses_f1a9c133affem3ylLrB0ZQeRuF].md",
       "source_location": "L5275",
-      "norm_label": "info toasts map to null: the neutral toast type is deliberately left silent"
+      "norm_label": "info toasts map to null: the neutral toast type is deliberately left silent",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - d5-toast-and-primitive-sounds [ses_f1a9c133affem3ylLrB0ZQeRuF].md:L5279] The info call sites are empty-result notices and progress acknowledgements, so a confirmation chime on \"No logs to copy\" is a false positive that teaches users to ignore the channel",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - d5-toast-and-primitive-sounds [ses_f1a9c133affem3ylLrB0ZQeRuF].md:L5280] info toasts already go through Button which plays a click, so a second cue would double-fire on one user action"
+      ]
     },
     {
       "id": "concept--bare-vitest-mock-factory-trap",
@@ -31,22 +35,6 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - d5-toast-and-primitive-sounds [ses_f1a9c133affem3ylLrB0ZQeRuF].md",
       "source_location": "L5367",
       "norm_label": "no shared modal/tab/dropdown sound primitive: 606 raw <button> against 37 <button> uses, so ~94% of interactive elements still emit no sound"
-    },
-    {
-      "id": "rationale--confirmation-chime-on-an-empty-result-is-a-false-positive",
-      "label": "The info call sites are empty-result notices and progress acknowledgements, so a confirmation chime on \"No logs to copy\" is a false positive that teaches users to ignore the channel",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - d5-toast-and-primitive-sounds [ses_f1a9c133affem3ylLrB0ZQeRuF].md",
-      "source_location": "L5279",
-      "norm_label": "the info call sites are empty-result notices and progress acknowledgements, so a confirmation chime on \"no logs to copy\" is a false positive that teaches users to ignore the channel"
-    },
-    {
-      "id": "rationale--info-toasts-already-click-through-button",
-      "label": "info toasts already go through Button which plays a click, so a second cue would double-fire on one user action",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - d5-toast-and-primitive-sounds [ses_f1a9c133affem3ylLrB0ZQeRuF].md",
-      "source_location": "L5280",
-      "norm_label": "info toasts already go through button which plays a click, so a second cue would double-fire on one user action"
     },
     {
       "id": "concept--frozen-hmac-timestamp-on-a-client-built-once",
@@ -70,7 +58,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - fu1-injectable-client-factory [ses_f0b0c7d05ffeUvGFr6YMEClane].md",
       "source_location": "L8953",
-      "norm_label": "poll trait whose run returns a manually boxed pin<box<dyn future<output = pollstep>>> instead of a higher-ranked closure"
+      "norm_label": "poll trait whose run returns a manually boxed pin<box<dyn future<output = pollstep>>> instead of a higher-ranked closure",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - fu1-injectable-client-factory [ses_f0b0c7d05ffeUvGFr6YMEClane].md:L8954] The closure form is inference-heavy and this subagent was forbidden to compile, so the trait was chosen for a shape it could reason about with confidence"
     },
     {
       "id": "concept--source-shape-guard-replaced-by-a-behavioural-loop-test",
@@ -78,38 +67,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - fu1-injectable-client-factory [ses_f0b0c7d05ffeUvGFr6YMEClane].md",
       "source_location": "L8967",
-      "norm_label": "telegram_worker_client_freshness_rebuilds_per_poll drives the real run_poll_loop for 3 iterations and supersedes the source-shape guard"
-    },
-    {
-      "id": "rationale--only-a-loop-that-owns-acquire-can-guard-acquisition",
-      "label": "A test that merely mirrors the loop cannot fail on a hoisted acquisition; the acquisition has to live inside the extracted loop the test actually drives",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - fu1-injectable-client-factory [ses_f0b0c7d05ffeUvGFr6YMEClane].md",
-      "source_location": "L2458",
-      "norm_label": "a test that merely mirrors the loop cannot fail on a hoisted acquisition; the acquisition has to live inside the extracted loop the test actually drives"
-    },
-    {
-      "id": "rationale--manual-boxed-future-over-higher-ranked-closure",
-      "label": "The closure form is inference-heavy and this subagent was forbidden to compile, so the trait was chosen for a shape it could reason about with confidence",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - fu1-injectable-client-factory [ses_f0b0c7d05ffeUvGFr6YMEClane].md",
-      "source_location": "L8954",
-      "norm_label": "the closure form is inference-heavy and this subagent was forbidden to compile, so the trait was chosen for a shape it could reason about with confidence"
+      "norm_label": "telegram_worker_client_freshness_rebuilds_per_poll drives the real run_poll_loop for 3 iterations and supersedes the source-shape guard",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - fu1-injectable-client-factory [ses_f0b0c7d05ffeUvGFr6YMEClane].md:L2458] A test that merely mirrors the loop cannot fail on a hoisted acquisition; the acquisition has to live inside the extracted loop the test actually drives"
     }
   ],
   "links": [
-    {
-      "source": "rationale--confirmation-chime-on-an-empty-result-is-a-false-positive",
-      "target": "concept--info-toasts-stay-silent",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--info-toasts-already-click-through-button",
-      "target": "concept--info-toasts-stay-silent",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--info-toasts-stay-silent",
       "target": "concept--toast-sound-mapping-pure-literal-table",
@@ -157,18 +119,6 @@
       "target": "concept--a-test-that-passes-on-unfixed-code-proves-nothing",
       "relation": "conceptually_related_to",
       "confidence": "INFERRED"
-    },
-    {
-      "source": "rationale--only-a-loop-that-owns-acquire-can-guard-acquisition",
-      "target": "concept--source-shape-guard-replaced-by-a-behavioural-loop-test",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--manual-boxed-future-over-higher-ranked-closure",
-      "target": "concept--poll-trait-manual-boxed-future",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
     }
   ]
 }

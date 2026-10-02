@@ -16,7 +16,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - sinkronisasi-riwayat-opencode-ke-obsidian [ses_f060b17deffej7q80pv7ZH1uH8].md",
       "source_location": "L4944",
-      "norm_label": "symlink premise impossible without a file store"
+      "norm_label": "symlink premise impossible without a file store",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-10-02 - sinkronisasi-riwayat-opencode-ke-obsidian [ses_f060b17deffej7q80pv7ZH1uH8].md:L4939] Symlink impossible because no per-session files exist to link"
     },
     {
       "id": "concept--obsidian-symlink-warning",
@@ -32,7 +33,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - sinkronisasi-riwayat-opencode-ke-obsidian [ses_f060b17deffej7q80pv7ZH1uH8].md",
       "source_location": "L7465",
-      "norm_label": "sqlite wal-safe read-only open"
+      "norm_label": "sqlite wal-safe read-only open",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-10-02 - sinkronisasi-riwayat-opencode-ke-obsidian [ses_f060b17deffej7q80pv7ZH1uH8].md:L4941] SQLite read-only open needed because the database is live and in WAL mode"
     },
     {
       "id": "concept--export-time-secret-redaction",
@@ -40,7 +42,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - sinkronisasi-riwayat-opencode-ke-obsidian [ses_f060b17deffej7q80pv7ZH1uH8].md",
       "source_location": "L5364",
-      "norm_label": "export-time secret redaction"
+      "norm_label": "export-time secret redaction",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-10-02 - sinkronisasi-riwayat-opencode-ke-obsidian [ses_f060b17deffej7q80pv7ZH1uH8].md:L5364] Redaction at export time needed because tracking was chosen",
+        "[05 - Conversations/home-belajarcarabelajar/2026-10-02 - sinkronisasi-riwayat-opencode-ke-obsidian [ses_f060b17deffej7q80pv7ZH1uH8].md:L5624] Pattern redaction chosen because full fidelity preserves shell tool output"
+      ]
     },
     {
       "id": "concept--full-fidelity-export-size-budget",
@@ -64,7 +70,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - sinkronisasi-riwayat-opencode-ke-obsidian [ses_f060b17deffej7q80pv7ZH1uH8].md",
       "source_location": "L9134",
-      "norm_label": "graphify host-agent llm fallback"
+      "norm_label": "graphify host-agent llm fallback",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-10-02 - sinkronisasi-riwayat-opencode-ke-obsidian [ses_f060b17deffej7q80pv7ZH1uH8].md:L12153] Merge held because a partial graph would look complete and answer questions wrongly"
     },
     {
       "id": "concept--measured-versus-documented-behaviour",
@@ -88,7 +95,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - sinkronisasi-riwayat-opencode-ke-obsidian [ses_f060b17deffej7q80pv7ZH1uH8].md",
       "source_location": "L5275",
-      "norm_label": "plan-publish vault mirror precedent"
+      "norm_label": "plan-publish vault mirror precedent",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-10-02 - sinkronisasi-riwayat-opencode-ke-obsidian [ses_f060b17deffej7q80pv7ZH1uH8].md:L5376] Copy-and-mirror preferred over symlink because it sidesteps Obsidian's own warning"
     },
     {
       "id": "concept--parent-diff-audit-gate",
@@ -97,54 +105,6 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - sinkronisasi-riwayat-opencode-ke-obsidian [ses_f060b17deffej7q80pv7ZH1uH8].md",
       "source_location": "L34312",
       "norm_label": "parent diff audit gate"
-    },
-    {
-      "id": "rationale--symlink-impossible-because-no-file-store",
-      "label": "Symlink impossible because no per-session files exist to link",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - sinkronisasi-riwayat-opencode-ke-obsidian [ses_f060b17deffej7q80pv7ZH1uH8].md",
-      "source_location": "L4939",
-      "norm_label": "symlink impossible because no per-session files exist to link"
-    },
-    {
-      "id": "rationale--redaction-needed-because-tracking-chosen",
-      "label": "Redaction at export time needed because tracking was chosen",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - sinkronisasi-riwayat-opencode-ke-obsidian [ses_f060b17deffej7q80pv7ZH1uH8].md",
-      "source_location": "L5364",
-      "norm_label": "redaction at export time needed because tracking was chosen"
-    },
-    {
-      "id": "rationale--sqlite-read-only-because-wal-live-db",
-      "label": "SQLite read-only open needed because the database is live and in WAL mode",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - sinkronisasi-riwayat-opencode-ke-obsidian [ses_f060b17deffej7q80pv7ZH1uH8].md",
-      "source_location": "L4941",
-      "norm_label": "sqlite read-only open needed because the database is live and in wal mode"
-    },
-    {
-      "id": "rationale--redaction-because-full-fidelity-tool-output",
-      "label": "Pattern redaction chosen because full fidelity preserves shell tool output",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - sinkronisasi-riwayat-opencode-ke-obsidian [ses_f060b17deffej7q80pv7ZH1uH8].md",
-      "source_location": "L5624",
-      "norm_label": "pattern redaction chosen because full fidelity preserves shell tool output"
-    },
-    {
-      "id": "rationale--hold-graphify-merge-for-complete-coverage",
-      "label": "Merge held because a partial graph would look complete and answer questions wrongly",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - sinkronisasi-riwayat-opencode-ke-obsidian [ses_f060b17deffej7q80pv7ZH1uH8].md",
-      "source_location": "L12153",
-      "norm_label": "merge held because a partial graph would look complete and answer questions wrongly"
-    },
-    {
-      "id": "rationale--prefer-copy-mirror-over-symlink",
-      "label": "Copy-and-mirror preferred over symlink because it sidesteps Obsidian's own warning",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - sinkronisasi-riwayat-opencode-ke-obsidian [ses_f060b17deffej7q80pv7ZH1uH8].md",
-      "source_location": "L5376",
-      "norm_label": "copy-and-mirror preferred over symlink because it sidesteps obsidian's own warning"
     }
   ],
   "links": [
@@ -218,42 +178,6 @@
       "source": "concept--graphify-host-agent-llm-fallback",
       "target": "concept--parent-diff-audit-gate",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--symlink-impossible-because-no-file-store",
-      "target": "concept--symlink-premise-impossible-no-file-store",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--sqlite-read-only-because-wal-live-db",
-      "target": "concept--sqlite-wal-readonly-open",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--redaction-needed-because-tracking-chosen",
-      "target": "concept--export-time-secret-redaction",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--redaction-because-full-fidelity-tool-output",
-      "target": "concept--export-time-secret-redaction",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--hold-graphify-merge-for-complete-coverage",
-      "target": "concept--graphify-host-agent-llm-fallback",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--prefer-copy-mirror-over-symlink",
-      "target": "concept--plan-publish-vault-mirror-precedent",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     }
   ]

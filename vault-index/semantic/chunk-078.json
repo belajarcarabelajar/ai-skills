@@ -7,7 +7,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - map-voice-profile-ui-surfaces [ses_f26387f22ffewAD4aiHCS1yQFZ].md",
       "source_location": "L2620",
-      "norm_label": "voice profile select renders as an empty greyed box"
+      "norm_label": "voice profile select renders as an empty greyed box",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - map-voice-profile-ui-surfaces [ses_f26387f22ffewAD4aiHCS1yQFZ].md:L2676] Explain an empty voice runtime instead of leaving an enabled empty profile dropdown"
     },
     {
       "id": "concept--select-placeholder-option-asymmetry",
@@ -39,7 +40,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - map-voice-profile-ui-surfaces [ses_f26387f22ffewAD4aiHCS1yQFZ].md",
       "source_location": "L2643",
-      "norm_label": "ttsvoiceprofilepicker is a button group, not a select"
+      "norm_label": "ttsvoiceprofilepicker is a button group, not a select",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - map-voice-profile-ui-surfaces [ses_f26387f22ffewAD4aiHCS1yQFZ].md:L2649] Substitute the unavailable message for the whole list so no empty widget is drawn"
     },
     {
       "id": "concept--audio-settings-raw-select-no-wrapper-component",
@@ -50,28 +52,16 @@
       "norm_label": "no select wrapper component; audiosettingssection uses raw select.input"
     },
     {
-      "id": "rationale--explain-empty-voice-runtime-instead-of-enabled-empty-dropdown",
-      "label": "Explain an empty voice runtime instead of leaving an enabled empty profile dropdown",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - map-voice-profile-ui-surfaces [ses_f26387f22ffewAD4aiHCS1yQFZ].md",
-      "source_location": "L2676",
-      "norm_label": "explain an empty voice runtime instead of leaving an enabled empty profile dropdown"
-    },
-    {
-      "id": "rationale--picker-substitutes-message-for-whole-list",
-      "label": "Substitute the unavailable message for the whole list so no empty widget is drawn",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - map-voice-profile-ui-surfaces [ses_f26387f22ffewAD4aiHCS1yQFZ].md",
-      "source_location": "L2649",
-      "norm_label": "substitute the unavailable message for the whole list so no empty widget is drawn"
-    },
-    {
       "id": "concept--per-producer-collector-state",
       "label": "Per-producer CollectorState with reason codes",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-linux-capture-capability [ses_f20039a54ffeg73csCMDUwcFtf].md",
       "source_location": "L15788",
-      "norm_label": "per-producer collectorstate with reason codes"
+      "norm_label": "per-producer collectorstate with reason codes",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-linux-capture-capability [ses_f20039a54ffeg73csCMDUwcFtf].md:L15810] X11 pointer stays Unknown until first observed action because rdev cannot enumerate",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-linux-capture-capability [ses_f20039a54ffeg73csCMDUwcFtf].md:L15810] Per-producer statuses added additively so the current frontend keeps working until T9 migrates it"
+      ]
     },
     {
       "id": "concept--live-collector-probes-replace-target-os-flag",
@@ -103,7 +93,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-linux-capture-capability [ses_f20039a54ffeg73csCMDUwcFtf].md",
       "source_location": "L15793",
-      "norm_label": "evdev pointer device heuristic (btn_left plus rel_x/rel_y)"
+      "norm_label": "evdev pointer device heuristic (btn_left plus rel_x/rel_y)",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-linux-capture-capability [ses_f20039a54ffeg73csCMDUwcFtf].md:L36] Extend the existing Linux event path without a second listener, without grabbing input, without storing keys"
     },
     {
       "id": "concept--partial-coverage-without-fake-zero",
@@ -127,7 +118,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-linux-capture-capability [ses_f20039a54ffeg73csCMDUwcFtf].md",
       "source_location": "L15814",
-      "norm_label": "counter_test_serial shared lock for global counter races"
+      "norm_label": "counter_test_serial shared lock for global counter races",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-linux-capture-capability [ses_f20039a54ffeg73csCMDUwcFtf].md:L15814] Mitigate test-only global-counter races with a shared serial lock"
     },
     {
       "id": "concept--rust-e0603-pub-re-export-fix",
@@ -144,38 +136,6 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-linux-capture-capability [ses_f20039a54ffeg73csCMDUwcFtf].md",
       "source_location": "L16658",
       "norm_label": "evdev 0.13.2 relativeaxiscode exposes no code(); use the .0 tuple field"
-    },
-    {
-      "id": "rationale--pointer-unknown-until-observed-because-rdev-cannot-enumerate",
-      "label": "X11 pointer stays Unknown until first observed action because rdev cannot enumerate",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-linux-capture-capability [ses_f20039a54ffeg73csCMDUwcFtf].md",
-      "source_location": "L15810",
-      "norm_label": "x11 pointer stays unknown until first observed action because rdev cannot enumerate"
-    },
-    {
-      "id": "rationale--additive-per-producer-statuses-for-frontend-compat",
-      "label": "Per-producer statuses added additively so the current frontend keeps working until T9 migrates it",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-linux-capture-capability [ses_f20039a54ffeg73csCMDUwcFtf].md",
-      "source_location": "L15810",
-      "norm_label": "per-producer statuses added additively so the current frontend keeps working until t9 migrates it"
-    },
-    {
-      "id": "rationale--no-grab-no-key-storage-for-linux-event-path",
-      "label": "Extend the existing Linux event path without a second listener, without grabbing input, without storing keys",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-linux-capture-capability [ses_f20039a54ffeg73csCMDUwcFtf].md",
-      "source_location": "L36",
-      "norm_label": "extend the existing linux event path without a second listener, without grabbing input, without storing keys"
-    },
-    {
-      "id": "rationale--shared-serial-lock-for-global-counter-races",
-      "label": "Mitigate test-only global-counter races with a shared serial lock",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-linux-capture-capability [ses_f20039a54ffeg73csCMDUwcFtf].md",
-      "source_location": "L15814",
-      "norm_label": "mitigate test-only global-counter races with a shared serial lock"
     }
   ],
   "links": [
@@ -207,18 +167,6 @@
       "source": "concept--audio-settings-raw-select-no-wrapper-component",
       "target": "concept--select-placeholder-option-asymmetry",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--explain-empty-voice-runtime-instead-of-enabled-empty-dropdown",
-      "target": "concept--voice-profile-select-empty-state",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--picker-substitutes-message-for-whole-list",
-      "target": "concept--tts-voice-profile-picker-button-group",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {
@@ -273,30 +221,6 @@
       "source": "concept--evdev-relative-axis-code-tuple-field",
       "target": "concept--evdev-pointer-device-heuristic",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--pointer-unknown-until-observed-because-rdev-cannot-enumerate",
-      "target": "concept--per-producer-collector-state",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--additive-per-producer-statuses-for-frontend-compat",
-      "target": "concept--per-producer-collector-state",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--no-grab-no-key-storage-for-linux-event-path",
-      "target": "concept--evdev-pointer-device-heuristic",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--shared-serial-lock-for-global-counter-races",
-      "target": "concept--counter-test-serial-lock",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     }
   ]

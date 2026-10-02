@@ -7,7 +7,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-batch-d-10-files [ses_f17699445ffeq07cbExFDI9PT1].md",
       "source_location": "L40",
-      "norm_label": "audio cue pinning test"
+      "norm_label": "audio cue pinning test",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-batch-d-10-files [ses_f17699445ffeq07cbExFDI9PT1].md:L40] Exact key plus count is what catches a double cue"
     },
     {
       "id": "concept--stop-propagation-double-cue-guard",
@@ -31,7 +32,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-batch-d-10-files [ses_f17699445ffeq07cbExFDI9PT1].md",
       "source_location": "L1688",
-      "norm_label": "negative control test"
+      "norm_label": "negative control test",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-batch-d-10-files [ses_f17699445ffeq07cbExFDI9PT1].md:L56] The bubbling guard is the whole point of the fix"
     },
     {
       "id": "concept--self-sounding-claim",
@@ -39,31 +41,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-batch-d-10-files [ses_f17699445ffeq07cbExFDI9PT1].md",
       "source_location": "L37",
-      "norm_label": "self sounding claim"
-    },
-    {
-      "id": "rationale--exact-key-and-count-catches-double-cue",
-      "label": "Exact key plus count is what catches a double cue",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-batch-d-10-files [ses_f17699445ffeq07cbExFDI9PT1].md",
-      "source_location": "L40",
-      "norm_label": "exact key plus count is what catches a double cue"
-    },
-    {
-      "id": "rationale--backdrop-guard-is-the-whole-point",
-      "label": "The bubbling guard is the whole point of the fix",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-batch-d-10-files [ses_f17699445ffeq07cbExFDI9PT1].md",
-      "source_location": "L56",
-      "norm_label": "the bubbling guard is the whole point of the fix"
-    },
-    {
-      "id": "rationale--make-self-sounding-executable",
-      "label": "Pin bare-referenced handlers so the self-sounding claim becomes executable proof",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-batch-d-10-files [ses_f17699445ffeq07cbExFDI9PT1].md",
-      "source_location": "L37",
-      "norm_label": "pin bare referenced handlers so the self sounding claim becomes executable proof"
+      "norm_label": "self sounding claim",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-batch-d-10-files [ses_f17699445ffeq07cbExFDI9PT1].md:L37] Pin bare-referenced handlers so the self-sounding claim becomes executable proof"
     },
     {
       "id": "concept--plan-publishing-contract-guard",
@@ -71,7 +50,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t6-validator-guard [ses_f219ee8ddffeRCbq5xZqGSiCuU].md",
       "source_location": "L36",
-      "norm_label": "plan publishing contract guard"
+      "norm_label": "plan publishing contract guard",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - t6-validator-guard [ses_f219ee8ddffeRCbq5xZqGSiCuU].md:L47] Cheap existence checks must fail before the expensive mmdc render pass"
     },
     {
       "id": "concept--mandatory-negative-test",
@@ -79,7 +59,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t6-validator-guard [ses_f219ee8ddffeRCbq5xZqGSiCuU].md",
       "source_location": "L50",
-      "norm_label": "mandatory negative test"
+      "norm_label": "mandatory negative test",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - t6-validator-guard [ses_f219ee8ddffeRCbq5xZqGSiCuU].md:L51] A guard only ever observed passing is indistinguishable from one that does nothing"
     },
     {
       "id": "concept--shared-error-counter-validator",
@@ -95,7 +76,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t6-validator-guard [ses_f219ee8ddffeRCbq5xZqGSiCuU].md",
       "source_location": "L56",
-      "norm_label": "byte identical restore proof"
+      "norm_label": "byte identical restore proof",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - t6-validator-guard [ses_f219ee8ddffeRCbq5xZqGSiCuU].md:L56] A restore that silently truncates a config file is the thing that gets missed"
     },
     {
       "id": "concept--root-cause-double-count-avoidance",
@@ -104,51 +86,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t6-validator-guard [ses_f219ee8ddffeRCbq5xZqGSiCuU].md",
       "source_location": "L1735",
       "norm_label": "root cause double count avoidance"
-    },
-    {
-      "id": "rationale--guard-never-observed-failing",
-      "label": "A guard only ever observed passing is indistinguishable from one that does nothing",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t6-validator-guard [ses_f219ee8ddffeRCbq5xZqGSiCuU].md",
-      "source_location": "L51",
-      "norm_label": "a guard only ever observed passing is indistinguishable from one that does nothing"
-    },
-    {
-      "id": "rationale--cheap-checks-before-expensive-render",
-      "label": "Cheap existence checks must fail before the expensive mmdc render pass",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t6-validator-guard [ses_f219ee8ddffeRCbq5xZqGSiCuU].md",
-      "source_location": "L47",
-      "norm_label": "cheap existence checks must fail before the expensive mmdc render pass"
-    },
-    {
-      "id": "rationale--restore-can-silently-truncate",
-      "label": "A restore that silently truncates a config file is the thing that gets missed",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t6-validator-guard [ses_f219ee8ddffeRCbq5xZqGSiCuU].md",
-      "source_location": "L56",
-      "norm_label": "a restore that silently truncates a config file is the thing that gets missed"
     }
   ],
   "links": [
-    {
-      "source": "rationale--exact-key-and-count-catches-double-cue",
-      "target": "concept--audio-cue-pinning-test",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--backdrop-guard-is-the-whole-point",
-      "target": "concept--negative-control-test",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--make-self-sounding-executable",
-      "target": "concept--self-sounding-claim",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--stop-propagation-double-cue-guard",
       "target": "concept--audio-cue-pinning-test",
@@ -171,24 +111,6 @@
       "source": "concept--self-sounding-claim",
       "target": "concept--audio-cue-pinning-test",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--guard-never-observed-failing",
-      "target": "concept--mandatory-negative-test",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--cheap-checks-before-expensive-render",
-      "target": "concept--plan-publishing-contract-guard",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--restore-can-silently-truncate",
-      "target": "concept--byte-identical-restore-proof",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {

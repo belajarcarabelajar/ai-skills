@@ -7,15 +7,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md",
       "source_location": "L207",
-      "norm_label": "linux cannot hot-swap a running kernel; a kernel swap needs a reboot"
-    },
-    {
-      "id": "rationale--kexec-is-still-a-reboot-not-an-alternative",
-      "label": "kexec is the closest thing to a live kernel swap but still kills every process, so it is not an alternative",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md",
-      "source_location": "L212",
-      "norm_label": "kexec is the closest thing to a live kernel swap but still kills every process, so it is not an alternative"
+      "norm_label": "linux cannot hot-swap a running kernel; a kernel swap needs a reboot",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md:L212] kexec is the closest thing to a live kernel swap but still kills every process, so it is not an alternative"
     },
     {
       "id": "concept--cachyos-kernel-package-on-arch-without-flashdisk",
@@ -23,15 +16,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md",
       "source_location": "L261",
-      "norm_label": "installing a cachyos kernel on the running arch from its pacman repo, with no flashdisk"
-    },
-    {
-      "id": "rationale--no-flashdisk-because-only-the-kernel-changes",
-      "label": "No flashdisk is needed because only the kernel package is added; a flashdisk is only required for a full reinstall",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md",
-      "source_location": "L262",
-      "norm_label": "no flashdisk is needed because only the kernel package is added; a flashdisk is only required for a full reinstall"
+      "norm_label": "installing a cachyos kernel on the running arch from its pacman repo, with no flashdisk",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md:L262] No flashdisk is needed because only the kernel package is added; a flashdisk is only required for a full reinstall"
     },
     {
       "id": "concept--x86-64-v3-vs-v4-package-variant-from-cpu-flags",
@@ -39,15 +25,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md",
       "source_location": "L600",
-      "norm_label": "cpu feature flags decide the x86-64-v3 vs v4 kernel package variant"
-    },
-    {
-      "id": "rationale--v4-rejected-because-comet-lake-has-no-avx-512",
-      "label": "The v4 variant was rejected because the i3-10105 has no AVX-512, and the realistic gain is responsiveness rather than throughput",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md",
-      "source_location": "L604",
-      "norm_label": "the v4 variant was rejected because the i3-10105 has no avx-512, and the realistic gain is responsiveness rather than throughput"
+      "norm_label": "cpu feature flags decide the x86-64-v3 vs v4 kernel package variant",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md:L604] The v4 variant was rejected because the i3-10105 has no AVX-512, and the realistic gain is responsiveness rather than throughput"
     },
     {
       "id": "concept--old-kernel-kept-installed-as-boot-rollback",
@@ -55,15 +34,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md",
       "source_location": "L773",
-      "norm_label": "the old arch kernel is deliberately left installed as the rollback path for the new kernel"
-    },
-    {
-      "id": "rationale--keep-old-kernel-in-case-the-new-one-fails-to-boot",
-      "label": "The old kernel is kept because the newly installed kernel may simply fail to boot, and an unbootable system needs a second entry",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md",
-      "source_location": "L264",
-      "norm_label": "the old kernel is kept because the newly installed kernel may simply fail to boot, and an unbootable system needs a second entry"
+      "norm_label": "the old arch kernel is deliberately left installed as the rollback path for the new kernel",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md:L264] The old kernel is kept because the newly installed kernel may simply fail to boot, and an unbootable system needs a second entry"
     },
     {
       "id": "concept--stale-uefi-nvram-entry-detected-by-venhw-path",
@@ -71,15 +43,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md",
       "source_location": "L993",
-      "norm_label": "a stale uefi nvram entry is identified by a venhw() path with no matching file on disk"
-    },
-    {
-      "id": "rationale--stale-entry-safe-to-delete-because-nothing-on-disk-matches",
-      "label": "The stale Windows entry was safe to delete because no NTFS partition and no EFI/Microsoft directory existed, so selecting it could only fail",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md",
-      "source_location": "L995",
-      "norm_label": "the stale windows entry was safe to delete because no ntfs partition and no efi/microsoft directory existed, so selecting it could only fail"
+      "norm_label": "a stale uefi nvram entry is identified by a venhw() path with no matching file on disk",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md:L995] The stale Windows entry was safe to delete because no NTFS partition and no EFI/Microsoft directory existed, so selecting it could only fail"
     },
     {
       "id": "concept--arch-pacman-rejects-x86-64-v3-architecture",
@@ -111,15 +76,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md",
       "source_location": "L6956",
-      "norm_label": "the same kernel warning pattern on the previous arch boot rules out a new regression from the cachyos kernel"
-    },
-    {
-      "id": "rationale--identical-warnings-on-both-kernels-prove-they-pre-date-the-swap",
-      "label": "SGX, TDX, PCIe DPC, ACPI and NVMe SUBNQN warnings appearing on both boots prove they pre-date the kernel swap",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md",
-      "source_location": "L6948",
-      "norm_label": "sgx, tdx, pcie dpc, acpi and nvme subnqn warnings appearing on both boots prove they pre-date the kernel swap"
+      "norm_label": "the same kernel warning pattern on the previous arch boot rules out a new regression from the cachyos kernel",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md:L6948] SGX, TDX, PCIe DPC, ACPI and NVMe SUBNQN warnings appearing on both boots prove they pre-date the kernel swap"
     },
     {
       "id": "concept--nvme-media-errors-counter-with-empty-error-log",
@@ -127,15 +85,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md",
       "source_location": "L9602",
-      "norm_label": "the nvme drive reports media_errors 12 while all 64 error-log entries read zero, so the counter cannot be corroborated"
-    },
-    {
-      "id": "rationale--secure-erase-refused-because-it-would-destroy-data",
-      "label": "nvme sanitize, secure erase and format were deliberately not run because every one of them deletes user data",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md",
-      "source_location": "L7773",
-      "norm_label": "nvme sanitize, secure erase and format were deliberately not run because every one of them deletes user data"
+      "norm_label": "the nvme drive reports media_errors 12 while all 64 error-log entries read zero, so the counter cannot be corroborated",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md:L7773] nvme sanitize, secure erase and format were deliberately not run because every one of them deletes user data"
     },
     {
       "id": "concept--smartd-devicescan-nvme-temperature-thresholds",
@@ -159,15 +110,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md",
       "source_location": "L10299",
-      "norm_label": "a kernel speedup claim needs the identical benchmark run under both kernels, not one config audit"
-    },
-    {
-      "id": "rationale--config-flags-prove-adaptation-not-speed",
-      "label": "Config flags prove the kernel is adapted to the CPU, but only a same-benchmark run on the old kernel can prove the speed delta",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md",
-      "source_location": "L10309",
-      "norm_label": "config flags prove the kernel is adapted to the cpu, but only a same-benchmark run on the old kernel can prove the speed delta"
+      "norm_label": "a kernel speedup claim needs the identical benchmark run under both kernels, not one config audit",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md:L10309] Config flags prove the kernel is adapted to the CPU, but only a same-benchmark run on the old kernel can prove the speed delta"
     },
     {
       "id": "concept--kde-process-count-is-not-background-bloat",
@@ -183,15 +127,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md",
       "source_location": "L12170",
-      "norm_label": "optional autostarts were disabled with hidden=true user overrides instead of deleting the desktop entries"
-    },
-    {
-      "id": "rationale--overrides-not-deletion-so-every-change-stays-reversible",
-      "label": "Overrides plus a timestamped backup were chosen over deleting entries so the applications stay installed and every change can be undone",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md",
-      "source_location": "L12377",
-      "norm_label": "overrides plus a timestamped backup were chosen over deleting entries so the applications stay installed and every change can be undone"
+      "norm_label": "optional autostarts were disabled with hidden=true user overrides instead of deleting the desktop entries",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md:L12377] Overrides plus a timestamped backup were chosen over deleting entries so the applications stay installed and every change can be undone"
     },
     {
       "id": "concept--typeless-loading-stalls-without-an-ibus-daemon",
@@ -199,15 +136,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md",
       "source_location": "L15129",
-      "norm_label": "typeless voice loading stalls and retries because no ibus daemon is running to expose the typeless-voice engine"
-    },
-    {
-      "id": "rationale--ibus-started-only-for-diagnosis-not-persistently",
-      "label": "IBus was started by hand for diagnosis only, because making it persistent would change input method behaviour for the whole session",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md",
-      "source_location": "L15191",
-      "norm_label": "ibus was started by hand for diagnosis only, because making it persistent would change input method behaviour for the whole session"
+      "norm_label": "typeless voice loading stalls and retries because no ibus daemon is running to expose the typeless-voice engine",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md:L15191] IBus was started by hand for diagnosis only, because making it persistent would change input method behaviour for the whole session"
     },
     {
       "id": "concept--ibus-wayland-configured-in-kwinrc-but-daemon-absent",
@@ -231,60 +161,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md",
       "source_location": "L19968",
-      "norm_label": "snipset sigabrt coredumps land in zbus secret service keyring access, not in ibus"
-    },
-    {
-      "id": "rationale--zbus-speaks-dbus-so-its-panic-is-not-an-ibus-fault",
-      "label": "zbus also speaks D-Bus, so its keyring panic cannot be read as an IBus problem; the suspects are keyring, portal and WebViewGTK",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md",
-      "source_location": "L19880",
-      "norm_label": "zbus also speaks d-bus, so its keyring panic cannot be read as an ibus problem; the suspects are keyring, portal and webviewgtk"
+      "norm_label": "snipset sigabrt coredumps land in zbus secret service keyring access, not in ibus",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md:L19880] zbus also speaks D-Bus, so its keyring panic cannot be read as an IBus problem; the suspects are keyring, portal and WebViewGTK"
     }
   ],
   "links": [
-    {
-      "source": "rationale--kexec-is-still-a-reboot-not-an-alternative",
-      "target": "concept--linux-cannot-hot-swap-a-running-kernel",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--no-flashdisk-because-only-the-kernel-changes",
-      "target": "concept--cachyos-kernel-package-on-arch-without-flashdisk",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--v4-rejected-because-comet-lake-has-no-avx-512",
-      "target": "concept--x86-64-v3-vs-v4-package-variant-from-cpu-flags",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--keep-old-kernel-in-case-the-new-one-fails-to-boot",
-      "target": "concept--old-kernel-kept-installed-as-boot-rollback",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--stale-entry-safe-to-delete-because-nothing-on-disk-matches",
-      "target": "concept--stale-uefi-nvram-entry-detected-by-venhw-path",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--identical-warnings-on-both-kernels-prove-they-pre-date-the-swap",
-      "target": "concept--previous-boot-log-comparison-rules-out-a-new-regression",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--secure-erase-refused-because-it-would-destroy-data",
-      "target": "concept--nvme-media-errors-counter-with-empty-error-log",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--read-only-raw-read-as-storage-corroboration",
       "target": "concept--nvme-media-errors-counter-with-empty-error-log",
@@ -295,12 +176,6 @@
       "source": "concept--smartd-devicescan-nvme-temperature-thresholds",
       "target": "concept--nvme-media-errors-counter-with-empty-error-log",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--config-flags-prove-adaptation-not-speed",
-      "target": "concept--speedup-claim-needs-ab-benchmark-on-both-kernels",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {
@@ -352,27 +227,9 @@
       "confidence": "EXTRACTED"
     },
     {
-      "source": "rationale--overrides-not-deletion-so-every-change-stays-reversible",
-      "target": "concept--autostart-disabled-with-hidden-true-user-overrides",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--ibus-started-only-for-diagnosis-not-persistently",
-      "target": "concept--typeless-loading-stalls-without-an-ibus-daemon",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
       "source": "concept--ibus-wayland-configured-in-kwinrc-but-daemon-absent",
       "target": "concept--typeless-loading-stalls-without-an-ibus-daemon",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--zbus-speaks-dbus-so-its-panic-is-not-an-ibus-fault",
-      "target": "concept--snipset-coredumps-sit-in-secret-service-not-ibus",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {

@@ -6,7 +6,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md",
       "source_location": "L6085",
-      "norm_label": "servo stavolt fails structurally against a constant power psu load"
+      "norm_label": "servo stavolt fails structurally against a constant power psu load",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md:L6103] Plugging the PC straight into the outlet during the 18:00-19:00 window separates a grid fault from a worn stavolt"
     },
     {
       "id": "concept--psu-ovp-uvp-latching-on-out-of-spec-input",
@@ -14,7 +15,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md",
       "source_location": "L6087",
-      "norm_label": "psu ovp/uvp latching makes a desktop unable to restart"
+      "norm_label": "psu ovp/uvp latching makes a desktop unable to restart",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md:L6099] A full rear-switch power cycle empties the PSU capacitors and resets the OVP/UVP latch"
     },
     {
       "id": "concept--stock-12v-battery-yields-about-3x-amp-hours",
@@ -30,7 +32,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md",
       "source_location": "L7343",
-      "norm_label": "nut driver support level used as a ups buying criterion"
+      "norm_label": "nut driver support level used as a ups buying criterion",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md:L7376] A vendor-supplied protocol is preferred over a driver that only works through reverse engineering"
     },
     {
       "id": "concept--upower-hid-ups-backend-races-nut-in-plasma",
@@ -38,7 +41,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md",
       "source_location": "L7384",
-      "norm_label": "upower's nut-generated hid ups backend races nut inside kde plasma"
+      "norm_label": "upower's nut-generated hid ups backend races nut inside kde plasma",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md:L7390] Plasma's own on-battery suspend profile must be disabled or it can suspend in the middle of the shutdown"
     },
     {
       "id": "concept--gateway-loss-as-power-outage-signal",
@@ -46,7 +50,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md",
       "source_location": "L14299",
-      "norm_label": "loss of the network gateway used as a power outage signal"
+      "norm_label": "loss of the network gateway used as a power outage signal",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md:L14309] The gateway-drop signal only works if the router stays on a normal outlet and dies with the grid",
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md:L15097] The guard script ships disarmed because a router restart would be misread as a power cut"
+      ]
     },
     {
       "id": "concept--listing-text-checkpoints-for-usb-variant",
@@ -54,7 +62,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md",
       "source_location": "L10148",
-      "norm_label": "five listing checkpoints that decide whether a prolink sfcu really has usb"
+      "norm_label": "five listing checkpoints that decide whether a prolink sfcu really has usb",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md:L10158] Assume a listing has no USB port unless all five text checkpoints agree"
     },
     {
       "id": "concept--va-rating-does-not-determine-runtime",
@@ -62,7 +71,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md",
       "source_location": "L13761",
-      "norm_label": "va rating does not determine runtime; battery energy does"
+      "norm_label": "va rating does not determine runtime; battery energy does",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md:L13757] Sizing rule of two to three times the measured load, which puts a 100 W desktop at 650 VA"
     },
     {
       "id": "concept--runtime-need-is-clean-shutdown-not-outage-survival",
@@ -70,7 +80,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md",
       "source_location": "L11452",
-      "norm_label": "the runtime requirement is a clean shutdown, not surviving the outage"
+      "norm_label": "the runtime requirement is a clean shutdown, not surviving the outage",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md:L7361] Fifteen minutes of runtime is roughly ten times the time a clean shutdown needs"
     },
     {
       "id": "concept--power-draw-measured-on-cpu-only",
@@ -78,87 +89,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md",
       "source_location": "L1662",
-      "norm_label": "system power draw measured on the cpu package only, non-cpu still estimated"
-    },
-    {
-      "id": "rationale--full-power-cycle-resets-the-psu-latch",
-      "label": "A full rear-switch power cycle empties the PSU capacitors and resets the OVP/UVP latch",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md",
-      "source_location": "L6099",
-      "norm_label": "a full rear-switch power cycle empties the psu capacitors and resets the ovp/uvp latch"
-    },
-    {
-      "id": "rationale--bypassing-stavolt-separates-grid-fault-from-unit-fault",
-      "label": "Plugging the PC straight into the outlet during the 18:00-19:00 window separates a grid fault from a worn stavolt",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md",
-      "source_location": "L6103",
-      "norm_label": "plugging the pc straight into the outlet during the 18:00-19:00 window separates a grid fault from a worn stavolt"
-    },
-    {
-      "id": "rationale--vendor-protocol-outranks-reverse-engineered-driver",
-      "label": "A vendor-supplied protocol is preferred over a driver that only works through reverse engineering",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md",
-      "source_location": "L7376",
-      "norm_label": "a vendor-supplied protocol is preferred over a driver that only works through reverse engineering"
-    },
-    {
-      "id": "rationale--plasma-suspend-setting-can-win-over-nut-shutdown",
-      "label": "Plasma's own on-battery suspend profile must be disabled or it can suspend in the middle of the shutdown",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md",
-      "source_location": "L7390",
-      "norm_label": "plasma's own on-battery suspend profile must be disabled or it can suspend in the middle of the shutdown"
-    },
-    {
-      "id": "rationale--15-minute-runtime-is-ten-times-the-shutdown-need",
-      "label": "Fifteen minutes of runtime is roughly ten times the time a clean shutdown needs",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md",
-      "source_location": "L7361",
-      "norm_label": "fifteen minutes of runtime is roughly ten times the time a clean shutdown needs"
-    },
-    {
-      "id": "rationale--two-to-three-times-load-sizing-rule",
-      "label": "Sizing rule of two to three times the measured load, which puts a 100 W desktop at 650 VA",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md",
-      "source_location": "L13757",
-      "norm_label": "sizing rule of two to three times the measured load, which puts a 100 w desktop at 650 va"
-    },
-    {
-      "id": "rationale--kill-a-watt-is-the-only-end-to-end-power-check",
-      "label": "A kill-a-watt at the wall is the only end-to-end check of the estimated system draw",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md",
-      "source_location": "L4430",
-      "norm_label": "a kill-a-watt at the wall is the only end-to-end check of the estimated system draw"
-    },
-    {
-      "id": "rationale--gateway-signal-works-only-if-router-stays-off-the-ups",
-      "label": "The gateway-drop signal only works if the router stays on a normal outlet and dies with the grid",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md",
-      "source_location": "L14309",
-      "norm_label": "the gateway-drop signal only works if the router stays on a normal outlet and dies with the grid"
-    },
-    {
-      "id": "rationale--arm-flag-stays-zero-until-ups-is-proven",
-      "label": "The guard script ships disarmed because a router restart would be misread as a power cut",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md",
-      "source_location": "L15097",
-      "norm_label": "the guard script ships disarmed because a router restart would be misread as a power cut"
-    },
-    {
-      "id": "rationale--assume-no-usb-unless-all-five-checkpoints-match",
-      "label": "Assume a listing has no USB port unless all five text checkpoints agree",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md",
-      "source_location": "L10158",
-      "norm_label": "assume a listing has no usb port unless all five text checkpoints agree"
+      "norm_label": "system power draw measured on the cpu package only, non-cpu still estimated",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md:L4430] A kill-a-watt at the wall is the only end-to-end check of the estimated system draw"
     }
   ],
   "links": [
@@ -226,66 +158,6 @@
       "source": "concept--power-draw-measured-on-cpu-only",
       "target": "concept--va-rating-does-not-determine-runtime",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--full-power-cycle-resets-the-psu-latch",
-      "target": "concept--psu-ovp-uvp-latching-on-out-of-spec-input",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--bypassing-stavolt-separates-grid-fault-from-unit-fault",
-      "target": "concept--servo-stavolt-fails-constant-power-load",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--vendor-protocol-outranks-reverse-engineered-driver",
-      "target": "concept--nut-driver-support-level-as-selection-criterion",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--plasma-suspend-setting-can-win-over-nut-shutdown",
-      "target": "concept--upower-hid-ups-backend-races-nut-in-plasma",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--15-minute-runtime-is-ten-times-the-shutdown-need",
-      "target": "concept--runtime-need-is-clean-shutdown-not-outage-survival",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--two-to-three-times-load-sizing-rule",
-      "target": "concept--va-rating-does-not-determine-runtime",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--kill-a-watt-is-the-only-end-to-end-power-check",
-      "target": "concept--power-draw-measured-on-cpu-only",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--gateway-signal-works-only-if-router-stays-off-the-ups",
-      "target": "concept--gateway-loss-as-power-outage-signal",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--arm-flag-stays-zero-until-ups-is-proven",
-      "target": "concept--gateway-loss-as-power-outage-signal",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--assume-no-usb-unless-all-five-checkpoints-match",
-      "target": "concept--listing-text-checkpoints-for-usb-variant",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     }
   ]

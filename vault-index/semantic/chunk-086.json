@@ -6,7 +6,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - collect-test-idioms-in-wayland-module [ses_f26591c8cffeHhEwtOj22O03cI].md",
       "source_location": "L3946",
-      "norm_label": "sync_preferences_from_live"
+      "norm_label": "sync_preferences_from_live",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - collect-test-idioms-in-wayland-module [ses_f26591c8cffeHhEwtOj22O03cI].md:L4094] A change made inside Snipset must not be reverted by the desktop's stale binding",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - collect-test-idioms-in-wayland-module [ses_f26591c8cffeHhEwtOj22O03cI].md:L4053] A refused shortcut leaves no trigger to learn from, so overwriting would destroy a good value"
+      ]
     },
     {
       "id": "concept--grant-set-apply-bound-state",
@@ -39,22 +43,6 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - collect-test-idioms-in-wayland-module [ses_f26591c8cffeHhEwtOj22O03cI].md",
       "source_location": "L4127",
       "norm_label": "rust #[path] test module wiring convention"
-    },
-    {
-      "id": "rationale--app-side-shortcut-change-survives-rebind",
-      "label": "A change made inside Snipset must not be reverted by the desktop's stale binding",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - collect-test-idioms-in-wayland-module [ses_f26591c8cffeHhEwtOj22O03cI].md",
-      "source_location": "L4094",
-      "norm_label": "a change made inside snipset must not be reverted by the desktop's stale binding"
-    },
-    {
-      "id": "rationale--refused-binding-writes-nothing",
-      "label": "A refused shortcut leaves no trigger to learn from, so overwriting would destroy a good value",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - collect-test-idioms-in-wayland-module [ses_f26591c8cffeHhEwtOj22O03cI].md",
-      "source_location": "L4053",
-      "norm_label": "a refused shortcut leaves no trigger to learn from, so overwriting would destroy a good value"
     },
     {
       "id": "concept--platform-isolation-matrix",
@@ -134,15 +122,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t13-cross-platform-isolation-evidence [ses_f1d2f8d1fffe92A2DMPG3C7Uhq].md",
       "source_location": "L10144",
-      "norm_label": "source-level contract test where no runtime exists"
-    },
-    {
-      "id": "rationale--no-pwsh-on-dev-host",
-      "label": "No pwsh on the dev host, so the Windows producer gets source-contract assertions only",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t13-cross-platform-isolation-evidence [ses_f1d2f8d1fffe92A2DMPG3C7Uhq].md",
-      "source_location": "L89",
-      "norm_label": "no pwsh on the dev host, so the windows producer gets source-contract assertions only"
+      "norm_label": "source-level contract test where no runtime exists",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t13-cross-platform-isolation-evidence [ses_f1d2f8d1fffe92A2DMPG3C7Uhq].md:L89] No pwsh on the dev host, so the Windows producer gets source-contract assertions only"
     },
     {
       "id": "concept--tgrep-index-staleness",
@@ -158,15 +139,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t13-cross-platform-isolation-evidence [ses_f1d2f8d1fffe92A2DMPG3C7Uhq].md",
       "source_location": "L9582",
-      "norm_label": "hygiene assertion scoped to release-evidence paths"
-    },
-    {
-      "id": "rationale--whole-tree-hygiene-assertion-too-strong",
-      "label": "A whole-tree cleanliness assertion is too strong when another session legitimately works in the same checkout",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t13-cross-platform-isolation-evidence [ses_f1d2f8d1fffe92A2DMPG3C7Uhq].md",
-      "source_location": "L9578",
-      "norm_label": "a whole-tree cleanliness assertion is too strong when another session legitimately works in the same checkout"
+      "norm_label": "hygiene assertion scoped to release-evidence paths",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t13-cross-platform-isolation-evidence [ses_f1d2f8d1fffe92A2DMPG3C7Uhq].md:L9578] A whole-tree cleanliness assertion is too strong when another session legitimately works in the same checkout"
     },
     {
       "id": "concept--byte-identity-snapshot-delta-assertion",
@@ -186,18 +160,6 @@
     }
   ],
   "links": [
-    {
-      "source": "rationale--app-side-shortcut-change-survives-rebind",
-      "target": "concept--sync-preferences-from-live",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--refused-binding-writes-nothing",
-      "target": "concept--sync-preferences-from-live",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--sync-preferences-from-live",
       "target": "concept--grant-set-apply-bound-state",
@@ -280,18 +242,6 @@
       "source": "concept--mutation-testing-for-non-vacuous-tests",
       "target": "concept--platform-isolation-matrix",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--no-pwsh-on-dev-host",
-      "target": "concept--source-contract-test-without-runtime",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--whole-tree-hygiene-assertion-too-strong",
-      "target": "concept--scoped-hygiene-assertion",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     }
   ]

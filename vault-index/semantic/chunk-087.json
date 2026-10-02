@@ -15,7 +15,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - ground-secrets-and-d1-config [ses_f0629f2ddffenZ53Z8NzyXYIvY].md",
       "source_location": "L2187",
-      "norm_label": "runtime-over-build-time env resolution"
+      "norm_label": "runtime-over-build-time env resolution",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - ground-secrets-and-d1-config [ses_f0629f2ddffenZ53Z8NzyXYIvY].md:L2187] Runtime secrets win so production can override a stale .env baked into the bundle"
     },
     {
       "id": "concept--out-of-band-wrangler-secret",
@@ -55,23 +56,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - ground-secrets-and-d1-config [ses_f0629f2ddffenZ53Z8NzyXYIvY].md",
       "source_location": "L2221",
-      "norm_label": "astro adapter owns the production worker entry"
-    },
-    {
-      "id": "rationale--runtime-secrets-override-baked-env",
-      "label": "Runtime secrets win so production can override a stale .env baked into the bundle",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - ground-secrets-and-d1-config [ses_f0629f2ddffenZ53Z8NzyXYIvY].md",
-      "source_location": "L2187",
-      "norm_label": "runtime secrets win so production can override a stale .env baked into the bundle"
-    },
-    {
-      "id": "rationale--stable-build-entry-for-health-probe",
-      "label": "The legacy worker entry exists only to give bun run build a stable entry point",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - ground-secrets-and-d1-config [ses_f0629f2ddffenZ53Z8NzyXYIvY].md",
-      "source_location": "L2221",
-      "norm_label": "the legacy worker entry exists only to give bun run build a stable entry point"
+      "norm_label": "astro adapter owns the production worker entry",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - ground-secrets-and-d1-config [ses_f0629f2ddffenZ53Z8NzyXYIvY].md:L2221] The legacy worker entry exists only to give bun run build a stable entry point"
     },
     {
       "id": "concept--i18n-shape-class-gap",
@@ -87,7 +73,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23c-regression-guard [ses_f209aaca9ffeQmUc8502HFP6fu].md",
       "source_location": "L10165",
-      "norm_label": "hard-locked usetranslation() detector"
+      "norm_label": "hard-locked usetranslation() detector",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23c-regression-guard [ses_f209aaca9ffeQmUc8502HFP6fu].md:L10198] The parent-supplied fallback class is recorded separately because an excluded shape regresses unnoticed"
     },
     {
       "id": "concept--unpropagated-lang-prop-detector",
@@ -95,7 +82,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23c-regression-guard [ses_f209aaca9ffeQmUc8502HFP6fu].md",
       "source_location": "L10182",
-      "norm_label": "unpropagated lang prop detector"
+      "norm_label": "unpropagated lang prop detector",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23c-regression-guard [ses_f209aaca9ffeQmUc8502HFP6fu].md:L10232] Only optional lang? props are counted because a required lang: a parent omits is a tsc error"
     },
     {
       "id": "concept--shrink-only-budget-ratchet",
@@ -103,7 +91,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23c-regression-guard [ses_f209aaca9ffeQmUc8502HFP6fu].md",
       "source_location": "L68",
-      "norm_label": "shrink-only budget ratchet"
+      "norm_label": "shrink-only budget ratchet",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23c-regression-guard [ses_f209aaca9ffeQmUc8502HFP6fu].md:L32] A measured budget is seeded because the tree is being migrated concurrently by sibling chunks"
     },
     {
       "id": "concept--detector-fail-proof",
@@ -112,30 +101,6 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23c-regression-guard [ses_f209aaca9ffeQmUc8502HFP6fu].md",
       "source_location": "L10220",
       "norm_label": "proving the detector can actually fail"
-    },
-    {
-      "id": "rationale--record-fallback-class-separately",
-      "label": "The parent-supplied fallback class is recorded separately because an excluded shape regresses unnoticed",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23c-regression-guard [ses_f209aaca9ffeQmUc8502HFP6fu].md",
-      "source_location": "L10198",
-      "norm_label": "the parent-supplied fallback class is recorded separately because an excluded shape regresses unnoticed"
-    },
-    {
-      "id": "rationale--seed-budget-because-tree-is-mid-migration",
-      "label": "A measured budget is seeded because the tree is being migrated concurrently by sibling chunks",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23c-regression-guard [ses_f209aaca9ffeQmUc8502HFP6fu].md",
-      "source_location": "L32",
-      "norm_label": "a measured budget is seeded because the tree is being migrated concurrently by sibling chunks"
-    },
-    {
-      "id": "rationale--optional-lang-only-because-required-is-tsc-error",
-      "label": "Only optional lang? props are counted because a required lang: a parent omits is a tsc error",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23c-regression-guard [ses_f209aaca9ffeQmUc8502HFP6fu].md",
-      "source_location": "L10232",
-      "norm_label": "only optional lang? props are counted because a required lang: a parent omits is a tsc error"
     }
   ],
   "links": [
@@ -198,36 +163,6 @@
       "target": "concept--raw-session-id-as-cookie-value",
       "relation": "conceptually_related_to",
       "confidence": "INFERRED"
-    },
-    {
-      "source": "rationale--runtime-secrets-override-baked-env",
-      "target": "concept--runtime-over-build-time-env-resolution",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--stable-build-entry-for-health-probe",
-      "target": "concept--astro-adapter-owns-worker-entry",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--record-fallback-class-separately",
-      "target": "concept--hard-locked-use-translation-detector",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--seed-budget-because-tree-is-mid-migration",
-      "target": "concept--shrink-only-budget-ratchet",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--optional-lang-only-because-required-is-tsc-error",
-      "target": "concept--unpropagated-lang-prop-detector",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
     }
   ]
 }

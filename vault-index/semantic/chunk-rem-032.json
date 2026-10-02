@@ -15,7 +15,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
       "source_location": "L7013",
-      "norm_label": "markdown has no local-only extraction mode, so a vault graph requires an llm backend"
+      "norm_label": "markdown has no local-only extraction mode, so a vault graph requires an llm backend",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L6995] Markdown has no local-only mode, so the free AST-only Phase 1 offered earlier does not exist for a vault"
     },
     {
       "id": "concept--think-false-is-ignored-on-the-ollama-generate-path",
@@ -31,7 +32,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
       "source_location": "L9785",
-      "norm_label": "the ollama cloud backend serializes requests, so --max-concurrency buys nothing"
+      "norm_label": "the ollama cloud backend serializes requests, so --max-concurrency buys nothing",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L9785] The four-worker projection was never measured; four parallel cloud requests took 41s against a 32s serial baseline"
     },
     {
       "id": "concept--graphifyignore-is-always-enforced-with-no-bypass-flag",
@@ -39,7 +41,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
       "source_location": "L6843",
-      "norm_label": ".graphifyignore is always enforced: no --no-graphifyignore flag exists, so the exclusions are permanent"
+      "norm_label": ".graphifyignore is always enforced: no --no-graphifyignore flag exists, so the exclusions are permanent",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L6933] The strict .graphifyignore was kept because it still yields 1312 notes and 2.86M tokens including all of 01 - Projects and the wiki's concept, entity and cluster layer",
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L5548] A cloud backend means note content leaves the machine, contradicting the vault's no-external-service posture, so .graphifyignore became mandatory"
+      ]
     },
     {
       "id": "concept--label-and-cluster-only-ignore-the-model-flag",
@@ -63,7 +69,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
       "source_location": "L9072",
-      "norm_label": "03 - resources/attachments treated as a scope exclusion rather than a content sample"
+      "norm_label": "03 - resources/attachments treated as a scope exclusion rather than a content sample",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L9060] Attachment images are screenshots and rendered PDFs with low concept value and very high per-item cost; the 1316 markdown docs are the signal",
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L9062] Stopping the run to re-scope was safe because graphify reuses completed chunks from its cache"
+      ]
     },
     {
       "id": "concept--withdrawn-worker-projection-kept-in-the-runbook",
@@ -71,7 +81,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
       "source_location": "L9787",
-      "norm_label": "the withdrawn worker projection is kept as a section in the runbook so a later session cannot resurrect the wrong numbers"
+      "norm_label": "the withdrawn worker projection is kept as a section in the runbook so a later session cannot resurrect the wrong numbers",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L9787] The disproven worker projection stays in the runbook as a withdrawn-claim section so a future session cannot resurrect it from memory"
     },
     {
       "id": "concept--stale-wiki-sources-gitignore-patterns-after-para-migration",
@@ -79,7 +90,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
       "source_location": "L4788",
-      "norm_label": "88 .gitignore patterns still point at wiki/sources/ after the para move, so secret-bearing notes under 03 - resources/llm wiki/sources stay tracked and pushed"
+      "norm_label": "88 .gitignore patterns still point at wiki/sources/ after the para move, so secret-bearing notes under 03 - resources/llm wiki/sources stay tracked and pushed",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L9803] A .gitignore entry never untracks an already-tracked path, and untracking is the user's decision",
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L4790] No extraction pass may run until the pushed secret notes are resolved, because a .graphifyignore protects the graph, not the remote"
+      ]
     },
     {
       "id": "concept--git-check-ignore-skips-tracked-files",
@@ -87,7 +102,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
       "source_location": "L8552",
-      "norm_label": "git check-ignore reports nothing for tracked paths; verifying new ignore rules needs --no-index"
+      "norm_label": "git check-ignore reports nothing for tracked paths; verifying new ignore rules needs --no-index",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L8542] gitignore does not apply to tracked files, so the first check-ignore run proved nothing about the new rules"
     },
     {
       "id": "concept--installer-wrote-a-false-graph-claim-into-agents-md",
@@ -111,7 +127,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
       "source_location": "L11362",
-      "norm_label": "plain mv instead of git mv, because git mv stages and obsidian git auto-pushes staged paths within seconds"
+      "norm_label": "plain mv instead of git mv, because git mv stages and obsidian git auto-pushes staged paths within seconds",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L11202] git mv stages the rename, and Obsidian Git would commit and push it within ten seconds without review"
     },
     {
       "id": "concept--content-hashing-disproved-the-claimed-duplicate-corpus",
@@ -135,7 +152,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
       "source_location": "L16744",
-      "norm_label": "an anonymous 404 from the api means the repo is private, not that it was deleted"
+      "norm_label": "an anonymous 404 from the api means the repo is private, not that it was deleted",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L16846] Because the repo is private and the codes have not leaked, the backup codes are rotated calmly first and deletion comes later"
     },
     {
       "id": "concept--n8n-raw-capture-deletion-and-its-revert",
@@ -143,7 +161,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
       "source_location": "L15271",
-      "norm_label": "deleting 748 n8n raw captures and reverting it: fully reversible because every file was git-tracked"
+      "norm_label": "deleting 748 n8n raw captures and reverting it: fully reversible because every file was git-tracked",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L15263] All 748 N8n files were git-tracked, so the deletion was fully reversible through git checkout and proceeded behind a manifest"
     },
     {
       "id": "concept--nxdomain-negative-cache-blocks-a-new-subdomain",
@@ -159,7 +178,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
       "source_location": "L20900",
-      "norm_label": "the extracted graph has median degree 1, 1415 orphan nodes (23%), and one god node (llm wiki index, 694 connections)"
+      "norm_label": "the extracted graph has median degree 1, 1415 orphan nodes (23%), and one god node (llm wiki index, 694 connections)",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L20769] The ugly rendering was a symptom of the graph's content, not of the colour scheme, so the renderer was rebuilt rather than the palette retuned"
     },
     {
       "id": "concept--vis-network-edges-need-node-ids-not-dataset-ordinals",
@@ -223,220 +243,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
       "source_location": "L8330",
-      "norm_label": "the stale .gitignore patch was regenerated by hand rather than fuzzy-applied to a security file"
-    },
-    {
-      "id": "rationale--gitignore-entry-never-untracks-a-tracked-path",
-      "label": "A .gitignore entry never untracks an already-tracked path, and untracking is the user's decision",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L9803",
-      "norm_label": "a .gitignore entry never untracks an already-tracked path, and untracking is the user's decision"
-    },
-    {
-      "id": "rationale--a-markdown-vault-needs-a-backend-so-ast-only-is-not-an-option",
-      "label": "Markdown has no local-only mode, so the free AST-only Phase 1 offered earlier does not exist for a vault",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L6995",
-      "norm_label": "markdown has no local-only mode, so the free ast-only phase 1 offered earlier does not exist for a vault"
-    },
-    {
-      "id": "rationale--strict-graphifyignore-still-yields-1312-notes",
-      "label": "The strict .graphifyignore was kept because it still yields 1312 notes and 2.86M tokens including all of 01 - Projects and the wiki's concept, entity and cluster layer",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L6933",
-      "norm_label": "the strict .graphifyignore was kept because it still yields 1312 notes and 2.86m tokens including all of 01 - projects and the wiki's concept, entity and cluster layer"
-    },
-    {
-      "id": "rationale--cloud-backend-makes-graphifyignore-mandatory-not-optional",
-      "label": "A cloud backend means note content leaves the machine, contradicting the vault's no-external-service posture, so .graphifyignore became mandatory",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L5548",
-      "norm_label": "a cloud backend means note content leaves the machine, contradicting the vault's no-external-service posture, so .graphifyignore became mandatory"
-    },
-    {
-      "id": "rationale--attachment-images-are-low-concept-value-per-unit-cost",
-      "label": "Attachment images are screenshots and rendered PDFs with low concept value and very high per-item cost; the 1316 markdown docs are the signal",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L9060",
-      "norm_label": "attachment images are screenshots and rendered pdfs with low concept value and very high per-item cost; the 1316 markdown docs are the signal"
-    },
-    {
-      "id": "rationale--re-scope-rather-than-restart-because-the-cache-reuses-chunks",
-      "label": "Stopping the run to re-scope was safe because graphify reuses completed chunks from its cache",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L9062",
-      "norm_label": "stopping the run to re-scope was safe because graphify reuses completed chunks from its cache"
-    },
-    {
-      "id": "rationale--ignore-rules-need-no-index-because-tracked-paths-are-exempt",
-      "label": "gitignore does not apply to tracked files, so the first check-ignore run proved nothing about the new rules",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L8542",
-      "norm_label": "gitignore does not apply to tracked files, so the first check-ignore run proved nothing about the new rules"
-    },
-    {
-      "id": "rationale--no-extraction-pass-until-the-pushed-secrets-are-resolved",
-      "label": "No extraction pass may run until the pushed secret notes are resolved, because a .graphifyignore protects the graph, not the remote",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L4790",
-      "norm_label": "no extraction pass may run until the pushed secret notes are resolved, because a .graphifyignore protects the graph, not the remote"
-    },
-    {
-      "id": "rationale--plain-mv-avoids-an-unreviewed-autopush",
-      "label": "git mv stages the rename, and Obsidian Git would commit and push it within ten seconds without review",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L11202",
-      "norm_label": "git mv stages the rename, and obsidian git would commit and push it within ten seconds without review"
-    },
-    {
-      "id": "rationale--measure-parallel-latency-instead-of-assuming-worker-speedup",
-      "label": "The four-worker projection was never measured; four parallel cloud requests took 41s against a 32s serial baseline",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L9785",
-      "norm_label": "the four-worker projection was never measured; four parallel cloud requests took 41s against a 32s serial baseline"
-    },
-    {
-      "id": "rationale--withdrawn-numbers-stay-in-the-doc-as-a-section",
-      "label": "The disproven worker projection stays in the runbook as a withdrawn-claim section so a future session cannot resurrect it from memory",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L9787",
-      "norm_label": "the disproven worker projection stays in the runbook as a withdrawn-claim section so a future session cannot resurrect it from memory"
-    },
-    {
-      "id": "rationale--fuzzy-apply-is-not-verification-for-a-security-file",
-      "label": "A fuzzy apply on a security-critical .gitignore is not verification, so the patch was regenerated from the current file",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L8308",
-      "norm_label": "a fuzzy apply on a security-critical .gitignore is not verification, so the patch was regenerated from the current file"
-    },
-    {
-      "id": "rationale--privacy-downgrades-urgency-not-the-need-to-rotate",
-      "label": "Because the repo is private and the codes have not leaked, the backup codes are rotated calmly first and deletion comes later",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L16846",
-      "norm_label": "because the repo is private and the codes have not leaked, the backup codes are rotated calmly first and deletion comes later"
-    },
-    {
-      "id": "rationale--manifest-before-deletion-because-tracking-makes-it-reversible",
-      "label": "All 748 N8n files were git-tracked, so the deletion was fully reversible through git checkout and proceeded behind a manifest",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L15263",
-      "norm_label": "all 748 n8n files were git-tracked, so the deletion was fully reversible through git checkout and proceeded behind a manifest"
-    },
-    {
-      "id": "rationale--ugly-colours-were-a-symptom-of-messy-content",
-      "label": "The ugly rendering was a symptom of the graph's content, not of the colour scheme, so the renderer was rebuilt rather than the palette retuned",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L20769",
-      "norm_label": "the ugly rendering was a symptom of the graph's content, not of the colour scheme, so the renderer was rebuilt rather than the palette retuned"
+      "norm_label": "the stale .gitignore patch was regenerated by hand rather than fuzzy-applied to a security file",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L8308] A fuzzy apply on a security-critical .gitignore is not verification, so the patch was regenerated from the current file"
     }
   ],
   "links": [
-    {
-      "source": "rationale--gitignore-entry-never-untracks-a-tracked-path",
-      "target": "concept--stale-wiki-sources-gitignore-patterns-after-para-migration",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--a-markdown-vault-needs-a-backend-so-ast-only-is-not-an-option",
-      "target": "concept--markdown-has-no-local-only-extraction-mode",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--strict-graphifyignore-still-yields-1312-notes",
-      "target": "concept--graphifyignore-is-always-enforced-with-no-bypass-flag",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--cloud-backend-makes-graphifyignore-mandatory-not-optional",
-      "target": "concept--graphifyignore-is-always-enforced-with-no-bypass-flag",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--attachment-images-are-low-concept-value-per-unit-cost",
-      "target": "concept--attachments-subtree-as-scope-exclusion",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--re-scope-rather-than-restart-because-the-cache-reuses-chunks",
-      "target": "concept--attachments-subtree-as-scope-exclusion",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--ignore-rules-need-no-index-because-tracked-paths-are-exempt",
-      "target": "concept--git-check-ignore-skips-tracked-files",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--no-extraction-pass-until-the-pushed-secrets-are-resolved",
-      "target": "concept--stale-wiki-sources-gitignore-patterns-after-para-migration",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--plain-mv-avoids-an-unreviewed-autopush",
-      "target": "concept--plain-mv-instead-of-git-mv-in-an-autopush-vault",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--measure-parallel-latency-instead-of-assuming-worker-speedup",
-      "target": "concept--ollama-cloud-backend-serializes-requests-per-account",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--withdrawn-numbers-stay-in-the-doc-as-a-section",
-      "target": "concept--withdrawn-worker-projection-kept-in-the-runbook",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--fuzzy-apply-is-not-verification-for-a-security-file",
-      "target": "concept--regenerate-the-patch-rather-than-fuzzy-apply-a-security-file",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--privacy-downgrades-urgency-not-the-need-to-rotate",
-      "target": "concept--anon-404-means-private-not-deleted",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--manifest-before-deletion-because-tracking-makes-it-reversible",
-      "target": "concept--n8n-raw-capture-deletion-and-its-revert",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--ugly-colours-were-a-symptom-of-messy-content",
-      "target": "concept--graph-topology-is-median-degree-one-with-a-single-god-node",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--markdown-has-no-local-only-extraction-mode",
       "target": "concept--graphify-semantic-graph-integration-into-ai-skills-and-the-vault",

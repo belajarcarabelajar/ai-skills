@@ -7,7 +7,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - peningkatan-ai-skills-dari-input-data [ses_f267bdb37ffetNHhHL8RgPAu3Q].md",
       "source_location": "L22039",
-      "norm_label": "subagent-first, high fan-out execution model"
+      "norm_label": "subagent-first, high fan-out execution model",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - peningkatan-ai-skills-dari-input-data [ses_f267bdb37ffetNHhHL8RgPAu3Q].md:L21889] Ten small chunks finish faster and isolate failure better than five oversized ones"
     },
     {
       "id": "concept--task-chunking-and-fan-out-plan",
@@ -23,7 +24,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - peningkatan-ai-skills-dari-input-data [ses_f267bdb37ffetNHhHL8RgPAu3Q].md",
       "source_location": "L23577",
-      "norm_label": "code review template extraction"
+      "norm_label": "code review template extraction",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - peningkatan-ai-skills-dari-input-data [ses_f267bdb37ffetNHhHL8RgPAu3Q].md:L23577] The new template extracts the contract rather than inventing policy"
     },
     {
       "id": "concept--browser-free-mermaid-validation",
@@ -31,7 +33,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - peningkatan-ai-skills-dari-input-data [ses_f267bdb37ffetNHhHL8RgPAu3Q].md",
       "source_location": "L23581",
-      "norm_label": "browser-free mermaid validation"
+      "norm_label": "browser-free mermaid validation",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - peningkatan-ai-skills-dari-input-data [ses_f267bdb37ffetNHhHL8RgPAu3Q].md:L23581] mmdc cannot run because puppeteer's postinstall is blocked by npm allowScripts and no system Chrome exists"
     },
     {
       "id": "concept--duplicate-rejection-with-file-path-evidence",
@@ -39,7 +42,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - peningkatan-ai-skills-dari-input-data [ses_f267bdb37ffetNHhHL8RgPAu3Q].md",
       "source_location": "L23565",
-      "norm_label": "duplicate rejection with file-path evidence"
+      "norm_label": "duplicate rejection with file-path evidence",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - peningkatan-ai-skills-dari-input-data [ses_f267bdb37ffetNHhHL8RgPAu3Q].md:L22054] Deliver the findings in chat because the earlier artifact was deleted and its URL is dead"
     },
     {
       "id": "concept--canonical-lockfile-ambiguity",
@@ -48,38 +52,6 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - peningkatan-ai-skills-dari-input-data [ses_f267bdb37ffetNHhHL8RgPAu3Q].md",
       "source_location": "L23583",
       "norm_label": "canonical lockfile ambiguity"
-    },
-    {
-      "id": "rationale--high-fan-out-floor-isolates-failure",
-      "label": "Ten small chunks finish faster and isolate failure better than five oversized ones",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - peningkatan-ai-skills-dari-input-data [ses_f267bdb37ffetNHhHL8RgPAu3Q].md",
-      "source_location": "L21889",
-      "norm_label": "ten small chunks finish faster and isolate failure better than five oversized ones"
-    },
-    {
-      "id": "rationale--mmdc-blocked-puppeteer-postinstall",
-      "label": "mmdc cannot run because puppeteer's postinstall is blocked by npm allowScripts and no system Chrome exists",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - peningkatan-ai-skills-dari-input-data [ses_f267bdb37ffetNHhHL8RgPAu3Q].md",
-      "source_location": "L23581",
-      "norm_label": "mmdc cannot run because puppeteer's postinstall is blocked by npm allowscripts and no system chrome exists"
-    },
-    {
-      "id": "rationale--template-extracts-contract-not-invents-policy",
-      "label": "The new template extracts the contract rather than inventing policy",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - peningkatan-ai-skills-dari-input-data [ses_f267bdb37ffetNHhHL8RgPAu3Q].md",
-      "source_location": "L23577",
-      "norm_label": "the new template extracts the contract rather than inventing policy"
-    },
-    {
-      "id": "rationale--deliver-in-chat-not-deleted-artifact",
-      "label": "Deliver the findings in chat because the earlier artifact was deleted and its URL is dead",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - peningkatan-ai-skills-dari-input-data [ses_f267bdb37ffetNHhHL8RgPAu3Q].md",
-      "source_location": "L22054",
-      "norm_label": "deliver the findings in chat because the earlier artifact was deleted and its url is dead"
     }
   ],
   "links": [
@@ -111,30 +83,6 @@
       "source": "concept--canonical-lockfile-ambiguity",
       "target": "concept--code-review-template-extraction",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--high-fan-out-floor-isolates-failure",
-      "target": "concept--subagent-first-high-fan-out-execution-model",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--mmdc-blocked-puppeteer-postinstall",
-      "target": "concept--browser-free-mermaid-validation",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--template-extracts-contract-not-invents-policy",
-      "target": "concept--code-review-template-extraction",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--deliver-in-chat-not-deleted-artifact",
-      "target": "concept--duplicate-rejection-with-file-path-evidence",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     }
   ]

@@ -6,7 +6,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - wire-graphify-into-deep-research-path [ses_f080a8e1fffeNi62CM6DlAep7Q].md",
       "source_location": "L1231",
-      "norm_label": "graphify codebase graph preflight"
+      "norm_label": "graphify codebase graph preflight",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - wire-graphify-into-deep-research-path [ses_f080a8e1fffeNi62CM6DlAep7Q].md:L1248] Scoped subgraph is a size argument, not a speed claim",
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - wire-graphify-into-deep-research-path [ses_f080a8e1fffeNi62CM6DlAep7Q].md:L1253] No invented performance or token-reduction numbers"
+      ]
     },
     {
       "id": "concept--graphify-scoped-subgraph-queries",
@@ -33,23 +37,6 @@
       "norm_label": "graph results are leads, not evidence"
     },
     {
-      "id": "rationale--scoped-subgraph-is-a-size-argument-not-a-speed-claim",
-      "label": "Scoped subgraph is a size argument, not a speed claim",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - wire-graphify-into-deep-research-path [ses_f080a8e1fffeNi62CM6DlAep7Q].md",
-      "source_location": "L1248",
-      "norm_label": "scoped subgraph is a size argument, not a speed claim"
-    },
-    {
-      "id": "rationale--no-invented-performance-numbers",
-      "label": "No invented performance or token-reduction numbers",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - wire-graphify-into-deep-research-path [ses_f080a8e1fffeNi62CM6DlAep7Q].md",
-      "source_location": "L1253",
-      "norm_label": "no invented performance or token-reduction numbers"
-    },
-
-    {
       "id": "concept--xdg-globalshortcuts-portal-contract",
       "label": "XDG GlobalShortcuts portal contract",
       "file_type": "concept",
@@ -71,7 +58,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - sinkronisasi-shortcut-snipset-dua-arah [ses_f26610dabffe09guILt65II2Cb].md",
       "source_location": "L12748",
-      "norm_label": "pending-push reconciliation"
+      "norm_label": "pending-push reconciliation",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - sinkronisasi-shortcut-snipset-dua-arah [ses_f26610dabffe09guILt65II2Cb].md:L7097] No guaranteed silent write from app to system settings"
     },
     {
       "id": "concept--stable-portal-shortcut-ids",
@@ -79,7 +67,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - sinkronisasi-shortcut-snipset-dua-arah [ses_f26610dabffe09guILt65II2Cb].md",
       "source_location": "L10914",
-      "norm_label": "stable portal shortcut ids across rebind"
+      "norm_label": "stable portal shortcut ids across rebind",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - sinkronisasi-shortcut-snipset-dua-arah [ses_f26610dabffe09guILt65II2Cb].md:L10915] Stable ids prevent a duplicate System Settings entry"
     },
     {
       "id": "concept--shortcut-slot-coverage-audit",
@@ -87,7 +76,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - sinkronisasi-shortcut-snipset-dua-arah [ses_f26610dabffe09guILt65II2Cb].md",
       "source_location": "L7099",
-      "norm_label": "shortcut slot coverage audit"
+      "norm_label": "shortcut slot coverage audit",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - sinkronisasi-shortcut-snipset-dua-arah [ses_f26610dabffe09guILt65II2Cb].md:L7099] Unmapped slot never rebinds nor syncs"
     },
     {
       "id": "concept--zero-subagent-compiler-policy",
@@ -95,7 +85,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - sinkronisasi-shortcut-snipset-dua-arah [ses_f26610dabffe09guILt65II2Cb].md",
       "source_location": "L7181",
-      "norm_label": "zero subagent compiler policy"
+      "norm_label": "zero subagent compiler policy",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - sinkronisasi-shortcut-snipset-dua-arah [ses_f26610dabffe09guILt65II2Cb].md:L7386] Repo rule outranks generic skill default"
     },
     {
       "id": "concept--speech-shortcut-cache-clobber",
@@ -112,38 +103,6 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - sinkronisasi-shortcut-snipset-dua-arah [ses_f26610dabffe09guILt65II2Cb].md",
       "source_location": "L9417",
       "norm_label": "control-api settings/set blind spot"
-    },
-    {
-      "id": "rationale--no-guaranteed-silent-write-to-system-settings",
-      "label": "No guaranteed silent write from app to system settings",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - sinkronisasi-shortcut-snipset-dua-arah [ses_f26610dabffe09guILt65II2Cb].md",
-      "source_location": "L7097",
-      "norm_label": "no guaranteed silent write from app to system settings"
-    },
-    {
-      "id": "rationale--stable-ids-prevent-duplicate-system-settings-entry",
-      "label": "Stable ids prevent a duplicate System Settings entry",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - sinkronisasi-shortcut-snipset-dua-arah [ses_f26610dabffe09guILt65II2Cb].md",
-      "source_location": "L10915",
-      "norm_label": "stable ids prevent a duplicate system settings entry"
-    },
-    {
-      "id": "rationale--repo-rule-outranks-generic-skill-default",
-      "label": "Repo rule outranks generic skill default",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - sinkronisasi-shortcut-snipset-dua-arah [ses_f26610dabffe09guILt65II2Cb].md",
-      "source_location": "L7386",
-      "norm_label": "repo rule outranks generic skill default"
-    },
-    {
-      "id": "rationale--unmapped-slot-never-rebinds-or-syncs",
-      "label": "Unmapped slot never rebinds nor syncs",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - sinkronisasi-shortcut-snipset-dua-arah [ses_f26610dabffe09guILt65II2Cb].md",
-      "source_location": "L7099",
-      "norm_label": "unmapped slot never rebinds nor syncs"
     }
   ],
   "links": [
@@ -165,19 +124,6 @@
       "relation": "conceptually_related_to",
       "confidence": "EXTRACTED"
     },
-    {
-      "source": "rationale--scoped-subgraph-is-a-size-argument-not-a-speed-claim",
-      "target": "concept--graphify-codebase-graph-preflight",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--no-invented-performance-numbers",
-      "target": "concept--graphify-codebase-graph-preflight",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-
     {
       "source": "concept--xdg-globalshortcuts-portal-contract",
       "target": "concept--pending-push-reconciliation",
@@ -213,30 +159,6 @@
       "target": "concept--shortcut-slot-coverage-audit",
       "relation": "conceptually_related_to",
       "confidence": "INFERRED"
-    },
-    {
-      "source": "rationale--no-guaranteed-silent-write-to-system-settings",
-      "target": "concept--pending-push-reconciliation",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--stable-ids-prevent-duplicate-system-settings-entry",
-      "target": "concept--stable-portal-shortcut-ids",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--repo-rule-outranks-generic-skill-default",
-      "target": "concept--zero-subagent-compiler-policy",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--unmapped-slot-never-rebinds-or-syncs",
-      "target": "concept--shortcut-slot-coverage-audit",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
     }
   ]
 }

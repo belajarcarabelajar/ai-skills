@@ -15,7 +15,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-session-idempotent-tts-metrics [ses_f1fc5aa3fffe5HaO3HSs6qxvtB].md",
       "source_location": "L16337",
-      "norm_label": "one accounting owner per sessionid"
+      "norm_label": "one accounting owner per sessionid",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-session-idempotent-tts-metrics [ses_f1fc5aa3fffe5HaO3HSs6qxvtB].md:L16337] One finalize hook so every lifecycle path is covered"
     },
     {
       "id": "concept--measured-playback-duration",
@@ -23,7 +24,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-session-idempotent-tts-metrics [ses_f1fc5aa3fffe5HaO3HSs6qxvtB].md",
       "source_location": "L33",
-      "norm_label": "measured active playback duration excluding pause"
+      "norm_label": "measured active playback duration excluding pause",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-session-idempotent-tts-metrics [ses_f1fc5aa3fffe5HaO3HSs6qxvtB].md:L16341] Preserve all-rows mixed sums so older readers and the journal aggregator see unchanged numbers"
     },
     {
       "id": "concept--legacy-generated-duration",
@@ -39,7 +41,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-session-idempotent-tts-metrics [ses_f1fc5aa3fffe5HaO3HSs6qxvtB].md",
       "source_location": "L35",
-      "norm_label": "speech rate applied twice in duration accounting"
+      "norm_label": "speech rate applied twice in duration accounting",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-session-idempotent-tts-metrics [ses_f1fc5aa3fffe5HaO3HSs6qxvtB].md:L16337] Synthesis already encodes the rate, so the extra sink.set_speed was removed"
     },
     {
       "id": "concept--staged-tts-submission",
@@ -74,36 +77,13 @@
       "norm_label": "speech_history tts mirror linked by session identity"
     },
     {
-      "id": "rationale--single-finalize-hook-covers-every-lifecycle-path",
-      "label": "One finalize hook so every lifecycle path is covered",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-session-idempotent-tts-metrics [ses_f1fc5aa3fffe5HaO3HSs6qxvtB].md",
-      "source_location": "L16337",
-      "norm_label": "one finalize hook so every lifecycle path is covered"
-    },
-    {
-      "id": "rationale--synthesis-already-encodes-the-rate",
-      "label": "Synthesis already encodes the rate, so the extra sink.set_speed was removed",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-session-idempotent-tts-metrics [ses_f1fc5aa3fffe5HaO3HSs6qxvtB].md",
-      "source_location": "L16337",
-      "norm_label": "synthesis already encodes the rate, so the extra sink.set_speed was removed"
-    },
-    {
-      "id": "rationale--preserve-existing-projection-shape-for-older-readers",
-      "label": "Preserve all-rows mixed sums so older readers and the journal aggregator see unchanged numbers",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-session-idempotent-tts-metrics [ses_f1fc5aa3fffe5HaO3HSs6qxvtB].md",
-      "source_location": "L16341",
-      "norm_label": "preserve all-rows mixed sums so older readers and the journal aggregator see unchanged numbers"
-    },
-    {
       "id": "concept--sensitive-path-substring-scan",
       "label": "Path-substring scan of tracked filenames for credential-shaped terms",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t3-backup-gate-operating-doc [ses_f21657fbeffee7k10og2pxIYfV].md",
       "source_location": "L45",
-      "norm_label": "path-substring scan of tracked filenames for credential-shaped terms"
+      "norm_label": "path-substring scan of tracked filenames for credential-shaped terms",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - t3-backup-gate-operating-doc [ses_f21657fbeffee7k10og2pxIYfV].md:L47] The scan never opens a flagged file, so it cannot separate a how-to note from a real credential"
     },
     {
       "id": "concept--backup-gate-reports-does-not-block",
@@ -111,7 +91,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t3-backup-gate-operating-doc [ses_f21657fbeffee7k10og2pxIYfV].md",
       "source_location": "L37",
-      "norm_label": "backup gate reports sensitive tracked paths instead of blocking"
+      "norm_label": "backup gate reports sensitive tracked paths instead of blocking",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - t3-backup-gate-operating-doc [ses_f21657fbeffee7k10og2pxIYfV].md:L49] Safe to relax the gate because the repository is private, so the release and the git history have the same audience"
     },
     {
       "id": "concept--sensitive-term-wikilink-ban",
@@ -127,7 +108,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t3-backup-gate-operating-doc [ses_f21657fbeffee7k10og2pxIYfV].md",
       "source_location": "L53",
-      "norm_label": "satset/ gitignore inconsistency left as an open item"
+      "norm_label": "satset/ gitignore inconsistency left as an open item",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - t3-backup-gate-operating-doc [ses_f21657fbeffee7k10og2pxIYfV].md:L53] A .gitignore entry never untracks an already-tracked path, and untracking is the user's decision"
     },
     {
       "id": "concept--vault-hub-reachability-registration",
@@ -135,7 +117,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t3-backup-gate-operating-doc [ses_f21657fbeffee7k10og2pxIYfV].md",
       "source_location": "L2588",
-      "norm_label": "vault hub reachability and system_hub_relpaths registration ordering"
+      "norm_label": "vault hub reachability and system_hub_relpaths registration ordering",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - t3-backup-gate-operating-doc [ses_f21657fbeffee7k10og2pxIYfV].md:L2588] Register the index inbound link before adding the page to SYSTEM_HUB_RELPATHS"
     },
     {
       "id": "concept--command-rewriting-proxy",
@@ -144,38 +127,6 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t3-backup-gate-operating-doc [ses_f21657fbeffee7k10og2pxIYfV].md",
       "source_location": "L67",
       "norm_label": "command-rewriting proxy mangling sed -i, redirection and grep flags"
-    },
-    {
-      "id": "rationale--private-repo-means-release-and-history-share-an-audience",
-      "label": "Safe to relax the gate because the repository is private, so the release and the git history have the same audience",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t3-backup-gate-operating-doc [ses_f21657fbeffee7k10og2pxIYfV].md",
-      "source_location": "L49",
-      "norm_label": "safe to relax the gate because the repository is private, so the release and the git history have the same audience"
-    },
-    {
-      "id": "rationale--gitignore-entry-never-untracks-a-tracked-path",
-      "label": "A .gitignore entry never untracks an already-tracked path, and untracking is the user's decision",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t3-backup-gate-operating-doc [ses_f21657fbeffee7k10og2pxIYfV].md",
-      "source_location": "L53",
-      "norm_label": "a .gitignore entry never untracks an already-tracked path, and untracking is the user's decision"
-    },
-    {
-      "id": "rationale--index-link-before-hub-registration",
-      "label": "Register the index inbound link before adding the page to SYSTEM_HUB_RELPATHS",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t3-backup-gate-operating-doc [ses_f21657fbeffee7k10og2pxIYfV].md",
-      "source_location": "L2588",
-      "norm_label": "register the index inbound link before adding the page to system_hub_relpaths"
-    },
-    {
-      "id": "rationale--scan-matches-paths-not-contents",
-      "label": "The scan never opens a flagged file, so it cannot separate a how-to note from a real credential",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t3-backup-gate-operating-doc [ses_f21657fbeffee7k10og2pxIYfV].md",
-      "source_location": "L47",
-      "norm_label": "the scan never opens a flagged file, so it cannot separate a how-to note from a real credential"
     }
   ],
   "links": [
@@ -222,24 +173,6 @@
       "confidence": "EXTRACTED"
     },
     {
-      "source": "rationale--single-finalize-hook-covers-every-lifecycle-path",
-      "target": "concept--one-accounting-owner-per-session",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--synthesis-already-encodes-the-rate",
-      "target": "concept--double-applied-speech-rate",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--preserve-existing-projection-shape-for-older-readers",
-      "target": "concept--measured-playback-duration",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
       "source": "concept--backup-gate-reports-does-not-block",
       "target": "concept--sensitive-path-substring-scan",
       "relation": "conceptually_related_to",
@@ -256,30 +189,6 @@
       "target": "concept--sensitive-path-substring-scan",
       "relation": "conceptually_related_to",
       "confidence": "AMBIGUOUS"
-    },
-    {
-      "source": "rationale--private-repo-means-release-and-history-share-an-audience",
-      "target": "concept--backup-gate-reports-does-not-block",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--scan-matches-paths-not-contents",
-      "target": "concept--sensitive-path-substring-scan",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--gitignore-entry-never-untracks-a-tracked-path",
-      "target": "concept--satset-gitignore-inconsistency",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--index-link-before-hub-registration",
-      "target": "concept--vault-hub-reachability-registration",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
     }
   ]
 }

@@ -8,7 +8,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-02 - diagnose-6-failing-script-tests [ses_f060d9198ffe9gB2iDyFXGc6pX].md",
       "source_location": "L53",
-      "norm_label": "three-way failure classification test wrong implementation wrong environment"
+      "norm_label": "three-way failure classification test wrong implementation wrong environment",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-02 - diagnose-6-failing-script-tests [ses_f060d9198ffe9gB2iDyFXGc6pX].md:L56] Each class demands proof: git log -S for (a), a misbehaving input for (b), isolation vs full suite for (c)"
     },
     {
       "id": "concept--stale-release-version-literal-drift",
@@ -24,7 +25,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-02 - diagnose-6-failing-script-tests [ses_f060d9198ffe9gB2iDyFXGc6pX].md",
       "source_location": "L12277",
-      "norm_label": "version equality assertion encoded a coincidence not an invariant"
+      "norm_label": "version equality assertion encoded a coincidence not an invariant",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-02 - diagnose-6-failing-script-tests [ses_f060d9198ffe9gB2iDyFXGc6pX].md:L12277] The platform-versioning doc records equal Windows/Linux values as a known gap, not a contract"
     },
     {
       "id": "concept--bind-p-omits-x-bindings-vacuous-assertion",
@@ -32,7 +34,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-02 - diagnose-6-failing-script-tests [ses_f060d9198ffe9gB2iDyFXGc6pX].md",
       "source_location": "L12338",
-      "norm_label": "bash bind -p omits -x bindings so the negative tab-bind assertion could never fail"
+      "norm_label": "bash bind -p omits -x bindings so the negative tab-bind assertion could never fail",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-02 - diagnose-6-failing-script-tests [ses_f060d9198ffe9gB2iDyFXGc6pX].md:L10641] Adding the enabled-case positive control turns a vacuous green into a real test"
     },
     {
       "id": "concept--bashrc-exec-fish-hangs-interactive-test",
@@ -56,7 +59,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-02 - diagnose-6-failing-script-tests [ses_f060d9198ffe9gB2iDyFXGc6pX].md",
       "source_location": "L12334",
-      "norm_label": "website releasefacts is five linux releases behind releases linux latest json"
+      "norm_label": "website releasefacts is five linux releases behind releases linux latest json",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-02 - diagnose-6-failing-script-tests [ses_f060d9198ffe9gB2iDyFXGc6pX].md:L58] A release-path defect is a product decision, so it is reported and not fixed"
     },
     {
       "id": "concept--platform-isolation-working-tree-guard",
@@ -65,65 +69,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-02 - diagnose-6-failing-script-tests [ses_f060d9198ffe9gB2iDyFXGc6pX].md",
       "source_location": "L12311",
       "norm_label": "platform-isolation release-record guard trips on any uncommitted edit under scripts release"
-    },
-    {
-      "id": "rationale--classification-requires-proof",
-      "label": "Each class demands proof: git log -S for (a), a misbehaving input for (b), isolation vs full suite for (c)",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-02 - diagnose-6-failing-script-tests [ses_f060d9198ffe9gB2iDyFXGc6pX].md",
-      "source_location": "L56",
-      "norm_label": "each class demands proof git log -s for a a misbehaving input for b isolation vs full suite for c"
-    },
-    {
-      "id": "rationale--known-gap-is-not-an-invariant",
-      "label": "The platform-versioning doc records equal Windows/Linux values as a known gap, not a contract",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-02 - diagnose-6-failing-script-tests [ses_f060d9198ffe9gB2iDyFXGc6pX].md",
-      "source_location": "L12277",
-      "norm_label": "the platform-versioning doc records equal windows linux values as a known gap not a contract"
-    },
-    {
-      "id": "rationale--release-path-defect-is-a-product-decision",
-      "label": "A release-path defect is a product decision, so it is reported and not fixed",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-02 - diagnose-6-failing-script-tests [ses_f060d9198ffe9gB2iDyFXGc6pX].md",
-      "source_location": "L58",
-      "norm_label": "a release-path defect is a product decision so it is reported and not fixed"
-    },
-    {
-      "id": "rationale--positive-control-against-vacuous-green",
-      "label": "Adding the enabled-case positive control turns a vacuous green into a real test",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-02 - diagnose-6-failing-script-tests [ses_f060d9198ffe9gB2iDyFXGc6pX].md",
-      "source_location": "L10641",
-      "norm_label": "adding the enabled-case positive control turns a vacuous green into a real test"
     }
   ],
   "links": [
-    {
-      "source": "rationale--classification-requires-proof",
-      "target": "concept--test-failure-triage-classification",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--known-gap-is-not-an-invariant",
-      "target": "concept--version-equality-assertion-encoded-a-coincidence",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--release-path-defect-is-a-product-decision",
-      "target": "concept--website-release-facts-behind-published-manifest",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--positive-control-against-vacuous-green",
-      "target": "concept--bind-p-omits-x-bindings-vacuous-assertion",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--test-failure-triage-classification",
       "target": "concept--stale-release-version-literal-drift",

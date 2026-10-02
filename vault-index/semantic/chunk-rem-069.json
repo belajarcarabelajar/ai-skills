@@ -23,7 +23,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - t1-gui-verbatim-references [ses_f0be3b5e7ffeGwkG494moyWSAJ].md",
       "source_location": "L4022",
-      "norm_label": "compatibility frontmatter field"
+      "norm_label": "compatibility frontmatter field",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - t1-gui-verbatim-references [ses_f0be3b5e7ffeGwkG494moyWSAJ].md:L24] The repo's own ban on compatibility was overridden by four fetched vendor specs"
     },
     {
       "id": "concept--fixture-invariant-test-over-all-skills",
@@ -39,23 +40,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - t1-gui-verbatim-references [ses_f0be3b5e7ffeGwkG494moyWSAJ].md",
       "source_location": "L4021",
-      "norm_label": "single-pass entity decoder with &amp; decoded last"
-    },
-    {
-      "id": "rationale--unknown-entities-left-intact-so-zero-escape-test-fails-loudly",
-      "label": "Unknown entities were left intact so the zero-escape test would fail loudly",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - t1-gui-verbatim-references [ses_f0be3b5e7ffeGwkG494moyWSAJ].md",
-      "source_location": "L4021",
-      "norm_label": "unknown entities were left intact so the zero-escape test would fail loudly"
-    },
-    {
-      "id": "rationale--compatibility-ban-overridden-by-fetched-vendor-specs",
-      "label": "The repo's own ban on compatibility was overridden by four fetched vendor specs",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - t1-gui-verbatim-references [ses_f0be3b5e7ffeGwkG494moyWSAJ].md",
-      "source_location": "L24",
-      "norm_label": "the repo's own ban on compatibility was overridden by four fetched vendor specs"
+      "norm_label": "single-pass entity decoder with &amp; decoded last",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - t1-gui-verbatim-references [ses_f0be3b5e7ffeGwkG494moyWSAJ].md:L4021] Unknown entities were left intact so the zero-escape test would fail loudly"
     },
     {
       "id": "concept--media-volume-scale-zero-causes-digital-silence",
@@ -111,15 +97,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - solusi-render-font-cjk-dan-icon-di-mozilla [ses_f22e09093ffekrmxv2ZvC4hVz7].md",
       "source_location": "L1416",
-      "norm_label": "wqy-zenhei as a 16mb substitute for noto-fonts-cjk"
-    },
-    {
-      "id": "rationale--cjk-font-chosen-for-storage-not-for-coverage",
-      "label": "wqy-zenhei was chosen for storage, not for coverage beyond the common CJK set",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - solusi-render-font-cjk-dan-icon-di-mozilla [ses_f22e09093ffekrmxv2ZvC4hVz7].md",
-      "source_location": "L967",
-      "norm_label": "wqy-zenhei was chosen for storage, not for coverage beyond the common cjk set"
+      "norm_label": "wqy-zenhei as a 16mb substitute for noto-fonts-cjk",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - solusi-render-font-cjk-dan-icon-di-mozilla [ses_f22e09093ffekrmxv2ZvC4hVz7].md:L967] wqy-zenhei was chosen for storage, not for coverage beyond the common CJK set"
     },
     {
       "id": "concept--plasma-pa-card-level-grouping-couples-sink-and-source",
@@ -135,30 +114,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - solusi-render-font-cjk-dan-icon-di-mozilla [ses_f22e09093ffekrmxv2ZvC4hVz7].md",
       "source_location": "L9406",
-      "norm_label": "onboard sink routed to line out while the line mixer was off"
-    },
-    {
-      "id": "rationale--alc887-auto-mute-mutes-line-out-when-another-input-is-active",
-      "label": "ALC887 Auto-Mute kills Line Out while another input is active, so the USB mic silenced the speaker path",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - solusi-render-font-cjk-dan-icon-di-mozilla [ses_f22e09093ffekrmxv2ZvC4hVz7].md",
-      "source_location": "L10920",
-      "norm_label": "alc887 auto-mute kills line out while another input is active, so the usb mic silenced the speaker path"
+      "norm_label": "onboard sink routed to line out while the line mixer was off",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - solusi-render-font-cjk-dan-icon-di-mozilla [ses_f22e09093ffekrmxv2ZvC4hVz7].md:L10920] ALC887 Auto-Mute kills Line Out while another input is active, so the USB mic silenced the speaker path"
     }
   ],
   "links": [
-    {
-      "source": "rationale--unknown-entities-left-intact-so-zero-escape-test-fails-loudly",
-      "target": "concept--single-pass-entity-decoder-with-amp-decoded-last",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--compatibility-ban-overridden-by-fetched-vendor-specs",
-      "target": "concept--compatibility-frontmatter-field",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--single-pass-entity-decoder-with-amp-decoded-last",
       "target": "concept--html-entity-escaping-in-downloaded-references",
@@ -176,18 +136,6 @@
       "target": "concept--single-pass-entity-decoder-with-amp-decoded-last",
       "relation": "conceptually_related_to",
       "confidence": "INFERRED"
-    },
-    {
-      "source": "rationale--alc887-auto-mute-mutes-line-out-when-another-input-is-active",
-      "target": "concept--alc887-line-out-path-silenced-by-muted-mixer",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--cjk-font-chosen-for-storage-not-for-coverage",
-      "target": "concept--wqy-zenhei-as-cjk-substitute",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
     },
     {
       "source": "concept--media-volume-scale-zero-causes-digital-silence",

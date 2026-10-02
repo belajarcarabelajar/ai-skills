@@ -7,7 +7,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - h10-overlay-failure-feedback [ses_f08b3c99bffeCVhBbeHh8rHpqJ].md",
       "source_location": "L2463",
-      "norm_label": "silent failure of linux attachment injection"
+      "norm_label": "silent failure of linux attachment injection",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - h10-overlay-failure-feedback [ses_f08b3c99bffeCVhBbeHh8rHpqJ].md:L2583] A toast alone cannot deliver Linux failure feedback"
     },
     {
       "id": "concept--toast-error-feedback-in-downloads-magic-menu",
@@ -15,7 +16,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - h10-overlay-failure-feedback [ses_f08b3c99bffeCVhBbeHh8rHpqJ].md",
       "source_location": "L2352",
-      "norm_label": "toast error feedback in downloadsmagicmenu"
+      "norm_label": "toast error feedback in downloadsmagicmenu",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - h10-overlay-failure-feedback [ses_f08b3c99bffeCVhBbeHh8rHpqJ].md:L2583] A toast alone cannot deliver Linux failure feedback"
     },
     {
       "id": "concept--non-windows-inject-file-attachment-fallback",
@@ -31,7 +33,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - h10-overlay-failure-feedback [ses_f08b3c99bffeCVhBbeHh8rHpqJ].md",
       "source_location": "L2435",
-      "norm_label": "rust-side window hide before injection"
+      "norm_label": "rust-side window hide before injection",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - h10-overlay-failure-feedback [ses_f08b3c99bffeCVhBbeHh8rHpqJ].md:L2586] Defer the window hide until the injection outcome is known"
     },
     {
       "id": "concept--non-windows-copy-bundle-to-clipboard-no-op",
@@ -42,28 +45,16 @@
       "norm_label": "non-windows copy_bundle_to_clipboard no-op"
     },
     {
-      "id": "rationale--toast-alone-cannot-deliver-linux-failure-feedback",
-      "label": "A toast alone cannot deliver Linux failure feedback",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - h10-overlay-failure-feedback [ses_f08b3c99bffeCVhBbeHh8rHpqJ].md",
-      "source_location": "L2583",
-      "norm_label": "a toast alone cannot deliver linux failure feedback"
-    },
-    {
-      "id": "rationale--defer-window-hide-until-injection-outcome-known",
-      "label": "Defer the window hide until the injection outcome is known",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - h10-overlay-failure-feedback [ses_f08b3c99bffeCVhBbeHh8rHpqJ].md",
-      "source_location": "L2586",
-      "norm_label": "defer the window hide until the injection outcome is known"
-    },
-    {
       "id": "concept--three-layer-llm-wiki-separation",
       "label": "Three-layer LLM Wiki separation",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md",
       "source_location": "L12572",
-      "norm_label": "three-layer llm wiki separation"
+      "norm_label": "three-layer llm wiki separation",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md:L12574] Source bodies must stay byte-identical",
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md:L12611] Gaps and uncertainty stops a summary laundering a weak source"
+      ]
     },
     {
       "id": "concept--frozen-source-evidence-layer",
@@ -71,7 +62,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md",
       "source_location": "L12580",
-      "norm_label": "frozen source evidence layer"
+      "norm_label": "frozen source evidence layer",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md:L12580] A frontmatter edit falsifies the capture record"
     },
     {
       "id": "concept--restricted-sources-manifest",
@@ -79,7 +71,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md",
       "source_location": "L12674",
-      "norm_label": "restricted sources manifest"
+      "norm_label": "restricted sources manifest",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md:L12676] A path manifest makes exclusion possible when the files cannot be modified"
     },
     {
       "id": "concept--source-path-and-source-hash-provenance",
@@ -119,7 +112,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md",
       "source_location": "L12531",
-      "norm_label": "authored index summary column"
+      "norm_label": "authored index summary column",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md:L12658] A Summary cell copied from the page cannot drift"
     },
     {
       "id": "concept--credential-material-in-active-source-layer",
@@ -128,46 +122,6 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md",
       "source_location": "L12540",
       "norm_label": "credential material in the active source layer"
-    },
-    {
-      "id": "rationale--source-bodies-must-stay-byte-identical",
-      "label": "Source bodies must stay byte-identical",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md",
-      "source_location": "L12574",
-      "norm_label": "source bodies must stay byte-identical"
-    },
-    {
-      "id": "rationale--frontmatter-edit-falsifies-the-capture-record",
-      "label": "A frontmatter edit falsifies the capture record",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md",
-      "source_location": "L12580",
-      "norm_label": "a frontmatter edit falsifies the capture record"
-    },
-    {
-      "id": "rationale--manifest-makes-exclusion-possible-when-files-are-frozen",
-      "label": "A path manifest makes exclusion possible when the files cannot be modified",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md",
-      "source_location": "L12676",
-      "norm_label": "a path manifest makes exclusion possible when the files cannot be modified"
-    },
-    {
-      "id": "rationale--copied-index-summary-cannot-drift",
-      "label": "A Summary cell copied from the page cannot drift",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md",
-      "source_location": "L12658",
-      "norm_label": "a summary cell copied from the page cannot drift"
-    },
-    {
-      "id": "rationale--gaps-and-uncertainty-stops-summary-laundering",
-      "label": "Gaps and uncertainty stops a summary laundering a weak source",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md",
-      "source_location": "L12611",
-      "norm_label": "gaps and uncertainty stops a summary laundering a weak source"
     }
   ],
   "links": [
@@ -193,24 +147,6 @@
       "source": "concept--non-windows-inject-file-attachment-fallback",
       "target": "concept--non-windows-copy-bundle-to-clipboard-no-op",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--toast-alone-cannot-deliver-linux-failure-feedback",
-      "target": "concept--toast-error-feedback-in-downloads-magic-menu",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--toast-alone-cannot-deliver-linux-failure-feedback",
-      "target": "concept--silent-failure-of-linux-attachment-injection",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--defer-window-hide-until-injection-outcome-known",
-      "target": "concept--rust-side-window-hide-before-injection",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {
@@ -260,36 +196,6 @@
       "target": "concept--missing-frontmatter-linter-measurement-gap",
       "relation": "conceptually_related_to",
       "confidence": "INFERRED"
-    },
-    {
-      "source": "rationale--source-bodies-must-stay-byte-identical",
-      "target": "concept--three-layer-llm-wiki-separation",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--frontmatter-edit-falsifies-the-capture-record",
-      "target": "concept--frozen-source-evidence-layer",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--manifest-makes-exclusion-possible-when-files-are-frozen",
-      "target": "concept--restricted-sources-manifest",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--copied-index-summary-cannot-drift",
-      "target": "concept--authored-index-summary-column",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--gaps-and-uncertainty-stops-summary-laundering",
-      "target": "concept--three-layer-llm-wiki-separation",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
     }
   ]
 }

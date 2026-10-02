@@ -23,7 +23,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
       "source_location": "L56",
-      "norm_label": "prop drilling as the language convention"
+      "norm_label": "prop drilling as the language convention",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md:L56] Use what exists, prop drilling is the convention"
     },
     {
       "id": "concept--license-gate-structural-blocker",
@@ -31,7 +32,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
       "source_location": "L1102",
-      "norm_label": "license gate structural blocker"
+      "norm_label": "license gate structural blocker",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md:L13533] LicenseGate is the parent of App"
     },
     {
       "id": "concept--use-overlay-language-localstorage-hook",
@@ -63,7 +65,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
       "source_location": "L67",
-      "norm_label": "explicit lang instead of toLocale"
+      "norm_label": "explicit lang instead of toLocale",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md:L67] Host default locale would false pass"
     },
     {
       "id": "concept--clean-positive-control",
@@ -79,7 +82,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
       "source_location": "L13528",
-      "norm_label": "optional lang prop keeps English identical"
+      "norm_label": "optional lang prop keeps English identical",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md:L13528] Optional props mean no English regression"
     },
     {
       "id": "concept--stale-audit-line-numbers",
@@ -87,7 +91,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
       "source_location": "L33",
-      "norm_label": "stale audit line numbers"
+      "norm_label": "stale audit line numbers",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md:L33] Audit flagged some entries as false positives"
     },
     {
       "id": "concept--dead-code-verified-not-deleted",
@@ -95,7 +100,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
       "source_location": "L13539",
-      "norm_label": "dead code verified not deleted"
+      "norm_label": "dead code verified not deleted",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md:L59] Do not resurrect or delete dead code"
     },
     {
       "id": "concept--missing-web-search-grounding-toast-key",
@@ -103,7 +109,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
       "source_location": "L13532",
-      "norm_label": "missing web search grounding toast key"
+      "norm_label": "missing web search grounding toast key",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md:L13532] Toggle label keys would change English"
     },
     {
       "id": "concept--pristine-head-reproduction",
@@ -111,71 +118,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
       "source_location": "L13565",
-      "norm_label": "pristine head reproduction"
-    },
-    {
-      "id": "rationale--use-what-exists-prop-drilling-is-the-convention",
-      "label": "Use what exists, prop drilling is the convention",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
-      "source_location": "L56",
-      "norm_label": "use what exists, prop drilling is the convention"
-    },
-    {
-      "id": "rationale--host-default-locale-would-false-pass",
-      "label": "Host default locale would false pass",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
-      "source_location": "L67",
-      "norm_label": "host default locale would false pass"
-    },
-    {
-      "id": "rationale--license-gate-is-the-parent-of-app",
-      "label": "LicenseGate is the parent of App",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
-      "source_location": "L13533",
-      "norm_label": "license gate is the parent of App"
-    },
-    {
-      "id": "rationale--toggle-label-keys-would-change-english",
-      "label": "Toggle label keys would change English",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
-      "source_location": "L13532",
-      "norm_label": "toggle label keys would change English"
-    },
-    {
-      "id": "rationale--optional-props-mean-no-english-regression",
-      "label": "Optional props mean no English regression",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
-      "source_location": "L13528",
-      "norm_label": "optional props mean no English regression"
-    },
-    {
-      "id": "rationale--audit-flagged-some-entries-as-false-positives",
-      "label": "Audit flagged some entries as false positives",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
-      "source_location": "L33",
-      "norm_label": "audit flagged some entries as false positives"
-    },
-    {
-      "id": "rationale--do-not-resurrect-or-delete-dead-code",
-      "label": "Do not resurrect or delete dead code",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
-      "source_location": "L59",
-      "norm_label": "do not resurrect or delete dead code"
-    },
-    {
-      "id": "rationale--same-failure-on-pristine-head-proves-not-mine",
-      "label": "Same failure on pristine HEAD proves not mine",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
-      "source_location": "L13565",
-      "norm_label": "same failure on pristine HEAD proves not mine"
+      "norm_label": "pristine head reproduction",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md:L13565] Same failure on pristine HEAD proves not mine"
     },
     {
       "id": "concept--zero-unique-commit-merge-check",
@@ -183,7 +127,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
       "source_location": "L535",
-      "norm_label": "zero unique commit merge check"
+      "norm_label": "zero unique commit merge check",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md:L543] Use branch minus d not force delete"
     },
     {
       "id": "concept--remote-branch-deletion-needs-confirmation",
@@ -191,7 +136,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
       "source_location": "L558",
-      "norm_label": "remote branch deletion needs confirmation"
+      "norm_label": "remote branch deletion needs confirmation",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md:L558] Remote deletion is visible to everyone"
     },
     {
       "id": "concept--github-keeps-no-branch-reflogs",
@@ -199,7 +145,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
       "source_location": "L2716",
-      "norm_label": "github keeps no branch reflogs"
+      "norm_label": "github keeps no branch reflogs",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md:L2716] No reflog makes the tips unrecoverable"
     },
     {
       "id": "concept--runner-minute-freeze",
@@ -207,7 +154,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
       "source_location": "L1427",
-      "norm_label": "runner minute freeze"
+      "norm_label": "runner minute freeze",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md:L1427] Push trigger reenables runner consumption"
     },
     {
       "id": "concept--path-filtered-pull-request-trigger",
@@ -215,7 +163,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
       "source_location": "L2703",
-      "norm_label": "path filtered pull request trigger"
+      "norm_label": "path filtered pull request trigger",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md:L2703] Path filter bounds runner minutes"
     },
     {
       "id": "concept--checkout-action-version-pin-drift",
@@ -223,7 +172,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
       "source_location": "L2704",
-      "norm_label": "checkout action version pin drift"
+      "norm_label": "checkout action version pin drift",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md:L2704] Dependabot cannot see an untracked workflow"
     },
     {
       "id": "concept--untracked-file-survives-checkout",
@@ -231,7 +181,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
       "source_location": "L209",
-      "norm_label": "untracked file survives checkout"
+      "norm_label": "untracked file survives checkout",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md:L209] Untracked paths absent from origin main"
     },
     {
       "id": "concept--schema-cli-fingerprint-guard-workflow",
@@ -240,113 +191,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
       "source_location": "L1197",
       "norm_label": "schema cli fingerprint guard workflow"
-    },
-    {
-      "id": "rationale--git-branch-d-not-force-delete",
-      "label": "Use branch minus d not force delete",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
-      "source_location": "L543",
-      "norm_label": "use branch minus d not force delete"
-    },
-    {
-      "id": "rationale--remote-deletion-is-visible-to-everyone",
-      "label": "Remote deletion is visible to everyone",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
-      "source_location": "L558",
-      "norm_label": "remote deletion is visible to everyone"
-    },
-    {
-      "id": "rationale--no-reflog-makes-the-tips-unrecoverable",
-      "label": "No reflog makes the tips unrecoverable",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
-      "source_location": "L2716",
-      "norm_label": "no reflog makes the tips unrecoverable"
-    },
-    {
-      "id": "rationale--push-trigger-reenables-runner-consumption",
-      "label": "Push trigger reenables runner consumption",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
-      "source_location": "L1427",
-      "norm_label": "push trigger reenables runner consumption"
-    },
-    {
-      "id": "rationale--path-filter-bounds-runner-minutes",
-      "label": "Path filter bounds runner minutes",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
-      "source_location": "L2703",
-      "norm_label": "path filter bounds runner minutes"
-    },
-    {
-      "id": "rationale--dependabot-cannot-see-an-untracked-workflow",
-      "label": "Dependabot cannot see an untracked workflow",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
-      "source_location": "L2704",
-      "norm_label": "dependabot cannot see an untracked workflow"
-    },
-    {
-      "id": "rationale--untracked-paths-absent-from-origin-main",
-      "label": "Untracked paths absent from origin main",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
-      "source_location": "L209",
-      "norm_label": "untracked paths absent from origin main"
     }
   ],
   "links": [
-    {
-      "source": "rationale--use-what-exists-prop-drilling-is-the-convention",
-      "target": "concept--prop-drilling-as-the-language-convention",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--host-default-locale-would-false-pass",
-      "target": "concept--explicit-lang-instead-of-tolocalestring",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--license-gate-is-the-parent-of-app",
-      "target": "concept--license-gate-structural-blocker",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--toggle-label-keys-would-change-english",
-      "target": "concept--missing-web-search-grounding-toast-key",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--optional-props-mean-no-english-regression",
-      "target": "concept--optional-lang-prop-keeps-english-identical",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--audit-flagged-some-entries-as-false-positives",
-      "target": "concept--stale-audit-line-numbers",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--do-not-resurrect-or-delete-dead-code",
-      "target": "concept--dead-code-verified-not-deleted",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--same-failure-on-pristine-head-proves-not-mine",
-      "target": "concept--pristine-head-reproduction",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--usetranslation-hard-default-to-english",
       "target": "concept--i18n-completeness-guard-blind-spot",
@@ -418,48 +265,6 @@
       "target": "concept--i18n-completeness-guard-blind-spot",
       "relation": "conceptually_related_to",
       "confidence": "INFERRED"
-    },
-    {
-      "source": "rationale--git-branch-d-not-force-delete",
-      "target": "concept--zero-unique-commit-merge-check",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--remote-deletion-is-visible-to-everyone",
-      "target": "concept--remote-branch-deletion-needs-confirmation",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--no-reflog-makes-the-tips-unrecoverable",
-      "target": "concept--github-keeps-no-branch-reflogs",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--push-trigger-reenables-runner-consumption",
-      "target": "concept--runner-minute-freeze",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--path-filter-bounds-runner-minutes",
-      "target": "concept--path-filtered-pull-request-trigger",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--dependabot-cannot-see-an-untracked-workflow",
-      "target": "concept--checkout-action-version-pin-drift",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--untracked-paths-absent-from-origin-main",
-      "target": "concept--untracked-file-survives-checkout",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
     },
     {
       "source": "concept--runner-minute-freeze",

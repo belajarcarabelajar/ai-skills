@@ -14,7 +14,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md",
       "source_location": "L11684",
-      "norm_label": "llama-cpp-python cpu prebuilt wheel index"
+      "norm_label": "llama-cpp-python cpu prebuilt wheel index",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md:L11686] wheel index chosen over sdist source build"
     },
     {
       "id": "concept--fish-shell-collector-hook",
@@ -22,7 +23,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md",
       "source_location": "L20921",
-      "norm_label": "fish shell collector hook"
+      "norm_label": "fish shell collector hook",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md:L20921] fish hook written because .bashrc execs fish"
     },
     {
       "id": "concept--systemd-user-timer-persistent",
@@ -30,7 +32,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md",
       "source_location": "L8412",
-      "norm_label": "systemd user timer with persistent=true"
+      "norm_label": "systemd user timer with persistent=true",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md:L21915] Persistent=true covers the Linger=no gap"
     },
     {
       "id": "concept--cloudflared-locally-managed-tunnel",
@@ -62,7 +65,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md",
       "source_location": "L29050",
-      "norm_label": "light-dark() css function for theming"
+      "norm_label": "light-dark() css function for theming",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md:L29050] light-dark() chosen over prefers-color-scheme blocks",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md:L29759] third-party font request leaks visitor IP"
+      ]
     },
     {
       "id": "concept--fake-dom-test-harness",
@@ -70,7 +77,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md",
       "source_location": "L29727",
-      "norm_label": "fake dom test harness via new function"
+      "norm_label": "fake dom test harness via new function",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md:L30662] fake DOM instead of converting app.js to a module"
     },
     {
       "id": "concept--single-writer-per-file-orchestration",
@@ -94,7 +102,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md",
       "source_location": "L27233",
-      "norm_label": "keyboard-inaccessible heatmap cells"
+      "norm_label": "keyboard-inaccessible heatmap cells",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md:L38254] focus ring measured in a real render, not assumed"
     },
     {
       "id": "concept--donut-quarter-offset-bug",
@@ -127,62 +136,6 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md",
       "source_location": "L11678",
       "norm_label": "port of terminal-log-intelligence from wsl to arch linux"
-    },
-    {
-      "id": "rationale--wheel-index-over-source-build",
-      "label": "wheel index chosen over sdist source build",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md",
-      "source_location": "L11686",
-      "norm_label": "wheel index chosen over sdist source build"
-    },
-    {
-      "id": "rationale--fish-hook-because-bashrc-execs-fish",
-      "label": "fish hook written because .bashrc execs fish",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md",
-      "source_location": "L20921",
-      "norm_label": "fish hook written because .bashrc execs fish"
-    },
-    {
-      "id": "rationale--persistent-covers-linger-no",
-      "label": "Persistent=true covers the Linger=no gap",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md",
-      "source_location": "L21915",
-      "norm_label": "persistent=true covers the linger=no gap"
-    },
-    {
-      "id": "rationale--light-dark-over-prefers-color-scheme",
-      "label": "light-dark() chosen over prefers-color-scheme blocks",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md",
-      "source_location": "L29050",
-      "norm_label": "light-dark() chosen over prefers-color-scheme blocks"
-    },
-    {
-      "id": "rationale--fake-dom-instead-of-module-conversion",
-      "label": "fake DOM instead of converting app.js to a module",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md",
-      "source_location": "L30662",
-      "norm_label": "fake dom instead of converting app.js to a module"
-    },
-    {
-      "id": "rationale--webfont-removal-privacy-leak",
-      "label": "third-party font request leaks visitor IP",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md",
-      "source_location": "L29759",
-      "norm_label": "third-party font request leaks visitor ip"
-    },
-    {
-      "id": "rationale--focus-ring-measured-not-assumed",
-      "label": "focus ring measured in a real render, not assumed",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md",
-      "source_location": "L38254",
-      "norm_label": "focus ring measured in a real render, not assumed"
     }
   ],
   "links": [
@@ -208,24 +161,6 @@
       "source": "concept--arch-linux-port-from-wsl",
       "target": "concept--fish-shell-collector-hook",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--wheel-index-over-source-build",
-      "target": "concept--llama-cpp-python-cpu-wheel-index",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--fish-hook-because-bashrc-execs-fish",
-      "target": "concept--fish-shell-collector-hook",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--persistent-covers-linger-no",
-      "target": "concept--systemd-user-timer-persistent",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {
@@ -265,12 +200,6 @@
       "confidence": "INFERRED"
     },
     {
-      "source": "rationale--light-dark-over-prefers-color-scheme",
-      "target": "concept--light-dark-css-function",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
       "source": "concept--fake-dom-test-harness",
       "target": "concept--donut-quarter-offset-bug",
       "relation": "conceptually_related_to",
@@ -280,12 +209,6 @@
       "source": "concept--fake-dom-test-harness",
       "target": "concept--mutation-proved-test-non-vacuity",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--fake-dom-instead-of-module-conversion",
-      "target": "concept--fake-dom-test-harness",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {
@@ -316,18 +239,6 @@
       "source": "concept--light-dark-css-function",
       "target": "concept--donut-quarter-offset-bug",
       "relation": "conceptually_related_to",
-      "confidence": "INFERRED"
-    },
-    {
-      "source": "rationale--webfont-removal-privacy-leak",
-      "target": "concept--light-dark-css-function",
-      "relation": "rationale_for",
-      "confidence": "AMBIGUOUS"
-    },
-    {
-      "source": "rationale--focus-ring-measured-not-assumed",
-      "target": "concept--heatmap-keyboard-inaccessible-cells",
-      "relation": "rationale_for",
       "confidence": "INFERRED"
     }
   ]

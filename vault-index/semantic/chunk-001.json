@@ -14,7 +14,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md",
       "source_location": "L7265",
-      "norm_label": "portal grant state, not accelerator value"
+      "norm_label": "portal grant state, not accelerator value",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md:L7265] Shipped default also fails, so the accelerator is not the variable"
     },
     {
       "id": "concept--configureshortcuts-portal-v2-repair",
@@ -54,7 +55,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md",
       "source_location": "L110583",
-      "norm_label": "escaped systemd scope app id for portal identity"
+      "norm_label": "escaped systemd scope app id for portal identity",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md:L110583] Launching the binary directly yields NotAllowed because there is no app id"
     },
     {
       "id": "concept--case-insensitive-portal-trigger-parser",
@@ -70,7 +72,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md",
       "source_location": "L22034",
-      "norm_label": "webview watchdog silent-window reload"
+      "norm_label": "webview watchdog silent-window reload",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md:L22034] Watchdog reloads any silent window because it has no visibility check"
     },
     {
       "id": "concept--whisper-single-flight-inference-gate",
@@ -78,7 +81,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md",
       "source_location": "L148625",
-      "norm_label": "whisper single-flight inference gate"
+      "norm_label": "whisper single-flight inference gate",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md:L148622] Engine mutex protected initialization only, letting two inference graphs overlap"
     },
     {
       "id": "concept--voice-profile-availability-contract",
@@ -86,7 +90,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md",
       "source_location": "L133370",
-      "norm_label": "voice profile availability contract"
+      "norm_label": "voice profile availability contract",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md:L148609] Resolver correctly hides voiceless profiles but the UI still renders an enabled empty dropdown"
     },
     {
       "id": "concept--ydotool-wayland-text-injection",
@@ -102,7 +107,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md",
       "source_location": "L90447",
-      "norm_label": "alsa default vs native pipewire sink"
+      "norm_label": "alsa default vs native pipewire sink",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md:L90447] pw-play audible rules out PipeWire and the speaker"
     },
     {
       "id": "concept--vps-only-build-discipline",
@@ -110,7 +116,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md",
       "source_location": "L27",
-      "norm_label": "vps-only build discipline"
+      "norm_label": "vps-only build discipline",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md:L27] Cargo builds run on the VPS to avoid overloading local Arch storage"
     },
     {
       "id": "concept--approval-gated-rca-to-plan-tdd-workflow",
@@ -119,107 +126,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md",
       "source_location": "L95348",
       "norm_label": "approval-gated rca-to-plan tdd workflow"
-    },
-    {
-      "id": "rationale--shipped-default-also-fails",
-      "label": "Shipped default also fails, so the accelerator is not the variable",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md",
-      "source_location": "L7265",
-      "norm_label": "shipped default also fails, so the accelerator is not the variable"
-    },
-    {
-      "id": "rationale--engine-mutex-protected-initialization-only",
-      "label": "Engine mutex protected initialization only, letting two inference graphs overlap",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md",
-      "source_location": "L148622",
-      "norm_label": "engine mutex protected initialization only, letting two inference graphs overlap"
-    },
-    {
-      "id": "rationale--watchdog-has-no-visibility-check",
-      "label": "Watchdog reloads any silent window because it has no visibility check",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md",
-      "source_location": "L22034",
-      "norm_label": "watchdog reloads any silent window because it has no visibility check"
-    },
-    {
-      "id": "rationale--resolver-hides-profiles-but-ui-renders-enabled-dropdown",
-      "label": "Resolver correctly hides voiceless profiles but the UI still renders an enabled empty dropdown",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md",
-      "source_location": "L148609",
-      "norm_label": "resolver correctly hides voiceless profiles but the ui still renders an enabled empty dropdown"
-    },
-    {
-      "id": "rationale--pw-play-audible-rules-out-pipewire",
-      "label": "pw-play audible rules out PipeWire and the speaker",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md",
-      "source_location": "L90447",
-      "norm_label": "pw-play audible rules out pipewire and the speaker"
-    },
-    {
-      "id": "rationale--direct-binary-launch-has-no-app-id",
-      "label": "Launching the binary directly yields NotAllowed because there is no app id",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md",
-      "source_location": "L110583",
-      "norm_label": "launching the binary directly yields notallowed because there is no app id"
-    },
-    {
-      "id": "rationale--vps-builds-to-protect-local-storage",
-      "label": "Cargo builds run on the VPS to avoid overloading local Arch storage",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md",
-      "source_location": "L27",
-      "norm_label": "cargo builds run on the vps to avoid overloading local arch storage"
     }
   ],
   "links": [
-    {
-      "source": "rationale--shipped-default-also-fails",
-      "target": "concept--portal-grant-state-not-accelerator-value",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--engine-mutex-protected-initialization-only",
-      "target": "concept--whisper-single-flight-inference-gate",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--watchdog-has-no-visibility-check",
-      "target": "concept--webview-watchdog-silent-window-reload",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--resolver-hides-profiles-but-ui-renders-enabled-dropdown",
-      "target": "concept--voice-profile-availability-contract",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--pw-play-audible-rules-out-pipewire",
-      "target": "concept--alsa-default-vs-native-pipewire-sink",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--direct-binary-launch-has-no-app-id",
-      "target": "concept--escaped-systemd-scope-app-id",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--vps-builds-to-protect-local-storage",
-      "target": "concept--vps-only-build-discipline",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--xdg-globalshortcuts-portal",
       "target": "concept--portal-grant-state-not-accelerator-value",

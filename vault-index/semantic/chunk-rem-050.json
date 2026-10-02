@@ -26,7 +26,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - ekstraksi-takeout-untuk-inisiasi-proyek-baru [ses_f12a9a77fffesY6FrqsFQjSCbZ].md",
       "source_location": "L18283",
       "norm_label": "excerpt-only publication protects the prompt ip",
-      "summary": "The generator was written to publish a summary of each Gem rather than the 842 thousand characters of prompt text, on the stated ground that the full prompts are the paid IP and stay behind the gate. Five prompt-only templates were given honest metadata labels instead of invented descriptions, because a generated description the source does not support is a fabrication in a document that claims to be the source."
+      "summary": "The generator was written to publish a summary of each Gem rather than the 842 thousand characters of prompt text, on the stated ground that the full prompts are the paid IP and stay behind the gate. Five prompt-only templates were given honest metadata labels instead of invented descriptions, because a generated description the source does not support is a fabrication in a document that claims to be the source.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - ekstraksi-takeout-untuk-inisiasi-proyek-baru [ses_f12a9a77fffesY6FrqsFQjSCbZ].md:L18283] The prompt text is the paid product, so only summaries were published"
     },
     {
       "id": "concept--full-instructions-reverse-the-excerpt-decision",
@@ -35,7 +36,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - ekstraksi-takeout-untuk-inisiasi-proyek-baru [ses_f12a9a77fffesY6FrqsFQjSCbZ].md",
       "source_location": "L18407",
       "norm_label": "full instructions reverse the excerpt decision",
-      "summary": "Asked why the instructions read as cut off, the session dropped the excerpt-only design and chose to render the full instruction text publicly with stronger MDX escaping, rather than building a gated ingest pipeline. The trade-off had been decided in-session the day before and was explicitly retracted, which is recorded later in the recap rather than quietly applied."
+      "summary": "Asked why the instructions read as cut off, the session dropped the excerpt-only design and chose to render the full instruction text publicly with stronger MDX escaping, rather than building a gated ingest pipeline. The trade-off had been decided in-session the day before and was explicitly retracted, which is recorded later in the recap rather than quietly applied.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - ekstraksi-takeout-untuk-inisiasi-proyek-baru [ses_f12a9a77fffesY6FrqsFQjSCbZ].md:L19474] The user's request overturned the self-decided excerpt trade-off"
     },
     {
       "id": "concept--mdx-brace-and-angle-escaping-for-imported-instructions",
@@ -125,7 +127,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - ekstraksi-takeout-untuk-inisiasi-proyek-baru [ses_f12a9a77fffesY6FrqsFQjSCbZ].md",
       "source_location": "L14046",
       "norm_label": "prerendered middleware redirect baked into a static file",
-      "summary": "Middleware runs during the build for prerendered pages, so its cookie-less redirect result is written into the static HTML and served as a 200 with a meta-refresh instead of a 302. This is why a prerendered Astro site answers with 200 even though the middleware source contains a redirect, and why the same site under server output still returned the baked page."
+      "summary": "Middleware runs during the build for prerendered pages, so its cookie-less redirect result is written into the static HTML and served as a 200 with a meta-refresh instead of a 302. This is why a prerendered Astro site answers with 200 even though the middleware source contains a redirect, and why the same site under server output still returned the baked page.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - ekstraksi-takeout-untuk-inisiasi-proyek-baru [ses_f12a9a77fffesY6FrqsFQjSCbZ].md:L13823] Prerendered pages are static assets and never run middleware"
     },
     {
       "id": "concept--public-docs-funnel-with-gated-app-ssr-routes",
@@ -134,7 +137,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - ekstraksi-takeout-untuk-inisiasi-proyek-baru [ses_f12a9a77fffesY6FrqsFQjSCbZ].md",
       "source_location": "L14211",
       "norm_label": "public docs funnel with gated app ssr routes",
-      "summary": "The final architecture follows the pattern already proven in Snipset: documentation is a public funnel and only app/* plus api/private/* are gated on SSR. Gating the docs as well was tried first, produced the baked redirect on every page, and then required a satteri WASM binding under workerd that could not be verified, so wasm vendoring was deferred as follow-up debt rather than done quietly."
+      "summary": "The final architecture follows the pattern already proven in Snipset: documentation is a public funnel and only app/* plus api/private/* are gated on SSR. Gating the docs as well was tried first, produced the baked redirect on every page, and then required a satteri WASM binding under workerd that could not be verified, so wasm vendoring was deferred as follow-up debt rather than done quietly.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - ekstraksi-takeout-untuk-inisiasi-proyek-baru [ses_f12a9a77fffesY6FrqsFQjSCbZ].md:L14229] The WASI runtime could not be verified, so full-doc gating was deferred"
     },
     {
       "id": "concept--fully-static-astro-build-has-no-server-entry",
@@ -152,7 +156,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - ekstraksi-takeout-untuk-inisiasi-proyek-baru [ses_f12a9a77fffesY6FrqsFQjSCbZ].md",
       "source_location": "L12719",
       "norm_label": "cf deploy dies scaffolding npm inside a workspace",
-      "summary": "cf deploy cannot be used on this project: it warns that no lock file was detected because the app is a workspace member, then tries to scaffold with npm and dies on 'npm error Cannot read properties of null (reading matches)'. The dry run reproduces it every time, so the failure is the deploy path itself rather than a transient state, and it left no way to deploy except the sanctioned wrangler exception."
+      "summary": "cf deploy cannot be used on this project: it warns that no lock file was detected because the app is a workspace member, then tries to scaffold with npm and dies on 'npm error Cannot read properties of null (reading matches)'. The dry run reproduces it every time, so the failure is the deploy path itself rather than a transient state, and it left no way to deploy except the sanctioned wrangler exception.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - ekstraksi-takeout-untuk-inisiasi-proyek-baru [ses_f12a9a77fffesY6FrqsFQjSCbZ].md:L14562] No CI and a broken cf deploy left one approved local wrangler run"
     },
     {
       "id": "concept--locals-runtime-env-removed-by-the-cloudflare-adapter",
@@ -161,7 +166,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - ekstraksi-takeout-untuk-inisiasi-proyek-baru [ses_f12a9a77fffesY6FrqsFQjSCbZ].md",
       "source_location": "L15532",
       "norm_label": "locals.runtime.env removed by the cloudflare adapter",
-      "summary": "Reading secrets through locals.runtime.env returned 500 on the live login route because the adapter no longer provides that runtime. The fix is a dynamic import of cloudflare:workers with an ambient .d.ts, which reads workerd secrets at request time and falls back to the local .env during dev."
+      "summary": "Reading secrets through locals.runtime.env returned 500 on the live login route because the adapter no longer provides that runtime. The fix is a dynamic import of cloudflare:workers with an ambient .d.ts, which reads workerd secrets at request time and falls back to the local .env during dev.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - ekstraksi-takeout-untuk-inisiasi-proyek-baru [ses_f12a9a77fffesY6FrqsFQjSCbZ].md:L15247] Dynamic cloudflare:workers import so node dev still runs"
     },
     {
       "id": "concept--authorized-redirect-uri-missing-because-the-json-registers-none",
@@ -179,7 +185,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - ekstraksi-takeout-untuk-inisiasi-proyek-baru [ses_f12a9a77fffesY6FrqsFQjSCbZ].md",
       "source_location": "L15533",
       "norm_label": "plain-curl 403 is an edge bot challenge, not an app error",
-      "summary": "A bare curl against the deployed route intermittently answered 403 while the same route was healthy. The worker tail showed zero exceptions and the response went away with a browser user agent, so the 403 was Cloudflare's edge bot challenge in front of the app and not a failure inside it, which is why the first instinct to debug the login route was wrong."
+      "summary": "A bare curl against the deployed route intermittently answered 403 while the same route was healthy. The worker tail showed zero exceptions and the response went away with a browser user agent, so the 403 was Cloudflare's edge bot challenge in front of the app and not a failure inside it, which is why the first instinct to debug the login route was wrong.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - ekstraksi-takeout-untuk-inisiasi-proyek-baru [ses_f12a9a77fffesY6FrqsFQjSCbZ].md:L15533] Worker tail and a browser user agent proved the edge was 403ing"
     },
     {
       "id": "concept--adapter-writes-wrangler-json-into-the-static-client-output",
@@ -207,69 +214,6 @@
       "source_location": "L18285",
       "norm_label": "edge cache served mixed old and new documents",
       "summary": "After the track pages were deployed, some requests returned the previous version and some the new one, so the site looked internally inconsistent. The cause was edge cache holding pre-purge documents, and a cache purge made the responses coherent; the local build was already the same as what was live."
-    },
-    {
-      "id": "rationale--paid-prompt-ip-is-why-only-summaries-were-published",
-      "label": "The prompt text is the paid product, so only summaries were published",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - ekstraksi-takeout-untuk-inisiasi-proyek-baru [ses_f12a9a77fffesY6FrqsFQjSCbZ].md",
-      "source_location": "L18283",
-      "norm_label": "the prompt text is the paid product, so only summaries were published",
-      "summary": "The 842 thousand characters of prompt are stated to be the paid IP and to stay behind the gate, which is why the published pages carry a summary and the full instructions do not appear. The five prompt-only templates were labelled with honest metadata rather than invented descriptions because the same rule applies to generated text."
-    },
-    {
-      "id": "rationale--the-users-request-overturned-the-self-decided-excerpt-tradeoff",
-      "label": "The user's request overturned the self-decided excerpt trade-off",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - ekstraksi-takeout-untuk-inisiasi-proyek-baru [ses_f12a9a77fffesY6FrqsFQjSCbZ].md",
-      "source_location": "L19474",
-      "norm_label": "the user's request overturned the self-decided excerpt trade-off",
-      "summary": "The excerpt-only trade-off had been decided in-session for IP reasons without being asked for, and the recap admits that as the error: because full instructions were requested, full instructions are what went live."
-    },
-    {
-      "id": "rationale--wasi-runtime-unverifiable-so-full-doc-gating-was-deferred",
-      "label": "The WASI runtime could not be verified, so full-doc gating was deferred",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - ekstraksi-takeout-untuk-inisiasi-proyek-baru [ses_f12a9a77fffesY6FrqsFQjSCbZ].md",
-      "source_location": "L14229",
-      "norm_label": "the wasi runtime could not be verified, so full-doc gating was deferred",
-      "summary": "Gating the documentation as well as the app was abandoned because it needs the satteri WASM binding vendored into workerd, and that runtime could not be shown to work. The public-docs funnel was chosen over a gating scheme whose runtime was unproven, and the gap was left as a named follow-up rather than papered over."
-    },
-    {
-      "id": "rationale--prerendered-pages-are-static-assets-and-never-run-middleware",
-      "label": "Prerendered pages are static assets and never run middleware",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - ekstraksi-takeout-untuk-inisiasi-proyek-baru [ses_f12a9a77fffesY6FrqsFQjSCbZ].md",
-      "source_location": "L13823",
-      "norm_label": "prerendered pages are static assets and never run middleware",
-      "summary": "Static asset serving bypasses middleware, so a prerendered page cannot be gated at request time no matter what the middleware source says. That is why the gate had to be enforced by SSR enforcement on the app routes instead of by a redirect in the middleware."
-    },
-    {
-      "id": "rationale--dynamic-cloudflare-workers-import-so-node-dev-still-runs",
-      "label": "Dynamic cloudflare:workers import so node dev still runs",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - ekstraksi-takeout-untuk-inisiasi-proyek-baru [ses_f12a9a77fffesY6FrqsFQjSCbZ].md",
-      "source_location": "L15247",
-      "norm_label": "dynamic cloudflare:workers import so node dev still runs",
-      "summary": "A static import of cloudflare:workers would break the node dev server and the build, so the module is imported dynamically and the ambient declaration added by hand. The route reads workerd secrets first, then build-time env, so one code path serves both runtimes."
-    },
-    {
-      "id": "rationale--no-ci-and-a-broken-cf-deploy-left-one-local-wrangler-deploy",
-      "label": "No CI and a broken cf deploy left one approved local wrangler run",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - ekstraksi-takeout-untuk-inisiasi-proyek-baru [ses_f12a9a77fffesY6FrqsFQjSCbZ].md",
-      "source_location": "L14562",
-      "norm_label": "no ci and a broken cf deploy left one approved local wrangler run",
-      "summary": "CI was rejected by the user and cf deploy crashes on this workspace, so the single deploy ran through a local wrangler deploy under explicit approval. The exception is recorded rather than treated as precedent: the cf-only rule still applies from that point on."
-    },
-    {
-      "id": "rationale--worker-tail-and-a-browser-user-agent-proved-the-edge-was-403ing",
-      "label": "Worker tail and a browser user agent proved the edge was 403ing",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - ekstraksi-takeout-untuk-inisiasi-proyek-baru [ses_f12a9a77fffesY6FrqsFQjSCbZ].md",
-      "source_location": "L15533",
-      "norm_label": "worker tail and a browser user agent proved the edge was 403ing",
-      "summary": "The worker tail recorded zero exceptions and the 403 disappeared with a browser user agent, so the rejection happened at Cloudflare's edge before the application ran. That evidence is what moved the diagnosis away from the login route."
     }
   ],
   "links": [
@@ -374,48 +318,6 @@
       "target": "concept--edge-cache-served-mixed-old-and-new-documents",
       "relation": "conceptually_related_to",
       "confidence": "INFERRED"
-    },
-    {
-      "source": "rationale--paid-prompt-ip-is-why-only-summaries-were-published",
-      "target": "concept--excerpt-only-publication-protects-the-prompt-ip",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--the-users-request-overturned-the-self-decided-excerpt-tradeoff",
-      "target": "concept--full-instructions-reverse-the-excerpt-decision",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--wasi-runtime-unverifiable-so-full-doc-gating-was-deferred",
-      "target": "concept--public-docs-funnel-with-gated-app-ssr-routes",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--prerendered-pages-are-static-assets-and-never-run-middleware",
-      "target": "concept--prerendered-middleware-redirect-baked-to-static",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--dynamic-cloudflare-workers-import-so-node-dev-still-runs",
-      "target": "concept--locals-runtime-env-removed-by-the-cloudflare-adapter",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--no-ci-and-a-broken-cf-deploy-left-one-local-wrangler-deploy",
-      "target": "concept--cf-deploy-dies-scaffolding-npm-inside-a-workspace",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--worker-tail-and-a-browser-user-agent-proved-the-edge-was-403ing",
-      "target": "concept--plain-curl-403-is-an-edge-bot-challenge-not-an-app-error",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
     }
   ]
 }

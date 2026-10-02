@@ -10,14 +10,6 @@
       "norm_label": "credential hand off"
     },
     {
-      "id": "rationale--licenses-json-change-is-build-regeneration",
-      "label": "The licenses.json change is build regeneration, not dirt",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
-      "source_location": "L20175",
-      "norm_label": "the licenses json change is build regeneration not dirt"
-    },
-    {
       "id": "concept--parent-diff-audit-gate",
       "label": "Parent diff audit gate",
       "file_type": "concept",
@@ -26,20 +18,13 @@
       "norm_label": "parent diff audit gate"
     },
     {
-      "id": "rationale--same-failure-on-pristine-head-proves-not-mine",
-      "label": "A failure that also appears on a pristine HEAD is not mine",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
-      "source_location": "L15822",
-      "norm_label": "a failure that also appears on a pristine head is not mine"
-    },
-    {
       "id": "concept--buzzer-niche-fit-verdict",
       "label": "Buzzer niche fit verdict: useful as finger muscle, not a campaign manager",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
       "source_location": "L460",
-      "norm_label": "buzzer niche fit verdict useful as finger muscle not a campaign manager"
+      "norm_label": "buzzer niche fit verdict useful as finger muscle not a campaign manager",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L445] Snipset rates useful for a buzzer only because it automates the typing, not the posting"
     },
     {
       "id": "concept--buzzer-brand-connotation-risk",
@@ -55,7 +40,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
       "source_location": "L2894",
-      "norm_label": "the solutions vertical page pattern with solution verticals and per vertical og"
+      "norm_label": "the solutions vertical page pattern with solution verticals and per vertical og",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L2900] A standalone page is lighter than a vertical because a new vertical needs generated OG assets uploaded to R2"
     },
     {
       "id": "concept--seo-cannibalization-risk",
@@ -71,7 +57,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
       "source_location": "L3556",
-      "norm_label": "og asset pipeline a new vertical requires 2 images 4 manifest entries an r2 upload"
+      "norm_label": "og asset pipeline a new vertical requires 2 images 4 manifest entries an r2 upload",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L2900] A standalone page is lighter than a vertical because a new vertical needs generated OG assets uploaded to R2"
     },
     {
       "id": "concept--dynamic-og-endpoint",
@@ -79,7 +66,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
       "source_location": "L3777",
-      "norm_label": "the unused og path dynamic og image endpoint"
+      "norm_label": "the unused og path dynamic og image endpoint",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L3890] Reuse the existing marketing OG asset because the dynamic OG endpoint has no production user and is therefore untested"
     },
     {
       "id": "concept--brand-safe-slug-decision",
@@ -87,7 +75,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
       "source_location": "L3064",
-      "norm_label": "brand safe slug decision rank for the market term without owning it in the brand name"
+      "norm_label": "brand safe slug decision rank for the market term without owning it in the brand name",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L3064] Separate the SEO surface from the brand surface so the page ranks for the intent without owning the pejorative word"
     },
     {
       "id": "concept--chatbot-catalog-derived-gates",
@@ -95,7 +84,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
       "source_location": "L13124",
-      "norm_label": "chatbot knowledge gates derived from site search catalog"
+      "norm_label": "chatbot knowledge gates derived from site search catalog",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L15822] One catalog row is not enough because three derived chatbot gates have to pass with it"
     },
     {
       "id": "concept--style-parity-vs-line-count-rule",
@@ -103,7 +93,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
       "source_location": "L15826",
-      "norm_label": "the structural conflict between the 500 line rule and the byte identical style parity guard"
+      "norm_label": "the structural conflict between the 500 line rule and the byte identical style parity guard",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L15826] The 462-line style block must stay byte-identical inside the page, so dropping under 500 lines needs a shared partial"
     },
     {
       "id": "concept--llms-txt-omits-solutions-pages",
@@ -111,7 +102,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
       "source_location": "L15054",
-      "norm_label": "llms txt omits every solutions page"
+      "norm_label": "llms txt omits every solutions page",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L15050] llms.txt also omits the sibling marketing page, so the new page absence is the existing pattern and not a regression"
     },
     {
       "id": "concept--stale-verify-license-mock",
@@ -119,7 +111,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
       "source_location": "L15307",
-      "norm_label": "the stale verify license test mock that masks regressions as pre existing red"
+      "norm_label": "the stale verify license test mock that masks regressions as pre existing red",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L17995] Cross-check whether a failure is plausible before reporting it as pre-existing, because this one was my own shipping artifact",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L15822] A failure that also appears on a pristine HEAD is not mine"
+      ]
     },
     {
       "id": "concept--incomplete-vps-ship-false-failures",
@@ -127,7 +123,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
       "source_location": "L17426",
-      "norm_label": "four vps test failures manufactured by an incomplete file ship not by the code"
+      "norm_label": "four vps test failures manufactured by an incomplete file ship not by the code",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L17995] Cross-check whether a failure is plausible before reporting it as pre-existing, because this one was my own shipping artifact"
     },
     {
       "id": "concept--zombie-chunk-file-overwrite",
@@ -151,7 +148,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
       "source_location": "L15493",
-      "norm_label": "a date shift offset is only valid on the datetime variable not on date"
+      "norm_label": "a date shift offset is only valid on the datetime variable not on date",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L15493] A +3d offset only works on the dateTime variable, so the date form is invalid syntax rather than a formatting problem"
     },
     {
       "id": "concept--keycap-documentation-mismatch",
@@ -159,7 +157,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
       "source_location": "L15495",
-      "norm_label": "keycap mismatch shipped default ctrl shift k versus docs saying ctrl"
+      "norm_label": "keycap mismatch shipped default ctrl shift k versus docs saying ctrl",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L15495] Align the page to the shipped constant and leave the docs mismatch as debt because the docs live in another app"
     },
     {
       "id": "concept--footnote-split-fragility",
@@ -175,7 +174,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
       "source_location": "L19295",
-      "norm_label": "the quick deploy flag that skips secret sync so worker level secrets are preserved"
+      "norm_label": "the quick deploy flag that skips secret sync so worker level secrets are preserved",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L20414] A full secret sync is both impossible and unnecessary, so --quick is the correct documented path",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L20175] The licenses.json change is build regeneration, not dirt"
+      ]
     },
     {
       "id": "concept--cloudflare-secrets-write-only",
@@ -183,7 +186,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
       "source_location": "L19246",
-      "norm_label": "cloudflare worker secret values are write only and cannot be read back"
+      "norm_label": "cloudflare worker secret values are write only and cannot be read back",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L20414] A full secret sync is both impossible and unnecessary, so --quick is the correct documented path"
     },
     {
       "id": "concept--forum-admin-emails-fail-closed",
@@ -207,7 +211,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
       "source_location": "L20042",
-      "norm_label": "admin role is derived at the oauth callback and is upgrade only"
+      "norm_label": "admin role is derived at the oauth callback and is upgrade only",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L20042] The role is derived at the OAuth callback and is upgrade-only, so an existing session cannot rise on its own"
     },
     {
       "id": "concept--production-deploy-ack-token",
@@ -231,7 +236,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
       "source_location": "L4291",
-      "norm_label": "the plan dag yields a 4 wide first wave below the 10 writer fan out floor"
+      "norm_label": "the plan dag yields a 4 wide first wave below the 10 writer fan out floor",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L4024] Discovery tasks are read-only and log gaps instead of editing, so they cannot collide with the file owners"
     },
     {
       "id": "concept--authorization-allowlist-is-not-credential",
@@ -239,7 +245,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
       "source_location": "L20648",
-      "norm_label": "an email allowlist is authorization data not authentication material"
+      "norm_label": "an email allowlist is authorization data not authentication material",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L20648] Entering the allowlist is additive authorization on the owner own site after explicit repeated human authorization",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L20904] Pipe the secret value through stdin with history disabled so it never reaches history, ps or output"
+      ]
     },
     {
       "id": "concept--redirect-status-proves-nothing",
@@ -271,7 +281,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
       "source_location": "L4062",
-      "norm_label": "bun run mirror publish does not exist in this project package json"
+      "norm_label": "bun run mirror publish does not exist in this project package json",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L4062] Record the absent mirror publisher as SKIPPED-NOT-APPLICABLE with evidence instead of inventing a success"
     },
     {
       "id": "concept--verification-scope-gap-for-derived-gates",
@@ -280,153 +291,13 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
       "source_location": "L17993",
       "norm_label": "the local 23 file run did not cover src lib rulechat so the derived gates could not fail locally"
-    },
-    {
-      "id": "rationale--no-scheduler-no-engagement-tracking",
-      "label": "Snipset rates useful for a buzzer only because it automates the typing, not the posting",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
-      "source_location": "L445",
-      "norm_label": "snipset rates useful for a buzzer only because it automates the typing not the posting"
-    },
-    {
-      "id": "rationale--standalone-page-over-new-vertical",
-      "label": "A standalone page is lighter than a vertical because a new vertical needs generated OG assets uploaded to R2",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
-      "source_location": "L2900",
-      "norm_label": "a standalone page is lighter than a vertical because a new vertical needs generated og assets uploaded to r2"
-    },
-    {
-      "id": "rationale--brand-safe-slug-separates-seo-from-brand",
-      "label": "Separate the SEO surface from the brand surface so the page ranks for the intent without owning the pejorative word",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
-      "source_location": "L3064",
-      "norm_label": "separate the seo surface from the brand surface so the page ranks for the intent without owning the pejorative word"
-    },
-    {
-      "id": "rationale--existing-og-asset-over-untested-dynamic-endpoint",
-      "label": "Reuse the existing marketing OG asset because the dynamic OG endpoint has no production user and is therefore untested",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
-      "source_location": "L3890",
-      "norm_label": "reuse the existing marketing og asset because the dynamic og endpoint has no production user and is therefore untested"
-    },
-    {
-      "id": "rationale--full-secret-sync-impossible-and-unnecessary",
-      "label": "A full secret sync is both impossible and unnecessary, so --quick is the correct documented path",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
-      "source_location": "L20414",
-      "norm_label": "a full secret sync is both impossible and unnecessary so quick is the correct documented path"
-    },
-    {
-      "id": "rationale--allowlist-entry-is-additive-authorization",
-      "label": "Entering the allowlist is additive authorization on the owner own site after explicit repeated human authorization",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
-      "source_location": "L20648",
-      "norm_label": "entering the allowlist is additive authorization on the owner own site after explicit repeated human authorization"
-    },
-    {
-      "id": "rationale--relogin-required-for-upgrade-only-role",
-      "label": "The role is derived at the OAuth callback and is upgrade-only, so an existing session cannot rise on its own",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
-      "source_location": "L20042",
-      "norm_label": "the role is derived at the oauth callback and is upgrade only so an existing session cannot rise on its own"
-    },
-    {
-      "id": "rationale--byte-identical-style-block-blocks-componentisation",
-      "label": "The 462-line style block must stay byte-identical inside the page, so dropping under 500 lines needs a shared partial",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
-      "source_location": "L15826",
-      "norm_label": "the 462 line style block must stay byte identical inside the page so dropping under 500 lines needs a shared partial"
-    },
-    {
-      "id": "rationale--catalog-row-implies-three-derived-gates",
-      "label": "One catalog row is not enough because three derived chatbot gates have to pass with it",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
-      "source_location": "L15822",
-      "norm_label": "one catalog row is not enough because three derived chatbot gates have to pass with it"
-    },
-    {
-      "id": "rationale--read-only-verification-avoids-write-scope-overlap",
-      "label": "Discovery tasks are read-only and log gaps instead of editing, so they cannot collide with the file owners",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
-      "source_location": "L4024",
-      "norm_label": "discovery tasks are read only and log gaps instead of editing so they cannot collide with the file owners"
-    },
-    {
-      "id": "rationale--cross-check-failure-plausibility-before-blaming-code",
-      "label": "Cross-check whether a failure is plausible before reporting it as pre-existing, because this one was my own shipping artifact",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
-      "source_location": "L17995",
-      "norm_label": "cross check whether a failure is plausible before reporting it as pre existing because this one was my own shipping artifact"
-    },
-    {
-      "id": "rationale--secret-value-piped-not-typed",
-      "label": "Pipe the secret value through stdin with history disabled so it never reaches history, ps or output",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
-      "source_location": "L20904",
-      "norm_label": "pipe the secret value through stdin with history disabled so it never reaches history ps or output"
-    },
-    {
-      "id": "rationale--llms-txt-gap-is-pre-existing-not-a-regression",
-      "label": "llms.txt also omits the sibling marketing page, so the new page absence is the existing pattern and not a regression",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
-      "source_location": "L15050",
-      "norm_label": "llms txt also omits the sibling marketing page so the new page absence is the existing pattern and not a regression"
-    },
-    {
-      "id": "rationale--skipped-not-applicable-not-false-success",
-      "label": "Record the absent mirror publisher as SKIPPED-NOT-APPLICABLE with evidence instead of inventing a success",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
-      "source_location": "L4062",
-      "norm_label": "record the absent mirror publisher as skipped not applicable with evidence instead of inventing a success"
-    },
-    {
-      "id": "rationale--shift-offset-only-valid-on-datetime",
-      "label": "A +3d offset only works on the dateTime variable, so the date form is invalid syntax rather than a formatting problem",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
-      "source_location": "L15493",
-      "norm_label": "a 3d offset only works on the datetime variable so the date form is invalid syntax rather than a formatting problem"
-    },
-    {
-      "id": "rationale--keycap-fix-scoped-to-owned-files",
-      "label": "Align the page to the shipped constant and leave the docs mismatch as debt because the docs live in another app",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
-      "source_location": "L15495",
-      "norm_label": "align the page to the shipped constant and leave the docs mismatch as debt because the docs live in another app"
     }
   ],
   "links": [
     {
-      "source": "rationale--no-scheduler-no-engagement-tracking",
-      "target": "concept--buzzer-niche-fit-verdict",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
       "source": "concept--buzzer-brand-connotation-risk",
       "target": "concept--buzzer-niche-fit-verdict",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--brand-safe-slug-separates-seo-from-brand",
-      "target": "concept--brand-safe-slug-decision",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {
@@ -454,33 +325,9 @@
       "confidence": "EXTRACTED"
     },
     {
-      "source": "rationale--standalone-page-over-new-vertical",
-      "target": "concept--solutions-vertical-page-pattern",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--standalone-page-over-new-vertical",
-      "target": "concept--og-asset-pipeline-for-a-new-vertical",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
       "source": "concept--og-asset-pipeline-for-a-new-vertical",
       "target": "concept--dynamic-og-endpoint",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--existing-og-asset-over-untested-dynamic-endpoint",
-      "target": "concept--dynamic-og-endpoint",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--catalog-row-implies-three-derived-gates",
-      "target": "concept--chatbot-catalog-derived-gates",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {
@@ -493,12 +340,6 @@
       "source": "concept--verification-scope-gap-for-derived-gates",
       "target": "concept--parent-diff-audit-gate",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--byte-identical-style-block-blocks-componentisation",
-      "target": "concept--style-parity-vs-line-count-rule",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {
@@ -520,33 +361,9 @@
       "confidence": "EXTRACTED"
     },
     {
-      "source": "rationale--llms-txt-gap-is-pre-existing-not-a-regression",
-      "target": "concept--llms-txt-omits-solutions-pages",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
       "source": "concept--stale-verify-license-mock",
       "target": "concept--incomplete-vps-ship-false-failures",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--cross-check-failure-plausibility-before-blaming-code",
-      "target": "concept--incomplete-vps-ship-false-failures",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--cross-check-failure-plausibility-before-blaming-code",
-      "target": "concept--stale-verify-license-mock",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--same-failure-on-pristine-head-proves-not-mine",
-      "target": "concept--stale-verify-license-mock",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {
@@ -556,27 +373,9 @@
       "confidence": "EXTRACTED"
     },
     {
-      "source": "rationale--read-only-verification-avoids-write-scope-overlap",
-      "target": "concept--plan-dag-parallelism-below-fanout-floor",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
       "source": "concept--prettier-cannot-parse-astro",
       "target": "concept--style-parity-vs-line-count-rule",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--shift-offset-only-valid-on-datetime",
-      "target": "concept--date-shift-requires-datetime-token",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--keycap-fix-scoped-to-owned-files",
-      "target": "concept--keycap-documentation-mismatch",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {
@@ -589,18 +388,6 @@
       "source": "concept--footnote-split-fragility",
       "target": "concept--thin-renderer-over-data-module",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--full-secret-sync-impossible-and-unnecessary",
-      "target": "concept--quick-deploy-skip-secret-sync",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--full-secret-sync-impossible-and-unnecessary",
-      "target": "concept--cloudflare-secrets-write-only",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {
@@ -622,33 +409,15 @@
       "confidence": "EXTRACTED"
     },
     {
-      "source": "rationale--relogin-required-for-upgrade-only-role",
-      "target": "concept--upgrade-only-forum-role",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
       "source": "concept--upgrade-only-forum-role",
       "target": "concept--forum-admin-emails-fail-closed",
       "relation": "conceptually_related_to",
       "confidence": "EXTRACTED"
     },
     {
-      "source": "rationale--allowlist-entry-is-additive-authorization",
-      "target": "concept--authorization-allowlist-is-not-credential",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
       "source": "concept--authorization-allowlist-is-not-credential",
       "target": "concept--credential-handoff",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--secret-value-piped-not-typed",
-      "target": "concept--authorization-allowlist-is-not-credential",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {
@@ -673,18 +442,6 @@
       "source": "concept--subagent-corrects-parent-premise",
       "target": "concept--parent-diff-audit-gate",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--skipped-not-applicable-not-false-success",
-      "target": "concept--mirror-publish-script-absent",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--licenses-json-change-is-build-regeneration",
-      "target": "concept--quick-deploy-skip-secret-sync",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {

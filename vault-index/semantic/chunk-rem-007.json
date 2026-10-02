@@ -39,7 +39,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md",
       "source_location": "L46347",
-      "norm_label": "parent diff audit gate"
+      "norm_label": "parent diff audit gate",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md:L45488] A one-line fix is done inline rather than dispatched to a subagent"
     },
     {
       "id": "concept--ownership-gate-test-fixture-defect",
@@ -55,7 +56,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md",
       "source_location": "L42325",
-      "norm_label": "portal identity derived from process cgroup"
+      "norm_label": "portal identity derived from process cgroup",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md:L42815] Refuse a foreign or unreadable derived identity before opening the session"
     },
     {
       "id": "concept--orphan-kglobalaccel-component",
@@ -71,7 +73,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md",
       "source_location": "L40232",
-      "norm_label": "preference sync clobbering the local database"
+      "norm_label": "preference sync clobbering the local database",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md:L40605] Snapshot preferences before any launch that triggers the clobbering sync"
     },
     {
       "id": "concept--appimage-bundled-webkit-renderer-abort",
@@ -79,7 +82,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md",
       "source_location": "L36900",
-      "norm_label": "appimage-bundled webkit renderer abort"
+      "norm_label": "appimage-bundled webkit renderer abort",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md:L38054] Prefer the system WebKit over the AppImage's bundled copy"
     },
     {
       "id": "concept--sqlite-unique-index-migration-ordering",
@@ -119,7 +123,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md",
       "source_location": "L31988",
-      "norm_label": "chunked parallel artifact transfer"
+      "norm_label": "chunked parallel artifact transfer",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md:L31264] A v* test tag would trigger the full production release pipeline"
     },
     {
       "id": "concept--red-evidence-named-reason",
@@ -127,7 +132,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md",
       "source_location": "L8607",
-      "norm_label": "red evidence failing for the named reason"
+      "norm_label": "red evidence failing for the named reason",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md:L8607] A RED test is only evidence when it fails for the named behavioural reason"
     },
     {
       "id": "concept--global-db-lock-test-deadlock",
@@ -135,7 +141,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md",
       "source_location": "L14764",
-      "norm_label": "self-deadlock from holding the global db lock in a test"
+      "norm_label": "self-deadlock from holding the global db lock in a test",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md:L15177] Rewrite the deadlocked test through the production path instead of patching the lock"
     },
     {
       "id": "concept--live-acceptance-gate",
@@ -143,7 +150,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md",
       "source_location": "L23808",
-      "norm_label": "live kde acceptance gate"
+      "norm_label": "live kde acceptance gate",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md:L27075] Leave the plan InProgress while live acceptance evidence is missing"
     },
     {
       "id": "concept--combined-tree-verification",
@@ -151,111 +159,136 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md",
       "source_location": "L22792",
-      "norm_label": "combined-tree verification instead of clean baseline"
-    },
-    {
-      "id": "rationale--red-must-fail-for-named-behavioral-reason",
-      "label": "A RED test is only evidence when it fails for the named behavioural reason",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md",
-      "source_location": "L8607",
-      "norm_label": "a red test is only evidence when it fails for the named behavioural reason"
-    },
-    {
-      "id": "rationale--snapshot-prefs-before-any-launch-that-syncs",
-      "label": "Snapshot preferences before any launch that triggers the clobbering sync",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md",
-      "source_location": "L40605",
-      "norm_label": "snapshot preferences before any launch that triggers the clobbering sync"
-    },
-    {
-      "id": "rationale--verify-on-combined-tree-not-clean-tree",
-      "label": "A full suite run on a clean tree proves only the baseline",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md",
-      "source_location": "L22792",
-      "norm_label": "a full suite run on a clean tree proves only the baseline"
-    },
-    {
-      "id": "rationale--prefer-system-webkit-over-bundled",
-      "label": "Prefer the system WebKit over the AppImage's bundled copy",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md",
-      "source_location": "L38054",
-      "norm_label": "prefer the system webkit over the appimage's bundled copy"
-    },
-    {
-      "id": "rationale--test-tag-would-trigger-production-release-pipeline",
-      "label": "A v* test tag would trigger the full production release pipeline",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md",
-      "source_location": "L31264",
-      "norm_label": "a v* test tag would trigger the full production release pipeline"
-    },
-    {
-      "id": "rationale--rewrite-deadlocked-test-through-production-path",
-      "label": "Rewrite the deadlocked test through the production path instead of patching the lock",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md",
-      "source_location": "L15177",
-      "norm_label": "rewrite the deadlocked test through the production path instead of patching the lock"
-    },
-    {
-      "id": "rationale--one-line-fix-inline-not-to-subagent",
-      "label": "A one-line fix is done inline rather than dispatched to a subagent",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md",
-      "source_location": "L45488",
-      "norm_label": "a one-line fix is done inline rather than dispatched to a subagent"
-    },
-    {
-      "id": "rationale--keep-plan-inprogress-without-live-evidence",
-      "label": "Leave the plan InProgress while live acceptance evidence is missing",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md",
-      "source_location": "L27075",
-      "norm_label": "leave the plan inprogress while live acceptance evidence is missing"
-    },
-    {
-      "id": "rationale--refuse-foreign-identity-before-session",
-      "label": "Refuse a foreign or unreadable derived identity before opening the session",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md",
-      "source_location": "L42815",
-      "norm_label": "refuse a foreign or unreadable derived identity before opening the session"
+      "norm_label": "combined-tree verification instead of clean baseline",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md:L22792] A full suite run on a clean tree proves only the baseline"
     }
   ],
   "links": [
-    { "source": "concept--native-tts-session-lifecycle", "target": "concept--red-evidence-named-reason", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
-    { "source": "concept--native-tts-session-lifecycle", "target": "concept--live-acceptance-gate", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--todoist-mapping-ownership-collision", "target": "concept--global-db-lock-test-deadlock", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
-    { "source": "concept--todoist-mapping-ownership-collision", "target": "concept--red-evidence-named-reason", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--tracker-input-density-capability-gate", "target": "concept--linux-capture-availability", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
-    { "source": "concept--tracker-input-density-capability-gate", "target": "concept--red-evidence-named-reason", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--linux-capture-availability", "target": "concept--red-evidence-named-reason", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--parent-diff-audit-gate", "target": "concept--ownership-gate-test-fixture-defect", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
-    { "source": "concept--parent-diff-audit-gate", "target": "concept--red-evidence-named-reason", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
-    { "source": "concept--parent-diff-audit-gate", "target": "concept--combined-tree-verification", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--ownership-gate-test-fixture-defect", "target": "concept--preference-sync-clobber", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
-    { "source": "concept--portal-identity-from-process-cgroup", "target": "concept--orphan-kglobalaccel-component", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
-    { "source": "concept--portal-identity-from-process-cgroup", "target": "concept--ashpd-create-session-options-has-no-app-id", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
-    { "source": "concept--portal-identity-from-process-cgroup", "target": "concept--preference-sync-clobber", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
-    { "source": "concept--orphan-kglobalaccel-component", "target": "concept--preference-sync-clobber", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
-    { "source": "concept--appimage-bundled-webkit-renderer-abort", "target": "concept--live-acceptance-gate", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
-    { "source": "concept--sqlite-unique-index-migration-ordering", "target": "concept--live-acceptance-gate", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--sqlite-unique-index-migration-ordering", "target": "concept--cumulative-vps-transfer-set", "relation": "conceptually_related_to", "confidence": "AMBIGUOUS" },
-    { "source": "concept--cumulative-vps-transfer-set", "target": "concept--cold-build-resource-staging", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
-    { "source": "concept--chunked-parallel-artifact-transfer", "target": "concept--appimage-bundled-webkit-renderer-abort", "relation": "conceptually_related_to", "confidence": "INFERRED" },
-    { "source": "concept--combined-tree-verification", "target": "concept--cold-build-resource-staging", "relation": "conceptually_related_to", "confidence": "AMBIGUOUS" },
-    { "source": "rationale--red-must-fail-for-named-behavioral-reason", "target": "concept--red-evidence-named-reason", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--snapshot-prefs-before-any-launch-that-syncs", "target": "concept--preference-sync-clobber", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--verify-on-combined-tree-not-clean-tree", "target": "concept--combined-tree-verification", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--prefer-system-webkit-over-bundled", "target": "concept--appimage-bundled-webkit-renderer-abort", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--test-tag-would-trigger-production-release-pipeline", "target": "concept--chunked-parallel-artifact-transfer", "relation": "rationale_for", "confidence": "INFERRED" },
-    { "source": "rationale--rewrite-deadlocked-test-through-production-path", "target": "concept--global-db-lock-test-deadlock", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--one-line-fix-inline-not-to-subagent", "target": "concept--parent-diff-audit-gate", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--keep-plan-inprogress-without-live-evidence", "target": "concept--live-acceptance-gate", "relation": "rationale_for", "confidence": "EXTRACTED" },
-    { "source": "rationale--refuse-foreign-identity-before-session", "target": "concept--portal-identity-from-process-cgroup", "relation": "rationale_for", "confidence": "EXTRACTED" }
+    {
+      "source": "concept--native-tts-session-lifecycle",
+      "target": "concept--red-evidence-named-reason",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--native-tts-session-lifecycle",
+      "target": "concept--live-acceptance-gate",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--todoist-mapping-ownership-collision",
+      "target": "concept--global-db-lock-test-deadlock",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--todoist-mapping-ownership-collision",
+      "target": "concept--red-evidence-named-reason",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--tracker-input-density-capability-gate",
+      "target": "concept--linux-capture-availability",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--tracker-input-density-capability-gate",
+      "target": "concept--red-evidence-named-reason",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--linux-capture-availability",
+      "target": "concept--red-evidence-named-reason",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--parent-diff-audit-gate",
+      "target": "concept--ownership-gate-test-fixture-defect",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--parent-diff-audit-gate",
+      "target": "concept--red-evidence-named-reason",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--parent-diff-audit-gate",
+      "target": "concept--combined-tree-verification",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--ownership-gate-test-fixture-defect",
+      "target": "concept--preference-sync-clobber",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--portal-identity-from-process-cgroup",
+      "target": "concept--orphan-kglobalaccel-component",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--portal-identity-from-process-cgroup",
+      "target": "concept--ashpd-create-session-options-has-no-app-id",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--portal-identity-from-process-cgroup",
+      "target": "concept--preference-sync-clobber",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--orphan-kglobalaccel-component",
+      "target": "concept--preference-sync-clobber",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--appimage-bundled-webkit-renderer-abort",
+      "target": "concept--live-acceptance-gate",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--sqlite-unique-index-migration-ordering",
+      "target": "concept--live-acceptance-gate",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--sqlite-unique-index-migration-ordering",
+      "target": "concept--cumulative-vps-transfer-set",
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS"
+    },
+    {
+      "source": "concept--cumulative-vps-transfer-set",
+      "target": "concept--cold-build-resource-staging",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--chunked-parallel-artifact-transfer",
+      "target": "concept--appimage-bundled-webkit-renderer-abort",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--combined-tree-verification",
+      "target": "concept--cold-build-resource-staging",
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS"
+    }
   ]
 }

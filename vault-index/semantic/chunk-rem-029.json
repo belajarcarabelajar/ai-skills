@@ -23,7 +23,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-raw-folder [ses_f281d7319ffe2rQVakUr9zxWR5].md",
       "source_location": "L25358",
-      "norm_label": "para triage of the raw capture tree"
+      "norm_label": "para triage of the raw capture tree",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-raw-folder [ses_f281d7319ffe2rQVakUr9zxWR5].md:L25374] Areas should hold synthesized notes and current practices, not the bulk of copied documentation"
     },
     {
       "id": "concept--reorg-log-inventory-drift",
@@ -39,7 +40,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-raw-folder [ses_f281d7319ffe2rQVakUr9zxWR5].md",
       "source_location": "L25418",
-      "norm_label": "duplicate families identified by repeated canonical source url"
+      "norm_label": "duplicate families identified by repeated canonical source url",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-raw-folder [ses_f281d7319ffe2rQVakUr9zxWR5].md:L25433] Some duplicate pairs differ only by URL anchor, so canonicalization must preserve the anchor context",
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-raw-folder [ses_f281d7319ffe2rQVakUr9zxWR5].md:L25486] Run a post-migration link audit before removing any raw copy, after canonicalizing and renaming"
+      ]
     },
     {
       "id": "concept--title-collision-is-not-a-duplicate-family",
@@ -47,7 +52,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-raw-folder [ses_f281d7319ffe2rQVakUr9zxWR5].md",
       "source_location": "L25435",
-      "norm_label": "repeated title is a title collision, not a duplicate family"
+      "norm_label": "repeated title is a title collision, not a duplicate family",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-raw-folder [ses_f281d7319ffe2rQVakUr9zxWR5].md:L25435] The Learn Earth material IDs and topics differ, so the shared title is a collision rather than a duplicate"
     },
     {
       "id": "concept--external-attachment-embed-risk",
@@ -55,7 +61,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-raw-folder [ses_f281d7319ffe2rQVakUr9zxWR5].md",
       "source_location": "L25476",
-      "norm_label": "wiki/resources image embeds whose attachment files are absent"
+      "norm_label": "wiki/resources image embeds whose attachment files are absent",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-raw-folder [ses_f281d7319ffe2rQVakUr9zxWR5].md:L25486] Run a post-migration link audit before removing any raw copy, after canonicalizing and renaming"
     },
     {
       "id": "concept--scraped-cli-capture-code-block-corruption",
@@ -80,71 +87,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-raw-folder [ses_f281d7319ffe2rQVakUr9zxWR5].md",
       "source_location": "L14426",
       "norm_label": "traversal claim downgraded from the mandated full read"
-    },
-    {
-      "id": "rationale--areas-hold-synthesized-notes-not-copied-documentation",
-      "label": "Areas should hold synthesized notes and current practices, not the bulk of copied documentation",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-raw-folder [ses_f281d7319ffe2rQVakUr9zxWR5].md",
-      "source_location": "L25374",
-      "norm_label": "areas should hold synthesized notes, not bulk copied documentation"
-    },
-    {
-      "id": "rationale--anchor-context-must-survive-canonicalization",
-      "label": "Some duplicate pairs differ only by URL anchor, so canonicalization must preserve the anchor context",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-raw-folder [ses_f281d7319ffe2rQVakUr9zxWR5].md",
-      "source_location": "L25433",
-      "norm_label": "canonicalization must preserve anchor context"
-    },
-    {
-      "id": "rationale--learning-series-ids-differ-across-title-collisions",
-      "label": "The Learn Earth material IDs and topics differ, so the shared title is a collision rather than a duplicate",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-raw-folder [ses_f281d7319ffe2rQVakUr9zxWR5].md",
-      "source_location": "L25435",
-      "norm_label": "learn earth material ids and topics differ across the shared title"
-    },
-    {
-      "id": "rationale--post-migration-link-audit-before-removing-raw-copies",
-      "label": "Run a post-migration link audit before removing any raw copy, after canonicalizing and renaming",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-raw-folder [ses_f281d7319ffe2rQVakUr9zxWR5].md",
-      "source_location": "L25486",
-      "norm_label": "post-migration link audit before removing raw copies"
     }
   ],
   "links": [
-    {
-      "source": "rationale--areas-hold-synthesized-notes-not-copied-documentation",
-      "target": "concept--raw-capture-para-triage",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--anchor-context-must-survive-canonicalization",
-      "target": "concept--duplicate-families-by-canonical-source-url",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--learning-series-ids-differ-across-title-collisions",
-      "target": "concept--title-collision-is-not-a-duplicate-family",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--post-migration-link-audit-before-removing-raw-copies",
-      "target": "concept--external-attachment-embed-risk",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--post-migration-link-audit-before-removing-raw-copies",
-      "target": "concept--duplicate-families-by-canonical-source-url",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--credential-handling-docs-are-not-credentials",
       "target": "concept--structural-signature-secret-scanning",

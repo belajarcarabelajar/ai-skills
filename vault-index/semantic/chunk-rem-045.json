@@ -36,7 +36,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-kde-plasma-6-components [ses_f221dc2aaffeD7tR9uzbMitsZ7].md",
       "source_location": "L16727",
       "norm_label": "xdg-desktop-portal-gtk must be kept as the documented remedy for gtk font rendering and the on-demand xwayland file chooser",
-      "summary": "Running xdg-desktop-portal-gtk alongside xdg-desktop-portal-kde looks like duplication, but the verdict is keep it: it is the documented fix for incorrect GTK font rendering on Plasma and it supplies the on-demand XWayland file chooser. xdg-desktop-portal-kde is itself not removable, exposing 20 portals including file chooser, print and screencast. Upstream forbids xdg-desktop-portal-gnome because it conflicts with the KDE backend, an asymmetry that shows the list is not a dedupe list."
+      "summary": "Running xdg-desktop-portal-gtk alongside xdg-desktop-portal-kde looks like duplication, but the verdict is keep it: it is the documented fix for incorrect GTK font rendering on Plasma and it supplies the on-demand XWayland file chooser. xdg-desktop-portal-kde is itself not removable, exposing 20 portals including file chooser, print and screencast. Upstream forbids xdg-desktop-portal-gnome because it conflicts with the KDE backend, an asymmetry that shows the list is not a dedupe list.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-kde-plasma-6-components [ses_f221dc2aaffeD7tR9uzbMitsZ7].md:L16727] The redundant-looking GTK portal was kept because it is the documented remedy, not a duplicate"
     },
     {
       "id": "concept--proportional-set-size-not-rss-for-thin-plasmashell-children",
@@ -63,7 +64,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-kde-plasma-6-components [ses_f221dc2aaffeD7tR9uzbMitsZ7].md",
       "source_location": "L16739",
       "norm_label": "missing rtkit drops pipewire to rt priority 1",
-      "summary": "rtkit is not installed on this machine, so PipeWire and WirePlumber log repeated RTKit ServiceUnknown errors and the documented consequence is that MaxRealtimePriority falls back to 1. rtkit 0.14-1, roughly 90 KiB, is in the official Arch extra repository, and the verdict is to install it rather than suppress the warnings."
+      "summary": "rtkit is not installed on this machine, so PipeWire and WirePlumber log repeated RTKit ServiceUnknown errors and the documented consequence is that MaxRealtimePriority falls back to 1. rtkit 0.14-1, roughly 90 KiB, is in the official Arch extra repository, and the verdict is to install it rather than suppress the warnings.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-kde-plasma-6-components [ses_f221dc2aaffeD7tR9uzbMitsZ7].md:L16739] rtkit was to be installed rather than its errors suppressed, because the daemon is what restores RT priority"
     },
     {
       "id": "concept--sddm-x11-greeter-is-the-documented-default",
@@ -72,7 +74,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-kde-plasma-6-components [ses_f221dc2aaffeD7tR9uzbMitsZ7].md",
       "source_location": "L16740",
       "norm_label": "sddm's x11 greeter is the documented default for 0.21 while wayland remains experimental",
-      "summary": "sddm.conf(5) gives DisplayServer a default value of x11, and the Wayland greeter is marked experimental, which is why an Xorg greeter is resident on vt2 despite there being no /etc/sddm.conf. The verdict is to leave it: the X11 greeter is the documented default with the fewest moving parts. Upstream publishes no memory figures for either greeter mode, so no quantitative saving is claimed for switching."
+      "summary": "sddm.conf(5) gives DisplayServer a default value of x11, and the Wayland greeter is marked experimental, which is why an Xorg greeter is resident on vt2 despite there being no /etc/sddm.conf. The verdict is to leave it: the X11 greeter is the documented default with the fewest moving parts. Upstream publishes no memory figures for either greeter mode, so no quantitative saving is claimed for switching.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-kde-plasma-6-components [ses_f221dc2aaffeD7tR9uzbMitsZ7].md:L14347] The greeter was left on X11 because the Wayland greeter is experimental and upstream publishes no memory figures to justify the switch"
     },
     {
       "id": "concept--usr-owned-by-uid-1000-escalation-surface",
@@ -81,70 +84,11 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-kde-plasma-6-components [ses_f221dc2aaffeD7tR9uzbMitsZ7].md",
       "source_location": "L5548",
       "norm_label": "/usr owned by an unprivileged user is an escalation surface, not a memory defect",
-      "summary": "The kernel log line systemd-tmpfiles[500]: Detected unsafe path transition /usr (owned by belajarcarabelajar) -> /usr/lib (owned by root) has its root cause in the ownership of /usr rather than in anything tmpfiles does: an intermediate path component owned by a non-root user means tmpfiles refuses to traverse or operate across it. This is the same class as any unprivileged-owned directory in the system path."
-    },
-    {
-      "id": "rationale--usr-ownership-is-a-security-issue-not-a-ram-issue",
-      "label": "The /usr ownership entry was kept as a fix because it is a security control, not a memory issue",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-kde-plasma-6-components [ses_f221dc2aaffeD7tR9uzbMitsZ7].md",
-      "source_location": "L16741",
-      "norm_label": "the /usr ownership entry was kept as a fix because it is a security control, not a memory issue",
-      "summary": "The session's per-component verdict list ends with an instruction to fix /usr ownership, on the stated grounds that it is a real security control rather than a memory issue and that upstream accepts no configuration workaround for it. That is the same claim emitted in chunk-rem-022, so the id is reused rather than a near-duplicate created; the label differs from that chunk's wording but the claim is identical."
-    },
-    {
-      "id": "rationale--portal-gtk-kept-as-the-documented-rendering-and-chooser-remedy",
-      "label": "The redundant-looking GTK portal was kept because it is the documented remedy, not a duplicate",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-kde-plasma-6-components [ses_f221dc2aaffeD7tR9uzbMitsZ7].md",
-      "source_location": "L16727",
-      "norm_label": "the redundant-looking gtk portal was kept because it is the documented remedy, not a duplicate",
-      "summary": "Installing it alongside xdg-desktop-portal-kde reads as waste on a KDE-only session, and the upstream list forbids xdg-desktop-portal-gnome for conflicting with the KDE backend, which invites the inference that portal-gtk is the same case. It is not: portal-gtk is the documented fix for incorrect GTK font rendering on Plasma and for the on-demand XWayland file chooser, so removing it trades a cosmetic-looking process for a hard-to-diagnose failure mode."
-    },
-    {
-      "id": "rationale--install-rtkit-rather-than-suppress-its-errors",
-      "label": "rtkit was to be installed rather than its errors suppressed, because the daemon is what restores RT priority",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-kde-plasma-6-components [ses_f221dc2aaffeD7tR9uzbMitsZ7].md",
-      "source_location": "L16739",
-      "norm_label": "rtkit was to be installed rather than its errors suppressed, because the daemon is what restores rt priority",
-      "summary": "The repeated RTKit ServiceUnknown messages in PipeWire and WirePlumber can be silenced, but silencing them leaves MaxRealtimePriority at its fallback of 1. Installing rtkit 0.14-1 from extra costs about 90 KiB and is the only option that restores the scheduling the audio stack expects, so the errors are a symptom worth fixing rather than noise to hide."
-    },
-    {
-      "id": "rationale--leave-the-x11-greeter-because-wayland-greeter-is-experimental",
-      "label": "The greeter was left on X11 because the Wayland greeter is experimental and upstream publishes no memory figures to justify the switch",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-kde-plasma-6-components [ses_f221dc2aaffeD7tR9uzbMitsZ7].md",
-      "source_location": "L14347",
-      "norm_label": "the greeter was left on x11 because the wayland greeter is experimental and upstream publishes no memory figures to justify the switch",
-      "summary": "The Xorg greeter is resident at about 25 MiB RSS plus 23 MiB swap, and the Wayland greeter would run kwin_wayland as the sddm user instead. No upstream source documents either mode numerically, so the only measurement available is the observed one, and the deciding factor was that DisplayServer defaults to x11 while the Wayland greeter requires extra drop-in work and is marked experimental."
+      "summary": "The kernel log line systemd-tmpfiles[500]: Detected unsafe path transition /usr (owned by belajarcarabelajar) -> /usr/lib (owned by root) has its root cause in the ownership of /usr rather than in anything tmpfiles does: an intermediate path component owned by a non-root user means tmpfiles refuses to traverse or operate across it. This is the same class as any unprivileged-owned directory in the system path.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-kde-plasma-6-components [ses_f221dc2aaffeD7tR9uzbMitsZ7].md:L16741] The /usr ownership entry was kept as a fix because it is a security control, not a memory issue"
     }
   ],
   "links": [
-    {
-      "source": "rationale--portal-gtk-kept-as-the-documented-rendering-and-chooser-remedy",
-      "target": "concept--xdg-desktop-portal-gtk-fixes-gtk-font-rendering-on-plasma",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--install-rtkit-rather-than-suppress-its-errors",
-      "target": "concept--missing-rtkit-drops-pipewire-to-rt-priority-1",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--leave-the-x11-greeter-because-wayland-greeter-is-experimental",
-      "target": "concept--sddm-x11-greeter-is-the-documented-default",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--usr-ownership-is-a-security-issue-not-a-ram-issue",
-      "target": "concept--usr-owned-by-uid-1000-escalation-surface",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--kaccess-forces-xcb-and-is-x11-only",
       "target": "concept--sddm-x11-greeter-is-the-documented-default",

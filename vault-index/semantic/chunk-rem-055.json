@@ -8,7 +8,11 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - pull-request-review-orchestration [ses_f085aa3a4ffeFf5LPuRAOkO1Hu].md",
       "source_location": "L4144",
       "norm_label": "bun install --frozen-lockfile as a dependency coherence gate across ci and deploy scripts",
-      "summary": "Reused id. Dependabot PR #438 edited four package.json manifests and left bun.lock untouched, so the gate fires: every one of the 13 `bun install --frozen-lockfile` call sites fails with \"lockfile had changes, but lockfile is frozen\". Merging shipped the P1 onto main."
+      "summary": "Reused id. Dependabot PR #438 edited four package.json manifests and left bun.lock untouched, so the gate fires: every one of the 13 `bun install --frozen-lockfile` call sites fails with \"lockfile had changes, but lockfile is frozen\". Merging shipped the P1 onto main.",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - pull-request-review-orchestration [ses_f085aa3a4ffeFf5LPuRAOkO1Hu].md:L6608] Re-verify the blocker against the merged origin/main tree, not the synthetic probe",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - pull-request-review-orchestration [ses_f085aa3a4ffeFf5LPuRAOkO1Hu].md:L6214] P1 rather than P0 because no workflow is actually running"
+      ]
     },
     {
       "id": "concept--dependabot-npm-ecosystem-vs-bun-resolution",
@@ -26,7 +30,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - pull-request-review-orchestration [ses_f085aa3a4ffeFf5LPuRAOkO1Hu].md",
       "source_location": "L8166",
       "norm_label": "dependabot supports bun as a package-ecosystem value, version updates only",
-      "summary": "Verified against the GitHub docs rather than memory before editing the config: `bun` is a valid package-ecosystem YAML value, GA since 2025-02-13, requires Bun >= 1.1.39 (repo is on 1.4.0), covers the text bun.lock but not the legacy binary bun.lockb, and has no security-updates support yet."
+      "summary": "Verified against the GitHub docs rather than memory before editing the config: `bun` is a valid package-ecosystem YAML value, GA since 2025-02-13, requires Bun >= 1.1.39 (repo is on 1.4.0), covers the text bun.lock but not the legacy binary bun.lockb, and has no security-updates support yet.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - pull-request-review-orchestration [ses_f085aa3a4ffeFf5LPuRAOkO1Hu].md:L8284] Switching npm to bun loses nothing because no security-updates block exists"
     },
     {
       "id": "concept--vitest-coverage-exact-peer-lockstep",
@@ -35,7 +40,11 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - pull-request-review-orchestration [ses_f085aa3a4ffeFf5LPuRAOkO1Hu].md",
       "source_location": "L8296",
       "norm_label": "every @vitest/coverage-* release pins vitest to the identical exact version",
-      "summary": "Checked against the npm registry before moving anything: coverage-istanbul 5.0.1 peer-pins vitest 5.0.1, coverage 5.0.3 peer-pins vitest 5.0.3. Provider and runner therefore cannot move independently, which is what finding F2 was about after Dependabot bumped the providers but not the runner."
+      "summary": "Checked against the npm registry before moving anything: coverage-istanbul 5.0.1 peer-pins vitest 5.0.1, coverage 5.0.3 peer-pins vitest 5.0.3. Provider and runner therefore cannot move independently, which is what finding F2 was about after Dependabot bumped the providers but not the runner.",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - pull-request-review-orchestration [ses_f085aa3a4ffeFf5LPuRAOkO1Hu].md:L8264] Align vitest to the already-merged coverage version rather than to latest",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - pull-request-review-orchestration [ses_f085aa3a4ffeFf5LPuRAOkO1Hu].md:L6035] The coverage/vitest peer mismatch only warns in bun, so it is P2 not blocking"
+      ]
     },
     {
       "id": "concept--nested-node-modules-duplicate-workerd-binary",
@@ -62,7 +71,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - pull-request-review-orchestration [ses_f085aa3a4ffeFf5LPuRAOkO1Hu].md",
       "source_location": "L6348",
       "norm_label": "stale # v6 and # ratchet annotations left behind by a sha pin bump",
-      "summary": "Finding F4 on PR #439, filed P2: three lines moved to the SHA 3d3c42e5..., verified via the GitHub API as the commit behind tag v7.0.1, while the trailing `# v6` comment and the `# ratchet:actions/checkout@v6` marker stayed at the old version."
+      "summary": "Finding F4 on PR #439, filed P2: three lines moved to the SHA 3d3c42e5..., verified via the GitHub API as the commit behind tag v7.0.1, while the trailing `# v6` comment and the `# ratchet:actions/checkout@v6` marker stayed at the old version.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - pull-request-review-orchestration [ses_f085aa3a4ffeFf5LPuRAOkO1Hu].md:L5757] The wrangler SHA-pin finding was dropped because no such convention exists"
     },
     {
       "id": "concept--red-checks-are-billing-artifacts",
@@ -71,7 +81,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - pull-request-review-orchestration [ses_f085aa3a4ffeFf5LPuRAOkO1Hu].md",
       "source_location": "L6352",
       "norm_label": "five red checks are billing cancellations, not build failures",
-      "summary": "The five red checks on PR #438 came back \"The job was not started because recent account payments have failed\", every job with steps_count 0 and a 3-second duration. PR #439 reported no checks at all. Both still fail the auto-merge gates, but not for the reason the red X implies."
+      "summary": "The five red checks on PR #438 came back \"The job was not started because recent account payments have failed\", every job with steps_count 0 and a 3-second duration. PR #439 reported no checks at all. Both still fail the auto-merge gates, but not for the reason the red X implies.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - pull-request-review-orchestration [ses_f085aa3a4ffeFf5LPuRAOkO1Hu].md:L4158] Zero steps and a 3-second duration mark a job that never started"
     },
     {
       "id": "concept--edquot-from-reviewer-probe-dirs",
@@ -89,7 +100,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - pull-request-review-orchestration [ses_f085aa3a4ffeFf5LPuRAOkO1Hu].md",
       "source_location": "L6604",
       "norm_label": "an already-merged pr is terminal: record the discrepancy, never revert",
-      "summary": "The user merged both PRs, including #438 which carried a P1. The response was to record the merge commits, re-verify the finding against the merged origin/main tree, and change nothing else: no revert, no un-merge, nothing posted."
+      "summary": "The user merged both PRs, including #438 which carried a P1. The response was to record the merge commits, re-verify the finding against the merged origin/main tree, and change nothing else: no revert, no un-merge, nothing posted.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - pull-request-review-orchestration [ses_f085aa3a4ffeFf5LPuRAOkO1Hu].md:L6393] No revert, because a revert is a new change and not an undo"
     },
     {
       "id": "concept--untracked-workflow-invisible-to-dependabot",
@@ -99,78 +111,6 @@
       "source_location": "L6353",
       "norm_label": "schema-cli-fingerprint.yml exists only in the local working tree",
       "summary": "The file is untracked and absent from origin/main, which is why PR #439 left it on actions/checkout@v4 at line 58. Recorded explicitly as local repo state and out of scope for the PR, since Dependabot only ever reads the tracked base."
-    },
-    {
-      "id": "rationale--align-vitest-to-the-already-merged-coverage-version",
-      "label": "Align vitest to the already-merged coverage version rather than to latest",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - pull-request-review-orchestration [ses_f085aa3a4ffeFf5LPuRAOkO1Hu].md",
-      "source_location": "L8264",
-      "norm_label": "align vitest to the already-merged coverage version rather than to latest",
-      "summary": "Coverage is exact-pinned in this repo and PR #438 already merged 5.0.1, so resolving the lock to vitest 5.0.1 is the only self-consistent pairing that adds no version drift beyond what is already on main. Going to 5.0.3 would re-pin the providers into an unreviewed bump."
-    },
-    {
-      "id": "rationale--verify-against-the-merged-tree-not-a-synthetic-probe",
-      "label": "Re-verify the blocker against the merged origin/main tree, not the synthetic probe",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - pull-request-review-orchestration [ses_f085aa3a4ffeFf5LPuRAOkO1Hu].md",
-      "source_location": "L6608",
-      "norm_label": "re-verify the blocker against the merged origin main tree, not the synthetic probe",
-      "summary": "The first reproduction used a hand-built workspace. After the merge the claim was re-checked with `git archive origin/main package.json bun.lock patches apps config` piped into `bun install --frozen-lockfile`: exit 1, lockfile frozen. Evidence from the real tree beats evidence from the model of it."
-    },
-    {
-      "id": "rationale--p1-not-p0-because-workflows-are-disabled-today",
-      "label": "P1 rather than P0 because no workflow is actually running",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - pull-request-review-orchestration [ses_f085aa3a4ffeFf5LPuRAOkO1Hu].md",
-      "source_location": "L6214",
-      "norm_label": "p1 rather than p0 because no workflow is actually running",
-      "summary": "P0 would need universal failure independent of inputs. The frozen-lockfile contract is documented and spans 13 install sites, which is P1, but ci.yml is workflow_dispatch-only and Actions are disabled, so nothing is breaking live. Severity was lowered on that basis, not on convenience; the verdict stayed `not correct` either way."
-    },
-    {
-      "id": "rationale--peer-mismatch-is-a-warning-not-a-fatal-install",
-      "label": "The coverage/vitest peer mismatch only warns in bun, so it is P2 not blocking",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - pull-request-review-orchestration [ses_f085aa3a4ffeFf5LPuRAOkO1Hu].md",
-      "source_location": "L6035",
-      "norm_label": "the coverage/vitest peer mismatch only warns in bun, so it is p2 not blocking",
-      "summary": "A reviewer subagent called the peer conflict a confirmed risk case. A parent-side probe showed a non-frozen install prints `incorrect peer dependency` and exits 0, which contradicts the subagent, so the finding was downgraded rather than passed on."
-    },
-    {
-      "id": "rationale--dropped-because-no-sha-pin-convention-exists",
-      "label": "The wrangler SHA-pin finding was dropped because no such convention exists",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - pull-request-review-orchestration [ses_f085aa3a4ffeFf5LPuRAOkO1Hu].md",
-      "source_location": "L5757",
-      "norm_label": "the wrangler sha-pin finding was dropped because no such convention exists",
-      "summary": "A reviewer flagged that moving wrangler-action to @v4.1.3 breaks a SHA-pin convention. The repo overwhelmingly uses floating tags (checkout@v7, setup-bun@v2, rust-cache@v2, gitleaks@v3) and the three SHA-pinned workflows are the exception, so the claim failed the deliberate-design-choice criterion and was recorded as rejected."
-    },
-    {
-      "id": "rationale--zero-step-three-second-runs-prove-non-start",
-      "label": "Zero steps and a 3-second duration mark a job that never started",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - pull-request-review-orchestration [ses_f085aa3a4ffeFf5LPuRAOkO1Hu].md",
-      "source_location": "L4158",
-      "norm_label": "zero steps and a 3-second duration mark a job that never started",
-      "summary": "No step can fail in under three seconds with an empty steps array, so the red X was a job that was never allocated a runner. That reading is what separated an account billing artefact from a repository breakage, and it was confirmed independently against the API rather than taken from the subagent."
-    },
-    {
-      "id": "rationale--ecosystem-switch-loses-nothing-because-no-security-updates-configured",
-      "label": "Switching npm to bun loses nothing because no security-updates block exists",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - pull-request-review-orchestration [ses_f085aa3a4ffeFf5LPuRAOkO1Hu].md",
-      "source_location": "L8284",
-      "norm_label": "switching npm to bun loses nothing because no security-updates block exists",
-      "summary": "Bun security updates are not supported by Dependabot yet, which looked like a regression until the config was re-read: it declares only npm, cargo and github-actions version updates and no security-updates section, so the gap applies to nothing that was configured."
-    },
-    {
-      "id": "rationale--no-revert-because-a-revert-is-a-new-change",
-      "label": "No revert, because a revert is a new change and not an undo",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - pull-request-review-orchestration [ses_f085aa3a4ffeFf5LPuRAOkO1Hu].md",
-      "source_location": "L6393",
-      "norm_label": "no revert, because a revert is a new change and not an undo",
-      "summary": "The P1 finding was correct and the PR was merged anyway, which is the user's call. The chosen response was to verify and write down the consequence, not to undo the merge - merged is terminal, and un-merging would substitute an agent decision for a human one."
     }
   ],
   "links": [
@@ -220,54 +160,6 @@
       "source": "concept--untracked-workflow-invisible-to-dependabot",
       "target": "concept--dependabot-npm-ecosystem-vs-bun-resolution",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--verify-against-the-merged-tree-not-a-synthetic-probe",
-      "target": "concept--frozen-lockfile-lockfile-coherence-gate",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--p1-not-p0-because-workflows-are-disabled-today",
-      "target": "concept--frozen-lockfile-lockfile-coherence-gate",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--no-revert-because-a-revert-is-a-new-change",
-      "target": "concept--merged-is-terminal-record-discrepancy",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--ecosystem-switch-loses-nothing-because-no-security-updates-configured",
-      "target": "concept--dependabot-bun-ecosystem-support",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--align-vitest-to-the-already-merged-coverage-version",
-      "target": "concept--vitest-coverage-exact-peer-lockstep",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--peer-mismatch-is-a-warning-not-a-fatal-install",
-      "target": "concept--vitest-coverage-exact-peer-lockstep",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--zero-step-three-second-runs-prove-non-start",
-      "target": "concept--red-checks-are-billing-artifacts",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--dropped-because-no-sha-pin-convention-exists",
-      "target": "concept--stale-ratchet-annotation-after-sha-bump",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     }
   ]

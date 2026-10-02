@@ -32,7 +32,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-systemd-boot-kernel-entries [ses_f221dc2a9ffez0yuGn9R5Uw0ns].md",
       "source_location": "L20809",
-      "norm_label": "mkinitcpio's pacman-hook preset path writes /boot/vmlinuz-linux and /boot/initramfs-linux.img but no loader entry"
+      "norm_label": "mkinitcpio's pacman-hook preset path writes /boot/vmlinuz-linux and /boot/initramfs-linux.img but no loader entry",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-systemd-boot-kernel-entries [ses_f221dc2a9ffez0yuGn9R5Uw0ns].md:L22208] No fallback entry can be authored until mkinitcpio -p linux runs, because /boot contains no initramfs-linux.img at all",
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-systemd-boot-kernel-entries [ses_f221dc2a9ffez0yuGn9R5Uw0ns].md:L22241] Drop the initrd /intel-ucode.img line when HOOKS contains microcode, because that hook already packs the early CPIO into the image and a duplicate line is redundant"
+      ]
     },
     {
       "id": "concept--zswap-enabled-is-a-kernel-parameter-not-a-systemd-one",
@@ -56,7 +60,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-systemd-boot-kernel-entries [ses_f221dc2a9ffez0yuGn9R5Uw0ns].md",
       "source_location": "L22245",
-      "norm_label": "60-mkinitcpio-remove.hook deletes /boot/vmlinuz-linux and /boot/initramfs-linux.img, turning a hand-written loader entry into a dead menu item"
+      "norm_label": "60-mkinitcpio-remove.hook deletes /boot/vmlinuz-linux and /boot/initramfs-linux.img, turning a hand-written loader entry into a dead menu item",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-systemd-boot-kernel-entries [ses_f221dc2a9ffez0yuGn9R5Uw0ns].md:L22245] Do not remove the linux package until the fallback entry has booted successfully, because the remove hook deletes the very files the entry needs"
     },
     {
       "id": "concept--oneshot-boot-selection-tests-an-entry-without-changing-bootorder",
@@ -72,66 +77,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-systemd-boot-kernel-entries [ses_f221dc2a9ffez0yuGn9R5Uw0ns].md",
       "source_location": "L22243",
-      "norm_label": "bootctl list and status only read, while bootctl install and update overwrite efi/boot/bootx64.efi and rewrite the firmware boot list"
-    },
-    {
-      "id": "rationale--never-bootctl-install-or-efibootmgr-create-here",
-      "label": "Never run bootctl install, bootctl update or efibootmgr --create, because they are unnecessary once the firmware already boots systemd-boot via Boot0002",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-systemd-boot-kernel-entries [ses_f221dc2a9ffez0yuGn9R5Uw0ns].md",
-      "source_location": "L22243",
-      "norm_label": "never run bootctl install, bootctl update or efibootmgr --create, because they are unnecessary once the firmware already boots systemd-boot via boot0002"
-    },
-    {
-      "id": "rationale--defer-removing-linux-until-the-fallback-entry-has-booted",
-      "label": "Do not remove the linux package until the fallback entry has booted successfully, because the remove hook deletes the very files the entry needs",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-systemd-boot-kernel-entries [ses_f221dc2a9ffez0yuGn9R5Uw0ns].md",
-      "source_location": "L22245",
-      "norm_label": "do not remove the linux package until the fallback entry has booted successfully, because the remove hook deletes the very files the entry needs"
-    },
-    {
-      "id": "rationale--build-the-missing-initramfs-before-authoring-any-fallback-entry",
-      "label": "No fallback entry can be authored until mkinitcpio -p linux runs, because /boot contains no initramfs-linux.img at all",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-systemd-boot-kernel-entries [ses_f221dc2a9ffez0yuGn9R5Uw0ns].md",
-      "source_location": "L22208",
-      "norm_label": "no fallback entry can be authored until mkinitcpio -p linux runs, because /boot contains no initramfs-linux.img at all"
-    },
-    {
-      "id": "rationale--omit-the-separate-intel-ucode-initrd-when-the-microcode-hook-is-active",
-      "label": "Drop the initrd /intel-ucode.img line when HOOKS contains microcode, because that hook already packs the early CPIO into the image and a duplicate line is redundant",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-systemd-boot-kernel-entries [ses_f221dc2a9ffez0yuGn9R5Uw0ns].md",
-      "source_location": "L22241",
-      "norm_label": "drop the initrd /intel-ucode.img line when hooks contains microcode, because that hook already packs the early cpio into the image and a duplicate line is redundant"
+      "norm_label": "bootctl list and status only read, while bootctl install and update overwrite efi/boot/bootx64.efi and rewrite the firmware boot list",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-systemd-boot-kernel-entries [ses_f221dc2a9ffez0yuGn9R5Uw0ns].md:L22243] Never run bootctl install, bootctl update or efibootmgr --create, because they are unnecessary once the firmware already boots systemd-boot via Boot0002"
     }
   ],
   "links": [
-    {
-      "source": "rationale--never-bootctl-install-or-efibootmgr-create-here",
-      "target": "concept--bootctl-read-only-subcommands-versus-firmware-writing-ones",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--defer-removing-linux-until-the-fallback-entry-has-booted",
-      "target": "concept--mkinitcpio-remove-hook-silently-breaks-a-hand-written-loader-entry",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--build-the-missing-initramfs-before-authoring-any-fallback-entry",
-      "target": "concept--mkinitcpio-preset-path-writes-flat-boot-images-and-no-loader-entry",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--omit-the-separate-intel-ucode-initrd-when-the-microcode-hook-is-active",
-      "target": "concept--mkinitcpio-preset-path-writes-flat-boot-images-and-no-loader-entry",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--systemd-boot-loader-entry-discovery-and-bls-layout",
       "target": "concept--kernel-install-plugins-present-but-never-invoked-for-stock-linux",

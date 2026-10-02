@@ -16,7 +16,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - investigate-sops-and-windows-updater-test-debts [ses_f25834e0bffeT27b9dlmsoTMNe].md",
       "source_location": "L5577",
-      "norm_label": "sops store tracking expectation in repository layout test is obsolete"
+      "norm_label": "sops store tracking expectation in repository layout test is obsolete",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - investigate-sops-and-windows-updater-test-debts [ses_f25834e0bffeT27b9dlmsoTMNe].md:L5597] The age private key exists only on each machine, so the store can never be repo content"
     },
     {
       "id": "concept--latest-json-windows-url-version-skew",
@@ -24,7 +25,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - investigate-sops-and-windows-updater-test-debts [ses_f25834e0bffeT27b9dlmsoTMNe].md",
       "source_location": "L5632",
-      "norm_label": "latest json version newer than its own windows urls after a linux only release"
+      "norm_label": "latest json version newer than its own windows urls after a linux only release",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - investigate-sops-and-windows-updater-test-debts [ses_f25834e0bffeT27b9dlmsoTMNe].md:L5655] Deleting or relaxing the updater test lets a manifest whose version outruns its binary return unnoticed"
     },
     {
       "id": "concept--updater-serves-last-manifest-publishing-release",
@@ -32,7 +34,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - investigate-sops-and-windows-updater-test-debts [ses_f25834e0bffeT27b9dlmsoTMNe].md",
       "source_location": "L5640",
-      "norm_label": "updater serves the last release that published a manifest and overlays newer non windows entries"
+      "norm_label": "updater serves the last release that published a manifest and overlays newer non windows entries",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - investigate-sops-and-windows-updater-test-debts [ses_f25834e0bffeT27b9dlmsoTMNe].md:L5640] A Windows URL pointing at a different build would make clients reinstall the same installer on every update check"
     },
     {
       "id": "concept--ci-contract-test-step-tolerated-by-or-true",
@@ -67,30 +70,6 @@
       "norm_label": "a base64 blob decoded from memory is retracted rather than reported as evidence"
     },
     {
-      "id": "rationale--sops-stores-are-machine-local-by-policy",
-      "label": "The age private key exists only on each machine, so the store can never be repo content",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - investigate-sops-and-windows-updater-test-debts [ses_f25834e0bffeT27b9dlmsoTMNe].md",
-      "source_location": "L5597",
-      "norm_label": "the age private key exists only on each machine so the store can never be repo content"
-    },
-    {
-      "id": "rationale--windows-target-must-never-lag-the-manifest-version",
-      "label": "A Windows URL pointing at a different build would make clients reinstall the same installer on every update check",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - investigate-sops-and-windows-updater-test-debts [ses_f25834e0bffeT27b9dlmsoTMNe].md",
-      "source_location": "L5640",
-      "norm_label": "a windows url pointing at a different build would make clients reinstall the same installer on every update check"
-    },
-    {
-      "id": "rationale--deleting-the-test-returns-the-hazard-it-guarded",
-      "label": "Deleting or relaxing the updater test lets a manifest whose version outruns its binary return unnoticed",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - investigate-sops-and-windows-updater-test-debts [ses_f25834e0bffeT27b9dlmsoTMNe].md",
-      "source_location": "L5655",
-      "norm_label": "deleting or relaxing the updater test lets a manifest whose version outruns its binary return unnoticed"
-    },
-    {
       "id": "concept--independent-platform-versioning",
       "label": "Independent platform versioning",
       "file_type": "concept",
@@ -120,7 +99,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-linux-release-producer [ses_f1d4e8931ffemY5TiOgRQZ6aA3].md",
       "source_location": "L9627",
-      "norm_label": "linux owned state rollback bounded to the linux manifest and the linux aggregate entry"
+      "norm_label": "linux owned state rollback bounded to the linux manifest and the linux aggregate entry",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-linux-release-producer [ses_f1d4e8931ffemY5TiOgRQZ6aA3].md:L2618] Restoring the whole aggregate from the snapshot would undo a concurrent sibling channel release"
     },
     {
       "id": "concept--dry-run-created-a-thousand-path-shim-symlinks",
@@ -136,7 +116,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-linux-release-producer [ses_f1d4e8931ffemY5TiOgRQZ6aA3].md",
       "source_location": "L9639",
-      "norm_label": "the newest by mtime bundle fallback that shipped a stale deb is removed"
+      "norm_label": "the newest by mtime bundle fallback that shipped a stale deb is removed",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-linux-release-producer [ses_f1d4e8931ffemY5TiOgRQZ6aA3].md:L9639] A bundle that is not this release's version must fail closed instead of falling back to the newest file by mtime"
     },
     {
       "id": "concept--read-field-splitting-on-newlines",
@@ -152,7 +133,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-linux-release-producer [ses_f1d4e8931ffemY5TiOgRQZ6aA3].md",
       "source_location": "L9596",
-      "norm_label": "full tree byte identity snapshot delta assertion"
+      "norm_label": "full tree byte identity snapshot delta assertion",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-linux-release-producer [ses_f1d4e8931ffemY5TiOgRQZ6aA3].md:L9590] Never invoked is an observation of an empty stub log, not an assumption"
     },
     {
       "id": "concept--locked-deployment-contract-needs-explicit-signoff",
@@ -161,39 +143,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-linux-release-producer [ses_f1d4e8931ffemY5TiOgRQZ6aA3].md",
       "source_location": "L9637",
       "norm_label": "locked deployment contract needs explicit sign off"
-    },
-    {
-      "id": "rationale--restoring-the-whole-aggregate-would-undo-a-concurrent-release",
-      "label": "Restoring the whole aggregate from the snapshot would undo a concurrent sibling channel release",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-linux-release-producer [ses_f1d4e8931ffemY5TiOgRQZ6aA3].md",
-      "source_location": "L2618",
-      "norm_label": "restoring the whole aggregate from the snapshot would undo a concurrent sibling channel release"
-    },
-    {
-      "id": "rationale--never-invoked-is-an-empty-log-not-an-assumption",
-      "label": "Never invoked is an observation of an empty stub log, not an assumption",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-linux-release-producer [ses_f1d4e8931ffemY5TiOgRQZ6aA3].md",
-      "source_location": "L9590",
-      "norm_label": "never invoked is an observation of an empty stub log not an assumption"
-    },
-    {
-      "id": "rationale--a-bundle-that-is-not-this-release-fails-closed",
-      "label": "A bundle that is not this release's version must fail closed instead of falling back to the newest file by mtime",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-linux-release-producer [ses_f1d4e8931ffemY5TiOgRQZ6aA3].md",
-      "source_location": "L9639",
-      "norm_label": "a bundle that is not this release s version must fail closed instead of falling back to the newest file by mtime"
     }
   ],
   "links": [
-    {
-      "source": "rationale--sops-stores-are-machine-local-by-policy",
-      "target": "concept--sops-store-tracking-expectation-is-obsolete",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--sops-store-tracking-expectation-is-obsolete",
       "target": "concept--sops-encrypted-secret-store",
@@ -201,21 +153,9 @@
       "confidence": "EXTRACTED"
     },
     {
-      "source": "rationale--deleting-the-test-returns-the-hazard-it-guarded",
-      "target": "concept--latest-json-windows-url-version-skew",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
       "source": "concept--updater-serves-last-manifest-publishing-release",
       "target": "concept--latest-json-windows-url-version-skew",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--windows-target-must-never-lag-the-manifest-version",
-      "target": "concept--updater-serves-last-manifest-publishing-release",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {
@@ -288,24 +228,6 @@
       "source": "concept--locked-deployment-contract-needs-explicit-signoff",
       "target": "concept--linux-platform-authority",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--restoring-the-whole-aggregate-would-undo-a-concurrent-release",
-      "target": "concept--linux-owned-state-rollback",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--never-invoked-is-an-empty-log-not-an-assumption",
-      "target": "concept--byte-identity-snapshot-delta-assertion",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--a-bundle-that-is-not-this-release-fails-closed",
-      "target": "concept--stale-bundle-newest-by-mtime-fallback-removed",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     }
   ]

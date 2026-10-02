@@ -15,7 +15,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k8-settings-toggle-copy [ses_f08a794a6ffepQwjH3Yp1I1Trb].md",
       "source_location": "L37",
-      "norm_label": "swallowed initial read failure on a state gating toggle"
+      "norm_label": "swallowed initial read failure on a state gating toggle",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k8-settings-toggle-copy [ses_f08a794a6ffepQwjH3Yp1I1Trb].md:L37] A user whose read fails is told metrics are off when the real state is unknown, and the toggle gates collection"
     },
     {
       "id": "concept--aria-switch-has-no-unknown-state",
@@ -23,7 +24,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k8-settings-toggle-copy [ses_f08a794a6ffepQwjH3Yp1I1Trb].md",
       "source_location": "L233",
-      "norm_label": "role switch has no unknown state, so aria busy plus role status is the honest pattern"
+      "norm_label": "role switch has no unknown state, so aria busy plus role status is the honest pattern",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k8-settings-toggle-copy [ses_f08a794a6ffepQwjH3Yp1I1Trb].md:L1962] Put the failure message inside the existing hint div so all four required ARIA attributes stay byte-identical"
     },
     {
       "id": "concept--accessible-name-assertion-vs-label-rename",
@@ -50,28 +52,13 @@
       "norm_label": "one file write scope forces reuse of an existing i18n key instead of inventing one"
     },
     {
-      "id": "rationale--do-not-claim-metric-off-when-read-failed",
-      "label": "A user whose read fails is told metrics are off when the real state is unknown, and the toggle gates collection",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k8-settings-toggle-copy [ses_f08a794a6ffepQwjH3Yp1I1Trb].md",
-      "source_location": "L37",
-      "norm_label": "a user whose read fails is told metrics are off when the real state is unknown, and the toggle gates collection"
-    },
-    {
-      "id": "rationale--keep-aria-attributes-byte-identical",
-      "label": "Put the failure message inside the existing hint div so all four required ARIA attributes stay byte-identical",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k8-settings-toggle-copy [ses_f08a794a6ffepQwjH3Yp1I1Trb].md",
-      "source_location": "L1962",
-      "norm_label": "put the failure message inside the existing hint div so all four required aria attributes stay byte identical"
-    },
-    {
       "id": "concept--expression-duration-class",
       "label": "expression: duration class, a duration read from a property rather than a literal",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-30 - f2-measure-two-qml-durations [ses_f102d8d3bffe00O6CvsB6ITw3j].md",
       "source_location": "L34",
-      "norm_label": "expression duration class, a duration read from a property rather than a literal"
+      "norm_label": "expression duration class, a duration read from a property rather than a literal",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-30 - f2-measure-two-qml-durations [ses_f102d8d3bffe00O6CvsB6ITw3j].md:L41] Both outcomes are acceptable and useful; a fabricated third outcome is not"
     },
     {
       "id": "concept--animation-duration-factor-zero-scaling",
@@ -95,7 +82,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-30 - f2-measure-two-qml-durations [ses_f102d8d3bffe00O6CvsB6ITw3j].md",
       "source_location": "L4232",
-      "norm_label": "required property with exactly one instantiation site closes the binding chain"
+      "norm_label": "required property with exactly one instantiation site closes the binding chain",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-30 - f2-measure-two-qml-durations [ses_f102d8d3bffe00O6CvsB6ITw3j].md:L5487] The report owns the verdicts, so no bucket was changed even though a measurement contradicted it"
     },
     {
       "id": "concept--org-kde-kwin-standin-import-path",
@@ -103,7 +91,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-30 - f2-measure-two-qml-durations [ses_f102d8d3bffe00O6CvsB6ITw3j].md",
       "source_location": "L4248",
-      "norm_label": "org kde kwin is compositor registered with no qmldir, needing a throwaway stand in import"
+      "norm_label": "org kde kwin is compositor registered with no qmldir, needing a throwaway stand in import",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-30 - f2-measure-two-qml-durations [ses_f102d8d3bffe00O6CvsB6ITw3j].md:L10046] Stubbing that much of the delegate's input would be closer to fabrication than to measurement"
     },
     {
       "id": "concept--positive-control-via-unreadable-kdeglobals",
@@ -144,45 +133,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-30 - f2-measure-two-qml-durations [ses_f102d8d3bffe00O6CvsB6ITw3j].md",
       "source_location": "L8806",
       "norm_label": "chain terminal tie so a tampered single measurement cannot pass verify"
-    },
-    {
-      "id": "rationale--no-fabricated-third-outcome",
-      "label": "Both outcomes are acceptable and useful; a fabricated third outcome is not",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-30 - f2-measure-two-qml-durations [ses_f102d8d3bffe00O6CvsB6ITw3j].md",
-      "source_location": "L41",
-      "norm_label": "both outcomes are acceptable and useful; a fabricated third outcome is not"
-    },
-    {
-      "id": "rationale--do-not-stub-the-whole-delegate-input-graph",
-      "label": "Stubbing that much of the delegate's input would be closer to fabrication than to measurement",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-30 - f2-measure-two-qml-durations [ses_f102d8d3bffe00O6CvsB6ITw3j].md",
-      "source_location": "L10046",
-      "norm_label": "stubbing that much of the delegate's input would be closer to fabrication than to measurement"
-    },
-    {
-      "id": "rationale--instrument-measures-but-does-not-reclassify",
-      "label": "The report owns the verdicts, so no bucket was changed even though a measurement contradicted it",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-30 - f2-measure-two-qml-durations [ses_f102d8d3bffe00O6CvsB6ITw3j].md",
-      "source_location": "L5487",
-      "norm_label": "the report owns the verdicts, so no bucket was changed even though a measurement contradicted it"
     }
   ],
   "links": [
-    {
-      "source": "rationale--do-not-claim-metric-off-when-read-failed",
-      "target": "concept--swallowed-initial-read-failure",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--keep-aria-attributes-byte-identical",
-      "target": "concept--aria-switch-has-no-unknown-state",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--accessible-name-assertion-vs-label-rename",
       "target": "concept--research-mode-to-customer-support-key-rename",
@@ -205,24 +158,6 @@
       "source": "concept--parallel-agent-locale-write-race",
       "target": "concept--research-mode-to-customer-support-key-rename",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--no-fabricated-third-outcome",
-      "target": "concept--expression-duration-class",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--do-not-stub-the-whole-delegate-input-graph",
-      "target": "concept--org-kde-kwin-standin-import-path",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--instrument-measures-but-does-not-reclassify",
-      "target": "concept--required-property-closed-binding-chain",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {

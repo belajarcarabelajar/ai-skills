@@ -9,7 +9,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - remove-dead-engine-mode-type [ses_f257de248ffeLu864vqn0xWscx].md",
       "source_location": "L43",
-      "norm_label": "dead engine_mode type surface removal"
+      "norm_label": "dead engine_mode type surface removal",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - remove-dead-engine-mode-type [ses_f257de248ffeLu864vqn0xWscx].md:L43] The Rust TtsOptions has no such field and serde silently drops unknown fields, so keeping the type is a trap for future code"
     },
     {
       "id": "concept--test-asserting-a-mode-that-does-not-exist",
@@ -17,7 +18,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - remove-dead-engine-mode-type [ses_f257de248ffeLu864vqn0xWscx].md",
       "source_location": "L42",
-      "norm_label": "a test whose name asserts a mode production never implements"
+      "norm_label": "a test whose name asserts a mode production never implements",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - remove-dead-engine-mode-type [ses_f257de248ffeLu864vqn0xWscx].md:L42] Production speakText unconditionally calls browserSpeechSynthesis.speak and never reads engine_mode, so the test is behaviourally identical to its neighbour and its name asserts a mode that does not exist"
     },
     {
       "id": "concept--strict-write-scope-for-concurrent-subagents",
@@ -25,7 +27,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - remove-dead-engine-mode-type [ses_f257de248ffeLu864vqn0xWscx].md",
       "source_location": "L35",
-      "norm_label": "strict write scope when several subagents edit one repo"
+      "norm_label": "strict write scope when several subagents edit one repo",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - remove-dead-engine-mode-type [ses_f257de248ffeLu864vqn0xWscx].md:L35] At least two other agents are concurrently editing i18n locales, VoiceSelector, repository-layout tests and a Rust file, so this agent was restricted to two named files"
     },
     {
       "id": "concept--tsc-no-emit-as-proof-of-no-hidden-caller",
@@ -44,30 +47,6 @@
       "norm_label": "vitest tohavebeencalledwith ignores undefined-valued properties"
     },
     {
-      "id": "rationale--serde-silently-drops-unknown-fields-so-the-type-is-a-trap",
-      "label": "The Rust TtsOptions has no such field and serde silently drops unknown fields, so keeping the type is a trap for future code",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - remove-dead-engine-mode-type [ses_f257de248ffeLu864vqn0xWscx].md",
-      "source_location": "L43",
-      "norm_label": "the rust ttsoptions has no such field and serde silently drops unknown fields, so keeping the type is a trap for future code"
-    },
-    {
-      "id": "rationale--speaktext-never-reads-engine-mode",
-      "label": "Production speakText unconditionally calls browserSpeechSynthesis.speak and never reads engine_mode, so the test is behaviourally identical to its neighbour and its name asserts a mode that does not exist",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - remove-dead-engine-mode-type [ses_f257de248ffeLu864vqn0xWscx].md",
-      "source_location": "L42",
-      "norm_label": "production speaktext unconditionally calls browserspeechsynthesis.speak and never reads engine_mode, so the test is behaviourally identical to its neighbour and its name asserts a mode that does not exist"
-    },
-    {
-      "id": "rationale--concurrent-agents-editing-the-same-tree-require-a-file-allowlist",
-      "label": "At least two other agents are concurrently editing i18n locales, VoiceSelector, repository-layout tests and a Rust file, so this agent was restricted to two named files",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - remove-dead-engine-mode-type [ses_f257de248ffeLu864vqn0xWscx].md",
-      "source_location": "L35",
-      "norm_label": "at least two other agents are concurrently editing i18n locales, voiceselector, repository-layout tests and a rust file, so this agent was restricted to two named files"
-    },
-    {
       "id": "concept--topgrade-rust-upgrade-wrapper",
       "label": "Topgrade, a Rust CLI that wraps every upgrade path it detects",
       "file_type": "concept",
@@ -81,7 +60,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - pertanyaan-tentang-repo-topgrade [ses_f1abaa5fcffe4Rd0iFGEFbqZqE].md",
       "source_location": "L917",
-      "norm_label": "topgrade dry-run before an auto-confirmed run"
+      "norm_label": "topgrade dry-run before an auto-confirmed run",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-27 - pertanyaan-tentang-repo-topgrade [ses_f1abaa5fcffe4Rd0iFGEFbqZqE].md:L913] Topgrade with -y only runs upgrades you could run manually; the only thing it removes is your chance to review between steps, which is why the dry run comes first"
     },
     {
       "id": "concept--pacdiff-interactive-config-update-hangs-non-tty",
@@ -89,7 +69,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - pertanyaan-tentang-repo-topgrade [ses_f1abaa5fcffe4Rd0iFGEFbqZqE].md",
       "source_location": "L1838",
-      "norm_label": "pacdiff opens an interactive diff and can hang a non-tty topgrade run"
+      "norm_label": "pacdiff opens an interactive diff and can hang a non-tty topgrade run",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-27 - pertanyaan-tentang-repo-topgrade [ses_f1abaa5fcffe4Rd0iFGEFbqZqE].md:L1817] pacdiff runs sudo --preserve-env=DIFFPROG pacdiff and opens an interactive diff tool, which would hang in a non-tty shell, so config_update was disabled and the pacnew handled by hand",
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-27 - pertanyaan-tentang-repo-topgrade [ses_f1abaa5fcffe4Rd0iFGEFbqZqE].md:L3917] The .pacnew lacks [cachyos-v3] and [cachyos] and comments out [multilib], so copying it over pacman.conf would delete the CachyOS repos and disable multilib; the existing comment block already recorded that decision"
+      ]
     },
     {
       "id": "concept--kernel-install-sync-pacman-hook",
@@ -97,7 +81,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - pertanyaan-tentang-repo-topgrade [ses_f1abaa5fcffe4Rd0iFGEFbqZqE].md",
       "source_location": "L7754",
-      "norm_label": "kernel-install-sync: a pacman hook that runs kernel-install on every kernel package change"
+      "norm_label": "kernel-install-sync: a pacman hook that runs kernel-install on every kernel package change",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-27 - pertanyaan-tentang-repo-topgrade [ses_f1abaa5fcffe4Rd0iFGEFbqZqE].md:L7757] Nothing on this system calls kernel-install during a kernel upgrade, verified by no references in /usr/share/libalpm and an empty /etc/pacman.d/hooks, so boot entries went stale and the entry kept 7.2.7-1-cachyos while the package was already 7.2.8-1"
     },
     {
       "id": "concept--lockout-risk-table-for-a-single-boot-entry",
@@ -113,7 +98,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - pertanyaan-tentang-repo-topgrade [ses_f1abaa5fcffe4Rd0iFGEFbqZqE].md",
       "source_location": "L9854",
-      "norm_label": "reinstalling the stock kernel from the pacman cache as a second bootable entry, offline"
+      "norm_label": "reinstalling the stock kernel from the pacman cache as a second bootable entry, offline",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-27 - pertanyaan-tentang-repo-topgrade [ses_f1abaa5fcffe4Rd0iFGEFbqZqE].md:L10862] The fallback is worth building because the stock kernel is the one currently running, so it is almost certain to boot and recovery needs no flashdisk, just picking the other menu entry",
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-27 - pertanyaan-tentang-repo-topgrade [ses_f1abaa5fcffe4Rd0iFGEFbqZqE].md:L10864] A kernel regression in 7.2.8-1 cannot be disproved without rebooting onto it, and that unprovable risk is what makes the fallback entry necessary"
+      ]
     },
     {
       "id": "concept--bootctl-set-timeout-efivar-outranks-loader-conf",
@@ -153,84 +142,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - pertanyaan-tentang-repo-topgrade [ses_f1abaa5fcffe4Rd0iFGEFbqZqE].md",
       "source_location": "L10138",
-      "norm_label": "tgrep wrapper false negatives"
-    },
-    {
-      "id": "rationale--tgrep-wrapper-mangles-alternation",
-      "label": "A false negative came from the tgrep wrapper mangling a multi-alternation pattern, so GNU grep is used for verification",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - pertanyaan-tentang-repo-topgrade [ses_f1abaa5fcffe4Rd0iFGEFbqZqE].md",
-      "source_location": "L10138",
-      "norm_label": "a false negative came from the tgrep wrapper mangling a multi-alternation pattern, so gnu grep is used for verification"
-    },
-    {
-      "id": "rationale--nothing-invokes-kernel-install-so-boot-entries-go-stale",
-      "label": "Nothing on this system calls kernel-install during a kernel upgrade, verified by no references in /usr/share/libalpm and an empty /etc/pacman.d/hooks, so boot entries went stale and the entry kept 7.2.7-1-cachyos while the package was already 7.2.8-1",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - pertanyaan-tentang-repo-topgrade [ses_f1abaa5fcffe4Rd0iFGEFbqZqE].md",
-      "source_location": "L7757",
-      "norm_label": "nothing on this system calls kernel-install during a kernel upgrade, verified by no references in /usr/share/libalpm and an empty /etc/pacman.d/hooks, so boot entries went stale and the entry kept 7.2.7-1-cachyos while the package was already 7.2.8-1"
-    },
-    {
-      "id": "rationale--pacdiff-opens-an-interactive-diff-tool",
-      "label": "pacdiff runs sudo --preserve-env=DIFFPROG pacdiff and opens an interactive diff tool, which would hang in a non-tty shell, so config_update was disabled and the pacnew handled by hand",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - pertanyaan-tentang-repo-topgrade [ses_f1abaa5fcffe4Rd0iFGEFbqZqE].md",
-      "source_location": "L1817",
-      "norm_label": "pacdiff runs sudo --preserve-env=diffprog pacdiff and opens an interactive diff tool, which would hang in a non-tty shell, so config_update was disabled and the pacnew handled by hand"
-    },
-    {
-      "id": "rationale--dry-run-first-because-yes-removes-every-prompt",
-      "label": "Topgrade with -y only runs upgrades you could run manually; the only thing it removes is your chance to review between steps, which is why the dry run comes first",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - pertanyaan-tentang-repo-topgrade [ses_f1abaa5fcffe4Rd0iFGEFbqZqE].md",
-      "source_location": "L913",
-      "norm_label": "topgrade with -y only runs upgrades you could run manually; the only thing it removes is your chance to review between steps, which is why the dry run comes first"
-    },
-    {
-      "id": "rationale--cached-stock-kernel-avoids-a-flashdisk-recovery",
-      "label": "The fallback is worth building because the stock kernel is the one currently running, so it is almost certain to boot and recovery needs no flashdisk, just picking the other menu entry",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - pertanyaan-tentang-repo-topgrade [ses_f1abaa5fcffe4Rd0iFGEFbqZqE].md",
-      "source_location": "L10862",
-      "norm_label": "the fallback is worth building because the stock kernel is the one currently running, so it is almost certain to boot and recovery needs no flashdisk, just picking the other menu entry"
-    },
-    {
-      "id": "rationale--fallback-kept-until-a-kernel-regression-is-disproved-by-booting",
-      "label": "A kernel regression in 7.2.8-1 cannot be disproved without rebooting onto it, and that unprovable risk is what makes the fallback entry necessary",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - pertanyaan-tentang-repo-topgrade [ses_f1abaa5fcffe4Rd0iFGEFbqZqE].md",
-      "source_location": "L10864",
-      "norm_label": "a kernel regression in 7.2.8-1 cannot be disproved without rebooting onto it, and that unprovable risk is what makes the fallback entry necessary"
-    },
-    {
-      "id": "rationale--pacman-conf-comment-already-decided-the-pacnew",
-      "label": "The .pacnew lacks [cachyos-v3] and [cachyos] and comments out [multilib], so copying it over pacman.conf would delete the CachyOS repos and disable multilib; the existing comment block already recorded that decision",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - pertanyaan-tentang-repo-topgrade [ses_f1abaa5fcffe4Rd0iFGEFbqZqE].md",
-      "source_location": "L3917",
-      "norm_label": "the .pacnew lacks [cachyos-v3] and [cachyos] and comments out [multilib], so copying it over pacman.conf would delete the cachyos repos and disable multilib; the existing comment block already recorded that decision"
+      "norm_label": "tgrep wrapper false negatives",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-27 - pertanyaan-tentang-repo-topgrade [ses_f1abaa5fcffe4Rd0iFGEFbqZqE].md:L10138] A false negative came from the tgrep wrapper mangling a multi-alternation pattern, so GNU grep is used for verification"
     }
   ],
   "links": [
-    {
-      "source": "rationale--serde-silently-drops-unknown-fields-so-the-type-is-a-trap",
-      "target": "concept--dead-engine-mode-type-removal",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--speaktext-never-reads-engine-mode",
-      "target": "concept--test-asserting-a-mode-that-does-not-exist",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--concurrent-agents-editing-the-same-tree-require-a-file-allowlist",
-      "target": "concept--strict-write-scope-for-concurrent-subagents",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--dead-engine-mode-type-removal",
       "target": "concept--test-asserting-a-mode-that-does-not-exist",
@@ -250,12 +166,6 @@
       "confidence": "EXTRACTED"
     },
     {
-      "source": "rationale--dry-run-first-because-yes-removes-every-prompt",
-      "target": "concept--topgrade-dry-run-before-auto-confirm",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
       "source": "concept--topgrade-rust-upgrade-wrapper",
       "target": "concept--topgrade-dry-run-before-auto-confirm",
       "relation": "conceptually_related_to",
@@ -265,18 +175,6 @@
       "source": "concept--pacdiff-interactive-config-update-hangs-non-tty",
       "target": "concept--topgrade-rust-upgrade-wrapper",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--pacdiff-opens-an-interactive-diff-tool",
-      "target": "concept--pacdiff-interactive-config-update-hangs-non-tty",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--nothing-invokes-kernel-install-so-boot-entries-go-stale",
-      "target": "concept--kernel-install-sync-pacman-hook",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {
@@ -304,34 +202,10 @@
       "confidence": "INFERRED"
     },
     {
-      "source": "rationale--cached-stock-kernel-avoids-a-flashdisk-recovery",
-      "target": "concept--offline-kernel-fallback-reinstalled-from-pacman-cache",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--fallback-kept-until-a-kernel-regression-is-disproved-by-booting",
-      "target": "concept--offline-kernel-fallback-reinstalled-from-pacman-cache",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--pacman-conf-comment-already-decided-the-pacnew",
-      "target": "concept--pacdiff-interactive-config-update-hangs-non-tty",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
       "source": "concept--transient-github-api-outage-explains-both-failed-upgrade-steps",
       "target": "concept--topgrade-rust-upgrade-wrapper",
       "relation": "conceptually_related_to",
       "confidence": "INFERRED"
-    },
-    {
-      "source": "rationale--tgrep-wrapper-mangles-alternation",
-      "target": "concept--tgrep-wrapper-false-negatives",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
     }
   ]
 }

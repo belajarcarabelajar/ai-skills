@@ -8,7 +8,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - e1-telegram-service-f1-f6 [ses_f0b2a1d30ffea0R42JxHXjIaoN].md",
       "source_location": "L33",
-      "norm_label": "frozen hmac timestamp on a client built once outside the poll loop"
+      "norm_label": "frozen hmac timestamp on a client built once outside the poll loop",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - e1-telegram-service-f1-f6 [ses_f0b2a1d30ffea0R42JxHXjIaoN].md:L39] Rebuild the client inside the loop instead of mutating an existing one, because build_client installs the timestamp as a default header at construction so only a fresh client carries a current signature"
     },
     {
       "id": "concept--bare-client-without-proxy-auth-always-401s",
@@ -24,7 +25,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - e1-telegram-service-f1-f6 [ses_f0b2a1d30ffea0R42JxHXjIaoN].md",
       "source_location": "L45",
-      "norm_label": "download file stores error body as image bytes"
+      "norm_label": "download file stores error body as image bytes",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - e1-telegram-service-f1-f6 [ses_f0b2a1d30ffea0R42JxHXjIaoN].md:L60] Extracted the download_file status check into an ensure_success helper because a network test was impractical and tests must not make HTTP calls"
     },
     {
       "id": "concept--serde-drops-unparsed-updates-before-offset-persist",
@@ -32,7 +34,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - e1-telegram-service-f1-f6 [ses_f0b2a1d30ffea0R42JxHXjIaoN].md",
       "source_location": "L50",
-      "norm_label": "serde drops unparsed updates before offset persist"
+      "norm_label": "serde drops unparsed updates before offset persist",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - e1-telegram-service-f1-f6 [ses_f0b2a1d30ffea0R42JxHXjIaoN].md:L4733] Offset ordering was deliberately left unchanged because moving the persist after the message guard would change acknowledgement semantics and risk redelivery loops"
     },
     {
       "id": "concept--telegram-photo-array-order-is-not-a-size-guarantee",
@@ -59,36 +62,13 @@
       "norm_label": "browser sniffing overrides declared image mime subtype"
     },
     {
-      "id": "rationale--fresh-client-per-poll-iteration",
-      "label": "Rebuild the client inside the loop instead of mutating an existing one, because build_client installs the timestamp as a default header at construction so only a fresh client carries a current signature",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - e1-telegram-service-f1-f6 [ses_f0b2a1d30ffea0R42JxHXjIaoN].md",
-      "source_location": "L39",
-      "norm_label": "rebuild client in loop because default headers are set at construction"
-    },
-    {
-      "id": "rationale--status-guard-extracted-as-a-testable-helper",
-      "label": "Extracted the download_file status check into an ensure_success helper because a network test was impractical and tests must not make HTTP calls",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - e1-telegram-service-f1-f6 [ses_f0b2a1d30ffea0R42JxHXjIaoN].md",
-      "source_location": "L60",
-      "norm_label": "extract status guard into testable helper to avoid network in tests"
-    },
-    {
-      "id": "rationale--offset-persist-ordering-left-alone",
-      "label": "Offset ordering was deliberately left unchanged because moving the persist after the message guard would change acknowledgement semantics and risk redelivery loops",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - e1-telegram-service-f1-f6 [ses_f0b2a1d30ffea0R42JxHXjIaoN].md",
-      "source_location": "L4733",
-      "norm_label": "offset persist ordering left alone to avoid redelivery loops"
-    },
-    {
       "id": "concept--nut-driver-support-level-as-selection-criterion",
       "label": "NUT hardware-compatibility support level used as a UPS buying criterion",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - riset-dukungan-ups-di-linux [ses_f18de69a7ffeh5014GS0F4Adgz].md",
       "source_location": "L11744",
-      "norm_label": "nut hardware compatibility support level used as ups buying criterion"
+      "norm_label": "nut hardware compatibility support level used as ups buying criterion",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - riset-dukungan-ups-di-linux [ses_f18de69a7ffeh5014GS0F4Adgz].md:L11718] NUT was chosen because it is the only daemon covering APC, CyberPower and Eaton together, apcupsd being APC-only and PowerPanel brand-locked"
     },
     {
       "id": "concept--upower-hid-ups-backend-races-nut-in-plasma",
@@ -96,7 +76,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - riset-dukungan-ups-di-linux [ses_f18de69a7ffeh5014GS0F4Adgz].md",
       "source_location": "L11731",
-      "norm_label": "upower nut generated hid ups backend races nut in kde plasma"
+      "norm_label": "upower nut generated hid ups backend races nut in kde plasma",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - riset-dukungan-ups-di-linux [ses_f18de69a7ffeh5014GS0F4Adgz].md:L11738] Plasma's own on-battery profile must be set to No Action because otherwise it races NUT and can suspend the machine in the middle of the shutdown"
     },
     {
       "id": "concept--nut-monitor-service-runs-upsmon-not-the-gui",
@@ -112,7 +93,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - riset-dukungan-ups-di-linux [ses_f18de69a7ffeh5014GS0F4Adgz].md",
       "source_location": "L11836",
-      "norm_label": "modified sine psu damage is a vendor narrative not a documented failure"
+      "norm_label": "modified sine psu damage is a vendor narrative not a documented failure",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - riset-dukungan-ups-di-linux [ses_f18de69a7ffeh5014GS0F4Adgz].md:L11851] Pure sine wave exists at 1000-1500 VA from CyberPower for roughly the price of a 650 VA stepped-sine unit, which makes it cheap insurance for an APFC PSU"
     },
     {
       "id": "concept--atx-hold-up-17ms-is-a-full-load-figure",
@@ -120,7 +102,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - riset-dukungan-ups-di-linux [ses_f18de69a7ffeh5014GS0F4Adgz].md",
       "source_location": "L11876",
-      "norm_label": "atx 17 ms hold up is a full load figure"
+      "norm_label": "atx 17 ms hold up is a full load figure",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - riset-dukungan-ups-di-linux [ses_f18de69a7ffeh5014GS0F4Adgz].md:L11876] Transfer time is not the risk because hold-up scales with capacitor energy over power, so at a fifth of rated load the margin is 3-5x; the real risk is hold-up degradation from aged bulk capacitors, and the waveform is a separate smaller risk"
     },
     {
       "id": "concept--acpi-has-no-ac-adapter-object-for-a-desktop-ups",
@@ -145,59 +128,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - riset-dukungan-ups-di-linux [ses_f18de69a7ffeh5014GS0F4Adgz].md",
       "source_location": "L11767",
       "norm_label": "apc bx series firmware phantom low battery"
-    },
-    {
-      "id": "rationale--plasma-suspend-setting-can-win-over-nut-shutdown",
-      "label": "Plasma's own on-battery profile must be set to No Action because otherwise it races NUT and can suspend the machine in the middle of the shutdown",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - riset-dukungan-ups-di-linux [ses_f18de69a7ffeh5014GS0F4Adgz].md",
-      "source_location": "L11738",
-      "norm_label": "plasma on battery profile set to no action so nut owns shutdown"
-    },
-    {
-      "id": "rationale--nut-covers-all-four-brands-while-apcupsd-and-powerpanel-do-not",
-      "label": "NUT was chosen because it is the only daemon covering APC, CyberPower and Eaton together, apcupsd being APC-only and PowerPanel brand-locked",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - riset-dukungan-ups-di-linux [ses_f18de69a7ffeh5014GS0F4Adgz].md",
-      "source_location": "L11718",
-      "norm_label": "nut chosen because it alone covers all four brands"
-    },
-    {
-      "id": "rationale--pure-sine-at-1000va-is-cheap-insurance-for-an-apfc-psu",
-      "label": "Pure sine wave exists at 1000-1500 VA from CyberPower for roughly the price of a 650 VA stepped-sine unit, which makes it cheap insurance for an APFC PSU",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - riset-dukungan-ups-di-linux [ses_f18de69a7ffeh5014GS0F4Adgz].md",
-      "source_location": "L11851",
-      "norm_label": "pure sine at 1000 va is cheap insurance for an apfc psu"
-    },
-    {
-      "id": "rationale--transfer-time-is-not-the-problem-waveform-is",
-      "label": "Transfer time is not the risk because hold-up scales with capacitor energy over power, so at a fifth of rated load the margin is 3-5x; the real risk is hold-up degradation from aged bulk capacitors, and the waveform is a separate smaller risk",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - riset-dukungan-ups-di-linux [ses_f18de69a7ffeh5014GS0F4Adgz].md",
-      "source_location": "L11876",
-      "norm_label": "transfer time is not the problem waveform is"
     }
   ],
   "links": [
-    {
-      "source": "rationale--fresh-client-per-poll-iteration",
-      "relation": "rationale_for",
-      "target": "concept--frozen-hmac-timestamp-on-a-client-built-once",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--status-guard-extracted-as-a-testable-helper",
-      "relation": "rationale_for",
-      "target": "concept--download-file-stores-error-body-as-image-bytes",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--offset-persist-ordering-left-alone",
-      "relation": "rationale_for",
-      "target": "concept--serde-drops-unparsed-updates-before-offset-persist",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--frozen-hmac-timestamp-on-a-client-built-once",
       "relation": "conceptually_related_to",
@@ -214,30 +147,6 @@
       "source": "concept--browser-sniffing-overrides-declared-image-mime",
       "relation": "conceptually_related_to",
       "target": "concept--send-photo-hardcoded-png-label",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--nut-covers-all-four-brands-while-apcupsd-and-powerpanel-do-not",
-      "relation": "rationale_for",
-      "target": "concept--nut-driver-support-level-as-selection-criterion",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--plasma-suspend-setting-can-win-over-nut-shutdown",
-      "relation": "rationale_for",
-      "target": "concept--upower-hid-ups-backend-races-nut-in-plasma",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--pure-sine-at-1000va-is-cheap-insurance-for-an-apfc-psu",
-      "relation": "rationale_for",
-      "target": "concept--modified-sine-psu-damage-is-a-vendor-narrative",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--transfer-time-is-not-the-problem-waveform-is",
-      "relation": "rationale_for",
-      "target": "concept--atx-hold-up-17ms-is-a-full-load-figure",
       "confidence": "EXTRACTED"
     },
     {

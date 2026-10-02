@@ -15,15 +15,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - r6-indonesian-solutions-json-ld [ses_f16b7874cffeeLGurSOupEWz3Z].md",
       "source_location": "L67",
-      "norm_label": "derive json-ld from the rendered title"
-    },
-    {
-      "id": "rationale--never-machine-translate-indonesian-copy",
-      "label": "Never machine-translate Indonesian copy; derive it from the page and exclude what has no Indonesian source",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - r6-indonesian-solutions-json-ld [ses_f16b7874cffeeLGurSOupEWz3Z].md",
-      "source_location": "L61",
-      "norm_label": "never machine-translate indonesian copy"
+      "norm_label": "derive json-ld from the rendered title",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - r6-indonesian-solutions-json-ld [ses_f16b7874cffeeLGurSOupEWz3Z].md:L61] Never machine-translate Indonesian copy; derive it from the page and exclude what has no Indonesian source"
     },
     {
       "id": "concept--structural-invariant-test-not-a-hand-list",
@@ -31,15 +24,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - r6-indonesian-solutions-json-ld [ses_f16b7874cffeeLGurSOupEWz3Z].md",
       "source_location": "L84",
-      "norm_label": "structural invariant test, not a hand list"
-    },
-    {
-      "id": "rationale--a-hand-list-is-what-let-the-defect-survive",
-      "label": "A hand list is the mechanism that let the English-entity defect survive, and it will not catch the next vertical added wrong",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - r6-indonesian-solutions-json-ld [ses_f16b7874cffeeLGurSOupEWz3Z].md",
-      "source_location": "L85",
-      "norm_label": "a hand list is the mechanism that let the defect survive"
+      "norm_label": "structural invariant test, not a hand list",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - r6-indonesian-solutions-json-ld [ses_f16b7874cffeeLGurSOupEWz3Z].md:L85] A hand list is the mechanism that let the English-entity defect survive, and it will not catch the next vertical added wrong"
     },
     {
       "id": "concept--webpage-scoped-json-ld-title-invariant",
@@ -71,15 +57,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c7-c8-c9-c10-depth-probes [ses_f08dc55a3ffesy8GpXj7AiE7dc].md",
       "source_location": "L6070",
-      "norm_label": "sensitive check authored above the existing dedup"
-    },
-    {
-      "id": "rationale--dedup-predated-the-sensitive-check-by-five-weeks",
-      "label": "The parent commit already carried the dedup and no sensitive check, so the ordering is an original authoring choice and not a regression",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c7-c8-c9-c10-depth-probes [ses_f08dc55a3ffesy8GpXj7AiE7dc].md",
-      "source_location": "L6074",
-      "norm_label": "dedup predated the sensitive check by five weeks"
+      "norm_label": "sensitive check authored above the existing dedup",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c7-c8-c9-c10-depth-probes [ses_f08dc55a3ffesy8GpXj7AiE7dc].md:L6074] The parent commit already carried the dedup and no sensitive check, so the ordering is an original authoring choice and not a regression"
     },
     {
       "id": "concept--sensitive-detector-per-tick-cost-shape",
@@ -95,15 +74,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c7-c8-c9-c10-depth-probes [ses_f08dc55a3ffesy8GpXj7AiE7dc].md",
       "source_location": "L6112",
-      "norm_label": "clipboard poll loop has no test seam"
-    },
-    {
-      "id": "rationale--loop-reads-the-live-os-clipboard",
-      "label": "The loop is unconditional and arboard reads the live OS clipboard, so no test can drive two ticks",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c7-c8-c9-c10-depth-probes [ses_f08dc55a3ffesy8GpXj7AiE7dc].md",
-      "source_location": "L6112",
-      "norm_label": "the poll loop reads the live os clipboard"
+      "norm_label": "clipboard poll loop has no test seam",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c7-c8-c9-c10-depth-probes [ses_f08dc55a3ffesy8GpXj7AiE7dc].md:L6112] The loop is unconditional and arboard reads the live OS clipboard, so no test can drive two ticks"
     },
     {
       "id": "concept--non-windows-clipboard-capture-is-a-500ms-poll",
@@ -116,21 +88,9 @@
   ],
   "links": [
     {
-      "source": "rationale--never-machine-translate-indonesian-copy",
-      "target": "concept--derive-json-ld-from-the-rendered-title",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
       "source": "concept--indonesian-json-ld-declares-english-entities",
       "target": "concept--derive-json-ld-from-the-rendered-title",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--a-hand-list-is-what-let-the-defect-survive",
-      "target": "concept--structural-invariant-test-not-a-hand-list",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {
@@ -170,12 +130,6 @@
       "confidence": "EXTRACTED"
     },
     {
-      "source": "rationale--dedup-predated-the-sensitive-check-by-five-weeks",
-      "target": "concept--sensitive-check-authored-above-the-existing-dedup",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
       "source": "concept--sensitive-detector-per-tick-cost-shape",
       "target": "concept--clipboard-poll-dedup-bypassed-on-the-sensitive-path",
       "relation": "conceptually_related_to",
@@ -191,12 +145,6 @@
       "source": "concept--clipboard-poll-loop-has-no-test-seam",
       "target": "concept--clipboard-poll-dedup-bypassed-on-the-sensitive-path",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--loop-reads-the-live-os-clipboard",
-      "target": "concept--clipboard-poll-loop-has-no-test-seam",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {

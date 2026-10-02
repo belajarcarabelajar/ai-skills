@@ -46,7 +46,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-29 - riset-cara-kerja-jev-trending [ses_f107c2034ffeOAJhzw4NJIBssc].md",
       "source_location": "L4317",
-      "norm_label": "pre-registered decision rule"
+      "norm_label": "pre-registered decision rule",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-29 - riset-cara-kerja-jev-trending [ses_f107c2034ffeOAJhzw4NJIBssc].md:L6483] Agreement alone does not justify a network call"
     },
     {
       "id": "concept--degenerate-corpus",
@@ -54,7 +55,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-29 - riset-cara-kerja-jev-trending [ses_f107c2034ffeOAJhzw4NJIBssc].md",
       "source_location": "L6069",
-      "norm_label": "degenerate corpus"
+      "norm_label": "degenerate corpus",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-29 - riset-cara-kerja-jev-trending [ses_f107c2034ffeOAJhzw4NJIBssc].md:L6071] The vault fixes provenance but not class balance"
     },
     {
       "id": "concept--ground-truth-circularity",
@@ -78,7 +80,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-29 - riset-cara-kerja-jev-trending [ses_f107c2034ffeOAJhzw4NJIBssc].md",
       "source_location": "L10350",
-      "norm_label": "rule-beats-model placement"
+      "norm_label": "rule-beats-model placement",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-29 - riset-cara-kerja-jev-trending [ses_f107c2034ffeOAJhzw4NJIBssc].md:L9079] Paying 273 ms to imitate an already-correct regex is pure loss"
     },
     {
       "id": "concept--model-placement-criteria",
@@ -110,7 +113,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c7-git-history-regression [ses_f24ed0410ffePfqDLIQZY9khSK].md",
       "source_location": "L407",
-      "norm_label": "git log -s substring false positive"
+      "norm_label": "git log -s substring false positive",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c7-git-history-regression [ses_f24ed0410ffePfqDLIQZY9khSK].md:L419] The origin hits are the substring in original"
     },
     {
       "id": "concept--never-present-versus-removed",
@@ -118,7 +122,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c7-git-history-regression [ses_f24ed0410ffePfqDLIQZY9khSK].md",
       "source_location": "L1296",
-      "norm_label": "never-present versus removed disambiguation"
+      "norm_label": "never-present versus removed disambiguation",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c7-git-history-regression [ses_f24ed0410ffePfqDLIQZY9khSK].md:L899] Blame dates the whole YouTube path to three August 2026 commits"
     },
     {
       "id": "concept--unmapped-error-code-fallback",
@@ -143,46 +148,6 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c7-git-history-regression [ses_f24ed0410ffePfqDLIQZY9khSK].md",
       "source_location": "L1428",
       "norm_label": "csp frame-src host mismatch"
-    },
-    {
-      "id": "rationale--paying-273ms-to-imitate-a-correct-regex",
-      "label": "Paying 273 ms to imitate an already-correct regex is pure loss",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-29 - riset-cara-kerja-jev-trending [ses_f107c2034ffeOAJhzw4NJIBssc].md",
-      "source_location": "L9079",
-      "norm_label": "paying 273 ms to imitate an already-correct regex is pure loss"
-    },
-    {
-      "id": "rationale--vault-fixes-provenance-not-class-balance",
-      "label": "The vault fixes provenance but not class balance",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-29 - riset-cara-kerja-jev-trending [ses_f107c2034ffeOAJhzw4NJIBssc].md",
-      "source_location": "L6071",
-      "norm_label": "the vault fixes provenance but not class balance"
-    },
-    {
-      "id": "rationale--agreement-alone-does-not-justify-a-network-call",
-      "label": "Agreement alone does not justify a network call",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-29 - riset-cara-kerja-jev-trending [ses_f107c2034ffeOAJhzw4NJIBssc].md",
-      "source_location": "L6483",
-      "norm_label": "agreement alone does not justify a network call"
-    },
-    {
-      "id": "rationale--blame-dates-the-whole-youtube-path",
-      "label": "Blame dates the whole YouTube path to three August 2026 commits",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c7-git-history-regression [ses_f24ed0410ffePfqDLIQZY9khSK].md",
-      "source_location": "L899",
-      "norm_label": "blame dates the whole youtube path to three august 2026 commits"
-    },
-    {
-      "id": "rationale--origin-hits-are-the-word-original",
-      "label": "The origin hits are the substring in original",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c7-git-history-regression [ses_f24ed0410ffePfqDLIQZY9khSK].md",
-      "source_location": "L419",
-      "norm_label": "the origin hits are the substring in original"
     }
   ],
   "links": [
@@ -281,36 +246,6 @@
       "target": "concept--rule-beats-model-placement",
       "relation": "conceptually_related_to",
       "confidence": "INFERRED"
-    },
-    {
-      "source": "rationale--paying-273ms-to-imitate-a-correct-regex",
-      "target": "concept--rule-beats-model-placement",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--vault-fixes-provenance-not-class-balance",
-      "target": "concept--degenerate-corpus",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--agreement-alone-does-not-justify-a-network-call",
-      "target": "concept--pre-registered-decision-rule",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--blame-dates-the-whole-youtube-path",
-      "target": "concept--never-present-versus-removed",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--origin-hits-are-the-word-original",
-      "target": "concept--git-log-s-substring-false-positive",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
     }
   ]
 }

@@ -35,7 +35,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - super-ultra-code-plan-pr-delivery-session [ses_f08d01cd8ffe92DE7Adnn8J1o5].md",
       "source_location": "L11509",
       "norm_label": "has col guard makes the migration array a no op so schema rs is the authority",
-      "summary": "The parity test's disagreement branch fired on ten columns and the measurement said the migration array, not schema.rs, is the wrong source of truth: those ALTER TABLE ADD COLUMN statements are wrapped in a has_col guard, so on any database that already has the column they do nothing. Six columns measured notnull=0 on the real database, including is_deleted."
+      "summary": "The parity test's disagreement branch fired on ten columns and the measurement said the migration array, not schema.rs, is the wrong source of truth: those ALTER TABLE ADD COLUMN statements are wrapped in a has_col guard, so on any database that already has the column they do nothing. Six columns measured notnull=0 on the real database, including is_deleted.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - super-ultra-code-plan-pr-delivery-session [ses_f08d01cd8ffe92DE7Adnn8J1o5].md:L11511] The desktop app's six-column NOT NULL migration defect is recorded and deferred, not fixed, because editing the app's upgrade path for real user databases needs its own approval"
     },
     {
       "id": "concept--guard-test-reads-app-migration-source",
@@ -107,7 +108,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - super-ultra-code-plan-pr-delivery-session [ses_f08d01cd8ffe92DE7Adnn8J1o5].md",
       "source_location": "L17460",
       "norm_label": "post merge re verification on the new base",
-      "summary": "After #442 merged as 30deffa54, the suite was re-run on vps-bcb after git pull --ff-only onto that commit rather than re-reading the pre-merge result: 188 passed, clippy 0, fmt clean. An empty diff against the verified branch proved main content byte-identical, because the merge rebased and SHA ancestry could not."
+      "summary": "After #442 merged as 30deffa54, the suite was re-run on vps-bcb after git pull --ff-only onto that commit rather than re-reading the pre-merge result: 188 passed, clippy 0, fmt clean. An empty diff against the verified branch proved main content byte-identical, because the merge rebased and SHA ancestry could not.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - super-ultra-code-plan-pr-delivery-session [ses_f08d01cd8ffe92DE7Adnn8J1o5].md:L17460] The post-merge run is the evidence for that merge, not a re-read of the pre-merge run"
     },
     {
       "id": "concept--direction-specific-schema-mismatch-remedy",
@@ -116,7 +118,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - super-ultra-code-plan-pr-delivery-session [ses_f08d01cd8ffe92DE7Adnn8J1o5].md",
       "source_location": "L9001",
       "norm_label": "each schema mismatch direction has its own remedy",
-      "summary": "The shipped guide documented only `unexpected columns` and told users to rebuild the CLI from the app's revision, which is not the fix for a missing column, since a CLI built from the app's revision expects the same absent column. Missing columns means open the app once or run `snipset init --force`, which renames the old file to a timestamped backup and never deletes it."
+      "summary": "The shipped guide documented only `unexpected columns` and told users to rebuild the CLI from the app's revision, which is not the fix for a missing column, since a CLI built from the app's revision expects the same absent column. Missing columns means open the app once or run `snipset init --force`, which renames the old file to a timestamped backup and never deletes it.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - super-ultra-code-plan-pr-delivery-session [ses_f08d01cd8ffe92DE7Adnn8J1o5].md:L9001] The hint goes in assert_schema, not in the Display arm or SchemaDiff::message(), because doctor publishes message() as a machine-readable detail field and that keeps doctor --json byte-identical"
     },
     {
       "id": "concept--stale-sidecar-rebuild-signal-plan",
@@ -125,43 +128,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - super-ultra-code-plan-pr-delivery-session [ses_f08d01cd8ffe92DE7Adnn8J1o5].md",
       "source_location": "L17252",
       "norm_label": "sidecar rebuild signal when the app schema changes",
-      "summary": "Root cause of the incident class: snipset-cli is versioned 0.2.0 independently of the app, so nothing signals a sidecar rebuild when the app schema changes. Research verified no user_version or schema_revision exists anywhere and no macOS target or build script exists. Kept as a Draft plan because it proposes making a stale sidecar a fatal build failure."
-    },
-    {
-      "id": "rationale--hint-in-assert-schema-to-keep-doctor-json-byte-identical",
-      "label": "The hint goes in assert_schema, not in the Display arm or SchemaDiff::message(), because doctor publishes message() as a machine-readable detail field and that keeps doctor --json byte-identical",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - super-ultra-code-plan-pr-delivery-session [ses_f08d01cd8ffe92DE7Adnn8J1o5].md",
-      "source_location": "L9001",
-      "norm_label": "the hint goes in assert schema not in the display arm or schema diff message because doctor publishes message as a machine readable detail field",
-      "summary": "Chunk K3's blast-radius measurement chose the insertion site. DbError::Schema is an overloaded variant used at 41 sites, so adding text there would change it everywhere, and SchemaDiff::message() is consumed by doctor as a machine-readable detail field."
-    },
-    {
-      "id": "rationale--post-merge-run-is-evidence-for-this-merge",
-      "label": "The post-merge run is the evidence for that merge, not a re-read of the pre-merge run",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - super-ultra-code-plan-pr-delivery-session [ses_f08d01cd8ffe92DE7Adnn8J1o5].md",
-      "source_location": "L17460",
-      "norm_label": "the post merge run is the evidence for that merge not a re read of the pre merge run",
-      "summary": "The base moves with every merge, so a green run recorded before the merge describes a commit that no longer exists on main."
-    },
-    {
-      "id": "rationale--app-migration-defect-left-for-its-own-approval",
-      "label": "The desktop app's six-column NOT NULL migration defect is recorded and deferred, not fixed, because editing the app's upgrade path for real user databases needs its own approval",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - super-ultra-code-plan-pr-delivery-session [ses_f08d01cd8ffe92DE7Adnn8J1o5].md",
-      "source_location": "L11511",
-      "norm_label": "the desktop app's six column not null migration defect is recorded and deferred not fixed because editing the app's upgrade path for real user databases needs its own approval",
-      "summary": "The test's reconciliation rule was corrected to read schema.rs for shapes and the migration array for names only, with the measurement recorded in the comment so the next maintainer does not have to rediscover it. T2 in the plan, defer-marked."
-    },
-    {
-      "id": "rationale--sidecar-plan-left-draft-because-it-overrides-a-deliberate-decision",
-      "label": "The sidecar plan is left Draft and unapproved because making a stale sidecar fatal overrides a deliberate decision documented at stage-cli-sidecar.mjs:4-6",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - super-ultra-code-plan-pr-delivery-session [ses_f08d01cd8ffe92DE7Adnn8J1o5].md",
-      "source_location": "L17252",
-      "norm_label": "the sidecar plan is left draft and unapproved because making a stale sidecar fatal overrides a deliberate decision documented at stage cli sidecar",
-      "summary": "The optional `resources/cli/*` glob in tauri.conf.json is deliberate and shipped, so the proposal to turn its absence into a build failure contradicts a recorded design decision rather than filling a gap."
+      "summary": "Root cause of the incident class: snipset-cli is versioned 0.2.0 independently of the app, so nothing signals a sidecar rebuild when the app schema changes. Research verified no user_version or schema_revision exists anywhere and no macOS target or build script exists. Kept as a Draft plan because it proposes making a stale sidecar a fatal build failure.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - super-ultra-code-plan-pr-delivery-session [ses_f08d01cd8ffe92DE7Adnn8J1o5].md:L17252] The sidecar plan is left Draft and unapproved because making a stale sidecar fatal overrides a deliberate decision documented at stage-cli-sidecar.mjs:4-6"
     }
   ],
   "links": [
@@ -242,30 +210,6 @@
       "target": "concept--column-definition-catch-all",
       "relation": "conceptually_related_to",
       "confidence": "INFERRED"
-    },
-    {
-      "source": "rationale--hint-in-assert-schema-to-keep-doctor-json-byte-identical",
-      "target": "concept--direction-specific-schema-mismatch-remedy",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--post-merge-run-is-evidence-for-this-merge",
-      "target": "concept--post-merge-reverification-on-the-new-base",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--app-migration-defect-left-for-its-own-approval",
-      "target": "concept--has-col-guard-makes-migration-array-a-no-op",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--sidecar-plan-left-draft-because-it-overrides-a-deliberate-decision",
-      "target": "concept--stale-sidecar-rebuild-signal-plan",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
     }
   ]
 }

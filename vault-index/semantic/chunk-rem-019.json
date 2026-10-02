@@ -16,7 +16,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-satset-folder [ses_f281d7317ffeOf78hoBBrYZ6cV].md",
       "source_location": "L35179",
       "norm_label": "satset as immutable source mirror",
-      "summary": "Final recommendation: keep Satset/ as an immutable source mirror and build the wiki-centric PARA overlay from sanitized, classified derived pages instead of moving or renaming any original file."
+      "summary": "Final recommendation: keep Satset/ as an immutable source mirror and build the wiki-centric PARA overlay from sanitized, classified derived pages instead of moving or renaming any original file.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-satset-folder [ses_f281d7317ffeOf78hoBBrYZ6cV].md:L35058] The old protection policy must be consciously overridden, not silently ignored"
     },
     {
       "id": "concept--satset-id-as-sync-identity",
@@ -25,7 +26,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-satset-folder [ses_f281d7317ffeOf78hoBBrYZ6cV].md",
       "source_location": "L34822",
       "norm_label": "satset_id as application identity and sync protocol",
-      "summary": "All 522 Satset files carry a UUID satset_id, and the documented sync implementation scans it, preserves it during conflict handling, strips it from conflict copies and avoids duplicate ID indexing. It is identity, not metadata."
+      "summary": "All 522 Satset files carry a UUID satset_id, and the documented sync implementation scans it, preserves it during conflict handling, strips it from conflict copies and avoids duplicate ID indexing. It is identity, not metadata.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-satset-folder [ses_f281d7317ffeOf78hoBBrYZ6cV].md:L34822] satset_id is identity rather than metadata, so copying it must not mint new IDs"
     },
     {
       "id": "concept--copilot-mirror-satset-id-duplication",
@@ -52,7 +54,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-satset-folder [ses_f281d7317ffeOf78hoBBrYZ6cV].md",
       "source_location": "L34978",
       "norm_label": "legacy title-style [[satset/...]] links in copilot index files",
-      "summary": "Copilot-Indexed-Files-* files carry large blocks of legacy references such as [[Satset/1. Mindset Bisnis.md]] using historical title-style names rather than current kebab-case filenames, so most are already stale and any rename or move would make more of them unresolved."
+      "summary": "Copilot-Indexed-Files-* files carry large blocks of legacy references such as [[Satset/1. Mindset Bisnis.md]] using historical title-style names rather than current kebab-case filenames, so most are already stale and any rename or move would make more of them unresolved.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-satset-folder [ses_f281d7317ffeOf78hoBBrYZ6cV].md:L34980] Preserve the old Satset path so legacy Copilot consumers stay resolvable"
     },
     {
       "id": "concept--source-pointer-identity-preservation",
@@ -70,7 +73,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-satset-folder [ses_f281d7317ffeOf78hoBBrYZ6cV].md",
       "source_location": "L34943",
       "norm_label": "credential rotation ordered by blast radius before any migration",
-      "summary": "Before any PARA migration, detected values are treated as potentially live and rotated in a stated order: Supabase service-role keys, private keys and certificates, provider API keys, n8n/Heroku API and JWT credentials, cookies and session tokens, recovery/2FA codes, then third-party integration tokens — with duplicate copies checked in copilot/, raw/, Git history and backups."
+      "summary": "Before any PARA migration, detected values are treated as potentially live and rotated in a stated order: Supabase service-role keys, private keys and certificates, provider API keys, n8n/Heroku API and JWT credentials, cookies and session tokens, recovery/2FA codes, then third-party integration tokens — with duplicate copies checked in copilot/, raw/, Git history and backups.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-satset-folder [ses_f281d7317ffeOf78hoBBrYZ6cV].md:L34901] Service-role keys are rotated first because they bypass user-level restrictions"
     },
     {
       "id": "concept--duplicate-suffix-variant-identity-decision",
@@ -89,69 +93,9 @@
       "source_location": "L34856",
       "norm_label": "satset protection is repository policy not a per-file frontmatter flag",
       "summary": "No reliable protected: true or locked: true field exists anywhere in the collection; protection comes from the README rule not to move, rename or modify Satset files, so it must be enforced by the migration process itself. Frontmatter is also non-uniform: some notes lack tags, some close the block early, and body-level --- separators inside HTML exports would confuse a naive parser."
-    },
-    {
-      "id": "rationale--conscious-override-not-silent-ignore",
-      "label": "The old protection policy must be consciously overridden, not silently ignored",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-satset-folder [ses_f281d7317ffeOf78hoBBrYZ6cV].md",
-      "source_location": "L35058",
-      "norm_label": "the old protection policy must be consciously overridden not silently ignored",
-      "summary": "The current request asks for PARA planning, so the README rule protecting Satset is treated as a repository-level safety constraint that must be consciously overridden and documented, rather than quietly disregarded."
-    },
-    {
-      "id": "rationale--service-role-keys-bypass-user-restrictions",
-      "label": "Service-role keys are rotated first because they bypass user-level restrictions",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-satset-folder [ses_f281d7317ffeOf78hoBBrYZ6cV].md",
-      "source_location": "L34901",
-      "norm_label": "service-role keys are rotated first because they bypass user-level restrictions",
-      "summary": "Service-role keys are called out as especially urgent precisely because they bypass the normal user-level restrictions that would otherwise limit the blast radius of a leaked key."
-    },
-    {
-      "id": "rationale--satset-id-is-identity-not-metadata",
-      "label": "satset_id is identity rather than metadata, so copying it must not mint new IDs",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-satset-folder [ses_f281d7317ffeOf78hoBBrYZ6cV].md",
-      "source_location": "L34822",
-      "norm_label": "satset_id is identity rather than metadata so copying it must not mint new ids",
-      "summary": "The sync implementation scans satset_id, preserves it across conflict handling, strips it from conflict files and avoids duplicate ID indexing, which makes the field part of the application's identity model and not something a derived page should regenerate."
-    },
-    {
-      "id": "rationale--preserve-old-path-for-legacy-consumers",
-      "label": "Preserve the old Satset path so legacy Copilot consumers stay resolvable",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-satset-folder [ses_f281d7317ffeOf78hoBBrYZ6cV].md",
-      "source_location": "L34980",
-      "norm_label": "preserve the old satset path so legacy copilot consumers stay resolvable",
-      "summary": "The prescribed safeguard is to leave the Copilot mirror untouched and keep the original Satset path until every consumer of the legacy [[Satset/...]] links has been inventoried, because those references already use historical filenames and a rename would only add unresolved links."
     }
   ],
   "links": [
-    {
-      "source": "rationale--conscious-override-not-silent-ignore",
-      "target": "concept--satset-as-immutable-source-mirror",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--service-role-keys-bypass-user-restrictions",
-      "target": "concept--credential-rotation-precedence-by-blast-radius",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--satset-id-is-identity-not-metadata",
-      "target": "concept--satset-id-as-sync-identity",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--preserve-old-path-for-legacy-consumers",
-      "target": "concept--legacy-copilot-index-satset-links",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--shallow-para-typed-wiki",
       "target": "concept--satset-as-immutable-source-mirror",

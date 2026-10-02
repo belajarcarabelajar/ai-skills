@@ -22,7 +22,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - t1-optimistic-reveal-fix [ses_f1b7f397bfferdGh9zHebHbYZR].md",
       "source_location": "L700",
-      "norm_label": "optimistic reveal for internal chapter navigation"
+      "norm_label": "optimistic reveal for internal chapter navigation",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - t1-optimistic-reveal-fix [ses_f1b7f397bfferdGh9zHebHbYZR].md:L26] Chapter-to-chapter navigation must not blank the page, so hide is skipped while auth still resolves"
     },
     {
       "id": "concept--referrer-based-internal-navigation-detection",
@@ -38,7 +39,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - t1-optimistic-reveal-fix [ses_f1b7f397bfferdGh9zHebHbYZR].md",
       "source_location": "L702",
-      "norm_label": "client checkauth as second auth layer behind edge middleware"
+      "norm_label": "client checkauth as second auth layer behind edge middleware",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - t1-optimistic-reveal-fix [ses_f1b7f397bfferdGh9zHebHbYZR].md:L22] Edge middleware 302 redirect is the enforcer, so client checkAuth must stay as a second layer"
     },
     {
       "id": "concept--file-order-invariant-test",
@@ -57,28 +59,13 @@
       "norm_label": "bfcache-restored pages inheriting opacity 0"
     },
     {
-      "id": "rationale--edge-middleware-is-the-enforcer-not-the-client",
-      "label": "Edge middleware 302 redirect is the enforcer, so client checkAuth must stay as a second layer",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - t1-optimistic-reveal-fix [ses_f1b7f397bfferdGh9zHebHbYZR].md",
-      "source_location": "L22",
-      "norm_label": "edge middleware 302 redirect is the enforcer, so client checkauth must stay as a second layer"
-    },
-    {
-      "id": "rationale--internal-navigation-must-not-blank-the-page",
-      "label": "Chapter-to-chapter navigation must not blank the page, so hide is skipped while auth still resolves",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - t1-optimistic-reveal-fix [ses_f1b7f397bfferdGh9zHebHbYZR].md",
-      "source_location": "L26",
-      "norm_label": "chapter-to-chapter navigation must not blank the page, so hide is skipped while auth still resolves"
-    },
-    {
       "id": "concept--para-and-llm-wiki-as-orthogonal-axes",
       "label": "PARA and Karpathy LLM Wiki as orthogonal axes",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md",
       "source_location": "L13498",
-      "norm_label": "para and karpathy llm wiki as orthogonal axes"
+      "norm_label": "para and karpathy llm wiki as orthogonal axes",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md:L12354] PARA decides where active work lives, the LLM Wiki decides how evidence becomes knowledge"
     },
     {
       "id": "concept--wiki-sources-role-mixing",
@@ -86,7 +73,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md",
       "source_location": "L13513",
-      "norm_label": "wiki/sources role mixing"
+      "norm_label": "wiki/sources role mixing",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md:L13523] wiki/sources serving raw, compiled, system and secret roles at once is the central reconciliation problem"
     },
     {
       "id": "concept--syntactic-unresolved-link-count",
@@ -94,7 +82,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md",
       "source_location": "L13316",
-      "norm_label": "syntactic unresolved link count is not a dead-link count"
+      "norm_label": "syntactic unresolved link count is not a dead-link count",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md:L13316] The 2,512 unresolved count is inflated by generated false positives, so it is not a dead-link count"
     },
     {
       "id": "concept--wikilink-false-positives-from-hashtag-and-css-tokens",
@@ -126,7 +115,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md",
       "source_location": "L13403",
-      "norm_label": "filename-variant groups as merge candidates, not deletions"
+      "norm_label": "filename-variant groups as merge candidates, not deletions",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md:L13403] Variant-named files are likely revisions rather than exact duplicates, so merge instead of delete"
     },
     {
       "id": "concept--intra-wiki-orphan-scope",
@@ -142,7 +132,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md",
       "source_location": "L13473",
-      "norm_label": "credential quarantine before knowledge compilation"
+      "norm_label": "credential quarantine before knowledge compilation",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md:L13473] Ingestion, sync, git or indexing would expose credentials, PII and infrastructure secrets"
     },
     {
       "id": "concept--structural-signature-secret-scanning",
@@ -150,7 +141,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md",
       "source_location": "L13455",
-      "norm_label": "structural-signature secret scanning with live validity untested"
+      "norm_label": "structural-signature secret scanning with live validity untested",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md:L13455] Structurally valid signatures are not proof of live credentials, so treat as potentially live until revoked"
     },
     {
       "id": "concept--tesseract-ocr-blind-spot",
@@ -190,7 +182,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md",
       "source_location": "L13673",
-      "norm_label": "canonical slug plus display title plus aliases"
+      "norm_label": "canonical slug plus display title plus aliases",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md:L12388] A stable internal slug plus display title and aliases survives the emoji-vs-kebab-case conflict"
     },
     {
       "id": "concept--emoji-title-case-vs-kebab-case-naming-conflict",
@@ -230,7 +223,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md",
       "source_location": "L13659",
-      "norm_label": "graph not yet trustworthy for automated llm maintenance"
+      "norm_label": "graph not yet trustworthy for automated llm maintenance",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md:L13659] Broken links, false links and raw/archive mixing propagate errors into future automated summaries"
     },
     {
       "id": "concept--missing-conflict-staleness-layer",
@@ -263,85 +257,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md",
       "source_location": "L13527",
       "norm_label": "filename-based cluster counts are approximate and overlapping"
-    },
-    {
-      "id": "rationale--para-and-llm-wiki-answer-different-questions",
-      "label": "PARA decides where active work lives, the LLM Wiki decides how evidence becomes knowledge",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md",
-      "source_location": "L12354",
-      "norm_label": "para decides where active work lives, the llm wiki decides how evidence becomes knowledge"
-    },
-    {
-      "id": "rationale--role-mixing-is-the-central-reconciliation-problem",
-      "label": "wiki/sources serving raw, compiled, system and secret roles at once is the central reconciliation problem",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md",
-      "source_location": "L13523",
-      "norm_label": "wiki/sources serving raw, compiled, system and secret roles at once is the central reconciliation problem"
-    },
-    {
-      "id": "rationale--unresolved-count-inflated-by-generated-false-positives",
-      "label": "The 2,512 unresolved count is inflated by generated false positives, so it is not a dead-link count",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md",
-      "source_location": "L13316",
-      "norm_label": "the 2,512 unresolved count is inflated by generated false positives, so it is not a dead-link count"
-    },
-    {
-      "id": "rationale--ingestion-would-expose-credentials",
-      "label": "Ingestion, sync, git or indexing would expose credentials, PII and infrastructure secrets",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md",
-      "source_location": "L13473",
-      "norm_label": "ingestion, sync, git or indexing would expose credentials, pii and infrastructure secrets"
-    },
-    {
-      "id": "rationale--credential-signatures-not-validity-tested",
-      "label": "Structurally valid signatures are not proof of live credentials, so treat as potentially live until revoked",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md",
-      "source_location": "L13455",
-      "norm_label": "structurally valid signatures are not proof of live credentials, so treat as potentially live until revoked"
-    },
-    {
-      "id": "rationale--slug-survives-emoji-and-kebab-case-standards",
-      "label": "A stable internal slug plus display title and aliases survives the emoji-vs-kebab-case conflict",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md",
-      "source_location": "L12388",
-      "norm_label": "a stable internal slug plus display title and aliases survives the emoji-vs-kebab-case conflict"
-    },
-    {
-      "id": "rationale--graph-errors-propagate-into-future-summaries",
-      "label": "Broken links, false links and raw/archive mixing propagate errors into future automated summaries",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md",
-      "source_location": "L13659",
-      "norm_label": "broken links, false links and raw/archive mixing propagate errors into future automated summaries"
-    },
-    {
-      "id": "rationale--variant-files-are-likely-revisions",
-      "label": "Variant-named files are likely revisions rather than exact duplicates, so merge instead of delete",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md",
-      "source_location": "L13403",
-      "norm_label": "variant-named files are likely revisions rather than exact duplicates, so merge instead of delete"
     }
   ],
   "links": [
-    {
-      "source": "rationale--edge-middleware-is-the-enforcer-not-the-client",
-      "target": "concept--client-checkauth-as-second-auth-layer",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--internal-navigation-must-not-blank-the-page",
-      "target": "concept--optimistic-reveal-for-internal-chapter-navigation",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--optimistic-reveal-for-internal-chapter-navigation",
       "target": "concept--referrer-based-internal-navigation-detection",
@@ -370,54 +288,6 @@
       "source": "concept--n8n-underlying-architecture",
       "target": "concept--n8n-embedding-and-database-customization",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--para-and-llm-wiki-answer-different-questions",
-      "target": "concept--para-and-llm-wiki-as-orthogonal-axes",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--role-mixing-is-the-central-reconciliation-problem",
-      "target": "concept--wiki-sources-role-mixing",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--unresolved-count-inflated-by-generated-false-positives",
-      "target": "concept--syntactic-unresolved-link-count",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--ingestion-would-expose-credentials",
-      "target": "concept--credential-quarantine-before-knowledge-compilation",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--credential-signatures-not-validity-tested",
-      "target": "concept--structural-signature-secret-scanning",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--slug-survives-emoji-and-kebab-case-standards",
-      "target": "concept--canonical-slug-plus-aliases",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--graph-errors-propagate-into-future-summaries",
-      "target": "concept--graph-not-trustworthy-for-automated-llm-maintenance",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--variant-files-are-likely-revisions",
-      "target": "concept--filename-variant-groups-as-merge-candidates",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {

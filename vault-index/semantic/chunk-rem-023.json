@@ -6,7 +6,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - perbaikan-inject-attachment-magic-menu-download-linux [ses_f08b8695affeoxzP70A34cuaph].md",
       "source_location": "L11714",
-      "norm_label": "text/uri-list as the native linux file-reference clipboard format"
+      "norm_label": "text/uri-list as the native linux file-reference clipboard format",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - perbaikan-inject-attachment-magic-menu-download-linux [ses_f08b8695affeoxzP70A34cuaph].md:L11714] An attachment injection must use the platform's native file-reference format, or the target app sees text instead of an attachment"
     },
     {
       "id": "concept--non-windows-inject-file-attachment-fallback",
@@ -22,7 +23,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - perbaikan-inject-attachment-magic-menu-download-linux [ses_f08b8695affeoxzP70A34cuaph].md",
       "source_location": "L11732",
-      "norm_label": "arboard set::file_list as the in-process file-reference seam"
+      "norm_label": "arboard set::file_list as the in-process file-reference seam",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - perbaikan-inject-attachment-magic-menu-download-linux [ses_f08b8695affeoxzP70A34cuaph].md:L11732] arboard already writes text/uri-list in-process on X11 and Wayland, so new wl-copy --type / xclip -t plumbing is unnecessary"
     },
     {
       "id": "concept--ungated-slash-to-backslash-corrupts-posix-paths",
@@ -46,7 +48,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - perbaikan-inject-attachment-magic-menu-download-linux [ses_f08b8695affeoxzP70A34cuaph].md",
       "source_location": "L11737",
-      "norm_label": "the terminal guard lives inside inject_file_attachment, not at the caller"
+      "norm_label": "the terminal guard lives inside inject_file_attachment, not at the caller",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - perbaikan-inject-attachment-magic-menu-download-linux [ses_f08b8695affeoxzP70A34cuaph].md:L11737] The Linux branch must reproduce the Windows internal terminal guard, or terminal targets regress from path-text to a pasted URI list"
     },
     {
       "id": "concept--gtk-file-paste-gated-on-targets-atom",
@@ -62,7 +65,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - perbaikan-inject-attachment-magic-menu-download-linux [ses_f08b8695affeoxzP70A34cuaph].md",
       "source_location": "L15324",
-      "norm_label": "a platform-blind test that asserted windows normalization"
+      "norm_label": "a platform-blind test that asserted windows normalization",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - perbaikan-inject-attachment-magic-menu-download-linux [ses_f08b8695affeoxzP70A34cuaph].md:L9186] The existing test used only Windows drive-letter inputs, so it could not catch POSIX path corruption"
     },
     {
       "id": "concept--isolated-vps-worktree-for-concurrent-session",
@@ -70,7 +74,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - perbaikan-inject-attachment-magic-menu-download-linux [ses_f08b8695affeoxzP70A34cuaph].md",
       "source_location": "L19360",
-      "norm_label": "isolated vps worktree because another session was live-editing"
+      "norm_label": "isolated vps worktree because another session was live-editing",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - perbaikan-inject-attachment-magic-menu-download-linux [ses_f08b8695affeoxzP70A34cuaph].md:L13177] Two sessions writing in one tree is exactly the shared-mutable-state failure the isolation rules exist to prevent"
     },
     {
       "id": "concept--tauri-build-prerequisite-provisioning",
@@ -94,94 +99,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - perbaikan-inject-attachment-magic-menu-download-linux [ses_f08b8695affeoxzP70A34cuaph].md",
       "source_location": "L19659",
-      "norm_label": "merge verified by content because the merge rebased"
-    },
-    {
-      "id": "rationale--file-attachment-must-use-native-file-reference-format",
-      "label": "An attachment injection must use the platform's native file-reference format, or the target app sees text instead of an attachment",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - perbaikan-inject-attachment-magic-menu-download-linux [ses_f08b8695affeoxzP70A34cuaph].md",
-      "source_location": "L11714",
-      "norm_label": "an attachment injection must use the platform's native file-reference format, or the target app sees text instead of an attachment"
-    },
-    {
-      "id": "rationale--arboard-file-list-beats-new-shell-plumbing",
-      "label": "arboard already writes text/uri-list in-process on X11 and Wayland, so new wl-copy --type / xclip -t plumbing is unnecessary",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - perbaikan-inject-attachment-magic-menu-download-linux [ses_f08b8695affeoxzP70A34cuaph].md",
-      "source_location": "L11732",
-      "norm_label": "arboard already writes text/uri-list in-process on x11 and wayland, so new wl-copy --type / xclip -t plumbing is unnecessary"
-    },
-    {
-      "id": "rationale--linux-branch-must-mirror-windows-terminal-guard",
-      "label": "The Linux branch must reproduce the Windows internal terminal guard, or terminal targets regress from path-text to a pasted URI list",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - perbaikan-inject-attachment-magic-menu-download-linux [ses_f08b8695affeoxzP70A34cuaph].md",
-      "source_location": "L11737",
-      "norm_label": "the linux branch must reproduce the windows internal terminal guard, or terminal targets regress from path-text to a pasted uri list"
-    },
-    {
-      "id": "rationale--windows-only-test-inputs-hid-posix-corruption",
-      "label": "The existing test used only Windows drive-letter inputs, so it could not catch POSIX path corruption",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - perbaikan-inject-attachment-magic-menu-download-linux [ses_f08b8695affeoxzP70A34cuaph].md",
-      "source_location": "L9186",
-      "norm_label": "the existing test used only windows drive-letter inputs, so it could not catch posix path corruption"
-    },
-    {
-      "id": "rationale--shared-vps-tree-active-writer-forces-separate-worktree",
-      "label": "Two sessions writing in one tree is exactly the shared-mutable-state failure the isolation rules exist to prevent",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - perbaikan-inject-attachment-magic-menu-download-linux [ses_f08b8695affeoxzP70A34cuaph].md",
-      "source_location": "L13177",
-      "norm_label": "two sessions writing in one tree is exactly the shared-mutable-state failure the isolation rules exist to prevent"
-    },
-    {
-      "id": "rationale--verify-merged-content-not-sha-ancestry",
-      "label": "The merge rebased so the commit SHAs changed, and content equality proves the work landed where ancestry cannot",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - perbaikan-inject-attachment-magic-menu-download-linux [ses_f08b8695affeoxzP70A34cuaph].md",
-      "source_location": "L19512",
-      "norm_label": "the merge rebased so the commit shas changed, and content equality proves the work landed where ancestry cannot"
+      "norm_label": "merge verified by content because the merge rebased",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - perbaikan-inject-attachment-magic-menu-download-linux [ses_f08b8695affeoxzP70A34cuaph].md:L19512] The merge rebased so the commit SHAs changed, and content equality proves the work landed where ancestry cannot"
     }
   ],
   "links": [
-    {
-      "source": "rationale--file-attachment-must-use-native-file-reference-format",
-      "target": "concept--text-uri-list-native-file-reference-format",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--arboard-file-list-beats-new-shell-plumbing",
-      "target": "concept--arboard-file-list-as-in-process-file-reference-seam",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--linux-branch-must-mirror-windows-terminal-guard",
-      "target": "concept--internal-terminal-guard-inside-inject-file",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--windows-only-test-inputs-hid-posix-corruption",
-      "target": "concept--platform-blind-test-encoded-the-bug",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--shared-vps-tree-active-writer-forces-separate-worktree",
-      "target": "concept--isolated-vps-worktree-for-concurrent-session",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--verify-merged-content-not-sha-ancestry",
-      "target": "concept--verify-merge-by-content-not-sha-ancestry",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--text-uri-list-native-file-reference-format",
       "target": "concept--non-windows-inject-file-attachment-fallback",

@@ -23,7 +23,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - assess-3-linux-audio-snipset-plans [ses_f20931d1bffeLOuDTKdGRQlLbs].md",
       "source_location": "L7283",
-      "norm_label": "all three plans record zero ticked checkboxes and a commit touching a plan file proves only that the file was written"
+      "norm_label": "all three plans record zero ticked checkboxes and a commit touching a plan file proves only that the file was written",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - assess-3-linux-audio-snipset-plans [ses_f20931d1bffeLOuDTKdGRQlLbs].md:L7283] A fix(...) commit touching a plan file proves the file changed and nothing more; the progress files are the only place state is recorded and two of the three contradict the plans"
     },
     {
       "id": "concept--test-existence-is-not-test-execution",
@@ -71,23 +72,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - assess-3-linux-audio-snipset-plans [ses_f20931d1bffeLOuDTKdGRQlLbs].md",
       "source_location": "L4209",
-      "norm_label": "a stale trigram index behind the shell grep wrapper produced a false negative for content git head proved was present"
-    },
-    {
-      "id": "rationale--fix-commit-is-not-completion-evidence",
-      "label": "A fix(...) commit touching a plan file proves the file changed and nothing more; the progress files are the only place state is recorded and two of the three contradict the plans",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - assess-3-linux-audio-snipset-plans [ses_f20931d1bffeLOuDTKdGRQlLbs].md",
-      "source_location": "L7283",
-      "norm_label": "a fix commit touching a plan file proves the file changed and nothing more the progress files are the only place state is recorded and two of the three contradict the plans"
-    },
-    {
-      "id": "rationale--wrapped-shell-grep-reverified-with-gnu-grep",
-      "label": "The shell grep is wrapped by rtk/tgrep and may hit a stale trigram index, so every earlier match was re-verified with /usr/bin/grep",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - assess-3-linux-audio-snipset-plans [ses_f20931d1bffeLOuDTKdGRQlLbs].md",
-      "source_location": "L4219",
-      "norm_label": "the shell grep is wrapped by rtk tgrep and may hit a stale trigram index so every earlier match was re verified with usr bin grep"
+      "norm_label": "a stale trigram index behind the shell grep wrapper produced a false negative for content git head proved was present",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - assess-3-linux-audio-snipset-plans [ses_f20931d1bffeLOuDTKdGRQlLbs].md:L4219] The shell grep is wrapped by rtk/tgrep and may hit a stale trigram index, so every earlier match was re-verified with /usr/bin/grep"
     },
     {
       "id": "concept--generic-ui-recorder-accepts-unvalidated-csat",
@@ -103,15 +89,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-01 - author-r3-event-guard-patch [ses_f0a7762e7ffeUxz1pKi8mhdJog].md",
       "source_location": "L2870",
-      "norm_label": "reject analyticsaction csatresponded in the generic recorder with analytics csat use dedicated recorder forcing all csat writes through the validated recorder"
-    },
-    {
-      "id": "rationale--guard-before-spawn-blocking-avoids-db-touch",
-      "label": "The guard sits before spawn_blocking so a rejected event touches no database at all",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-01 - author-r3-event-guard-patch [ses_f0a7762e7ffeUxz1pKi8mhdJog].md",
-      "source_location": "L2927",
-      "norm_label": "the guard sits before spawn blocking so a rejected event touches no database at all"
+      "norm_label": "reject analyticsaction csatresponded in the generic recorder with analytics csat use dedicated recorder forcing all csat writes through the validated recorder",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-10-01 - author-r3-event-guard-patch [ses_f0a7762e7ffeUxz1pKi8mhdJog].md:L2927] The guard sits before spawn_blocking so a rejected event touches no database at all"
     }
   ],
   "links": [
@@ -119,12 +98,6 @@
       "source": "concept--fail-closed-infra-error-as-auth-failure",
       "target": "concept--sessions-row-alone-should-grant-gated-prefixes",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--fix-commit-is-not-completion-evidence",
-      "target": "concept--plan-verdict-from-repo-evidence-not-plan-prose",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {
@@ -158,21 +131,9 @@
       "confidence": "INFERRED"
     },
     {
-      "source": "rationale--wrapped-shell-grep-reverified-with-gnu-grep",
-      "target": "concept--tgrep-index-staleness",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
       "source": "concept--csat-boundary-guard-rejects-in-generic-recorder",
       "target": "concept--generic-ui-recorder-accepts-unvalidated-csat",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--guard-before-spawn-blocking-avoids-db-touch",
-      "target": "concept--csat-boundary-guard-rejects-in-generic-recorder",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     }
   ]

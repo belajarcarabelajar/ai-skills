@@ -9,7 +9,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - resume-codex-task-and-review-git-diff [ses_f2263a6f1ffe1H81iTVF0xnawu].md",
       "source_location": "L7888",
       "norm_label": "youtube iframe player error 153",
-      "description": "The defect this whole session exists to fix. A document loaded over a custom scheme sends no HTTP Referer header on the subframe request, and YouTube rejects such an embed with IFrame error 153. The app localises the integer as pomoMusicError153. The same frontend works in development because http://localhost:1420 is a real HTTP origin that does send a Referer. Five remedies were tried and failed, including origin and referrerpolicy."
+      "description": "The defect this whole session exists to fix. A document loaded over a custom scheme sends no HTTP Referer header on the subframe request, and YouTube rejects such an embed with IFrame error 153. The app localises the integer as pomoMusicError153. The same frontend works in development because http://localhost:1420 is a real HTTP origin that does send a Referer. Five remedies were tried and failed, including origin and referrerpolicy.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - resume-codex-task-and-review-git-diff [ses_f2263a6f1ffe1H81iTVF0xnawu].md:L7898] The custom scheme is the cause, not the operating system"
     },
     {
       "id": "concept--static-loopback-youtube-player-page",
@@ -18,7 +19,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - resume-codex-task-and-review-git-diff [ses_f2263a6f1ffe1H81iTVF0xnawu].md",
       "source_location": "L2633",
       "norm_label": "single static html player page on 127 0 0 1 21772",
-      "description": "commands/youtube_player_origin.rs: an isolated loopback HTTP server that serves a wrapper page framing the YouTube embed, so the invisible audio window has a real HTTP origin. Shipped in commit abf51d416 after a rewrite from an OS-assigned ephemeral port to a fixed port 21772 with per-connection threads via spawn_supervised."
+      "description": "commands/youtube_player_origin.rs: an isolated loopback HTTP server that serves a wrapper page framing the YouTube embed, so the invisible audio window has a real HTTP origin. Shipped in commit abf51d416 after a rewrite from an OS-assigned ephemeral port to a fixed port 21772 with per-connection threads via spawn_supervised.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - resume-codex-task-and-review-git-diff [ses_f2263a6f1ffe1H81iTVF0xnawu].md:L2639] Only the invisible audio window gets a real HTTP origin so the iframe sends a Referer"
     },
     {
       "id": "concept--http-header-body-framing-truncation",
@@ -27,7 +29,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - resume-codex-task-and-review-git-diff [ses_f2263a6f1ffe1H81iTVF0xnawu].md",
       "source_location": "L11570",
       "norm_label": "http response framing headers after the terminator truncate the page",
-      "description": "Root cause of the silent player, proven against the live server on 127.0.0.1:21772. respond() built its format string ending in the \\r\\n\\r\\n terminator, then pushed X-Frame-Options and X-Content-Type-Options after it, so those two lines became the first bytes of the HTML body. Content-Length still counted only body.len() (1078) while 1134 bytes were sent. The user agent trusts Content-Length, truncated the response mid-token at 'documen', so the inline script never completed, the iframe was never created, and the embed never loaded. Measured: body bytes sent 1134, excess truncated by UA 56."
+      "description": "Root cause of the silent player, proven against the live server on 127.0.0.1:21772. respond() built its format string ending in the \\r\\n\\r\\n terminator, then pushed X-Frame-Options and X-Content-Type-Options after it, so those two lines became the first bytes of the HTML body. Content-Length still counted only body.len() (1078) while 1134 bytes were sent. The user agent trusts Content-Length, truncated the response mid-token at 'documen', so the inline script never completed, the iframe was never created, and the embed never loaded. Measured: body bytes sent 1134, excess truncated by UA 56.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - resume-codex-task-and-review-git-diff [ses_f2263a6f1ffe1H81iTVF0xnawu].md:L11739] Appending a header after the terminator sends body bytes, not a header"
     },
     {
       "id": "concept--webview-watchdog-silent-window-reload",
@@ -36,7 +39,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - resume-codex-task-and-review-git-diff [ses_f2263a6f1ffe1H81iTVF0xnawu].md",
       "source_location": "L13621",
       "norm_label": "webview watchdog silent window reload",
-      "description": "Liveness comes from webview_heartbeat(label), a command the app frontend calls. should_reload_webview reloads when stale > 25s, a 60s cooldown has elapsed, and the cap is not hit. The loopback player page has no Tauri IPC by design and can never send a heartbeat, so it was reloaded every 60 seconds exactly (20:52:24, 20:53:24, 20:54:24) and the track restarted from zero each time. Fixed by exempting the youtube-player label."
+      "description": "Liveness comes from webview_heartbeat(label), a command the app frontend calls. should_reload_webview reloads when stale > 25s, a 60s cooldown has elapsed, and the cap is not hit. The loopback player page has no Tauri IPC by design and can never send a heartbeat, so it was reloaded every 60 seconds exactly (20:52:24, 20:53:24, 20:54:24) and the track restarted from zero each time. Fixed by exempting the youtube-player label.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - resume-codex-task-and-review-git-diff [ses_f2263a6f1ffe1H81iTVF0xnawu].md:L13814] The watchdog cannot recover anything by reloading the player window"
     },
     {
       "id": "concept--youtube-iframe-postmessage-readiness-handshake",
@@ -45,7 +49,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - resume-codex-task-and-review-git-diff [ses_f2263a6f1ffe1H81iTVF0xnawu].md",
       "source_location": "L14460",
       "norm_label": "youtube iframe postmessage readiness handshake and command queue",
-      "description": "The page sends {event:'listening', id:1} to the embed after it loads, waits for onReady, then flushes queued play/pause/seekTo/setVolume. No external API script is loaded; the documented postMessage protocol alone is enough. Rust's command_script was changed to call window.__snipsetYtCommand({event:'command',func:...,args:...}) so every command goes through the queue rather than posting straight at the iframe's contentWindow."
+      "description": "The page sends {event:'listening', id:1} to the embed after it loads, waits for onReady, then flushes queued play/pause/seekTo/setVolume. No external API script is loaded; the documented postMessage protocol alone is enough. Rust's command_script was changed to call window.__snipsetYtCommand({event:'command',func:...,args:...}) so every command goes through the queue rather than posting straight at the iframe's contentWindow.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - resume-codex-task-and-review-git-diff [ses_f2263a6f1ffe1H81iTVF0xnawu].md:L13414] Commands sent before the embed reports ready are dropped"
     },
     {
       "id": "concept--player-state-channel-over-loopback",
@@ -72,7 +77,11 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - resume-codex-task-and-review-git-diff [ses_f2263a6f1ffe1H81iTVF0xnawu].md",
       "source_location": "L10714",
       "norm_label": "github prerelease as the artifact delivery channel",
-      "description": "The user directed the flow: bundle on the VPS, publish a GitHub release, then download from the release onto the desktop and install with the repo's existing script. Published as prerelease v0.6.848, later clobbered twice with rebuilt bundles. deploy-linux-github.sh was deliberately not used for the upload because it bumps the version and rebuilds from scratch while the bundle was already built."
+      "description": "The user directed the flow: bundle on the VPS, publish a GitHub release, then download from the release onto the desktop and install with the repo's existing script. Published as prerelease v0.6.848, later clobbered twice with rebuilt bundles. deploy-linux-github.sh was deliberately not used for the upload because it bumps the version and rebuilds from scratch while the bundle was already built.",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - resume-codex-task-and-review-git-diff [ses_f2263a6f1ffe1H81iTVF0xnawu].md:L10716] Ship the artifact through a release because the VPS link is throttled",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - resume-codex-task-and-review-git-diff [ses_f2263a6f1ffe1H81iTVF0xnawu].md:L9412] Publish as prerelease so an unverified fix stays out of every user's updater"
+      ]
     },
     {
       "id": "concept--poisoned-sccache-compile-artifact",
@@ -81,79 +90,8 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - resume-codex-task-and-review-git-diff [ses_f2263a6f1ffe1H81iTVF0xnawu].md",
       "source_location": "L17717",
       "norm_label": "poisoned sccache compile artifact",
-      "description": "The snipset lib test build failed with twelve nonsense errors (E0433 on every #[tauri::command]-generated symbol, E0425 on PLAYER_WINDOW_LABEL) while the source on disk was verifiably correct: 394 lines, correct md5, 5 macro attributes, balanced braces, and no error inside the module itself. A fresh CARGO_TARGET_DIR compiled successfully, which confirmed the cached artifact rather than the code was at fault. touch does not help because sccache keys on content, not mtime."
-    },
-    {
-      "id": "rationale--custom-scheme-is-the-cause-not-the-os",
-      "label": "The custom scheme is the cause, not the operating system",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - resume-codex-task-and-review-git-diff [ses_f2263a6f1ffe1H81iTVF0xnawu].md",
-      "source_location": "L7898",
-      "norm_label": "the custom scheme is the cause not the operating system",
-      "description": "The runbook's triage rule: a Linux user running the dev server sees the IFrame path work, and that is not a contradiction, it is the same bug from the other side. The upstream Tauri issue is labelled for Linux and macOS together, which is the same split seen here."
-    },
-    {
-      "id": "rationale--loopback-origin-so-the-iframe-sends-a-referer",
-      "label": "Only the invisible audio window gets a real HTTP origin so the iframe sends a Referer",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - resume-codex-task-and-review-git-diff [ses_f2263a6f1ffe1H81iTVF0xnawu].md",
-      "source_location": "L2639",
-      "norm_label": "only the invisible audio window gets a real http origin so the iframe sends a referer",
-      "description": "The main window keeps snipset:// and its Tauri ACL; only the player window is moved onto a real HTTP origin. Serving the whole app from loopback instead was tried earlier and broke all IPC, which is why the origin is scoped to a separate window."
-    },
-    {
-      "id": "rationale--headers-after-the-terminator-are-body-bytes",
-      "label": "Appending a header after the terminator sends body bytes, not a header",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - resume-codex-task-and-review-git-diff [ses_f2263a6f1ffe1H81iTVF0xnawu].md",
-      "source_location": "L11739",
-      "norm_label": "appending a header after the terminator sends body bytes not a header",
-      "description": "Written into the fix as a comment so it cannot recur: the user agent trusts Content-Length, truncates the response to the declared length, and cuts the page off mid-script. The new test pins sent == Content-Length and the body ending at </html>."
-    },
-    {
-      "id": "rationale--reload-cannot-recover-the-player-window",
-      "label": "The watchdog cannot recover anything by reloading the player window",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - resume-codex-task-and-review-git-diff [ses_f2263a6f1ffe1H81iTVF0xnawu].md",
-      "source_location": "L13814",
-      "norm_label": "the watchdog cannot recover anything by reloading the player window",
-      "description": "The watchdog's premise is that the app's own renderer died and the UI is frozen. The player page is not the app UI, has no heartbeat, and reloading it destroyed playback while recovering nothing: it reloaded every 60 s and the track restarted each time. Exemption was chosen over hiding the window because a hidden webview risks WebKit throttling the playback it exists to serve."
-    },
-    {
-      "id": "rationale--commands-dropped-before-the-player-is-ready",
-      "label": "Commands sent before the embed reports ready are dropped",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - resume-codex-task-and-review-git-diff [ses_f2263a6f1ffe1H81iTVF0xnawu].md",
-      "source_location": "L13414",
-      "norm_label": "commands sent before the embed reports ready are dropped",
-      "description": "Two independent reasons seeking failed: the iframe is created by the page's inline script after load, so an eval that runs first finds getElementById('yt') null and silently no-ops; and the YouTube IFrame API needs its own init handshake before playVideo or seekTo are honoured."
-    },
-    {
-      "id": "rationale--release-channel-because-the-vps-link-is-throttled",
-      "label": "Ship the artifact through a release because the VPS link is throttled",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - resume-codex-task-and-review-git-diff [ses_f2263a6f1ffe1H81iTVF0xnawu].md",
-      "source_location": "L10716",
-      "norm_label": "ship the artifact through a release because the vps link is throttled",
-      "description": "Measured both ways: VPS to desktop ran at 546 B/s to 6 KB/s, a 4 MiB dd returned 98 KiB in 90 seconds, putting a 38 MB binary at roughly seven hours. The same 44.5 MB came off the GitHub CDN in 6.6 seconds. Compression did not help because the bottleneck was bandwidth, not size."
-    },
-    {
-      "id": "rationale--prerelease-keeps-an-unverified-fix-out-of-updaters",
-      "label": "Publish as prerelease so an unverified fix stays out of every user's updater",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - resume-codex-task-and-review-git-diff [ses_f2263a6f1ffe1H81iTVF0xnawu].md",
-      "source_location": "L9412",
-      "norm_label": "publish as prerelease so an unverified fix stays out of every user's updater",
-      "description": "v0.6.848 would have become Latest and been offered to every user by the auto-updater, with the YouTube fix still unverified live: all prior native probes were muted, and unmuted autoplay in a never-focused webview was the open risk. A prerelease stays downloadable and is one gh release edit away from promotion."
-    },
-    {
-      "id": "rationale--fresh-target-dir-to-tell-cache-apart-from-source",
-      "label": "A fresh target directory is what separates a bad cache from bad source",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - resume-codex-task-and-review-git-diff [ses_f2263a6f1ffe1H81iTVF0xnawu].md",
-      "source_location": "L17809",
-      "norm_label": "a fresh target directory is what separates a bad cache from bad source",
-      "description": "The source had already been proven correct by md5, line count, macro count and brace balance, so the errors were judged to be at the artifact layer rather than the source. Building into a clean CARGO_TARGET_DIR on the disk-backed filesystem forced a real compile and cleared the twelve errors, confirming the cache was poisoned. It was also the move that exposed the genuine test failures that were hidden behind them."
+      "description": "The snipset lib test build failed with twelve nonsense errors (E0433 on every #[tauri::command]-generated symbol, E0425 on PLAYER_WINDOW_LABEL) while the source on disk was verifiably correct: 394 lines, correct md5, 5 macro attributes, balanced braces, and no error inside the module itself. A fresh CARGO_TARGET_DIR compiled successfully, which confirmed the cached artifact rather than the code was at fault. touch does not help because sccache keys on content, not mtime.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - resume-codex-task-and-review-git-diff [ses_f2263a6f1ffe1H81iTVF0xnawu].md:L17809] A fresh target directory is what separates a bad cache from bad source"
     }
   ],
   "links": [
@@ -186,54 +124,6 @@
       "target": "concept--vps-only-build-discipline",
       "relation": "conceptually_related_to",
       "confidence": "INFERRED"
-    },
-    {
-      "source": "rationale--custom-scheme-is-the-cause-not-the-os",
-      "target": "concept--youtube-iframe-player-error-153",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--loopback-origin-so-the-iframe-sends-a-referer",
-      "target": "concept--static-loopback-youtube-player-page",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--headers-after-the-terminator-are-body-bytes",
-      "target": "concept--http-header-body-framing-truncation",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--reload-cannot-recover-the-player-window",
-      "target": "concept--webview-watchdog-silent-window-reload",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--commands-dropped-before-the-player-is-ready",
-      "target": "concept--youtube-iframe-postmessage-readiness-handshake",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--release-channel-because-the-vps-link-is-throttled",
-      "target": "concept--github-prerelease-as-artifact-delivery",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--prerelease-keeps-an-unverified-fix-out-of-updaters",
-      "target": "concept--github-prerelease-as-artifact-delivery",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--fresh-target-dir-to-tell-cache-apart-from-source",
-      "target": "concept--poisoned-sccache-compile-artifact",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
     }
   ]
 }

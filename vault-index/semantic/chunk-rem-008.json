@@ -14,7 +14,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
       "source_location": "L24996",
-      "norm_label": "known gaps as a checked-in shrinking work queue"
+      "norm_label": "known gaps as a checked-in shrinking work queue",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md:L24996] The gap is a checked-in queue so the detector task can reach GREEN before wiring lands"
     },
     {
       "id": "concept--production-files-only-subagent-scope",
@@ -22,7 +23,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
       "source_location": "L24997",
-      "norm_label": "production-files-only subagent scope with a parent-owned contract file"
+      "norm_label": "production-files-only subagent scope with a parent-owned contract file",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md:L24997] Restricting subagents to production files is what stopped the shared-file clobbering"
     },
     {
       "id": "concept--shared-cue-survives-dedup",
@@ -38,7 +40,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
       "source_location": "L24999",
-      "norm_label": "audio cue pinning test"
+      "norm_label": "audio cue pinning test",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md:L16878] Exact key plus count is what catches a double cue"
     },
     {
       "id": "concept--retracted-heuristic-counts",
@@ -46,7 +49,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
       "source_location": "L25036",
-      "norm_label": "four retracted heuristic counts 159 to 182 to 87 to 79"
+      "norm_label": "four retracted heuristic counts 159 to 182 to 87 to 79",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md:L25036] Counts must be re-derived by running the detector, never by pattern-matching heuristics"
     },
     {
       "id": "concept--full-suite-forbidden-on-dev-host",
@@ -54,7 +58,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
       "source_location": "L25037",
-      "norm_label": "full web suite forbidden on the dev host"
+      "norm_label": "full web suite forbidden on the dev host",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md:L25037] The documented hard-reset risk is why the full web suite runs on the VPS"
     },
     {
       "id": "concept--bare-reference-resolution-blind-spot",
@@ -86,7 +91,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
       "source_location": "L15525",
-      "norm_label": "shared button soundeffect prop is invisible to the detector"
+      "norm_label": "shared button soundeffect prop is invisible to the detector",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md:L15529] A detector gap is fixed at the source instead of being papered over with exclusions"
     },
     {
       "id": "concept--typed-param-index-blind-spot",
@@ -102,7 +108,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
       "source_location": "L14594",
-      "norm_label": "stoppropagation backdrop shield is not a control"
+      "norm_label": "stoppropagation backdrop shield is not a control",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md:L17161] A stopPropagation div is a barrier whose function must survive the cue removal"
     },
     {
       "id": "concept--cross-module-prop-cue",
@@ -110,7 +117,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
       "source_location": "L8781",
-      "norm_label": "cross-module prop handler cues in the parent component"
+      "norm_label": "cross-module prop handler cues in the parent component",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md:L8781] The cue for a prop handler lives in the parent, so the per-file exclusion is correct"
     },
     {
       "id": "concept--test-voice-two-state-cue-conflict",
@@ -118,7 +126,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
       "source_location": "L29259",
-      "norm_label": "test voice two-state button has no single correct cue key"
+      "norm_label": "test voice two-state button has no single correct cue key",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md:L29259] A cue at the speech call site lands on top of the first spoken syllable"
     },
     {
       "id": "concept--three-dismiss-entry-points",
@@ -126,7 +135,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
       "source_location": "L17373",
-      "norm_label": "oncancel has three dismiss entry points: escape, backdrop, cancel button"
+      "norm_label": "oncancel has three dismiss entry points: escape, backdrop, cancel button",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md:L17373] Escape, backdrop and Cancel all call onCancel, so the caller's cue cannot be removed"
     },
     {
       "id": "concept--matcher-coverage-is-not-owner-coverage",
@@ -166,7 +176,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
       "source_location": "L24830",
-      "norm_label": "happy-dom event.target propagation makes a backdrop guard test vacuous"
+      "norm_label": "happy-dom event.target propagation makes a backdrop guard test vacuous",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md:L24830] A guard only ever observed passing is indistinguishable from one that does nothing"
     },
     {
       "id": "concept--pre-existing-failure-proven-at-ancestor",
@@ -174,7 +185,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
       "source_location": "L23541",
-      "norm_label": "pre-existing failure proven by re-running at the ancestor commit"
+      "norm_label": "pre-existing failure proven by re-running at the ancestor commit",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md:L23541] Calling a failure pre-existing requires reproducing it before the work started"
     },
     {
       "id": "concept--i18n-scanner-ascii-only-char-class",
@@ -190,7 +202,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
       "source_location": "L26881",
-      "norm_label": "naive widening of the i18n regex is noise, closing it needs an ast scan"
+      "norm_label": "naive widening of the i18n regex is noise, closing it needs an ast scan",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md:L26881] A wider i18n regex matches code, not text, so the guard would get worse"
     },
     {
       "id": "concept--i18n-ledger-entry-couples-to-file-deletion",
@@ -198,7 +211,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
       "source_location": "L27251",
-      "norm_label": "shrink-only i18n ledger entries couple a file deletion to ledger cleanup"
+      "norm_label": "shrink-only i18n ledger entries couple a file deletion to ledger cleanup",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md:L27251] Exact two-way equality under a shrink-only ratchet turns a deleted file into a stale entry"
     },
     {
       "id": "concept--pipeline-exit-code-is-not-tool-exit-code",
@@ -278,220 +292,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
       "source_location": "L21224",
-      "norm_label": "never bypass the pre-commit hook on lint-red work"
-    },
-    {
-      "id": "rationale--gap-queue-not-zero-assertion",
-      "label": "The gap is a checked-in queue so the detector task can reach GREEN before wiring lands",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
-      "source_location": "L24996",
-      "norm_label": "the gap is a checked-in queue so the detector task can reach green before wiring lands"
-    },
-    {
-      "id": "rationale--serial-contract-ownership-stops-clobbering",
-      "label": "Restricting subagents to production files is what stopped the shared-file clobbering",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
-      "source_location": "L24997",
-      "norm_label": "restricting subagents to production files is what stopped the shared-file clobbering"
-    },
-    {
-      "id": "rationale--exact-key-and-count-catches-double-cue",
-      "label": "Exact key plus count is what catches a double cue",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
-      "source_location": "L16878",
-      "norm_label": "exact key plus count is what catches a double cue"
-    },
-    {
-      "id": "rationale--detector-is-the-only-count-authority",
-      "label": "Counts must be re-derived by running the detector, never by pattern-matching heuristics",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
-      "source_location": "L25036",
-      "norm_label": "counts must be re-derived by running the detector, never by pattern-matching heuristics"
-    },
-    {
-      "id": "rationale--suite-on-vps-not-this-host",
-      "label": "The documented hard-reset risk is why the full web suite runs on the VPS",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
-      "source_location": "L25037",
-      "norm_label": "the documented hard-reset risk is why the full web suite runs on the vps"
-    },
-    {
-      "id": "rationale--fix-detector-not-register-exclusions",
-      "label": "A detector gap is fixed at the source instead of being papered over with exclusions",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
-      "source_location": "L15529",
-      "norm_label": "a detector gap is fixed at the source instead of being papered over with exclusions"
-    },
-    {
-      "id": "rationale--cue-would-mask-the-spoken-prompt",
-      "label": "A cue at the speech call site lands on top of the first spoken syllable",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
-      "source_location": "L29259",
-      "norm_label": "a cue at the speech call site lands on top of the first spoken syllable"
-    },
-    {
-      "id": "rationale--escape-backdrop-cancel-all-call-oncancel",
-      "label": "Escape, backdrop and Cancel all call onCancel, so the caller's cue cannot be removed",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
-      "source_location": "L17373",
-      "norm_label": "escape, backdrop and cancel all call oncancel, so the caller's cue cannot be removed"
-    },
-    {
-      "id": "rationale--prop-handler-cue-lives-in-parent",
-      "label": "The cue for a prop handler lives in the parent, so the per-file exclusion is correct",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
-      "source_location": "L8781",
-      "norm_label": "the cue for a prop handler lives in the parent, so the per-file exclusion is correct"
-    },
-    {
-      "id": "rationale--stoppropagation-is-a-barrier-not-an-action",
-      "label": "A stopPropagation div is a barrier whose function must survive the cue removal",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
-      "source_location": "L17161",
-      "norm_label": "a stoppropagation div is a barrier whose function must survive the cue removal"
-    },
-    {
-      "id": "rationale--pre-existing-proof-is-a-rerun-at-the-ancestor",
-      "label": "Calling a failure pre-existing requires reproducing it before the work started",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
-      "source_location": "L23541",
-      "norm_label": "calling a failure pre-existing requires reproducing it before the work started"
-    },
-    {
-      "id": "rationale--ledger-exact-equality-forces-cleanup",
-      "label": "Exact two-way equality under a shrink-only ratchet turns a deleted file into a stale entry",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
-      "source_location": "L27251",
-      "norm_label": "exact two-way equality under a shrink-only ratchet turns a deleted file into a stale entry"
-    },
-    {
-      "id": "rationale--no-sound-bearing-widening-of-the-i18n-regex",
-      "label": "A wider i18n regex matches code, not text, so the guard would get worse",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
-      "source_location": "L26881",
-      "norm_label": "a wider i18n regex matches code, not text, so the guard would get worse"
-    },
-    {
-      "id": "rationale--lint-red-commit-marks-inflight-work-final",
-      "label": "Committing lint-red agent work would mark unfinished work as final",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
-      "source_location": "L21288",
-      "norm_label": "committing lint-red agent work would mark unfinished work as final"
-    },
-    {
-      "id": "rationale--guard-never-observed-failing",
-      "label": "A guard only ever observed passing is indistinguishable from one that does nothing",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
-      "source_location": "L24830",
-      "norm_label": "a guard only ever observed passing is indistinguishable from one that does nothing"
+      "norm_label": "never bypass the pre-commit hook on lint-red work",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md:L21288] Committing lint-red agent work would mark unfinished work as final"
     }
   ],
   "links": [
-    {
-      "source": "rationale--gap-queue-not-zero-assertion",
-      "target": "concept--known-gaps-work-queue",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--serial-contract-ownership-stops-clobbering",
-      "target": "concept--production-files-only-subagent-scope",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--exact-key-and-count-catches-double-cue",
-      "target": "concept--audio-cue-pinning-test",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--detector-is-the-only-count-authority",
-      "target": "concept--retracted-heuristic-counts",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--suite-on-vps-not-this-host",
-      "target": "concept--full-suite-forbidden-on-dev-host",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--fix-detector-not-register-exclusions",
-      "target": "concept--shared-button-soundeffect-hop",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--cue-would-mask-the-spoken-prompt",
-      "target": "concept--test-voice-two-state-cue-conflict",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--escape-backdrop-cancel-all-call-oncancel",
-      "target": "concept--three-dismiss-entry-points",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--prop-handler-cue-lives-in-parent",
-      "target": "concept--cross-module-prop-cue",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--stoppropagation-is-a-barrier-not-an-action",
-      "target": "concept--stop-propagation-shield-is-not-a-control",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--pre-existing-proof-is-a-rerun-at-the-ancestor",
-      "target": "concept--pre-existing-failure-proven-at-ancestor",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--ledger-exact-equality-forces-cleanup",
-      "target": "concept--i18n-ledger-entry-couples-to-file-deletion",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--no-sound-bearing-widening-of-the-i18n-regex",
-      "target": "concept--ast-scan-required-for-i18n-literal-scanner",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--lint-red-commit-marks-inflight-work-final",
-      "target": "concept--no-bypass-precommit-hook",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--guard-never-observed-failing",
-      "target": "concept--happy-dom-target-propagation-vacuous-guard",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--audio-cue-coverage-detector",
       "target": "concept--known-gaps-work-queue",

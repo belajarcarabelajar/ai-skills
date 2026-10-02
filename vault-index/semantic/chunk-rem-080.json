@@ -95,7 +95,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-truthful-voice-availability [ses_f1fb19667ffeJbWZ9KQEnqT0UC].md",
       "source_location": "L12933",
-      "norm_label": "native tts availability is probed by running the synthesis executable itself with version"
+      "norm_label": "native tts availability is probed by running the synthesis executable itself with version",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-truthful-voice-availability [ses_f1fb19667ffeJbWZ9KQEnqT0UC].md:L32] The warning consulted browser profiles while the native path independently used its own provider"
     },
     {
       "id": "concept--native-capability-rides-as-serde-defaulted-fields-on-the-existing-status-wrapper",
@@ -103,7 +104,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-truthful-voice-availability [ses_f1fb19667ffeJbWZ9KQEnqT0UC].md",
       "source_location": "L12933",
-      "norm_label": "native capability rides as two serde defaulted fields on the existing tts status with playback wrapper instead of a new tauri command"
+      "norm_label": "native capability rides as two serde defaulted fields on the existing tts status with playback wrapper instead of a new tauri command",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-truthful-voice-availability [ses_f1fb19667ffeJbWZ9KQEnqT0UC].md:L12933] No new Tauri command was registered because command registration lives in commands/mod.rs outside the owned files"
     },
     {
       "id": "concept--missing-tts-provider-is-a-built-in-waveform-fallback-not-an-error",
@@ -111,39 +113,11 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-truthful-voice-availability [ses_f1fb19667ffeJbWZ9KQEnqT0UC].md",
       "source_location": "L12934",
-      "norm_label": "a missing tts provider is a built in waveform fallback never an error state"
-    },
-    {
-      "id": "rationale--the-native-path-uses-its-own-provider-so-browser-profiles-answer-nothing",
-      "label": "The warning consulted browser profiles while the native path independently used its own provider",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-truthful-voice-availability [ses_f1fb19667ffeJbWZ9KQEnqT0UC].md",
-      "source_location": "L32",
-      "norm_label": "the warning consulted browser profiles while the native path independently used its own provider"
-    },
-    {
-      "id": "rationale--no-new-tauri-command-because-registration-is-outside-the-owned-files",
-      "label": "No new Tauri command was registered because command registration lives in commands/mod.rs outside the owned files",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-truthful-voice-availability [ses_f1fb19667ffeJbWZ9KQEnqT0UC].md",
-      "source_location": "L12933",
-      "norm_label": "no new tauri command was registered because command registration lives in commands mod rs outside the owned files"
-    },
-    {
-      "id": "rationale--keep-legacy-alert-phrases-so-unmodifiable-tests-still-pass",
-      "label": "The new alert texts keep the legacy phrases so the unmodifiable TtsLiveDemoCard and TtsNativeSessionLifecycle tests still pass",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-truthful-voice-availability [ses_f1fb19667ffeJbWZ9KQEnqT0UC].md",
-      "source_location": "L12935",
-      "norm_label": "the new alert texts keep the legacy phrases so the unmodifiable demo card and native session lifecycle tests still pass"
-    },
-    {
-      "id": "rationale--missing-provider-is-never-an-error-so-no-surface-prescribes-installation",
-      "label": "Missing provider means the engine speaks through its built-in fallback waveform, so no surface ever prescribes installation",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-truthful-voice-availability [ses_f1fb19667ffeJbWZ9KQEnqT0UC].md",
-      "source_location": "L12934",
-      "norm_label": "missing provider means the engine speaks through its built in fallback waveform so no surface ever prescribes installation"
+      "norm_label": "a missing tts provider is a built in waveform fallback never an error state",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-truthful-voice-availability [ses_f1fb19667ffeJbWZ9KQEnqT0UC].md:L12934] Missing provider means the engine speaks through its built-in fallback waveform, so no surface ever prescribes installation",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-truthful-voice-availability [ses_f1fb19667ffeJbWZ9KQEnqT0UC].md:L12935] The new alert texts keep the legacy phrases so the unmodifiable TtsLiveDemoCard and TtsNativeSessionLifecycle tests still pass"
+      ]
     }
   ],
   "links": [
@@ -217,30 +191,6 @@
       "source": "concept--missing-tts-provider-is-a-built-in-waveform-fallback-not-an-error",
       "target": "concept--voice-availability-must-separate-loading-enumeration-failure-and-absence",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--the-native-path-uses-its-own-provider-so-browser-profiles-answer-nothing",
-      "target": "concept--native-tts-availability-probed-by-running-the-engine-binary",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--no-new-tauri-command-because-registration-is-outside-the-owned-files",
-      "target": "concept--native-capability-rides-as-serde-defaulted-fields-on-the-existing-status-wrapper",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--missing-provider-is-never-an-error-so-no-surface-prescribes-installation",
-      "target": "concept--missing-tts-provider-is-a-built-in-waveform-fallback-not-an-error",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--keep-legacy-alert-phrases-so-unmodifiable-tests-still-pass",
-      "target": "concept--missing-tts-provider-is-a-built-in-waveform-fallback-not-an-error",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     }
   ]

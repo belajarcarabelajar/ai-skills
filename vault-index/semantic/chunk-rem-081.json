@@ -15,15 +15,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - taxonomy-locale-visible-and-ceiling [ses_f16574357ffepBL31qJ4gpDJpH].md",
       "source_location": "L9542",
-      "norm_label": "blog tags slug and blog categories slug are globally unique while name is unique locale name"
-    },
-    {
-      "id": "rationale--locale-pass-through-breaks-16-live-urls",
-      "label": "An id row cannot carry an English slug, so passing 'id' turns the 16 live taxonomy 200s into 302s",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - taxonomy-locale-visible-and-ceiling [ses_f16574357ffepBL31qJ4gpDJpH].md",
-      "source_location": "L9544",
-      "norm_label": "an id row cannot carry an english slug so passing id turns the 16 live taxonomy 200s into 302s"
+      "norm_label": "blog tags slug and blog categories slug are globally unique while name is unique locale name",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - taxonomy-locale-visible-and-ceiling [ses_f16574357ffepBL31qJ4gpDJpH].md:L9544] An id row cannot carry an English slug, so passing 'id' turns the 16 live taxonomy 200s into 302s"
     },
     {
       "id": "concept--migration-0012-slug-uniqueness-rationale-self-refuting",
@@ -79,15 +72,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-01 - author-r4-tab-layout-patch [ses_f0a7762e7ffd9sMR04EXN9mSMN].md",
       "source_location": "L3425",
-      "norm_label": "narrow render needs an auto fit minmax card grid plus an overflow x table wrapper not a fixed repeat 3 1fr grid over a bare table"
-    },
-    {
-      "id": "rationale--plain-overflowx-instead-of-reusing-pomodoro-wrapper",
-      "label": "Plain overflowX auto was used instead of .pomodoro-task-table-wrapper because that class sets overflow hidden with overflow-y auto, leaving x hidden",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-01 - author-r4-tab-layout-patch [ses_f0a7762e7ffd9sMR04EXN9mSMN].md",
-      "source_location": "L3583",
-      "norm_label": "plain overflowx auto was used instead of pomodoro task table wrapper because that class sets overflow hidden with overflow y auto leaving x hidden"
+      "norm_label": "narrow render needs an auto fit minmax card grid plus an overflow x table wrapper not a fixed repeat 3 1fr grid over a bare table",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-10-01 - author-r4-tab-layout-patch [ses_f0a7762e7ffd9sMR04EXN9mSMN].md:L3583] Plain overflowX auto was used instead of .pomodoro-task-table-wrapper because that class sets overflow hidden with overflow-y auto, leaving x hidden"
     },
     {
       "id": "concept--mode-off-vs-null-data-branch-split",
@@ -108,12 +94,6 @@
   ],
   "links": [
     {
-      "source": "rationale--locale-pass-through-breaks-16-live-urls",
-      "target": "concept--blog-tags-slug-global-unique",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
       "source": "concept--migration-0012-slug-uniqueness-rationale-self-refuting",
       "target": "concept--blog-tags-slug-global-unique",
       "relation": "conceptually_related_to",
@@ -129,12 +109,6 @@
       "source": "concept--call-sites-guard-blind-to-absence",
       "target": "concept--taxonomy-title-ceiling-via-shared-helper",
       "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--plain-overflowx-instead-of-reusing-pomodoro-wrapper",
-      "target": "concept--narrow-render-auto-fit-grid-plus-table-overflow",
-      "relation": "rationale_for",
       "confidence": "EXTRACTED"
     },
     {

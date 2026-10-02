@@ -47,15 +47,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c5-send-photo-hardcoded-mime [ses_f0b3bb2bdffex7NYvzMYqYCN5R].md",
       "source_location": "L3228",
-      "norm_label": "telegram acceptance of mislabeled bytes not determinable from repo"
-    },
-    {
-      "id": "rationale--no-non-png-upload-test",
-      "label": "No audit test exercises a real non-PNG upload, so server acceptance cannot be claimed",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c5-send-photo-hardcoded-mime [ses_f0b3bb2bdffex7NYvzMYqYCN5R].md",
-      "source_location": "L3228",
-      "norm_label": "no audit test exercises a real non-png upload"
+      "norm_label": "telegram acceptance of mislabeled bytes not determinable from repo",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c5-send-photo-hardcoded-mime [ses_f0b3bb2bdffex7NYvzMYqYCN5R].md:L3228] No audit test exercises a real non-PNG upload, so server acceptance cannot be claimed"
     },
     {
       "id": "concept--alacritty-tabs-macos-only",
@@ -111,7 +104,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - ketidakmantan-multitab-terminal-alacritty [ses_f11bb3aa8ffe0PO3NO1b9XipIw].md",
       "source_location": "L11148",
-      "norm_label": "alacritty terminal shell launches tmux new-session -a"
+      "norm_label": "alacritty terminal shell launches tmux new-session -a",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - ketidakmantan-multitab-terminal-alacritty [ses_f11bb3aa8ffe0PO3NO1b9XipIw].md:L9854] Chose tmux new-session -A -s main because it attaches when the session exists and creates it otherwise"
     },
     {
       "id": "concept--tmux-send-keys-cannot-trigger-prefix",
@@ -135,7 +129,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - ketidakmantan-multitab-terminal-alacritty [ses_f11bb3aa8ffe0PO3NO1b9XipIw].md",
       "source_location": "L14846",
-      "norm_label": "konsole-style tab keys via alacritty chars sending tmux prefix bytes"
+      "norm_label": "konsole-style tab keys via alacritty chars sending tmux prefix bytes",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - ketidakmantan-multitab-terminal-alacritty [ses_f11bb3aa8ffe0PO3NO1b9XipIw].md:L14311] Chose alacritty chars because it writes bytes to the PTY and so goes through tmux's real input path, unlike send-keys"
     },
     {
       "id": "concept--toml-hex-escape-version-portability",
@@ -151,7 +146,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - ketidakmantan-multitab-terminal-alacritty [ses_f11bb3aa8ffe0PO3NO1b9XipIw].md",
       "source_location": "L16068",
-      "norm_label": "wcag 4.5 to 1 contrast threshold for tmux status-bar small text"
+      "norm_label": "wcag 4.5 to 1 contrast threshold for tmux status-bar small text",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - ketidakmantan-multitab-terminal-alacritty [ses_f11bb3aa8ffe0PO3NO1b9XipIw].md:L16063] Darkened the orange accent because every brighter orange measured below the 4.5:1 small-text threshold"
     },
     {
       "id": "concept--imagemagick-colors-quantizes",
@@ -168,30 +164,6 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - ketidakmantan-multitab-terminal-alacritty [ses_f11bb3aa8ffe0PO3NO1b9XipIw].md",
       "source_location": "L19500",
       "norm_label": "in tmux fg white means colour 7 not ffffff"
-    },
-    {
-      "id": "rationale--new-session-a-attach-or-create",
-      "label": "Chose tmux new-session -A -s main because it attaches when the session exists and creates it otherwise",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - ketidakmantan-multitab-terminal-alacritty [ses_f11bb3aa8ffe0PO3NO1b9XipIw].md",
-      "source_location": "L9854",
-      "norm_label": "new-session -a chosen because it attaches or creates"
-    },
-    {
-      "id": "rationale--chars-goes-through-real-input-path",
-      "label": "Chose alacritty chars because it writes bytes to the PTY and so goes through tmux's real input path, unlike send-keys",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - ketidakmantan-multitab-terminal-alacritty [ses_f11bb3aa8ffe0PO3NO1b9XipIw].md",
-      "source_location": "L14311",
-      "norm_label": "chars chosen because it uses the real pty input path"
-    },
-    {
-      "id": "rationale--darker-orange-for-wcag-small-text",
-      "label": "Darkened the orange accent because every brighter orange measured below the 4.5:1 small-text threshold",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - ketidakmantan-multitab-terminal-alacritty [ses_f11bb3aa8ffe0PO3NO1b9XipIw].md",
-      "source_location": "L16063",
-      "norm_label": "orange darkened because brighter oranges fall below 4.5 to 1"
     }
   ],
   "links": [
@@ -217,12 +189,6 @@
       "source": "concept--validate-photo-size-is-size-only",
       "relation": "conceptually_related_to",
       "target": "concept--send-photo-hardcoded-png-label",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--no-non-png-upload-test",
-      "relation": "rationale_for",
-      "target": "concept--telegram-acceptance-not-determinable-from-repo",
       "confidence": "EXTRACTED"
     },
     {
@@ -277,24 +243,6 @@
       "source": "concept--imagemagick-colors-quantizes",
       "relation": "conceptually_related_to",
       "target": "concept--tmux-white-is-colour-7",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--new-session-a-attach-or-create",
-      "relation": "rationale_for",
-      "target": "concept--alacritty-terminal-shell-launches-tmux",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--chars-goes-through-real-input-path",
-      "relation": "rationale_for",
-      "target": "concept--alacritty-chars-sends-tmux-prefix-bytes",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--darker-orange-for-wcag-small-text",
-      "relation": "rationale_for",
-      "target": "concept--wcag-small-text-contrast-threshold",
       "confidence": "EXTRACTED"
     }
   ]

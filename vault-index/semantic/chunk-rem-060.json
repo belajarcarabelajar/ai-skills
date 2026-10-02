@@ -16,7 +16,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - c3-content-collections [ses_f128cf21dffeT9oZcVqZ8w8dax].md",
       "source_location": "L800",
-      "norm_label": "a minimal starlight docs collection mirrors the snipset website export shape"
+      "norm_label": "a minimal starlight docs collection mirrors the snipset website export shape",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - c3-content-collections [ses_f128cf21dffeT9oZcVqZ8w8dax].md:L26] The export shape was mirrored but kept to the docs collection only, because task C8 owns the docs pages"
     },
     {
       "id": "concept--placeholder-stylesheet-with-inline-revert-instruction",
@@ -25,14 +26,6 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - c3-content-collections [ses_f128cf21dffeT9oZcVqZ8w8dax].md",
       "source_location": "L821",
       "norm_label": "the placeholder custom css carries its own revert instruction in a comment"
-    },
-    {
-      "id": "rationale--mirror-the-export-shape-but-docs-only-because-c8-owns-docs-pages",
-      "label": "The export shape was mirrored but kept to the docs collection only, because task C8 owns the docs pages",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - c3-content-collections [ses_f128cf21dffeT9oZcVqZ8w8dax].md",
-      "source_location": "L26",
-      "norm_label": "the export shape was mirrored but kept to the docs collection only because task c8 owns the docs pages"
     },
     {
       "id": "concept--extraction-node-id-deterministic-from-full-path-stem",
@@ -56,7 +49,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - semantic-extraction-chunk-1 [ses_f05f44afcffecTZWLHOR94kuzT].md",
       "source_location": "L63",
-      "norm_label": "inferred edges draw confidence only from a closed set never zero point five and fall to ambiguous when nothing fits"
+      "norm_label": "inferred edges draw confidence only from a closed set never zero point five and fall to ambiguous when nothing fits",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-10-02 - semantic-extraction-chunk-1 [ses_f05f44afcffecTZWLHOR94kuzT].md:L71] Each allowed score names an evidence tier, so an edge that fits none of them is marked AMBIGUOUS rather than given a number below 0.55"
     },
     {
       "id": "concept--cross-language-calls-edges-are-phantom-artifacts",
@@ -72,7 +66,8 @@
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - semantic-extraction-chunk-1 [ses_f05f44afcffecTZWLHOR94kuzT].md",
       "source_location": "L51",
-      "norm_label": "rationale belongs as an attribute on the concept node not as a separate rationale node"
+      "norm_label": "rationale belongs as an attribute on the concept node not as a separate rationale node",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-10-02 - semantic-extraction-chunk-1 [ses_f05f44afcffecTZWLHOR94kuzT].md:L5619] The rationale key was added anyway because the prompt asked for it, while the explicit rejection risk sat only on invalid file_type values"
     },
     {
       "id": "concept--out-of-set-confidence-scores-caught-in-self-audit",
@@ -89,43 +84,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - semantic-extraction-chunk-1 [ses_f05f44afcffecTZWLHOR94kuzT].md",
       "source_location": "L57",
       "norm_label": "semantically similar to is reserved for genuinely non obvious pairs skipping the same rule restated across documents"
-    },
-    {
-      "id": "rationale--confidence-values-carry-evidence-tiers-so-an-edge-cannot-invent-its-own-number",
-      "label": "Each allowed score names an evidence tier, so an edge that fits none of them is marked AMBIGUOUS rather than given a number below 0.55",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - semantic-extraction-chunk-1 [ses_f05f44afcffecTZWLHOR94kuzT].md",
-      "source_location": "L71",
-      "norm_label": "each allowed score names an evidence tier so an edge that fits none of them is marked ambiguous rather than given a number below zero point five five"
-    },
-    {
-      "id": "rationale--rationale-attribute-added-despite-schema-tension-because-the-instruction-asked-for-it",
-      "label": "The rationale key was added anyway because the prompt asked for it, while the explicit rejection risk sat only on invalid file_type values",
-      "file_type": "rationale",
-      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - semantic-extraction-chunk-1 [ses_f05f44afcffecTZWLHOR94kuzT].md",
-      "source_location": "L5619",
-      "norm_label": "the rationale key was added anyway because the prompt asked for it while the explicit rejection risk sat only on invalid file type values"
     }
   ],
   "links": [
-    {
-      "source": "rationale--mirror-the-export-shape-but-docs-only-because-c8-owns-docs-pages",
-      "target": "concept--minimal-starlight-docs-collection-mirrors-website-export-shape",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--confidence-values-carry-evidence-tiers-so-an-edge-cannot-invent-its-own-number",
-      "target": "concept--closed-set-confidence-score-rubric",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
-    {
-      "source": "rationale--rationale-attribute-added-despite-schema-tension-because-the-instruction-asked-for-it",
-      "target": "concept--rationale-as-node-attribute-not-a-separate-node",
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED"
-    },
     {
       "source": "concept--extraction-node-id-deterministic-from-full-path-stem",
       "target": "concept--verbatim-absolute-source-file-rule",

@@ -47,6 +47,7 @@ import {
   listEligible,
   readManifest,
   scan,
+  scanAll,
   PYTHON_SNIPPET,
 } from './vault-index.mjs';
 
@@ -366,7 +367,14 @@ spawning('the python binary can be overridden, so a missing interpreter is namea
 // ---------- live vault (skipped when absent) ----------
 
 const VAULT = '/home/belajarcarabelajar/Dokumen/Obsidian Vault';
-const live = existsSync(VAULT) ? test : test.skip;
+
+// The transcript half of the corpus. 05 - Conversations/ moved here on
+// 2026-10-02 (vault commit 51b7a59): 50 files >1MB, 300 MB total, OOMed
+// Obsidian's metadata cache at ~3.9GB on every launch. Scanning the vault
+// alone reports 572 eligible and has done since the move -- not a boundary
+// failure, just a corpus that is no longer there.
+const ARCHIVE = '/home/belajarcarabelajar/Documents/conversations-archive';
+const live = existsSync(VAULT) && existsSync(ARCHIVE) ? test : test.skip;
 
 live('the real vault reports the numbers measured on 2026-10-02', { timeout: 300_000 }, () => {
   // Asserted as a band, not an exact figure, and deliberately so. The exact
@@ -382,7 +390,16 @@ live('the real vault reports the numbers measured on 2026-10-02', { timeout: 300
   // red on an ordinary edit, while a scanner that silently stopped honouring
   // .gitignore or .graphifyignore still would -- that failure inflates eligible
   // by thousands, which is the direction these bands are actually guarding.
-  const { eligible, worklist, counts } = scan(VAULT);
+  //
+  // 1,584 is now a two-root measurement, and it reproduces exactly: vault 572 +
+  // archive 1,012. The archive contributes 1,043, not 1,012, unless it carries
+  // its own copy of the GROUP 7 rules -- graphify's detector reads the
+  // .graphifyignore in whatever root it is handed, so one root's exclusions
+  // apply to the other root's files not at all. That 31 is asserted below
+  // rather than assumed, because it is the whole reason this file exists at the
+  // archive: a boundary that follows the corpus when it is in one root and
+  // silently evaporates when it is split across two.
+  const { eligible, worklist, counts } = scanAll([VAULT, ARCHIVE]);
 
   assert.ok(eligible.length > 1200, `expected >1200 eligible files, got ${eligible.length}`);
   assert.ok(eligible.length < 2500, `eligible ${eligible.length} is implausibly high — is .graphifyignore still being honoured?`);
@@ -399,11 +416,37 @@ live('the real vault reports the numbers measured on 2026-10-02', { timeout: 300
     'Satset/ is excluded by .graphifyignore and must never appear in the worklist',
   );
   assert.ok(counts.ignored > 0, 'detect() reported no ignored paths, so the ignore files were not read');
+
+  // The archive must honour the same scope boundary the vault does. These 31
+  // are "hi", "say-pong", "say-ok" and rtk-probe duplicates -- connect-and-
+  // disconnect smoke tests that a knowledge graph cannot distinguish from a
+  // real conversation. Without a .graphifyignore in the archive root, the
+  // detector has nothing to exclude them by and eligible lands on 1,615.
+  const probes = eligible.filter((p) => /^05 - Conversations\/(tmp|tmp-opencode-)/.test(p));
+  assert.equal(
+    probes.length,
+    0,
+    `${probes.length} tool-test transcripts leaked past GROUP 7 — does ${ARCHIVE}/.graphifyignore exist?`,
+  );
+
+  // Both roots must actually be scanned. Asserted positively rather than by
+  // arithmetic, because the failure mode is one root returning zero and the
+  // total still looking plausible.
+  assert.ok(counts.byRoot.length === 2, `expected 2 roots scanned, got ${counts.byRoot.length}`);
+  assert.ok(
+    counts.byRoot.every((r) => r.eligible > 0),
+    `a root contributed nothing: ${JSON.stringify(counts.byRoot)}`,
+  );
+  assert.equal(
+    counts.byRoot.reduce((n, r) => n + r.eligible, 0),
+    counts.eligible,
+    'per-root eligible does not sum to the total — the union is double counting or dropping',
+  );
 });
 
 live('the real vault scan is deterministic', { timeout: 300_000 }, () => {
-  const a = scan(VAULT);
-  const b = scan(VAULT);
+  const a = scanAll([VAULT, ARCHIVE]);
+  const b = scanAll([VAULT, ARCHIVE]);
 
   assert.deepEqual(a.worklist, b.worklist);
   assert.deepEqual(a.counts, b.counts);

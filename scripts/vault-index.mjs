@@ -61,7 +61,7 @@
 
 import { spawnSync } from 'node:child_process';
 import { readFileSync, statSync } from 'node:fs';
-import { isAbsolute, join, relative, resolve, sep } from 'node:path';
+import { basename, isAbsolute, join, relative, resolve, sep } from 'node:path';
 
 /**
  * graphify's installed site-packages, injected onto `sys.path` rather than
@@ -409,6 +409,7 @@ export function scan(root, opts = {}) {
       indexed: indexed.length,
       worklist: worklist.length,
       byBucket: bucketCounts,
+      byRoot: [{ root: absRoot, eligible: eligible.length }],
       manifestEntries: manifest.size,
       droppedByExtension,
       ignored: ignored.length,
@@ -416,6 +417,59 @@ export function scan(root, opts = {}) {
       detectTotalFiles: totalFiles,
       unclassified,
       walkErrors,
+    },
+  };
+}
+
+/**
+ * `scan` across several roots, unioned.
+ *
+ * The corpus stopped being one directory on 2026-10-02: `05 - Conversations/`
+ * moved to an archive because 50 files over 1MB made Obsidian's metadata cache
+ * OOM at ~3.9GB (vault commit 51b7a59). The vault alone now reports 572
+ * eligible files, which reads like a mass deletion and is not one.
+ *
+ * Paths stay root-relative and are qualified by the root's basename, so
+ * `01 - Projects/...` in the vault cannot collide with a same-named path in
+ * the archive. Without the qualifier the union would be a set operation over
+ * two unrelated namespaces, and a collision would silently drop one file.
+ *
+ * `.graphifyignore` is per root, not global — graphify's detector reads the one
+ * in whatever root it is handed. Two roots therefore need two copies of the
+ * scope rules, and the archive needed one written for it; see the file's own
+ * header. `scanAll` does not merge the rules, because doing so would mean
+ * reimplementing a boundary this module exists to borrow.
+ *
+ * @param {readonly string[]} roots
+ * @param {object} [opts] forwarded to each `scan`
+ * @returns {{eligible: string[], indexed: string[], worklist: string[],
+ *   counts: object}}
+ */
+export function scanAll(roots, opts = {}) {
+  const list = [...roots];
+  if (list.length === 0) throw new VaultIndexError('scanAll needs at least one root');
+
+  const parts = list.map((root) => scan(root, opts));
+  const qualify = (root, p) => `${basename(resolveRoot(root))}/${p}`;
+
+  const eligible = [...new Set(parts.flatMap((r, i) => r.eligible.map((p) => qualify(list[i], p))))].sort();
+  const indexedSet = new Set(parts.flatMap((r, i) => r.indexed.map((p) => qualify(list[i], p))));
+  const worklist = eligible.filter((p) => !indexedSet.has(p));
+
+  return {
+    eligible,
+    indexed: eligible.filter((p) => indexedSet.has(p)),
+    worklist,
+    counts: {
+      eligible: eligible.length,
+      indexed: indexedSet.size,
+      worklist: worklist.length,
+      byRoot: parts.map((r, i) => ({ root: resolveRoot(list[i]), eligible: r.eligible.length })),
+      // Summed, not taken from one root: each detector run counts only its own
+      // tree, and the total is what the caller is being asked to reason about.
+      ignored: parts.reduce((n, r) => n + r.counts.ignored, 0),
+      detectTotalFiles: parts.reduce((n, r) => n + (r.counts.detectTotalFiles ?? 0), 0),
+      walkErrors: parts.reduce((n, r) => n + (r.counts.walkErrors ?? 0), 0),
     },
   };
 }

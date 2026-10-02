@@ -1,0 +1,202 @@
+{
+  "batch": "rem-115",
+  "nodes": [
+    {
+      "id": "concept--independent-verification-rerun",
+      "label": "Independent verification rerun instead of trusting a prior report",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - v1-independent-repro-rerun [ses_f1b7b4f17ffeUpPFeiAEb4Z6Or].md",
+      "source_location": "L20",
+      "norm_label": "independent verification rerun instead of trusting a prior report",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - v1-independent-repro-rerun [ses_f1b7b4f17ffeUpPFeiAEb4Z6Or].md:L20] Stated reason: \"Jangan percaya laporan orang lain, run sendiri.\" The read-only contract makes the verifier run both test files fresh and report the exit code plus pass/fail verbatim with a GREEN/RED verdict, capped at 10 lines. The recorded verdict was 8 pass, 0 fail across 2 files at exit 0, i.e. GREEN [same file:L86]."
+    },
+    {
+      "id": "concept--rdev-listen-x11-only-no-wayland",
+      "label": "rdev::listen is X11-only and does not work on Wayland",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - deep-research-wayland-input-density [ses_f258b313affeq5eT2xP5hKvAjA].md",
+      "source_location": "L8166",
+      "norm_label": "rdev::listen is x11-only and does not work on wayland",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - deep-research-wayland-input-density [ses_f258b313affeq5eT2xP5hKvAjA].md:L8166] Stated reason: the crate's own documentation says \"The listen function uses X11 APIs, and so will not work in Wayland or in the linux kernel virtual console\", which makes the silent-failure path logged at rdev_hook.rs:153-155 the expected outcome on the target machine rather than a bug in that file. Released 0.5.3 ships only the serialize and unstable_grab features, so the unreleased wayland feature flag is unreachable."
+    },
+    {
+      "id": "concept--xdg-portal-remote-desktop-is-injection-only",
+      "label": "The XDG RemoteDesktop portal is injection-only and can never produce counts",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - deep-research-wayland-input-density [ses_f258b313affeq5eT2xP5hKvAjA].md",
+      "source_location": "L8168",
+      "norm_label": "the xdg remotedesktop portal is injection-only and can never produce counts",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - deep-research-wayland-input-density [ses_f258b313affeq5eT2xP5hKvAjA].md:L8168] Stated reason: \"There is no read-back channel, so it can never produce counts.\" Its entire API is NotifyPointerMotion, NotifyKeyboardKeycode, NotifyTouchDown and the like, plus ConnectToEIS which creates a sender libei context."
+    },
+    {
+      "id": "concept--xdg-portal-input-capture-is-trigger-based",
+      "label": "XDG InputCapture is trigger-based, so it is not a global telemetry feed",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - deep-research-wayland-input-density [ses_f258b313affeq5eT2xP5hKvAjA].md",
+      "source_location": "L8168",
+      "norm_label": "xdg inputcapture is trigger-based, so it is not a global telemetry feed",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - deep-research-wayland-input-density [ses_f258b313affeq5eT2xP5hKvAjA].md:L8168] Stated reason: \"Input capturing is trigger-based. Currently the only defined trigger is pointer barriers\", together with \"The compositor is always in control of input capturing and may filter events or stop capturing at any time\". KDE does implement it, but counts would arrive only while the cursor crosses a barrier, which the report calls useless for activity density. The two portals are ruled out for opposite reasons: RemoteDesktop has no read-back at all, InputCapture has read-back with the wrong semantics."
+    },
+    {
+      "id": "concept--libinput-libseat-give-no-privilege-advantage",
+      "label": "libinput and libseat grant no privilege advantage over raw evdev",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - deep-research-wayland-input-density [ses_f258b313affeq5eT2xP5hKvAjA].md",
+      "source_location": "L8172",
+      "norm_label": "libinput and libseat grant no privilege advantage over raw evdev",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - deep-research-wayland-input-density [ses_f258b313affeq5eT2xP5hKvAjA].md:L8172] Stated reason: libinput \"only supports evdev devices\" and keeps \"a 1:1 mapping between libinput devices and /dev/input/eventX device nodes\", while libseat and seatd are seat managers that grant the same device access rather than a lesser one. The conclusion drawn is \"If libinput can read the node, so can you, and if it cannot, libinput is equally blind.\""
+    },
+    {
+      "id": "concept--xwayland-xtest-cannot-see-native-wayland-input",
+      "label": "XTest and xdotool cannot observe native Wayland client input through XWayland",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - deep-research-wayland-input-density [ses_f258b313affeq5eT2xP5hKvAjA].md",
+      "source_location": "L8174",
+      "norm_label": "xtest and xdotool cannot observe native wayland client input through xwayland",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - deep-research-wayland-input-density [ses_f258b313affeq5eT2xP5hKvAjA].md:L8174] Stated reason: \"XTest synthesises events into the X server and only observes X11 input; native Wayland clients' input never traverses XWayland.\" xdotool's README is unambiguous that typing and window searching do not work on Wayland, and the report notes this is the same reason global shortcuts on Wayland require a portal at all."
+    },
+    {
+      "id": "concept--wayland-input-density-availability",
+      "label": "Wayland input density availability",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - deep-research-wayland-input-density [ses_f258b313affeq5eT2xP5hKvAjA].md",
+      "source_location": "L8170",
+      "norm_label": "wayland input density availability",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - deep-research-wayland-input-density [ses_f258b313affeq5eT2xP5hKvAjA].md:L8170] Stated reason: \"this permission is equivalent to keylogger access, and the project must justify it as a deliberate, user-granted, opt-in capability\". Out of the box neither grant applies, because the Arch Wiki carries an explicit warning against setting the uaccess tag on input devices, so the app must never silently degrade to zero counts and must show a visible permission state."
+    },
+    {
+      "id": "concept--linux-capture-provider-input-density-gate",
+      "label": "Linux capture provider input-density gate",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - deep-research-wayland-input-density [ses_f258b313affeq5eT2xP5hKvAjA].md",
+      "source_location": "L8162",
+      "norm_label": "linux capture provider input-density gate",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - deep-research-wayland-input-density [ses_f258b313affeq5eT2xP5hKvAjA].md:L8162] Stated reason for adding no new capture mechanism at all: the mechanism is already running and already populating the counters, so \"the only missing piece is the single #[cfg] read in capture_provider.rs\". The Linux branch hardcodes input_density: None while the only read of INPUT_TRACKER sits behind #[cfg(target_os = \"windows\")]."
+    },
+    {
+      "id": "concept--audit-instrument-defects-manufacture-false-symptoms",
+      "label": "Audit instrument defects manufacture false symptoms",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - efisiensi-daya-listrik-pc [ses_f1d988394ffeR7mzol16F72rHi].md",
+      "source_location": "L2726",
+      "norm_label": "audit instrument defects manufacture false symptoms",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-27 - efisiensi-daya-listrik-pc [ses_f1d988394ffeR7mzol16F72rHi].md:L2726] Stated reason: \"Kontrol positif gagal → sesuai aturan sendiri, methods-nya yang salah, bukan sistemnya.\" Package temperature rose 27 C under an 8-thread load while RAPL stayed flat, so the instrument was indicted rather than the machine, and every earlier wattage figure was withdrawn as noise."
+    },
+    {
+      "id": "concept--rapl-under-reports-on-this-host",
+      "label": "RAPL under-reports on this host and cannot be used to measure power",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - efisiensi-daya-listrik-pc [ses_f1d988394ffeR7mzol16F72rHi].md",
+      "source_location": "L2220",
+      "norm_label": "rapl under-reports on this host and cannot be used to measure power",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-27 - efisiensi-daya-listrik-pc [ses_f1d988394ffeR7mzol16F72rHi].md:L2220] Stated reason: package temperature climbed from 49 to 76 C across the 8-thread load while RAPL kept reporting 4,9 W, so measuring was abandoned and every EPP conclusion was withdrawn as noise. A direct read of MSR 0x611 also failed, so the driver and the hardware MSR could not be told apart and RAPL stayed unverifiable."
+    },
+    {
+      "id": "concept--hard-reset-with-no-software-trace",
+      "label": "Hard reset with no software trace on this host",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - efisiensi-daya-listrik-pc [ses_f1d988394ffeR7mzol16F72rHi].md",
+      "source_location": "L5957",
+      "norm_label": "hard reset with no software trace on this host",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-27 - efisiensi-daya-listrik-pc [ses_f1d988394ffeR7mzol16F72rHi].md:L5957] Stated reason: boot -5 ended without a shutdown sequence, unlike boot -4 which recorded Reached target System Power Off together with systemd-shutdown, so the event is a hard reset and not an ordinary shutdown. Watchdog, MCE, RAM/EDAC, thermal, OOM killer, disk I/O and kernel panic were each ruled out with evidence, leaving the immediate pre-state benign on every recorded metric."
+    },
+    {
+      "id": "concept--no-panic-crash-forensics-cannot-capture-a-hard-reset",
+      "label": "kdump, pstore and coredump cannot capture a hard reset that produces no panic",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - efisiensi-daya-listrik-pc [ses_f1d988394ffeR7mzol16F72rHi].md",
+      "source_location": "L6000",
+      "norm_label": "kdump, pstore and coredump cannot capture a hard reset that produces no panic",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-27 - efisiensi-daya-listrik-pc [ses_f1d988394ffeR7mzol16F72rHi].md:L5998] Stated reason: \"Semua tool yang ada butuh CPU masih jalan cukup lama untuk menulis. Kalau CPU/mesin mati mendadak, nggak ada yang sempat nulis.\" Concretely, \"kdump, pstore, coredump — semuanya nggak akan menolong kasus ini\", because kdump only fires on a panic and the evidence is precisely that there was none [same file:L6000]. Installing them was therefore rejected."
+    },
+    {
+      "id": "concept--bounded-soak-test-with-tested-safety-brakes",
+      "label": "Bounded low-priority soak test whose safety brakes are each tested",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - efisiensi-daya-listrik-pc [ses_f1d988394ffeR7mzol16F72rHi].md",
+      "source_location": "L8718",
+      "norm_label": "bounded low-priority soak test whose safety brakes are each tested",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-27 - efisiensi-daya-listrik-pc [ses_f1d988394ffeR7mzol16F72rHi].md:L8718] Stated reason: an untested brake is the exact class of error AGENTS.md forbids, so every brake was exercised rather than merely written. The stop path was verified end-to-end against 4 real cgroup PIDs all dead, and the temperature abort was triggered deliberately with the threshold set to the current temperature. Three bugs surfaced only because of that verification, including a pgrep -f pattern that matched its own command line and an empty ControlGroup that would have fallen through to the root cgroup containing every PID on the machine."
+    }
+  ],
+  "links": [
+    {
+      "source": "concept--xdg-portal-remote-desktop-is-injection-only",
+      "target": "concept--xdg-portal-input-capture-is-trigger-based",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--xdg-portal-remote-desktop-is-injection-only",
+      "target": "concept--rdev-listen-x11-only-no-wayland",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--xdg-portal-input-capture-is-trigger-based",
+      "target": "concept--rdev-listen-x11-only-no-wayland",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--libinput-libseat-give-no-privilege-advantage",
+      "target": "concept--wayland-input-density-availability",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--xwayland-xtest-cannot-see-native-wayland-input",
+      "target": "concept--wayland-input-density-availability",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--linux-capture-provider-input-density-gate",
+      "target": "concept--wayland-input-density-availability",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--linux-capture-provider-input-density-gate",
+      "target": "concept--rdev-listen-x11-only-no-wayland",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--rapl-under-reports-on-this-host",
+      "target": "concept--audit-instrument-defects-manufacture-false-symptoms",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--no-panic-crash-forensics-cannot-capture-a-hard-reset",
+      "target": "concept--hard-reset-with-no-software-trace",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--bounded-soak-test-with-tested-safety-brakes",
+      "target": "concept--hard-reset-with-no-software-trace",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--bounded-soak-test-with-tested-safety-brakes",
+      "target": "concept--no-panic-crash-forensics-cannot-capture-a-hard-reset",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--bounded-soak-test-with-tested-safety-brakes",
+      "target": "concept--rapl-under-reports-on-this-host",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--independent-verification-rerun",
+      "target": "concept--hard-reset-with-no-software-trace",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    }
+  ]
+}

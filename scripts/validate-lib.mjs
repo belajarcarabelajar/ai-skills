@@ -49,6 +49,7 @@ export const SNIPPET_CONTRACTS = {
     '--body-file',
     'pr-registry.mjs order',
     'pr-review-template.md',
+    'plan-issue-sync.mjs', // the plan's issue closes after the debt sweep, not before
   ],
   'orkestrasi-pr-review.md': [
     'todowrite',

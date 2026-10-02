@@ -50,6 +50,17 @@ test('orkestrasi-pr-review.md is under contract', () => {
   assert.ok(SNIPPET_CONTRACTS['orkestrasi-pr-review.md'].length > 0);
 });
 
+// Ported from PR #2 (2026-10-01-snippet-db-sync), whose other two changes had
+// already landed by another path. Without this needle the PR snippet could
+// silently drop the "close the plan's issue only after the debt sweep" rule and
+// still pass validation — the gap PR #2 was opened to close.
+test('orkestrasi-pr.md is held to the issue-close-after-the-sweep sync', () => {
+  assert.ok(
+    SNIPPET_CONTRACTS['orkestrasi-pr.md'].includes('plan-issue-sync.mjs'),
+    'the PR snippet contract must require plan-issue-sync.mjs so the issue-close rule cannot be dropped unnoticed',
+  );
+});
+
 test('all live snippets pass their contract, ladder, and runtime checks', () => {
   assert.ok(REQUIRED_SNIPPETS.length >= 4, 'expected at least the four trigger snippets');
   for (const [snip, extra] of Object.entries(SNIPPET_CONTRACTS)) {

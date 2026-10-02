@@ -1,0 +1,418 @@
+{
+  "batch": "rem-026",
+  "nodes": [
+    {
+      "id": "concept--subagents-do-not-commit-parent-commits",
+      "label": "Subagents do not commit; the parent commits",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L5099",
+      "norm_label": "subagents do not commit; the parent commits",
+      "summary": "Stated as P0-2 and then implemented: a subagent may not commit, branch, push or stash. The parent owns every git operation. Reused id; the rule is stated here in its widest form and the plan template's per-task 'Step 5: Commit' was the conflict it removes."
+    },
+    {
+      "id": "concept--pr-as-terminal-stage-of-a-session",
+      "label": "PR Delivery as the terminal stage of a session",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L5100",
+      "norm_label": "pr delivery as the terminal stage of a session",
+      "summary": "A new numbered stage between Step 5 (Verify) and Step 6 (Debt Sweep). Before it, the pipeline's terminal state was a local conventional commit and a clean handoff, so nothing forced a reviewable artifact."
+    },
+    {
+      "id": "concept--one-pr-per-session-not-per-subagent",
+      "label": "One PR per session, not per subagent",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L5101",
+      "norm_label": "one pr per session, not per subagent",
+      "summary": "Granularity was left undefined in the reference material. The decision recorded here: 20 subagents inside one session produce one PR, 20 sessions produce 20 PRs."
+    },
+    {
+      "id": "concept--branch-and-worktree-naming-derived-by-tool",
+      "label": "Branch and worktree names derived by the tool, not chosen by the agent",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L8992",
+      "norm_label": "branch and worktree names derived by the tool, not chosen by the agent",
+      "summary": "pr-registry.mjs derives the branch and worktree path and prints the exact git worktree add line. Duplicate branch or worktree is refused at claim, at load and at save, so the uniqueness rule is enforced rather than stated."
+    },
+    {
+      "id": "concept--pr-registry-state-machine-as-gate",
+      "label": "Session state machine as a merge gate",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L8995",
+      "norm_label": "session state machine as a merge gate",
+      "summary": "isolated -> active -> verified -> open -> merged, with three hard errors: a PR number cannot be recorded before verified (otherwise the sequence skips the evidence gate), only an open session with a PR can merge, and merged is terminal, so a revert is a new session rather than an edit of state."
+    },
+    {
+      "id": "concept--topological-merge-order-from-plan-depends-on",
+      "label": "Topological merge order taken from the plan depends_on DAG",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L8998",
+      "norm_label": "topological merge order taken from the plan depends_on dag",
+      "summary": "order is topological over depends_on with a name tiebreak so it is reproducible; surface <s> reports what has to rebase first. Rebase before every merge, resolve inside the session's own branch, verify after every merge."
+    },
+    {
+      "id": "concept--pr-is-publication-not-verification",
+      "label": "A PR is a publication artifact, not a verification executor",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L5086",
+      "norm_label": "a pr is a publication artifact, not a verification executor",
+      "summary": "The resolution of the first conflict: the existing rule forbids pushing to make remote runners check, but a PR does trigger them. The precedence written in is that the PR exists for human review and carries the local evidence table, so green local runs stay the gate."
+    },
+    {
+      "id": "concept--plan-to-github-issue-one-way-mirror",
+      "label": "Plan mirrored one-way onto a GitHub issue",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L12119",
+      "norm_label": "plan mirrored one-way onto a github issue",
+      "summary": "plan-issue-sync.mjs treats the repository plan as the source and the issue as a derived mirror, giving GitHub-side history of the work alongside the vault mirror. The issue body is the plan text byte for byte plus a plan-sync trailer; a summary body is refused because it becomes a second source of truth that goes stale silently."
+    },
+    {
+      "id": "concept--issue-number-in-sidecar-not-plan-frontmatter",
+      "label": "Issue number kept in a sidecar, never in plan frontmatter",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L12125",
+      "norm_label": "issue number kept in a sidecar, never in plan frontmatter",
+      "summary": "The mapping lives in plan.issues.json. An author-written github_issue frontmatter key is honoured as an override instead of being created over."
+    },
+    {
+      "id": "concept--issue-body-via-stdin-not-argv",
+      "label": "Issue body passed on stdin rather than in argv",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L12127",
+      "norm_label": "issue body passed on stdin rather than in argv",
+      "summary": "A 10 KB plan in argv hits ARG_MAX and crosses shell quoting rules, so the bytes must land identical to the plan for the mirror premise to hold. A test asserts argv and stdin against the real gh binary on disk."
+    },
+    {
+      "id": "concept--issue-state-derived-from-plan-status",
+      "label": "Issue state derived from the plan status field",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L12129",
+      "norm_label": "issue state derived from the plan status field",
+      "summary": "deriveAction is a pure function of (entry, planText, status) returning create, update-body, update-state, update-and-state or current, where current means zero gh calls. Blocked stays open because the work is unfinished; only Complete closes."
+    },
+    {
+      "id": "concept--gh-issue-create-edit-have-no-json-flag",
+      "label": "gh issue create and edit have no --json flag",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L12133",
+      "norm_label": "gh issue create and edit have no --json flag",
+      "summary": "The first draft added --json to create and edit and passed every stubbed test; only the end-to-end test against the real binary failed. gh issue view is the read path that takes --json, and create/edit return a URL on stdout."
+    },
+    {
+      "id": "concept--parent-owns-todo-list-because-subagent-has-none",
+      "label": "Parent owns the todo list because the subagent has no todo tool",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L12139",
+      "norm_label": "parent owns the todo list because the subagent has no todo tool",
+      "summary": "Verified from opencode.ai/docs rather than memory: OpenCode's general subagent has full tool access except todo. So the list is per session, held by the parent, and telling a subagent to make one produces a fake list in its report. todowrite / TodoWrite / update_plan are discovered in the tool catalog, never guessed, and the Plan agent only restricts file edits and bash so planning sessions get one too."
+    },
+    {
+      "id": "concept--plan-file-checklist-outranks-tool-todo-list",
+      "label": "The plan file checklist outranks the tool list when they disagree",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L12154",
+      "norm_label": "the plan file checklist outranks the tool list when they disagree",
+      "summary": "Both artifacts are mandatory and neither replaces the other: the tool list is live progress that dies at compaction, the file checklist is the version-controlled record that survives it. On mismatch the file wins and the tool list is corrected."
+    },
+    {
+      "id": "concept--shipped-cli-rejects-its-sibling-app-schema",
+      "label": "The shipped CLI rejects the database its own sibling app creates",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L18589",
+      "norm_label": "the shipped cli rejects the database its own sibling app creates",
+      "summary": "Snipset 0.6.854's schema_migrations.rs adds groups.research_tag; GROUP_COLUMNS in crates/snipset-cli/src/db/fingerprint.rs was not taught the column, so every write is refused with schema_match: false. Root cause is an upstream release defect, not drift on the machine: all seven local binaries were tested and all are 0.2.0 with research_tag appearing zero times."
+    },
+    {
+      "id": "concept--fingerprint-name-vs-shape-agreement",
+      "label": "Fingerprint name-versus-shape agreement",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L16313",
+      "norm_label": "fingerprint name-versus-shape agreement",
+      "summary": "Reused id. Here the finding is that GROUP_COLUMNS does double duty: it is the fingerprint expectation and it builds the CREATE TABLE in snipset init, so init and the check agree by construction. A positive control (snipset init then doctor) returned schema_match: true, which refuted the self-inconsistency hypothesis: the CLI is internally consistent but externally stale."
+    },
+    {
+      "id": "concept--guard-test-reads-app-migration-source",
+      "label": "The guard test reads the app's migration source instead of restating the column list",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L18597",
+      "norm_label": "the guard test reads the app's migration source instead of restating the column list",
+      "summary": "fingerprint_test.rs parses schema_migrations.rs and checks the relationship between the two lists. The stated reason is that a test rewriting the column list carries the same blind spot and would pass forever."
+    },
+    {
+      "id": "concept--migration-array-order-is-not-cid-order",
+      "label": "Migration array position is not cid position",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L18606",
+      "norm_label": "migration array position is not cid position",
+      "summary": "An assertion was written and then dropped because the live database disproved it: is_favorite sits at index 9 of the snippet_cols migration array and at cid 9 in the database because it was already in CREATE TABLE, so the has_col check skipped it. SNIPPET_COLUMNS was in fact already correct in true cid order; the replacement assertion claims only what can be proved."
+    },
+    {
+      "id": "concept--fts-trigger-subset-blind-spot",
+      "label": "present_triggers only queries the FTS_TRIGGERS subset",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L16158",
+      "norm_label": "present_triggers only queries the fts_triggers subset",
+      "summary": "The comparison uses WHERE name IN (FTS_TRIGGERS), so the three embed_snippet_* triggers in the live database are never looked at and the extra triggers a side-by-side diff showed were a false positive of the diff, not drift. Reading the code instead of trusting the diff is what caught it."
+    },
+    {
+      "id": "concept--schema-cli-fingerprint-guard-workflow",
+      "label": "schema cli fingerprint guard workflow",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L19136",
+      "norm_label": "schema cli fingerprint guard workflow",
+      "summary": "Reused id. The decisive measurement: no workflow in the Snipset repository runs on pull_request and ci.yml is workflow_dispatch only, so a correct guard test does not fire on the pull request that adds a schema migration, which is exactly the moment it must. The written but uncommitted remedy is a path-filtered workflow on schema_migrations.rs and fingerprint.rs."
+    },
+    {
+      "id": "concept--hand-built-cli-breaks-runbook-byte-identity",
+      "label": "A hand-built CLI breaks the runbook byte-identity invariant until a release ships",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L18637",
+      "norm_label": "a hand-built cli breaks the runbook byte-identity invariant until a release ships",
+      "summary": "The installed CLI is sha b6aa82ef from a hand build, not the release's 770f29da, so the runbook requirement that ~/.local/bin/snipset be identical to the release sidecar is violated until 0.6.855 ships. Recorded in Snipset PR #440 rather than left as a local binary."
+    },
+    {
+      "id": "concept--backup-filename-sha-misread-as-version-drift",
+      "label": "A backup filename's sha was misread as version drift",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L15510",
+      "norm_label": "a backup filename's sha was misread as version drift",
+      "summary": "The backup named snipset.bak-770f29da0d03 looked like a stale CLI, but 770f29da is exactly the sha the runbook requires to be installed. Four binaries compared byte-identical to release 0.6.854, so the install was a no-op and the earlier 'CLI stuck at 0.6.852' hypothesis was withdrawn in the answer."
+    },
+    {
+      "id": "concept--quiet-scp-truncated-transfer",
+      "label": "A quiet scp truncated the transfer and still exited 0",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L17747",
+      "norm_label": "a quiet scp truncated the transfer and still exited 0",
+      "summary": "1.7 MB arrived locally against 8.6 MB on the VPS. scp -q printed nothing and was believed on its exit status; the new binary segfaulted with exit 139 and contained none of the expected strings, which is how the truncation was found. Retransfer is verified by hash before the binary is used."
+    },
+    {
+      "id": "concept--pgrep-bracket-trick-matched-own-command",
+      "label": "The pgrep bracket trick matched the agent's own compound command line",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L15465",
+      "norm_label": "the pgrep bracket trick matched the agent's own compound command line",
+      "summary": "The runbook's pgrep -af \"[s]nipset-desktop\" preflight exists to avoid matching pgrep itself, but the same compound shell line also contained the literal string in a sha256sum argument, so the check reported the app as running when it was not. Resolved by re-running pgrep standalone."
+    },
+    {
+      "id": "concept--gh-issue-edit-state-removed-in-2-102-0",
+      "label": "gh 2.102.0 removed gh issue edit --state",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L20133",
+      "norm_label": "gh 2.102.0 removed gh issue edit --state",
+      "summary": "plan-issue-sync.mjs used --state, so every close and reopen would have failed with unknown flag against the installed gh. The class of mistake is identical to the --json assumption caught earlier in the same file, where one instance was fixed and the second left behind."
+    },
+    {
+      "id": "concept--concurrent-session-committed-onto-my-branch",
+      "label": "A concurrent session committed onto this session's branch and moved HEAD",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L19757",
+      "norm_label": "a concurrent session committed onto this session's branch and moved head",
+      "summary": "Three commits by the same git identity landed at 18:25, 18:27 and 18:31 on the branch that PR #440 was merged from, and a fourth dirty file appeared, which broke this session's commit with cannot lock ref 'HEAD'. Two live opencode processes confirmed a second writer. The same session was found active in ai-skills and on the build host, and its commit fixed a real bug in code already merged to main."
+    },
+    {
+      "id": "concept--fingerprint-guard-negative-control",
+      "label": "Negative control on the fingerprint guard: removing the column fails two tests",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L17451",
+      "norm_label": "negative control on the fingerprint guard: removing the column fails two tests",
+      "summary": "Six of six green, then research_tag was temporarily removed and two tests failed with the exact diagnosis, so the guard is real rather than decorative."
+    },
+    {
+      "id": "rationale--parent-commits-to-avoid-index-lock-race",
+      "label": "Parallel git commits in one repository race on .git/index.lock, so commit ownership moved to the parent and was batched per repo after the diff audit",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L9004",
+      "norm_label": "parallel git commits in one repository race on .git/index.lock, so commit ownership moved to the parent and was batched per repo after the diff audit",
+      "summary": "Reused id. The mechanical reason given here: the git index is shared mutable state with no per-writer lock, so two subagents staging at once produce a commit holding half of someone else's change, and that commit is never tested in that shape."
+    },
+    {
+      "id": "rationale--one-pr-per-session-avoiding-two-hundred-prs",
+      "label": "One PR per session because per-chunk granularity multiplies into 200 PRs and kills the merge queue",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L5131",
+      "norm_label": "one pr per session because per-chunk granularity multiplies into 200 prs and kills the merge queue",
+      "summary": "The user was asked to choose between per-session and per-chunk and the recommendation given was per session, with the arithmetic as the reason."
+    },
+    {
+      "id": "rationale--per-merge-verification-not-batch-at-the-end",
+      "label": "Verify after each merge, because 20 merges then one test leaves 19 merges without evidence",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L5196",
+      "norm_label": "verify after each merge, because 20 merges then one test leaves 19 merges without evidence",
+      "summary": "Also recorded as the reason rebase happens before each merge rather than once at the start, so 20 branches do not conflict pairwise."
+    },
+    {
+      "id": "rationale--issue-number-would-change-source-hash-and-stale-mirrors",
+      "label": "The issue number cannot go in plan frontmatter because the vault publisher hashes the whole plan text, so injecting it would make every mirror stale",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L12125",
+      "norm_label": "the issue number cannot go in plan frontmatter because the vault publisher hashes the whole plan text, so injecting it would make every mirror stale",
+      "summary": "Writing the number changes source_hash, which makes the whole vault mirror set stale and trips the exit-3 gate. The sidecar also happens to agree with the existing skill rule that a verdict belongs in the source plan, never in the mirror."
+    },
+    {
+      "id": "rationale--byte-identical-body-is-the-only-premise-of-the-mirror",
+      "label": "The body goes on stdin because byte identity between issue and plan is the only premise the mirror rests on",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L12127",
+      "norm_label": "the body goes on stdin because byte identity between issue and plan is the only premise the mirror rests on",
+      "summary": "argv would both risk ARG_MAX at 10 KB and cross shell quoting rules, so the bytes could stop matching the plan."
+    },
+    {
+      "id": "rationale--derived-issue-state-outranks-manual-close",
+      "label": "An issue closed by hand does not win, because the issue is derived state and the next sync reopens it",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L12129",
+      "norm_label": "an issue closed by hand does not win, because the issue is derived state and the next sync reopens it",
+      "summary": "Tidying the board must not permanently detach a plan from its mirror, so status is only ever derived from the plan's status field."
+    },
+    {
+      "id": "rationale--list-is-a-contract-tool-is-only-the-widget",
+      "label": "Do not skip the list because the widget is missing; the list is the contract and the tool is only how it is displayed",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L12156",
+      "norm_label": "do not skip the list because the widget is missing; the list is the contract and the tool is only how it is displayed",
+      "summary": "If the tool is absent or denied the degradation is a rendered checkbox list in the reply plus one line of disclosure, the same rule the debt sweep already uses."
+    },
+    {
+      "id": "rationale--guard-never-observed-failing",
+      "label": "A guard only ever observed passing is indistinguishable from one that does nothing",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L17370",
+      "norm_label": "a guard only ever observed passing is indistinguishable from one that does nothing",
+      "summary": "Reused id. Stated as the reason the fingerprint guard was proven by deleting the column rather than accepted green."
+    },
+    {
+      "id": "rationale--fingerprint-is-app-shape-not-columns-the-cli-reads",
+      "label": "research_tag is listed even though the CLI never reads it, because the constant is a fingerprint of the shape the app produces and fail-closed must survive",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L18591",
+      "norm_label": "research_tag is listed even though the cli never reads it, because the constant is a fingerprint of the shape the app produces and fail-closed must survive",
+      "summary": "The check is exact-set equality by design, so a database the app has not migrated is still refused because the column genuinely is not there. Lowering research_tag to optional was explicitly rejected as deleting the fail-closed check."
+    },
+    {
+      "id": "rationale--path-filtered-trigger-because-dispatch-only-ci-never-fires",
+      "label": "A path-filtered trigger is needed because dispatch-only CI never runs on the pull request that adds the migration",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L19148",
+      "norm_label": "a path-filtered trigger is needed because dispatch-only ci never runs on the pull request that adds the migration",
+      "summary": "Without it the guard is decorative in practice, which is the same class of gap as the original bug."
+    },
+    {
+      "id": "rationale--keep-hand-built-cli-rather-than-restore-broken-release-binary",
+      "label": "Keep the hand-built CLI, because reverting to the release binary immediately re-breaks snippet writes",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L19200",
+      "norm_label": "keep the hand-built cli, because reverting to the release binary immediately re-breaks snippet writes",
+      "summary": "The runbook invariant violation is accepted as the correct trade until the release ships, and it is recorded in Snipset PR #440 rather than left as local state."
+    },
+    {
+      "id": "rationale--unstage-rather-than-leave-silent-contamination",
+      "label": "Unstage the file rather than leave it staged, because loud failure beats silent contamination",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L19847",
+      "norm_label": "unstage the file rather than leave it staged, because loud failure beats silent contamination",
+      "summary": "No index.lock was present, so the race window is small, while leaving the file staged would almost certainly put it into the other session's next commit."
+    },
+    {
+      "id": "rationale--stop-repo-surgery-while-another-writer-is-active",
+      "label": "Stop all work in that repository while another writer is active",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L19768",
+      "norm_label": "stop all work in that repository while another writer is active",
+      "summary": "The whole premise of the approved six-item plan was that this session was the only writer. Only the two items that touch no conflicted working tree were carried out, and the workflow file was preserved outside the repository."
+    },
+    {
+      "id": "rationale--verify-concurrent-sessions-bug-claim-before-accepting",
+      "label": "The concurrent session's bug report was verified against the installed gh before being accepted",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
+      "source_location": "L20159",
+      "norm_label": "the concurrent session's bug report was verified against the installed gh before being accepted",
+      "summary": "gh issue edit --help shows no --state while issue close and issue reopen do, and the installed version is 2.102.0, so the fix was correct and the omission was owned as negligence rather than luck."
+    }
+  ],
+  "links": [
+    { "source": "concept--pr-as-terminal-stage-of-a-session", "target": "concept--one-pr-per-session-not-per-subagent", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--pr-as-terminal-stage-of-a-session", "target": "concept--pr-is-publication-not-verification", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--branch-and-worktree-naming-derived-by-tool", "target": "concept--pr-registry-state-machine-as-gate", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--pr-registry-state-machine-as-gate", "target": "concept--topological-merge-order-from-plan-depends-on", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--subagents-do-not-commit-parent-commits", "target": "concept--pr-registry-state-machine-as-gate", "relation": "conceptually_related_to", "confidence": "INFERRED" },
+    { "source": "concept--one-pr-per-session-not-per-subagent", "target": "concept--parent-owns-todo-list-because-subagent-has-none", "relation": "conceptually_related_to", "confidence": "INFERRED" },
+    { "source": "concept--plan-to-github-issue-one-way-mirror", "target": "concept--issue-number-in-sidecar-not-plan-frontmatter", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--plan-to-github-issue-one-way-mirror", "target": "concept--issue-state-derived-from-plan-status", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--issue-body-via-stdin-not-argv", "target": "concept--plan-to-github-issue-one-way-mirror", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--parent-owns-todo-list-because-subagent-has-none", "target": "concept--plan-file-checklist-outranks-tool-todo-list", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--shipped-cli-rejects-its-sibling-app-schema", "target": "concept--fingerprint-name-vs-shape-agreement", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--shipped-cli-rejects-its-sibling-app-schema", "target": "concept--guard-test-reads-app-migration-source", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--shipped-cli-rejects-its-sibling-app-schema", "target": "concept--schema-cli-fingerprint-guard-workflow", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--fts-trigger-subset-blind-spot", "target": "concept--shipped-cli-rejects-its-sibling-app-schema", "relation": "conceptually_related_to", "confidence": "INFERRED" },
+    { "source": "concept--guard-test-reads-app-migration-source", "target": "concept--migration-array-order-is-not-cid-order", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--schema-cli-fingerprint-guard-workflow", "target": "concept--fingerprint-guard-negative-control", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--migration-array-order-is-not-cid-order", "target": "concept--dual-schema-declaration", "relation": "conceptually_related_to", "confidence": "INFERRED" },
+    { "source": "concept--migration-array-order-is-not-cid-order", "target": "concept--set-based-fingerprint-difference", "relation": "conceptually_related_to", "confidence": "INFERRED" },
+    { "source": "concept--hand-built-cli-breaks-runbook-byte-identity", "target": "concept--linux-arch-install-runbook-five-invariants", "relation": "conceptually_related_to", "confidence": "INFERRED" },
+    { "source": "concept--backup-filename-sha-misread-as-version-drift", "target": "concept--hand-built-cli-breaks-runbook-byte-identity", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--backup-filename-sha-misread-as-version-drift", "target": "concept--shipped-cli-rejects-its-sibling-app-schema", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--quiet-scp-truncated-transfer", "target": "concept--pipeline-exit-code-is-not-tool-exit-code", "relation": "conceptually_related_to", "confidence": "INFERRED" },
+    { "source": "concept--pgrep-bracket-trick-matched-own-command", "target": "concept--pipeline-exit-code-is-not-tool-exit-code", "relation": "conceptually_related_to", "confidence": "INFERRED" },
+    { "source": "concept--gh-issue-edit-state-removed-in-2-102-0", "target": "concept--gh-issue-create-edit-have-no-json-flag", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--concurrent-session-committed-onto-my-branch", "target": "concept--concurrent-session-clobber", "relation": "conceptually_related_to", "confidence": "INFERRED" },
+    { "source": "concept--concurrent-session-committed-onto-my-branch", "target": "concept--isolated-vps-worktree-for-concurrent-session", "relation": "conceptually_related_to", "confidence": "INFERRED" },
+    { "source": "concept--fingerprint-guard-negative-control", "target": "concept--negative-control-test", "relation": "conceptually_related_to", "confidence": "INFERRED" },
+    { "source": "concept--concurrent-session-committed-onto-my-branch", "target": "concept--gh-issue-edit-state-removed-in-2-102-0", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "rationale--parent-commits-to-avoid-index-lock-race", "target": "concept--subagents-do-not-commit-parent-commits", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--one-pr-per-session-avoiding-two-hundred-prs", "target": "concept--one-pr-per-session-not-per-subagent", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--per-merge-verification-not-batch-at-the-end", "target": "concept--topological-merge-order-from-plan-depends-on", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--issue-number-would-change-source-hash-and-stale-mirrors", "target": "concept--issue-number-in-sidecar-not-plan-frontmatter", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--byte-identical-body-is-the-only-premise-of-the-mirror", "target": "concept--issue-body-via-stdin-not-argv", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--derived-issue-state-outranks-manual-close", "target": "concept--issue-state-derived-from-plan-status", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--list-is-a-contract-tool-is-only-the-widget", "target": "concept--plan-file-checklist-outranks-tool-todo-list", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--guard-never-observed-failing", "target": "concept--fingerprint-guard-negative-control", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--fingerprint-is-app-shape-not-columns-the-cli-reads", "target": "concept--shipped-cli-rejects-its-sibling-app-schema", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--path-filtered-trigger-because-dispatch-only-ci-never-fires", "target": "concept--schema-cli-fingerprint-guard-workflow", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--keep-hand-built-cli-rather-than-restore-broken-release-binary", "target": "concept--hand-built-cli-breaks-runbook-byte-identity", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--unstage-rather-than-leave-silent-contamination", "target": "concept--concurrent-session-committed-onto-my-branch", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--stop-repo-surgery-while-another-writer-is-active", "target": "concept--concurrent-session-committed-onto-my-branch", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--verify-concurrent-sessions-bug-claim-before-accepting", "target": "concept--gh-issue-edit-state-removed-in-2-102-0", "relation": "rationale_for", "confidence": "EXTRACTED" }
+  ]
+}

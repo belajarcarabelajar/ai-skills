@@ -592,18 +592,18 @@ Recorded so a fresh session continues instead of re-deriving. Everything below i
 
 | Where it stands | |
 |---|---|
-| Plan state | `Approved`. T1–T6 and T11 **complete**. T7 complete. T8 **in progress**. |
-| Commits | tooling `26a91a2` · structural layer `ce2ab59` · narration filter `99edb67` · wave 2 `dd0694c` · worklist `0a7fc0c` / `584803e` · debt sweep `eaa5ba8` F3, `60fa515` F7, `7da0cb1` F6 · validator fix `13988e3` · wave 21 `17d7b8c` |
-| Chunks landed | **225 files** `vault-index/semantic/chunk-*.json`, all passing `validateChunk`. Validator failures **4 → 0**, repaired 2026-10-03 |
-| Totals | **3,297 nodes · 2,433 links · 2,804 distinct ids · 493 deliberate id reuses** (measured 2026-10-03) |
-| By type | 3,294 `concept` · 3 `rationale` — the standalone why-node is retired (§3), so reasons live as a `rationale` attribute on the concept they explain |
-| Anchor gate | `check-anchors.mjs --all`: **112 of 221 chunks clean** (measured before `rem-250` landed). 2,898 anchors parsed, **571 failed**, 26 in padding, 638 past a lone CR. Pre-existing, not a regression — see §9c |
+| Plan state | `Approved`. T1–T7 **complete**. T8 **complete** (all 251 batches extracted). |
+| Commits | tooling `26a91a2` · structural layer `ce2ab59` · narration filter `99edb67` · wave 2 `dd0694c` · worklist `0a7fc0c` / `584803e` · debt sweep `eaa5ba8` F3, `60fa515` F7, `7da0cb1` F6 · validator fix `13988e3` · wave 21 `17d7b8c` · T8 close-out `fcc77a9`, `257b321`, `38e8a28` |
+| Chunks landed | **271 files** `vault-index/semantic/chunk-*.json`, all passing `validateChunk`. Validator failures **4 → 0**, repaired 2026-10-03 |
+| Totals | **4,209 nodes · 2,907 links · 3,498 distinct ids · 711 deliberate id reuses** (measured 2026-10-03, worklist complete) |
+| By type | 4,206 `concept` · 3 `rationale` — the standalone why-node is retired (§3), so reasons live as a `rationale` attribute on the concept they explain |
+| Anchor gate | `check-anchors.mjs --all`: **162 of 271 chunks clean**. 4,035 anchors parsed, **571 failed**, 26 in padding, 675 past a lone CR. Every failure is legacy; the `rem-242 … rem-247` close-out chunks add **0** — see §9c |
 | Full suite | `bun test scripts/` → 993 pass / 0 fail across 36 files |
 | Worklist | `vault-index/semantic/batches.json`, 251 batches, ids `rem-001 … rem-251` |
-| Progress | **205 of 251 batches.** Next: `rem-247`. The 46 remaining batches are `rem-202 … rem-247` |
-| Remote | `ai-skills` pushed to `origin/main` at `13988e3`. Everything after that is local, unpushed. |
+| Progress | **251 of 251 batches. Extraction complete.** Nothing left to dispatch |
+| Remote | `ai-skills` pushed to `origin/main` at `38e8a28`. Working tree clean |
 
-**To resume:** read `templates/vault-index-subagent-contract.md`, then dispatch on `batches.json`. The prompt needs four things only — the batch id, the filter command, the output path, and the verify command. Skip any `rem-*` whose `chunk-rem-*.json` already exists.
+**T8 is finished, so there is nothing to dispatch.** Every `rem-*` in `batches.json` now has a `chunk-rem-*.json` on disk. The next task is **T9**, the merge into the vault graph. Its step 3 requires the anchor count reported next to the node count: `4209 nodes, 4035 anchors parsed, 571 failed` — do not merge on the validator's exit code alone (§9c).
 
 **Two scope changes landed mid-run and both are permanent:** commit `3a968b2` deleted the 748 N8n raw-capture files, and `.graphifyignore` GROUP 7 (`c20b3be`) excludes 31 tool-test transcripts. Eligible corpus went 2,360 → 1,584. Batch ids were regenerated into a `rem-*` namespace because they are positional and cannot survive a worklist change.
 

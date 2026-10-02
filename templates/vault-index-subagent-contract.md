@@ -225,6 +225,12 @@ A practical test: if the sentence would still be true with the dispatch removed
 from the transcript, it is source. If it only exists because someone asked for
 it, it is a brief.
 
+The same line separates tool output from tool input. Output — the log, the test
+result, the error — is what happened, and is citable. Input is what someone asked
+to be written, and is not: one subagent anchored a claim on a 7,108-character
+`newString` payload sitting in an `### tool · edit` block, which is the shape of
+the prompt problem wearing a different bracket.
+
 ## 5c. Two chunks, one id
 
 `§5a` tells you when to reuse an id. This tells the merge what to do when two

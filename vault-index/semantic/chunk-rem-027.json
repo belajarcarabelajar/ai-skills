@@ -1,0 +1,436 @@
+{
+  "nodes": [
+    {
+      "id": "concept--aur-install-over-manual-binary-copy",
+      "label": "AUR install instead of manual binary copy",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L1528",
+      "norm_label": "aur install instead of manual binary copy"
+    },
+    {
+      "id": "rationale--pacman-tracks-and-pulls-deps-automatically",
+      "label": "AUR install is tracked by pacman, auto-updates, and auto-pulls the missing dependencies",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L1534",
+      "norm_label": "aur install is tracked by pacman, auto-updates, and auto-pulls the missing dependencies"
+    },
+    {
+      "id": "concept--curl-impersonate-for-cloudflare-block",
+      "label": "curl-impersonate as the Cloudflare-block remedy",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L1542",
+      "norm_label": "curl-impersonate as the cloudflare-block remedy"
+    },
+    {
+      "id": "rationale--curl-impersonate-only-when-blocked",
+      "label": "curl-impersonate needs no configuration and is only needed when ani-cli reports Blocked by cloudflare",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L2358",
+      "norm_label": "curl-impersonate needs no configuration and is only needed when ani-cli reports blocked by cloudflare"
+    },
+    {
+      "id": "concept--hianime-vidstream-2-replaces-zokoanime",
+      "label": "HiAnime Vidstream-2 (MegaPlay) replacing ZokoAnime",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L4421",
+      "norm_label": "hianime vidstream-2 (megaplay) replacing zokoanime"
+    },
+    {
+      "id": "rationale--hardcoded-source-name-made-lookup-fail",
+      "label": "Installed 5.1.0 and even upstream 5.1.4 hardcode ZokoAnime, so source lookup fails against a site serving only Vidstream-2",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L4421",
+      "norm_label": "installed 5.1.0 and even upstream 5.1.4 hardcode zokoanime, so source lookup fails against a site serving only vidstream-2"
+    },
+    {
+      "id": "concept--patched-ani-cli-shadowing-aur-binary",
+      "label": "Patched ani-cli installed to /usr/local/bin to shadow the AUR binary",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L4426",
+      "norm_label": "patched ani-cli installed to /usr/local/bin to shadow the aur binary"
+    },
+    {
+      "id": "rationale--pacman-db-untouched-keeps-revert-to-one-rm",
+      "label": "The patched build lives outside pacman's database, so the revert is a single rm and AUR 5.1.0 stays intact underneath",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L4426",
+      "norm_label": "the patched build lives outside pacman's database, so the revert is a single rm and aur 5.1.0 stays intact underneath"
+    },
+    {
+      "id": "rationale--self-update-would-clobber-the-patch",
+      "label": "ani-cli's own -U update would overwrite the patched binary with the broken master build",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L2368",
+      "norm_label": "ani-cli's own -u update would overwrite the patched binary with the broken master build"
+    },
+    {
+      "id": "concept--bash-stale-hash-shadows-newer-binary",
+      "label": "Stale bash hash keeping the old binary after a fix is installed",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L4757",
+      "norm_label": "stale bash hash keeping the old binary after a fix is installed"
+    },
+    {
+      "id": "rationale--interactive-shell-hashed-the-broken-path",
+      "label": "The user's terminal had hashed ani-cli to /usr/bin/ani-cli 5.1.0 and kept using it even though the fixed /usr/local/bin copy shadowed it, while the fresh test shells did not",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L4757",
+      "norm_label": "the user's terminal had hashed ani-cli to /usr/bin/ani-cli 5.1.0 and kept using it even though the fixed /usr/local/bin copy shadowed it, while the fresh test shells did not"
+    },
+    {
+      "id": "concept--grep-wrapper-tgrep-warning-breaks-ani-cli",
+      "label": "Local grep wrapper routing to tgrep breaks one ani-cli call",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L5634",
+      "norm_label": "local grep wrapper routing to tgrep breaks one ani-cli call"
+    },
+    {
+      "id": "rationale--per-call-escape-hatch-keeps-the-tgrep-speedup",
+      "label": "The wrapper's own GREP_WRAPPER=0 escape hatch is scoped to ani-cli so the normal grep to tgrep speedup is left untouched, and only the one non-piped grep -q history check at line 443 hits the wrapper",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L5634",
+      "norm_label": "the wrapper's own grep_wrapper=0 escape hatch is scoped to ani-cli so the normal grep to tgrep speedup is left untouched, and only the one non-piped grep -q history check at line 443 hits the wrapper"
+    },
+    {
+      "id": "concept--ani-cli-indo-subtitle-pairing-wrapper",
+      "label": "ani-cli-indo wrapper pairing Indonesian subtitles",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L9736",
+      "norm_label": "ani-cli-indo wrapper pairing indonesian subtitles"
+    },
+    {
+      "id": "rationale--pair-subs-without-touching-the-patched-ani-cli",
+      "label": "A small script fetches the Indonesian subtitle for episode N and hands it to mpv alongside the ani-cli stream, without modifying the patched ani-cli file",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L8759",
+      "norm_label": "a small script fetches the indonesian subtitle for episode n and hands it to mpv alongside the ani-cli stream, without modifying the patched ani-cli file"
+    },
+    {
+      "id": "concept--english-subtitle-fallback-for-missing-Indonesian",
+      "label": "English subtitle fallback for episodes with no Indonesian file",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L20669",
+      "norm_label": "english subtitle fallback for episodes with no indonesian file"
+    },
+    {
+      "id": "rationale--correct-timing-beats-a-misaligned-subtitle",
+      "label": "A double-episode subtitle file was deleted because its combined timing is wrong when played per episode, so English with correct timing is better",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L25656",
+      "norm_label": "a double-episode subtitle file was deleted because its combined timing is wrong when played per episode, so english with correct timing is better"
+    },
+    {
+      "id": "concept--mpv-subtitle-track-selection-limits",
+      "label": "mpv subtitle track selection limits (first --sub-file wins, --sid unsafe, --slang ineffective)",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L27610",
+      "norm_label": "mpv subtitle track selection limits (first --sub-file wins, --sid unsafe, --slang ineffective)"
+    },
+    {
+      "id": "concept--hardsub-mkv-defeats-subtitle-extraction",
+      "label": "Hardsub MKV batches defeat subtitle extraction",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L23901",
+      "norm_label": "hardsub mkv batches defeat subtitle extraction"
+    },
+    {
+      "id": "rationale--downloaded-2-5-gb-batch-had-no-subtitle-track",
+      "label": "The 2.5 GB Pixeldrain batch turned out to be hardsub MKV with no subtitle track, so it was deleted rather than kept",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L23901",
+      "norm_label": "the 2.5 gb pixeldrain batch turned out to be hardsub mkv with no subtitle track, so it was deleted rather than kept"
+    },
+    {
+      "id": "concept--subtitle-pack-plaintext-content-check",
+      "label": "Content-checking every subtitle pack because one pack mixes encrypted and plaintext files",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L21642",
+      "norm_label": "content-checking every subtitle pack because one pack mixes encrypted and plaintext files"
+    },
+    {
+      "id": "rationale--check-pack-contents-before-declaring-a-range-done",
+      "label": "The first S20 pack yielded base64 garbage, so every new pack is now inspected before its episode range is declared complete",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L21642",
+      "norm_label": "the first s20 pack yielded base64 garbage, so every new pack is now inspected before its episode range is declared complete"
+    },
+    {
+      "id": "concept--subdl-absolute-s01e-episode-numbering",
+      "label": "SubDL absolute S01E episode numbering matching ani-cli episodes",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L8755",
+      "norm_label": "subdl absolute s01e episode numbering matching ani-cli episodes"
+    },
+    {
+      "id": "rationale--absolute-numbering-makes-pairing-direct",
+      "label": "SubDL numbers episodes absolutely, exactly like HiAnime/ani-cli, so the pairing needs no conversion and a free API key with 2000 requests a day is far more than enough",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L8755",
+      "norm_label": "subdl numbers episodes absolutely, exactly like hianime/ani-cli, so the pairing needs no conversion and a free api key with 2000 requests a day is far more than enough"
+    },
+    {
+      "id": "concept--ani-cli-streams-by-default-download-opt-in",
+      "label": "ani-cli streams over HLS unless the download flag is given",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L27293",
+      "norm_label": "ani-cli streams over hls unless the download flag is given"
+    },
+    {
+      "id": "rationale--only-the-download-flag-writes-a-video-file",
+      "label": "ani-cli resolves an HLS link and mpv plays it straight from the server, so nothing is left on disk and -d is the only mode that saves a real video file",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L27293",
+      "norm_label": "ani-cli resolves an hls link and mpv plays it straight from the server, so nothing is left on disk and -d is the only mode that saves a real video file"
+    },
+    {
+      "id": "concept--layered-ani-cli-source-failure-diagnosis",
+      "label": "Layered ani-cli failure diagnosis by layer",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L27344",
+      "norm_label": "layered ani-cli failure diagnosis by layer"
+    },
+    {
+      "id": "rationale--diagnose-per-layer-so-you-know-which-one-is-broken",
+      "label": "Diagnosis is split search, then sources, then decryption so it is clear which layer is failing, and each layer has its own known upstream cause",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L27344",
+      "norm_label": "diagnosis is split search, then sources, then decryption so it is clear which layer is failing, and each layer has its own known upstream cause"
+    },
+    {
+      "id": "concept--private-repo-for-fansub-assets",
+      "label": "Separate private repository for the fansub collection, wrapper and config",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L26030",
+      "norm_label": "separate private repository for the fansub collection, wrapper and config"
+    },
+    {
+      "id": "rationale--fansub-assets-need-a-private-repo-not-a-fork",
+      "label": "Subtitles are copyrighted fansub data that must live in a private repo, since a public clone or fork would expose them to takedown",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L26027",
+      "norm_label": "subtitles are copyrighted fansub data that must live in a private repo, since a public clone or fork would expose them to takedown"
+    },
+    {
+      "id": "rationale--separate-repo-avoids-clashing-with-upstream-updates",
+      "label": "ani-cli is upstream and gets overwritten by yay updates, while the personal collection is a private asset, so mixing them guarantees a conflict on every update",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L26026",
+      "norm_label": "ani-cli is upstream and gets overwritten by yay updates, while the personal collection is a private asset, so mixing them guarantees a conflict on every update"
+    },
+    {
+      "id": "rationale--api-key-file-is-safer-than-an-environment-variable",
+      "label": "The SubDL key stays in a mode-600 file the script reads directly rather than in the environment, because an env value is readable by every child process",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
+      "source_location": "L26734",
+      "norm_label": "the subdl key stays in a mode-600 file the script reads directly rather than in the environment, because an env value is readable by every child process"
+    }
+  ],
+  "links": [
+    {
+      "source": "rationale--pacman-tracks-and-pulls-deps-automatically",
+      "target": "concept--aur-install-over-manual-binary-copy",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--curl-impersonate-only-when-blocked",
+      "target": "concept--curl-impersonate-for-cloudflare-block",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--hardcoded-source-name-made-lookup-fail",
+      "target": "concept--hianime-vidstream-2-replaces-zokoanime",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--pacman-db-untouched-keeps-revert-to-one-rm",
+      "target": "concept--patched-ani-cli-shadowing-aur-binary",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--self-update-would-clobber-the-patch",
+      "target": "concept--patched-ani-cli-shadowing-aur-binary",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--interactive-shell-hashed-the-broken-path",
+      "target": "concept--bash-stale-hash-shadows-newer-binary",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--per-call-escape-hatch-keeps-the-tgrep-speedup",
+      "target": "concept--grep-wrapper-tgrep-warning-breaks-ani-cli",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--pair-subs-without-touching-the-patched-ani-cli",
+      "target": "concept--ani-cli-indo-subtitle-pairing-wrapper",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--correct-timing-beats-a-misaligned-subtitle",
+      "target": "concept--english-subtitle-fallback-for-missing-Indonesian",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--downloaded-2-5-gb-batch-had-no-subtitle-track",
+      "target": "concept--hardsub-mkv-defeats-subtitle-extraction",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--check-pack-contents-before-declaring-a-range-done",
+      "target": "concept--subtitle-pack-plaintext-content-check",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--absolute-numbering-makes-pairing-direct",
+      "target": "concept--subdl-absolute-s01e-episode-numbering",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--only-the-download-flag-writes-a-video-file",
+      "target": "concept--ani-cli-streams-by-default-download-opt-in",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--diagnose-per-layer-so-you-know-which-one-is-broken",
+      "target": "concept--layered-ani-cli-source-failure-diagnosis",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--fansub-assets-need-a-private-repo-not-a-fork",
+      "target": "concept--private-repo-for-fansub-assets",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--separate-repo-avoids-clashing-with-upstream-updates",
+      "target": "concept--private-repo-for-fansub-assets",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--api-key-file-is-safer-than-an-environment-variable",
+      "target": "concept--private-repo-for-fansub-assets",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--hianime-vidstream-2-replaces-zokoanime",
+      "target": "concept--patched-ani-cli-shadowing-aur-binary",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--aur-install-over-manual-binary-copy",
+      "target": "concept--patched-ani-cli-shadowing-aur-binary",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--patched-ani-cli-shadowing-aur-binary",
+      "target": "concept--bash-stale-hash-shadows-newer-binary",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--grep-wrapper-tgrep-warning-breaks-ani-cli",
+      "target": "concept--ani-cli-indo-subtitle-pairing-wrapper",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--ani-cli-indo-subtitle-pairing-wrapper",
+      "target": "concept--mpv-subtitle-track-selection-limits",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--ani-cli-indo-subtitle-pairing-wrapper",
+      "target": "concept--english-subtitle-fallback-for-missing-Indonesian",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--ani-cli-indo-subtitle-pairing-wrapper",
+      "target": "concept--subdl-absolute-s01e-episode-numbering",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--hardsub-mkv-defeats-subtitle-extraction",
+      "target": "concept--subtitle-pack-plaintext-content-check",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--hianime-vidstream-2-replaces-zokoanime",
+      "target": "concept--layered-ani-cli-source-failure-diagnosis",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--ani-cli-indo-subtitle-pairing-wrapper",
+      "target": "concept--private-repo-for-fansub-assets",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--curl-impersonate-for-cloudflare-block",
+      "target": "concept--layered-ani-cli-source-failure-diagnosis",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--ani-cli-streams-by-default-download-opt-in",
+      "target": "concept--mpv-subtitle-track-selection-limits",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    }
+  ]
+}

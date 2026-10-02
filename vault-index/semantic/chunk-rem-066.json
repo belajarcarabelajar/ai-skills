@@ -1,0 +1,170 @@
+{
+  "nodes": [
+    {
+      "id": "concept--snippet-content-has-no-storage-or-ipc-size-cap",
+      "label": "Snippet content has no storage or IPC size cap",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c12-encoding-truncation-boundary [ses_f1d0e469dffeaddH5OzCXCCtmr].md",
+      "source_location": "L4484",
+      "norm_label": "snippet content has no storage or ipc size cap"
+    },
+    {
+      "id": "concept--tauri-ipc-string-hop-is-lossless",
+      "label": "Tauri IPC string hop is lossless",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c12-encoding-truncation-boundary [ses_f1d0e469dffeaddH5OzCXCCtmr].md",
+      "source_location": "L4536",
+      "norm_label": "tauri ipc string hop is lossless"
+    },
+    {
+      "id": "concept--byte-unit-str-slicing-panics-not-corrupts",
+      "label": "Byte-unit str slicing panics rather than corrupting",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c12-encoding-truncation-boundary [ses_f1d0e469dffeaddH5OzCXCCtmr].md",
+      "source_location": "L4553",
+      "norm_label": "byte-unit str slicing panics not corrupts"
+    },
+    {
+      "id": "concept--oversize-variable-text-rejected-not-truncated",
+      "label": "Oversize variable text is rejected, not truncated",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c12-encoding-truncation-boundary [ses_f1d0e469dffeaddH5OzCXCCtmr].md",
+      "source_location": "L4559",
+      "norm_label": "oversize variable text rejected not truncated"
+    },
+    {
+      "id": "rationale--serde-json-round-trip-is-lossless-for-valid-unicode",
+      "label": "Rust String to JSON to JS string and back is lossless for every valid Unicode scalar value, and a lone surrogate surfaces as a serde_json parse error rather than a truncated value",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c12-encoding-truncation-boundary [ses_f1d0e469dffeaddH5OzCXCCtmr].md",
+      "source_location": "L4545",
+      "norm_label": "serde json round trip is lossless for valid unicode"
+    },
+    {
+      "id": "rationale--byte-slices-are-display-only-and-never-written-back",
+      "label": "The byte slices only build preview labels that are never written back to the database, so they are display-only and off the insertion path",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c12-encoding-truncation-boundary [ses_f1d0e469dffeaddH5OzCXCCtmr].md",
+      "source_location": "L4555",
+      "norm_label": "byte slices are display only and never written back"
+    },
+    {
+      "id": "concept--maudit-image-component-is-the-intrinsic-size-seam",
+      "label": "Maudit's ImageComponent is the seam where the intrinsic size seam can be injected",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - f2-f1-intrinsic-image-dimensions [ses_f169638d7ffeFPj2j3fMC6dflb].md",
+      "source_location": "L12312",
+      "norm_label": "maudit image component is the intrinsic size seam"
+    },
+    {
+      "id": "concept--checked-in-docs-image-dimension-table",
+      "label": "Checked-in docs image dimension table with two-way catalog coverage",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - f2-f1-intrinsic-image-dimensions [ses_f169638d7ffeFPj2j3fMC6dflb].md",
+      "source_location": "L12314",
+      "norm_label": "checked in docs image dimension table"
+    },
+    {
+      "id": "concept--blog-cover-dimensions-absent-from-d1-schema",
+      "label": "Blog cover dimensions are absent from the D1 schema",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - f2-f1-intrinsic-image-dimensions [ses_f169638d7ffeFPj2j3fMC6dflb].md",
+      "source_location": "L12334",
+      "norm_label": "blog cover dimensions absent from d1 schema"
+    },
+    {
+      "id": "concept--blog-cover-declared-aspect-ratio-does-not-match-served",
+      "label": "Blog cover declared aspect ratio does not match the served covers",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - f2-f1-intrinsic-image-dimensions [ses_f169638d7ffeFPj2j3fMC6dflb].md",
+      "source_location": "L12340",
+      "norm_label": "blog cover declared aspect ratio does not match served"
+    },
+    {
+      "id": "rationale--image-component-is-the-only-place-the-tag-is-built",
+      "label": "The component is the correct layer because it is the only seam where the tag is constructed, it fixes both content sources at once, and it leaves layout.rs untouched",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - f2-f1-intrinsic-image-dimensions [ses_f169638d7ffeFPj2j3fMC6dflb].md",
+      "source_location": "L12312",
+      "norm_label": "image component is the only place the tag is built"
+    },
+    {
+      "id": "rationale--media-manifest-is-incomplete-and-outside-the-crate",
+      "label": "The deploy media manifest covers only 64 of the 81 URLs and lives outside the crate, so generating the table from it or fetching at build time is not viable",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - f2-f1-intrinsic-image-dimensions [ses_f169638d7ffeFPj2j3fMC6dflb].md",
+      "source_location": "L7604",
+      "norm_label": "media manifest is incomplete and outside the crate"
+    },
+    {
+      "id": "rationale--cover-rows-can-be-backfilled-not-re-uploaded",
+      "label": "Rows can be backfilled rather than re-uploaded because the cover upload script already pins every cover to 1200x630 and all live covers serve at exactly that size",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - f2-f1-intrinsic-image-dimensions [ses_f169638d7ffeFPj2j3fMC6dflb].md",
+      "source_location": "L12338",
+      "norm_label": "cover rows can be backfilled not re uploaded"
+    }
+  ],
+  "links": [
+    {
+      "source": "concept--tauri-ipc-string-hop-is-lossless",
+      "target": "concept--snippet-content-has-no-storage-or-ipc-size-cap",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--byte-unit-str-slicing-panics-not-corrupts",
+      "target": "concept--snippet-content-has-no-storage-or-ipc-size-cap",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--oversize-variable-text-rejected-not-truncated",
+      "target": "concept--snippet-content-has-no-storage-or-ipc-size-cap",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--serde-json-round-trip-is-lossless-for-valid-unicode",
+      "target": "concept--tauri-ipc-string-hop-is-lossless",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--byte-slices-are-display-only-and-never-written-back",
+      "target": "concept--byte-unit-str-slicing-panics-not-corrupts",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--checked-in-docs-image-dimension-table",
+      "target": "concept--maudit-image-component-is-the-intrinsic-size-seam",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--blog-cover-declared-aspect-ratio-does-not-match-served",
+      "target": "concept--blog-cover-dimensions-absent-from-d1-schema",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--image-component-is-the-only-place-the-tag-is-built",
+      "target": "concept--maudit-image-component-is-the-intrinsic-size-seam",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--media-manifest-is-incomplete-and-outside-the-crate",
+      "target": "concept--checked-in-docs-image-dimension-table",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--cover-rows-can-be-backfilled-not-re-uploaded",
+      "target": "concept--blog-cover-dimensions-absent-from-d1-schema",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    }
+  ]
+}

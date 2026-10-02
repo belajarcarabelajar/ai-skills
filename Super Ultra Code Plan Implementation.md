@@ -1222,7 +1222,7 @@ isolated → active → verified → open → merged
 | `verified` | Local evidence is green, parent diff audit passed | `state <s> verified` |
 | `open` | The PR exists on the remote | `pr <s> --number <N>` |
 | `merged` | The PR reached the base branch | `state <s> merged` |
-| `closed` | The PR was closed without merging — superseded, abandoned, or its change landed by another path | `state <s> closed` |
+| `closed` | The PR was closed without merging (superseded, abandoned, or its change landed by another path) | `state <s> closed` |
 
 - **A PR number cannot be recorded before `verified`.** `setPr` throws otherwise. Recording a PR implies the work is finished and checked, so `isolated → open` would skip the gate that makes a merge safe.
 - **Only an `open` session can merge**, and only if it has a PR number. A green local run is not a mergeable session; a mergeable session is a green local run *and* a PR.

@@ -48,14 +48,40 @@ You emit only the layer that needs judgment:
 | Node `file_type` | What it is | Typical count |
 |---|---|---|
 | `concept` | A named idea the note is actually about — a technique, a decision, a system, a term of art | 0–4 per note |
-| `rationale` | A stated reason for a choice, in the note's own words | 0–2 per note |
+
+**A "why" is an attribute, not a node.** This is graphify's rule and this project
+follows it. When a choice has a stated reason, the reason belongs *on* the
+concept it explains:
+
+```json
+{
+  "id": "concept--some-decision",
+  "label": "Some decision",
+  "file_type": "concept",
+  "rationale": "Stated reason, in the note's own words, with its anchor.",
+  "source_file": "01 - Projects/foo/plans/2026-09-30-some-plan.md",
+  "source_location": "L142"
+}
+```
+
+Do **not** create a separate node whose only content is "X was chosen because
+Y", and do not emit a `rationale_for` edge to carry it. A standalone why-node is
+a fragment, not an idea, and it fragments the graph the same way a per-note id
+would.
+
+`file_type: "rationale"` is still valid in graphify
+(`site-packages/graphify/validate.py:4`) — but only for a node that is itself a
+concept-like thing: an idea, principle, mechanism, or design pattern that the
+note names as such. "Fail-closed signature verification" is a mechanism and
+deserves a node. "We chose fail-closed because the mirror lacked signatures" is
+a why and does not.
 
 | Relation | Direction | Meaning |
 |---|---|---|
 | `conceptually_related_to` | concept → concept | two ideas a reader would want side by side |
-| `rationale_for` | rationale → concept | this is *why* that was chosen |
 
-Use only relations from the validator's vocabulary. `contains` and `references` belong to T7.
+Use only relations from the validator's vocabulary. `contains` and `references`
+belong to T7.
 
 ## 4. Node shape
 
@@ -82,7 +108,7 @@ These are the decisions that make this layer worth a model, and the ones a parse
 
 - **A concept is something the note is about, not something it mentions.** "Cloudflare" appearing in a list of tools is not a concept node for that note. A note whose entire subject is a decision to move DNS to Cloudflare has one.
 - **Zero is a valid answer.** Most notes in this vault are plans, logs, or transcripts, and many have no distinct concept worth a node. A batch that returns nothing is a correct batch, not a failed one. Do not pad to hit a quota.
-- **`rationale` requires an actual stated reason.** "Chose X" is not a rationale. "Chose X because Y broke under Z load" is. If the note records a choice without a reason, emit the concept and skip the rationale.
+- **A `rationale` attribute requires an actual stated reason.** "Chose X" is not a rationale. "Chose X because Y broke under Z load" is. If the note records a choice without a reason, emit the concept and leave the attribute off. A why with no stated reason is a guess, and a guess written into an attribute reads the same as a sourced one.
 - **Do not invent.** If the note does not say it, it is not in the graph. A concept you inferred from general knowledge rather than read here is a hallucination with a file path attached, which is worse than a missing node.
 - **Transcripts are not plans.** Roughly half the corpus is `05 - Conversations/`, raw session logs. A discarded approach discussed in a transcript is worth a concept node; a tool invocation is not.
 

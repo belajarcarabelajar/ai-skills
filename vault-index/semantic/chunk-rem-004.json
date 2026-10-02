@@ -24,7 +24,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
       "source_location": "L15130",
       "norm_label": "seo audit fan out architecture",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L15114] Latency, not quota, is the constraint"
+      "rationale": "Latency, not quota, is the constraint [05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L15114] 242 URLs is 12% of the daily budget, so quota is not the constraint. Latency is. One parent pass, then a fan-out that never touches the network."
     },
     {
       "id": "concept--url-inspection-quota",
@@ -33,7 +33,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
       "source_location": "L15114",
       "norm_label": "url inspection api quota",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L15114] Latency, not quota, is the constraint"
+      "rationale": "Latency, not quota, is the constraint [05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L15114] 242 URLs is 12% of the daily budget, so quota is not the constraint. Latency is."
     },
     {
       "id": "concept--indexing-api-unsupported-use",
@@ -42,7 +42,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
       "source_location": "L15115",
       "norm_label": "indexing api unsupported use",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L15115] Indexing API publish path removed, not gated"
+      "rationale": "Indexing API publish path removed, not gated [05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L15115] `gsc-index-all.ts --publish` is outside Google's supported use. It gets removed, not gated."
     },
     {
       "id": "concept--core-web-vitals-75th-percentile",
@@ -78,7 +78,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
       "source_location": "L30942",
       "norm_label": "plan publish registry prefix routing",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L30963] No supported way to publish worktree plans to the parent project folder"
+      "rationale": "No supported way to publish worktree plans to the parent project folder [05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L30963] tidak ada cara yang didukung untuk menerbitkan plan worktree ke folder project induknya"
     },
     {
       "id": "concept--worktree-routing-enumeration-asymmetry",
@@ -87,7 +87,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
       "source_location": "L33020",
       "norm_label": "worktree routing enumeration asymmetry",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L33020] A worktree holds the whole recorded history, so enumerating it re-files everything"
+      "rationale": "A worktree holds the whole recorded history, so enumerating it re-files everything [05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L33020] worktree berisi seluruh histori terekam, jadi plan di worktree **adalah** plan di root. Mengenumerasi keduanya = meng-file ulang semuanya."
     },
     {
       "id": "concept--lcp-preload-cache-key-duplication",
@@ -96,7 +96,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
       "source_location": "L40215",
       "norm_label": "lcp preload cache key duplication",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L40375] fetchpriority is the positive authorial LCP claim, loading=eager is not"
+      "rationale": "fetchpriority is the positive authorial LCP claim, loading=eager is not [05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L40375] `loading=\"eager\"` di `lp/campaign.astro` dipakai pada logo 28×28 yang LCP-nya h1 — preload di sana justru bahaya yang(scoping) mau dicegah. Ia mengunci rule ke `fetchpriority`, yang memang klaim positif dari penulis"
     },
     {
       "id": "concept--blog-tags-slug-global-unique",
@@ -105,19 +105,16 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
       "source_location": "L50459",
       "norm_label": "blog tags slug global unique constraint",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L50470] Taxonomy locale pass-through turns 16 live 200s into 302s"
+      "rationale": "Taxonomy locale pass-through turns 16 live 200s into 302s [05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L50525] **16 URL ID memakai slug Inggris dan semuanya 200 hari ini**, `blog_tags.slug` UNIQUE **global** (baris 95) sementara `name` saja yang per-locale (baris 97), dan halaman melakukan `redirect` saat null. Jadi pass-through locale **akan mengubah 16 URL terindeks jadi 302**"
     },
     {
       "id": "concept--d1-rejects-like-use-instr",
       "label": "D1 rejects LIKE, use instr",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
-      "source_location": "L61786",
+      "source_location": "L061743",
       "norm_label": "d1 rejects like use instr",
-      "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L61743] A blanket 1200x630 backfill would falsify 8 of 10 covers",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L61745] upload-cover is not the only path a cover arrives by"
-      ]
+      "rationale": "A blanket 1200x630 backfill would falsify 8 of 10 covers [05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L61743] Stempel blanket akan memalsukan 8 dari 10. [05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L61745] pipeline `upload-cover` yang katanya \"selalu 1200x630\" jelas bukan satu-satunya jalan masuk."
     },
     {
       "id": "concept--rollback-success-traffic-anomaly",
@@ -134,19 +131,16 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
       "source_location": "L55714",
       "norm_label": "deploy dirty ack policy",
-      "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L55714] Dirty-ack ships unreviewed changes, which is exactly what policy forbids",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L55797] The licenses.json change is build regeneration, not dirt"
-      ]
+      "rationale": "Dirty-ack ships unreviewed changes, which is exactly what policy forbids [05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L55714] **Saya tidak bisa memakai `DIRTY_ACK`** — mengakui perubahan tak-dikomit ikut terdeploy tanpa review adalah persis yang dilarang policy, dan alasan kerja selama ini adalah verifikasi tiap baris. [05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L55797] Dua file itu **regenerasi build**: `generatedAt` dan `version` yang di-sync dari GitHub release terbaru — bukan kotoran, itu mekanisme yang benar. Deploy ulang sekarang."
     },
     {
       "id": "concept--vps-first-compilation-policy",
       "label": "VPS-first compilation policy",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
-      "source_location": "L61832",
+      "source_location": "L054273",
       "norm_label": "vps first compilation policy",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L61808] Docs deploy needs maudit, which needs cargo, which is forbidden on this host"
+      "rationale": "Docs deploy needs maudit, which needs cargo, which is forbidden on this host; compilation runs on the VPS first [05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L54273] Blocker keras: **`maudit` CLI tidak terpasang**, jadi `deploy-docs.sh` akan menjalankan `cargo-r2 install maudit-cli` lalu `maudit build` — dua kompilasi penuh, yang **dilarang** di mesin ini. [05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L61749] `maudit-cli` sekarang terpasang permanen di `~/.cargo/bin` VPS — build docs berikutnya skip kompilasi penuh."
     },
     {
       "id": "concept--rationale--unverified-extractor-manufactures-findings",
@@ -159,7 +153,7 @@
   ],
   "links": [
     {
-      "source": "rationale--unverified-extractor-manufactures-findings",
+      "source": "concept--rationale--unverified-extractor-manufactures-findings",
       "target": "concept--positive-control-for-extractors",
       "relation": "rationale_for",
       "confidence": "EXTRACTED"

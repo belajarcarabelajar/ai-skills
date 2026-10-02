@@ -6,7 +6,7 @@
       "label": "Graphify semantic graph integration into ai-skills and the Obsidian vault",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L8031",
+      "source_location": "L8035",
       "norm_label": "graphify semantic graph integration into ai-skills and the obsidian vault"
     },
     {
@@ -14,7 +14,7 @@
       "label": "Markdown has no local-only extraction mode, so a vault graph requires an LLM backend",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L7011",
+      "source_location": "L7013",
       "norm_label": "markdown has no local-only extraction mode, so a vault graph requires an llm backend"
     },
     {
@@ -38,7 +38,7 @@
       "label": ".graphifyignore is always enforced: no --no-graphifyignore flag exists, so the exclusions are permanent",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L6841",
+      "source_location": "L6843",
       "norm_label": ".graphifyignore is always enforced: no --no-graphifyignore flag exists, so the exclusions are permanent"
     },
     {
@@ -46,7 +46,7 @@
       "label": "graphify label and cluster-only ignore --model and fall back to a hardcoded qwen2.5-coder:7b; the OLLAMA_MODEL env var is the fix",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L7398",
+      "source_location": "L7400",
       "norm_label": "graphify label and cluster-only ignore --model and fall back to a hardcoded qwen2.5-coder:7b; the ollama_model env var is the fix"
     },
     {
@@ -54,7 +54,7 @@
       "label": "--max-concurrency is forced to 1 for community labeling only; extract keeps its own default of 4",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L7771",
+      "source_location": "L7773",
       "norm_label": "--max-concurrency is forced to 1 for community labeling only; extract keeps its own default of 4"
     },
     {
@@ -62,7 +62,7 @@
       "label": "03 - Resources/Attachments treated as a scope exclusion rather than a content sample",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L9070",
+      "source_location": "L9072",
       "norm_label": "03 - resources/attachments treated as a scope exclusion rather than a content sample"
     },
     {
@@ -86,7 +86,7 @@
       "label": "git check-ignore reports nothing for tracked paths; verifying new ignore rules needs --no-index",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L8550",
+      "source_location": "L8552",
       "norm_label": "git check-ignore reports nothing for tracked paths; verifying new ignore rules needs --no-index"
     },
     {
@@ -110,7 +110,7 @@
       "label": "Plain mv instead of git mv, because git mv stages and Obsidian Git auto-pushes staged paths within seconds",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L11360",
+      "source_location": "L11362",
       "norm_label": "plain mv instead of git mv, because git mv stages and obsidian git auto-pushes staged paths within seconds"
     },
     {
@@ -118,7 +118,7 @@
       "label": "Content hashing disproved the duplicate claim: 0 of 1227 LLM Wiki sources are byte-identical to Satset, and the 373 overlap was filename-only",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L4106",
+      "source_location": "L4108",
       "norm_label": "content hashing disproved the duplicate claim: 0 of 1227 llm wiki sources are byte-identical to satset, and the 373 overlap was filename-only"
     },
     {
@@ -126,7 +126,7 @@
       "label": "A fresh clone from GitHub proved the credential exposure instead of arguing for it",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L15808",
+      "source_location": "L15822",
       "norm_label": "a fresh clone from github proved the credential exposure instead of arguing for it"
     },
     {
@@ -134,7 +134,7 @@
       "label": "An anonymous 404 from the API means the repo is private, not that it was deleted",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L16732",
+      "source_location": "L16744",
       "norm_label": "an anonymous 404 from the api means the repo is private, not that it was deleted"
     },
     {
@@ -142,7 +142,7 @@
       "label": "Deleting 748 N8n raw captures and reverting it: fully reversible because every file was git-tracked",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L15263",
+      "source_location": "L15271",
       "norm_label": "deleting 748 n8n raw captures and reverting it: fully reversible because every file was git-tracked"
     },
     {
@@ -150,7 +150,7 @@
       "label": "NXDOMAIN negative cache in the local resolver blocks a freshly created subdomain long after public resolvers answer correctly",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L24130",
+      "source_location": "L24132",
       "norm_label": "nxdomain negative cache in the local resolver blocks a freshly created subdomain long after public resolvers answer correctly"
     },
     {
@@ -158,7 +158,7 @@
       "label": "The extracted graph has median degree 1, 1415 orphan nodes (23%), and one god node (LLM Wiki Index, 694 connections)",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L20891",
+      "source_location": "L20900",
       "norm_label": "the extracted graph has median degree 1, 1415 orphan nodes (23%), and one god node (llm wiki index, 694 connections)"
     },
     {
@@ -166,7 +166,7 @@
       "label": "vis-network edges must reference node ids, not dataset ordinals; ordinals give a blank canvas with a working legend",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L21443",
+      "source_location": "L21447",
       "norm_label": "vis-network edges must reference node ids, not dataset ordinals; ordinals give a blank canvas with a working legend"
     },
     {
@@ -174,7 +174,7 @@
       "label": "vis-network 9 has no net.canvas.style and no net.neighbors; method names guessed from memory fail at runtime",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L22184",
+      "source_location": "L22192",
       "norm_label": "vis-network 9 has no net.canvas.style and no net.neighbors; method names guessed from memory fail at runtime"
     },
     {
@@ -182,7 +182,7 @@
       "label": "A regex replacement that stops at the first } leaves a dangling brace and a SyntaxError that blanks the page",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L19958",
+      "source_location": "L19960",
       "norm_label": "a regex replacement that stops at the first } leaves a dangling brace and a syntaxerror that blanks the page"
     },
     {
@@ -190,7 +190,7 @@
       "label": "A black canvas on a 4740-node graph is physics settle time, not an empty graph",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L22023",
+      "source_location": "L22025",
       "norm_label": "a black canvas on a 4740-node graph is physics settle time, not an empty graph"
     },
     {
@@ -206,7 +206,7 @@
       "label": "The Ollama cloud 429 monthly-usage-limit is account-level, so another cloud model on the same account fails too",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L17358",
+      "source_location": "L17365",
       "norm_label": "the ollama cloud 429 monthly-usage-limit is account-level, so another cloud model on the same account fails too"
     },
     {
@@ -214,7 +214,7 @@
       "label": "The SHA256 chunk cache meant re-scoping resumed from 295 cached chunks instead of zero",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L17632",
+      "source_location": "L17634",
       "norm_label": "the sha256 chunk cache meant re-scoping resumed from 295 cached chunks instead of zero"
     },
     {
@@ -294,7 +294,7 @@
       "label": "git mv stages the rename, and Obsidian Git would commit and push it within ten seconds without review",
       "file_type": "rationale",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L11212",
+      "source_location": "L11202",
       "norm_label": "git mv stages the rename, and obsidian git would commit and push it within ten seconds without review"
     },
     {
@@ -326,7 +326,7 @@
       "label": "Because the repo is private and the codes have not leaked, the backup codes are rotated calmly first and deletion comes later",
       "file_type": "rationale",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L16833",
+      "source_location": "L16846",
       "norm_label": "because the repo is private and the codes have not leaked, the backup codes are rotated calmly first and deletion comes later"
     },
     {
@@ -342,7 +342,7 @@
       "label": "The ugly rendering was a symptom of the graph's content, not of the colour scheme, so the renderer was rebuilt rather than the palette retuned",
       "file_type": "rationale",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L20767",
+      "source_location": "L20769",
       "norm_label": "the ugly rendering was a symptom of the graph's content, not of the colour scheme, so the renderer was rebuilt rather than the palette retuned"
     }
   ],

@@ -101,7 +101,38 @@ belong to T7.
 
 ## 4. Node shape
 
-Every node needs, at minimum:
+### 4a. Quote the note verbatim. Then explain it.
+
+A `rationale` opens with `[<source_file>:L<n>]` and then the reason. Everything
+between that bracket and the end of the string must be the **note's own words**,
+copied exactly — because that span is what a reader lands on and expects to
+match.
+
+Measured across this corpus: writing your commentary after the anchor instead
+puts *your* words on that line, so the reader finds a paraphrase where the note
+never said it. Six consecutive batches reported anchors as verified while a
+sixth to a half of them pointed at a line carrying no part of the quote.
+
+So:
+
+- **Verbatim first, commentary after the quote**, never interleaved. If you need
+  to say "reused id, same claim as chunk-rem-060", put that BEFORE the bracket.
+- **No silent normalisation.** Do not transliterate `—` into `-` or `→` into
+  `->` inside a quoted span. Five chunks carry those substitutions and each one
+  makes the quote unmatchable against the line it cites.
+- **A quote that wraps across source lines gets two anchors.** One `L<n>` cannot
+  cover two lines and the schema has no range syntax. Quote each fragment at its
+  own line rather than dropping the tail or inflating the anchor.
+
+Every path in this corpus ends in `[ses_…]`, so an anchor contains a `]` before
+its `:L<n>`. Parse it greedily to the last `:` before the digits. A non-greedy
+`\[([^\]]+):L(\d+)\]` silently matches **zero** anchors and reports success.
+
+Verify by reading the line back and substring-matching, and **print how many
+anchors you parsed**. Zero parsed and zero failed are different results, and
+only the second means anything.
+
+### 4b. Required fields
 
 ```json
 {
@@ -110,13 +141,15 @@ Every node needs, at minimum:
   "file_type": "concept",
   "source_file": "01 - Projects/foo/plans/2026-09-30-some-plan.md",
   "source_location": "L142",
-  "norm_label": "leiden community detection"
+  "norm_label": "leiden community detection",
+  "rationale": "[01 - Projects/foo/plans/2026-09-30-some-plan.md:L88] \"Verbatim words from that exact line, nothing added.\""
 }
 ```
 
 - `id` — a stable slug. Same concept in two notes gets the **same** id, so the merger unions them instead of duplicating. Slug the normalised label, not the note path; a per-note id would make every concept a singleton and reproduce the fragmentation this project exists to fix.
 - `source_file` — repo-relative, from your batch list, verbatim. Never absolute, never `..`.
-- `source_location` — `L<n>`, the line the concept is discussed on. This is what makes `graphify explain` clickable.
+- `source_location` — `L<n>`, a real line number the file actually has. Not a character offset: several subagents wrote one, producing anchors past the end of the file. Count the lines.
+- `rationale` — the note's own stated reason, quoted, per §4a. A string, or an array of strings when the note gives more than one anchor. No rationale is better than an invented one.
 
 ## 5. Judgement calls
 

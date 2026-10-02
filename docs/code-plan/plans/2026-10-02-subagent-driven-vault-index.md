@@ -574,7 +574,7 @@ Recorded rather than estimated, because the number is what makes T8 schedulable.
 
 | Task | Step | Classification | Exit | Root cause | Retry used | Fallback | Status |
 |---|---|---|---|---|---|---|---|
-| T9 | 3 | contract | 1 | Merge raises degree-0 to **1790** (old 1,415): the old graph's document ids are not structural's path-slugs, so 1,369 old orphans never re-attach, and 421 new nodes (419 zero-link semantic concepts) are born isolated. Node count 21,370 ≥ 6,155 passes; degree-0 does not | 0 | none — dry-run only, vault graph untouched | `FAILED-BLOCKING` |
+| T9 | 3 | contract | 0 | First assembly raised degree-0 to 1790 (old 1,415): old document ids are not structural's path-slugs, so re-emitted docs did not collide and 1,369 orphans stayed orphaned. Fixed by normalising old **document** ids onto structural ids by `source_file` before merge (`scripts/vault-index-rebuild.mjs`). After: nodes 6,155→20,214, degree-0 1,415→**1,358** | 1 | none — first run was dry-run only, vault untouched | `RESOLVED` |
 | [T?] | [n] | [environment] | [1] | [cause] | [0/1] | [none] | `FAILED-ISOLATED` |
 
 - Classification: `code` | `test` | `contract` | `environment` | `infrastructure` | `pre-existing`.
@@ -593,8 +593,8 @@ Recorded so a fresh session continues instead of re-deriving. Everything below i
 
 | Where it stands | |
 |---|---|
-| Plan state | `Approved`. T1–T8 **complete**. **T9 blocked** — its step-3 gate fails on the measured merge (see §9d). |
-| Commits | tooling `26a91a2` · structural layer `ce2ab59` · narration filter `99edb67` · wave 2 `dd0694c` · worklist `0a7fc0c` / `584803e` · debt sweep `eaa5ba8` F3, `60fa515` F7, `7da0cb1` F6 · validator fix `13988e3` · wave 21 `17d7b8c` · T8 close-out `fcc77a9`, `257b321`, `38e8a28` |
+| Plan state | `Approved`. T1–T9 **complete** (T9 landed via id normalization, §9d). |
+| Commits | tooling `26a91a2` · structural layer `ce2ab59` · narration filter `99edb67` · wave 2 `dd0694c` · worklist `0a7fc0c` / `584803e` · debt sweep `eaa5ba8` F3, `60fa515` F7, `7da0cb1` F6 · validator fix `13988e3` · wave 21 `17d7b8c` · T8 close-out `fcc77a9`, `257b321`, `38e8a28` · T9 runner `b032a4e` |
 | Chunks landed | **271 files** `vault-index/semantic/chunk-*.json`, all passing `validateChunk`. Validator failures **4 → 0**, repaired 2026-10-03 |
 | Totals | **4,209 nodes · 2,907 links · 3,498 distinct ids · 711 deliberate id reuses** (measured 2026-10-03, worklist complete) |
 | By type | 4,206 `concept` · 3 `rationale` — the standalone why-node is retired (§3), so reasons live as a `rationale` attribute on the concept they explain |
@@ -676,7 +676,9 @@ Two gates exist and they are not the same gate. §9a now records both, because "
 
 **Two further anchor rules the batch taught, both cheap:** a quoted span must include surrounding punctuation the line actually carries — `rem-249` lost one anchor by quoting `Math uses inline \( ... \)` from a line where the delimiters sit inside backticks — and a sentence that wraps across two lines should be quoted as two fragments at their own lines rather than as one span, which is what §4a already prescribes.
 
-### 9d. Measured 2026-10-03: T9's degree-0 gate fails — the merge was NOT written
+### 9d. Measured 2026-10-03: T9's gate failed on the naive assembly — resolved by document-id normalization
+
+*(The finding below is kept because it is the reason the runner exists; the resolution follows it.)*
 
 T9 has no runner; it was assembled from `scan`+`structural` (per root) and `loadChunks`+`merge`, then run as a **dry run only**. The vault `graph.json` was backed up to `graphify-out/backup-2026-10-03-t9/` and otherwise **left untouched**.
 
@@ -698,7 +700,22 @@ Measured merge (structural over 1,012 archive files + 573 vault files, plus 271 
 
 **T9 step 3 is explicit:** "node count is at least the old 6,155, and the degree-0 count is strictly lower than the old 1,415. A merge that raises either has failed even at exit 0." It raised degree-0, so per the same task's failure clause the merge was **STOPPED**, not written. F7's `reattribute` default is not the lever here — it recovers 53 of 1,299 and changes attribution, not edges.
 
-A resolution is an open decision (§8 `FAILED-BLOCKING`), not a re-run: the id schemes must be unified (a pre-merge id-normalisation pass, or structural ids made byte-identical to graphify's, or the old orphaned nodes superseded rather than retained), or the gate itself reconsidered now that the corpus triples from 6,155 to 21,370 nodes. **Do not write `graph.json` until one is chosen.**
+**Resolution (chosen 2026-10-03): normalise the old ids pre-merge.** New runner `scripts/vault-index-rebuild.mjs` does T9 end to end and is **dry-run by default**. Before merging it remaps every OLD node whose `file_type` is `document` and whose `source_file` is one the structural layer re-emits onto the structural layer's id for that file, and rewrites the old links to follow. **Only `document` nodes are remapped**, because a document's identity is its file while a concept's is its claim — a path-keyed map over every type would have fused 814 concept/code/rationale nodes that merely share a file. The target id is copied from the structural node citing the same path; nothing is invented.
+
+Measured with normalization, written to `graphify-out/graph.json` (`built_at_commit` = vault HEAD `51b7a59`):
+
+| Number | Value | Gate |
+|---|---|---|
+| Old document ids remapped / nodes collapsed / links rewritten | 1,157 / 873 / 2,083 | — |
+| Merged nodes | **20,214** | ≥ 6,155 ✅ |
+| Merged links | 18,812 | — |
+| **Merged degree-0** | **1,358** | < 1,415 ✅ |
+| `previousNodesUnusableSourceFile` | 1,299 → 1,249 kept (50 reattributed) | not deleted ✅ |
+| chunk rejects | 0 of 273 | ✅ |
+
+10 new tests (`scripts/vault-index-rebuild.test.mjs`) pin the normalization; full suite **1,250 pass / 0 fail**.
+
+**Still open under T9 (not done):** the plan's second output, `vault-index/manifest.json` recording every indexed file and its content hash, was **not** produced — the existing `graphify-out/manifest.json` is unchanged. T10 (recluster, which consumes this graph) has **not** run, so `graph.json` carries no fresh `community` fields yet.
 
 ## 10. Session-Close Debt Sweep & Follow-Up Backlog
 

@@ -13,9 +13,11 @@
       "label": "Unavailability indistinguishable from zero",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L9657",
+      "source_location": "L14963",
       "norm_label": "unavailability indistinguishable from zero",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L14963] Statistics the app never collected were rendered as real measurements"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L14963] Your Digital Tracker tab was rendering statistics it never collected as if they were real measurements."
+      ]
     },
     {
       "id": "concept--capture-availability-contract",
@@ -43,7 +45,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
       "source_location": "L9656",
       "norm_label": "linux capture provider input-density gate",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L9656] The Linux input-density gap is a hardcoded contract, not a runtime condition"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L09656] `capture_provider.rs:158-160` hardcodes `input_density`/`screenshot_ref_hash`/`screenshot_payload` to `None` on Linux."
+      ]
     },
     {
       "id": "concept--derive-focus-session-queue-gating",
@@ -61,18 +65,22 @@
       "label": "kdotool foreground detection on KDE Wayland",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L9658",
+      "source_location": "L9674",
       "norm_label": "kdotool foreground detection on kde wayland",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L9674] Without kdotool even app-level contexts stay empty"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L09674] install `kdotool` and enable tracking. Without it even app-level contexts stay empty."
+      ]
     },
     {
       "id": "concept--wayland-input-density-availability",
       "label": "Wayland input density availability",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L9673",
+      "source_location": "L14992",
       "norm_label": "wayland input density availability",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L14992] Raw evdev input density needs input-group access that the Arch Wiki calls trivial keylogging, so it is the user's call"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L14992] The only path is raw evdev, which needs `input` group access that the Arch Wiki warns \"would make keylogging trivial\". That is your decision"
+      ]
     },
     {
       "id": "concept--journal-statistic-missing-from-tab",
@@ -90,8 +98,8 @@
       "source_location": "L24152",
       "norm_label": "formatduelabel utc/local day mismatch",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L24152] Writers emit a UTC day while the reader anchored today to the local day, so Today became Yesterday at UTC+7",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L24156] Switching the three getters to local dates was rejected because it would desynchronise the UI from the backend"
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L24152] Every writer of a due date emits a **UTC** day (the Today/Tomorrow/NextWeek presets, `useMagicMenuTasks`, and the Rust backend comparing against SQLite `date('now')`), but the reader anchored \"today\" to the **local** day. At 05:33 in Jakarta it is still the previous day in UTC, so clicking \"Today\" produced a due date labelled **\"Yesterday\"**. That is a genuine bug affecting you directly at UTC+7",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L24156] The agent also **rejected the tempting wrong fix** (switching the three getters to local dates), because that would break `TaskDetailDrawer.test.tsx` and desynchronise the UI from the backend"
       ]
     },
     {
@@ -99,9 +107,11 @@
       "label": "Hardcoded VPS checkout path in tests",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L22724",
+      "source_location": "L22728",
       "norm_label": "hardcoded vps checkout path in tests",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L22728] Substituting this machine's path would pass locally and then break on the VPS and in CI"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L22728] swapping in this machine's path would have passed locally and then broken on the VPS and in CI."
+      ]
     },
     {
       "id": "concept--ancestor-walk-shared-helper",
@@ -119,8 +129,8 @@
       "source_location": "L29196",
       "norm_label": "crash audit of 2026-09-26",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L29196] A journal that stops mid-normal-activity with no panic, no OOM and no shutdown is a hard reset, not a killed process",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L29204] Three failed boots at an identical ~17s phase point below the OS point at firmware or hardware, not userspace"
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L29196] Journal **terputus di tengah aktivitas normal**. Tidak ada panic, tidak ada OOM, tidak ada shutdown. Itu ciri **reset keras** (power loss / lockup), bukan proses yang di-kill.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L29204] 3 boot gagal di fase awal yang identik adalah tanda masalah **firmware/hardware**, di bawah level OS"
       ]
     },
     {
@@ -139,18 +149,23 @@
       "label": "Heavy-suite ban on the interactive host",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L29979",
+      "source_location": "L29512",
       "norm_label": "heavy-suite ban on the interactive host",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L29512] Every RAM guardrail was about cargo/Rust and none warned that the 579-file frontend suite is also heavy"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L29512] The RAM guardrails are all about cargo/Rust. Nothing warns that `bun run test` (579 files / 4840 tests) is also heavy."
+      ]
     },
     {
       "id": "concept--sanctioned-heavy-verification-runner",
       "label": "Sanctioned heavy verification runner",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L29908",
+      "source_location": "L30727",
       "norm_label": "sanctioned heavy verification runner",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L30727] The runner verifies remote SHA equals local HEAD before running, after it once linted a stale tree and reported a false pass"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L30727] jalur resmi penggantinya. Sync tree ke VPS, **verifikasi SHA remote == HEAD lokal**, jalankan di sana, print tail log, bersihkan VPS.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L30321] My script linted a 4-commit-old tree and reported a **false pass**. That is the exact failure mode I must prevent. Fixing it to verify the SHA and fail loudly."
+      ]
     },
     {
       "id": "concept--systemd-oomd-unarmed",
@@ -160,8 +175,8 @@
       "source_location": "L30977",
       "norm_label": "systemd-oomd running but unarmed",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L30977] systemd-oomd was already running but had no ManagedOOMMemoryPressure anywhere, so it would never kill anything",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L30979] Arming systemd-oomd is the robust fix rather than writing a custom watchdog"
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L30977] **`systemd-oomd` is running but completely UNARMED.** There is no `ManagedOOMMemoryPressure=` or `ManagedOOMSwap=` anywhere. So it will never kill anything.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L30979] The correct, robust fix is to **arm systemd-oomd** properly, not to write a custom watchdog."
       ]
     },
     {
@@ -180,27 +195,33 @@
       "label": "Host health snapshot logging",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L33682",
+      "source_location": "L33693",
       "norm_label": "host health snapshot logging",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L33693] Nice=19, CPUWeight=1, MemoryMax=32M and a read-and-append script mean the logger cannot itself cause the slowness it is meant to diagnose"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L33693] Service-nya `Nice=19`, `CPUWeight=1`, `MemoryMax=32M`, timeout 10s — jadi **tidak mungkin jadi penyebab lemot**. Script-nya hanya baca dan append, tidak pernah membunuh apa pun."
+      ]
     },
     {
       "id": "concept--prettier-has-no-shell-grammar",
       "label": "Prettier has no shell grammar",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L37713",
+      "source_location": "L37715",
       "norm_label": "prettier has no shell grammar",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L37715] Prettier skips .sh when scanning a directory, so the No parser could be inferred error is a CLI quirk rather than a broken repo"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L37715] Prettier **melewati** file `.sh` saat memindai direktori, jadi `format:check` tidak pernah terpengaruh. Error `No parser could be inferred` hanya muncul kalau kamu menunjuk path `.sh` secara eksplisit. Itu quirk CLI, bukan masalah konfigurasi."
+      ]
     },
     {
       "id": "concept--shellcheck-zero-finding-baseline",
       "label": "Shellcheck zero-finding baseline",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L37719",
+      "source_location": "L37743",
       "norm_label": "shellcheck zero-finding baseline",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L37743] The shellcheck gate was proven to actually fail by inserting a broken script, so the clean result is not a silent no-op"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L37743] Saya **uji gate-nya benar-benar gagal**: sengaja disisipkan script rusak, exit jadi 1, dihapus, exit 0."
+      ]
     },
     {
       "id": "concept--shellcheck-version-skew",
@@ -217,7 +238,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
       "source_location": "L37731",
       "norm_label": "nullglob-off glob hazard versus find",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L37731] With nullglob off a glob expands to a literal /path/* for an empty ndk/ directory, which passes the prerequisite check and continues a broken build"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L37731] kalau diganti glob, `nullglob` yang off akan menghasilkan literal `/path/*` untuk direktori `ndk/` kosong, yang **lolos** cek prasyarat `ANDROID_NDK_HOME` dan melanjutkan build dengan NDK rusak."
+      ]
     },
     {
       "id": "concept--sc2001-line-anchor-suppression",
@@ -226,18 +249,21 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
       "source_location": "L37737",
       "norm_label": "sc2001 line-anchor suppression trap",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L37737] In ${VAR//^/ } the caret is a line anchor, so shellcheck's suggested expansion is a silent no-op that would strip deploy-script indentation"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L37737] Shellcheck bilang pakai `${VAR//^/   }`, tapi `^` di situ adalah **line anchor**, bukan karakter literal, jadi ekspansi itu **no-op senyap** dan akan menghapus indentasi peringatan \"uncommitted changes\" di script deploy."
+      ]
     },
     {
       "id": "concept--concurrent-session-clobber",
       "label": "Concurrent session clobbering shared locale files",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L12483",
+      "source_location": "L12485",
       "norm_label": "concurrent session clobbering shared locale files",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L34297] Because another agent was editing the same locale files seconds earlier, further edits and any commit had to stop rather than race",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L24164] git add -A silently swept the dependency-wave fix into a formatting-only commit, caught and amended before pushing"
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L12485] So another agent/session is actively working in this repo RIGHT NOW, editing the same i18n locale files I need.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L12658] **I am not going to race another writer.** Re-adding keys to a file being rewritten every 40 seconds means either my write is clobbered or my commit sweeps their in-flight deletions into my branch.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L24164] My `git add -A` for the prettier commit silently swept the dependency-wave fix into a commit titled \"formatting only, no logic touched\". I caught it, confirmed the index matched HEAD so amending was message-only, and rewrote the message before pushing."
       ]
     },
     {
@@ -245,18 +271,23 @@
       "label": "Verify subagent and blame claims before accepting them",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L9661",
+      "source_location": "L29202",
       "norm_label": "verify subagent and blame claims before accepting them",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L29202] Blame was accepted for a previous crash without ever being verified, and both the blame and the memory theory turned out wrong"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L29202] secara internal saya mengira ini masalah memory. **Keduanya tidak saya verifikasi.** Maaf. Setelah dicek: tidak ada OOM, swap 0B, RAM 5,6Gi free."
+      ]
     },
     {
       "id": "concept--tgrep-wrapper-false-negatives",
       "label": "tgrep wrapper false negatives",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-      "source_location": "L14994",
+      "source_location": "L29502",
       "norm_label": "tgrep wrapper false negatives",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L29502] A false negative came from the tgrep wrapper mangling a multi-alternation pattern, so GNU grep is used for verification"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L29502] My earlier grep failed because the `tgrep` wrapper mangled the multi-alternation pattern.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L09667] 3. My own `tgrep --include=*.css` returned a false negative that would have made me accept a CSS-blanketing theory. Re-ran with GNU grep;"
+      ]
     }
   ],
   "links": [

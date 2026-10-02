@@ -1,0 +1,225 @@
+{
+  "batch": "077",
+  "nodes": [
+    {
+      "id": "concept--audio-cue-pinning-test",
+      "label": "Audio cue pinning test",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-batch-d-10-files [ses_f17699445ffeq07cbExFDI9PT1].md",
+      "source_location": "L40",
+      "norm_label": "audio cue pinning test"
+    },
+    {
+      "id": "concept--stop-propagation-double-cue-guard",
+      "label": "stopPropagation as double-cue guard",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-batch-d-10-files [ses_f17699445ffeq07cbExFDI9PT1].md",
+      "source_location": "L16220",
+      "norm_label": "stoppropagation as double cue guard"
+    },
+    {
+      "id": "concept--backdrop-target-guard",
+      "label": "Modal backdrop target guard",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-batch-d-10-files [ses_f17699445ffeq07cbExFDI9PT1].md",
+      "source_location": "L56",
+      "norm_label": "modal backdrop target guard"
+    },
+    {
+      "id": "concept--negative-control-test",
+      "label": "Negative control test",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-batch-d-10-files [ses_f17699445ffeq07cbExFDI9PT1].md",
+      "source_location": "L1688",
+      "norm_label": "negative control test"
+    },
+    {
+      "id": "concept--self-sounding-claim",
+      "label": "self-sounding claim",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-batch-d-10-files [ses_f17699445ffeq07cbExFDI9PT1].md",
+      "source_location": "L37",
+      "norm_label": "self sounding claim"
+    },
+    {
+      "id": "rationale--exact-key-and-count-catches-double-cue",
+      "label": "Exact key plus count is what catches a double cue",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-batch-d-10-files [ses_f17699445ffeq07cbExFDI9PT1].md",
+      "source_location": "L40",
+      "norm_label": "exact key plus count is what catches a double cue"
+    },
+    {
+      "id": "rationale--backdrop-guard-is-the-whole-point",
+      "label": "The bubbling guard is the whole point of the fix",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-batch-d-10-files [ses_f17699445ffeq07cbExFDI9PT1].md",
+      "source_location": "L56",
+      "norm_label": "the bubbling guard is the whole point of the fix"
+    },
+    {
+      "id": "rationale--make-self-sounding-executable",
+      "label": "Pin bare-referenced handlers so the self-sounding claim becomes executable proof",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-batch-d-10-files [ses_f17699445ffeq07cbExFDI9PT1].md",
+      "source_location": "L37",
+      "norm_label": "pin bare referenced handlers so the self sounding claim becomes executable proof"
+    },
+    {
+      "id": "concept--plan-publishing-contract-guard",
+      "label": "Plan Publishing contract guard",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t6-validator-guard [ses_f219ee8ddffeRCbq5xZqGSiCuU].md",
+      "source_location": "L36",
+      "norm_label": "plan publishing contract guard"
+    },
+    {
+      "id": "concept--mandatory-negative-test",
+      "label": "Mandatory negative test for a guard",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t6-validator-guard [ses_f219ee8ddffeRCbq5xZqGSiCuU].md",
+      "source_location": "L50",
+      "norm_label": "mandatory negative test"
+    },
+    {
+      "id": "concept--shared-error-counter-validator",
+      "label": "Shared errors-counter validator convention",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t6-validator-guard [ses_f219ee8ddffeRCbq5xZqGSiCuU].md",
+      "source_location": "L45",
+      "norm_label": "shared errors counter validator convention"
+    },
+    {
+      "id": "concept--byte-identical-restore-proof",
+      "label": "Byte-identical restore proof",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t6-validator-guard [ses_f219ee8ddffeRCbq5xZqGSiCuU].md",
+      "source_location": "L56",
+      "norm_label": "byte identical restore proof"
+    },
+    {
+      "id": "concept--root-cause-double-count-avoidance",
+      "label": "Root-cause double-count avoidance",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t6-validator-guard [ses_f219ee8ddffeRCbq5xZqGSiCuU].md",
+      "source_location": "L1735",
+      "norm_label": "root cause double count avoidance"
+    },
+    {
+      "id": "rationale--guard-never-observed-failing",
+      "label": "A guard only ever observed passing is indistinguishable from one that does nothing",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t6-validator-guard [ses_f219ee8ddffeRCbq5xZqGSiCuU].md",
+      "source_location": "L51",
+      "norm_label": "a guard only ever observed passing is indistinguishable from one that does nothing"
+    },
+    {
+      "id": "rationale--cheap-checks-before-expensive-render",
+      "label": "Cheap existence checks must fail before the expensive mmdc render pass",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t6-validator-guard [ses_f219ee8ddffeRCbq5xZqGSiCuU].md",
+      "source_location": "L47",
+      "norm_label": "cheap existence checks must fail before the expensive mmdc render pass"
+    },
+    {
+      "id": "rationale--restore-can-silently-truncate",
+      "label": "A restore that silently truncates a config file is the thing that gets missed",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t6-validator-guard [ses_f219ee8ddffeRCbq5xZqGSiCuU].md",
+      "source_location": "L56",
+      "norm_label": "a restore that silently truncates a config file is the thing that gets missed"
+    }
+  ],
+  "links": [
+    {
+      "source": "rationale--exact-key-and-count-catches-double-cue",
+      "target": "concept--audio-cue-pinning-test",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--backdrop-guard-is-the-whole-point",
+      "target": "concept--negative-control-test",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--make-self-sounding-executable",
+      "target": "concept--self-sounding-claim",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--stop-propagation-double-cue-guard",
+      "target": "concept--audio-cue-pinning-test",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--audio-cue-pinning-test",
+      "target": "concept--backdrop-target-guard",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--negative-control-test",
+      "target": "concept--backdrop-target-guard",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--self-sounding-claim",
+      "target": "concept--audio-cue-pinning-test",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--guard-never-observed-failing",
+      "target": "concept--mandatory-negative-test",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--cheap-checks-before-expensive-render",
+      "target": "concept--plan-publishing-contract-guard",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--restore-can-silently-truncate",
+      "target": "concept--byte-identical-restore-proof",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--mandatory-negative-test",
+      "target": "concept--plan-publishing-contract-guard",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--byte-identical-restore-proof",
+      "target": "concept--mandatory-negative-test",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--mandatory-negative-test",
+      "target": "concept--negative-control-test",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--shared-error-counter-validator",
+      "target": "concept--plan-publishing-contract-guard",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--root-cause-double-count-avoidance",
+      "target": "concept--shared-error-counter-validator",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    }
+  ]
+}

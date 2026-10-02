@@ -82,9 +82,9 @@
       "label": "Declining a revert as diagnostic theater",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md",
-      "source_location": "L57131",
+      "source_location": "L18131",
       "norm_label": "declining a revert as diagnostic theater",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md:L57131] The variable was already closed by two workflows the change never touched failing identically, so reverting would restore a known-broken gate while adding no information"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md:L18131] The variable was already closed by two workflows the change never touched failing identically, so reverting would restore a known-broken gate while adding no information"
     },
     {
       "id": "concept--zero-step-in-three-seconds-is-runner-unreachable",

@@ -1,0 +1,277 @@
+{
+  "batch": "rem-024",
+  "nodes": [
+    {
+      "id": "concept--manual-deb-install-on-arch-without-dpkg",
+      "label": "Manual .deb install on Arch by extraction plus postinst",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - installing-typeless-2-2-0-deb-package [ses_f2bf9c1daffe7JAQPHDJTCsA7V].md",
+      "source_location": "L1481",
+      "norm_label": "manual .deb install on arch without dpkg"
+    },
+    {
+      "id": "rationale--postinst-safe-on-arch-because-command-v-guards",
+      "label": "The package postinst was safe to run on Arch because every Debian-specific step sat behind a command -v guard",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - installing-typeless-2-2-0-deb-package [ses_f2bf9c1daffe7JAQPHDJTCsA7V].md",
+      "source_location": "L1482",
+      "norm_label": "the package postinst was safe to run on arch because every debian-specific step sat behind a command -v guard"
+    },
+    {
+      "id": "concept--epipe-from-piping-app-stdout-into-head",
+      "label": "EPIPE from piping a GUI app's stdout into head",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - installing-typeless-2-2-0-deb-package [ses_f2bf9c1daffe7JAQPHDJTCsA7V].md",
+      "source_location": "L1607",
+      "norm_label": "epipe from piping a gui app's stdout into head"
+    },
+    {
+      "id": "rationale--epipe-dialog-was-self-inflicted-by-the-smoke-test-pipe",
+      "label": "The EPIPE dialog came from the agent's own `typeless --version | head -5` smoke test, not from the install",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - installing-typeless-2-2-0-deb-package [ses_f2bf9c1daffe7JAQPHDJTCsA7V].md",
+      "source_location": "L1970",
+      "norm_label": "the epipe dialog came from the agent's own typeless --version | head -5 smoke test, not from the install"
+    },
+    {
+      "id": "concept--startupwmclass-taskbar-grouping",
+      "label": "StartupWMClass taskbar grouping",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - installing-typeless-2-2-0-deb-package [ses_f2bf9c1daffe7JAQPHDJTCsA7V].md",
+      "source_location": "L4258",
+      "norm_label": "startupwmclass taskbar grouping"
+    },
+    {
+      "id": "concept--kwin-rules-registry-general-rules-key",
+      "label": "KWin loads only rule groups registered in the [General] rules key",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - installing-typeless-2-2-0-deb-package [ses_f2bf9c1daffe7JAQPHDJTCsA7V].md",
+      "source_location": "L8200",
+      "norm_label": "kwin loads only rule groups registered in the [general] rules key"
+    },
+    {
+      "id": "rationale--first-kwin-rule-failed-because-group-was-never-registered",
+      "label": "The first kwinrulesrc rule did nothing because its group was present in the file but absent from [General] rules, and KWin loads only registered groups",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - installing-typeless-2-2-0-deb-package [ses_f2bf9c1daffe7JAQPHDJTCsA7V].md",
+      "source_location": "L7527",
+      "norm_label": "the first kwinrulesrc rule did nothing because its group was present in the file but absent from [general] rules, and kwin loads only registered groups"
+    },
+    {
+      "id": "concept--canary-rule-proves-a-config-pipeline-end-to-end",
+      "label": "Canary rule used to prove a window-manager config pipeline end to end",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - installing-typeless-2-2-0-deb-package [ses_f2bf9c1daffe7JAQPHDJTCsA7V].md",
+      "source_location": "L7663",
+      "norm_label": "canary rule used to prove a window-manager config pipeline end to end"
+    },
+    {
+      "id": "concept--sd-is-not-a-drop-in-sed",
+      "label": "sd is not a drop-in sed: it rewrites files in place by default",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - installing-typeless-2-2-0-deb-package [ses_f2bf9c1daffe7JAQPHDJTCsA7V].md",
+      "source_location": "L27364",
+      "norm_label": "sd is not a drop-in sed: it rewrites files in place by default"
+    },
+    {
+      "id": "rationale--sed-shadowing-rejected-because-sd-is-destructive-by-default",
+      "label": "Shadowing sed with sd was rejected because `sed 's/a/A/' file` only prints while `sd a A file` overwrites the file, so a transparent wrapper would turn a read-only command into a destructive one",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - installing-typeless-2-2-0-deb-package [ses_f2bf9c1daffe7JAQPHDJTCsA7V].md",
+      "source_location": "L27361",
+      "norm_label": "shadowing sed with sd was rejected because `sed 's/a/a/' file` only prints while `sd a a file` overwrites the file, so a transparent wrapper would turn a read-only command into a destructive one"
+    },
+    {
+      "id": "concept--conservative-grep-wrapper-delegates-risky-flags",
+      "label": "Conservative grep wrapper delegating every risky flag to GNU grep",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - installing-typeless-2-2-0-deb-package [ses_f2bf9c1daffe7JAQPHDJTCsA7V].md",
+      "source_location": "L23896",
+      "norm_label": "conservative grep wrapper delegating every risky flag to gnu grep"
+    },
+    {
+      "id": "rationale--grep-delegated-to-gnu-because-flag-surface-differs",
+      "label": "grep had to be translated by hand because its flag surface is not tgrep's, so delegation to /usr/bin/grep was made the default for anything non-trivial",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - installing-typeless-2-2-0-deb-package [ses_f2bf9c1daffe7JAQPHDJTCsA7V].md",
+      "source_location": "L22183",
+      "norm_label": "grep had to be translated by hand because its flag surface is not tgrep's, so delegation to /usr/bin/grep was made the default for anything non-trivial"
+    },
+    {
+      "id": "concept--skip-tgrep-serve-daemon-on-a-small-ram-machine",
+      "label": "Skipping the tgrep serve daemon on a 6 GB machine",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - installing-typeless-2-2-0-deb-package [ses_f2bf9c1daffe7JAQPHDJTCsA7V].md",
+      "source_location": "L23909",
+      "norm_label": "skipping the tgrep serve daemon on a 6 gb machine"
+    },
+    {
+      "id": "concept--opencode-v2-plugin-contract-breaks-v1-plugins",
+      "label": "OpenCode v2 plugin contract breaks V1-era plugins",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - installing-typeless-2-2-0-deb-package [ses_f2bf9c1daffe7JAQPHDJTCsA7V].md",
+      "source_location": "L24592",
+      "norm_label": "opencode v2 plugin contract breaks v1-era plugins"
+    },
+    {
+      "id": "concept--context-mode-via-mcp-instead-of-plugin",
+      "label": "context-mode connected as a local MCP server instead of a plugin",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - installing-typeless-2-2-0-deb-package [ses_f2bf9c1daffe7JAQPHDJTCsA7V].md",
+      "source_location": "L24594",
+      "norm_label": "context-mode connected as a local mcp server instead of a plugin"
+    },
+    {
+      "id": "rationale--mcp-chosen-because-the-protocol-is-version-independent",
+      "label": "context-mode was switched to the MCP path because MCP is not bound to an OpenCode version, unlike the plugin entry point",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - installing-typeless-2-2-0-deb-package [ses_f2bf9c1daffe7JAQPHDJTCsA7V].md",
+      "source_location": "L24594",
+      "norm_label": "context-mode was switched to the mcp path because mcp is not bound to an opencode version, unlike the plugin entry point"
+    },
+    {
+      "id": "concept--opencode-file-watcher-hot-loads-plugin-files",
+      "label": "OpenCode's file watcher loads a plugin file as soon as it is written, without a restart",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - installing-typeless-2-2-0-deb-package [ses_f2bf9c1daffe7JAQPHDJTCsA7V].md",
+      "source_location": "L28488",
+      "norm_label": "opencode's file watcher loads a plugin file as soon as it is written, without a restart"
+    },
+    {
+      "id": "concept--arch-config-backup-fail-closed-secret-gate",
+      "label": "arch-config-backup fail-closed secret gate over an allowlist",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - installing-typeless-2-2-0-deb-package [ses_f2bf9c1daffe7JAQPHDJTCsA7V].md",
+      "source_location": "L17286",
+      "norm_label": "arch-config-backup fail-closed secret gate over an allowlist"
+    },
+    {
+      "id": "concept--archived-private-repo-still-exposes-history-credentials",
+      "label": "Archiving a private repo still leaves credentials readable in git history",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - installing-typeless-2-2-0-deb-package [ses_f2bf9c1daffe7JAQPHDJTCsA7V].md",
+      "source_location": "L17907",
+      "norm_label": "archiving a private repo still leaves credentials readable in git history"
+    },
+    {
+      "id": "rationale--new-repo-chosen-over-rename-because-rename-keeps-the-leak",
+      "label": "A fresh repo was created and the old one archived instead of renaming it, because the WSL repo's 74 commits of WSL/Ubuntu config carried leaked credentials that a rename would preserve under a cleaner-sounding name",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - installing-typeless-2-2-0-deb-package [ses_f2bf9c1daffe7JAQPHDJTCsA7V].md",
+      "source_location": "L17917",
+      "norm_label": "a fresh repo was created and the old one archived instead of renaming it, because the wsl repo's 74 commits of wsl/ubuntu config carried leaked credentials that a rename would preserve under a cleaner-sounding name"
+    },
+    {
+      "id": "concept--typeless-update-runbook-as-agent-handoff",
+      "label": "Typeless-UPDATE-RUNBOOK.md as a durable agent handoff",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - installing-typeless-2-2-0-deb-package [ses_f2bf9c1daffe7JAQPHDJTCsA7V].md",
+      "source_location": "L11096",
+      "norm_label": "typeless-update-runbook.md as a durable agent handoff"
+    }
+  ],
+  "links": [
+    {
+      "source": "rationale--postinst-safe-on-arch-because-command-v-guards",
+      "target": "concept--manual-deb-install-on-arch-without-dpkg",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--epipe-dialog-was-self-inflicted-by-the-smoke-test-pipe",
+      "target": "concept--epipe-from-piping-app-stdout-into-head",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--epipe-from-piping-app-stdout-into-head",
+      "target": "concept--manual-deb-install-on-arch-without-dpkg",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--kwin-rules-registry-general-rules-key",
+      "target": "concept--startupwmclass-taskbar-grouping",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--first-kwin-rule-failed-because-group-was-never-registered",
+      "target": "concept--kwin-rules-registry-general-rules-key",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--canary-rule-proves-a-config-pipeline-end-to-end",
+      "target": "concept--kwin-rules-registry-general-rules-key",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--typeless-update-runbook-as-agent-handoff",
+      "target": "concept--manual-deb-install-on-arch-without-dpkg",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--typeless-update-runbook-as-agent-handoff",
+      "target": "concept--epipe-from-piping-app-stdout-into-head",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--sed-shadowing-rejected-because-sd-is-destructive-by-default",
+      "target": "concept--sd-is-not-a-drop-in-sed",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--sd-is-not-a-drop-in-sed",
+      "target": "concept--conservative-grep-wrapper-delegates-risky-flags",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "rationale--grep-delegated-to-gnu-because-flag-surface-differs",
+      "target": "concept--conservative-grep-wrapper-delegates-risky-flags",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--skip-tgrep-serve-daemon-on-a-small-ram-machine",
+      "target": "concept--conservative-grep-wrapper-delegates-risky-flags",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "rationale--mcp-chosen-because-the-protocol-is-version-independent",
+      "target": "concept--context-mode-via-mcp-instead-of-plugin",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--context-mode-via-mcp-instead-of-plugin",
+      "target": "concept--opencode-v2-plugin-contract-breaks-v1-plugins",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--opencode-file-watcher-hot-loads-plugin-files",
+      "target": "concept--opencode-v2-plugin-contract-breaks-v1-plugins",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--archived-private-repo-still-exposes-history-credentials",
+      "target": "concept--arch-config-backup-fail-closed-secret-gate",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "rationale--new-repo-chosen-over-rename-because-rename-keeps-the-leak",
+      "target": "concept--archived-private-repo-still-exposes-history-credentials",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    }
+  ]
+}

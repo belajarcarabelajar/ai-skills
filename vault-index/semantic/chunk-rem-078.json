@@ -1,0 +1,313 @@
+{
+  "batch": "rem-078",
+  "nodes": [
+    {
+      "id": "concept--agentrouter-openai-invalid-stream-event",
+      "label": "agentrouter-openai/openai-compatible-chat returns provider.invalid-output for an invalid stream event",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-24 - reply-with-exactly-ok [ses_f2b319fcbffeWFdhDuAvEXBzHb].md",
+      "source_location": "L25",
+      "norm_label": "agentrouter-openai/openai-compatible-chat returns provider.invalid-output for an invalid stream event"
+    },
+    {
+      "id": "concept--vault-analysis-json-as-maintenance-artifact-not-wiki-page",
+      "label": "outputs/vault-analysis.json is a maintenance artifact, not a canonical LLM Wiki knowledge page",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-outputs-folder [ses_f281d7309ffen8cYixVEaG4Yik].md",
+      "source_location": "L14338",
+      "norm_label": "outputs/vault-analysis.json is a maintenance artifact, not a canonical llm wiki knowledge page"
+    },
+    {
+      "id": "rationale--raw-audit-json-would-consume-retrieval-context",
+      "label": "Its size and repetitive data would consume substantial retrieval context and could dominate embeddings or indexing",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-outputs-folder [ses_f281d7309ffen8cYixVEaG4Yik].md",
+      "source_location": "L14351",
+      "norm_label": "raw audit json would consume retrieval context"
+    },
+    {
+      "id": "concept--unlinked-mention-false-positives-from-browser-history-stubs",
+      "label": "Browser-history stubs produce mass false-positive unlinked mentions in the audit report",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-outputs-folder [ses_f281d7309ffen8cYixVEaG4Yik].md",
+      "source_location": "L14394",
+      "norm_label": "browser-history stubs produce mass false-positive unlinked mentions in the audit report"
+    },
+    {
+      "id": "rationale--do-not-bulk-create-links-from-unlinked-mentions",
+      "label": "A cleanup tool could create thousands of false links from the unlinked-mention list, so these mentions should not be converted automatically into wikilinks",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-outputs-folder [ses_f281d7309ffen8cYixVEaG4Yik].md",
+      "source_location": "L14408",
+      "norm_label": "do not bulk create links from unlinked mentions"
+    },
+    {
+      "id": "concept--empty-duplicates-array-is-not-evidence-of-no-clones",
+      "label": "An empty duplicates array is not evidence that the vault has no clones or versioned copies",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-outputs-folder [ses_f281d7309ffen8cYixVEaG4Yik].md",
+      "source_location": "L14325",
+      "norm_label": "an empty duplicates array is not evidence that the vault has no clones or versioned copies"
+    },
+    {
+      "id": "rationale--dedupe-must-not-rest-on-the-duplicates-field",
+      "label": "An empty duplicates result must not be used as evidence that similarly named or versioned files can be merged",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-outputs-folder [ses_f281d7309ffen8cYixVEaG4Yik].md",
+      "source_location": "L14417",
+      "norm_label": "dedupe must not rest on the duplicates field"
+    },
+    {
+      "id": "concept--acp-is-agent-client-protocol-not-agent-code-protocol",
+      "label": "ACP in the Zed ecosystem is the Agent Client Protocol, not the Agent Code Protocol the note claims",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-outputs-folder [ses_f281d7309ffen8cYixVEaG4Yik].md",
+      "source_location": "L14479",
+      "norm_label": "acp is the agent client protocol, not the agent code protocol the note claims"
+    },
+    {
+      "id": "concept--by-folder-collapses-nested-taxonomy-to-leaf-names",
+      "label": "The report's by_folder key collapses nested categories into leaf-style names and cannot describe the PARA hierarchy",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-outputs-folder [ses_f281d7309ffen8cYixVEaG4Yik].md",
+      "source_location": "L14324",
+      "norm_label": "the report's by_folder key collapses nested categories into leaf-style names and cannot describe the para hierarchy"
+    },
+    {
+      "id": "concept--audit-output-self-exclusion",
+      "label": "The outputs folder is absent from by_folder, so the scanner evidently excluded its own output directory",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-outputs-folder [ses_f281d7309ffen8cYixVEaG4Yik].md",
+      "source_location": "L14334",
+      "norm_label": "the outputs folder is absent from by_folder, so the scanner evidently excluded its own output directory"
+    },
+    {
+      "id": "rationale--undocumented-self-exclusion-makes-the-report-possibly-recursive",
+      "label": "That exclusion is not documented, and without it the report could recursively affect its own statistics",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-outputs-folder [ses_f281d7309ffen8cYixVEaG4Yik].md",
+      "source_location": "L14334",
+      "norm_label": "undocumented self exclusion makes the report possibly recursive"
+    },
+    {
+      "id": "concept--redaction-selftest-as-executable-guard",
+      "label": "scripts/lib/redaction-selftest.test.mjs is the executable guard that makes best-effort redaction falsifiable",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - t11-planted-secret-self-test [ses_f05f0d545ffe0Mm7mYxtJozEcY].md",
+      "source_location": "L31",
+      "norm_label": "scripts/lib/redaction-selftest.test.mjs is the executable guard that makes best-effort redaction falsifiable"
+    },
+    {
+      "id": "rationale--best-effort-redaction-must-be-made-falsifiable-by-a-test",
+      "label": "Redaction is a best-effort net over tool output written into an auto-committed vault, so this test is what makes best-effort falsifiable",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - t11-planted-secret-self-test [ses_f05f0d545ffe0Mm7mYxtJozEcY].md",
+      "source_location": "L31",
+      "norm_label": "redaction is a best-effort net, so this test is what makes best-effort falsifiable"
+    },
+    {
+      "id": "concept--per-pattern-sample-table-fails-on-unplanted-pattern",
+      "label": "A synthetic sample per PATTERNS entry, with the sampled key set asserted equal to PATTERN_NAMES in both directions",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - t11-planted-secret-self-test [ses_f05f0d545ffe0Mm7mYxtJozEcY].md",
+      "source_location": "L4334",
+      "norm_label": "a synthetic sample per patterns entry, with the sampled key set asserted equal to pattern_names in both directions"
+    },
+    {
+      "id": "rationale--untested-pattern-is-a-silent-gap-not-a-skip",
+      "label": "An untested pattern is a silent gap, so a pattern with no sample must be an explicit failure rather than a skip",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - t11-planted-secret-self-test [ses_f05f0d545ffe0Mm7mYxtJozEcY].md",
+      "source_location": "L50",
+      "norm_label": "an untested pattern is a silent gap, not a skip"
+    },
+    {
+      "id": "concept--fragment-built-needles-so-the-scanner-cannot-match-its-own-source",
+      "label": "The credential-query needles are assembled from string fragments so the scanning file cannot match its own source",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - t11-planted-secret-self-test [ses_f05f0d545ffe0Mm7mYxtJozEcY].md",
+      "source_location": "L4340",
+      "norm_label": "the credential-query needles are assembled from string fragments so the scanning file cannot match its own source"
+    },
+    {
+      "id": "rationale--a-self-test-that-spells-the-string-it-hunts-can-never-pass",
+      "label": "A self-test that hunts a string and then spells that string in its own title can never pass, so the needles are built from fragments ('credent' + 'ial') and the file does not match itself",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - t11-planted-secret-self-test [ses_f05f0d545ffe0Mm7mYxtJozEcY].md",
+      "source_location": "L4309",
+      "norm_label": "a self-test that spells the string it hunts can never pass"
+    },
+    {
+      "id": "concept--pem-pattern-swallows-jwt-losing-attribution-not-the-secret",
+      "label": "A JWT nested inside a PEM block is swallowed by pem-private-key: the secret is removed and counted, but jwt records nothing",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - t11-planted-secret-self-test [ses_f05f0d545ffe0Mm7mYxtJozEcY].md",
+      "source_location": "L4360",
+      "norm_label": "a jwt nested inside a pem block is swallowed by pem-private-key: the secret is removed and counted, but jwt records nothing"
+    },
+    {
+      "id": "rationale--pattern-order-pem-before-jwt-loses-attribution",
+      "label": "pem-private-key is index 3 and jwt is index 4, so the broad pattern replaces the block first and the narrow one never sees the text; the safety property holds but the note can no longer say a JWT was there, so jwt === 1 was deliberately not asserted and a future reordering must force that trade-off to be decided",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - t11-planted-secret-self-test [ses_f05f0d545ffe0Mm7mYxtJozEcY].md",
+      "source_location": "L4365",
+      "norm_label": "pattern order pem before jwt loses attribution, so jwt === 1 was deliberately not asserted"
+    },
+    {
+      "id": "concept--per-acceptance-criterion-mutation-proof",
+      "label": "Three separate mutations each falsified one guard: an unplanted pattern, a planted credential query, and a weakened aws pattern",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - t11-planted-secret-self-test [ses_f05f0d545ffe0Mm7mYxtJozEcY].md",
+      "source_location": "L4311",
+      "norm_label": "three separate mutations each falsified one guard: an unplanted pattern, a planted credential query, and a weakened aws pattern"
+    },
+    {
+      "id": "rationale--a-green-guard-proves-nothing-unless-it-can-go-red",
+      "label": "A green guard proves nothing unless it can go red, and the first mutation attempt silently no-opped on bad anchor text, so that was reported rather than treated as a pass",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - t11-planted-secret-self-test [ses_f05f0d545ffe0Mm7mYxtJozEcY].md",
+      "source_location": "L4319",
+      "norm_label": "a green guard proves nothing unless it can go red"
+    },
+    {
+      "id": "concept--skipped-optional-integration-proven-non-vacuous-with-a-stand-in-renderer",
+      "label": "The optional render-session integration test skipped cleanly, then was proven non-vacuous against a leaky and a redacting stand-in renderer in a throwaway copy outside the repo",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - t11-planted-secret-self-test [ses_f05f0d545ffe0Mm7mYxtJozEcY].md",
+      "source_location": "L4347",
+      "norm_label": "the optional render-session integration test skipped cleanly, then was proven non-vacuous against a leaky and a redacting stand-in renderer"
+    },
+    {
+      "id": "rationale--a-skip-that-can-never-fail-is-decoration",
+      "label": "Since a skip that can never fail is decoration, the test couples to the documented T6 signature renderSession(session, messages, opts) on purpose, because a guard that adapts to whatever the renderer happens to be isn't a guard",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - t11-planted-secret-self-test [ses_f05f0d545ffe0Mm7mYxtJozEcY].md",
+      "source_location": "L4351",
+      "norm_label": "a skip that can never fail is decoration"
+    },
+    {
+      "id": "concept--synthetic-secrets-assembled-from-visible-fragments",
+      "label": "Every secret in the redaction self-test is synthetic and assembled in-code from visible fragments so a test run cannot print a real credential",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - t11-planted-secret-self-test [ses_f05f0d545ffe0Mm7mYxtJozEcY].md",
+      "source_location": "L4369",
+      "norm_label": "every secret in the redaction self-test is synthetic and assembled in-code from visible fragments so a test run cannot print a real credential"
+    }
+  ],
+  "links": [
+    {
+      "source": "rationale--raw-audit-json-would-consume-retrieval-context",
+      "target": "concept--vault-analysis-json-as-maintenance-artifact-not-wiki-page",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--do-not-bulk-create-links-from-unlinked-mentions",
+      "target": "concept--unlinked-mention-false-positives-from-browser-history-stubs",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--dedupe-must-not-rest-on-the-duplicates-field",
+      "target": "concept--empty-duplicates-array-is-not-evidence-of-no-clones",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--undocumented-self-exclusion-makes-the-report-possibly-recursive",
+      "target": "concept--audit-output-self-exclusion",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--empty-duplicates-array-is-not-evidence-of-no-clones",
+      "target": "concept--unlinked-mention-false-positives-from-browser-history-stubs",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--by-folder-collapses-nested-taxonomy-to-leaf-names",
+      "target": "concept--audit-output-self-exclusion",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--by-folder-collapses-nested-taxonomy-to-leaf-names",
+      "target": "concept--vault-analysis-json-as-maintenance-artifact-not-wiki-page",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "rationale--best-effort-redaction-must-be-made-falsifiable-by-a-test",
+      "target": "concept--redaction-selftest-as-executable-guard",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--untested-pattern-is-a-silent-gap-not-a-skip",
+      "target": "concept--per-pattern-sample-table-fails-on-unplanted-pattern",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--a-self-test-that-spells-the-string-it-hunts-can-never-pass",
+      "target": "concept--fragment-built-needles-so-the-scanner-cannot-match-its-own-source",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--pattern-order-pem-before-jwt-loses-attribution",
+      "target": "concept--pem-pattern-swallows-jwt-losing-attribution-not-the-secret",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--a-green-guard-proves-nothing-unless-it-can-go-red",
+      "target": "concept--per-acceptance-criterion-mutation-proof",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--a-skip-that-can-never-fail-is-decoration",
+      "target": "concept--skipped-optional-integration-proven-non-vacuous-with-a-stand-in-renderer",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--per-pattern-sample-table-fails-on-unplanted-pattern",
+      "target": "concept--redaction-selftest-as-executable-guard",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--fragment-built-needles-so-the-scanner-cannot-match-its-own-source",
+      "target": "concept--redaction-selftest-as-executable-guard",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--per-acceptance-criterion-mutation-proof",
+      "target": "concept--redaction-selftest-as-executable-guard",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--skipped-optional-integration-proven-non-vacuous-with-a-stand-in-renderer",
+      "target": "concept--per-acceptance-criterion-mutation-proof",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--synthetic-secrets-assembled-from-visible-fragments",
+      "target": "concept--redaction-selftest-as-executable-guard",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--pem-pattern-swallows-jwt-losing-attribution-not-the-secret",
+      "target": "concept--per-pattern-sample-table-fails-on-unplanted-pattern",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    }
+  ]
+}

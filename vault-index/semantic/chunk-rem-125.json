@@ -122,7 +122,7 @@
       "source_location": "L9203",
       "norm_label": "re derive the rustfmt baseline from head so only the diffs your change introduced get fixed",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md:L9203] \"rustfmt --check is not clean on this file, and was already not clean at HEAD. HEAD has 4 diffs (lines 300, 378, 629, 762 in the original). My change leaves exactly those same 4 and adds none. I deliberately did not reformat pre-existing code since that would inflate the diff.\"",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md:L09203] **`rustfmt --check` is not clean on this file, and was already not clean at HEAD.** HEAD has 4 diffs (lines 300, 378, 629, 762 in the original). My change leaves exactly those same 4 and adds none. I deliberately did not reformat pre-existing code since that would inflate the diff.",
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md:L6912] How the baseline is obtained rather than assumed: \"The original file already has 4 diffs with rustfmt (baseline is not rustfmt-clean, presumably because CI uses a different config or these were committed).\""
       ]
     },

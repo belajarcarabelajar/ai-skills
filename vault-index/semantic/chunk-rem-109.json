@@ -90,7 +90,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - setup-fastpech-untuk-showoff-arch-linux [ses_f2fecbcd2ffedFGmI23FSb061w].md",
       "source_location": "L5429",
       "norm_label": "fastfetch shell module reports the parent process",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-23 - setup-fastpech-untuk-showoff-arch-linux [ses_f2fecbcd2ffedFGmI23FSb061w].md:L5429] \"Saya menemukan satu hal khusus untuk Agents: Fastfetch mendeteksi parent process sebagai opencode, sehingga modul Shell terlihat opencode ketika dijalankan dari harness; dari terminal interaktif biasa seharusnya mendeteksi shell yang sedang dipakai.\""
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-23 - setup-fastpech-untuk-showoff-arch-linux [ses_f2fecbcd2ffedFGmI23FSb061w].md:L05429] Saya menemukan satu hal khusus untuk Agents: Fastfetch mendeteksi parent process sebagai `opencode`, sehingga modul Shell terlihat `opencode` ketika dijalankan dari harness; dari terminal interaktif biasa seharusnya mendeteksi shell yang sedang dipakai."
+      ]
     }
   ],
   "links": [

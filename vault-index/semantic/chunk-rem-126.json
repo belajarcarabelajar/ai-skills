@@ -19,7 +19,9 @@
       "source_location": "L5024",
       "norm_label": "indexfunctions cannot index usecallback wrapped arrows",
       "summary": "The second, independent blind spot in the same detector, hit here via CorrectionSuggestions.tsx:278 and :287. Their handlers do cue CONFIRMATION and CLOSE but are declared as useCallback-wrapped functions, which indexFunctions never indexes, so the detector reports them silent. Unlike the bare-reference case this one cannot be worked around at the call site without a behaviour change.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-pages-speech-cues [ses_f17b2671dffel2sYJJnLKtcP27].md:L5024] The dominant root cause is ONE bug in indexFunctions/reachesPlayAudio: it cannot follow a bare handler reference (onClick={name}) nor a useCallback-wrapped declaration."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-pages-speech-cues [ses_f17b2671dffel2sYJJnLKtcP27].md:L05024] The dominant root cause is ONE bug in `indexFunctions`/`reachesPlayAudio`: it cannot follow a bare handler reference (`onClick={name}`) nor a `useCallback`-wrapped declaration."
+      ]
     },
     {
       "id": "concept--onchange-drag-controls-are-invisible-to-the-onclick-only-cue-detector",
@@ -49,7 +51,9 @@
       "source_location": "L8081",
       "norm_label": "a shared append-only file changed under an edit call invalidates its anchors",
       "summary": "Nine chunks shared one checkout and all appended to the same contract test file. It changed under this agent three or more times mid-edit and two edit calls failed on stale anchors. The fix adopted was a structure-derived atomic insert script instead of anchor-based edits. The whole-file contract run stayed red from other chunks' in-flight state, with the failure count itself moving between consecutive runs, so per-group runs were the only trustworthy signal.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-pages-speech-cues [ses_f17b2671dffel2sYJJnLKtcP27].md:L8081] Shared worktree is racy. 9 chunks in one checkout; audioCueCoverage.test.ts changed under me 3+ times mid-edit (two edit calls failed on stale anchors). I switched to a structure-derived atomic insert script."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-pages-speech-cues [ses_f17b2671dffel2sYJJnLKtcP27].md:L08081] **Shared worktree is racy.** 9 chunks in one checkout; `audioCueCoverage.test.ts` changed under me 3+ times mid-edit (two `edit` calls failed on stale anchors). I switched to a structure-derived atomic insert script."
+      ]
     },
     {
       "id": "concept--register-justification-accepts-four-classes-not-five",
@@ -68,7 +72,9 @@
       "source_location": "L7981",
       "norm_label": "self sounding was extended by concurrent chunks to mean the handler already cues not that the element plays the cue under test",
       "summary": "Reached the same settled reading as chunks-rem-086 and rem-095, on the same grounds: none of the eight register classes honestly describes a control that is not silent but whose handler already cues, and self-sounding's registered meaning in this file is exactly the double-fire clause.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-pages-speech-cues [ses_f17b2671dffel2sYJJnLKtcP27].md:L7981] I used self-sounding (with the double-fire clause that defines it), matching the convention A5/A7/A8 already established in this same register for the identical defect."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-pages-speech-cues [ses_f17b2671dffel2sYJJnLKtcP27].md:L07981] I used `self-sounding` (with the double-fire clause that defines it), matching the convention A5/A7/A8 already established in this same register for the identical defect."
+      ]
     },
     {
       "id": "concept--audio-cue-pinning-test",
@@ -109,7 +115,9 @@
       "source_location": "L2046",
       "norm_label": "string escape style json does not exist in fish 4 9 3",
       "summary": "The obvious builtin answer to the escaping problem is simply absent on this host's fish. Verified by running it rather than by reading documentation, which is what kept a broken collector from shipping. The same pattern repeated for the truncation subcommand: `string truncate` is the fish 3.x name and errors with invalid subcommand on 4.9.3.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L2046] string escape --style=json does not exist in fish 4.9.3. Good thing I tested. Let me measure the escaping alternatives rather than guess."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L02046] `string escape --style=json` does not exist in fish 4.9.3. Good thing I tested. Let me measure the escaping alternatives rather than guess."
+      ]
     },
     {
       "id": "concept--truncate-before-escaping-with-a-character-counting-subcommand",
@@ -144,7 +152,7 @@
       "norm_label": "fish dedupes a function registered twice for the same event making the idempotence guard unobservable",
       "summary": "Measured, not assumed: with the guard deleted, sourcing the hook twice is completely silent and still leaves exactly one handler. So the load guard is defence in depth rather than the mechanism, and the one mutation that survives the suite is explained rather than papered over. It was kept because fish's dedupe is an implementation detail and not a documented contract.",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L05150] without the guard, sourcing twice is completely silent and produces exactly one handler. So the guard is unobservable defence in depth on fish 4.9.3, because fish itself dedupes a function registered twice for the same event."
+        "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L05093] without the guard, sourcing twice is completely silent and produces exactly one handler. So the guard is unobservable defence in depth on fish 4.9.3, because fish itself dedupes a function registered twice for the same event."
       ]
     },
     {
@@ -155,7 +163,9 @@
       "source_location": "L7872",
       "norm_label": "fish preexec fires only interactively so fish c proves nothing",
       "summary": "status is-interactive returns 1 under `fish -c`, so neither event fires and a test that only ran fish -c would assert nothing at all while passing. The suite therefore calls the two handler functions by name, which is the same code path the event takes; end-to-end behaviour through a real pty is documented in a manual checklist instead, because a pty test is not deterministic. The same fact is written into the README troubleshooting section as a silent-failure warning.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L7872] Added a second entry for \"hook fish terpasang tapi tetap sunyi\" explaining that fish_preexec only fires interactively so fish -c proves nothing."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L07872] Added a second entry for \"hook fish terpasang tapi tetap sunyi\" explaining that `fish_preexec` only fires interactively so `fish -c` proves nothing."
+      ]
     },
     {
       "id": "concept--mutation-harness-must-verify-each-mutation-changed-the-file",

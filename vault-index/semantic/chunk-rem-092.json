@@ -7,7 +7,9 @@
       "id": "concept--audio-cue-pinning-test",
       "label": "Audio cue pinning test",
       "file_type": "concept",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-cues-batch-a [ses_f178408e8ffeytvVLtBrayXvUn].md:L46] toHaveBeenCalledTimes(1) is the whole point: a test that only checks \"something played\" would still pass while a double cue exists",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-cues-batch-a [ses_f178408e8ffeytvVLtBrayXvUn].md:L00046] `toHaveBeenCalledTimes(1)` is the whole point: a test that only checks \"something played\" would still pass while a double cue exists."
+      ],
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-cues-batch-a [ses_f178408e8ffeytvVLtBrayXvUn].md",
       "source_location": "L46",
       "norm_label": "audio cue pinning test"

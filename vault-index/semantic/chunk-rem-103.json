@@ -18,7 +18,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cover-dimensions-and-ratio-reconcile [ses_f1657096affeCvcc1c5iTFodvs].md",
       "source_location": "L10273",
       "norm_label": "the cover dimension backfill lives in the single-apply migration not in a seed",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cover-dimensions-and-ratio-reconcile [ses_f1657096affeCvcc1c5iTFodvs].md:L10273] The backfill is in the migration, not a seed. It is a fact about assets rather than content, and db/README.md already says seed/ is \"never part of migration replay\". As a seed, anyone applying the file would see two NULL columns and could not tell they were meant to be filled."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cover-dimensions-and-ratio-reconcile [ses_f1657096affeCvcc1c5iTFodvs].md:L10273] The backfill is **in the migration, not a seed**. It is a fact about assets rather than content, and `db/README.md` already says `seed/` is \"never part of migration replay\". As a seed, anyone applying the file would see two NULL columns and could not tell they were meant to be filled."
+      ]
     },
     {
       "id": "concept--inline-aspect-ratio-removed-not-corrected",
@@ -54,7 +56,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cover-dimensions-and-ratio-reconcile [ses_f1657096affeCvcc1c5iTFodvs].md",
       "source_location": "L10289",
       "norm_label": "the lcp-preload guard was rewritten to the invariant under its now-false reason not deleted",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cover-dimensions-and-ratio-reconcile [ses_f1657096affeCvcc1c5iTFodvs].md:L10289] It forbade the post pages from reading cover_image_(width|height) at all, on the grounds that D1 stores no such columns. That reason is now false, but the invariant under it is not, so the test now forbids the preload payload from reading a dimension into imagesrcset/imagesizes, which is where a NULL would actually print undefined into a head link."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cover-dimensions-and-ratio-reconcile [ses_f1657096affeCvcc1c5iTFodvs].md:L10289] It forbade the post pages from reading `cover_image_(width|height)` at all, on the grounds that D1 stores no such columns. That reason is now false, but the invariant under it is not, so the test now forbids the **preload payload** from reading a dimension into `imagesrcset`/`imagesizes`, which is where a NULL would actually print `undefined` into a head link."
+      ]
     },
     {
       "id": "concept--stale-pacman-db-lck-after-interrupted-install",

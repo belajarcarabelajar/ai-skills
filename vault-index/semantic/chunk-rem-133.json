@@ -110,7 +110,7 @@
       "source_location": "L9495",
       "norm_label": "five timeshift excludes added for var cache var log var tmp tmp and coredump",
       "rationale": [
-        "Reused id — the stated reason, from a later session in the same worktree: [05 - Conversations/home-belajarcarabelajar/2026-09-25 - bug-penggunaan-storage-tidak-real-time [ses_f26b6c4c7ffediARdF9M0SSyRN].md:L09633] \"- 5 exclude baru: `/var/cache/**`, `/var/log/**`, `/var/tmp/**`, `/tmp/**`, `/var/lib/systemd/coredump/**`\""
+        "Reused id — the stated reason, from a later session in the same worktree: [05 - Conversations/home-belajarcarabelajar/2026-09-25 - bug-penggunaan-storage-tidak-real-time [ses_f26b6c4c7ffediARdF9M0SSyRN].md:L09495] \"- 5 exclude baru: `/var/cache/**`, `/var/log/**`, `/var/tmp/**`, `/tmp/**`, `/var/lib/systemd/coredump/**`\""
       ]
     },
     {

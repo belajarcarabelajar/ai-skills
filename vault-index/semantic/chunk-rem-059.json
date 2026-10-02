@@ -10,7 +10,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - remove-dead-engine-mode-type [ses_f257de248ffeLu864vqn0xWscx].md",
       "source_location": "L43",
       "norm_label": "dead engine_mode type surface removal",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - remove-dead-engine-mode-type [ses_f257de248ffeLu864vqn0xWscx].md:L43] The Rust TtsOptions has no such field and serde silently drops unknown fields, so keeping the type is a trap for future code"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - remove-dead-engine-mode-type [ses_f257de248ffeLu864vqn0xWscx].md:L00043] The Rust `TtsOptions` has no such field and serde silently drops unknown fields, so keeping the type is a trap for future code."
+      ]
     },
     {
       "id": "concept--test-asserting-a-mode-that-does-not-exist",

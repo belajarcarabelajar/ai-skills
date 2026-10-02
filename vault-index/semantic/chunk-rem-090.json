@@ -8,7 +8,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t7-desktop-updater-channel-selection [ses_f1d9670afffeI1M3fuU0BJD05J].md",
       "source_location": "L3391",
       "norm_label": "channel-scoped selection filters the release list to the requested os before any semver comparison",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t7-desktop-updater-channel-selection [ses_f1d9670afffeI1M3fuU0BJD05J].md:L3402] Replaced by `newestChannelManifest`: the list is filtered to the channel **before** any comparison, via `classifyReleaseTag` + artifact evidence; the repo-wide `/releases/latest` is never authority for a qualified request"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t7-desktop-updater-channel-selection [ses_f1d9670afffeI1M3fuU0BJD05J].md:L08402] Replaced by `newestChannelManifest`: the list is filtered to the channel **before** any comparison, via `classifyReleaseTag` + artifact evidence; the repo-wide `/releases/latest` is never authority for a qualified request"
+      ]
     },
     {
       "id": "concept--root-aggregate-version-is-not-a-release-authority",
@@ -55,7 +57,7 @@
       "norm_label": "channel-scoped normalization of the legacy root aggregate is the no-update fallback",
       "rationale": [
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t7-desktop-updater-channel-selection [ses_f1d9670afffeI1M3fuU0BJD05J].md:L3438] That's a good, honest, low-risk design: \"channel-scoped normalization of the legacy aggregate\".",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t7-desktop-updater-channel-selection [ses_f1d9670afffeI1M3fuU0BJD05J].md:L3421] the risk of changing to 404 is a real behavior change for in-flight clients (a Linux aarch64 client that currently gets 200+0.6.838 would get 404 → error instead of \"up to date\")"
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t7-desktop-updater-channel-selection [ses_f1d9670afffeI1M3fuU0BJD05J].md:L03427] the risk of changing to 404 is a real behavior change for in-flight clients (a Linux aarch64 client that currently gets 200+0.6.838 would get 404 → error instead of \"up to date\")"
       ]
     },
     {

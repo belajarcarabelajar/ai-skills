@@ -47,7 +47,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t4-id-page [ses_f2129c1dfffeeeXkUd0qIbZFuQ].md",
       "source_location": "L5941",
       "norm_label": "a zombie chunk that stayed silent and then overwrote a re-chunked task files",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t4-id-page [ses_f2129c1dfffeeeXkUd0qIbZFuQ].md:L5941] While I was still editing it, a concurrent agent replaced the file at 00:59:17 with a data-driven version that imports `@/data/solutions/social-media.id.ts` and creates the 8-icon `ICONS` map. My copy is gone from disk.",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t4-id-page [ses_f2129c1dfffeeeXkUd0qIbZFuQ].md:L05941] While I was still editing it, **a concurrent agent replaced the file at 00:59:17** with a data-driven version that imports `@/data/solutions/social-media.id.ts` and creates the 8-icon `ICONS` map. My copy is gone from disk."
+      ],
       "summary": "Reused id, and this is the primary witness rather than the retrospective: chunk-rem-020 recorded the same event from the parent session's side as 'T4 lama tidak mati, hanya diam, lalu menimpa file yang sama dengan T4 re-chunk'. The overwrite was caught here by the file's own mtime (00:59:17.968959419) differing from the agent's last write, and by content the agent never wrote appearing in a file it still held write scope over."
     },
     {

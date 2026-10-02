@@ -32,7 +32,9 @@
       "id": "concept--deliberate-silence-pinned-as-a-positive-assertion",
       "label": "A deliberately silent control is pinned as silent, so a later cue fails the test",
       "file_type": "concept",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-batch-c-12-files [ses_f17699447ffekdqy749bVRPTFE].md:L11553] `InputVariableModal` Escape — deliberately silent, same class as FloatingLinkBubble's Escape. Pinned as silent, which is the assertion that would fail if someone later cued it.",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-batch-c-12-files [ses_f17699447ffekdqy749bVRPTFE].md:L11553] **`InputVariableModal` Escape** — deliberately silent, same class as FloatingLinkBubble's Escape. Pinned as silent, which is the assertion that would fail if someone later cued it."
+      ],
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-batch-c-12-files [ses_f17699447ffekdqy749bVRPTFE].md",
       "source_location": "L11553",
       "norm_label": "a deliberately silent control is pinned as silent so a later cue fails the test"

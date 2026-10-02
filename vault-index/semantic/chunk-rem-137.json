@@ -180,8 +180,8 @@
       "source_location": "L8652",
       "norm_label": "the zte f6600p ont web ui carries no wan speed profile at user level because the profile lives in the telkom bng olt and the firmware ships with the qos menu disabled",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar/2026-09-30 - speedtest-install-for-offline-testing [ses_f0b84582cffexPA4oDFDHrH95B].md:L08712] ONT ZTE F6600P **secara fisik tidak menampilkan speed profile**. Angka 300 Mbps itu disimpan di BNG/OLT sisi Telkom, di luar device.",
-        "[05 - Conversations/home-belajarcarabelajar/2026-09-30 - speedtest-install-for-offline-testing [ses_f0b84582cffexPA4oDFDHrH95B].md:L08708] menu QoS **dimatikan** di firmware Telkom"
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-30 - speedtest-install-for-offline-testing [ses_f0b84582cffexPA4oDFDHrH95B].md:L08652] ONT ZTE F6600P **secara fisik tidak menampilkan speed profile**. Angka 300 Mbps itu disimpan di BNG/OLT sisi Telkom, di luar device.",
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-30 - speedtest-install-for-offline-testing [ses_f0b84582cffexPA4oDFDHrH95B].md:L08648] menu QoS **dimatikan** di firmware Telkom"
       ]
     },
     {
@@ -226,9 +226,9 @@
       "source_location": "L8387",
       "norm_label": "the ont web ui ajax endpoints need sessiontoken in the query and menudata needs a post plus a check header carrying rsa sha256 of the data and a lua suffix",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar/2026-09-30 - speedtest-install-for-offline-testing [ses_f0b84582cffexPA4oDFDHrH95B].md:L06789] Semua endpoint `SessionTimeout` meski GET `/` berhasil — berarti ajax butuh `_sessionTOKEN` di parameter.",
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-30 - speedtest-install-for-offline-testing [ses_f0b84582cffexPA4oDFDHrH95B].md:L06729] Semua endpoint `SessionTimeout` meski GET `/` berhasil — berarti ajax butuh `_sessionTOKEN` di parameter.",
         "[05 - Conversations/home-belajarcarabelajar/2026-09-30 - speedtest-install-for-offline-testing [ses_f0b84582cffexPA4oDFDHrH95B].md:L8387] `menuData` butuh POST + header `Check` + suffix `.lua`.",
-        "[05 - Conversations/home-belajarcarabelajar/2026-09-30 - speedtest-install-for-offline-testing [ses_f0b84582cffexPA4oDFDHrH95B].md:L08677] Mekanismenya: RSA-4096 + SHA256 + header `Check` custom."
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-30 - speedtest-install-for-offline-testing [ses_f0b84582cffexPA4oDFDHrH95B].md:L08617] Mekanismenya: RSA-4096 + SHA256 + header `Check` custom."
       ]
     },
     {

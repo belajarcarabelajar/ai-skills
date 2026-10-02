@@ -48,7 +48,9 @@
       "source_location": "L8183",
       "norm_label": "an idle capture tick resets the afk counter and pins the worker at its fastest interval",
       "summary": "The no-sample case returns ActivityWorkerTickReport::default() whose is_afk is bool::default(), i.e. false. The adaptive interval logic at worker_manager.rs:296-321 therefore treats the idle state as active: afk_ticks resets to 0 and current_interval stays at 15 s indefinitely.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - audit-linux-activity-capture-path [ses_f2593177dffebmwf7DKUz8dQjY].md:L8183] On a machine with no kdotool/xprop, Linux spins at 15 s indefinitely, re-opening the encrypted DB twice per tick (worker_manager.rs:125 and :229) and re-resolving the vision model (:172)."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - audit-linux-activity-capture-path [ses_f2593177dffebmwf7DKUz8dQjY].md:L08183] On a machine with no `kdotool`/`xprop`, Linux spins at 15 s indefinitely, re-opening the encrypted DB twice per tick (`worker_manager.rs:125` and `:229`) and re-resolving the vision model (`:172`)."
+      ]
     },
     {
       "id": "concept--linux-webview-route-bypasses-the-iframe-fix",
@@ -77,7 +79,9 @@
       "source_location": "L6622",
       "norm_label": "a runbook documents a code path the application no longer calls",
       "summary": "docs/troubleshooting/youtube-linux-audio.md:30-32 tells operators the second route resolves an audio-only stream URL in Rust and hands it to HTMLAudioElement. The application no longer has that route.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - assess-3-linux-audio-plans [ses_f208d0ac1ffeRd3uR5eK8XPmxF].md:L6622] The document tells operators to install yt-dlp for a feature the app will never invoke. This is the concrete harm of marking this plan done."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - assess-3-linux-audio-plans [ses_f208d0ac1ffeRd3uR5eK8XPmxF].md:L06598] The document tells operators to install `yt-dlp` for a feature the app will never invoke. This is the concrete harm of marking this plan done."
+      ]
     },
     {
       "id": "concept--preexisting-baseline-defeats-the-exit-zero-gate",

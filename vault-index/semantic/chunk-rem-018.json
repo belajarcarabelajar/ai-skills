@@ -53,7 +53,7 @@
       "norm_label": "satset_id duplicate groups as a dedup key",
       "rationale": [
         "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md:L37413] 545 of 546 Satset files carry satset_id, which is what marks them as obsolete plugin export",
-        "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md:L37495] A filename or satset_id match must be checked against canonical content before any copy"
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md:L37495] A filename or `satset_id` match must be checked against canonical content before any copy."
       ]
     },
     {

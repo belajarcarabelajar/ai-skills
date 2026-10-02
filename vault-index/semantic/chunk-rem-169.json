@@ -65,7 +65,7 @@
       "norm_label": "a restore guard that hand rolls its own url regex is strictly narrower than the canonical parser",
       "rationale": [
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - vc-r1-sibling-caller-audit [ses_f2488c35dffeoumwIc1P827OM0].md:L6026] `extractYouTubeVideoId` (`pomodoroMusicPlayer.ts:98-112`) also accepts a bare 11-char ID (`:103`) and `/shorts/`, `/embed/`, `/live/`, `/v/`, `youtube-nocookie.com/embed/`. I verified the mismatch by evaluating both predicates: **6 of the 7 accepted shapes return `false`",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - vc-r2-code-review-8-criteria [ses_f2488c35bffe8GJu3V3k030s8Z].md:L06026] `needsYoutubeReResolve` re-implements YouTube URL detection with a two-alternative regex instead of reusing the canonical `extractYouTubeVideoId` (`pomodoroMusicPlayer.ts:98-112`), which accepts a bare 11-char id, `/shorts/`, `/live/`, `/embed/`, `/v/` and"
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - vc-r2-code-review-8-criteria [ses_f2488c35bffe8GJu3V3k030s8Z].md:L05234] `needsYoutubeReResolve` re-implements YouTube URL detection with a two-alternative regex instead of reusing the canonical `extractYouTubeVideoId` (`pomodoroMusicPlayer.ts:98-112`), which accepts a bare 11-char id, `/shorts/`, `/live/`, `/embed/`, `/v/` and"
       ]
     },
     {
@@ -77,7 +77,7 @@
       "norm_label": "restoring through the full apply path collapses the persisted queue to one track",
       "rationale": [
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - vc-r1-sibling-caller-audit [ses_f2488c35dffeoumwIc1P827OM0].md:L6038] the restore re-resolve delegates to `handleApplySource`, which writes `queue: [nativeTrack]`. A persisted `{activeTrack: nativeA, queue: [nativeA, nativeB]}` is therefore rewritten to a single-track queue on every launch; the pre-change path at `:323-325` preserved the whole queue",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - vc-r2-code-review-8-criteria [ses_f2488c35bffe8GJu3V3k030s8Z].md:L06038] The restore path reuses the whole `handleApplySource`, so a restore has three bad effects. (a) On success it writes"
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - vc-r2-code-review-8-criteria [ses_f2488c35bffe8GJu3V3k030s8Z].md:L05235] The restore path reuses the whole `handleApplySource`, so a restore has three bad effects. (a) On success it writes"
       ]
     },
     {

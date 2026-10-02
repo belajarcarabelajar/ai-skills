@@ -13,7 +13,7 @@
       "source_location": "L56",
       "norm_label": "gesture-gated toast audio",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L58] Therefore: do NOT gate playAudio itself. Gating it would suppress all 652 event-bound sounds in environments where the synthetic event never fires, and would churn a large number of existing tests. Gate the toast cue only.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L00058] Therefore: **do NOT gate `playAudio` itself.** Gating it would suppress all 652 event-bound sounds in environments where the synthetic event never fires, and would churn a large number of existing tests. Gate the **toast cue** only.",
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L52] Many toasts are raised by background work, not by anything the user did, so any user without Ollama installed got an error chime every time the app launches, before touching anything."
       ]
     },
@@ -25,7 +25,7 @@
       "source_location": "L6128",
       "norm_label": "vitest serves undeclared exports from a throwing proxy, so a bare vi.mock factory breaks any runtime read of them",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L6128] utils/audio is mocked in 161 test files and vitest serves undeclared exports from a throwing Proxy, so reading a new hasUserInteracted() from it would make the negative control fail by design, and the task forbids weakening that test."
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L06128] `utils/audio` is mocked in 161 test files and vitest serves undeclared exports from a throwing Proxy, so reading a new `hasUserInteracted()` from it would make the negative control fail **by design**, and the task forbids weakening that test."
       ]
     },
     {
@@ -48,7 +48,7 @@
       "source_location": "L6128",
       "norm_label": "the user-interaction latch lives in toastsound.tsx, not utils/audio.ts",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L6128] Keeping the latch in ToastSound.tsx means the toast path reads exactly one thing from utils/audio (playAudio), before and after the change, so the negative control needed no structural rescue at all. It is also the more honest location: this is a toast-cue rule, not a general audio rule, and putting it in utils/audio would invite a future reader to think it applies to playAudio.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L06128] Keeping the latch in `ToastSound.tsx` means the toast path reads exactly one thing from `utils/audio` (`playAudio`), before and after the change, so the negative control needed no structural rescue at all. It is also the more honest location: this is a toast-cue rule, not a general audio rule, and putting it in `utils/audio` would invite a future reader to think it applies to `playAudio`.",
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L2376] The recommendation was utils/audio.ts, but the negative control is a hard constraint, so the state was placed where the bare factory cannot observe it."
       ]
     },

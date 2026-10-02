@@ -51,7 +51,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - fix-silent-failure-paths [ses_f174462a9ffe0d2S8zrqQRLCf7].md",
       "source_location": "L6827",
       "norm_label": "the two non zero suite runs were attributed to concurrent sibling subagents confirmed by stashing this agent's changes",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - fix-silent-failure-paths [ses_f174462a9ffe0d2S8zrqQRLCf7].md:L6829] git status shows that test file modified but PomodoroThemeSelector.tsx unmodified = someone's in-flight RED. I confirmed it fails identically with my changes stashed."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - fix-silent-failure-paths [ses_f174462a9ffe0d2S8zrqQRLCf7].md:L06829] `git status` shows that test file **modified but `PomodoroThemeSelector.tsx` unmodified** = someone's in-flight RED. I confirmed it fails identically with my changes stashed."
+      ]
     },
     {
       "id": "concept--kwin-activeeffects-list-is-the-runtime-state-not-kwinrc",

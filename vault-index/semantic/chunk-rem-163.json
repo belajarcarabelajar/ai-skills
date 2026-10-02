@@ -170,13 +170,13 @@
       "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-10-01 - review-research-ui-render-audit [ses_f0a7b05cbffeEF22E4PWp9TdcM].md:L3062] empty `days: []` renders headers-only table with no empty state; siblings have `NotesEmptyState` / `.statistics-empty-section` (forms.css:373). Fix: `days.length === 0` → translated empty paragraph."
     },
     {
-      "id": "concept--a-disabled-or-or-default-branch-conflates-mode-off-with-no-data",
-      "label": "mode === false || !exportData conflates mode-off with no-data, so the mode=true plus null-export edge shows the wrong notice",
+      "id": "concept--mode-off-vs-null-data-branch-split",
+      "label": "mode === false and mode === true with null export data must render different copy, with the loading status reused for the null-data branch",
       "file_type": "concept",
-      "norm_label": "mode === false || !exportdata conflates mode-off with no-data, so the mode=true plus null-export edge shows the wrong notice",
+      "norm_label": "mode false and mode true with null export data must render different copy with the loading status reused for the null data branch",
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-01 - review-research-ui-render-audit [ses_f0a7b05cbffeEF22E4PWp9TdcM].md",
       "source_location": "L3063",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-10-01 - review-research-ui-render-audit [ses_f0a7b05cbffeEF22E4PWp9TdcM].md:L3063] `mode === false || !exportData` conflates \"mode off\" with \"no data\"; a `mode===true` + null-export edge shows the wrong (\"mode is off\") notice. Fix: split branches."
+      "rationale": "Reused id: chunk-rem-081 reached the same branch split from the patch side; this note states the reason from the review side. [05 - Conversations/home-belajarcarabelajar/2026-10-01 - review-research-ui-render-audit [ses_f0a7b05cbffeEF22E4PWp9TdcM].md:L3063] `mode === false || !exportData` conflates \"mode off\" with \"no data\"; a `mode===true` + null-export edge shows the wrong (\"mode is off\") notice. Fix: split branches."
     }
   ],
   "links": [

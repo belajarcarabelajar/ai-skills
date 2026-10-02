@@ -11,7 +11,7 @@
       "rationale": [
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - dedup-10-vaultpage-double-cues [ses_f1713d875ffeD4Feap1DRSYYuP].md:L28] remove the component's redundant cue and let the toast own the outcome",
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - dedup-10-vaultpage-double-cues [ses_f1713d875ffeD4Feap1DRSYYuP].md:L920] The component cue and the toast cue both fired on one press,",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - dedup-10-vaultpage-double-cues [ses_f1713d875ffeD4Feap1DRSYYuP].md:L9902] No handler was kept: every one has its success toast on a straight line from the cue, with no `return` or conditional between them. The guard clauses that do exist (`if (!unlockPin) return`, the alias-equality bail, the form-completeness bail, `if (!uri) return`) are all **before** the cue, so they never create a cue-without-toast path"
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - dedup-10-vaultpage-double-cues [ses_f1713d875ffeD4Feap1DRSYYuP].md:L09902] **No handler was kept**: every one has its success toast on a straight line from the cue, with no `return` or conditional between them. The guard clauses that do exist (`if (!unlockPin) return`, the alias-equality bail, the form-completeness bail, `if (!uri) return`) are all **before** the cue, so they never create a cue-without-toast path."
       ]
     },
     {
@@ -22,7 +22,7 @@
       "source_location": "L49",
       "norm_label": "counting the total sound one press makes requires a real toastprovider with toastsound's latch armed",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - dedup-10-vaultpage-double-cues [ses_f1713d875ffeD4Feap1DRSYYuP].md:L49] Counting the total requires a real `ToastProvider` with `ToastSound`'s interaction latch armed. The mock-based suites structurally cannot see the second sound.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - dedup-10-vaultpage-double-cues [ses_f1713d875ffeD4Feap1DRSYYuP].md:L00049] **Counting the total requires a real `ToastProvider` with `ToastSound`'s interaction latch armed.** The mock-based suites structurally cannot see the second sound.",
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - dedup-10-vaultpage-double-cues [ses_f1713d875ffeD4Feap1DRSYYuP].md:L905] it structurally cannot see the total the user hears. This file closes that gap",
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - dedup-10-vaultpage-double-cues [ses_f1713d875ffeD4Feap1DRSYYuP].md:L9917] Totals measured with a real `ToastProvider` + real `ToastSound` latch armed (`resetToastInteractionForTests()` + `pointerdown`), in `VaultPage.cueOwnership.audio.test.tsx`."
       ]

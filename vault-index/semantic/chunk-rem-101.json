@@ -41,7 +41,9 @@
       "id": "concept--no-such-column-string-match-for-migration-detection-is-fragile",
       "label": "Detecting a missing migration by string-matching \"no such column\" is fragile; match the rusqlite SqliteFailure extended code",
       "file_type": "concept",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-10-01 - review-research-rust-audit [ses_f0a7b05a5ffeCMl2aocZGIdDbL].md:L9546] \"ROBUSTNESS groups.rs:338-344: missing-column detection is string-matching on \"no such column\". Fragile across rusqlite/SQLite versions; match rusqlite::Error::SqliteFailure extended code instead.\"",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-10-01 - review-research-rust-audit [ses_f0a7b05a5ffeCMl2aocZGIdDbL].md:L09546] ROBUSTNESS `groups.rs:338-344`: missing-column detection is string-matching on `\"no such column\"`. Fragile across rusqlite/SQLite versions; match `rusqlite::Error::SqliteFailure` extended code instead."
+      ],
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-01 - review-research-rust-audit [ses_f0a7b05a5ffeCMl2aocZGIdDbL].md",
       "source_location": "L9546",
       "norm_label": "detecting a missing migration by string matching no such column is fragile match the rusqlite sqlitefailure extended code"

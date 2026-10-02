@@ -68,7 +68,9 @@
       "source_location": "L7358",
       "norm_label": "bind ctrl v to paste in the terminal config to accept an expander's paste",
       "summary": "The fix applied to ~/.config/alacritty/alacritty.toml: one new binding, key = \"V\", mods = \"Control\", action = \"Paste\", placed beside the existing Ctrl+Shift+V so the Konsole-style look is unchanged. Verified accepted by alacritty 0.17.0 with no warning, and live_config_reload made it take effect without a restart.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - masalah-text-expander-di-alacritty [ses_f11cfc5a1ffeD6XS3CwlK62gqZ].md:L7358] Tradeoff jujur: Ctrl+V jadi tidak bisa dipakai sebagai quoted-insert literal control char di shell."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - masalah-text-expander-di-alacritty [ses_f11cfc5a1ffeD6XS3CwlK62gqZ].md:L07358] Tradeoff jujur: `Ctrl+V` jadi tidak bisa dipakai sebagai quoted-insert literal control char di shell."
+      ]
     },
     {
       "id": "concept--alacritty-tab-actions-have-no-close-move-or-detach",

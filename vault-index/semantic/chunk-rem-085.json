@@ -1,0 +1,229 @@
+{
+  "batch": "rem-085",
+  "batch_id": "rem-085",
+  "vault_root": "/home/belajarcarabelajar/Documents/conversations-archive",
+  "nodes": [
+    {
+      "id": "concept--pcsx2-savestate-is-locked-to-its-emulator-version",
+      "label": "PCSX2 savestate is locked to the emulator version that made it",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - save-state-pcsx2-v2-6-3-tidak-kompatibel [ses_f15d394c3ffeEqtCk5URLY5h6a].md",
+      "source_location": "L1704",
+      "norm_label": "pcsx2 savestate is locked to the emulator version that made it",
+      "summary": "All 21 sstates/*.p2s carry header `PCSX2 Savestate Version` v2.6.3 while the installed AppImage is v2.8.2, so the load refusal is by design and not corruption. Recovery is only possible by running a matching v2.6.3 AppImage, loading the .p2s, saving in-game to the Memory Card, then returning to the current version.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - save-state-pcsx2-v2-6-3-tidak-kompatibel [ses_f15d394c3ffeEqtCk5URLY5h6a].md:L1704] Stated reason: `.p2s` is the internal structure of that emulator version, not a save game, and no conversion tool exists, so the Memory Card is the only bridge between versions and a savestate may be discarded as long as the memcard is safe.",
+      "description": "The in-app error message telling the user to download v2.8.2 was also found to be misleading wording: the number named is the version currently running, not the version the state needs."
+    },
+    {
+      "id": "concept--pcsx2-in-app-updater-overwrites-the-running-appimage",
+      "label": "The PCSX2 in-app updater overwrites the AppImage it is currently running",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - save-state-pcsx2-v2-6-3-tidak-kompatibel [ses_f15d394c3ffeEqtCk5URLY5h6a].md",
+      "source_location": "L3363",
+      "norm_label": "the pcsx2 in-app updater overwrites the appimage it is currently running",
+      "summary": "After an in-app update, pcsx2-v2.6.3.AppImage and pcsx2.AppImage hashed identically (0c46bb6a), so both were v2.8.2 and the savestate error returned. The v2.6.3 file was re-downloaded and matched the release hash 8ce7de86 at 71,686,648 bytes, with pcsx2-v2.6.3.orig.AppImage kept as a restore copy.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - save-state-pcsx2-v2-6-3-tidak-kompatibel [ses_f15d394c3ffeEqtCk5URLY5h6a].md:L3369] Stated rule: when v2.6.3 shows an update-available popup, answer No, because answering Yes is what overwrites the file and brings the incompatibility error back.",
+      "description": "This is a distinct claim from the existing concept--in-app-updater-replaces-elf-with-appimage, which is about the Tauri updater swapping an installed ELF for an AppImage. Here the updater replaces one AppImage with a different version of itself."
+    },
+    {
+      "id": "concept--raw-joyaxis-binding-is-silently-dropped-when-the-gamepad-mapping-claims-the-axis",
+      "label": "A raw JoyAxisN binding is silently dropped when the gamepad mapping claims that axis",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - save-state-pcsx2-v2-6-3-tidak-kompatibel [ses_f15d394c3ffeEqtCk5URLY5h6a].md",
+      "source_location": "L8552",
+      "norm_label": "a raw joyaxisn binding is silently dropped when the gamepad mapping claims that axis",
+      "summary": "PCSX2's SDLInputSource.cpp HandleJoystickAxisEvent returns early for any axis flagged in joy_axis_used_in_pad, because it is marked as already claimed by SDL's Gamepad event path. A binding written as `SDL-0/-JoyAxis4` for such an axis produces no input at all while the generic name `SDL-0/-RightY` on the same axis works. Six of eight analog directions died this way on 2026-09-29.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - save-state-pcsx2-v2-6-3-tidak-kompatibel [ses_f15d394c3ffeEqtCk5URLY5h6a].md:L6335] The early return exists to avoid double events, confirmed by the upstream comment \"Will get handled by Gamepad event\"; the device opens as `USB gamepad` with 5 axes and 12 buttons (L8170), so its axes are claimed by the Gamepad path.",
+      "description": "Emergency exception recorded in the same note: if a generic axis name reads weak or dead while the raw axis tests full range, fall back to raw JoyAxisN for that one axis only, because it is not claimed by the mapping. This worked for RLeft/RRight = ∓JoyAxis2."
+    },
+    {
+      "id": "concept--pcsx2-usb-gamepad-guid-mapping-assigns-rightstick-axes",
+      "label": "The matched USB gamepad GUID entry assigns the right stick to axes 3 and 4",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - save-state-pcsx2-v2-6-3-tidak-kompatibel [ses_f15d394c3ffeEqtCk5URLY5h6a].md",
+      "source_location": "L8054",
+      "norm_label": "the matched usb gamepad guid entry assigns the right stick to axes 3 and 4",
+      "summary": "resources/game_controller_db.txt has no entry for the DragonRise GUID, so the matching entry is 03000000790000000600000007010000,USB gamepad with leftx:a0, lefty:a1, rightx:a3, righty:a4. The kernel axis list is 0=X 1=Y 2=Z 3=RX 4=RZ 5=HAT0X 6=HAT0Y, so righty lands on axis 4 while the generic RightX on axis 2 is the only strong horizontal path.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - save-state-pcsx2-v2-6-3-tidak-kompatibel [ses_f15d394c3ffeEqtCk5URLY5h6a].md:L8170] Verified from PCSX2's own controller log rather than assumed: `Opened gamepad 1 ... : USB gamepad` and `Gamepad 0 has 5 axes and 12 buttons`."
+    },
+    {
+      "id": "concept--pcsx2-auto-bind-creates-combined-axis-requirements",
+      "label": "PCSX2 Atur Tombol Otomatis creates combined axis requirements and stray bindings",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - save-state-pcsx2-v2-6-3-tidak-kompatibel [ses_f15d394c3ffeEqtCk5URLY5h6a].md",
+      "source_location": "L5461",
+      "norm_label": "pcsx2 auto bind creates combined axis requirements and stray bindings",
+      "summary": "The auto-bind button wrote `RUp = SDL-0/-RightY & SDL-0/-JoyAxis2` and `RDown = SDL-0/+RightY & SDL-0/+JoyAxis2`, so up and down only fired as a diagonal, and it bound `LRight` to `Pointer-0/MiddleButton`, the mouse middle click, while leaving `LLeft` empty. Left and right sticks then interfered with each other in game.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - save-state-pcsx2-v2-6-3-tidak-kompatibel [ses_f15d394c3ffeEqtCk5URLY5h6a].md:L5461] Stated remedy: bind the 8 analog directions manually, one source per field, never pressing Atur Tombol Otomatis again; clear a field with right-click rather than Bersihkan Penetapan Tombol, which would also erase the correct button bindings."
+    },
+    {
+      "id": "concept--stick-capture-protocol-gas",
+      "label": "The gas protocol for capturing raw joystick events",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - save-state-pcsx2-v2-6-3-tidak-kompatibel [ses_f15d394c3ffeEqtCk5URLY5h6a].md",
+      "source_location": "L5002",
+      "norm_label": "the gas protocol for capturing raw joystick events",
+      "summary": "The user holds the stick, replies \"gas\", and only then does a 60 second /dev/input/js0 capture run, printing min, max and event count per AXIS and BTN. Init-only events with value 0 mean centred; full plus and minus 32767 on an axis means healthy; zero events over a 4 second idle means nothing is stuck.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - save-state-pcsx2-v2-6-3-tidak-kompatibel [ses_f15d394c3ffeEqtCk5URLY5h6a].md:L4998] Stated reason for the handshake: instructions are always read by the user after the tool has already finished, so a short read and the user's movement land in different windows; two earlier captures missed and produced wrong conclusions."
+    },
+    {
+      "id": "concept--dead-axis-verdict-retracted-by-a-longer-clean-capture",
+      "label": "The dead right-stick axis verdict was retracted by a longer clean capture",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - save-state-pcsx2-v2-6-3-tidak-kompatibel [ses_f15d394c3ffeEqtCk5URLY5h6a].md",
+      "source_location": "L5315",
+      "norm_label": "the dead right stick axis verdict was retracted by a longer clean capture",
+      "summary": "A 60 second capture under the gas protocol reported axis 4 at 0 events and concluded the right stick's vertical axis was physically dead. The next 60 second run, in which the user pressed no buttons, showed axis 4 at 252 events spanning -32767 to +32767 and axis 3 creeping 0 to 19255. The hardware was fine and the fault was in the SDL translation layer.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - save-state-pcsx2-v2-6-3-tidak-kompatibel [ses_f15d394c3ffeEqtCk5URLY5h6a].md:L5315] Stated correction: the earlier run missed because face buttons were being pressed rather than pure vertical motion, and the previous drifting reading was taken while the user was holding the stick."
+    },
+    {
+      "id": "concept--pcsx2-v282-wayland-init-segv-worked-around-with-xwayland",
+      "label": "PCSX2 v2.8.2 SEGV during Qt/Wayland init worked around by forcing XWayland",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - save-state-pcsx2-v2-6-3-tidak-kompatibel [ses_f15d394c3ffeEqtCk5URLY5h6a].md",
+      "source_location": "L2377",
+      "norm_label": "pcsx2 v2 8 2 segv during qt wayland init worked around by forcing xwayland",
+      "summary": "v2.8.2 crashed with Signal 11 (SEGV) at Qt/Wayland init, three coredumps on 2026-09-29, but a manual run often passed, so it was judged a race rather than a hard fault. The desktop entry was changed to launch with QT_QPA_PLATFORM=xcb, backed up as pcsx2.desktop.bak-20260929. The AppImage itself was verified intact by SHA256 and size, and the config diff was only window position."
+    },
+    {
+      "id": "concept--sidecar-schema-staleness-is-a-build-time-fact-not-a-version-number",
+      "label": "Sidecar schema staleness is a build-time fact, not a version-number problem",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-sidecar-rebuild-signal-plan [ses_f08bb98bcffezShw3Qxr4ebNUu].md",
+      "source_location": "L9541",
+      "norm_label": "sidecar schema staleness is a build time fact not a version number problem",
+      "summary": "The plan explicitly refuses the framing that snipset-cli's independent `version = \"0.2.0\"` is the defect. The claim is that whether the sidecar matches the app's column shapes is a fact about a build, so it must be stamped at compile time and checked mechanically. The CLI stays at 0.2.0; what changes is that it can no longer be built, staged or shipped without an assertion about which app schema shape it was compiled against. Four layers are proposed: a typed contract check, a compile-time stamp, a runtime cross-check, and a build-flow insertion point.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-sidecar-rebuild-signal-plan [ses_f08bb98bcffezShw3Qxr4ebNUu].md:L9541] Stated reasons: a version string cannot express a schema fact because 0.2.0 looks equally plausible whether or not the binary knows about research_tag; Linux already shipped 0.6.854 with a 0.2.0 CLI and nothing objected because no rule required agreement; and version authority is settled by the 2026-09-27 independent-platform-versioning design, which the plan cites rather than re-decides."
+    },
+    {
+      "id": "concept--typed-schema-contract-including-type-notnull-and-default",
+      "label": "Typed schema contract: name, declared type, NOT NULL and DEFAULT compared on both sides",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-sidecar-rebuild-signal-plan [ses_f08bb98bcffezShw3Qxr4ebNUu].md",
+      "source_location": "L9541",
+      "norm_label": "typed schema contract including type notnull and default",
+      "summary": "The existing guard parses the app's migration arrays and compares column names only; the type string that follows every name, such as (\"research_tag\", \"INTEGER NOT NULL DEFAULT 0\"), is discarded, and column_names at runtime selects only `name` from pragma_table_info. The proposed contract carries (name, sql_type, not_null, default_expr) per column for snippets and groups, parsed from both schema.rs and the migration arrays, failing in either direction. Measured divergences today: research_tag as bare TEXT instead of INTEGER NOT NULL DEFAULT 0, description losing DEFAULT '', enabled getting DEFAULT 0 instead of 1, created_at and modified_at losing NOT NULL.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-sidecar-rebuild-signal-plan [ses_f08bb98bcffezShw3Qxr4ebNUu].md:L9541] Stated reason a name-only check is insufficient: snipset init today creates a groups table that is not the app's groups table on five columns and nothing in the repository notices, because every existing check compares names.",
+      "description": "The user-visible consequence is stated: research_tag as bare TEXT accepts 'yes', and groups.rs reads that column with row.get::<_, i32>(9), which fails on a non-numeric value."
+    },
+    {
+      "id": "concept--no-escape-hatch-in-the-schema-contract-check",
+      "label": "The schema contract check deliberately offers no escape hatch",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-sidecar-rebuild-signal-plan [ses_f08bb98bcffezShw3Qxr4ebNUu].md",
+      "source_location": "L9541",
+      "norm_label": "the schema contract check deliberately offers no escape hatch",
+      "summary": "No allowlist, no #[ignore], no skip-this-column comment. The failure message names the column, the app's declared type, and the file and constant to edit, so a legitimate schema change reads as a step in a process rather than an obstacle. A false positive is remedied by fixing the contract or by changing the check visibly in review, in the same commit as the schema edit.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-sidecar-rebuild-signal-plan [ses_f08bb98bcffezShw3Qxr4ebNUu].md:L9541] Stated reason: an escape hatch is precisely how research_tag shipped, because a name-only check passed while the shape was wrong and an escape hatch would have passed while the column was missing."
+    },
+    {
+      "id": "concept--skip-if-fails-on-behaviour-not-on-text",
+      "label": "skip_if must fail on behaviour, never on the presence of a string",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-sidecar-rebuild-signal-plan [ses_f08bb98bcffezShw3Qxr4ebNUu].md",
+      "source_location": "L9541",
+      "norm_label": "skip if must fail on behaviour never on the presence of a string",
+      "summary": "A grep-based skip_if is a false pass because it proves the text is present, which survives the behaviour being reverted. All nine tasks in this plan therefore use either the \"false\" sentinel or a command that must succeed for the behaviour to exist: a nextest invocation, or bun scripts/build/check-cli-schema-contract.mjs, which exits non-zero on a mismatch. No grep, rg, tgrep or path-qualified grep appears in any skip_if.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-sidecar-rebuild-signal-plan [ses_f08bb98bcffezShw3Qxr4ebNUu].md:L48] Stated reason, from the repository's own plan rules: a skip_if must fail on BEHAVIOUR, because grepping a source file for a literal proves the text is there, which survives the behaviour being reverted."
+    },
+    {
+      "id": "concept--typed-schema-contract-in-a-compiler-free-script-not-only-in-cargo",
+      "label": "The schema contract check exists twice: a Rust test and a compiler-free staging script",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-sidecar-rebuild-signal-plan [ses_f08bb98bcffezShw3Qxr4ebNUu].md",
+      "source_location": "L9541",
+      "norm_label": "the schema contract check exists twice a rust test and a compiler free staging script",
+      "summary": "L1 is a nextest integration test in crates/snipset-cli. L4 is scripts/build/check-cli-schema-contract.mjs, a standalone JavaScript scanner that needs no compiler and therefore runs on the interactive host, on the VPS, and in any CI job with CI switched on or off; stage-cli-sidecar.mjs invokes it before the cargo build, so a caller that stages directly cannot skip it. Both fail loudly on an unrecognised declaration shape, which is what makes the duplication tolerable.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-sidecar-rebuild-signal-plan [ses_f08bb98bcffezShw3Qxr4ebNUu].md:L9541] Stated reason the check cannot live only in CI: every automatic GitHub Actions trigger in this repository is currently disabled and re-enabling them is the owner's decision, so a plan whose only enforcement lived in CI would enforce nothing today."
+    },
+    {
+      "id": "concept--contract-mismatch-fatal-while-staging-failure-stays-non-fatal",
+      "label": "A contract mismatch fails the desktop build while a staging failure stays non-fatal",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-sidecar-rebuild-signal-plan [ses_f08bb98bcffezShw3Qxr4ebNUu].md",
+      "source_location": "L9769",
+      "norm_label": "a contract mismatch fails the desktop build while a staging failure stays non fatal",
+      "summary": "T6 would make build-linux.sh and build-tauri.ps1 fail on a contract mismatch while deliberately preserving the existing non-fatal handling of a genuine staging or copy failure, since resources/cli/* is an optional glob so the desktop build still succeeds without a CLI. The two scripts are the narrowest point covering every release path, because deploy-linux-github.sh shells out to build-linux.sh and release.yml invokes build-tauri.ps1.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-sidecar-rebuild-signal-plan [ses_f08bb98bcffezShw3Qxr4ebNUu].md:L9769] Stated reason: shipping an installer whose bundled CLI will refuse every write is worse than shipping no CLI, because the failure surfaces later on a user's machine. The plan flags this as a judgement call about release risk rather than a measured fact."
+    },
+    {
+      "id": "concept--schema-revision-integer-is-a-diagnostic-label-not-the-guard",
+      "label": "The hand-maintained schema revision integer is a diagnostic label, not the guard",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-sidecar-rebuild-signal-plan [ses_f08bb98bcffezShw3Qxr4ebNUu].md",
+      "source_location": "L9771",
+      "norm_label": "the hand maintained schema revision integer is a diagnostic label not the guard",
+      "summary": "T3 stamps SNIPSET_APP_SCHEMA_REVISION and SNIPSET_APP_SCHEMA_DIGEST into every snipset-cli build via a new crates/snipset-cli/build.rs, modelled on the app's existing build.rs. The revision is a monotonic integer maintained by hand in one place in the app's schema module; the digest is a hash over the app's schema sources. Both are read through env! with no default, so the CLI cannot compile without them, and build.rs panics if the app schema directory is absent.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-sidecar-rebuild-signal-plan [ses_f08bb98bcffezShw3Qxr4ebNUu].md:L9771] Stated reason: a forgotten bump yields a wrong label, never a wrong build, because the guard is the typed comparison and not the number. Letting a hand-maintained number become load-bearing is the slower version of the original bug.",
+      "description": "No schema revision marker exists anywhere to read: grep for user_version and schema_revision across apps/, crates/ and scripts/ returns nothing, no PRAGMA user_version write, no schema-version table. That is why the revision is computed from source."
+    }
+  ],
+  "links": [
+    {
+      "source": "concept--pcsx2-savestate-is-locked-to-its-emulator-version",
+      "target": "concept--pcsx2-in-app-updater-overwrites-the-running-appimage",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--raw-joyaxis-binding-is-silently-dropped-when-the-gamepad-mapping-claims-the-axis",
+      "target": "concept--pcsx2-usb-gamepad-guid-mapping-assigns-rightstick-axes",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--pcsx2-usb-gamepad-guid-mapping-assigns-rightstick-axes",
+      "target": "concept--pcsx2-auto-bind-creates-combined-axis-requirements",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--stick-capture-protocol-gas",
+      "target": "concept--dead-axis-verdict-retracted-by-a-longer-clean-capture",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--raw-joyaxis-binding-is-silently-dropped-when-the-gamepad-mapping-claims-the-axis",
+      "target": "concept--dead-axis-verdict-retracted-by-a-longer-clean-capture",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--sidecar-schema-staleness-is-a-build-time-fact-not-a-version-number",
+      "target": "concept--typed-schema-contract-including-type-notnull-and-default",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--typed-schema-contract-including-type-notnull-and-default",
+      "target": "concept--no-escape-hatch-in-the-schema-contract-check",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--typed-schema-contract-including-type-notnull-and-default",
+      "target": "concept--typed-schema-contract-in-a-compiler-free-script-not-only-in-cargo",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--skip-if-fails-on-behaviour-not-on-text",
+      "target": "concept--typed-schema-contract-in-a-compiler-free-script-not-only-in-cargo",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--contract-mismatch-fatal-while-staging-failure-stays-non-fatal",
+      "target": "concept--typed-schema-contract-in-a-compiler-free-script-not-only-in-cargo",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--schema-revision-integer-is-a-diagnostic-label-not-the-guard",
+      "target": "concept--sidecar-schema-staleness-is-a-build-time-fact-not-a-version-number",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    }
+  ]
+}

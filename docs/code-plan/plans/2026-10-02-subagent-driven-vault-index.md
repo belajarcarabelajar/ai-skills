@@ -594,12 +594,13 @@ Recorded so a fresh session continues instead of re-deriving. Everything below i
 |---|---|
 | Plan state | `Approved`. T1–T6 and T11 **complete**. T7 complete. T8 **in progress**. |
 | Commits | tooling `26a91a2` · structural layer `ce2ab59` · narration filter `99edb67` · wave 2 `dd0694c` · worklist `0a7fc0c` / `584803e` · debt sweep `eaa5ba8` F3, `60fa515` F7, `7da0cb1` F6 · validator fix `13988e3` · wave 21 `17d7b8c` |
-| Chunks landed | **79 files** `vault-index/semantic/chunk-*.json`, all passing `validateChunk` |
-| Totals | **1,889 nodes · 1,689 links · 1,806 distinct ids · 83 deliberate id reuses** · 0 failing |
-| By type | 1,211 `concept` · 678 `rationale` |
+| Chunks landed | **225 files** `vault-index/semantic/chunk-*.json`, all passing `validateChunk`. Validator failures **4 → 0**, repaired 2026-10-03 |
+| Totals | **3,297 nodes · 2,433 links · 2,804 distinct ids · 493 deliberate id reuses** (measured 2026-10-03) |
+| By type | 3,294 `concept` · 3 `rationale` — the standalone why-node is retired (§3), so reasons live as a `rationale` attribute on the concept they explain |
+| Anchor gate | `check-anchors.mjs --all`: **112 of 221 chunks clean** (measured before `rem-250` landed). 2,898 anchors parsed, **571 failed**, 26 in padding, 638 past a lone CR. Pre-existing, not a regression — see §9c |
 | Full suite | `bun test scripts/` → 993 pass / 0 fail across 36 files |
 | Worklist | `vault-index/semantic/batches.json`, 251 batches, ids `rem-001 … rem-251` |
-| Progress | **79 of 251 batches.** Next after the current wave: `rem-064` |
+| Progress | **205 of 251 batches.** Next: `rem-247`. The 46 remaining batches are `rem-202 … rem-247` |
 | Remote | `ai-skills` pushed to `origin/main` at `13988e3`. Everything after that is local, unpushed. |
 
 **To resume:** read `templates/vault-index-subagent-contract.md`, then dispatch on `batches.json`. The prompt needs four things only — the batch id, the filter command, the output path, and the verify command. Skip any `rem-*` whose `chunk-rem-*.json` already exists.
@@ -646,6 +647,33 @@ searches misled me first — the `summary` grep hit nothing because `graphify.js
 nodes, and a bare-slug id search silently misses every id because ids carry a
 `concept--` / `rationale--` prefix. Find the real artifact before concluding from
 a failed search.
+
+### 9c. Measured 2026-10-03: the validator is green, the anchor gate is not
+
+Two gates exist and they are not the same gate. §9a now records both, because "every chunk passes the validator" was being read as "every claim is verifiable" and only the first is true.
+
+| Gate | Command | Corpus state |
+|---|---|---|
+| Schema + endpoints | `verify-chunk.sh` over every chunk, `knownNodeIds` = the union | **0 failures** across 221 chunks |
+| Verbatim anchors | `check-anchors.mjs --all` | **109 of 221 chunks fail.** 2,898 anchors parsed, **571 failed**, 26 sit inside `session-event` padding, 638 flagged past a lone CR |
+
+**The four validator failures were one defect, not four.** Every one was a `conceptually_related_to` edge pointing at a `rationale--*` id that exists in no chunk — the standalone why-node that §3 later retired. Two already had the why attached to a real concept elsewhere, so the link was retargeted: `rem-087` → `concept--info-toasts-stay-silent` (rem-071, whose rationale already carries "info toasts already go through Button which plays a click"), and `rem-082` → `concept--derive-json-ld-from-the-rendered-title` in its own chunk. Two were claims the note actually makes, so the node was emitted here rather than the link deleted: `concept--arboard-wayland-data-control-feature` at L6966 of rem-010's transcript, and `concept--plans-enumeration-globs-any-md-under-docs-code-plan-plans` at L6668 of rem-021's. Both new anchors pass `check-anchors`. **Deleting the link would have been the cheaper repair and the wrong one** — it would have dropped an extracted relation to make a gate green.
+
+**The 571 anchor failures are legacy, and the dominant shape is a §4a violation.** The quoted span opens with the subagent's own words rather than the note's — `"Stated reason for the reversal: --focus-ring vs --accent = 1.00:1…"` against a line that says the same thing in Indonesian and never uses the phrase "stated reason". A keyword-overlap checker passes those; only the verbatim substring test catches them, which is what `check-anchors` is for. Worst chunks: `rem-119` 13/20 anchors failed, `rem-107` and `rem-089` 11 each.
+
+**874 of 3,096 nodes carry no `[path:L<n>]` anchor at all** — the pre-§4a `(L3327)` form. They are not machine-verifiable in either direction, so neither the 571 nor the 874 is a count T9 can lean on.
+
+**Consequence for T9, stated before it runs:** merging 3,096 nodes on the strength of a green validator would merge a large share of rationale strings that resolve to nothing on disk. T9's step 3 needs the anchor count reported next to the node count, not just the validator's exit code.
+
+**`ok` is not the same as `checked everything` — measured on `rem-250`, 2026-10-03.** When a node's `source_file` does not resolve, `check-anchors` prints `source_file not on disk` and **skips that node's anchors without counting them as failures**. Writing that chunk, 19 of its 46 `source_file` values were retyped rather than copied and therefore did not resolve; the gate still printed `ok  chunk-rem-250  46 nodes  27 parsed  27 checked  0 failed` and exited 0. After the paths were rewritten from `batches.json`, the same chunk reports **46 parsed / 46 checked / 0 failed** — the 19 missing checks, invisible in the first run, are exactly the nodes whose quotes were never tested. So on a chunk that reports `ok`, compare `parsed` against the number of rationale-bearing nodes before believing the `0 failed`.
+
+**The corpus itself is not hiding anything this way today.** Measured across all 221 chunks: 7 nodes carry a `source_file` that is not on disk, in `chunk-072`, `chunk-084`, `chunk-087` and `chunk-100` — the N8n stubs T9 step 3 already names. All four already fail the anchor gate on other anchors, so no chunk currently reports `ok` while carrying an unresolvable `source_file`. The blind spot is a property of the gate, not a live count in the 571.
+
+**Hand-transcribing a path is the defect that produced it**, and it is the same class as the sessions that wrote `(L3327)` instead of `[path:L3327]`. The per-batch prompt already says to read the file list from `batches.json` rather than being handed it; the stricter rule for the next wave is that every `source_file` and every anchor path must be **copied from `batches.json` or the file itself, never typed**.
+
+**The mechanism that worked, `rem-249`, `rem-251` and `rem-248`, 2026-10-03:** write each node's `source_file` as the file's **basename** and each rationale anchor as `[@SELFFILE@:L<n>]`, then run one resolver pass that maps basename to the exact batch path and substitutes it into every anchor. All three chunks landed with 0 out-of-batch paths and 0 unresolved basenames on the first attempt, with 42/42, 40/40 and 75/75 anchors verifying. `rem-248` strengthened the technique one step further: the resolver also **reads each cited line and asserts the quoted span appears verbatim in it before writing the chunk**, so a quote that does not resolve is a build failure rather than a gate failure after the fact. The placeholder makes the anchor path structurally identical to `source_file`, so the two cannot disagree — the failure mode that produced the 19 silent skips cannot occur. **Use it for every remaining batch.**
+
+**Two further anchor rules the batch taught, both cheap:** a quoted span must include surrounding punctuation the line actually carries — `rem-249` lost one anchor by quoting `Math uses inline \( ... \)` from a line where the delimiters sit inside backticks — and a sentence that wraps across two lines should be quoted as two fragments at their own lines rather than as one span, which is what §4a already prescribes.
 
 ## 10. Session-Close Debt Sweep & Follow-Up Backlog
 

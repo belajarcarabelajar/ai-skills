@@ -412,7 +412,12 @@ flowchart LR
   - [ ] Skip when `skip_if` exits 0 → `SKIPPED-IDEMPOTENT`. This task has no single shell command, so `skip_if` is the sentinel `false` and it reports `NEEDS-AGENT` by design.
 - [ ] **Step 1 — Write the dispatch manifest** to `vault-index/semantic/batches.json` with chunk id, owner, target files, expected output and verification command, and assert no two chunks own the same file.
 - [ ] **Step 2 — Dispatch** narrow subagents in waves. **A batch whose output already exists and passes T1's validator is skipped**, so a multi-session run resumes instead of restarting. Report completed and remaining counts after every wave.
+  - **Cadence that worked, 2026-10-02.** One subagent in flight at a time per slot, replaced as each finished: `rem-001` … `rem-014` ran on that pattern. Ten concurrent is the practical ceiling here — above that, the parent spends its whole turn writing prompts and reading reports instead of auditing.
+  - **The prompt must be short.** The contract file carries the weight; the per-batch prompt only needs the batch id, the filter command, the output path and the verify command. Asking each subagent to look up its own file list from `batches.json` rather than being handed it removes the largest per-dispatch token cost and removes a class of transcription error at the same time.
+  - **Keep the report budget explicit.** Subagents were told "UNDER 120 WORDS" and complied; the reports became scannable and the parent stopped re-reading them. An unbounded report from 250 batches is the second way this task can exhaust a session.
 - [ ] **Step 3 — Verify:** every emitted chunk passes T1's validator, and the count of concepts carrying a resolvable `source_file` is reported rather than assumed.
+  - **Reusing an id is correct, not a duplicate.** The merger unions on `id`, so two sessions that discuss the same concept should emit the same id and let the union collapse them. Measured across 31 chunks: 806 nodes, **800 distinct ids, 6 deliberate re-uses**. A subagent that invents a near-duplicate id instead is the defect; one that reuses is the mechanism working.
+  - **A reported retention far outside the expected band is worth reading, not correcting.** Two chunks measured 88.9% and 93.3% and both subagents diagnosed why: those transcripts are mostly a pasted upstream prompt block, not tool traffic. That is the filter reporting a true fact about its input, and forcing it into the band would have hidden a real difference between corpora.
 
 ### Task T9: Merge both layers into the vault graph
 
@@ -579,6 +584,25 @@ Known pre-existing state, recorded so it is not misread as caused by this plan: 
 
 - [x] Approved 2026-10-02. Scope: T1–T5 and T11 complete. T7 was split from T8 on 2026-10-02 after a 200-note sample showed the structural layer needs no model; T8 keeps the concept and rationale layer.
 - [x] `05 - Conversations/` decision: index the whole eligible corpus, 1,822 files, 307.1 MB. Recorded in §6 with its real cost.
+
+## 9a. Resume Point
+
+Recorded so a fresh session continues instead of re-deriving. Everything below is committed.
+
+| Where it stands | |
+|---|---|
+| Plan state | `Approved`. T1–T6 and T11 **complete**. T7 complete. T8 **in progress**. |
+| Commits | `26a91a2` tooling · `ce2ab59` structural layer + wave 1 · `99edb67` narration filter · `dd0694c` wave 2 · `94d7e1f` rem wave + section 6 restored · `0a7fc0c` worklist regenerated |
+| Chunks landed | 31 files `vault-index/semantic/chunk-*.json`, all passing `validateChunk` |
+| Totals | **806 nodes · 739 links · 800 distinct ids · 53 distinct source files** · 0 failing · 0 missing `source_file` |
+| Full suite | `bun test scripts/` → 934 pass / 0 fail across 34 files |
+| Worklist | `vault-index/semantic/batches.json`, ids `rem-001 … rem-251` |
+
+**To resume:** read `templates/vault-index-subagent-contract.md`, then dispatch on `batches.json`. The prompt needs four things only — the batch id, the filter command, the output path, and the verify command. Skip any `rem-*` whose `chunk-rem-*.json` already exists.
+
+**Two scope changes landed mid-run and both are permanent:** commit `3a968b2` deleted the 748 N8n raw-capture files, and `.graphifyignore` GROUP 7 (`c20b3be`) excludes 31 tool-test transcripts. Eligible corpus went 2,360 → 1,584. Batch ids were regenerated into a `rem-*` namespace because they are positional and cannot survive a worklist change.
+
+**Two things that must happen before T9 merges, both recorded in T9's step 3:** drop the 9 nodes whose `source_file` no longer exists (pre-deletion N8n stubs), and decide F7 on the 1,299 unattributable nodes already in the old graph.
 
 ## 10. Session-Close Debt Sweep & Follow-Up Backlog
 

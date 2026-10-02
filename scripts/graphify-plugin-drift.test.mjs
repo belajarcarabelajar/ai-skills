@@ -446,42 +446,80 @@ test(
 const AI_SKILLS = '/home/belajarcarabelajar/ai-skills';
 const live = existsSync(AI_SKILLS) && installedPresent ? test : test.skip;
 
-live('the committed ai-skills plugin still carries the adaptation, and drift says so', () => {
-  // GREEN today, and deliberately so — this repo's plugin is NOT supposed to
-  // match the installer. Asserting `current === true` here would declare the
-  // 2026-10-02 regression correct. What must hold is the opposite: the
-  // hand-written adaptation survives, and the detector names every difference
-  // instead of silently absorbing it.
+live('the plugin is V2 on both sides, and the installer says why', () => {
+  // The premise of this test inverted on 2026-10-02 and the old assertions had
+  // to invert with it. It used to read: "the installer writes a regression, so
+  // the committed file must NOT match it." That was true because the vendored
+  // `_OPENCODE_PLUGIN_JS` still shipped the V1 named export. It has since been
+  // patched to V2 — a default export carrying `id` and `setup` — so the
+  // installer is no longer the thing to guard against.
   //
-  // This goes RED the moment `graphify install --project` is run here and the
-  // adaptation is reverted — which is precisely the event this module exists to
-  // notice. It is the tripwire, not a wish.
+  // Asserting `current === true` here would be wrong for a different reason
+  // now: identity is no longer the signal. The committed file carries a Revert
+  // block the vendored constant has no reason to know about, so it never
+  // should be byte-identical. The assertions below are the ones that carry
+  // meaning under either premise.
   const result = checkPlugin(AI_SKILLS);
 
-  assert.equal(
-    result.current,
-    false,
-    'the committed plugin has become identical to what graphify would write, so the hand-written adaptation was reverted',
-  );
+  // The committed file exists and is V2. V1 does not merely drift, it fails to
+  // load: PluginModule.LoadError, "Plugin must export a default definition with
+  // an id and an effect or setup function" (err_908e90d2). Every plugin on this
+  // machine was that shape until today.
+  assert.ok(result.found, 'the committed plugin is missing entirely');
+  assert.equal(exportShape(result.found), 'default-object', 'the committed plugin is back to the V1 named export');
 
   // The NOTE is institutional knowledge a future session cannot re-derive, so
-  // its absence is the assertion that matters most.
-  assert.ok(result.found, 'the committed plugin is missing entirely');
+  // its absence is the assertion that matters most on this side.
   assert.match(
     result.found,
     /@opencode\/plugin/,
     'the NOTE explaining why there is no runtime import from @opencode/plugin has been deleted',
   );
-  assert.equal(exportShape(result.found), 'default-object');
 
-  // And the detector must have caught all three measured differences.
+  // The other side, and the reason this test still earns its place. The
+  // installer was patched in the uv venv, not upstream — 0.9.73 is still the
+  // latest release and still ships V1. So `uv tool upgrade graphifyy` restores
+  // the broken template, and a later `graphify install --project` writes it over
+  // the working file on all four plugin paths. That is the tripwire now, and it
+  // is an assertion about the VENDORED shape rather than the local one.
+  assert.equal(
+    exportShape(result.vendored),
+    'default-object',
+    'the installed graphify ships the V1 named export again — the venv patch was lost to an upgrade, so `graphify install --project` would revert every plugin on this machine',
+  );
+
+  // Same story for the #1646 header contradiction, which lived in the vendored
+  // comment. It is asserted directly rather than through checkPlugin, because
+  // checkPlugin reports it as drift and a patched installer correctly reports
+  // none: the absence of a warning is not evidence of a fix.
+  assert.ok(
+    !headerContradictsCode(result.vendored),
+    'the vendored header claims "&&" again while its own code prepends with ";"',
+  );
+
+  // Shape and contradiction are now both expected to be ABSENT, and a detector
+  // that stopped reporting them would be indistinguishable from one that had
+  // nothing to report. So assert the negative explicitly.
   const categories = result.drift.map((d) => d.split(':')[0]);
-  assert.ok(categories.includes(DRIFT.SHAPE), `no shape drift reported:\n${result.drift.join('\n')}`);
-  assert.ok(categories.includes(DRIFT.CONTRADICTION), `no contradiction reported:\n${result.drift.join('\n')}`);
-  assert.ok(categories.includes(DRIFT.TEXT), `no first-differing-line reported:\n${result.drift.join('\n')}`);
+  assert.ok(
+    !categories.includes(DRIFT.SHAPE),
+    `shape drift reported but both sides are V2:\n${result.drift.join('\n')}`,
+  );
+  assert.ok(
+    !categories.includes(DRIFT.CONTRADICTION),
+    `contradiction reported but the vendored header was fixed:\n${result.drift.join('\n')}`,
+  );
   assert.ok(
     !categories.includes(DRIFT.NOTE_MISSING),
     'the NOTE is present, so reporting it missing is a false alarm',
+  );
+
+  // The Revert block is the committed file's one deliberate difference, and the
+  // detector should still name it — a detector that reports nothing here is a
+  // detector that reports nothing anywhere.
+  assert.ok(
+    categories.includes(DRIFT.TEXT),
+    `no first-differing-line reported, but the files are not identical:\n${result.drift.join('\n')}`,
   );
 });
 

@@ -29,6 +29,11 @@ twice.]
 **Non-goals:** [what this deliberately does not do, so a reviewer does not
 audit for something that was never claimed]
 
+A section that does not apply to this change is removed, not filled with a
+placeholder. An empty table or a row that says nothing is worse than an absent
+section, because a reviewer cannot tell an omitted section from a section
+nobody checked.
+
 ## 3. Acceptance Criteria
 
 | ID | Criterion | Task | Check | Evidence |
@@ -40,9 +45,9 @@ and its exit code are.
 
 ## 4. Local Verification Evidence
 
-> These runs happened **in the session that produced the change**, on the
-> machine holding the working tree. No hosted runner was asked to verify
-> anything, and no commit was pushed in order to make someone else's CI run.
+> Every row below was produced on the machine holding the working tree, before
+> this branch was pushed. No hosted runner was asked to verify anything, and no
+> commit was pushed in order to make someone else's check run.
 
 | Gate | Command | Exit | Result |
 |---|---|---|---|
@@ -53,6 +58,11 @@ and its exit code are.
 
 Pre-existing warnings outside the changed surface are reported in section 7,
 not carried as part of this PR.
+
+Command output longer than a screen goes inside a `<details>` block with a
+one-line summary of what it shows. The gate table keeps the command, the exit
+code, and the result, because that is what a reviewer scans. The raw log is
+evidence a reviewer expands only when a number in the table looks wrong.
 
 ## 5. Independent Review
 
@@ -95,6 +105,21 @@ each carries a ceiling and a trigger.
       in the diff.
 - [ ] No secrets, tokens, `.env` content, or unrelated cleanup in the diff.
 - [ ] Every acceptance criterion maps to a check and to evidence.
+- [ ] No reference to this conversation, to the session that produced the
+      change, or to an earlier exchange. The reviewer has none of that context,
+      so the sentence tells them nothing. Restate the fact instead of pointing
+      at the exchange.
+- [ ] No path outside this repository's commit history. The plan path under
+      `docs/code-plan/plans/` is allowed because it ships in the diff; a vault
+      mirror path or a scratch file under `/tmp` is not, because the reviewer
+      cannot open either one.
+- [ ] Read the body twice asking "can this be shorter?" and cut it both times.
+      Exit codes, evidence rows, and the exact rollback are never cut; the
+      surrounding prose is.
+- [ ] Any acronym a reviewer outside this team might not know is expanded on
+      first use. Identifiers that are schema labels (`AC-1`, `T1`, `P0` to
+      `P3`) keep their short form, and a term used in the surrounding code is
+      named the way the code names it.
 - [ ] PR body written to a file and posted with `--body-file`, never `--body`.
 - [ ] Registered in the registry: `bun scripts/pr-registry.mjs pr <session> --number <N>`.
 

@@ -50,6 +50,8 @@ An issue is a genuine review finding ONLY when every criterion is satisfied:
 
 Trivial style, formatting, typos, and documentation nits are not findings. If nothing qualifies, report none.
 
+**One exception, because it is measurable rather than a matter of taste.** A comment this change *introduced* that adds nothing the code does not already show does qualify, under criteria 1 and 5: an unreadable comment is a maintainability cost every later reader pays. That covers a restated line, `// Step 1: validate`, `// Core logic`, a decorative emoji, and `} // end if`. Two limits keep it honest. It must be anchored to a line this diff actually touched, and a plain rule marking a top-level block in a long file is an index rather than slop, so it is never a finding. See **Code Comment Hygiene** in the master skill for the full rule.
+
 ## 4. Findings
 
 Report **every** qualifying finding, not the first one. Deduplicate by changed location and by defect/remedy pair before writing. Keep the reported line range as tight as possible, ideally 5–10 lines.

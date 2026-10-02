@@ -48,10 +48,11 @@
 // The dry run is the default on purpose: the thing being overwritten is the
 // vault's only record of 6,155 nodes of accumulated work.
 
-import { readFileSync, mkdirSync, copyFileSync, existsSync } from 'node:fs';
-import { execFileSync } from 'node:child_process';
-import { resolve as resolvePath } from 'node:path';
+import { readFileSync, mkdirSync, copyFileSync, existsSync, writeFileSync, statSync } from 'node:fs';
+import { execFileSync } from 'child_process';
+import { resolve as resolvePath, sep, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 
 import { scan } from './vault-index.mjs';
 import { structural } from './vault-index-structural.mjs';
@@ -200,8 +201,10 @@ export function vaultHead(root = VAULT_ROOT) {
 export function assemble({ vaultRoot = VAULT_ROOT, archiveRoot = ARCHIVE_ROOT, semanticDir, previous, builtAtCommit = null }) {
   const roots = [archiveRoot, vaultRoot];
   const structuralChunks = [];
+  const eligibleByRoot = [];
   for (const root of roots) {
     const s = scan(root);
+    eligibleByRoot.push({ root, eligible: s.eligible });
     const { chunk } = structural(root, s.eligible, { knownPaths: s.eligible });
     structuralChunks.push({ name: `structural:${root}`, chunk });
   }
@@ -216,7 +219,7 @@ export function assemble({ vaultRoot = VAULT_ROOT, archiveRoot = ARCHIVE_ROOT, s
     ghostPolicy: 'reattribute',
   });
 
-  return { graph, report, normalization, semReport };
+  return { graph, report, normalization, semReport, eligibleByRoot };
 }
 
 /**
@@ -234,9 +237,110 @@ export function gateVerdict(graph, previous) {
   return { pass, nodesBefore, mergedNodes, d0Before, d0After };
 }
 
+/**
+ * Resolve a `source_file` to the first root under which it exists, or null.
+ *
+ * First root wins, matching `loadChunks`' resolution order, so a path that exists
+ * under both roots is attributed the same way the merge attributed it. Containment
+ * is checked, not just existence: a `source_file` of `../../etc/passwd` resolves to
+ * a real file, and hashing it would record a file outside the corpus as indexed.
+ *
+ * @param {string} sourceFile
+ * @param {string[]} roots
+ * @returns {{abs: string, root: string}|null}
+ */
+export function resolveUnderRoots(sourceFile, roots) {
+  for (const root of roots) {
+    const abs = resolvePath(root, sourceFile);
+    if (abs !== root && !abs.startsWith(`${root}${sep}`)) continue;
+    try {
+      if (statSync(abs).isFile()) return { abs, root };
+    } catch {
+      // Not there. Try the next root.
+    }
+  }
+  return null;
+}
+
+/**
+ * T9's second output: `vault-index/manifest.json`, every indexed file and its
+ * content hash, plus the skip list T12 checks coverage against.
+ *
+ * "Indexed" is measured, not assumed: a file is indexed when some node's
+ * `source_file` names it AND it resolves to a real file under one of the roots. A
+ * `source_file` that resolves to nothing is reported in `unresolved` rather than
+ * dropped, because the extraction was correct when written and the file was
+ * legitimately deleted afterwards (the N8n raw captures went in `3a968b2`) — the
+ * count is the only place that deletion stays visible.
+ *
+ * The skip list is the eligible corpus minus the indexed set, so T12 can assert
+ * "every worklist path is either a source_file of some node or in the skip list"
+ * against a recorded fact instead of a reconstruction.
+ *
+ * @param {{graph: object, roots: string[], eligibleByRoot: Array<{root: string, eligible: string[]}>,
+ *   builtAtCommit?: string|null}} opts
+ * @returns {object}
+ */
+export function buildManifest({ graph, roots, eligibleByRoot, builtAtCommit = null }) {
+  const nodes = Array.isArray(graph?.nodes) ? graph.nodes : [];
+  const links = Array.isArray(graph?.links) ? graph.links : [];
+
+  const nodeCountBySourceFile = new Map();
+  for (const node of nodes) {
+    if (node === null || typeof node !== 'object') continue;
+    const sourceFile = filled(node.source_file);
+    if (sourceFile === null) continue;
+    nodeCountBySourceFile.set(sourceFile, (nodeCountBySourceFile.get(sourceFile) ?? 0) + 1);
+  }
+
+  const files = {};
+  const unresolved = [];
+  for (const [sourceFile, count] of nodeCountBySourceFile) {
+    const hit = resolveUnderRoots(sourceFile, roots);
+    if (hit === null) {
+      unresolved.push(sourceFile);
+      continue;
+    }
+    const bytes = statSync(hit.abs).size;
+    const sha256 = createHash('sha256').update(readFileSync(hit.abs)).digest('hex');
+    files[sourceFile] = { sha256, bytes, root: hit.root, nodes: count };
+  }
+
+  const indexed = new Set(Object.keys(files));
+  const skipped = [];
+  let eligible = 0;
+  for (const entry of eligibleByRoot ?? []) {
+    for (const rel of entry.eligible ?? []) {
+      eligible += 1;
+      if (!indexed.has(rel)) {
+        skipped.push({ path: rel, root: entry.root, reason: 'no node cites this file' });
+      }
+    }
+  }
+
+  return {
+    version: 1,
+    generated_at: new Date().toISOString(),
+    built_at_commit: builtAtCommit,
+    roots: roots.map((root) => ({ root, basename: basename(root) })),
+    files,
+    skipped,
+    unresolved,
+    totals: {
+      eligible,
+      indexed: Object.keys(files).length,
+      skipped: skipped.length,
+      unresolved: unresolved.length,
+      nodes: nodes.length,
+      links: links.length,
+    },
+  };
+}
+
 function main() {
   const argv = process.argv.slice(2);
   const write = argv.includes('--write');
+  const manifestOnly = argv.includes('--manifest-only');
   const semanticDir = resolvePath(fileURLToPath(new URL('../vault-index/semantic', import.meta.url)));
   const graphPath = resolvePath(VAULT_ROOT, 'graphify-out/graph.json');
   const reportPath = resolvePath(VAULT_ROOT, 'graphify-out/GRAPH_REPORT.md');
@@ -245,9 +349,37 @@ function main() {
     console.error(`no existing graph at ${graphPath} — nothing to merge onto`);
     process.exit(2);
   }
+
+  // `--manifest-only` builds T9's second output from the graph that is already on
+  // disk, without re-running the merge. Re-running the merge is NOT idempotent:
+  // measured 2026-10-03, assembling over the already-merged graph collapses a
+  // further 10,271 document nodes and drops the count to 20,213, which fails T9's
+  // own gate. The manifest needs the final graph and the eligible corpus, not a
+  // second merge, so it reads the file directly.
+  if (manifestOnly) {
+    const graph = JSON.parse(readFileSync(graphPath, 'utf8'));
+    const roots = [ARCHIVE_ROOT, VAULT_ROOT];
+    const eligibleByRoot = roots.map((root) => ({ root, eligible: scan(root).eligible }));
+    const manifest = buildManifest({ graph, roots, eligibleByRoot, builtAtCommit: vaultHead() });
+    console.log('--- vault-index/manifest.json (from the graph on disk) ---');
+    console.log(`  nodes:      ${manifest.totals.nodes}`);
+    console.log(`  links:      ${manifest.totals.links}`);
+    console.log(`  eligible:   ${manifest.totals.eligible}`);
+    console.log(`  indexed:    ${manifest.totals.indexed}`);
+    console.log(`  skipped:    ${manifest.totals.skipped}`);
+    console.log(`  unresolved: ${manifest.totals.unresolved}`);
+    if (!write) {
+      console.log('DRY RUN — nothing written. Re-run with --write to write the manifest.');
+      process.exit(0);
+    }
+    const manifestPath = resolvePath(fileURLToPath(new URL('../vault-index/manifest.json', import.meta.url)));
+    writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`, 'utf8');
+    console.log(`wrote ${manifestPath}`);
+    return;
+  }
   const previous = JSON.parse(readFileSync(graphPath, 'utf8'));
 
-  const { graph, report, normalization, semReport } = assemble({
+  const { graph, report, normalization, semReport, eligibleByRoot } = assemble({
     semanticDir,
     previous,
     builtAtCommit: vaultHead(),
@@ -281,6 +413,18 @@ function main() {
     process.exit(1);
   }
 
+  const manifest = buildManifest({
+    graph,
+    roots: [ARCHIVE_ROOT, VAULT_ROOT],
+    eligibleByRoot,
+    builtAtCommit: vaultHead(),
+  });
+  console.log('--- vault-index/manifest.json ---');
+  console.log(`  eligible:   ${manifest.totals.eligible}`);
+  console.log(`  indexed:    ${manifest.totals.indexed}`);
+  console.log(`  skipped:    ${manifest.totals.skipped}`);
+  console.log(`  unresolved: ${manifest.totals.unresolved}`);
+
   if (!write) {
     console.log('DRY RUN — nothing written. Re-run with --write to back up and write.');
     process.exit(0);
@@ -295,6 +439,10 @@ function main() {
 
   const written = writeGraph(graph, graphPath);
   console.log(`wrote ${written.path} (${written.bytes} bytes, ${graph.nodes.length} nodes, ${graph.links.length} links)`);
+
+  const manifestPath = resolvePath(fileURLToPath(new URL('../vault-index/manifest.json', import.meta.url)));
+  writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`, 'utf8');
+  console.log(`wrote ${manifestPath} (${manifest.totals.indexed} indexed files, ${manifest.totals.skipped} skipped)`);
 }
 
 if (import.meta.main) main();

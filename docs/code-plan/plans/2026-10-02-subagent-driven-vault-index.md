@@ -608,6 +608,45 @@ Recorded so a fresh session continues instead of re-deriving. Everything below i
 
 **Two things that must happen before T9 merges, both recorded in T9's step 3:** drop the 9 nodes whose `source_file` no longer exists (pre-deletion N8n stubs), and decide F7 on the 1,299 unattributable nodes already in the old graph.
 
+### 9b. Settled: `summary` is not a node field — do not re-investigate
+
+Investigated 2026-10-02 and closed. Recorded so a later session does not spend an
+hour re-deriving it.
+
+**The question.** 1,492 of 1,937 nodes (77%) carry no `summary` / `description` /
+`statement` field. That looked like a silent data loss: a claim-text hole that
+`validateChunk` reported as clean.
+
+**The answer: it is not a defect. The claim lives in `label`.** Verified against
+graphify 0.9.73 itself, not inferred from absence:
+
+| Evidence | Location |
+|---|---|
+| `REQUIRED_NODE_FIELDS = {"id", "label", "file_type", "source_file"}` — no `summary` | `site-packages/graphify/validate.py:6` |
+| Zero occurrences of `summary` where graphify builds nodes from LLM output | `site-packages/graphify/extract.py` |
+| graphify mints a node itself with no `summary` | `site-packages/graphify/build.py:131` |
+| The already-merged graph has **no** `summary` field on any of its 1,276 nodes | `graphify-out/graph.json` |
+
+**Positive control.** A node shaped exactly as `build.py:131` emits it was fed to
+`validateChunk`. It was rejected for `source_file: ""` and for nothing else — the
+missing `summary` was never mentioned. If `summary` were required, that control
+would have failed on it.
+
+**Conclusion.** `chunk-schema.mjs` already matches graphify's contract field for
+field. The contract template's example node has no `summary` either. The three
+different field names across 445 nodes are cosmetic, and **no consumer reads any
+of them** — so nothing is lost and no validator should be added to police a field
+nothing reads.
+
+**My first claim was wrong and the correction is the point.** I reported "77% of
+nodes will merge with an empty claim" before checking graphify. The rule from
+`AGENTS.md` applies: a plausible mechanism is not evidence. Two of my own
+searches misled me first — the `summary` grep hit nothing because `graphify.js` in
+`~/.config/opencode/plugins/` is a 644-byte bash-reminder shim that never touches
+nodes, and a bare-slug id search silently misses every id because ids carry a
+`concept--` / `rationale--` prefix. Find the real artifact before concluding from
+a failed search.
+
 ## 10. Session-Close Debt Sweep & Follow-Up Backlog
 
 | # | Follow-up (outcome + path + finish line) | Class | `defer: <ceiling>, <upgrade-trigger>` | Status |

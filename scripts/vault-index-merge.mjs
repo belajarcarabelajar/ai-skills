@@ -95,7 +95,8 @@
 // node id is ever removed from the union, so a member cannot have gone missing
 // here.
 
-import { writeFileSync, mkdirSync } from 'node:fs';
+import { writeFileSync, mkdirSync, readdirSync, readFileSync, statSync } from 'node:fs';
+import { resolve as resolvePath, sep } from 'node:path';
 
 import { validateChunk } from './lib/chunk-schema.mjs';
 
@@ -293,6 +294,233 @@ function ordered(record, keys) {
   const surplus = Object.keys(record).filter((k) => !keys.includes(k)).sort(cmp);
   for (const key of surplus) out[key] = record[key];
   return out;
+}
+
+// ---------------------------------------------------------------------------
+// pass 0 — decide which files are inputs, and which nodes can be attributed
+// ---------------------------------------------------------------------------
+
+/**
+ * The two chunk-naming schemes in `vault-index/semantic/`, matched by name.
+ *
+ * Matched EXPLICITLY and not by `chunk-*.json`, because the glob is the bug.
+ * Measured 2026-10-02: `chunk-rem-NNN.json` is 88 files citing 124 source
+ * files, `chunk-NNN.json` is 20 files citing 42, and the intersection of those
+ * two source-file sets is ZERO. So the old scheme is not a stale subset of the
+ * new one to be tidied away — it is 342 node ids the current pass never saw,
+ * 300 of which appear in no `chunk-rem-*` file, covering 38 transcripts that
+ * are still on disk (23.4 MB) and that no other pass will ever read, because
+ * `batches.json`'s 997-file worklist also intersects the old scheme zero
+ * times. An allowlist of `chunk-rem-*` alone therefore discards live,
+ * unindexed work while producing a clean node count and no error anywhere.
+ *
+ * Order is also the merge order, which matters: on a node-id collision the
+ * first record wins its non-empty fields, so the two schemes are read in a
+ * fixed order rather than in whatever order the filesystem returns.
+ */
+export const CHUNK_FILE_SCHEMES = Object.freeze([
+  Object.freeze({ scheme: 'rem', pattern: /^chunk-rem-(\d+)\.json$/ }),
+  Object.freeze({ scheme: 'bare', pattern: /^chunk-(\d+)\.json$/ }),
+]);
+
+/**
+ * Files in the same directory that are not chunks.
+ *
+ * Named rather than pattern-matched, because "everything that is not a chunk
+ * is skipped" is precisely the rule that hides a third naming scheme. An
+ * unrecognised `chunk-*` file is an error in {@link discoverChunkFiles}; this
+ * is the short list of things that are knowingly not chunks.
+ */
+export const NON_CHUNK_FILES = Object.freeze(['batches.json']);
+
+/**
+ * Where a `source_file` may resolve to.
+ *
+ * Both roots are searched for every path because the corpus straddles them:
+ * transcripts live in `conversations-archive` (moved out of the vault on
+ * 2026-10-02, so `05 - Conversations` no longer resolves under the vault
+ * root), and vault notes resolve under `Obsidian Vault`.
+ *
+ * Overridable rather than hardcoded at the call site, because a caller merging
+ * a corpus other than this machine's must not have to edit this file, and a
+ * root list that only ever names two directories on one host is a constant
+ * pretending to be a convention.
+ */
+export const DEFAULT_SOURCE_ROOTS = Object.freeze([
+  '/home/belajarcarabelajar/Documents/conversations-archive',
+  '/home/belajarcarabelajar/Dokumen/Obsidian Vault',
+]);
+
+/**
+ * How many dropped nodes `report.unattributableSamples` will name.
+ *
+ * Same bound, same reasoning as {@link MAX_DANGLING_SAMPLES}: the count stays
+ * exact, the evidence is sampled.
+ */
+const MAX_UNATTRIBUTABLE_SAMPLES = 20;
+
+/** Which scheme a filename belongs to, or null when no scheme claims it. */
+function schemeOf(filename) {
+  for (const { scheme, pattern } of CHUNK_FILE_SCHEMES) {
+    if (pattern.test(filename)) return scheme;
+  }
+  return null;
+}
+
+/**
+ * List the chunk files in a directory, in a deterministic order, grouped by
+ * scheme.
+ *
+ * Every `.json` entry must be classified: it is a chunk file, or it is named in
+ * {@link NON_CHUNK_FILES}, or it is an error. Non-JSON entries and
+ * subdirectories are ignored — they cannot be a chunk, so ignoring them cannot
+ * hide one — but a JSON file of unknown shape is refused, because the day
+ * somebody invents `chunk-v2-NNN.json` this is the line that stops it being
+ * read by nobody.
+ *
+ * @param {string} dir
+ * @returns {{files: Array<{name: string, path: string, scheme: string}>,
+ *   byScheme: Record<string, string[]>}}
+ * @throws {Error} on an unclassifiable `.json` file, naming the file and the
+ *   two patterns that were tried.
+ */
+export function discoverChunkFiles(dir) {
+  const files = [];
+  const byScheme = {};
+  for (const { scheme } of CHUNK_FILE_SCHEMES) byScheme[scheme] = [];
+
+  const entries = readdirSync(dir, { withFileTypes: true })
+    .filter((e) => e.isFile() && e.name.endsWith('.json'))
+    .map((e) => e.name)
+    .sort(cmp);
+
+  const unclassified = [];
+  for (const name of entries) {
+    if (NON_CHUNK_FILES.includes(name)) continue;
+    const scheme = schemeOf(name);
+    if (scheme === null) {
+      unclassified.push(name);
+      continue;
+    }
+    files.push({ name, path: `${dir}/${name}`, scheme });
+    byScheme[scheme].push(name);
+  }
+
+  if (unclassified.length > 0) {
+    const patterns = CHUNK_FILE_SCHEMES.map((s) => s.pattern.source).join(' or ');
+    throw new Error(
+      `unrecognised chunk filename(s) in ${dir}: ${unclassified.join(', ')}. ` +
+        `Known schemes are ${patterns}. A file this function cannot classify is an error, not a skip: ` +
+        `naming it as a scheme is one line here, and skipping it silently drops a pass's work.`,
+    );
+  }
+
+  return { files, byScheme };
+}
+
+/**
+ * Resolve a `source_file` against the roots, or null when nothing matches.
+ *
+ * Containment is checked, not just existence. A `source_file` of
+ * `../../../etc/passwd` resolves to a file that exists, so a bare
+ * `existsSync` would happily attribute a node to it; measured 2026-10-02, no
+ * real source_file escapes a root, and the check costs one string comparison
+ * per candidate and keeps a future extractor from manufacturing provenance
+ * that points outside the corpus.
+ */
+function resolveUnderRoots(sourceFile, roots) {
+  for (const root of roots) {
+    const abs = resolvePath(root, sourceFile);
+    if (abs !== root && !abs.startsWith(`${root}${sep}`)) continue;
+    try {
+      if (statSync(abs).isFile()) return abs;
+    } catch {
+      // Not there. Try the next root.
+    }
+  }
+  return null;
+}
+
+/**
+ * Read the chunk files and drop the nodes that can no longer be attributed.
+ *
+ * A node whose `source_file` no longer resolves is DROPPED and counted, and
+ * this is the plan's rule rather than a preference (T9 in
+ * `docs/code-plan/plans/2026-10-02-subagent-driven-vault-index.md`): the
+ * extraction was correct when it was written, and the files were legitimately
+ * deleted afterwards — the N8n raw captures went in commit `3a968b2`. Keeping
+ * the node re-creates the unattributable-node failure this project exists to
+ * remove, except now nobody can even say which note it came from. The count is
+ * reported so the deletion is visible instead of inferred from a node count
+ * that came out lower than the sum of its inputs.
+ *
+ * Links are NOT touched here. A link whose endpoint was dropped becomes
+ * dangling in `merge`, which already drops those and already counts them in
+ * `danglingLinksDropped`; doing it in both places would give the same loss two
+ * counters and make the report unable to say which cause applied.
+ *
+ * @param {string} dir
+ * @param {{roots?: string[]}} [opts]
+ * @returns {{chunks: Array<{name: string, chunk: object}>, report: object}}
+ *   `chunks` is in merge order. `report` carries `chunkFilesByScheme`,
+ *   `chunkFilesRead`, `nodesUnattributable`, `unattributableFiles` and
+ *   `unattributableSamples`.
+ */
+export function loadChunks(dir, opts = {}) {
+  const roots = opts?.roots ?? DEFAULT_SOURCE_ROOTS;
+  if (!Array.isArray(roots) || roots.length === 0) {
+    throw new TypeError(`roots must be a non-empty array of directories, got ${JSON.stringify(roots)}`);
+  }
+
+  const { files, byScheme } = discoverChunkFiles(dir);
+
+  const chunks = [];
+  const report = {
+    chunkFilesByScheme: byScheme,
+    chunkFilesRead: 0,
+    nodesUnattributable: 0,
+    unattributableFiles: 0,
+    unattributableSamples: [],
+  };
+  const missingFiles = new Set();
+  // One stat per distinct path, not per node: the old scheme alone cites 42
+  // paths across 343 nodes, and the worklist scale is 997 files.
+  const resolved = new Map();
+
+  for (const file of files) {
+    const parsed = JSON.parse(readFileSync(file.path, 'utf8'));
+    const kept = [];
+    for (const n of parsed?.nodes ?? []) {
+      const sourceFile = n !== null && typeof n === 'object' && !Array.isArray(n) ? filledString(n.source_file) : null;
+      if (sourceFile === null) {
+        // Not an attribution question — the peer validator in pass 1 rejects a
+        // missing source_file, and re-attributing one here would invent the
+        // very provenance this pass refuses to invent. Let it be rejected and
+        // named there.
+        kept.push(n);
+        continue;
+      }
+      let hit = resolved.get(sourceFile);
+      if (hit === undefined) {
+        hit = resolveUnderRoots(sourceFile, roots);
+        resolved.set(sourceFile, hit);
+      }
+      if (hit === null) {
+        report.nodesUnattributable += 1;
+        missingFiles.add(sourceFile);
+        if (report.unattributableSamples.length < MAX_UNATTRIBUTABLE_SAMPLES) {
+          report.unattributableSamples.push({ file: file.name, node: filledString(n.id), source_file: sourceFile });
+        }
+        continue;
+      }
+      kept.push(n);
+    }
+    chunks.push({ name: file.name, chunk: { ...parsed, nodes: kept } });
+    report.chunkFilesRead += 1;
+  }
+
+  report.unattributableFiles = missingFiles.size;
+  return { chunks, report };
 }
 
 // ---------------------------------------------------------------------------

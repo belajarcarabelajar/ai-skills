@@ -72,12 +72,17 @@ import {
   foldLabel,
   GHOST_POLICIES,
   DEFAULT_GHOST_POLICY,
+  discoverChunkFiles,
+  loadChunks,
+  DEFAULT_SOURCE_ROOTS,
+  CHUNK_FILE_SCHEMES,
+  NON_CHUNK_FILES,
   NODE_KEY_ORDER,
   LINK_KEY_ORDER,
   TOP_LEVEL_KEY_ORDER,
 } from './vault-index-merge.mjs';
 import { validateChunk, FILE_TYPES, RELATIONS, CONFIDENCES } from './lib/chunk-schema.mjs';
-import { mkdtempSync, rmSync, readFileSync } from 'node:fs';
+import { mkdtempSync, rmSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
@@ -1084,6 +1089,407 @@ describe('ghostPolicy', () => {
       const before = JSON.stringify(previous);
       merge(alphaChunk(), { previous, ghostPolicy });
       assert.equal(JSON.stringify(previous), before, `${ghostPolicy} left previous alone`);
+    }
+  });
+});
+
+// ---------- 11. which chunk files are inputs, and which nodes can be attributed ----------
+
+// Fixtures below write real files into a temp dir and a fake corpus of two
+// roots. Synthetic on purpose: the real numbers that motivate this section
+// (88 vs 20 files, 300 orphaned ids, 8 unattributable nodes) are measured in
+// the comment headers of the module under test, not asserted here, so that
+// adding a note to the vault cannot turn this suite red.
+
+// A corpus with two roots and one deliberately absent file. `tmpDir` returns
+// the root so the fixtures can name paths inside it that really exist.
+function corpus() {
+  const dir = mkdtempSync(join(tmpdir(), 'vault-merge-corpus-'));
+  const roots = [join(dir, 'conversations'), join(dir, 'vault')];
+  for (const root of roots) mkdirSync(join(root, 'notes'), { recursive: true });
+  writeFileSync(join(roots[0], 'notes', 'live-transcript.md'), '# transcript\n', 'utf8');
+  writeFileSync(join(roots[1], 'notes', 'live-note.md'), '# note\n', 'utf8');
+  // Referenced by `deleted.md` below and never written, standing in for the
+  // N8n raw captures deleted in commit 3a968b2.
+  return { dir, roots };
+}
+
+// A semantic dir holding one file per naming scheme, plus chunks that point at
+// the corpus: live, live, and deleted.
+function schemeDir(files) {
+  const dir = mkdtempSync(join(tmpdir(), 'vault-merge-scheme-'));
+  for (const [name, nodes] of Object.entries(files)) {
+    writeFileSync(join(dir, name), JSON.stringify({ nodes, links: [] }), 'utf8');
+  }
+  return dir;
+}
+
+function chunkNode(id, sourceFile) {
+  return node(id, { source_file: sourceFile });
+}
+
+describe('discoverChunkFiles', () => {
+  test('BOTH naming schemes are read, not just the current one', () => {
+    // The whole reason this function exists. `chunk-NNN.json` is the older
+    // layout; a glob would catch it, an allowlist of `chunk-rem-*` would not,
+    // and the difference is 300 node ids covering 38 live transcripts.
+    const dir = schemeDir({
+      'chunk-rem-001.json': [chunkNode('a', 'notes/live.md')],
+      'chunk-rem-002.json': [chunkNode('b', 'notes/live.md')],
+      'chunk-001.json': [chunkNode('c', 'notes/live.md')],
+      'chunk-002.json': [chunkNode('d', 'notes/live.md')],
+    });
+    try {
+      const { files, byScheme } = discoverChunkFiles(dir);
+      assert.deepEqual(files.map((f) => f.name), [
+        'chunk-001.json',
+        'chunk-002.json',
+        'chunk-rem-001.json',
+        'chunk-rem-002.json',
+      ]);
+      assert.equal(byScheme.rem.length, 2);
+      assert.equal(byScheme.bare.length, 2, 'the older scheme is read too');
+      assert.deepEqual(byScheme.bare, ['chunk-001.json', 'chunk-002.json']);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  test('the two schemes do not shadow each other on the same number', () => {
+    const dir = schemeDir({
+      'chunk-007.json': [chunkNode('from-old', 'notes/live.md')],
+      'chunk-rem-007.json': [chunkNode('from-new', 'notes/live.md')],
+    });
+    try {
+      const { byScheme } = discoverChunkFiles(dir);
+      assert.deepEqual(byScheme.bare, ['chunk-007.json']);
+      assert.deepEqual(byScheme.rem, ['chunk-rem-007.json']);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  test('batches.json is not mistaken for a chunk', () => {
+    const dir = schemeDir({
+      'batches.json': [chunkNode('worklist', 'notes/live.md')],
+      'chunk-rem-001.json': [chunkNode('a', 'notes/live.md')],
+    });
+    try {
+      const { files } = discoverChunkFiles(dir);
+      assert.deepEqual(files.map((f) => f.name), ['chunk-rem-001.json']);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  test('an unrecognised filename is an ERROR, naming the file and both patterns', () => {
+    // Not a skip. A file this function cannot classify is either a naming
+    // scheme nobody told it about, or a chunk that would be read by nobody —
+    // and the second case is the silent loss the module header argues about.
+    const dir = schemeDir({
+      'chunk-rem-001.json': [chunkNode('a', 'notes/live.md')],
+      'chunk-v2-001.json': [chunkNode('b', 'notes/live.md')],
+    });
+    try {
+      assert.throws(() => discoverChunkFiles(dir), /unrecognised chunk filename/);
+      assert.throws(() => discoverChunkFiles(dir), /chunk-v2-001\.json/);
+      assert.throws(() => discoverChunkFiles(dir), /chunk-rem-\(\\d\+\)\\\.json\$/, 'the message lists both schemes');
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  test('every unrecognised filename is named, not just the first', () => {
+    const dir = schemeDir({
+      'chunk-a.json': [chunkNode('a', 'notes/live.md')],
+      'chunk-b.json': [chunkNode('b', 'notes/live.md')],
+    });
+    try {
+      assert.throws(() => discoverChunkFiles(dir), /chunk-a\.json, chunk-b\.json/);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  test('the order does not depend on the filesystem returning sorted entries', () => {
+    const dir = schemeDir({
+      'chunk-rem-010.json': [chunkNode('a', 'notes/live.md')],
+      'chunk-rem-002.json': [chunkNode('b', 'notes/live.md')],
+      'chunk-003.json': [chunkNode('c', 'notes/live.md')],
+    });
+    try {
+      const first = discoverChunkFiles(dir).files.map((f) => f.name);
+      const second = discoverChunkFiles(dir).files.map((f) => f.name);
+      assert.deepEqual(first, second);
+      // Scheme order is the merge order: `bare` first, because the older pass
+      // supplied the nodes a later pass would otherwise only half-fill.
+      assert.deepEqual(first, ['chunk-003.json', 'chunk-rem-002.json', 'chunk-rem-010.json']);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
+});
+
+describe('loadChunks', () => {
+  test('keeps a node whose file is under either root', () => {
+    const { dir, roots } = corpus();
+    const chunks = schemeDir({
+      'chunk-rem-001.json': [
+        chunkNode('from-transcripts', 'notes/live-transcript.md'),
+        chunkNode('from-vault', 'notes/live-note.md'),
+      ],
+    });
+    try {
+      const { chunks: loaded, report } = loadChunks(chunks, { roots });
+      assert.equal(report.nodesUnattributable, 0);
+      assert.deepEqual(loaded[0].chunk.nodes.map((n) => n.id), ['from-transcripts', 'from-vault']);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+      rmSync(chunks, { recursive: true, force: true });
+    }
+  });
+
+  test('DROPS the nodes of a deleted file, and counts them', () => {
+    // Measured on the real corpus: 8 nodes across 4 deleted N8n raw captures.
+    const { dir, roots } = corpus();
+    const chunks = schemeDir({
+      'chunk-rem-001.json': [
+        chunkNode('survivor', 'notes/live-note.md'),
+        chunkNode('gone-1', 'Raw Captures/n8n Docs 26.md'),
+        chunkNode('gone-2', 'Raw Captures/Specify user folder path.md'),
+        chunkNode('gone-3', 'Raw Captures/n8n Docs 16.md'),
+        chunkNode('gone-4', 'Raw Captures/User management SMTP.md'),
+      ],
+    });
+    try {
+      const { chunks: loaded, report } = loadChunks(chunks, { roots });
+      assert.deepEqual(loaded[0].chunk.nodes.map((n) => n.id), ['survivor'], 'only the attributable node survives');
+      assert.equal(report.nodesUnattributable, 4, 'every dropped node is counted, not just files');
+      assert.equal(report.unattributableFiles, 4);
+      assert.deepEqual(report.unattributableSamples.map((s) => s.node).sort(), ['gone-1', 'gone-2', 'gone-3', 'gone-4']);
+      assert.equal(report.unattributableSamples[0].file, 'chunk-rem-001.json', 'the sample names the chunk to look at');
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+      rmSync(chunks, { recursive: true, force: true });
+    }
+  });
+
+  test('one deleted file with several nodes is counted per NODE and per FILE', () => {
+    // The SMTP/2FA note alone carries four nodes on the real corpus, so
+    // conflating the two counts would understate the loss fourfold.
+    const { dir, roots } = corpus();
+    const chunks = schemeDir({
+      'chunk-rem-001.json': [
+        chunkNode('keep', 'notes/live-note.md'),
+        chunkNode('s1', 'Raw Captures/User management SMTP.md'),
+        chunkNode('s2', 'Raw Captures/User management SMTP.md'),
+        chunkNode('s3', 'Raw Captures/User management SMTP.md'),
+        chunkNode('s4', 'Raw Captures/User management SMTP.md'),
+      ],
+    });
+    try {
+      const { report } = loadChunks(chunks, { roots });
+      assert.equal(report.nodesUnattributable, 4);
+      assert.equal(report.unattributableFiles, 1);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+      rmSync(chunks, { recursive: true, force: true });
+    }
+  });
+
+  test('a node missing from BOTH roots is dropped too', () => {
+    // Not only the N8n case. Any path that resolves under neither root is
+    // unattributable, and the check must not be specific to one deleted
+    // directory.
+    const { dir, roots } = corpus();
+    const chunks = schemeDir({
+      'chunk-rem-001.json': [chunkNode('nowhere', '03 - Resources/Nothing/ever/filed this.md')],
+    });
+    try {
+      const { chunks: loaded, report } = loadChunks(chunks, { roots });
+      assert.deepEqual(loaded[0].chunk.nodes, []);
+      assert.equal(report.nodesUnattributable, 1);
+      assert.equal(report.unattributableFiles, 1);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+      rmSync(chunks, { recursive: true, force: true });
+    }
+  });
+
+  test('a source_file that escapes every root is not attributed to what it points at', () => {
+    // `../../etc/passwd` exists. Attributing a node to it would manufacture a
+    // provenance record pointing outside the corpus, which is the same defect
+    // as guessing a title during re-attribution.
+    const { dir, roots } = corpus();
+    const chunks = schemeDir({
+      'chunk-rem-001.json': [chunkNode('escapee', '../../../etc/passwd')],
+    });
+    try {
+      const { report } = loadChunks(chunks, { roots });
+      assert.equal(report.nodesUnattributable, 1, 'an escaping path is not an existing file for this purpose');
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+      rmSync(chunks, { recursive: true, force: true });
+    }
+  });
+
+  test('the dropped nodes are gone from the merged graph, and their links are counted once', () => {
+    // The end-to-end consequence: a link into a dropped node cannot survive,
+    // and the loss is reported by exactly one counter. If loadChunks started
+    // pruning links too, this would become two reasons for one dropped edge.
+    const { dir, roots } = corpus();
+    const chunksDir = schemeDir({
+      'chunk-rem-001.json': [
+        chunkNode('kept', 'notes/live-note.md'),
+        chunkNode('dropped', 'Raw Captures/deleted.md'),
+      ],
+    });
+    const chunksPath = join(chunksDir, 'chunk-rem-001.json');
+    writeFileSync(
+      chunksPath,
+      JSON.stringify({
+        nodes: [chunkNode('kept', 'notes/live-note.md'), chunkNode('dropped', 'Raw Captures/deleted.md')],
+        links: [link('kept', 'dropped')],
+      }),
+      'utf8',
+    );
+    try {
+      const { chunks, report } = loadChunks(chunksDir, { roots });
+      const { graph, report: merged } = merge(chunks);
+      assert.deepEqual(graph.nodes.map((n) => n.id), ['kept']);
+      assert.equal(graph.links.length, 0);
+      assert.equal(report.nodesUnattributable, 1);
+      assert.equal(merged.danglingLinksDropped, 1, 'counted by merge, once, for one reason');
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+      rmSync(chunksDir, { recursive: true, force: true });
+    }
+  });
+
+  test('an unattributable node is never reported as a validation failure instead', () => {
+    // If the drop did not happen, pass 1 would accept the node happily — a
+    // repo-relative path is all the validator checks — and the unattributable
+    // node would reach graph.json looking like any other. This is the whole
+    // reason the drop exists.
+    const { dir, roots } = corpus();
+    const chunks = schemeDir({
+      'chunk-rem-001.json': [chunkNode('dropped', 'Raw Captures/deleted.md')],
+    });
+    try {
+      const { chunks: loaded } = loadChunks(chunks, { roots });
+      const { report } = merge(loaded);
+      assert.equal(report.chunksRejected, 0);
+      assert.equal(report.nodes, 0);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+      rmSync(chunks, { recursive: true, force: true });
+    }
+  });
+
+  test('nodes from BOTH schemes reach the merge, so the old pass is not dropped', () => {
+    // The regression this pins: an allowlist of `chunk-rem-*` alone would
+    // emit a clean graph with these 300 real nodes simply absent.
+    const { dir, roots } = corpus();
+    const chunks = schemeDir({
+      'chunk-rem-001.json': [chunkNode('new-pass', 'notes/live-note.md')],
+      'chunk-001.json': [chunkNode('old-pass-only', 'notes/live-transcript.md')],
+    });
+    try {
+      const { chunks: loaded, report } = loadChunks(chunks, { roots });
+      assert.equal(report.chunkFilesRead, 2);
+      assert.deepEqual(report.chunkFilesByScheme.rem, ['chunk-rem-001.json']);
+      assert.deepEqual(report.chunkFilesByScheme.bare, ['chunk-001.json']);
+      const { graph } = merge(loaded);
+      assert.deepEqual(graph.nodes.map((n) => n.id), ['new-pass', 'old-pass-only']);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+      rmSync(chunks, { recursive: true, force: true });
+    }
+  });
+
+  test('a node with no source_file is left for the validator, not dropped here', () => {
+    // Re-attributing it would invent the provenance this module refuses to
+    // invent, and dropping it here would report it under a different counter
+    // than the ghost policy that owns it. The validator rejects and names it.
+    const { dir, roots } = corpus();
+    const chunks = schemeDir({
+      'chunk-rem-001.json': [{ id: 'no-source', label: 'No Source', file_type: 'concept', source_file: null }],
+    });
+    try {
+      const { chunks: loaded, report } = loadChunks(chunks, { roots });
+      assert.equal(report.nodesUnattributable, 0, 'a ghost is not an unattributable node');
+      assert.equal(loaded[0].chunk.nodes.length, 1);
+      const merged = merge(loaded).report;
+      assert.equal(merged.chunksRejected, 1, 'the peer validator still refuses it');
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+      rmSync(chunks, { recursive: true, force: true });
+    }
+  });
+
+  test('the same path is resolved once, and each node keeps its own source_file', () => {
+    const { dir, roots } = corpus();
+    const chunks = schemeDir({
+      'chunk-rem-001.json': [
+        chunkNode('a', 'notes/live-note.md'),
+        chunkNode('b', 'notes/live-note.md'),
+        chunkNode('c', 'notes/live-note.md'),
+      ],
+    });
+    try {
+      const { chunks: loaded } = loadChunks(chunks, { roots });
+      assert.deepEqual(
+        loaded[0].chunk.nodes.map((n) => n.source_file),
+        ['notes/live-note.md', 'notes/live-note.md', 'notes/live-note.md'],
+        'attribution resolves the path, it does not rewrite the field',
+      );
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+      rmSync(chunks, { recursive: true, force: true });
+    }
+  });
+
+  test('the unattributable sample is bounded while the count stays exact', () => {
+    const { dir, roots } = corpus();
+    const nodes = [];
+    for (let i = 0; i < 30; i += 1) nodes.push(chunkNode(`gone-${i}`, `Raw Captures/missing-${i}.md`));
+    const chunks = schemeDir({ 'chunk-rem-001.json': nodes });
+    try {
+      const { report } = loadChunks(chunks, { roots });
+      assert.equal(report.nodesUnattributable, 30, 'the count is not sampled');
+      assert.equal(report.unattributableFiles, 30);
+      assert.equal(report.unattributableSamples.length, 20, 'the evidence is, so the report stays readable');
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+      rmSync(chunks, { recursive: true, force: true });
+    }
+  });
+
+  test('an empty roots list is refused rather than dropping every node', () => {
+    const { dir, roots } = corpus();
+    const chunks = schemeDir({ 'chunk-rem-001.json': [chunkNode('a', 'notes/live-note.md')] });
+    try {
+      assert.throws(() => loadChunks(chunks, { roots: [] }), /roots must be a non-empty array/);
+      assert.throws(() => loadChunks(chunks, { roots: roots.slice(0, 0) }), /roots must be a non-empty array/);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+      rmSync(chunks, { recursive: true, force: true });
+    }
+  });
+
+  test('a directory with no chunk files is empty, not an error', () => {
+    // A first run over a fresh semantic dir has nothing to merge; that is not a
+    // defect and must not be reported as one.
+    const dir = mkdtempSync(join(tmpdir(), 'vault-merge-empty-'));
+    try {
+      const { files } = discoverChunkFiles(dir);
+      assert.deepEqual(files, []);
+      const { chunks, report } = loadChunks(dir, { roots: DEFAULT_SOURCE_ROOTS });
+      assert.deepEqual(chunks, []);
+      assert.equal(report.chunkFilesRead, 0);
+      assert.equal(report.nodesUnattributable, 0);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
     }
   });
 });

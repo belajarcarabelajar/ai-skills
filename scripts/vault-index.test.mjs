@@ -374,10 +374,19 @@ live('the real vault reports the numbers measured on 2026-10-02', { timeout: 300
   // ordinary edit trains people to ignore it. The invariants below are the ones
   // that would indicate a real problem: a worklist that is a small fraction of
   // the corpus, and a boundary that is still excluding the secrets directory.
+  //
+  // The bands were re-measured 2026-10-02 after two deliberate corpus changes:
+  // commit 3a968b2 deleted the 748 N8n raw-capture files, and .graphifyignore
+  // GROUP 7 (c20b3be) excluded 31 tool-test transcripts. Eligible fell 2,360 ->
+  // 1,584. The floors below are set so that deleting notes again does not go
+  // red on an ordinary edit, while a scanner that silently stopped honouring
+  // .gitignore or .graphifyignore still would -- that failure inflates eligible
+  // by thousands, which is the direction these bands are actually guarding.
   const { eligible, worklist, counts } = scan(VAULT);
 
-  assert.ok(eligible.length > 2000, `expected >2000 eligible files, got ${eligible.length}`);
-  assert.ok(worklist.length > 1000, `expected >1000 unindexed files, got ${worklist.length}`);
+  assert.ok(eligible.length > 1200, `expected >1200 eligible files, got ${eligible.length}`);
+  assert.ok(eligible.length < 2500, `eligible ${eligible.length} is implausibly high — is .graphifyignore still being honoured?`);
+  assert.ok(worklist.length > 700, `expected >700 unindexed files, got ${worklist.length}`);
   assert.ok(
     counts.indexed > 400 && counts.indexed < 1000,
     `indexed count ${counts.indexed} is outside the plausible band`,

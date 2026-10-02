@@ -180,7 +180,16 @@ def main(argv=None):
     ap.add_argument("--head", type=int, default=0, help="print only the first N lines")
     a = ap.parse_args(argv)
 
-    with open(a.file, encoding="utf-8", errors="replace") as fh:
+    # newline='' is REQUIRED, not a style choice. Python's universal-newline
+    # handling splits on a bare \r as well as \r\n and \n, so a transcript
+    # containing 36 stray carriage returns reports line numbers that are up to
+    # 36 too high from that point onward. Measured on one real transcript: the
+    # script reported 20957 where the true 1-indexed line was 20921. The
+    # `NNNNN | ` prefix exists so a subagent can write a real source_location
+    # from it, and every such location downstream of a stray \r was silently
+    # wrong. Splitting on '\n' alone keeps the numbering honest for a file whose
+    # line endings are already broken.
+    with open(a.file, encoding="utf-8", errors="replace", newline="") as fh:
         text = fh.read()
 
     kept, stats = filter_text(text)

@@ -202,6 +202,58 @@ Then the rule:
 If you cannot read the existing ids, say so in your report. Do not quietly
 emit batch-local generics and let the merge discover the collisions.
 
+## 5b. What counts as source
+
+A transcript is a record of a session, so it contains several kinds of text,
+and only some of them are the note speaking.
+
+- **Citable:** what the user said, what the assistant concluded, and what the
+  output of a run actually showed. Those are the session's own record.
+- **Not citable:** a dispatch prompt or task brief. `rem-094`, `rem-142`,
+  `rem-144` and `rem-149` anchored concepts on the text of a subagent's own
+  instructions; `rem-104` and `rem-122` avoided it. The second practice is the
+  correct one, and it is now the rule rather than an inconsistency.
+
+The distinction matters because a prompt states what was *asked for*, and a
+reader will take it as what happened. "Extract the failing anchors" is not a
+finding that there were failing anchors. When a user message itself settles
+something — a decision, a requirement, a correction — it is citable, because
+that is the user speaking in the note. The prompt that a harness then handed to
+a worker is not.
+
+A practical test: if the sentence would still be true with the dispatch removed
+from the transcript, it is source. If it only exists because someone asked for
+it, it is a brief.
+
+## 5c. Two chunks, one id
+
+`§5a` tells you when to reuse an id. This tells the merge what to do when two
+chunks already disagree, because 5 chunks have emitted conflicting `label` and
+`norm_label` values under one id, and 5 more reused an id whose `source_file`
+names a different transcript. There is no merge runner yet, so this is the
+policy it will implement:
+
+- **The rationale decides.** Compare the two nodes with
+  `./scripts/check-anchors.mjs`; the one whose quoted spans verify keeps the id.
+  A label whose only support is an anchor that does not resolve is the node that
+  is wrong, not the other one.
+- **If both verify, take the more specific label.** The narrower claim is the
+  one a reader is looking for, and `§5a` already says a narrower claim deserves
+  its own id — so a conflict means one chunk over-generalised. Prefer the label
+  that names the mechanism over the one that names the topic.
+- **`norm_label` is recomputed from the winning `label`.** It is a derived
+  field, never a source of truth, so keeping the loser's value only preserves a
+  contradiction in a place where nothing will notice it.
+- **`source_file` is set to the file its own primary anchor cites.** A rationale
+  string already carries its own path per anchor, and a node legitimately cites
+  more than one transcript — so a differing `source_file` is not by itself a
+  conflict. It is a conflict only when the file does not resolve at all.
+
+The general shape: the citation is the evidence, so the citation arbitrates.
+Everything the schema duplicates from it — `source_location`, `source_file`,
+`norm_label` — is a convenience that should be rewritten to agree with the
+evidence rather than treated as a second opinion.
+
 ## 6. Verification — run this yourself before reporting
 
 From `/home/belajarcarabelajar/ai-skills`:

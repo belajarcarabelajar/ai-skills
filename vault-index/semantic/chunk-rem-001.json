@@ -24,7 +24,7 @@
       "source_location": "L2327",
       "norm_label": "high fan-out floor",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md:L2327] Ten small chunks beat five massive ones",
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md:L02327] - **High Fan-Out Floor** — target 10+ narrow subagents when the task plausibly supports it, with the explicit rationale that ten small chunks beat five massive ones.",
         "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md:L2340] RAM/timeout guardrails kept above the fan-out default"
       ]
     },
@@ -79,7 +79,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
       "source_location": "L4580",
       "norm_label": "portable instruction content",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md:L4580] Only 12-15% of the pasted material is portable instruction content"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md:L04580] Also I should note one important structural point: the pasted material is mostly harness/system plumbing, and only a small fraction (maybe 12-15%) is portable instruction content."
+      ]
     },
     {
       "id": "concept--completion-audit",

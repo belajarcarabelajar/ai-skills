@@ -47,7 +47,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cover-dimensions-and-ratio-reconcile [ses_f1657096affeCvcc1c5iTFodvs].md",
       "source_location": "L10287",
       "norm_label": "the img-intrinsic-size guard asserts over every img tag instead of the first regex match",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cover-dimensions-and-ratio-reconcile [ses_f1657096affeCvcc1c5iTFodvs].md:L10261] The old single-match regex is why BlogHero.astro's second image, the author avatar, was never reached by the test. assetOf() classifies each tag by the expression behind its src and reports an unclassifiable one instead of skipping it, and assetsIn() asserts per file which assets must still be present so a deleted image cannot read as a pass."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cover-dimensions-and-ratio-reconcile [ses_f1657096affeCvcc1c5iTFodvs].md:L10287] Two supporting pieces: `assetOf()` classifies each tag by the expression behind its `src` and reports an unclassifiable one instead of skipping it, and `assetsIn()` asserts per file which assets must still be present so a deleted image cannot read as a pass."
+      ]
     },
     {
       "id": "concept--lcp-preload-guard-rewritten-to-the-invariant-under-its-stale-reason",

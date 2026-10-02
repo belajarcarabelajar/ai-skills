@@ -42,7 +42,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - fix-silent-failure-paths [ses_f174462a9ffe0d2S8zrqQRLCf7].md",
       "source_location": "L6795",
       "norm_label": "confirmation was kept rather than changed to switch for the smartshorthand enable switch",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - fix-silent-failure-paths [ses_f174462a9ffe0d2S8zrqQRLCf7].md:L6795] This switch is not a plain boolean flip — the ON path can open the model-download dialog, i.e. it is a \"confirm the enabling decision\" moment, which is what CONFIRMATION conveys. SWITCH is the codebase's key for plain toggles."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - fix-silent-failure-paths [ses_f174462a9ffe0d2S8zrqQRLCf7].md:L06795] Reasoning: this switch is not a plain boolean flip — the ON path can open the model-download dialog, i.e. it is a \"confirm the enabling decision\" moment, which is what `CONFIRMATION` conveys."
+      ]
     },
     {
       "id": "concept--red-suite-attributed-to-a-concurrent-sibling-by-stashing",
@@ -62,7 +64,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - c8-session-and-splash-surfaces [ses_f1069c84fffejHMuwvaB2szvTW].md",
       "source_location": "L41",
       "norm_label": "kwin effect runtime state is the d bus activeeffects list not the key in kwinrc",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - c8-session-and-splash-surfaces [ses_f1069c84fffejHMuwvaB2szvTW].md:L7860] kwinrc only records what was asked for. Do not read the effect's key out of kwinrc and call that its runtime state; the runtime list is the state."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - c8-session-and-splash-surfaces [ses_f1069c84fffejHMuwvaB2szvTW].md:L00041] Do not read the effect's key out of kwinrc and call that its runtime state; the runtime list is the state."
+      ]
     },
     {
       "id": "concept--session-observation-boundary-key-enforced-by-verify",
@@ -80,7 +84,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - c8-session-and-splash-surfaces [ses_f1069c84fffejHMuwvaB2szvTW].md",
       "source_location": "L9614",
       "norm_label": "the login greeter that actually ran was the theme embedded in the sddm greeter binary not the on disk breeze theme",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - c8-session-and-splash-surfaces [ses_f1069c84fffejHMuwvaB2szvTW].md:L9614] journalctl -b SYSLOG_IDENTIFIER=sddm-greeter-qt6 shows Loading qrc:/theme/Main.qml..., so the 13 Kirigami duration refs in /usr/share/sddm/themes/breeze/Main.qml describe a candidate, not what was displayed (sddm.conf CurrentTheme= is empty). Recorded as SESSION_LOGIN_DIALOG_RESOLVED=no."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - c8-session-and-splash-surfaces [ses_f1069c84fffejHMuwvaB2szvTW].md:L09614] So the 13 Kirigami duration refs in `/usr/share/sddm/themes/breeze/Main.qml` describe a *candidate*, not what was displayed (`sddm.conf CurrentTheme=` is empty)."
+      ]
     },
     {
       "id": "concept--current-look-and-feel-has-no-logout-dir-so-the-fallback-is-runtime-only",
@@ -107,7 +113,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - c8-session-and-splash-surfaces [ses_f1069c84fffejHMuwvaB2szvTW].md",
       "source_location": "L9608",
       "norm_label": "listofeffects returning 54 names with all six among them is the positive control that proves the empty activeeffects reading is real",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - c8-session-and-splash-surfaces [ses_f1069c84fffejHMuwvaB2szvTW].md:L9608] So the empty activeEffects is a real reading, not a dead probe. The plan says 51 and this host reports 54; T3 should record that."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - c8-session-and-splash-surfaces [ses_f1069c84fffejHMuwvaB2szvTW].md:L09608] Positive control: `listOfEffects` returns 54 names and all six are among them, so the empty `activeEffects` is a real reading, not a dead probe. (Plan says 51 — this host reports **54**; T3 should record that.)"
+      ]
     }
   ],
   "links": [

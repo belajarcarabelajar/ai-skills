@@ -53,7 +53,9 @@
       "source_location": "L7587",
       "norm_label": "job id added as an extra event key not a payload change",
       "description": "todoist-sync-progress gains a job_id extra key while todoist-sync-started / -complete / -error keep their exact payload shapes; two new job-scoped events carry {job_id, ...}. todoist_get_sync_status exposes activeJob for remount recovery. No new command registration was needed.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t6-todoist-transactional-sync [ses_f20039a56ffeKhffnCGEoD418C].md:L7587] \"Correlation without breaking the UI: `todoist-sync-progress` carries `job_id` (extra key, existing readers unaffected)\" — the constraint was that todoist-sync-complete stays a count and todoist-sync-error stays a string because the toast reads them."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t6-todoist-transactional-sync [ses_f20039a56ffeKhffnCGEoD418C].md:L07587] - Correlation without breaking the UI: `todoist-sync-progress` carries `job_id` (extra key, existing readers unaffected); `todoist-sync-started`, `todoist-sync-complete` (still a count, still used in the toast), and `todoist-sync-error` (still a string, still used in the toast) keep their payloads; new `todoist-sync-job-complete` and `todoist-sync-job-error` carry `{job_id, ...}`; `todoist_get_sync_status` now exposes `activeJob` for remount recovery."
+      ]
     },
     {
       "id": "concept--tail-expression-chain-extends-the-mappedrows-borrow",
@@ -83,7 +85,9 @@
       "source_location": "L8144",
       "norm_label": "claim refusal string unreachable through the update path",
       "description": "With only the mapping seeded, upsert_task_for_todoist_with_conn rechecks at mutation time, finds the committed owner, and takes the update path. update_task_with_conn then fails with \"Task not found (local-owner)\". The \"already owned\" string comes only from the create path's claim refusal, which cannot be reached single-threaded once the recheck sees the committed owner, so a test asserting that literal would fail deterministically.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t6-todoist-transactional-sync [ses_f20039a56ffeKhffnCGEoD418C].md:L8144] \"The `\\\"already owned\\\"` string only comes from the create path's claim refusal (`create_task_and_claim_mapping_with_conn`), which is unreachable single-threaded once the recheck sees the committed owner. The specified substring would fail deterministically.\" Reported as a deliberate deviation from the delegation that specified the substring."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t6-todoist-transactional-sync [ses_f20039a56ffeKhffnCGEoD418C].md:L08144] The `\"already owned\"` string only comes from the create path's claim refusal (`create_task_and_claim_mapping_with_conn`), which is unreachable single-threaded once the recheck sees the committed owner."
+      ]
     },
     {
       "id": "concept--day-range-control-is-not-a-tab-so-tablist-is-deleted",
@@ -173,7 +177,9 @@
       "source_location": "L7987",
       "norm_label": "second dashboard run competes for a shared pid file and tunnel",
       "description": "start.sh writes one shared pid file at $STATE_DIR/tli-dashboard.pid and starts a cloudflared tunnel whenever the binary and config exist. On this host cloudflared IS installed and the config exists, so a plain second run on another port would both clobber the live dashboard's pid handle and start a second tunnel on the same hostname. Isolated with TLI_STATE_DIR plus a nonexistent TLI_CLOUDFLARED_CONFIG; the shared pid file was already stale at 592337 while the live process was 489155.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-02 - t3-aria-contract-and-icon [ses_f05fcff42ffeEKlJqJfgHuvb4q].md:L7987] \"`cloudflared` **is** installed on this host, so a plain run would have started a second tunnel competing with the user's, and would have overwritten the shared pid file `~/.local/state/tli-dashboard.pid` (already stale at 592337, not 489155, before I started).\" The two hazards are enumerated separately at L5521 and L5524: \"Overwrite the shared pid file\" and \"So I must use TLI_STATE_DIR (private) and TLI_CLOUDFLARED_CONFIG (nonexistent path) to avoid both.\""
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-02 - t3-aria-contract-and-icon [ses_f05fcff42ffeEKlJqJfgHuvb4q].md:L07987] I isolated my run with `TLI_STATE_DIR=/tmp/...` and a nonexistent `TLI_CLOUDFLARED_CONFIG`, which mattered: `cloudflared` **is** installed on this host, so a plain run would have started a second tunnel competing with the user's, and would have overwritten the shared pid file `~/.local/state/tli-dashboard.pid` (already stale at 592337, not 489155, before I started)."
+      ]
     },
     {
       "id": "concept--bun-test-on-a-missing-file-exits-zero-fakes-an-idempotent-skip",

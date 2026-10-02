@@ -41,7 +41,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - t1-gui-verbatim-references [ses_f0be3b5e7ffeGwkG494moyWSAJ].md",
       "source_location": "L4021",
       "norm_label": "single-pass entity decoder with &amp; decoded last",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - t1-gui-verbatim-references [ses_f0be3b5e7ffeGwkG494moyWSAJ].md:L4021] Unknown entities were left intact so the zero-escape test would fail loudly"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - t1-gui-verbatim-references [ses_f0be3b5e7ffeGwkG494moyWSAJ].md:L04021] **Decoder:** decimal + hex + named map (`nbsp`→U+00A0, `pi`, `partial`, `lt`, `gt`, `int`, `quot`, `apos`; `&amp;` last, single-pass); unknown entities left intact so zero-escapes test fails loudly."
+      ]
     },
     {
       "id": "concept--media-volume-scale-zero-causes-digital-silence",

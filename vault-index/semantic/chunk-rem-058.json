@@ -24,7 +24,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t12-release-history-and-tooling [ses_f1d9670aeffeec0wbGK9b1oift].md",
       "source_location": "L55",
       "norm_label": "windows source-vs-published version distinction",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t12-release-history-and-tooling [ses_f1d9670aeffeec0wbGK9b1oift].md:L67] Package managers must be fed the published version because source and published already diverge"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t12-release-history-and-tooling [ses_f1d9670aeffeec0wbGK9b1oift].md:L00055] - **Windows source (0.6.849) != Windows published (0.6.838).** Package managers (winget/scoop/choco) must use the **published** Windows version and URL, NOT the source version."
+      ]
     },
     {
       "id": "concept--platform-scoped-release-tooling-contract",
@@ -69,7 +71,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c9-ci-gate-coverage-review [ses_f083c33b1ffejml6AAF80f5OGj].md",
       "source_location": "L791",
       "norm_label": "temporarily disabled github actions workflows",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c9-ci-gate-coverage-review [ses_f083c33b1ffejml6AAF80f5OGj].md:L791] Security and dispatch workflows were disabled because the GitHub Actions runner-minute limit was exhausted"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c9-ci-gate-coverage-review [ses_f083c33b1ffejml6AAF80f5OGj].md:L00791] Both disabled: `gemini-dispatch.yml:4` `# TEMPORARILY DISABLED 2026-09-28 (GitHub Actions runner-minute limit).`; `security-scan.yml:4` same (triggers now only `workflow_dispatch:`; `pull_request` and `schedule` commented out)."
+      ]
     },
     {
       "id": "concept--merge-gate-check-taxonomy",

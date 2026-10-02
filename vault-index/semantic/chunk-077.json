@@ -8,7 +8,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-batch-d-10-files [ses_f17699445ffeq07cbExFDI9PT1].md",
       "source_location": "L40",
       "norm_label": "audio cue pinning test",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-batch-d-10-files [ses_f17699445ffeq07cbExFDI9PT1].md:L40] Exact key plus count is what catches a double cue"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-batch-d-10-files [ses_f17699445ffeq07cbExFDI9PT1].md:L00040] Assert the EXACT key AND the count — `toHaveBeenCalledTimes(1)` is mandatory, it is what catches a double cue."
+      ]
     },
     {
       "id": "concept--stop-propagation-double-cue-guard",

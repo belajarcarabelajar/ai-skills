@@ -67,7 +67,7 @@
       "source_location": "L29050",
       "norm_label": "light-dark() css function for theming",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md:L34510] light-dark() chosen over prefers-color-scheme blocks",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md:L29050] Important design decision from this evidence: since `light-dark()` is Baseline since May 2024 and this dashboard is served to a personal phone/browser, `light-dark()` is the right mechanism over a `prefers-color-scheme` media query block — one token definition, no duplicated rule sets, and it works with the existing `color-scheme: light dark` declaration already on `:root`.",
         "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md:L29795] third-party font request leaks visitor IP"
       ]
     },

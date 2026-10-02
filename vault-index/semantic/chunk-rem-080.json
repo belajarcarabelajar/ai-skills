@@ -105,7 +105,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-truthful-voice-availability [ses_f1fb19667ffeJbWZ9KQEnqT0UC].md",
       "source_location": "L12933",
       "norm_label": "native capability rides as two serde defaulted fields on the existing tts status with playback wrapper instead of a new tauri command",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-truthful-voice-availability [ses_f1fb19667ffeJbWZ9KQEnqT0UC].md:L12933] No new Tauri command was registered because command registration lives in commands/mod.rs outside the owned files"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-truthful-voice-availability [ses_f1fb19667ffeJbWZ9KQEnqT0UC].md:L12933] No new Tauri command was registered (registration lives in `commands/mod.rs`, outside my files); the data rides as two serde-defaulted fields on the existing `TtsStatusWithPlayback` wrapper, so the frozen `TtsStatusPayload` shape and its guard test are untouched."
+      ]
     },
     {
       "id": "concept--missing-tts-provider-is-a-built-in-waveform-fallback-not-an-error",
@@ -115,7 +117,7 @@
       "source_location": "L12934",
       "norm_label": "a missing tts provider is a built in waveform fallback never an error state",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-truthful-voice-availability [ses_f1fb19667ffeJbWZ9KQEnqT0UC].md:L12934] Missing provider means the engine speaks through its built-in fallback waveform, so no surface ever prescribes installation",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-truthful-voice-availability [ses_f1fb19667ffeJbWZ9KQEnqT0UC].md:L12934] - Missing provider means the engine speaks through its built-in fallback waveform, never an error, so no surface ever prescribes installation.",
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-truthful-voice-availability [ses_f1fb19667ffeJbWZ9KQEnqT0UC].md:L12935] The new alert texts keep the legacy phrases so the unmodifiable TtsLiveDemoCard and TtsNativeSessionLifecycle tests still pass"
       ]
     }

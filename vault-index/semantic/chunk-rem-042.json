@@ -28,7 +28,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - dukungan-appimage-snipset-di-arch-linux [ses_f307e386bffeYlPW4CvAW2eqoU].md",
       "source_location": "L7614",
       "norm_label": "post build evex guard scoped to the ggml dispatch path",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - dukungan-appimage-snipset-di-arch-linux [ses_f307e386bffeYlPW4CvAW2eqoU].md:L7614] The guard was narrowed to the dispatch path because whole-binary EVEX scans false-positive on dormant AVX512 in upstream variant kernels"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - dukungan-appimage-snipset-di-arch-linux [ses_f307e386bffeYlPW4CvAW2eqoU].md:L07614] * Fix final: `GGML_NATIVE=OFF` di `build-linux.sh` + CI (Windows & Linux), rotasi cache key ke `ggml-nonnative-v2`, dan guard diubah dari scan seluruh biner (false-positive: variant kernels upstream memang mengandung AVX512 dormant) menjadi cek dispatch path (`reg_get_device`/`ggml_cpu_init`/`ggml_backend_cpu_init` harus EVEX-free) + fail-closed."
+      ]
     },
     {
       "id": "concept--appimage-bundled-webkit-renderer-abort",

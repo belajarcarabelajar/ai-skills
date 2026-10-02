@@ -35,7 +35,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - investigate-sops-and-windows-updater-test-debts [ses_f25834e0bffeT27b9dlmsoTMNe].md",
       "source_location": "L5640",
       "norm_label": "updater serves the last release that published a manifest and overlays newer non windows entries",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - investigate-sops-and-windows-updater-test-debts [ses_f25834e0bffeT27b9dlmsoTMNe].md:L5640] A Windows URL pointing at a different build would make clients reinstall the same installer on every update check"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - investigate-sops-and-windows-updater-test-debts [ses_f25834e0bffeT27b9dlmsoTMNe].md:L05640] When the newest release is therefore a platform-only build … Look one release-list page back for the most recent release that does publish a manifest and serve that one instead.\" And `:306-313`: \"`windows-*` is never taken from it: `version` stays the manifest's own, so a Windows URL pointing at a different build would make clients reinstall the same installer on every update check.\" Implementation: `resolveManifestRelease` (`:296-304`) + `newestPlatformEntries` filtering out `windows-*` (`:314-325`)."
+      ]
     },
     {
       "id": "concept--ci-contract-test-step-tolerated-by-or-true",

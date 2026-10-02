@@ -19,7 +19,9 @@
       "source_location": "L1984",
       "norm_label": "allowed-tools delimiter portability gap",
       "summary": "The agentskills.io spec writes allowed-tools space-delimited (Read Grep Glob); Claude Code writes it comma-delimited (Read, Grep, Glob). Both spellings are accepted by their own runtime, so the delimiter is the field that silently makes a skill single-vendor.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - audit-kompatibilitas-skills-md-multi-agent [ses_f12437de6ffejl2if9I0g8pTjZ].md:L1984] Space-delimited allowed-tools is the portable form"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - audit-kompatibilitas-skills-md-multi-agent [ses_f12437de6ffejl2if9I0g8pTjZ].md:L01984] A skill using space-delimited `allowed-tools` is cross-vendor portable."
+      ]
     },
     {
       "id": "concept--canonical-agents-skills-dir-with-byte-identical-mirrors",
@@ -29,7 +31,9 @@
       "source_location": "L5659",
       "norm_label": "canonical .agents/skills/ dir with byte-identical mirrors",
       "summary": "T1-spec decision 1: one canonical tree at .agents/skills/<slug>/ plus byte-identical COPIES into .claude/, .gemini/, .opencode/ and .cursor/ skills dirs, so each vendor loader finds its own path without resolving anything at read time.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - audit-kompatibilitas-skills-md-multi-agent [ses_f12437de6ffejl2if9I0g8pTjZ].md:L5659] Byte-identical copies rather than symlinks because symlinks break Windows checkouts and Pages builds"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - audit-kompatibilitas-skills-md-multi-agent [ses_f12437de6ffejl2if9I0g8pTjZ].md:L05659] Canonical `.agents/skills/<slug>/` + byte-identical COPIES (not symlinks) to `.claude/.gemini/.opencode/.cursor/skills/` — symlinks break on Windows checkouts and Pages builds."
+      ]
     },
     {
       "id": "concept--thin-skill-md-with-verbatim-reference",

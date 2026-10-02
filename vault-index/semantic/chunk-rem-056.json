@@ -28,7 +28,9 @@
       "source_location": "L26",
       "norm_label": "root bun test discovers the suites that --filter cannot reach",
       "summary": "Because apps/learn declares no test script, `--filter` can never run its suites. Running `bun test` from the repo root instead discovers scripts/skills-lib.test.ts and apps/learn/src/lib/*.test.ts: 24 tests across 3 files, 0 failures.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - fix-root-package-scripts [ses_f123039d6ffeRCUrnp5alwgtfd].md:L26] apps/learn has no test script, so --filter cannot work for it"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - fix-root-package-scripts [ses_f123039d6ffeRCUrnp5alwgtfd].md:L00026] - test: apps/learn has NO test script, so `--filter` cannot work for it."
+      ]
     },
     {
       "id": "concept--a-pipe-reports-the-last-command-exit-code-not-the-tools",
@@ -59,8 +61,8 @@
       "norm_label": "embed_clipboard_delete bumps a bookkeeping row to pending instead of removing it",
       "summary": "The real mechanism of the embedding leak was not a missing delete. The AFTER DELETE trigger sets revision=revision+1, embedded_revision=NULL, attempts=0, next_attempt_at=0 on the metadata row instead of deleting it, so 2020 of 2521 rows pointed at entries that no longer existed. Fixed with a set-based prune across all three delete paths.",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md:L10297] The bump was kept because a revision bump is the correct behaviour for edits",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md:L4563] The worker query is a LEFT JOIN rooted at clipboard_history, so orphan rows are never selected, retried or reaped"
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md:L10297] I kept the trigger's bump, because that bump is correct for edits.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md:L10297] `embed_clipboard_delete` *bumps* a bookkeeping row (`revision+1, embedded_revision=NULL`) instead of removing it, and the embed worker's query is a `LEFT JOIN` rooted at `clipboard_history`, so those rows are never selected, never retried, never reaped. 2020 of 2521 rows pointed at deleted entries."
       ]
     },
     {

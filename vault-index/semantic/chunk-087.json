@@ -16,7 +16,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - ground-secrets-and-d1-config [ses_f0629f2ddffenZ53Z8NzyXYIvY].md",
       "source_location": "L2187",
       "norm_label": "runtime-over-build-time env resolution",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - ground-secrets-and-d1-config [ses_f0629f2ddffenZ53Z8NzyXYIvY].md:L2187] Runtime secrets win so production can override a stale .env baked into the bundle"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - ground-secrets-and-d1-config [ses_f0629f2ddffenZ53Z8NzyXYIvY].md:L02187] - Merge order is build-time first, runtime last, so runtime wins — `apps/learn/src/lib/auth.ts:46`: `const merged = { ...buildEnv, ...runtimeEnv };`, with intent documented at `auth.ts:37-39`: `Runtime secrets win over build-time env so production can override a stale .env baked into the bundle.`"
+      ]
     },
     {
       "id": "concept--out-of-band-wrangler-secret",
@@ -57,7 +59,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - ground-secrets-and-d1-config [ses_f0629f2ddffenZ53Z8NzyXYIvY].md",
       "source_location": "L2221",
       "norm_label": "astro adapter owns the production worker entry",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - ground-secrets-and-d1-config [ses_f0629f2ddffenZ53Z8NzyXYIvY].md:L2221] The legacy worker entry exists only to give bun run build a stable entry point"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - ground-secrets-and-d1-config [ses_f0629f2ddffenZ53Z8NzyXYIvY].md:L02221] - The file states outright that it is not the production entry — `worker.ts:2-4`: `NOTE: the Astro @astrojs/cloudflare adapter handles real traffic in production; this entry only wires the /health probe + static placeholder so bun run build has a stable entry point.`"
+      ]
     },
     {
       "id": "concept--i18n-shape-class-gap",

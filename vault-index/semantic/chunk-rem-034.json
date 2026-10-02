@@ -49,7 +49,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - perbaikan-sistem-login-rusak [ses_f0cb21c35ffesBRnzbaIrhI8OK].md",
       "source_location": "L5490",
       "norm_label": "selective commit excludes unrelated wip",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - perbaikan-sistem-login-rusak [ses_f0cb21c35ffesBRnzbaIrhI8OK].md:L5499] middleware.ts was excluded from the commit so unrelated uncommitted gating work would not be mixed in"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - perbaikan-sistem-login-rusak [ses_f0cb21c35ffesBRnzbaIrhI8OK].md:L05490] Deciding to exclude middleware.ts from the commit to avoid mixing in unrelated uncommitted gating work."
+      ]
     },
     {
       "id": "concept--session-status-and-logout-api",

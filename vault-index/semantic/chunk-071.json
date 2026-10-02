@@ -7,7 +7,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t7b-family-budgets-and-cut-fix [ses_f167e9379ffeAgCtoPSuNmhuTg].md",
       "source_location": "L33",
       "norm_label": "per content family title budget, not per locale",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t7b-family-budgets-and-cut-fix [ses_f167e9379ffeAgCtoPSuNmhuTg].md:L33] The floor stays because the 29 too-short titles are a copy problem, and a higher floor would only relabel them as failures"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t7b-family-budgets-and-cut-fix [ses_f167e9379ffeAgCtoPSuNmhuTg].md:L00033] The floor is not raised: the 29 too-short titles are a copy problem and a higher floor would only relabel them as failures without fixing them."
+      ]
     },
     {
       "id": "concept--generated-versus-handwritten-title-classification",
@@ -16,7 +18,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t7b-family-budgets-and-cut-fix [ses_f167e9379ffeAgCtoPSuNmhuTg].md",
       "source_location": "L42",
       "norm_label": "generated versus hand-written title classification",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t7b-family-budgets-and-cut-fix [ses_f167e9379ffeAgCtoPSuNmhuTg].md:L42] Truncating hand-written prose is machine-editing Indonesian copy whatever the mechanism, so it is forbidden"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t7b-family-budgets-and-cut-fix [ses_f167e9379ffeAgCtoPSuNmhuTg].md:L00042] **Do not truncate, rewrite, or shorten any of them.** `AGENTS.md` forbids machine-editing Indonesian copy, and truncating hand-written prose is that, whatever the mechanism."
+      ]
     },
     {
       "id": "concept--dangling-function-word-cut-defect",

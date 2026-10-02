@@ -48,7 +48,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c5-send-photo-hardcoded-mime [ses_f0b3bb2bdffex7NYvzMYqYCN5R].md",
       "source_location": "L3228",
       "norm_label": "telegram acceptance of mislabeled bytes not determinable from repo",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c5-send-photo-hardcoded-mime [ses_f0b3bb2bdffex7NYvzMYqYCN5R].md:L3228] No audit test exercises a real non-PNG upload, so server acceptance cannot be claimed"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c5-send-photo-hardcoded-mime [ses_f0b3bb2bdffex7NYvzMYqYCN5R].md:L03228] Telegram-server acceptance is **not** determinable from this repo — no test exercises a real non-PNG upload (`services/telegram_service_audit_tests.rs:8-18` only asserts the 10 MB local rejection; `:20-56` asserts the URL is hardcoded)."
+      ]
     },
     {
       "id": "concept--alacritty-tabs-macos-only",

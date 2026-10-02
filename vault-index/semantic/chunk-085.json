@@ -16,7 +16,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k8-settings-toggle-copy [ses_f08a794a6ffepQwjH3Yp1I1Trb].md",
       "source_location": "L37",
       "norm_label": "swallowed initial read failure on a state gating toggle",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k8-settings-toggle-copy [ses_f08a794a6ffepQwjH3Yp1I1Trb].md:L37] A user whose read fails is told metrics are off when the real state is unknown, and the toggle gates collection"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k8-settings-toggle-copy [ses_f08a794a6ffepQwjH3Yp1I1Trb].md:L00037] That second case is a real reliability bug: a user whose read fails is told metrics are off when the real state is unknown, which matters because this toggle gates collection."
+      ]
     },
     {
       "id": "concept--aria-switch-has-no-unknown-state",

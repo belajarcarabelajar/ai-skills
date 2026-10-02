@@ -25,7 +25,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
       "source_location": "L4421",
       "norm_label": "hianime vidstream-2 (megaplay) replacing zokoanime",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md:L05097] Installed 5.1.0 and even upstream 5.1.4 hardcode ZokoAnime, so source lookup fails against a site serving only Vidstream-2"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md:L04421] Installed 5.1.0 and even upstream 5.1.4 hardcode `ZokoAnime`, so source lookup fails → `No sources found for sub!` |"
+      ]
     },
     {
       "id": "concept--patched-ani-cli-shadowing-aur-binary",

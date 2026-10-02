@@ -119,7 +119,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-linux-capture-capability [ses_f20039a54ffeg73csCMDUwcFtf].md",
       "source_location": "L15814",
       "norm_label": "counter_test_serial shared lock for global counter races",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-linux-capture-capability [ses_f20039a54ffeg73csCMDUwcFtf].md:L15814] Mitigate test-only global-counter races with a shared serial lock"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-linux-capture-capability [ses_f20039a54ffeg73csCMDUwcFtf].md:L15814] Risks and open points: nothing here was compiled or run (toolchain ban), so parent must run the VPS Nextest filters plus Windows compile; test-only global-counter races are mitigated with a shared serial lock but the lock only covers the six files I own; set_activity_input_enabled has no production caller yet because enable/disable runtime commands live outside the six files, so consent revoke currently stops persistence at the worker tick but not the counter, and that one-line wiring is requested as follow-up; evdev RelativeAxisCode generic bounds and EventType::RELATIVE were verified against evdev 0.13.2 sources but still need the compiler; live KDE acceptance (hotplug unplug, permission revoke, aggregate counter movement) is unverified; sibling tracks have concurrent uncommitted changes in speech and todoist files which I did not touch."
+      ]
     },
     {
       "id": "concept--rust-e0603-pub-re-export-fix",

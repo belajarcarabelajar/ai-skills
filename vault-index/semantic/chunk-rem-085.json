@@ -103,7 +103,9 @@
       "source_location": "L9541",
       "norm_label": "typed schema contract including type notnull and default",
       "summary": "The existing guard parses the app's migration arrays and compares column names only; the type string that follows every name, such as (\"research_tag\", \"INTEGER NOT NULL DEFAULT 0\"), is discarded, and column_names at runtime selects only `name` from pragma_table_info. The proposed contract carries (name, sql_type, not_null, default_expr) per column for snippets and groups, parsed from both schema.rs and the migration arrays, failing in either direction. Measured divergences today: research_tag as bare TEXT instead of INTEGER NOT NULL DEFAULT 0, description losing DEFAULT '', enabled getting DEFAULT 0 instead of 1, created_at and modified_at losing NOT NULL.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-sidecar-rebuild-signal-plan [ses_f08bb98bcffezShw3Qxr4ebNUu].md:L9541] Stated reason a name-only check is insufficient: snipset init today creates a groups table that is not the app's groups table on five columns and nothing in the repository notices, because every existing check compares names.",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-sidecar-rebuild-signal-plan [ses_f08bb98bcffezShw3Qxr4ebNUu].md:L09541] Comparing that function against the app's declarations:\\n\\n| Column | App declaration | `column_definition` emits | Diverges on |\\n| --- | --- | --- | --- |\\n| `groups.research_tag` | `INTEGER NOT NULL DEFAULT 0` (`schema.rs:36`, `schema_migrations.rs:108`) | `research_tag TEXT` (catch-all, `init.rs:33`) | type, NOT NULL, DEFAULT |\\n| `groups.description` | `TEXT DEFAULT ''` (`schema.rs:26`) | `description TEXT` | DEFAULT |\\n| `groups.enabled` | `INTEGER DEFAULT 1` (`schema.rs:27`) | `INTEGER DEFAULT 0` (`init.rs:30`) | DEFAULT |\\n| `groups.created_at` | `TEXT NOT NULL` (`schema.rs:29`) | `created_at TEXT` | NOT NULL |\\n| `groups.modified_at` | `TEXT NOT NULL` (`schema.rs:30`) | `modified_at TEXT` | NOT NULL |\\n\\nSo `snipset init` today creates a `groups` table that is **not** the app's `groups` table, on five columns, and nothing in the repository notices, because every existing check compares names."
+      ],
       "description": "The user-visible consequence is stated: research_tag as bare TEXT accepts 'yes', and groups.rs reads that column with row.get::<_, i32>(9), which fails on a non-numeric value."
     },
     {
@@ -114,7 +116,9 @@
       "source_location": "L9541",
       "norm_label": "the schema contract check deliberately offers no escape hatch",
       "summary": "No allowlist, no #[ignore], no skip-this-column comment. The failure message names the column, the app's declared type, and the file and constant to edit, so a legitimate schema change reads as a step in a process rather than an obstacle. A false positive is remedied by fixing the contract or by changing the check visibly in review, in the same commit as the schema edit.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-sidecar-rebuild-signal-plan [ses_f08bb98bcffezShw3Qxr4ebNUu].md:L9541] Stated reason: an escape hatch is precisely how research_tag shipped, because a name-only check passed while the shape was wrong and an escape hatch would have passed while the column was missing."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-sidecar-rebuild-signal-plan [ses_f08bb98bcffezShw3Qxr4ebNUu].md:L09541] An escape hatch is precisely how `research_tag` shipped: a name-only check passed while the shape was wrong, and an escape hatch would have passed while the column was missing."
+      ]
     },
     {
       "id": "concept--skip-if-fails-on-behaviour-not-on-text",

@@ -80,7 +80,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t7-todoist-sync-ui-safety [ses_f1fc5aa3effexLMX4dvoMO7LFb].md",
       "source_location": "L6696",
       "norm_label": "a ref, not state, is the synchronous guard against a double-clicked invoke",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t7-todoist-sync-ui-safety [ses_f1fc5aa3effexLMX4dvoMO7LFb].md:L6696] State updates are async so they cannot block a double-click, and the backend only fails fast while a job already runs, so syncBusyRef gives a synchronous single-flight guard that resets only on invoke failure or a terminal event"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t7-todoist-sync-ui-safety [ses_f1fc5aa3effexLMX4dvoMO7LFb].md:L06696] - `syncBusyRef` gives a synchronous single-flight guard since state updates cannot block a double-click; the ref resets only on invoke failure or terminal events."
+      ]
     },
     {
       "id": "concept--remount-recovers-sync-state-from-backend-active-job",
@@ -89,7 +91,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t7-todoist-sync-ui-safety [ses_f1fc5aa3effexLMX4dvoMO7LFb].md",
       "source_location": "L6699",
       "norm_label": "remount recovers in-flight and terminal sync state from the backend activejob snapshot",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t7-todoist-sync-ui-safety [ses_f1fc5aa3effexLMX4dvoMO7LFb].md:L6699] loadSyncStatus restores a running job as loading plus computed percentage and settles a terminal job to idle, so a remount neither loses an in-flight run nor leaves a stuck spinner, and it never clobbers a newer locally tracked job id"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t7-todoist-sync-ui-safety [ses_f1fc5aa3effexLMX4dvoMO7LFb].md:L06699] - `loadSyncStatus` restores running jobs (loading plus computed percentage) and settles terminal jobs to idle, and never clobbers a newer locally tracked job id."
+      ]
     },
     {
       "id": "concept--read-only-duplicate-repair-preview-without-merge-action",
@@ -98,7 +102,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t7-todoist-sync-ui-safety [ses_f1fc5aa3effexLMX4dvoMO7LFb].md",
       "source_location": "L6700",
       "norm_label": "read-only duplicate repair preview that never merges by title",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t7-todoist-sync-ui-safety [ses_f1fc5aa3effexLMX4dvoMO7LFb].md:L6700] The preview is a pure aggregate over tasks plus mappedTaskIds, so a row counts as owned only where retained remote identity proves it, unlinked rows are reported untouched, same-title groups are listed with linked and unlinked counts, and no delete, merge or approve action exists anywhere in the component"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t7-todoist-sync-ui-safety [ses_f1fc5aa3effexLMX4dvoMO7LFb].md:L06700] - The repair preview is a pure aggregate over `tasks` plus `mappedTaskIds`: linked rows are owned, unlinked rows are reported untouched, same-title groups are listed with linked and unlinked counts and no merge action exists anywhere in the component."
+      ]
     },
     {
       "id": "concept--provider-token-lacks-entitlement-for-the-requested-model",

@@ -103,7 +103,9 @@
       "source_location": "L36",
       "norm_label": "prefer the reactive useoverlaylanguage hook over the one-shot resolveoverlaylang",
       "description": "Use useOverlayLanguage for components, resolveOverlayLang for module-scope code outside a component; a one-shot read misses a language change that happens after the window opened, which is exactly the bug class being fixed. Outcome across all 17 files in the slice: useOverlayLanguage (reactive) in every one, never resolveOverlayLang, because no file in this slice has module-scope translation code. Four files take lang as a prop instead to keep one IPC read per window (AiSnippetMagicMenuEditingView, SessionList, FloatingSidebarHeader, FloatingSidebarFooter); MfaMagicMenu uses 3 hooks rather than 2 prop interfaces plus 3 call-site edits; FloatingSidebar/index.tsx forwards to 3 children so the read happens once instead of four times.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23b-overlay-window-language [ses_f209aeb49ffeAF5ENM1L52u4DG].md:L11739] A one-shot read misses a language change after the window opened, which is the bug class being fixed"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23b-overlay-window-language [ses_f209aeb49ffeAF5ENM1L52u4DG].md:L00036] **Use `useOverlayLanguage` for components, `resolveOverlayLang` for module-scope code outside a component.** Prefer the reactive hook: a one-shot read misses a language change that happens after the window opened, which is exactly the bug class you are fixing."
+      ]
     },
     {
       "id": "concept--main-tsx-left-in-unpropagated-lang-ledger",

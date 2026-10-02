@@ -86,12 +86,15 @@ function wrapHits(L, forms) {
   return hits;
 }
 
-// Markdown chrome: emphasis and code spans are presentation, not words. A
+// Chrome: emphasis, code spans, and quote marks are presentation, not words. A
 // subagent quoting "fails closed with a clear message" from a line that reads
 // ``fails closed with a clear message.`` has quoted the note correctly, so the
 // SEARCH may ignore chrome. The REPAIR never stores a relaxed span — it writes
 // back the line's own characters, so the stored quote is byte-verbatim.
-const CHROME = /[*`]/;
+// Quote marks are included because many pre-§4a quotes differ from their line by
+// nothing else; treating those as fabrications would rewrite 400-odd rationales
+// that only needed a line number.
+const CHROME = /[*`"']/;
 
 /** Index map from a chrome-stripped string back to the original offsets. */
 function stripMap(s) {
@@ -209,18 +212,72 @@ export function planChunk(name) {
         const mLoc = /^L(\d+)$/.exec(String(n.source_location || ''));
         const loc = mLoc ? Number(mLoc[1]) : null;
         const locOk = loc && loc >= 1 && loc <= L.length && !inPad(f, loc);
-        out.push({
-          node: n.id, idx: i, k, tier: locOk ? 'T3' : 'T4',
-          from: a.line, to: loc, file: a.file, quoted,
-          why: locOk ? 'quote absent; source_location usable' : 'no verifiable line',
-        });
+        if (!locOk) {
+          out.push({ node: n.id, idx: i, k, tier: 'T4', from: a.line, quoted, why: 'no usable source_location' });
+          continue;
+        }
+        const site = paraphraseSite(L[loc - 1], quoted);
+        if (site) {
+          out.push({ node: n.id, idx: i, k, tier: 'T3', to: loc, from: a.line, file: a.file, quoted, span: site.span, score: site.score });
+        } else {
+          out.push({ node: n.id, idx: i, k, tier: 'T4', from: a.line, quoted, why: 'quote absent and source_location does not carry the words either' });
+        }
       }
     }
   }
   return { name, chunk, plans: out };
 }
 
-// ------------------------------------------------------------------ apply
+/** Content tokens of a string, for overlap scoring. */
+function toks(s) {
+  return s.toLowerCase().split(/[^a-z0-9_À-ɏ]+/).filter((w) => w.length > 3);
+}
+
+/** Split a line into sentence-ish spans, keeping markdown list bullets whole. */
+function sentences(line) {
+  const parts = line.split(/(?<=[.!?])\s+(?=[A-Z`|*-])/).map((s) => s.trim()).filter(Boolean);
+  return parts.length ? parts : [line.trim()];
+}
+
+/**
+ * T3: the quote is absent from the file, but the node's own source_location
+ * names a line. If the quote's content words land on one sentence of that line,
+ * the subagent was paraphrasing THAT sentence — the pointer is sound and the
+ * words are the fabrication, so the sentence can replace the quote verbatim.
+ *
+ * If no sentence on the line carries the words, the pointer is not trustworthy
+ * either and the node needs a re-read. That case is T4, not a guess.
+ */
+/**
+ * Minimum fraction of the fabricated quote's content words that must appear in
+ * the replacement sentence. Set by reading the bands, not by taste:
+ *
+ *   0.90-1.00  the quote is a faithful distillation; the line says it better
+ *   0.75-0.95  same, minus a lead-in the subagent dropped
+ *   0.60-0.75  same, the sentence split differently
+ *   0.34-0.59  OFTEN A DIFFERENT CLAIM. rem-108 at 0.34 wanted a claim about
+ *              format!("{:?}").to_lowercase() and the best-matching sentence on
+ *              the cited line was about a badge icon not matching stateIcon.
+ *              Replacing there would produce a verbatim citation that passes
+ *              every automated check and supports nothing — a confidently wrong
+ *              pointer, which is worse than an acknowledged gap.
+ */
+const T3_MIN_OVERLAP = 0.6;
+
+function paraphraseSite(line, quoted) {
+  const q = new Set(toks(quoted));
+  if (q.size < 4) return null;
+  let best = null, bestScore = 0;
+  for (const sent of sentences(line)) {
+    const s = new Set(toks(sent));
+    let hit = 0;
+    for (const w of q) if (s.has(w)) hit++;
+    const score = hit / q.size;
+    if (score > bestScore) { bestScore = score; best = sent; }
+  }
+  if (!best || bestScore < T3_MIN_OVERLAP) return null;
+  return { span: best, score: bestScore };
+}
 /**
  * Rebuild one rationale string with a plan applied, then PROVE the result.
  *
@@ -257,6 +314,14 @@ export function applyPlan(s, pl) {
     if (!f2) return null;
     const span = exactSpan(f2.L[pl.to - 1], unquoteForms(pl.quoted));
     if (!span) return null;
+    mid = `[${a.file}${pad(pl.to)}] ${span}`;
+  } else if (pl.tier === 'T3') {
+    // The words were fabricated; replace them with the cited line's own
+    // sentence, which is the thing the subagent was reaching for.
+    const f3 = load(a.file) || load(pl.file);
+    if (!f3) return null;
+    const span = exactSpan(f3.L[pl.to - 1], [pl.span]) ?? pl.span;
+    if (!f3.L[pl.to - 1].includes(span)) return null;
     mid = `[${a.file}${pad(pl.to)}] ${span}`;
   } else return null;
 

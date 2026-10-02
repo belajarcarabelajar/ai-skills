@@ -17,7 +17,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - installing-typeless-2-2-0-deb-package [ses_f2bf9c1daffe7JAQPHDJTCsA7V].md",
       "source_location": "L1607",
       "norm_label": "epipe from piping a gui app's stdout into head",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - installing-typeless-2-2-0-deb-package [ses_f2bf9c1daffe7JAQPHDJTCsA7V].md:L1970] The EPIPE dialog came from the agent's own `typeless --version | head -5` smoke test, not from the install"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - installing-typeless-2-2-0-deb-package [ses_f2bf9c1daffe7JAQPHDJTCsA7V].md:L01607] Saya jalankan smoke test dengan `typeless --version | head -5` — `head` keluar setelah 5 baris lalu menutup pipe-nya, sehingga `console.info` (yang dibungkus Sentry) menulis ke pipe yang sudah mati → **EPIPE** → dialog itu."
+      ]
     },
     {
       "id": "concept--startupwmclass-taskbar-grouping",

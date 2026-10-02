@@ -36,7 +36,7 @@
       "source_location": "L6130",
       "norm_label": "negative control test",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L6130] I did not weaken it, I strengthened it. Its beforeEach now does resetToastInteractionForTests() for order independence plus a real window.dispatchEvent(new Event('pointerdown')) that reaches the actual capture-phase listener, while the audio mock still offers only playAudio. That dispatch is itself the proof the gate needs no second audio export.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L06130] Its `beforeEach` now does `resetToastInteractionForTests()` (order independence) plus a real `window.dispatchEvent(new Event(\"pointerdown\"))` that reaches the actual capture-phase listener, while the audio mock still offers only `playAudio`.",
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L6191] The reason for the literal table is kept and is now accurate: undeclared exports throw from vitest's Proxy, that caused 14 real failures, and the single remaining bare factory is the standing negative control."
       ]
     },
@@ -71,7 +71,7 @@
       "source_location": "L6191",
       "norm_label": "the '147 bare mock factories' comment was stale; measured 161 mocking files, 160 spread, exactly 1 bare",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L6191] Measured, not assumed: 161 test files vi.mock utils/audio; 160 use async (importOriginal) => ({...actual}) after the codemod; exactly 1 uses a bare factory, and it is ToastSound.bareMock.test.tsx itself. The measurement date was written inside the comment so a future reader knows when the numbers were taken.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L06191] Measured, not assumed: **161** test files `vi.mock` `utils/audio`; **160** use `async (importOriginal) => ({...actual})` after the codemod; exactly **1** uses a bare factory, and it is `ToastSound.bareMock.test.tsx` itself.",
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L1816] The first count was fooled because the negative control's own header comment contains the literal string importOriginal, so the grep for bare factories matched a comment."
       ]
     },
@@ -83,7 +83,7 @@
       "source_location": "L6183",
       "norm_label": "toast-cue blast radius stayed empty because most tests mock toastcontext away or assert on a component soundeffect",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L6183] I probed 52 files that can reach playToastSound and assert on playAudio. The reason the blast radius is otherwise empty is that most tests either mock contexts/ToastContext away or assert with toHaveBeenCalledWith on a component soundEffect rather than a toHaveBeenCalledTimes on a toast cue.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L06183] The reason the blast radius is otherwise empty is that most tests either mock `contexts/ToastContext` away or assert with `toHaveBeenCalledWith` on a component `soundEffect` rather than a `toHaveBeenCalledTimes` on a toast cue.",
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L3478] Only toHaveBeenCalledTimes and toHaveBeenNthCalledWith assertions are brittle; toHaveBeenCalledWith is tolerant of the toast cue being absent."
       ]
     },
@@ -131,7 +131,7 @@
       "source_location": "L9532",
       "norm_label": "a pcsx2 .ps2 memory card file is 16384 sectors of 528 bytes, mapped 1:1 onto card address",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md:L09546] McdSizeInSectors = m_fileSize / (SectorSize + EraseBlockSizeInSectors) = 8650752 / (512 + 16) = 16384, so the on-disk stride is 528 bytes per sector, not 512.",
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md:L09532] **Card size**: `McdSizeInSectors = m_fileSize / (SectorSize + EraseBlockSizeInSectors)` = 8650752 / (512 + 16) = 8650752 / 528 = 16384.",
         "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md:L9610] Seek is a raw FSeek64(f, adr, SEEK_SET), so card address equals file offset 1:1, with no header offset. The 512-byte assumption was what made the first two integrity tests wrong."
       ]
     },

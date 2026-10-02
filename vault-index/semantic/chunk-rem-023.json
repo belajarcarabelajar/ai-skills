@@ -7,7 +7,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - perbaikan-inject-attachment-magic-menu-download-linux [ses_f08b8695affeoxzP70A34cuaph].md",
       "source_location": "L11714",
       "norm_label": "text/uri-list as the native linux file-reference clipboard format",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - perbaikan-inject-attachment-magic-menu-download-linux [ses_f08b8695affeoxzP70A34cuaph].md:L11714] An attachment injection must use the platform's native file-reference format, or the target app sees text instead of an attachment"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - perbaikan-inject-attachment-magic-menu-download-linux [ses_f08b8695affeoxzP70A34cuaph].md:L11714] **Violated invariant:** a \"file attachment\" injection must put the file on the clipboard in that platform's *native file-reference format*, so the target app sees an attachment, not text."
+      ]
     },
     {
       "id": "concept--non-windows-inject-file-attachment-fallback",
@@ -49,7 +51,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - perbaikan-inject-attachment-magic-menu-download-linux [ses_f08b8695affeoxzP70A34cuaph].md",
       "source_location": "L11737",
       "norm_label": "the terminal guard lives inside inject_file_attachment, not at the caller",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - perbaikan-inject-attachment-magic-menu-download-linux [ses_f08b8695affeoxzP70A34cuaph].md:L11737] The Linux branch must reproduce the Windows internal terminal guard, or terminal targets regress from path-text to a pasted URI list"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - perbaikan-inject-attachment-magic-menu-download-linux [ses_f08b8695affeoxzP70A34cuaph].md:L11737] So the Linux branch must reproduce that guard, or terminal targets regress from path-text to a pasted URI list."
+      ]
     },
     {
       "id": "concept--gtk-file-paste-gated-on-targets-atom",

@@ -26,7 +26,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-02 - diagnose-6-failing-script-tests [ses_f060d9198ffe9gB2iDyFXGc6pX].md",
       "source_location": "L12277",
       "norm_label": "version equality assertion encoded a coincidence not an invariant",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-02 - diagnose-6-failing-script-tests [ses_f060d9198ffe9gB2iDyFXGc6pX].md:L12286] The platform-versioning doc records equal Windows/Linux values as a known gap, not a contract"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-02 - diagnose-6-failing-script-tests [ses_f060d9198ffe9gB2iDyFXGc6pX].md:L12277] `docs/development/platform-versioning.md` line 279 records equal values as a *known gap*, not an invariant: \"their current values are equal, so a version number alone cannot tell you which authority a number came from.\" | Replaced with `validateVersion` on each file."
+      ]
     },
     {
       "id": "concept--bind-p-omits-x-bindings-vacuous-assertion",

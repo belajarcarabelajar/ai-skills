@@ -9,7 +9,9 @@
       "source_location": "L25",
       "norm_label": "a loopback guard written as a string prefix check rejects the localhost alias of the address it allows",
       "summary": "activity/ollama_client.rs:77 gates on self.endpoint.starts_with(\"http://127.0.0.1:11434\") and returns OllamaError::SecurityBlocked otherwise. The default endpoint in the Snipset database preferences is http://localhost:11434, so the guard is self-defeating for the app's own default configuration. The fix normalizes the check to accept http://127.0.0.1:11434, http://localhost:11434 and http://[::1]:11434 while keeping untrusted external hosts blocked.",
-      "rationale": "[01 - Projects/Snipset/plans/2026-09-11-fix-activity-journal-vision-screen-capture-pipeline.md:L25] Stated reason the failure is total rather than intermittent: \"Because `self.endpoint` starts with `http://localhost:11434` and not `http://127.0.0.1:11434`, all background journal inference calls from `ActivityWorkerManager` fail immediately with `SecurityBlocked` before connecting to Ollama.\""
+      "rationale": [
+        "[01 - Projects/Snipset/plans/2026-09-11-fix-activity-journal-vision-screen-capture-pipeline.md:L00025] - Because `self.endpoint` starts with `http://localhost:11434` and not `http://127.0.0.1:11434`, all background journal inference calls from `ActivityWorkerManager` fail immediately with `SecurityBlocked` before connecting to Ollama."
+      ]
     },
     {
       "id": "concept--eager-screenshot-deletion-empties-the-journal-vision-pool",
@@ -79,7 +81,9 @@
       "source_location": "L7454",
       "norm_label": "timeline and heatmap render from recorded points even when the current day's collector failed",
       "summary": "shouldShowTimelineComponents(capture, hasPoints) returns true whenever points exist. With no points it returns false if capture.reason is non-null, and otherwise inspects the four producer blocks for unavailable/disabled/error before falling back to the legacy inputDensitySupported flag. A payload with no capture block at all stays on the components path.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t9-tracker-presentation-reasons [ses_f1fa39e88ffeFN5QfZUtFVAq7k].md:L7454] Stated reason the legacy no-capture-block path is deliberately not warned about: \"warning about missing data is worse than a quiet empty state.\""
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t9-tracker-presentation-reasons [ses_f1fa39e88ffeFN5QfZUtFVAq7k].md:L07454] A legacy payload\\n * with no capture block stays on the components path on purpose: a false\\n * warning about missing data is worse than a quiet empty state.\\n */\\nexport function shouldShowTimelineComponents(\\n  capture: CaptureAvailability,\\n  hasPoints: boolean\\n): boolean {\\n  if (hasPoints) return true;\\n  if (capture.reason !== null) return false;\\n  const producers = [\\n    capture.foreground,\\n    capture.keyboard,\\n    capture.pointer,\\n    capture.contextSwitch,\\n  ];\\n  const degraded = producers.some(\\n    (producer) =>\\n      producer !== null &&\\n      (producer.state === \\\"unavailable\\\" ||\\n        producer.state === \\\"disabled\\\" ||\\n        producer.state === \\\"error\\\")\\n  );\\n  if (degraded) return false;\\n  if (producers.some((producer) => producer !== null)) return true;\\n  return capture.inputDensitySupported;\\n}\\n\\nexport function normalizeActivityPageData(payload: unknown): ActivityPageData {\","
+      ]
     },
     {
       "id": "concept--capability-banner-only-when-no-history-renders",
@@ -99,7 +103,9 @@
       "source_location": "L7986",
       "norm_label": "a modify-only file boundary turns an in-scope failing test into a handoff instead of a scope violation",
       "summary": "The RED test file requires konsole and kitty to categorize as Development, which is decided by categorizeContexts() in DonutChart.tsx. DonutChart.tsx is not in the four allowed files, so the two cases stayed RED: 3 passed / 2 failed instead of the required all-green, and the fix (adding terminal keywords to the Development keyword list around lines 37-61) was named as T10 or parent work.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t9-tracker-presentation-reasons [ses_f1fa39e88ffeFN5QfZUtFVAq7k].md:L7986] Stated reason the tests were left failing rather than fixed: \"These call `categorizeContexts()` from `DonutChart.tsx`, which is outside my modify-only set, so I could not fix them without violating a hard prohibition.\""
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t9-tracker-presentation-reasons [ses_f1fa39e88ffeFN5QfZUtFVAq7k].md:L07986] These call `categorizeContexts()` from `DonutChart.tsx`, which is outside my modify-only set, so I could not fix them without violating a hard prohibition."
+      ]
     },
     {
       "id": "concept--line-count-change-breaks-the-audio-contract-file-line-keys",
@@ -109,7 +115,9 @@
       "source_location": "L8204",
       "norm_label": "the audio cue coverage contract is keyed on file:line, so a line-count change invalidates keys and has to be reported",
       "summary": "Reused id: same constraint, measured here on the A6 components group. Adding a playAudio call inserts lines, so every later <file>:<line> key in that file -- both KNOWN_GAPS queue entries and EXCLUSION_REGISTER entries -- is invalidated. Two exclusion keys were re-anchored after wiring (WelcomeModal 46->52, WhatsNewModal 40->46), and peers were observed hitting the same failure mid-batch (SystemDiagnosticsSection 220/221, LabelManager line drift).",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-cues [ses_f17b1e0fdffegV5GBjL6DpbdNn].md:L8204] Stated reason this is a hazard for the parent rather than a local bookkeeping detail: \"**wiring a cue that adds lines shifts every later line number in that file, invalidating that file's queue and exclusion keys.** The manifest/plan doesn't mention it.\""
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-cues [ses_f17b1e0fdffegV5GBjL6DpbdNn].md:L08204] This is a general hazard I must report: **wiring a cue that adds lines shifts every later line number in that file, invalidating that file's queue and exclusion keys.** The manifest/plan doesn't mention it."
+      ]
     },
     {
       "id": "concept--reachesplayaudio-follows-calls-only-so-bare-handler-refs-read-as-silent",
@@ -159,7 +167,9 @@
       "source_location": "L9641",
       "norm_label": "an exclusion reason token listed in the task brief is rejected by the test's own justification regex",
       "summary": "Brief rule 6 permitted five reason tokens: shared-primitive, toast-owns-cue, self-sounding, high-frequency, deliberate-prior-decision. The contract test's justification assertion (around line 539) accepts only the first four, so following the brief literally would have failed the test. A6 used the four accepted tokens, matching what A5 and A8 had already registered, and reported the contradiction rather than weakening the assertion.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-cues [ses_f17b1e0fdffegV5GBjL6DpbdNn].md:L9641] Stated reason the brief's fifth token is unusable: \"`deliberate-prior-decision` is listed in brief rule 6 as an allowed reason token, but the test's justification regex (line ~539) only accepts `shared-primitive|self-sounding|high-frequency|toast-owns-cue`. Using the brief's 5th token would fail the test.\""
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-cues [ses_f17b1e0fdffegV5GBjL6DpbdNn].md:L09641] `deliberate-prior-decision` is listed in brief rule 6 as an allowed reason token, but the test's justification regex (line ~539) only accepts `shared-primitive|self-sounding|high-frequency|toast-owns-cue`."
+      ]
     },
     {
       "id": "concept--claimed-cue-owner-must-be-verified-against-the-file",

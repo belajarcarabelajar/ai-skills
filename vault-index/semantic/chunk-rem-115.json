@@ -44,7 +44,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - deep-research-wayland-input-density [ses_f258b313affeq5eT2xP5hKvAjA].md",
       "source_location": "L8172",
       "norm_label": "libinput and libseat grant no privilege advantage over raw evdev",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - deep-research-wayland-input-density [ses_f258b313affeq5eT2xP5hKvAjA].md:L8172] Stated reason: libinput \"only supports evdev devices\" and keeps \"a 1:1 mapping between libinput devices and /dev/input/eventX device nodes\", while libseat and seatd are seat managers that grant the same device access rather than a lesser one. The conclusion drawn is \"If libinput can read the node, so can you, and if it cannot, libinput is equally blind.\""
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - deep-research-wayland-input-density [ses_f258b313affeq5eT2xP5hKvAjA].md:L08172] `libinput` / `libseat`.** No privilege advantage. libinput \"only supports evdev devices\" and maintains \"a 1:1 mapping between libinput devices and `/dev/input/eventX` device nodes\" [11]; `libseat`/`seatd` are seat-managers that grant *the same* device access, not a lesser one."
+      ]
     },
     {
       "id": "concept--xwayland-xtest-cannot-see-native-wayland-input",

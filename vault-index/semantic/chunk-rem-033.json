@@ -61,7 +61,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-systemd-boot-kernel-entries [ses_f221dc2a9ffez0yuGn9R5Uw0ns].md",
       "source_location": "L22245",
       "norm_label": "60-mkinitcpio-remove.hook deletes /boot/vmlinuz-linux and /boot/initramfs-linux.img, turning a hand-written loader entry into a dead menu item",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-systemd-boot-kernel-entries [ses_f221dc2a9ffez0yuGn9R5Uw0ns].md:L22245] Do not remove the linux package until the fallback entry has booted successfully, because the remove hook deletes the very files the entry needs"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-systemd-boot-kernel-entries [ses_f221dc2a9ffez0yuGn9R5Uw0ns].md:L22245] **Do not remove `linux` until the fallback has booted successfully.** `60-mkinitcpio-remove.hook` deletes `/boot/vmlinuz-linux` and `/boot/initramfs-linux.img`, which would turn your new entry into a dead menu item that still shows in `bootctl list`.[16]"
+      ]
     },
     {
       "id": "concept--oneshot-boot-selection-tests-an-entry-without-changing-bootorder",
@@ -78,7 +80,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-systemd-boot-kernel-entries [ses_f221dc2a9ffez0yuGn9R5Uw0ns].md",
       "source_location": "L22243",
       "norm_label": "bootctl list and status only read, while bootctl install and update overwrite efi/boot/bootx64.efi and rewrite the firmware boot list",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-systemd-boot-kernel-entries [ses_f221dc2a9ffez0yuGn9R5Uw0ns].md:L22243] Never run bootctl install, bootctl update or efibootmgr --create, because they are unnecessary once the firmware already boots systemd-boot via Boot0002"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-systemd-boot-kernel-entries [ses_f221dc2a9ffez0yuGn9R5Uw0ns].md:L22243] **Never run `bootctl install`, `bootctl update`, or `efibootmgr --create`.** They are unnecessary — the firmware already boots systemd-boot via `Boot0002` — and `install` overwrites `EFI/BOOT/BOOTX64.EFI` and rewrites the firmware boot list.[8]"
+      ]
     }
   ],
   "links": [

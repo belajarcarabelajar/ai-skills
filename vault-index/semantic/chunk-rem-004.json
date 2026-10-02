@@ -51,7 +51,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
       "source_location": "L15116",
       "norm_label": "core web vitals 75th percentile",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L15116] Core Web Vitals judged on 28-day field data"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md:L15116] | Core Web Vitals are judged at the 75th percentile of 28-day field data | The plan can fix *causes* but must never assert a score."
+      ]
     },
     {
       "id": "concept--positive-control-for-extractors",

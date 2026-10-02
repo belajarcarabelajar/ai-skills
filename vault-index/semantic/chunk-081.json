@@ -24,7 +24,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
       "source_location": "L56",
       "norm_label": "prop drilling as the language convention",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md:L56] Use what exists, prop drilling is the convention"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md:L00056] - **Do NOT create a React context, a module-level singleton, or a `window` global.** Prop drilling is the existing convention."
+      ]
     },
     {
       "id": "concept--license-gate-structural-blocker",
@@ -66,7 +68,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
       "source_location": "L67",
       "norm_label": "explicit lang instead of toLocale",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md:L67] Host default locale would false pass"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md:L00067] **This host's default locale is already `id-ID`, so a bare `toLocale*` will accidentally pass — never rely on it.** Capture evidence per area, and state the count of distinct `t()` keys that change."
+      ]
     },
     {
       "id": "concept--clean-positive-control",
@@ -92,7 +96,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
       "source_location": "L33",
       "norm_label": "stale audit line numbers",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md:L33] Audit flagged some entries as false positives"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md:L00033] **Verify every one yourself before editing** — the audit's line numbers may be stale, and its author flagged some entries as false positives."
+      ]
     },
     {
       "id": "concept--dead-code-verified-not-deleted",
@@ -119,7 +125,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
       "source_location": "L13565",
       "norm_label": "pristine head reproduction",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md:L13565] Same failure on pristine HEAD proves not mine"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md:L13565] I reverted my `OverviewTab.tsx` to HEAD, re-ran → **same failure on pristine HEAD** → restored my version."
+      ]
     },
     {
       "id": "concept--zero-unique-commit-merge-check",
@@ -137,7 +145,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
       "source_location": "L558",
       "norm_label": "remote branch deletion needs confirmation",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md:L558] Remote deletion is visible to everyone"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md:L00558] Say the word and I'll list which remotes are safe to prune, but remote deletion is visible to everyone, so I'd rather you confirm."
+      ]
     },
     {
       "id": "concept--github-keeps-no-branch-reflogs",
@@ -155,7 +165,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
       "source_location": "L1427",
       "norm_label": "runner minute freeze",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md:L1427] Push trigger reenables runner consumption"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md:L01427] So committing this workflow with `push: branches: [main]` would re-introduce automatic runner consumption."
+      ]
     },
     {
       "id": "concept--path-filtered-pull-request-trigger",
@@ -182,7 +194,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
       "source_location": "L209",
       "norm_label": "untracked file survives checkout",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md:L209] Untracked paths absent from origin main"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md:L00209] Both untracked files are absent from `origin/main`, so a checkout won't clobber them."
+      ]
     },
     {
       "id": "concept--schema-cli-fingerprint-guard-workflow",

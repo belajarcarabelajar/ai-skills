@@ -7,7 +7,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - graphify-js-plugin-export-fix [ses_f07e83b71ffeqlRc6yhQ313p17].md",
       "source_location": "L7584",
       "norm_label": "opencode v2 plugin contract breaks v1-era plugins",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - graphify-js-plugin-export-fix [ses_f07e83b71ffeqlRc6yhQ313p17].md:L7584] it used a named `export const GraphifyPlugin` returning a hook map. V2 requires a default export with `id` + `setup()` — rewritten to `export default { id: \"graphify\", async setup(ctx) {...} }` with the hook registered via `ctx.tool.hook(\"execute.before\", ...)` and `event.input.command` mutation, confirmed against the V2 plugin docs and migration guide.",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - graphify-js-plugin-export-fix [ses_f07e83b71ffeqlRc6yhQ313p17].md:L07584] Rewrote it to `export default { id: \"graphify\", async setup(ctx) {...} }` with the hook registered via `ctx.tool.hook(\"execute.before\", ...)` and `event.input.command` mutation (confirmed against the V2 plugin docs and migration guide)."
+      ],
       "summary": "Reused id, third owner (chunk-rem-024 found the V1 form still shipping and routed around it via MCP; chunk-rem-089 migrated rtk.ts off it). Here the failing plugin is ~/ai-skills/.opencode/plugins/graphify.js and the same V1 shape is migrated rather than routed around."
     },
     {
@@ -59,7 +61,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t4-id-page [ses_f2129c1dfffeeeXkUd0qIbZFuQ].md",
       "source_location": "L5944",
       "norm_label": "when a concurrent agent replaces your file, verify their version against the contract instead of restoring your own",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t4-id-page [ses_f2129c1dfffeeeXkUd0qIbZFuQ].md:L5944] The plan settles it — `docs/code-plan/plans/2026-09-27-solutions-social-media-landing.md:303-318` defines T4 as \"Halaman ID plus modul data (RE-CHUNKED setelah stall)\", producing both the fixture and the page as a \"renderer tipis\". Restoring my version would have orphaned `src/data/solutions/social-media.id.ts` and desynced EN/ID, so the brief's own wording lost to the plan that superseded it.",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t4-id-page [ses_f2129c1dfffeeeXkUd0qIbZFuQ].md:L05944] `docs/code-plan/plans/2026-09-27-solutions-social-media-landing.md:303-318` defines T4 as **\"Halaman ID plus modul data (RE-CHUNKED setelah stall)\"**, producing *both* `src/data/solutions/social-media.id.ts` (fixture) and the page as a \"renderer tipis, target di bawah 300 baris\", with FAQ/JSON-LD/table/workflows moved into the module."
+      ],
       "summary": "The agent held strict write scope for exactly one file, could rewrite it in seconds, and chose not to. The decision rule is separable from the overwrite itself: audit the peer's version against every hard contract string first, and let the authoritative plan decide whose architecture is correct rather than the brief that is now stale."
     },
     {
@@ -69,7 +73,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t4-id-page [ses_f2129c1dfffeeeXkUd0qIbZFuQ].md",
       "source_location": "L5969",
       "norm_label": "prettier cannot parse astro at all because prettier plugin astro is absent",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t4-id-page [ses_f2129c1dfffeeeXkUd0qIbZFuQ].md:L5969] `prettier-plugin-astro` is not installed anywhere (`ls -d node_modules/prettier-plugin-astro` finds nothing; `apps/website/package.json` has no prettier script), and the pre-existing tracked baseline `src/pages/id/solutions/marketing.astro` fails with the identical error. Check 5 is not runnable in this workspace, not a formatting failure. I am not claiming a pass.",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t4-id-page [ses_f2129c1dfffeeeXkUd0qIbZFuQ].md:L05969] **Check 5 is not runnable in this workspace, not a formatting failure.** `prettier-plugin-astro` is not installed anywhere (`ls -d node_modules/prettier-plugin-astro` finds nothing; `apps/website/package.json` has no prettier script), and the pre-existing tracked baseline `src/pages/id/solutions/marketing.astro` fails with the identical error."
+      ],
       "summary": "Reused id, and this session's contribution is the baseline test rather than the diagnosis: the identical `No parser could be inferred` failure on an untouched tracked file is what separates 'the check cannot run' from 'this file is badly formatted', and it is why exit 2 was reported as not-runnable instead of as a formatting defect."
     },
     {
@@ -79,7 +85,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t4-id-page [ses_f2129c1dfffeeeXkUd0qIbZFuQ].md",
       "source_location": "L6007",
       "norm_label": "copy requirements become unverifiable once copy moves to a data module",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t4-id-page [ses_f2129c1dfffeeeXkUd0qIbZFuQ].md:L6007] The bend in the shipped file is architectural: the re-chunked T4 moved the brief's \"local faqs array\" and inline comparison table into `src/data/solutions/social-media.id.ts`, so all copy-level requirements (buzzer vocabulary, honesty block completeness, Indonesian proofreading) are now unverifiable and unfixable from the page file alone.",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t4-id-page [ses_f2129c1dfffeeeXkUd0qIbZFuQ].md:L06007] The bend in the shipped file is architectural: the re-chunked T4 moved my brief's \"local faqs array\" and inline comparison table into `src/data/solutions/social-media.id.ts`, so all copy-level requirements (buzzer vocabulary, honesty block completeness, Indonesian proofreading) are now unverifiable and unfixable from the page file alone."
+      ],
       "summary": "The narrow claim under the thin-renderer architecture: splitting copy into a fixture satisfies the line-count and parity guards while making prose requirements uncheckable by the file they were written for. Concretely, the fixture's own header comment asserts the buzzer vocabulary is kept, and grep counts 1 occurrence in the fixture against 0 in user-facing copy."
     }
   ],

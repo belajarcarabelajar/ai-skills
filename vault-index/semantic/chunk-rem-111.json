@@ -8,7 +8,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-features-settings-cues [ses_f17b26724ffe4s4NL81X00dnos].md",
       "source_location": "L10502",
       "norm_label": "reachesplayaudio follows calls only, so a bare onclick={handler} reference is reported as a silent control",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-features-settings-cues [ses_f17b26724ffe4s4NL81X00dnos].md:L10502] \"`reachesPlayAudio` only matches `name(` sites, so every bare `onClick={handler}` and every `useCallback`-wrapped handler is reported silent — 16 of my 24 entries, and most of A8's, are that, not real gaps\". Most of this chunk's queue was detector false positives rather than unwired controls, and fixing the resolution would shrink both the queue and the register."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-features-settings-cues [ses_f17b26724ffe4s4NL81X00dnos].md:L10502] **Two real detector defects, for the T11/T12 owner:** (a) `reachesPlayAudio` only matches `name(` sites, so every bare `onClick={handler}` and every `useCallback`-wrapped handler is reported silent — 16 of my 24 entries, and most of A8's, are that, not real gaps; (b) the `named` resolution at test line 436 is **dead code** — `body` always starts with the `{` of `onClick={`, so `/^\\s*(\\w+)\\s*$/` can never match, which is why `raisesToast` is also always `false` for bare references."
+      ]
     },
     {
       "id": "concept--named-regex-dead-branch",
@@ -17,7 +19,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-features-settings-cues [ses_f17b26724ffe4s4NL81X00dnos].md",
       "source_location": "L10502",
       "norm_label": "named regex tested against a braced body can never match",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-features-settings-cues [ses_f17b26724ffe4s4NL81X00dnos].md:L10502] \"the `named` resolution at test line 436 is **dead code** — `body` always starts with the `{` of `onClick={`, so `/^\\s*(\\w+)\\s*$/` can never match, which is why `raisesToast` is also always `false` for bare references\". The same defect that hides the cue also hides the toast, so a bare reference to a toasting handler registers as an ordinary silent gap."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-features-settings-cues [ses_f17b26724ffe4s4NL81X00dnos].md:L10502] **Two real detector defects, for the T11/T12 owner:** (a) `reachesPlayAudio` only matches `name(` sites, so every bare `onClick={handler}` and every `useCallback`-wrapped handler is reported silent — 16 of my 24 entries, and most of A8's, are that, not real gaps; (b) the `named` resolution at test line 436 is **dead code** — `body` always starts with the `{` of `onClick={`, so `/^\\s*(\\w+)\\s*$/` can never match, which is why `raisesToast` is also always `false` for bare references."
+      ]
     },
     {
       "id": "concept--matcher-coverage-is-not-owner-coverage",

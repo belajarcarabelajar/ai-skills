@@ -53,7 +53,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-raw-folder [ses_f281d7319ffe2rQVakUr9zxWR5].md",
       "source_location": "L25435",
       "norm_label": "repeated title is a title collision, not a duplicate family",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-raw-folder [ses_f281d7319ffe2rQVakUr9zxWR5].md:L25435] The Learn Earth material IDs and topics differ, so the shared title is a collision rather than a duplicate"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-raw-folder [ses_f281d7319ffe2rQVakUr9zxWR5].md:L25435] The repeated title `AI-First Adaptive Learning` across Coverage, TDD, and Double Test is a **title collision**, not a duplicate family: the Learn Earth material IDs and topics differ."
+      ]
     },
     {
       "id": "concept--external-attachment-embed-risk",

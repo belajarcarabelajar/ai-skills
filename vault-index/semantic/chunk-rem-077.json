@@ -7,7 +7,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - obsidian [ses_f1d1f7010ffeMMXqgy117zIbta].md",
       "source_location": "L1353",
       "norm_label": "artifact language follows the codebase, never the prompt",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - obsidian [ses_f1d1f7010ffeMMXqgy117zIbta].md:L1353] A translated artifact is a defect rather than a courtesy because it breaks grep, breaks reviewer scanning, and silently diverges from the files it sits next to"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - obsidian [ses_f1d1f7010ffeMMXqgy117zIbta].md:L01353] A translated artifact is a defect, not a courtesy: it breaks grep, breaks reviewer scanning, and silently diverges from the files it sits next to."
+      ]
     },
     {
       "id": "concept--never-translate-the-vault-plan-mirror",
@@ -16,7 +18,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - obsidian [ses_f1d1f7010ffeMMXqgy117zIbta].md",
       "source_location": "L1491",
       "norm_label": "the vault plan mirror is a byte copy and is never translated on the way in",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - obsidian [ses_f1d1f7010ffeMMXqgy117zIbta].md:L1357] mergeFrontmatter copies the plan text unchanged and source_hash covers that whole text, so a translated mirror reads as stale on the next --check, blocks --execute with exit 3, and fails the daily drift timer"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - obsidian [ses_f1d1f7010ffeMMXqgy117zIbta].md:L01491] - **The mirror is a byte copy, so the plan is authored once, in the repository's language, and never translated on the way to the vault.** The publisher copies the plan text unchanged and injects only the vault properties, and `source_hash` is computed over that whole text, so a translated mirror reads as stale on the next `--check`, blocks `--execute` with exit 3, and fails the daily drift timer."
+      ]
     },
     {
       "id": "concept--non-repo-language-deliberation-note-outside-plans-dir",

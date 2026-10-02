@@ -32,7 +32,7 @@
       "source_location": "L69",
       "norm_label": "explicit --platform and --version required",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L69] Malformed authority / missing --platform / bad version fails closed with a clear message."
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L00069] - Malformed authority / missing `--platform` / bad version fails closed with a clear message."
       ]
     },
     {
@@ -117,7 +117,7 @@
       "norm_label": "an inner printf inside a function shadows the outer pipeline's stdin",
       "rationale": [
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L06345] we're already in a pipeline `printf ... | release_step plan`. So `release_step`'s stdin IS the outer printf's output. And inside `release_step`, the inner `printf '%s' '{}' | bun -e ...` provides its OWN stdin from the inner printf!",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L6347] That's the bug. local payload=\"${2:-}\" is empty -> payload='{}' -> the inner printf pipes {} into bun, ignoring the outer stdin."
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L06347] `local payload=\"${2:-}\"` is empty → `payload='{}'` → the inner printf pipes `{}` into bun, ignoring the outer stdin."
       ]
     },
     {
@@ -165,7 +165,7 @@
       "source_location": "L2525",
       "norm_label": "toast-owns-cue: a control whose handler raises a toast on every outcome is registered, not wired",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L2525] Line 435: onClick={handleDelete} - bare reference, detector can't resolve it. handleDelete calls showToast(t(\"taskDeletedToast\"), \"success\") -> raises a toast, and ToastSound plays the cue.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L02525] `handleDelete` calls `showToast(t(\"taskDeletedToast\"), \"success\")` → raises a toast, and `ToastSound` plays the cue.",
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L6486] toast-owns-cue (1): TaskDetailDrawer:444 (was 435 before my line shift)"
       ]
     },
@@ -201,7 +201,7 @@
       "source_location": "L6495",
       "norm_label": "tasks/magicmenutaskrow and tasks/nlptokenspreview are dead duplicates of the live magic_menu_tasks components",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L6495] magic_menu_tasks/TaskRow.tsx is live (imported via the barrel by components/MagicMenuTasks.tsx:7); tasks/MagicMenuTaskRow.tsx has no production importer at all - only its own test. It's dead code. Not deleted: out of scope and not my call."
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L06495] **Twin-file question.** `magic_menu_tasks/TaskRow.tsx` is live (imported via the barrel by `components/MagicMenuTasks.tsx:7`); `tasks/MagicMenuTaskRow.tsx` has **no production importer at all** — only its own test."
       ]
     },
     {
@@ -212,7 +212,7 @@
       "source_location": "L6505",
       "norm_label": "the exclusion register's justification test accepts four classes while the manifest lists five",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L6505] Contradiction with the brief: rule 6 lists deliberate-prior-decision as an allowed exclusion class, but the test's assertion (every exclusion names one of the four documented classes) only accepts shared-primitive|self-sounding|high-frequency|toast-owns-cue. I didn't need it, but the parent should reconcile the two lists."
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L06505] **Contradiction with the brief:** rule 6 lists `deliberate-prior-decision` as an allowed exclusion class, but the test's assertion (`every exclusion names one of the four documented classes`) only accepts `shared-primitive|self-sounding|high-frequency|toast-owns-cue`."
       ]
     },
     {
@@ -223,7 +223,7 @@
       "source_location": "L6497",
       "norm_label": "the mousedown handlers never cue, so a mousedown preceding the click is not a double-fire",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L6497] Mousedown/click pairing: no double-fire risk. The onMouseDown handlers in both files only e.stopPropagation() - no playAudio, and the detector never considers onMouseDown (CUE_EVENTS is onClick/onSubmit/onDoubleClick).",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L06497] **Mousedown/click pairing: no double-fire risk.** The `onMouseDown` handlers in both files only `e.stopPropagation()` — no `playAudio`, and the detector never considers `onMouseDown` (CUE_EVENTS is onClick/onSubmit/onDoubleClick).",
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L6085] the checkbox's onMouseDown stopPropagation is there to prevent the menu from treating the press as an outside-click (which would hide the menu). That's its purpose."
       ]
     },
@@ -235,7 +235,7 @@
       "source_location": "L6499",
       "norm_label": "one row click plays the same key twice: handletoggle cues, then completetask cues the same key",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L6499] The row already double-cues - pre-existing bug, not in my write scope. TaskRow.handleToggle plays toggle_001.ogg/confirmation_001.ogg (TaskRow.tsx:50) and then calls onComplete -> completeTask in useMagicMenuTasks.ts:247, which plays the same key under the same condition. One row click = two identical cues. Fix belongs in useMagicMenuTasks.ts (delete line 247) or in TaskRow.handleToggle - both outside my file list, so STOP + report."
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L06499] **The row already double-cues — pre-existing bug, not in my write scope.** `TaskRow.handleToggle` plays `toggle_001.ogg`/`confirmation_001.ogg` (TaskRow.tsx:50) and then calls `onComplete` → `completeTask` in `useMagicMenuTasks.ts:247`, which plays the *same key under the same condition*."
       ]
     },
     {
@@ -246,7 +246,7 @@
       "source_location": "L5399",
       "norm_label": "attribute a peer's red suite without git stash on a worktree nine agents share",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L5399] Stashing is risky with 9 concurrent agents editing the same worktree - git stash would stash OTHER chunks' in-flight work too and could lose their work. NO. Absolutely not: never run git stash in a shared worktree with 9 concurrent agents.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L05399] Stashing is risky with 9 concurrent agents editing the same worktree — `git stash` would stash OTHER chunks' in-flight work too and could lose their work.",
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L5395] the tsc run reports ALL errors project-wide, and there is exactly ONE error, in JournalList.tsx. Since tsc reports every error it finds (it doesn't stop at the first), the absence of any error in my 8 files means they are clean. That's strong evidence."
       ]
     },

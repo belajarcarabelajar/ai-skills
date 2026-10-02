@@ -23,7 +23,9 @@
       "source_location": "L4340",
       "norm_label": "untranslated id frontmatter title collides with en twin",
       "description": "Four EN //id/ pairs (tools/audio/, tools/magic-menu/, tools/omnisearch/, tools/pomodoro/) share one title string. The pair is correctly declared as reciprocal twins; only the title is wrong.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t6-chunks-c15-c20 [ses_f16e31f29ffeTsltrEQUTeBe9I].md:L4340] \"So this is not a broken localization layer; the pair is correctly declared, and the damage is narrow — an Indonesian searcher sees an English title byte-identical to the EN result, which reads as a duplicate. It's P2, and inconsistent with the other 33 ID pages, which translate even feature names ('Vault & Otentikator MFA', 'Statistik & Prestasi').\""
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t6-chunks-c15-c20 [ses_f16e31f29ffeTsltrEQUTeBe9I].md:L04340] So this is not a broken localization layer; the pair is correctly declared, and the damage is narrow — an Indonesian searcher sees an English title byte-identical to the EN result, which reads as a duplicate. It's P2, and inconsistent with the other 33 ID pages, which translate even feature names (\"Vault & Otentikator MFA\", \"Statistik & Prestasi\")."
+      ]
     },
     {
       "id": "concept--docs-topic-title-humanizes-slug-instead-of-curated-title",
@@ -33,7 +35,9 @@
       "source_location": "L3027",
       "norm_label": "docs topic title humanizes slug instead of curated title",
       "description": "apps/satteri-docs/src/layout.rs:163-165 returns slug.replace('-', \" \") unconditionally, against a doc comment promising a curated title when none is registered.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t6-chunks-c15-c20 [ses_f16e31f29ffeTsltrEQUTeBe9I].md:L2899] \"Yes — zero match arms, unconditional. The doc comment is wrong. So every 3rd breadcrumb level is a slug humanization, e.g. 'mfa authenticator' for a page whose title is 'Vault & MFA Authenticator' and whose ID twin breadcrumb says the same. That's a real P3\""
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t6-chunks-c15-c20 [ses_f16e31f29ffeTsltrEQUTeBe9I].md:L02899] Yes — zero match arms, unconditional. The doc comment is wrong. So every 3rd breadcrumb level is a slug humanization, e.g. \"mfa authenticator\" for a page whose title is \"Vault & MFA Authenticator\" and whose ID twin breadcrumb says the same. That's a real P3."
+      ]
     },
     {
       "id": "concept--unconditional-brand-suffix-pads-short-docs-titles",
@@ -81,7 +85,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - setup-fastpech-untuk-showoff-arch-linux [ses_f2fecbcd2ffedFGmI23FSb061w].md",
       "source_location": "L9594",
       "norm_label": "hardware specs kept for showoff are a fingerprint",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-23 - setup-fastpech-untuk-showoff-arch-linux [ses_f2fecbcd2ffedFGmI23FSb061w].md:L9594] \"Yang masih terlihat sengaja adalah CPU, GPU, RAM, kernel, WM, dan jumlah paket — informasi ini umum dipakai untuk showoff, tetapi secara teknis bisa menjadi sidik jari hardware. Kalau ingin versi ultra-anonymous, saya bisa lanjut menghapus semua model CPU/GPU dan informasi versi kernel juga.\""
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-23 - setup-fastpech-untuk-showoff-arch-linux [ses_f2fecbcd2ffedFGmI23FSb061w].md:L09594] Yang masih terlihat sengaja adalah CPU, GPU, RAM, kernel, WM, dan jumlah paket—informasi ini umum dipakai untuk showoff, tetapi secara teknis bisa menjadi sidik jari hardware."
+      ]
     },
     {
       "id": "concept--fastfetch-shell-module-reports-the-parent-process",

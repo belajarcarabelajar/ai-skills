@@ -63,7 +63,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md",
       "source_location": "L12580",
       "norm_label": "frozen source evidence layer",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md:L12580] A frontmatter edit falsifies the capture record"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md:L12580] Do not add `title`, `para`, `related`, or `source_hash` to them — that is a frontmatter rewrite, and it would also falsify the capture record."
+      ]
     },
     {
       "id": "concept--restricted-sources-manifest",

@@ -56,7 +56,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md",
       "source_location": "L110583",
       "norm_label": "escaped systemd scope app id for portal identity",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md:L110583] Launching the binary directly yields NotAllowed because there is no app id"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md:L110583] The escaped scope itself is correct, but launching the binary directly still yields `NotAllowed(\"An app id is required\")`; KDE is not deriving the desktop identity from the direct executable."
+      ]
     },
     {
       "id": "concept--case-insensitive-portal-trigger-parser",
@@ -73,7 +75,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md",
       "source_location": "L22034",
       "norm_label": "webview watchdog silent-window reload",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md:L22034] Watchdog reloads any silent window because it has no visibility check"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md:L22034] The watchdog iterates **all** webview windows and reloads any silent one, with no visibility check."
+      ]
     },
     {
       "id": "concept--whisper-single-flight-inference-gate",
@@ -108,7 +112,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md",
       "source_location": "L90447",
       "norm_label": "alsa default vs native pipewire sink",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md:L90447] pw-play audible rules out PipeWire and the speaker"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md:L90447] `pw-play` Audible, jadi PipeWire dan speaker bukan masalah."
+      ]
     },
     {
       "id": "concept--vps-only-build-discipline",
@@ -117,7 +123,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md",
       "source_location": "L27",
       "norm_label": "vps-only build discipline",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md:L27] Cargo builds run on the VPS to avoid overloading local Arch storage"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - arch-linux-shortcut-bug-implementation-plan [ses_f2ac93191ffeE04CHQVbvtUKxc].md:L00027] Cargo check, cargo nextest, and any other commands, including builds and releases, must be run on the VPS to avoid overloading the storage on the local Arch Linux machine."
+      ]
     },
     {
       "id": "concept--approval-gated-rca-to-plan-tdd-workflow",

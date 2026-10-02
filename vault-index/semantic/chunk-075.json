@@ -25,7 +25,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md",
       "source_location": "L39",
       "norm_label": "tauri-coupled locale library",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md:L39] Tauri coupling is why the CLI cannot reuse the desktop locale library"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md:L00039] - It **cannot** reuse `apps/desktop/src-tauri/src/locale.rs`."
+      ]
     },
     {
       "id": "concept--mcp-tool-description-localisation-exclusion",
@@ -34,7 +36,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md",
       "source_location": "L49",
       "norm_label": "mcp tool description localisation exclusion",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md:L49] MCP tool descriptions are read by LLM clients, not humans"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md:L00049] For the CLI specifically, state the recommended sequencing for a future effort: route the 40 error strings through the `main.rs:25` choke point first (one edit), leave the 744 clap doc comments until someone actually asks for `--lang`, and exclude the 80 MCP tool descriptions by explicit decision because they are read by LLM clients, not humans."
+      ]
     },
     {
       "id": "concept--unreproducible-audit-metric",
@@ -86,7 +90,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
       "source_location": "L3910",
       "norm_label": "windows-namespaced tag trigger",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L3910] Legacy bare v stays readable but must not build a Windows release"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L03910] Hmm but \"Legacy bare `v<semver>` is the Windows channel and stays readable\" — readability by the updater, which is handled by T8 reader changes, not this workflow."
+      ]
     },
     {
       "id": "concept--windows-compatibility-aggregate",
@@ -177,7 +183,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
       "source_location": "L47",
       "norm_label": "explicit --platform and --version required",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L47] Ignoring the version argument was a bug, so the call now fails loudly"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L00047] T1 changed `scripts/release/sync-version.mjs` to REQUIRE explicit `--platform` and `--version`; a no-argument invocation now fails loudly on purpose (its old behavior — ignoring the version and only rewriting the README — was a bug)."
+      ]
     },
     {
       "id": "concept--text-parsed-workflow-trigger-contract",

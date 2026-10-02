@@ -76,7 +76,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
       "source_location": "L3064",
       "norm_label": "brand safe slug decision rank for the market term without owning it in the brand name",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L3064] Separate the SEO surface from the brand surface so the page ranks for the intent without owning the pejorative word"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L03064] Honestly the cleanest recommendation: slug `/for-social-media-teams`, H1 \"Snipset for Social Media & Content Teams\", body uses the market's own vocabulary (\"buzzer campaign\", \"jujakan\" avoided) so SEO/brand-safety are separated: the page ranks for the intent without owning the pejorative word in the brand name."
+      ]
     },
     {
       "id": "concept--chatbot-catalog-derived-gates",
@@ -158,7 +160,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
       "source_location": "L15495",
       "norm_label": "keycap mismatch shipped default ctrl shift k versus docs saying ctrl",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L15495] Align the page to the shipped constant and leave the docs mismatch as debt because the docs live in another app"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md:L15495] The docs discrepancy is a separate item — I'll instruct: align the page to the shipped constant and note the docs mismatch as remaining debt (or fix docs too — that's `apps/satteri-docs`?"
+      ]
     },
     {
       "id": "concept--footnote-split-fragility",

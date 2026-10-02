@@ -133,7 +133,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md",
       "source_location": "L13473",
       "norm_label": "credential quarantine before knowledge compilation",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md:L13473] Ingestion, sync, git or indexing would expose credentials, PII and infrastructure secrets"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md:L13473] An LLM ingestion pass, external sync, Git commit, indexing service, or generated wiki summary could expose credentials, personal data, private infrastructure details, or source-code secrets."
+      ]
     },
     {
       "id": "concept--structural-signature-secret-scanning",
@@ -224,7 +226,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md",
       "source_location": "L13659",
       "norm_label": "graph not yet trustworthy for automated llm maintenance",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md:L13659] Broken links, false links and raw/archive mixing propagate errors into future automated summaries"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-wiki-folder [ses_f281d730bffer22kXBYdyB4g0F].md:L13659] **The current graph is not yet trustworthy for automated LLM maintenance.** Broken links, false links, ambiguous names, and archive/raw mixing would propagate errors into future summaries."
+      ]
     },
     {
       "id": "concept--missing-conflict-staleness-layer",

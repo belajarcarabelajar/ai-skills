@@ -39,7 +39,9 @@
       "source_location": "L8042",
       "norm_label": "locked deployment contract needs explicit sign off",
       "summary": "build-linux.sh, build-tauri.ps1 and release-publish.ps1 are on a locked deployment contract: unchanged behaviourally and structurally unless the user explicitly asks to change deployment behaviour in the same conversation. T3 and T4 had to stop before committing and put the choice to the user.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - implementasi-platform-versioning-independen [ses_f1da808ceffeWNKndIe0gVWJF4].md:L8050] The contract requires the user to ask for the deployment change in this conversation"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - implementasi-platform-versioning-independen [ses_f1da808ceffeWNKndIe0gVWJF4].md:L08042] The contract says these files \"must remain behaviorally and structurally unchanged **unless the user explicitly asks to change deployment behavior in the same conversation**.\""
+      ]
     },
     {
       "id": "concept--parent-verifies-subagent-reports-independently",

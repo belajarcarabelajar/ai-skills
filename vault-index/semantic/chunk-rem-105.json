@@ -32,7 +32,7 @@
       "source_location": "L5729",
       "norm_label": "foreign live binding ownership gate on preference sync",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md:L5729] A live binding reaches a write only if `owner_of` returns `Snipset` or `Unobservable`; `Foreign(c)` and `Unowned` are both refused and reported",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md:L05729] A live binding reaches a write only if `owner_of` returns `Snipset` or `Unobservable`.",
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md:L5731] The gate sits before the pending-push comparisons, not just before `store`: a `confirmed` push means the desktop agreed with what Snipset stored, and a foreign component saying so means nothing, so letting it through would let a coincidental match clear the record of what the user asked for",
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md:L2411] Blocking adoption for every binding would kill the whole feature and violate the hard requirement that a genuine same-application external edit must still be adopted, so the guard activates only when ownership data exists"
       ]
@@ -45,7 +45,7 @@
       "source_location": "L5729",
       "norm_label": "unobservable ownership is a distinct variant from unowned",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md:L5729] Keeping `Unowned` and `Unobservable` as distinct variants rather than one empty map makes \"never populated\" representable, so an observable session with a missing id is reported while a session that could not observe ownership keeps today's behavior; collapsing them would let the ambiguous case silently disable the guard, which is the same class of bug as the original",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md:L05729] The load-bearing decision is keeping `Unowned` and `Unobservable` as **distinct variants** rather than one empty map: `observed: Option<HashMap>` means \"never populated\" is representable, so an observable session with a missing id is reported while a session that could not observe ownership keeps today's behavior.",
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md:L2414] `Ownership::Unobservable` is session-level: the portal gave nothing to reason about, so policy keeps today's adoption behavior, which is the documented deferral and preserves requirement 3 today"
       ]
     },
@@ -103,7 +103,7 @@
       "source_location": "L10229",
       "norm_label": "app-owned versus schema-owned version constants",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t6-rust-runtime-version-identity [ses_f1da1a2baffeiKZVdRe4DoS4Cz].md:L10229] The backup file format version `version: \"2.0\"` is kept unchanged as a schema version consumed by restore and must never track the release number; a wrongly replaced schema version is a data-compatibility bug",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t6-rust-runtime-version-identity [ses_f1da1a2baffeiKZVdRe4DoS4Cz].md:L10229] | `backup/creation.rs` | 21, 51 | `version: \"2.0\"` | **unchanged** | **KEPT — schema version.** Backup file format version consumed by restore; must never track the release number.",
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t6-rust-runtime-version-identity [ses_f1da1a2baffeiKZVdRe4DoS4Cz].md:L78] When in doubt, leave a CARGO_PKG_VERSION use alone and report it, because the app-owned versus not-app-owned distinction is the highest-risk part of the migration"
       ]
     },

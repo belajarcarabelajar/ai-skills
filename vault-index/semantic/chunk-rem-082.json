@@ -75,7 +75,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c7-c8-c9-c10-depth-probes [ses_f08dc55a3ffesy8GpXj7AiE7dc].md",
       "source_location": "L6112",
       "norm_label": "clipboard poll loop has no test seam",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c7-c8-c9-c10-depth-probes [ses_f08dc55a3ffesy8GpXj7AiE7dc].md:L6112] The loop is unconditional and arboard reads the live OS clipboard, so no test can drive two ticks"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c7-c8-c9-c10-depth-probes [ses_f08dc55a3ffesy8GpXj7AiE7dc].md:L06112] There is no test seam for it today — the loop is unconditional and `arboard::Clipboard::new()` reads the live OS clipboard, so asserting this would require either extracting the tick body into a callable function with injected clipboard access, or asserting on log output from a spawned thread."
+      ]
     },
     {
       "id": "concept--non-windows-clipboard-capture-is-a-500ms-poll",

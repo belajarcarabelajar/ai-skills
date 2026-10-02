@@ -16,7 +16,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-session-idempotent-tts-metrics [ses_f1fc5aa3fffe5HaO3HSs6qxvtB].md",
       "source_location": "L16337",
       "norm_label": "one accounting owner per sessionid",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-session-idempotent-tts-metrics [ses_f1fc5aa3fffe5HaO3HSs6qxvtB].md:L16337] One finalize hook so every lifecycle path is covered"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-session-idempotent-tts-metrics [ses_f1fc5aa3fffe5HaO3HSs6qxvtB].md:L16337] One accounting owner per sessionId: `transition_session` finalizes terminal events directly, so every lifecycle path (natural end, stop, fail, monitor-loop race) funnels through one hook, and the ledger UPDATE guard `outcome = started` makes even a double call idempotent."
+      ]
     },
     {
       "id": "concept--measured-playback-duration",
@@ -109,7 +111,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t3-backup-gate-operating-doc [ses_f21657fbeffee7k10og2pxIYfV].md",
       "source_location": "L53",
       "norm_label": "satset/ gitignore inconsistency left as an open item",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - t3-backup-gate-operating-doc [ses_f21657fbeffee7k10og2pxIYfV].md:L53] A .gitignore entry never untracks an already-tracked path, and untracking is the user's decision"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - t3-backup-gate-operating-doc [ses_f21657fbeffee7k10og2pxIYfV].md:L00053] The earliest was added in commit `2a330d0` on 2026-05-15, before the ignore rule existed, and a `.gitignore` entry never untracks an already-tracked path."
+      ]
     },
     {
       "id": "concept--vault-hub-reachability-registration",

@@ -30,7 +30,7 @@
       "source_location": "L10911",
       "norm_label": "d1 backed code login brute force lockout with the lockout check before the code comparison",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md:L15526] The lockout check runs before the code comparison, so a locked-out attacker cannot use the response to learn the code is right",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md:L10911] The lockout check genuinely precedes code comparison, so a locked-out attacker cannot use the response to learn whether the code is right.",
         "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md:L9363] Anchoring the lockout window on first_failed_at stops the window sliding, so the deadline cannot recede forever"
       ]
     },
@@ -107,7 +107,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md",
       "source_location": "L7004",
       "norm_label": "cf d1 migrations apply requires the database uuid not its name",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md:L7004] The repo README's name-based migration command would have failed at execution time, after the migration file was already written"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md:L07004] Copying the README would have failed at execution time, after the migration file was already written."
+      ]
     },
     {
       "id": "concept--em-dash-repo-convention-beats-skill-template",

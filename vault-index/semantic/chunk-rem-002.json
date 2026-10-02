@@ -25,7 +25,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - peningkatan-ai-skills-dari-input-data [ses_f267bdb37ffetNHhHL8RgPAu3Q].md",
       "source_location": "L23577",
       "norm_label": "code review template extraction",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - peningkatan-ai-skills-dari-input-data [ses_f267bdb37ffetNHhHL8RgPAu3Q].md:L23577] The new template extracts the contract rather than inventing policy"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - peningkatan-ai-skills-dari-input-data [ses_f267bdb37ffetNHhHL8RgPAu3Q].md:L23577] The 8-point filter, P0–P3 calibration, and binary verdict are faithful to the skill's existing rubric; the new template *extracts* the contract rather than inventing policy."
+      ]
     },
     {
       "id": "concept--browser-free-mermaid-validation",
@@ -34,7 +36,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - peningkatan-ai-skills-dari-input-data [ses_f267bdb37ffetNHhHL8RgPAu3Q].md",
       "source_location": "L23581",
       "norm_label": "browser-free mermaid validation",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - peningkatan-ai-skills-dari-input-data [ses_f267bdb37ffetNHhHL8RgPAu3Q].md:L23581] mmdc cannot run because puppeteer's postinstall is blocked by npm allowScripts and no system Chrome exists"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - peningkatan-ai-skills-dari-input-data [ses_f267bdb37ffetNHhHL8RgPAu3Q].md:L23581] - Mermaid: `mmdc` can't run here (puppeteer's postinstall is blocked by npm `allowScripts`, and no system Chrome), so I wrote a browser-free parser check against `mermaid@11.17.2` under jsdom."
+      ]
     },
     {
       "id": "concept--duplicate-rejection-with-file-path-evidence",

@@ -30,7 +30,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - remove-dead-engine-mode-type [ses_f257de248ffeLu864vqn0xWscx].md",
       "source_location": "L35",
       "norm_label": "strict write scope when several subagents edit one repo",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - remove-dead-engine-mode-type [ses_f257de248ffeLu864vqn0xWscx].md:L35] At least two other agents are concurrently editing i18n locales, VoiceSelector, repository-layout tests and a Rust file, so this agent was restricted to two named files"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - remove-dead-engine-mode-type [ses_f257de248ffeLu864vqn0xWscx].md:L00035] At least two other agents are concurrently editing `i18n/locales/{en,id}/extended.ts`, `VoiceSelector*`, `repository-layout.test.ts`, `updater-platform.test.ts`, and a Rust file."
+      ]
     },
     {
       "id": "concept--tsc-no-emit-as-proof-of-no-hidden-caller",

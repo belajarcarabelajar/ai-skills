@@ -78,7 +78,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - optimasi-ram-arch-sesuai-kapasitas [ses_f3100fe4cffephOMLUpOT1osmt].md",
       "source_location": "L7190",
       "summary": "Registering an SSH key in the Civo dashboard does nothing to an instance that is already running. The key is written into authorized_keys at instance creation, so a VPS created before the key was registered neither receives it nor stops refusing port 22, and must be repaired through the out-of-band console or recreated with the new key.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-23 - optimasi-ram-arch-sesuai-kapasitas [ses_f3100fe4cffephOMLUpOT1osmt].md:L7190] key dashboard Civo cuma disuntik saat instance **dibuat**. VPS `49.128.191.153` yang sudah jalan tidak otomatis dapat key ini, dan port 22-nya tetap refused."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-23 - optimasi-ram-arch-sesuai-kapasitas [ses_f3100fe4cffephOMLUpOT1osmt].md:L07190] VPS `49.128.191.153` yang sudah jalan tidak otomatis dapat key ini, dan port 22-nya tetap refused — jadi setelah daftar, VPS itu tetap perlu diperbaiki via web console Civo (cek `sshd` + firewall), atau buat ulang instance dengan key ini."
+      ]
     },
     {
       "id": "concept--civo-recovery-mode-plus-chroot-restores-sshd-on-a-refusing-vps",

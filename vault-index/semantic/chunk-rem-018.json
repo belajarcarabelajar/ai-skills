@@ -24,7 +24,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md",
       "source_location": "L37398",
       "norm_label": "copilot index snapshots as obsolete plugin state",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md:L37398] The index files are obsolete plugin state rather than user knowledge"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md:L37398] - The **7 root index files are obsolete plugin state**, not user knowledge."
+      ]
     },
     {
       "id": "concept--copilot-conversation-log-disposal",
@@ -89,7 +91,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md",
       "source_location": "L37701",
       "norm_label": "secret exposure outliving the audited /copilot scope",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md:L37701] The Copilot indexes show the same credential-bearing filenames under wiki/sources, so removing only /copilot would not remediate the exposure"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md:L37701] The Copilot indexes show matching credential-bearing filenames already present under `wiki/sources`; therefore removing only `/copilot` would not adequately remediate the exposure."
+      ]
     },
     {
       "id": "concept--prompt-injection-from-migrated-agent-prompts",
@@ -98,7 +102,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md",
       "source_location": "L37713",
       "norm_label": "prompt injection and instruction contamination from migrated agent prompts",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md:L37713] Agentic coding, journal and visual-generation prompts may be retrieved by an LLM as trusted instructions rather than quoted source material"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md:L37713] - **Prompt injection and instruction contamination.** Files such as agentic coding prompts, journal prompts, visual-generation prompts, and system-style instructions may be retrieved by an LLM as trusted instructions rather than quoted source material."
+      ]
     },
     {
       "id": "concept--plugin-state-contamination",
@@ -107,7 +113,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md",
       "source_location": "L37721",
       "norm_label": "plugin-state contamination as a migration risk",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md:L37721] satset_id, generated tags, Copilot epochs, model keys and status fields are not durable knowledge metadata"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md:L37721] - **Plugin-state contamination.** `satset_id`, generated tags, Copilot epochs, model keys, and status fields are not durable knowledge metadata."
+      ]
     },
     {
       "id": "concept--search-poisoning-by-exact-title-files",
@@ -116,7 +124,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md",
       "source_location": "L37726",
       "norm_label": "search poisoning by exact-title and repeated-keyword files",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md:L37726] Exact-title and repeated keyword files can dominate LLM retrieval without adding unique information"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md:L37726] - **Search poisoning.** Exact-title and repeated keyword files may dominate LLM retrieval without adding unique information."
+      ]
     }
   ],
   "links": [

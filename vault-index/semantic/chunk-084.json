@@ -25,7 +25,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f2-retire-ok-or-sentinel [ses_f209be6e9ffeUzsjifu9sv5v3j].md",
       "source_location": "L52",
       "norm_label": "byte-identical english fallback",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f2-retire-ok-or-sentinel [ses_f209be6e9ffeUzsjifu9sv5v3j].md:L52] no user-visible string may change"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f2-retire-ok-or-sentinel [ses_f209be6e9ffeUzsjifu9sv5v3j].md:L00052] - No user-visible string may change."
+      ]
     },
     {
       "id": "concept--database-not-initialized-wire-code",
@@ -34,7 +36,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f2-retire-ok-or-sentinel [ses_f209be6e9ffeUzsjifu9sv5v3j].md",
       "source_location": "L11324",
       "norm_label": "database.not_initialized wire code",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f2-retire-ok-or-sentinel [ses_f209be6e9ffeUzsjifu9sv5v3j].md:L11324] the wire domain is database, not a subsystem"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f2-retire-ok-or-sentinel [ses_f209be6e9ffeUzsjifu9sv5v3j].md:L11324] The domain is `database`, not a subsystem, because the same `DB` mutex is missing for clipboard, snippets, notes, chat, speech, analytics, gamification, Vault, LAN transfer and tasks."
+      ]
     },
     {
       "id": "concept--ok-or-else-lazy-error-construction",
@@ -43,7 +47,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f2-retire-ok-or-sentinel [ses_f209be6e9ffeUzsjifu9sv5v3j].md",
       "source_location": "L11328",
       "norm_label": "ok_or_else lazy error construction",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f2-retire-ok-or-sentinel [ses_f209be6e9ffeUzsjifu9sv5v3j].md:L11328] ok_or_else keeps the success path allocation-free"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f2-retire-ok-or-sentinel [ses_f209be6e9ffeUzsjifu9sv5v3j].md:L11328] Call-site pattern: `ok_or(\"…\")` → `ok_or_else(|| DATABASE_NOT_INITIALIZED.english.to_string())` (lazy, so no allocation on the success path), `Err(…)`/`push(…)` → `DATABASE_NOT_INITIALIZED.english.to_string()`."
+      ]
     },
     {
       "id": "concept--include-str-retired-literal-guard",
@@ -91,7 +97,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t9-vault-mirror-contract-test [ses_f21a1c467ffeZtDCHHZUzTrC7i].md",
       "source_location": "L39",
       "norm_label": "pinned vault frontmatter vocabulary",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - t9-vault-mirror-contract-test [ses_f21a1c467ffeZtDCHHZUzTrC7i].md:L39] pinning type and para stops invented vocabulary"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - t9-vault-mirror-contract-test [ses_f21a1c467ffeZtDCHHZUzTrC7i].md:L00039] Pinning these two values is what stops a future edit from inventing `type: plan` or reverting to `para: projects`."
+      ]
     },
     {
       "id": "concept--source-hash-twelve-lowercase-hex",
@@ -126,7 +134,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t9-vault-mirror-contract-test [ses_f21a1c467ffeZtDCHHZUzTrC7i].md",
       "source_location": "L2307",
       "norm_label": "source_path ancestor resolution",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - t9-vault-mirror-contract-test [ses_f21a1c467ffeZtDCHHZUzTrC7i].md:L2307] the ancestor walk resolves a repo-relative source_path"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - t9-vault-mirror-contract-test [ses_f21a1c467ffeZtDCHHZUzTrC7i].md:L02307] That ancestor walk is what makes a repo-relative `docs/code-plan/plans/x.md` resolve when the repo is a sibling of the vault."
+      ]
     },
     {
       "id": "concept--external-teeth-check",
@@ -144,7 +154,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t9-vault-mirror-contract-test [ses_f21a1c467ffeZtDCHHZUzTrC7i].md",
       "source_location": "L43",
       "norm_label": "skip-with-a-stated-reason",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - t9-vault-mirror-contract-test [ses_f21a1c467ffeZtDCHHZUzTrC7i].md:L43] failing because a feature has not shipped makes a broken test"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - t9-vault-mirror-contract-test [ses_f21a1c467ffeZtDCHHZUzTrC7i].md:L00043] A test that fails merely because the feature has not shipped yet is a broken test."
+      ]
     }
   ],
   "links": [

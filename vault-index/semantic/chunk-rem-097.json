@@ -46,7 +46,9 @@
       "source_location": "L7258",
       "norm_label": "rodio is pinned to vorbis and wav only so the rust side cannot decode mp3 aac or opus",
       "summary": "apps/desktop/src-tauri/Cargo.toml:109 and :123 pin rodio = { version = \"0.22\", default-features = false, features = [\"playback\", \"vorbis\", \"wav\"] }. The consequence the audit draws is that a Rust-side decoder can read only OGG/Vorbis and WAV and cannot decode MP3, AAC or Opus, which removes rodio as any help for a YouTube extraction path. symphonia appears in Cargo.lock:6704-6795 only as a transitive dep of rodio, not a direct dependency. whisper-rs (Cargo.lock:8443) is STT-only, in speech/stt/whisper_engine.rs, and unrelated to playback.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - r6-precedent-and-alternative-audit [ses_f24bc0786ffepEZYl6g8AsbFaj].md:L7258] The codec narrowing is a deliberate size decision documented at docs/audits/binary-size-audit.md:256-272 (\"Pin Linux rodio to vorbis only\", minus 200-500 KB)"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - r6-precedent-and-alternative-audit [ses_f24bc0786ffepEZYl6g8AsbFaj].md:L07258] It cannot decode MP3, AAC or Opus.** Rationale is documented at `docs/audits/binary-size-audit.md:256-272` (\"Pin Linux `rodio` to `vorbis` only\", −200–500 KB)."
+      ]
     },
     {
       "id": "concept--the-only-ffmpeg-reference-is-a-false-precedent",

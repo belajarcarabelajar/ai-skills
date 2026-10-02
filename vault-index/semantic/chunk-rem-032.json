@@ -33,7 +33,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
       "source_location": "L9785",
       "norm_label": "the ollama cloud backend serializes requests, so --max-concurrency buys nothing",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L9785] The four-worker projection was never measured; four parallel cloud requests took 41s against a 32s serial baseline"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L09785] Measured: 4 parallel cloud requests took **41s** against a **32s** serial baseline — the Ollama cloud backend **serializes requests on this account**."
+      ]
     },
     {
       "id": "concept--graphifyignore-is-always-enforced-with-no-bypass-flag",
@@ -82,7 +84,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
       "source_location": "L9787",
       "norm_label": "the withdrawn worker projection is kept as a section in the runbook so a later session cannot resurrect the wrong numbers",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L9787] The disproven worker projection stays in the runbook as a withdrawn-claim section so a future session cannot resurrect it from memory"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L09787] The runbook now carries that as a withdrawn-claim section so a future session can't resurrect the wrong numbers from memory."
+      ]
     },
     {
       "id": "concept--stale-wiki-sources-gitignore-patterns-after-para-migration",

@@ -39,7 +39,9 @@
       "source_location": "L5415",
       "norm_label": "dedup branch runs its cache invalidation while holding the db guard",
       "summary": "Found while answering the delegation's lock-ordering question. guard is taken at :145 and there is no drop before the early return Ok(Some(dup_id)) at :234, so the whole dedup branch runs under the DB mutex — unlike the insert path, where drop(guard) at :312 precedes the invalidation. The call was left inside that scope rather than restructuring the branch.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - e2-clipboard-menu-cache-fix [ses_f0b2a1d2effeY3Mdv7MO7mlCP9].md:L5415] It is deadlock-safe: clipboard_cache is a leaf lock. invalidate_clipboard_menu, get_clipboard_menu and set_clipboard_menu touch only a HashMap and never re-enter the database while holding it, so no reverse edge (clipboard_cache to DB) exists to close a cycle with DB to clipboard_cache."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - e2-clipboard-menu-cache-fix [ses_f0b2a1d2effeY3Mdv7MO7mlCP9].md:L05415] `invalidate_clipboard_menu`, `get_clipboard_menu` and `set_clipboard_menu` touch only a `HashMap` and never re-enter the database while holding it, so no reverse edge (`clipboard_cache` → `DB`) exists to close a cycle with `DB` → `clipboard_cache`."
+      ]
     },
     {
       "id": "concept--zero-subagent-compiler-policy",
@@ -49,7 +51,9 @@
       "source_location": "L5275",
       "norm_label": "zero subagent compiler policy",
       "summary": "Reused id. Applied here: no cargo, rustc, nextest or clippy was run, and the two added tests were reported as unverified pending the parent's compilation. The boundary case considered was rustfmt, which is on neither list.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - e2-clipboard-menu-cache-fix [ses_f0b2a1d2effeY3Mdv7MO7mlCP9].md:L5275] The constraint said DO NOT run cargo, rustc, nextest, clippy, or any build command. rustfmt --check is none of those. But it did read the module tree. It passed. I'll disclose it."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - e2-clipboard-menu-cache-fix [ses_f0b2a1d2effeY3Mdv7MO7mlCP9].md:L05275] Actually, let me reconsider — the constraint said \"DO NOT run cargo, rustc, nextest, clippy, or any build command.\" rustfmt --check is none of those."
+      ]
     },
     {
       "id": "concept--expander-pastes-with-plain-ctrl-v-which-alacritty-leaves-unbound",

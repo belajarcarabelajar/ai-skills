@@ -109,7 +109,9 @@
       "source_location": "L17460",
       "norm_label": "post merge re verification on the new base",
       "summary": "After #442 merged as 30deffa54, the suite was re-run on vps-bcb after git pull --ff-only onto that commit rather than re-reading the pre-merge result: 188 passed, clippy 0, fmt clean. An empty diff against the verified branch proved main content byte-identical, because the merge rebased and SHA ancestry could not.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - super-ultra-code-plan-pr-delivery-session [ses_f08d01cd8ffe92DE7Adnn8J1o5].md:L17462] The post-merge run is the evidence for that merge, not a re-read of the pre-merge run"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - super-ultra-code-plan-pr-delivery-session [ses_f08d01cd8ffe92DE7Adnn8J1o5].md:L17460] The post-merge run is the evidence for *this* merge, not a re-read of the pre-merge one."
+      ]
     },
     {
       "id": "concept--direction-specific-schema-mismatch-remedy",
@@ -119,7 +121,9 @@
       "source_location": "L9001",
       "norm_label": "each schema mismatch direction has its own remedy",
       "summary": "The shipped guide documented only `unexpected columns` and told users to rebuild the CLI from the app's revision, which is not the fix for a missing column, since a CLI built from the app's revision expects the same absent column. Missing columns means open the app once or run `snipset init --force`, which renames the old file to a timestamped backup and never deletes it.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - super-ultra-code-plan-pr-delivery-session [ses_f08d01cd8ffe92DE7Adnn8J1o5].md:L9001] The hint goes in assert_schema, not in the Display arm or SchemaDiff::message(), because doctor publishes message() as a machine-readable detail field and that keeps doctor --json byte-identical"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - super-ultra-code-plan-pr-delivery-session [ses_f08d01cd8ffe92DE7Adnn8J1o5].md:L09001] K3's blast-radius answer changes where the hint goes: `DbError::Schema` is an overloaded variant used at **41 sites**, so the hint must go in `assert_schema` (`db/mod.rs:97`), not in the `Display` arm at `:41` and not in `SchemaDiff::message()`, which `doctor` publishes as a machine-readable `detail` field."
+      ]
     },
     {
       "id": "concept--stale-sidecar-rebuild-signal-plan",
@@ -129,7 +133,9 @@
       "source_location": "L17252",
       "norm_label": "sidecar rebuild signal when the app schema changes",
       "summary": "Root cause of the incident class: snipset-cli is versioned 0.2.0 independently of the app, so nothing signals a sidecar rebuild when the app schema changes. Research verified no user_version or schema_revision exists anywhere and no macOS target or build script exists. Kept as a Draft plan because it proposes making a stale sidecar a fatal build failure.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - super-ultra-code-plan-pr-delivery-session [ses_f08d01cd8ffe92DE7Adnn8J1o5].md:L17254] The sidecar plan is left Draft and unapproved because making a stale sidecar fatal overrides a deliberate decision documented at stage-cli-sidecar.mjs:4-6"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - super-ultra-code-plan-pr-delivery-session [ses_f08d01cd8ffe92DE7Adnn8J1o5].md:L17252] The plan at `docs/code-plan/plans/2026-10-01-sidecar-rebuild-signal.md` is **Draft and unapproved**, deliberately: it proposes making a stale sidecar a fatal build failure, which overrides a deliberate decision documented at `stage-cli-sidecar.mjs:4-6`."
+      ]
     }
   ],
   "links": [

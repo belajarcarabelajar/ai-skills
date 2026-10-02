@@ -64,7 +64,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md",
       "source_location": "L14769",
       "norm_label": "link repair gated behind correcting the basename-only resolver measurement",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md:L14769] Basename-only link resolution manufactures false orphans and ambiguity, so link counts cannot be repaired until the measurement instrument is corrected"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md:L14769] Subagent consensus now shows the remediation plan needs one more explicit gate: link counts cannot be repaired until the resolver measurement is corrected, because basename-only resolution manufactures false orphans and ambiguity."
+      ]
     },
     {
       "id": "concept--raw-satset-capture-immutable-body-and-frontmatter",

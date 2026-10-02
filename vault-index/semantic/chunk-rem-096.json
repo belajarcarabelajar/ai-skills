@@ -51,7 +51,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - typeless-optimization-for-ai-skills-workflows [ses_f0bef3380ffeONWpeoG7Brf618].md",
       "source_location": "L6977",
       "norm_label": "snippet validator requires the evidence ladder tools by name",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - typeless-optimization-for-ai-skills-workflows [ses_f0bef3380ffeONWpeoG7Brf618].md:L7389] a snippet naming the product but not the tools still leaves the escalation order undefined, and the escalation order is the part that costs nothing"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - typeless-optimization-for-ai-skills-workflows [ses_f0bef3380ffeONWpeoG7Brf618].md:L06977] A snippet that says \\\"run deep-research\\\" without\\n// naming how evidence is gathered leaves the agent to improvise its own\\n// browsing, which is exactly the drift the 3f check exists to stop on the\\n// master-skill side.\\n//\\n// Revert: delete this block.\\nfor (const snip of requiredSnippets) {\\n  const p = path.join(rootDir, 'snippets', snip);\\n  if (!fs.existsSync(p)) continue;\\n  const body = fs.readFileSync(p, 'utf8');\\n  // Require the ladder's free rungs by name, not the word \\\"TinyFish\\\" alone: a\\n  // snippet naming the product but not the tools still leaves the escalation\\n  // order undefined, and the escalation order is the part that costs nothing.\\n  const need = ['TinyFish', 'search', 'fetch_content'];\\n  const missing = need.filter((n) => !body.includes(n));\\n  if (missing.length === 0) {\\n    console.log(`✅ Trigger snippet names the TinyFish evidence ladder: snippets/${snip}`);\\n  } else {\\n    console.error(`❌ snippets/${snip} does not carry the TinyFish evidence ladder: missing ${missing.join(', ')}`);\\n    errors++;\\n  }\\n}\\n\\n// 3d."
+      ]
     },
     {
       "id": "concept--rtk-git-stash-prints-ok-without-creating-a-stash",
@@ -69,7 +71,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - lokasi-demo-live-waiting-room [ses_f225c059cffexMb9kvXx8YjxOp].md",
       "source_location": "L5817",
       "norm_label": "worker version propagation lag makes a successful deploy read as stale",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - lokasi-demo-live-waiting-room [ses_f225c059cffexMb9kvXx8YjxOp].md:L5817] the earlier stale read was propagation lag right after the version promotion — the probe ran seconds after the deploy script printed success, and the same URL re-probed later served the new content"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - lokasi-demo-live-waiting-room [ses_f225c059cffexMb9kvXx8YjxOp].md:L05817] The earlier stale read was just propagation lag right after the version promotion (my probe ran seconds after the deploy script printed success)."
+      ]
     },
     {
       "id": "concept--countdown-target-in-the-past-renders-all-zeros-indistinguishably-from-unchanged",
@@ -88,7 +92,7 @@
       "source_location": "L5903",
       "norm_label": "live demo countdown target moved to a shared constant with a versioned storage key",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - lokasi-demo-live-waiting-room [ses_f225c059cffexMb9kvXx8YjxOp].md:L5903] LIVE_DEMO_START_ISO/LIVE_DEMO_END_ISO are also used by the JSON-LD Event, so the countdown and the landing page share one source",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - lokasi-demo-live-waiting-room [ses_f225c059cffexMb9kvXx8YjxOp].md:L05903] - `live-demo-event.ts` dapat `LIVE_DEMO_START_ISO` / `LIVE_DEMO_END_ISO`, dipakai juga JSON-LD Event, jadi countdown dan landing page satu sumber.",
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - lokasi-demo-live-waiting-room [ses_f225c059cffexMb9kvXx8YjxOp].md:L5905] the localStorage key became eventTargetDate_v2 so a visitor who had stored the old date automatically gets the new target instead of a stale cached one"
       ]
     },

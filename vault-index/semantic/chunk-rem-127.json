@@ -35,7 +35,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t8-download-routing-retry [ses_f1d526ca4ffejy210M5YRuZFhy].md",
       "source_location": "L6774",
       "norm_label": "iswindowsinstaller does not count msi",
-      "rationale": "Reused id: same T7 gap, reported again and still not fixed. Its own stated reason: [05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t8-download-routing-retry [ses_f1d526ca4ffejy210M5YRuZFhy].md:L6774] \"reusing them would make `/msi` permanently unsatisfiable ... If a later task unifies them, `/msi` breaks.\""
+      "rationale": [
+        "Reused id: same T7 gap, reported again and still not fixed. Its own stated reason: [05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t8-download-routing-retry [ses_f1d526ca4ffejy210M5YRuZFhy].md:L06774] - **T7 gap, reported not fixed:** `hasChannelArtifact` in `release_channels.js` has no `.msi` in its Windows artifact set, so `channelReleases`/`fetchChannelReleases` cannot be used for download selection — reusing them would make `/msi` permanently unsatisfiable."
+      ]
     },
     {
       "id": "concept--url-routed-fetch-mock-replaces-positional-queue",

@@ -41,7 +41,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - f2-f1-intrinsic-image-dimensions [ses_f169638d7ffeFPj2j3fMC6dflb].md",
       "source_location": "L12312",
       "norm_label": "maudit image component is the intrinsic size seam",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - f2-f1-intrinsic-image-dimensions [ses_f169638d7ffeFPj2j3fMC6dflb].md:L12312] The component is the correct layer because it is the only seam where the tag is constructed, it fixes both content sources at once, and it leaves layout.rs untouched"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - f2-f1-intrinsic-image-dimensions [ses_f169638d7ffeFPj2j3fMC6dflb].md:L12312] **That is the bug, and the component is the correct layer** — it is the only seam where the tag is constructed, it fixes both content sources at once, and it leaves `layout.rs` untouched (my edit is fully disjoint from the head/breadcrumb work committed there earlier)."
+      ]
     },
     {
       "id": "concept--checked-in-docs-image-dimension-table",

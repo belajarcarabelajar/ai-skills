@@ -53,7 +53,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - audit-kecepatan-os-tanpa-animasi [ses_f107f3a8fffeucwj2OzKAXMO9F].md",
       "source_location": "L7152",
       "norm_label": "kwin reports platformrequirescompositing true on this wayland session so compositing cannot be turned off",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - audit-kecepatan-os-tanpa-animasi [ses_f107f3a8fffeucwj2OzKAXMO9F].md:L7318] platformRequiresCompositing=true is why no remediation proposal in this audit may suggest disabling compositing"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - audit-kecepatan-os-tanpa-animasi [ses_f107f3a8fffeucwj2OzKAXMO9F].md:L07152] It is not optional, and no remediation proposal may suggest disabling it.** KWin reports `platformRequiresCompositing=true` on this Wayland session, which is the platform's own mandate, not a KWin default or a user preference."
+      ]
     },
     {
       "id": "concept--audit-ceremony-outgrew-the-question",

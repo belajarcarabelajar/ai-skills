@@ -186,7 +186,7 @@
       "source_location": "L3855",
       "norm_label": "on a worktree sibling agents share, a modified file in git status is not evidence of authorship",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-oom-daemon-comparison [ses_f221dc2afffeeNpSQ4N6kFGC4e].md:L3855] The boot-kernel file's mtime is 20:27:20, five seconds *after* my first write at 20:27:15, and I issued exactly one `write` plus `edit` calls, all targeting my own path. Sibling subagents are evidently writing concurrently in the same tree."
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-oom-daemon-comparison [ses_f221dc2afffeeNpSQ4N6kFGC4e].md:L03855] Those are **not mine** — the boot-kernel file's mtime is 20:27:20, five seconds *after* my first write at 20:27:15, and I issued exactly one `write` plus `edit` calls, all targeting my own path."
       ]
     }
   ],

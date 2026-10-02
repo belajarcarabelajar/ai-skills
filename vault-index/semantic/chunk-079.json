@@ -87,7 +87,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md",
       "source_location": "L16191",
       "norm_label": "no body-derived strings in frontmatter",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md:L16191] First-paragraph text is the only channel through which redacted audit context could leak"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md:L16191] First-paragraph text must never be echoed into a note's own frontmatter — that is the only channel through which redacted audit context could leak."
+      ]
     },
     {
       "id": "concept--idempotent-normalization-pass",
@@ -104,7 +106,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md",
       "source_location": "L16192",
       "norm_label": "no renames during normalization",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md:L16192] Not renaming keeps Obsidian link rewriting out of the picture"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - prioritize-metadata-remediation [ses_f269c4d0affef6aWaf53nBUp3S].md:L16192] **No renames, ever.** Title normalization must not move files, so Obsidian's link rewriting stays out of the picture and the 2,782 unresolved / 51 ambiguous link candidates do not churn."
+      ]
     },
     {
       "id": "concept--status-key-collision-maturity-rename",

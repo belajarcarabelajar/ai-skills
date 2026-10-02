@@ -31,7 +31,9 @@
       "source_location": "L8055",
       "norm_label": "onchange drag controls never enter the cue detector's candidate list at all",
       "summary": "A third shape, distinct from both false positives above because it is an absence rather than a misclassification. The detector scans only onClick, onSubmit and onDoubleClick, so a control driven purely by onChange is never a candidate. The WPM slider at TtsLiveDemoCard.tsx:582 is exactly that case, and the genuinely machine-gun-risk TTS range sliders live in TtsAudioControls.tsx, not in the file the queue pointed at.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-pages-speech-cues [ses_f17b2671dffel2sYJJnLKtcP27].md:L8055] the real TTS range sliders 609561596 excluded for machine-gun risk live in TtsAudioControls.tsx; the WPM slider at TtsLiveDemoCard.tsx:582 uses onChange, so the detector never sees it. Nothing high-frequency in this file."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-pages-speech-cues [ses_f17b2671dffel2sYJJnLKtcP27].md:L08055] The real TTS range sliders `609561596` excluded for machine-gun risk live in `TtsAudioControls.tsx`; the WPM slider at `TtsLiveDemoCard.tsx:582` uses `onChange`, so the detector never sees it."
+      ]
     },
     {
       "id": "concept--verifier-must-reproduce-the-baseline-count-before-trusting-the-queue",
@@ -62,7 +64,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-pages-speech-cues [ses_f17b2671dffel2sYJJnLKtcP27].md",
       "source_location": "L8080",
       "norm_label": "the exclusion register's justification test accepts four classes while the manifest lists five",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-pages-speech-cues [ses_f17b2671dffel2sYJJnLKtcP27].md:L8080] Brief rule 6 / manifest rule 6 allow deliberate-prior-decision, but the test's justification regex is /shared-primitive|self-sounding|high-frequency|toast-owns-cue/ - it omits it. I used self-sounding (whose registered meaning is literally \"would double-fire\"), matching the convention A5/A7/A8 already wrote into this same register."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-pages-speech-cues [ses_f17b2671dffel2sYJJnLKtcP27].md:L08080] I used `self-sounding` (whose registered meaning is literally \"would double-fire\"), matching the convention A5/A7/A8 already wrote into this same register, and added `deliberate-prior-decision` explicitly where `609561596` is the origin."
+      ]
     },
     {
       "id": "concept--self-sounding-class-word-extended-to-bare-reference-false-positives",
@@ -140,7 +144,7 @@
       "norm_label": "set l inside a fish if block is block scoped and empty again at end",
       "summary": "A fish scoping rule that fails silently rather than loudly. Declaring the log path with `set -l` inside the TERMINAL_LOG_PATH branch scopes it to that branch, so it is empty again after `end`. The write is then handed an empty filename, which for this collector means flock is invoked as `flock -x \"\"`. The shipped code assigns first and overrides inside the block instead.",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L04358] scoped to that block in fish and is empty again at end, which silently degrades to flock -x \"\"."
+        "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L07669] # scoped to that block in fish and is empty again at `end`, which silently"
       ]
     },
     {

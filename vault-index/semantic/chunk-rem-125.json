@@ -36,7 +36,7 @@
       "source_location": "L794",
       "norm_label": "the exclusion register justification test accepts four classes while the manifest lists five",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-pages-pomodoro-cues [ses_f17b1e0fbffeD6ivhnQcpV9oAN].md:L794] \"Important: the exclusion register test only allows `shared-primitive|self-sounding|high-frequency|toast-owns-cue` - NOT `deliberate-prior-decision`. The brief mentions `deliberate-prior-decision` as an allowed reason, but the test's assertion regex doesn't include it.\"",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-pages-pomodoro-cues [ses_f17b1e0fbffeD6ivhnQcpV9oAN].md:L00794] Important: the exclusion register test only allows `shared-primitive|self-sounding|high-frequency|toast-owns-cue` — NOT `deliberate-prior-decision`.",
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-pages-pomodoro-cues [ses_f17b1e0fbffeD6ivhnQcpV9oAN].md:L4222] The same four-class list read a second time, from the enforcing assertion rather than the manifest: \"`every exclusion names one of the four documented classes` requires the reason to match one of: shared-primitive|self-sounding|high-frequency|toast-owns-cue\", and the reason must also exceed 20 characters."
       ]
     },
@@ -73,7 +73,7 @@
       "source_location": "L8417",
       "norm_label": "a scoped tsc run over the files you own proves ownership when a peer syntax error blocks the project typecheck",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-pages-pomodoro-cues [ses_f17b1e0fbffeD6ivhnQcpV9oAN].md:L8417] \"Note that a syntactic error makes `tsc` skip semantic diagnostics, so the full run proves nothing either way; I therefore ran a scoped project check over exactly my five production files: `bunx tsc --noEmit` on a temp config listing them -> exit 0, zero diagnostics (temp config deleted immediately, verified).\" The blocker named is A3's bare JSX comment as the first node of a ternary branch in LabelManager.tsx.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-pages-pomodoro-cues [ses_f17b1e0fbffeD6ivhnQcpV9oAN].md:L08417] Note that a syntactic error makes `tsc` skip semantic diagnostics, so the full run proves nothing either way; I therefore ran a scoped project check over exactly my five production files: **`bunx tsc --noEmit` on a temp config listing them → exit 0, zero diagnostics** (temp config deleted immediately, verified).",
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-pages-pomodoro-cues [ses_f17b1e0fbffeD6ivhnQcpV9oAN].md:L8415] The project-level run this substitutes for is recorded in the same verification table as \"| `bunx tsc --noEmit -p tsconfig.json` | **1** | **not A8**\", and the failing file changes between two consecutive runs, which is what identifies it as a peer's in-flight edit."
       ]
     },
@@ -146,7 +146,7 @@
       "source_location": "L58",
       "norm_label": "byte equivalence test pins serializer refactor",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md:L58] The reason the test exists is stated as part of the requirement: the new command \"produces the same `json` and `csv` as `get_research_export` for the same seeded data, proving the shared serializer did not change the format (this is the test that would go red if the CSV header or formatting regressed)\".",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md:L00058] `export_customer_support_report` produces the same `json` and `csv` as `get_research_export` for the same seeded data, proving the shared serializer did not change the format (this is the test that would go red if the CSV header or formatting regressed)",
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md:L8908] The assertion is checked against the trailing-newline detail that would otherwise make it wrong: \"report.csv.lines().count() == exp.days.len() + 1. The CSV ends with `\\n` so lines() gives header + N rows. Correct.\"",
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md:L9202] Its unverified status is inherited rather than hidden: the equivalence test is one of the \"Type errors, borrow errors, and clippy findings\" that remain unverified, because it cannot run without the compiler the policy forbids on this host."
       ]

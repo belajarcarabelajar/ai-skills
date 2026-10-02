@@ -18,7 +18,9 @@
       "id": "concept--negative-control-test",
       "label": "Negative control test",
       "file_type": "concept",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-cues-batch-a [ses_f178408e8ffeytvVLtBrayXvUn].md:L64] The test voice button is the negative control because it speaks the sample itself, so it must stay silent",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-cues-batch-a [ses_f178408e8ffeytvVLtBrayXvUn].md:L00064] There is also a \"test voice\" button that must stay SILENT (it speaks the sample itself)."
+      ],
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-cues-batch-a [ses_f178408e8ffeytvVLtBrayXvUn].md",
       "source_location": "L64",
       "norm_label": "negative control test"
@@ -27,7 +29,9 @@
       "id": "concept--mount-silence-precondition",
       "label": "Mount-silence precondition so a stray cue cannot be miscredited to a control",
       "file_type": "concept",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-cues-batch-a [ses_f178408e8ffeytvVLtBrayXvUn].md:L6356] Every test opens with an expectSilentSoFar() precondition so a cue added to mount/load cannot be miscredited to a control",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-cues-batch-a [ses_f178408e8ffeytvVLtBrayXvUn].md:L06356] Two extra hardening tests: all three processing filters asserted from the **off** state (opposite labels, same `SWITCH`), and every test opens with an `expectSilentSoFar()` precondition so a cue added to mount/load cannot be miscredited to a control."
+      ],
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-cues-batch-a [ses_f178408e8ffeytvVLtBrayXvUn].md",
       "source_location": "L6356",
       "norm_label": "mount silence precondition so a stray cue cannot be miscredited to a control"
@@ -45,7 +49,9 @@
       "id": "concept--unpinnable-double-cue-defect",
       "label": "A known double-cue defect is documented in a comment rather than pinned at any count",
       "file_type": "concept",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-cues-batch-a [ses_f178408e8ffeytvVLtBrayXvUn].md:L6386] Pinning 2 blesses a double cue, pinning 1 leaves a permanently failing test for a defect I may not fix",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-cues-batch-a [ses_f178408e8ffeytvVLtBrayXvUn].md:L06386] I left no test fixing a count for this path on purpose: pinning `2` blesses a double cue, pinning `1` leaves a permanently failing test for a defect I may not fix."
+      ],
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-cues-batch-a [ses_f178408e8ffeytvVLtBrayXvUn].md",
       "source_location": "L6386",
       "norm_label": "a known double cue defect is documented in a comment rather than pinned at any count"
@@ -63,7 +69,9 @@
       "id": "concept--frozen-source-evidence-layer",
       "label": "Frozen source evidence layer",
       "file_type": "concept",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-llm-wiki-sources [ses_f26e12947ffeqcZPrR6PAAFw9o].md:L10697] Sources are immutable evidence; summaries must be separate maintained pages that cite the source path",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-llm-wiki-sources [ses_f26e12947ffeqcZPrR6PAAFw9o].md:L10697] Summaries must be separate maintained pages that cite the source path."
+      ],
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-llm-wiki-sources [ses_f26e12947ffeqcZPrR6PAAFw9o].md",
       "source_location": "L10697",
       "norm_label": "frozen source evidence layer"
@@ -81,7 +89,9 @@
       "id": "concept--credential-quarantine-before-knowledge-compilation",
       "label": "Credential quarantine before knowledge compilation",
       "file_type": "concept",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-llm-wiki-sources [ses_f26e12947ffeqcZPrR6PAAFw9o].md:L10707] API keys, private keys, cookies, recovery codes, financial records, and credential-bearing exports must not be printed, copied, summarized, committed, embedded, or semantically indexed; if present, classify them only at a high level and exclude them from future ingestion",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-llm-wiki-sources [ses_f26e12947ffeqcZPrR6PAAFw9o].md:L10707] Under the vault safety policy, API keys, private keys, cookies, recovery codes, financial records, and credential-bearing exports must not be printed, copied, summarized, committed, embedded, or semantically indexed."
+      ],
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-llm-wiki-sources [ses_f26e12947ffeqcZPrR6PAAFw9o].md",
       "source_location": "L10707",
       "norm_label": "credential quarantine before knowledge compilation"

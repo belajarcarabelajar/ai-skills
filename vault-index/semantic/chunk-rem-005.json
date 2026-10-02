@@ -67,7 +67,9 @@
       "source_location": "L25880",
       "norm_label": "yt dlp resolve and stream audio path",
       "summary": "Native YouTube audio extraction for the Pomodoro player: resolve a signed direct media URL with yt-dlp on the Rust side and hand it to HTMLAudioElement — no proxy, no bundled binary, no new permission, no new Rust crate. Later disabled for this feature after it proved unable to succeed on the target videos.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - youtube-error-pomodoro-snipset-di-linux [ses_f24efcd1effeOS4DRwPu3Myfzn].md:L25590] Referer is not signed into direct media URLs"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - youtube-error-pomodoro-snipset-di-linux [ses_f24efcd1effeOS4DRwPu3Myfzn].md:L25880] **But two findings collapse the cost.** `Referer` is not the obstacle for direct media URLs: yt-dlp sends none, the signed parameter set does not include it, and the IP is what is signed, which same-machine satisfies."
+      ]
     },
     {
       "id": "concept--youtube-error-code-mapping-gap",
@@ -86,7 +88,9 @@
       "source_location": "L22340",
       "norm_label": "search list video embeddable filter not part status",
       "summary": "A bug found in the session's own shipped work: the search worker asked for part=snippet,status, but search.list accepts only part=snippet and exposes no status resource, so status.embeddable can never come back and an unsupported part risks 400 invalidPart. The documented filter is the videoEmbeddable=true query parameter, which requires type=video (already set).",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - youtube-error-pomodoro-snipset-di-linux [ses_f24efcd1effeOS4DRwPu3Myfzn].md:L05442] videoEmbeddable=true is the documented embeddability filter"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - youtube-error-pomodoro-snipset-di-linux [ses_f24efcd1effeOS4DRwPu3Myfzn].md:L22340] `search.list` *does* document a proper filter for exactly this: `videoEmbeddable=true`, which requires `type=video`, already set."
+      ]
     }
   ],
   "links": [

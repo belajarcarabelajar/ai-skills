@@ -29,7 +29,9 @@
       "source_location": "L7600",
       "norm_label": "single round trip command with partial failure degrade",
       "summary": "get_customer_support_overview returns mode, days, active_days, csat: Option<CsatSummary>, recent_conversations and snippets in one call. A failed CSAT aggregate sets that one field to null and the trend still renders; export moved to a separate command wired only at the click handler.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md:L7600] A slow mode check gated the whole tab and one rejection blanked everything"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md:L07600] - **The automation gap is a real design flaw, not a polish item.** The old code fires `get_research_mode`, then only if true does it fire a `Promise.all` of two more, so a slow mode check gates the entire tab and any single rejection blanks everything."
+      ]
     },
     {
       "id": "concept--frozen-cross-chunk-contract-before-fanout",
@@ -88,7 +90,9 @@
       "source_location": "L11475",
       "norm_label": "absence from narrow grep is not evidence",
       "summary": "The parent claimed a Rust subagent had skipped its tests on the strength of a grep for fn test_ returning 13. The seven tests were on disk at lines 1152-1357, named without the prefix. The subagent that had been re-dispatched to write them corrected the parent, and a chunk was dispatched for work that already existed. Stated as: infer absence from a search matching only one convention, then act on it, is the defect.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md:L11475] A search matching one naming convention is not a search for the tests"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md:L11475] I inferred absence from a search that only matched one naming convention, and then re-dispatched a chunk to write tests that already existed."
+      ]
     },
     {
       "id": "concept--parent-verifies-subagent-reports-independently",

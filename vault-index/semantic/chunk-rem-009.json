@@ -24,7 +24,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
       "source_location": "L14965",
       "norm_label": "captureavailability contract block",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L14965] Resolved input_density_supported at compile time because the Linux gap is structural"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L14965] - **New `CaptureAvailability` block** on the response, with `input_density_supported` resolved at compile time from the target OS, because the Linux gap is structural rather than a runtime condition."
+      ]
     },
     {
       "id": "concept--deep-work-fabrication",
@@ -50,7 +52,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
       "source_location": "L24847",
       "norm_label": "derive_focus_session gated on queue items",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L24847] Derived sessions come from raw_events, so the derive pass must not sit behind the empty-queue return"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L24847] To fix context switches on Linux, `commit_pending_queue` must run `derive_focus_session` even when the queue is empty (since derived sessions come from raw_events, not from the queue)."
+      ]
     },
     {
       "id": "concept--kdotool-foreground-detection",
@@ -126,7 +130,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
       "source_location": "L29510",
       "norm_label": "wrong machine profile in agents.md",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L29510] The guardrails were calibrated for a 4-core/6GB WSL2 box while the host is 8-core/7.6GB native Linux"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L29510] **That is the real, fixable root cause of the operational risk**: the guardrails are calibrated for a 4-core/6GB WSL2 box, but this is an 8-core/7.6GB native Linux box."
+      ]
     },
     {
       "id": "concept--heavy-suite-ban-on-interactive-host",
@@ -165,7 +171,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
       "source_location": "L31349",
       "norm_label": "psi-based oomd arming thresholds",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L31349] The 80% limit resolved to 3.2GB of stalled memory under PSI semantics, not raw usage"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L31349] `ManagedOOMMemoryPressure=kill` and `ManagedOOMSwap=kill` are live, and the 80% resolved to 3.2 GB of *stalled* memory (PSI semantics, not raw usage)."
+      ]
     },
     {
       "id": "concept--health-snapshot-logging",

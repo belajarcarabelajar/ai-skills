@@ -9,7 +9,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - f1-unify-ai-chatbot-window-options [ses_f0653e333ffe4kbmjlkqIg9QmB].md",
       "source_location": "L38",
       "summary": "The AI Companion popup is built from two unrelated places, a cold-create in trigger/ai_handler.rs and showAiChatbotPopup in apps/web/src/utils/companion.ts, and they disagreed on resizable, background_color, title and position.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - f1-unify-ai-chatbot-window-options [ses_f0653e333ffe4kbmjlkqIg9QmB].md:L38] Because `app.get_webview_window(\"ai-chatbot\")` (Rust) and `WebviewWindow.getByLabel(\"ai-chatbot\")` (TS) read the SAME label registry, whichever side creates first permanently fixes the options for that window's lifetime, so the disagreement between the two creation sites is not cosmetic."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - f1-unify-ai-chatbot-window-options [ses_f0653e333ffe4kbmjlkqIg9QmB].md:L00038] Because `app.get_webview_window(\"ai-chatbot\")` (Rust) and `WebviewWindow.getByLabel(\"ai-chatbot\")` (TS) read the SAME label registry, whichever side creates first permanently fixes the options for that window's lifetime."
+      ]
     },
     {
       "id": "concept--ai-chatbot-label-registry-first-writer-wins",
@@ -19,7 +21,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - f1-unify-ai-chatbot-window-options [ses_f0653e333ffe4kbmjlkqIg9QmB].md",
       "source_location": "L4716",
       "summary": "Mechanism recorded in the module doc of the new companion_window.rs: both creators look the window up by the same label, so whichever runs first wins and its options are then immutable for the life of that window.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - f1-unify-ai-chatbot-window-options [ses_f0653e333ffe4kbmjlkqIg9QmB].md:L4716] Both look the window up by the same label, and both resolve against the *same* label registry, so the winner is whichever runs first and its options are then fixed for the whole lifetime of that window."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - f1-unify-ai-chatbot-window-options [ses_f0653e333ffe4kbmjlkqIg9QmB].md:L04716] Both look the window up by the same label, and both\\n//! resolve against the *same* label registry, so the winner is whichever runs\\n//! first and its options are then fixed for the whole lifetime of that window.\\n//!\\n//!"
+      ]
     },
     {
       "id": "concept--include-str-bidirectional-cross-language-source-guard",
@@ -39,7 +43,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - f1-unify-ai-chatbot-window-options [ses_f0653e333ffe4kbmjlkqIg9QmB].md",
       "source_location": "L7791",
       "summary": "Resolution of the title divergence: the localized title comes from Rust's locale table via NativeKey::WindowAiCompanion, and the TS mirror carries only the locale table's English row as title_fallback. The divergence is narrowed but not eliminated, since eliminating it needs out-of-scope IPC.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - f1-unify-ai-chatbot-window-options [ses_f0653e333ffe4kbmjlkqIg9QmB].md:L7791] the frontend has no i18n key for this string and there is no `#[tauri::command]` in `locale.rs` and no `get_native_text` anywhere, so the webview *cannot* produce the localized title without new IPC; the window is `decorations:false` + `skip_taskbar:true`, so the title renders nowhere and the TS literal can only ever drift, and it had."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - f1-unify-ai-chatbot-window-options [ses_f0653e333ffe4kbmjlkqIg9QmB].md:L07791] Justification, in order: (1) the frontend has no i18n key for this string and there is no `#[tauri::command]` in `locale.rs` and no `get_native_text` anywhere, so the webview *cannot* produce the localized title without new IPC — which is outside this chunk's write scope; (2) the window is `decorations:false` + `skip_taskbar:true`, so the title renders nowhere, meaning the TS literal can only ever drift, and it had; (3) the alternative I considered and rejected — omitting `title` so Rust \"owns\" it — is worse: Tauri's JS create path goes `from_config` → `with_config`, which has no locale fallback, so the window would get an **empty** title."
+      ]
     },
     {
       "id": "concept--resizable-flag-buys-wm-drag-resize-not-the-grip",
@@ -49,7 +55,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - f1-unify-ai-chatbot-window-options [ses_f0653e333ffe4kbmjlkqIg9QmB].md",
       "source_location": "L7789",
       "summary": "Measured correction of the brief's stated rationale: AiChatbotResizeHandle calls win.setSize(), which Tauri does not gate on resizable, and isResizable has zero hits repo-wide, so nothing reads the flag. The flag must still be true, but because the window shows a resize handle and true restores the WM frame-edge resize that existed only when the Rust path won the race.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - f1-unify-ai-chatbot-window-options [ses_f0653e333ffe4kbmjlkqIg9QmB].md:L7789] Tauri does **not** gate that on `resizable` — confirmed, `isResizable` has **zero** hits repo-wide, so nothing reads the flag; `false` on the TS side was never a decision, it was the base default in `showCompanionWindow` leaking into the one surface that has a grip."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - f1-unify-ai-chatbot-window-options [ses_f0653e333ffe4kbmjlkqIg9QmB].md:L07789] The grip in `AiChatbotResizeHandle.tsx` calls `win.setSize()`, and Tauri does **not** gate that on `resizable` — confirmed, `isResizable` has **zero** hits repo-wide, so nothing reads the flag."
+      ]
     },
     {
       "id": "concept--plan-status-verdict-needs-evidence-not-checkboxes",
@@ -79,7 +87,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - assess-3-plans-website-i18n-speech [ses_f208d0ac2ffeQ2fupDNrEF3u2W].md",
       "source_location": "L4690",
       "summary": "The mobile-overlap plan's progress log records AC-4 as done and states the RCA was written at docs/code-plan/logs/2026-09-20-mobile-overlap-rca.md; neither that file nor its parent directory exists in the repo.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - assess-3-plans-website-i18n-speech [ses_f208d0ac2ffeQ2fupDNrEF3u2W].md:L4690] The named file `docs/code-plan/logs/2026-09-20-mobile-overlap-rca.md` **does not exist**; its parent directory does not exist; the Mermaid `stateDiagram-v2` in the plan is the plan's own template, not an authored RCA. The progress log nevertheless ticks AC-4 and states \"RCA ditulis\" with that path."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - assess-3-plans-website-i18n-speech [ses_f208d0ac2ffeQ2fupDNrEF3u2W].md:L04690] | AC-4 RCA log per template + Mermaid loop + classification + gate | **NOT MET** | The named file `docs/code-plan/logs/2026-09-20-mobile-overlap-rca.md` **does not exist**; its parent directory does not exist."
+      ]
     },
     {
       "id": "concept--named-commit-can-be-a-markdown-reformat",

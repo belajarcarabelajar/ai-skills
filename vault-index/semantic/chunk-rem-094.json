@@ -38,7 +38,9 @@
       "source_location": "L51",
       "norm_label": "assert on columns only; the deliberate foreign key and index differences are out of scope",
       "summary": "A deliberate scope limit on the parity test: it compares declared type, notnull and dflt_value for every column the app declares, and asserts nothing about table constraints, foreign keys, indexes, triggers or row order. Structural differences found during the work were recorded in the report instead: the CLI's snippets table lacks FOREIGN KEY (group_id) REFERENCES groups(uuid), and it creates none of idx_snippets_keyword, idx_snippets_group_id or idx_snippets_created_at, so the app's uniqueness constraint on keyword does not exist in an init-created database. Column order was checked and matches.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md:L51] The CLI's snippets table deliberately lacks the app's foreign key clause, so asserting on it would create a permanent red test that hides the shape bugs the test exists to report."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md:L00051] The CLI's `snippets` table deliberately lacks the app's `FOREIGN KEY (group_id) REFERENCES groups(uuid)` clause; that structural difference is out of scope and asserting on it would create a permanent red test."
+      ]
     },
     {
       "id": "concept--zero-parsed-columns-must-fail-loudly",
@@ -58,7 +60,9 @@
       "source_location": "L9145",
       "norm_label": "not null is read from an explicit token pair, never inferred from primary key",
       "summary": "Judgement call recorded in the final report. The notnull expectation is set only by an adjacent NOT NULL token pair in the app's declaration. It is deliberately not derived from a PRIMARY KEY clause, which is what a reader would otherwise assume.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md:L9145] SQLite's pragma_table_info reports notnull=0 for a TEXT PRIMARY KEY, so inferring notnull from PRIMARY KEY would have manufactured false failures on both uuid columns."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md:L09145] SQLite's `pragma_table_info` reports `notnull=0` for a `TEXT PRIMARY KEY`, so inferring would have manufactured false failures on both `uuid` columns."
+      ]
     },
     {
       "id": "concept--default-literal-quoting-normalised-none-distinct-from-empty",
@@ -108,7 +112,9 @@
       "source_location": "L23",
       "norm_label": "zero subagent compiler policy",
       "summary": "Reused id. Same claim. The first hard constraint of the task, quoted from the repository AGENTS.md: no cargo, rustc, clippy, nextest, mold or bun, locally or over ssh, and no ssh at all. Verification was therefore re-reading plus simulating both parsers and pragma_table_info against real SQLite in Python. Compilation and the actual test run are explicitly reported as unverified.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md:L23] The policy names the reason: you cannot verify your own work compiles, that is deliberate, and the parent does it."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md:L00023] You cannot verify your own work compiles; that is deliberate, the parent does it."
+      ]
     },
     {
       "id": "concept--tinyfish-connect-never-wrote-the-opencode-skills-path",
@@ -137,7 +143,9 @@
       "source_location": "L5550",
       "norm_label": "the deep research workflow must name one evidence tool, enforced by a validator check",
       "summary": "The ai-skills repository was changed from tool-agnostic research to TinyFish-mandated research in three places that must agree: an Evidence Gathering section in templates/deep-research-report-template.md, an Evidence Gathering subsection in the master skill (Super Ultra Code Plan Implementation.md), and a new check 3f in scripts/validate-skill.mjs that fails unless the literal use-tinyfish is present in both files. Every inline citation index must map to a source actually retrieved through that ladder, and a cited-but-unfetched source fails the report exactly like an unread one.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-30 - tinyfish-setup-and-connection-check [ses_f0db9f30cffeJYpA76JszqgVJy].md:L5550] Without a named tool each agent improvises its own browsing and the citations stop being reproducible; TinyFish is the tool and the master skill, the template, and the check have to agree on it."
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-30 - tinyfish-setup-and-connection-check [ses_f0db9f30cffeJYpA76JszqgVJy].md:L05550] Deep-research evidence contract: the workflow must name its evidence tool.\\n// Without a named tool each agent improvises its own browsing and citations stop\\n// being reproducible."
+      ]
     },
     {
       "id": "concept--lightest-tool-ladder-search-fetch-agent",

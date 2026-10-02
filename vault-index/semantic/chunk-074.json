@@ -114,7 +114,9 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c7-git-history-regression [ses_f24ed0410ffePfqDLIQZY9khSK].md",
       "source_location": "L407",
       "norm_label": "git log -s substring false positive",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c7-git-history-regression [ses_f24ed0410ffePfqDLIQZY9khSK].md:L419] The origin hits are the substring in original"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c7-git-history-regression [ses_f24ed0410ffePfqDLIQZY9khSK].md:L00407] So the `-S 'origin'` hits are false positives from the substring \"original\"."
+      ]
     },
     {
       "id": "concept--never-present-versus-removed",

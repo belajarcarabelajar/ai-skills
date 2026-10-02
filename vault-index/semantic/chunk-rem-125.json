@@ -94,10 +94,10 @@
       "label": "Zero subagent compiler policy",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md",
-      "source_location": "L27",
+      "source_location": "L09140",
       "norm_label": "zero subagent compiler policy",
       "rationale": [
-        "The policy as stated, with the reason attached; not running the compiler is framed as a documented handoff rather than a skipped step: [05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md:L00027] this is a memory-constrained interactive desktop (7.6 GiB RAM, ~2.7 GiB free). Rust compilation is FORBIDDEN on this host by the repository's own AGENTS.md.",
+        "The same ban as the closing report states it, memory constraint and all: [05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md:L09140] **I did not compile.** Rust compilation is forbidden on this host per the repo's `AGENTS.md` (memory-constrained interactive desktop, VPS-first rule).",
         "Compliance reported explicitly, including the unverified surface it leaves behind: [05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md:L09202] **Not compiled, not tested.** Type errors, borrow errors, and clippy findings are all unverified."
       ]
     },
@@ -131,11 +131,11 @@
       "label": "One round trip replaces a serial mode gate, with a per-field degrade contract",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md",
-      "source_location": "L42",
+      "source_location": "L09159",
       "norm_label": "single round trip command with partial failure degrade",
       "rationale": [
-        "The degrade contract as the plan states it, before it reaches the code it governs: [05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md:L00042] This is the partial-failure contract: a satisfaction aggregate that fails must not blank the whole tab",
-        "The stated reason, which is the whole justification for degrading one field rather than the payload: [05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md:L00042] because a support reference that goes fully blank on one bad count is less reliable, not more"
+        "The degrade contract as the closing report describes the shipped command: [05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md:L09159] `csat` uses `.ok()` with the partial-failure contract documented inline.",
+        "The stated reason, which is the whole justification for degrading one field rather than the payload: [05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md:L04749] // would make the support reference less reliable, not more"
       ]
     },
     {
@@ -143,10 +143,10 @@
       "label": "Byte-equivalence test pins an extracted serializer",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md",
-      "source_location": "L58",
+      "source_location": "L09174",
       "norm_label": "byte equivalence test pins serializer refactor",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md:L00058] `export_customer_support_report` produces the same `json` and `csv` as `get_research_export` for the same seeded data, proving the shared serializer did not change the format (this is the test that would go red if the CSV header or formatting regressed)",
+        "The byte-equivalence test as the closing report lists it among the tests added, named for what it asserts: [05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md:L09174] 7. `test_export_customer_support_report_matches_get_research_export`",
         "The assertion is checked against the trailing-newline detail that would otherwise make it wrong: [05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md:L08908] `report.csv.lines().count()` == exp.days.len() + 1. The CSV ends with `\\n` so lines() gives header + N rows. Correct.",
         "Its unverified status is inherited rather than hidden - the report's closing line covers the whole file, and this test cannot run without the compiler the policy forbids on this host: [05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md:L09202] **Not compiled, not tested.** Type errors, borrow errors, and clippy findings are all unverified."
       ]
@@ -156,10 +156,10 @@
       "label": "An opt-in gate that is off returns Ok with a mode flag and empty payload, not an error",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md",
-      "source_location": "L37",
+      "source_location": "L09159",
       "norm_label": "an opt in gate that is off returns ok with a mode flag and empty payload not an error",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md:L37] \"Read the mode flag with `crate::database::research_mode_enabled(conn)`. If it is OFF, return `Ok` with `mode: false` and empty everything else. Do NOT error: the frontend renders an off notice, and erroring would make a normal state look like a failure.\"",
+        "The mode gate as the closing report describes the shipped command: [05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md:L09159] Mode gate returns `Ok` with `mode: false` and empty everything else; every data-gathering sub-query sits past that gate.",
         "Implemented as a value, not as control flow that returns early - every field present and empty, so the shape the frontend reads is identical whether the mode is on or off: [05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md:L04017] For the off case, return `Ok(CustomerSupportOverview { mode: false, days: vec![], active_days: 0, csat: None, conversations: vec![], snippets: vec![] })`."
       ]
     },
@@ -168,11 +168,11 @@
       "label": "One payload carries two privacy classes: hashed event metadata and named local snippet metadata",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md",
-      "source_location": "L44",
+      "source_location": "L05314",
       "norm_label": "one payload carries two privacy classes hashed event metadata and named local snippet metadata",
       "rationale": [
-        "The line that draws the distinction, and it is a distinction about the data's origin rather than about the field: [05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md:L00044] This is the user's own local snippet metadata, which is not the same privacy class as the analytics event stream",
-        "The other list in the same struct is held to the stricter rule; the two candidate lists are not treated alike, and the asymmetry is deliberate rather than an oversight: [05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md:L00043] These MUST be metadata only, never a prompt body or a snippet body. Each item is `{ id, label, occurred_at }`.",
+        "The line that draws the distinction, and it is a distinction about the data's origin rather than about the field: [05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md:L05314] 417: /// This is the user's own local snippet metadata (their own name, their own [05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md:L05315] 418: /// group), which is a different privacy class from the analytics event stream,",
+        "The other list in the same struct is held to the stricter rule, carried into a test of its own: [05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md:L09171] 4. `test_customer_support_overview_conversations_are_metadata_only`",
         "The stricter rule is enforced by a negative assertion rather than by inspection: [05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k9-rust-overview-command [ses_f08a79496ffewAkp6HvnovBH6X].md:L02688] seed an expansion whose source_id is the opaque hash of a raw keyword, and also insert a snippet row containing a distinctive body string, then assert that body string is nowhere in `serde_json::to_string(&ov)`"
       ]
     }

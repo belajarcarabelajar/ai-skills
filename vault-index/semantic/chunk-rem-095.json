@@ -5,11 +5,11 @@
       "label": "Android platform authority",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md",
-      "source_location": "L44",
+      "source_location": "L2706",
       "norm_label": "android platform authority",
       "rationale": [
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L02706] Android identity stays version.json + android-v tags. Do not introduce a new authority or tag scheme for Android.",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L37] It is already independent - preserve both values unless a test bumps them in a temp fixture."
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L02692] Android authority apps/android/version.json = 1.0.6 / versionCode 107. It is already independent — preserve both values unless a test bumps them in a temp fixture."
       ]
     },
     {
@@ -17,11 +17,11 @@
       "label": "Android versionCode monotonicity",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md",
-      "source_location": "L46",
+      "source_location": "L07673",
       "norm_label": "android versioncode monotonicity",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L00046] **`versionCode` must stay monotonically increasing.** Use the T1 helpers (`getPlatformVersionCode`, `assertVersionCodeIncremented`). A publish reusing or lowering the published versionCode must FAIL before any write.",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L2698] If authority versionCode <= published versionCode -> fail. Good, that works if the deployer does not auto-increment."
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L07673] × refuses a versionCode that is not strictly greater, before writing anything",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L02698] If authority versionCode <= published versionCode → fail. Good, that works if the deployer does not auto-increment."
       ]
     },
     {
@@ -29,10 +29,10 @@
       "label": "Explicit --platform and --version required",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md",
-      "source_location": "L69",
+      "source_location": "L07680",
       "norm_label": "explicit --platform and --version required",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L00069] - Malformed authority / missing `--platform` / bad version fails closed with a clear message."
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L07680] × fails closed on a malformed authority, a missing --platform and a bad version"
       ]
     },
     {
@@ -40,10 +40,10 @@
       "label": "Build-free producer dry-run",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md",
-      "source_location": "L48",
+      "source_location": "L07676",
       "norm_label": "build-free producer dry-run",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L00048] **Dry-run must be completely side-effect free**: no file writes, no `gh` calls, no uploads, no git pushes, no gradle. It should print the plan (platform, version, versionCode, tag, manifest path, aggregate path) and exit 0.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L07676] × dry-runs with zero mutations and without invoking gh or gradle",
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L07736] It is placed *before* the JDK probe, before `gh auth status`, before `mktemp -d` for rollback state, and before any build."
       ]
     },
@@ -52,11 +52,11 @@
       "label": "Owner-scoped release rollback",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md",
-      "source_location": "L49",
+      "source_location": "L2732",
       "norm_label": "owner-scoped release rollback",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L49] Failure rollback restores only Android-owned state. Never roll back, rewrite, or \"reconcile\" a sibling platform.",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L7760] apps/android/version.json is never written, no sibling manifest is snapshotted, and there is no \"reconcile\" path."
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L02732] Better approach for rollback: re-read the current on-disk aggregate and surgically replace ONLY the android-owned entries with the pre-publish values (or delete them if they didn't exist). That's the true \"only android-owned state\" boundary and it cannot clobber a sibling.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L07760] `apps/android/version.json` is **never written** (see risk 1), no sibling manifest is snapshotted, and there is no \"reconcile\" path."
       ]
     },
     {
@@ -64,10 +64,10 @@
       "label": "Stale aggregate refused, not clobbered",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md",
-      "source_location": "L68",
+      "source_location": "L07762",
       "norm_label": "stale aggregate refused, not clobbered",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L00068] Concurrent aggregate change (root `latest.json` modified by \"someone else\" between read and write) -> conflict error, no clobber, Windows entry still intact.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L07762] The concurrent-aggregate test injects a Linux 0.6.900 release from inside the Gradle stub (i.e. genuinely between the plan read and the aggregate write). Result: `E_AGGREGATE_CONFLICT`, no release created, the Linux change **survives**, the Android manifest write is rolled back, and every Windows hash is unchanged.",
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L07758] the current on-disk aggregate is re-read, and the pre-publish snapshot is written back **only if every non-Android part of the file is still byte-identical to the snapshot**. Otherwise the aggregate is left exactly as the concurrent release left it and the reason is printed (not swallowed), because rewriting it would clobber a sibling."
       ]
     },
@@ -76,10 +76,10 @@
       "label": "Full-tree byte-identity snapshot delta assertion",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md",
-      "source_location": "L47",
+      "source_location": "L07742",
       "norm_label": "full-tree byte-identity snapshot delta assertion",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L47] Prove it byte-for-byte in tests: capture the Windows fields and the two desktop authority files before and after an Android publish and assert zero change.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L07742] `desktopOwnedHashes(root)` snapshots, before and after a real Android publish, and asserts equality on all of:",
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L07751] a **stronger whole-document assertion**: mask only `platforms.android` in the pre- and post-publish aggregate and require `JSON.stringify` equality. That single comparison covers every other entry, every root scalar, *and* key insertion order at once. It's paired with a `not.toEqual` on the android entry so the mask cannot pass vacuously. Nothing is eyeballed."
       ]
     },
@@ -92,8 +92,8 @@
       "norm_label": "the release producer stops auto-bumping the source authority",
       "rationale": [
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L2696] the deployer no longer auto-bumps the source authority. It reads the authority (versionName + versionCode) and publishes exactly that. If a version is passed explicitly, it must equal the authority (or it validates it).",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L2708] the rollback boundary contract (#6) says \"restore ONLY releases/android/latest.json and the android entry in root latest.json\" - explicitly excluding version.json. That strongly implies the deployer no longer writes version.json.",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L7766] This removes the old \"just run the deployer to cut a release\" ergonomics. Please confirm this is the intended trade-off (I did not, because auto-bump plus a strictly-increasing-published-code rule makes the happy path impossible without a new published manifest)."
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L02708] the rollback boundary contract (#6) says \"restore ONLY releases/android/latest.json and the android entry in root latest.json\" — explicitly excluding version.json. That strongly implies the deployer no longer writes version.json.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L07766] This removes the old \"just run the deployer to cut a release\" ergonomics. **Please confirm this is the intended trade-off**, or tell me to restore auto-bump (I did not, because auto-bump plus a strictly-increasing-published-code rule makes the happy path impossible without a new published manifest)."
       ]
     },
     {
@@ -104,7 +104,7 @@
       "source_location": "L7731",
       "norm_label": "repo-root env seam with script_dir still anchored to the real repo",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L7731] SNIPSET_ANDROID_REPO_ROOT - redirects the repository being published at a temp fixture. Crucially, SCRIPT_DIR still anchors to the real scripts/build/, so the T1/T2 .mjs helpers are imported from the real repo while all reads/writes target the fixture. The same pattern T0 used for its skills-root override.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L07731] - **`SNIPSET_ANDROID_REPO_ROOT`** — redirects the repository being published at a temp fixture. Crucially, `SCRIPT_DIR` still anchors to the *real* `scripts/build/`, so the T1/T2 `.mjs` helpers are imported from the real repo while all reads/writes target the fixture. The same pattern T0 used for its skills-root override.",
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md:L3373] REPO_ROOT=\"${SNIPSET_ANDROID_REPO_ROOT:-$(cd \"${SCRIPT_DIR}/../..\" && pwd)}\""
       ]
     },
@@ -137,10 +137,10 @@
       "label": "named regex tested against a braced body can never match",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md",
-      "source_location": "L1635",
+      "source_location": "L6493",
       "norm_label": "named regex tested against a braced body can never match",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L1635] That's the real detector bug: onClick={handleToggle} (identifier reference, no parens) is never resolved. Note the named regex /^\\s*([A-Za-z_$][\\w$]*)\\s*$/ is applied to {handleToggle} - braces included - so it never matches either.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L06493] The `named` regex that would catch it (`/^\\s*([A-Za-z_$][\\w$]*)\\s*$/`) is applied to `{handleToggle}` — braces included — so it never matches either.",
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L01627] `handleToggle` IS indexed. Then why is `onClick={handleToggle}` flagged?"
       ]
     },
@@ -178,7 +178,7 @@
       "norm_label": "shared button soundeffect prop is invisible to the detector",
       "rationale": [
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L6487] shared-primitive (5): TaskFilter:160, TaskFilter:282, DatePickerPopover:80/95/110",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L3343] ActionChip in Popover.tsx:92 - onClick={() => { playAudio(\"open_001.ogg\"); onClick(); }}. So the ActionChip is a shared primitive that already cues... AND the call site at index.tsx:114-117 ALSO plays click_001.ogg"
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L03343] - `ActionChip` in Popover.tsx:92 — `onClick={() => { playAudio(\"open_001.ogg\"); onClick(); }}`. So the ActionChip is a shared primitive that already cues... AND the call site at index.tsx:114-117 ALSO plays `click_001.ogg`"
       ]
     },
     {
@@ -186,11 +186,11 @@
       "label": "stopPropagation as double-cue guard",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md",
-      "source_location": "L6083",
+      "source_location": "L6081",
       "norm_label": "stoppropagation as double-cue guard",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L6081] handleToggle's e.stopPropagation() prevents the root's cue from firing. Good - the row does NOT double-cue. The root's onClick only fires for clicks that don't come from a row.",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L6083] So the pairing is: row click -> stopPropagation -> only handleToggle's cue. Correct, exactly one cue. And the root's playAudio(\"click_001.ogg\") handles the dismiss/blank-area click."
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L06081] So `handleToggle`'s `e.stopPropagation()` prevents the root's cue from firing. Good — the row does NOT double-cue. The root's onClick only fires for clicks that don't come from a row.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L06083] So the pairing is: row click → stopPropagation → only `handleToggle`'s cue. Correct, exactly one cue. And the root's `playAudio(\"click_001.ogg\")` handles the dismiss/blank-area click."
       ]
     },
     {
@@ -224,7 +224,7 @@
       "norm_label": "the mousedown handlers never cue, so a mousedown preceding the click is not a double-fire",
       "rationale": [
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L06497] **Mousedown/click pairing: no double-fire risk.** The `onMouseDown` handlers in both files only `e.stopPropagation()` — no `playAudio`, and the detector never considers `onMouseDown` (CUE_EVENTS is onClick/onSubmit/onDoubleClick).",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L6085] the checkbox's onMouseDown stopPropagation is there to prevent the menu from treating the press as an outside-click (which would hide the menu). That's its purpose."
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L06085] The `onMouseDown` stopPropagation prevents the menu from treating the press as an outside-click (which would hide the menu). That's its purpose."
       ]
     },
     {
@@ -258,7 +258,7 @@
       "source_location": "L6715",
       "norm_label": "seven queue keys sit in two known_gaps groups at once, and the set dedupe hides it",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L6715] Write-scope collision at HEAD. KNOWN_GAPS has 184 entries but 177 unique: 7 keys sit in both components (A6) and features/Snippets (A9). The queue Set dedupes so tests don't catch it, and every queue key is claimed by exactly one group matcher only checks GROUP_MATCHERS, not group ownership, so a key in two groups is invisible."
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-tasks-cues [ses_f17b1e0fcffeEPHB93qawr1jxo].md:L06715] **8. Write-scope collision at HEAD.** `KNOWN_GAPS` has 184 entries but 177 unique: 7 keys sit in **both** `components` (A6) and `features/Snippets` (A9) — `ProjectEditorModal.tsx:207,217,373,382`, `ProjectListSection.tsx:184`, `OverlayAiResponseCard.tsx:103`, `OverlayControls.tsx:146`. The `Set` dedupes so nothing catches it, and the group-matcher test checks GROUP_MATCHERS, not group ownership. Two agents will race on these 7."
       ]
     }
   ],

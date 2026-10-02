@@ -140,12 +140,12 @@
       "label": "renderErrorPage cannot know whether the Worker secret exists, so the code fallback link is an optional field only login.ts fills",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-02 - t6-conditional-fallback-link [ses_f060278daffetIJbwtxpjlMD34].md",
-      "source_location": "L3320",
+      "source_location": "L06001",
       "norm_label": "rendererrorpage cannot know whether the worker secret exists, so the code fallback link is an optional field only login.ts fills",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-02 - t6-conditional-fallback-link [ses_f060278daffetIJbwtxpjlMD34].md:L3320] Alasannya fungsi ini tidak bisa tahu apa secret kode sudah diisi di\\n// Worker atau belum — dia cuma interpolasi string, tidak pernah menyentuh",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-02 - t6-conditional-fallback-link [ses_f060278daffetIJbwtxpjlMD34].md:L3320] link mati di empat halaman sekaligus",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-02 - t6-conditional-fallback-link [ses_f060278daffetIJbwtxpjlMD34].md:L3320] Jadi emptiness-nya diputuskan pemanggil: hanya login.ts yang mengisi"
+        "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-02 - t6-conditional-fallback-link [ses_f060278daffetIJbwtxpjlMD34].md:L06001] Alasannya fungsi ini tidak bisa tahu apa secret kode sudah diisi di",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-02 - t6-conditional-fallback-link [ses_f060278daffetIJbwtxpjlMD34].md:L06005] link mati di empat halaman sekaligus.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-02 - t6-conditional-fallback-link [ses_f060278daffetIJbwtxpjlMD34].md:L06006] Jadi emptiness-nya diputuskan pemanggil: hanya login.ts yang mengisi"
       ]
     },
     {
@@ -162,10 +162,10 @@
       "label": "The absent case of an optional render field is asserted byte-identical, not merely asserted to contain no new string",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-02 - t6-conditional-fallback-link [ses_f060278daffetIJbwtxpjlMD34].md",
-      "source_location": "L3147",
+      "source_location": "L05342",
       "norm_label": "the absent case of an optional render field is asserted byte-identical, not merely asserted to contain no new string",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-02 - t6-conditional-fallback-link [ses_f060278daffetIJbwtxpjlMD34].md:L3147] Sisi absent diuji sebagai byte-identik, bukan \\\"sekali-kali tidak ada\\\":\\n// halaman ini dipakai bersama oleh OAuth callback error path\\n// (callback.ts errorResponse) dan track/skill 404, dan keduanya tidak boleh\\n// ikut-growing link. Kalau renderErrorPage diam-diam menambah apa pun saat\\n// `codeFallbackUrl` tidak diisi, test ini yang harus gagal lebih dulu.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-02 - t6-conditional-fallback-link [ses_f060278daffetIJbwtxpjlMD34].md:L05342] Membuktikan sifat byte-identik secara penuh, bukan per substring:",
         "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-02 - t6-conditional-fallback-link [ses_f060278daffetIJbwtxpjlMD34].md:L6321] a whole-document check `expect(withCode).toBe(bare.replace(ACTIONS_BARE, ACTIONS_WITH_CODE))` — so the *only* possible difference is the one inserted anchor."
       ]
     },

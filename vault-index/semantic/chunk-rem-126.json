@@ -6,10 +6,10 @@
       "label": "Bare onClick reference never resolves in reachesPlayAudio",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-pages-speech-cues [ses_f17b2671dffel2sYJJnLKtcP27].md",
-      "source_location": "L8079",
+      "source_location": "L08079",
       "norm_label": "bare on click reference never resolves in reaches play audio",
       "summary": "Reached independently while classifying this chunk's own 18-entry queue. The detector's reachesPlayAudio only follows an identifier written with a call parenthesis, so `onClick={name}` / `onSubmit={name}` is reported silent even though name() does call playAudio. 8 of this chunk's 18 queue entries were that defect rather than real gaps, and A5, A7, A8 and this chunk all hit it.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-pages-speech-cues [ses_f17b2671dffel2sYJJnLKtcP27].md:L8079] reachesPlayAudio only follows name( calls, so it cannot resolve (a) a bare handler reference onClick={name} / onSubmit={name}. Fixing the detector is the real fix; per-call-site arrow-wrapping would be papering over it."
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-pages-speech-cues [ses_f17b2671dffel2sYJJnLKtcP27].md:L08079] `reachesPlayAudio` only follows `name(` calls, so it cannot resolve (a) a bare handler reference `onClick={name}` / `onSubmit={name}`, nor (b) a `useCallback`-wrapped declaration, which `indexFunctions` cannot index. **A5, A7, A8 and now A4 all hit this independently** — A8's own comment in the register names both variants. This inflates the 182 baseline. Fixing the detector is the real fix; per-call-site arrow-wrapping would be papering over it. I deliberately did **not** do that (and could not have for the `useCallback` pair without a behaviour change)."
     },
     {
       "id": "concept--usecallback-body-not-indexed",
@@ -85,9 +85,9 @@
       "label": "Audio cue pinning test",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-pages-speech-cues [ses_f17b2671dffel2sYJJnLKtcP27].md",
-      "source_location": "L8055",
+      "source_location": "L08046",
       "norm_label": "audio cue pinning test",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-pages-speech-cues [ses_f17b2671dffel2sYJJnLKtcP27].md:L8046] Pinned by `LiveAudioMeter.test.tsx:296` — already cues `switch_001.ogg` at `:177`/`:188` on *both* branches. [05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-pages-speech-cues [ses_f17b2671dffel2sYJJnLKtcP27].md:L8055] TtsTextReader.test.tsx:126/:147 pin exactly one cue — wiring would have broken existing tests and double-fired."
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-pages-speech-cues [ses_f17b2671dffel2sYJJnLKtcP27].md:L08046] **EXCLUDED** — already cues `switch_001.ogg` at `:177`/`:188` on *both* branches. Pinned by `LiveAudioMeter.test.tsx:296`. [05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-pages-speech-cues [ses_f17b2671dffel2sYJJnLKtcP27].md:L08055] `TtsTextReader.test.tsx:126`/`:147` pin **exactly one** cue — wiring would have broken existing tests *and* double-fired."
     },
     {
       "id": "concept--fish-shell-collector-hook",
@@ -104,11 +104,13 @@
       "label": "The JSON escaping bug is the order of the two sed passes, not their presence",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md",
-      "source_location": "L7757",
+      "source_location": "L07152",
       "norm_label": "the json escaping bug is the order of the two sed passes not their presence",
       "summary": "The existing bash collector escapes the double quote but not the backslash, so `grep -E \\d+ f` produces invalid JSON and the parser drops the line. Both substitutions are present in both implementations; running the backslash pass first is what makes the quote pass safe, because the backslashes the quote pass introduces can no longer be doubled by a later pass. Measured both ways: the correct order round-trips, the reversed order raises JSONDecodeError at column 64.",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L04565] The bug is the order, not the presence of substitutions. Escaping the backslash first is what makes the quote pass safe, because the backslashes the quote pass introduces can no longer be doubled by a later pass. Chosen over python3 json.dumps at 18.7 ms per call against 0.7 ms for the sed pipeline, ~26x, on every interactive prompt."
+        "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L07152] The bug is the ORDER of the [05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L07153] two substitutions, not their presence. Here the backslash pass runs first:",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L07155] Escaping the backslash first is what makes the quote pass safe, because the [05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L07156] backslashes the quote pass introduces can no longer be doubled by a later [05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L07157] pass.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L07173] json.dumps was measured at 18.7 ms per call against 0.7 ms for this sed [05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L07174] pipeline, on every interactive prompt, so sed won."
       ]
     },
     {
@@ -128,11 +130,11 @@
       "label": "Truncate before escaping, and count characters rather than bytes",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md",
-      "source_location": "L3715",
+      "source_location": "L07182",
       "norm_label": "truncate before escaping with a character counting subcommand",
       "summary": "Two deliberate differences from the bash hook's `head -c 4000`, both stated as intent rather than silently inherited. `string sub -l 4000` counts characters, so a UTF-8 command is never cut mid-character where head -c can; and truncating before escaping means a long command can never be cut in the middle of an escape sequence, which would make the line unparseable. `string shorten` was rejected because it truncates to terminal display width and appends an ellipsis, corrupting the recorded command.",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L03786] string sub -l 4000 gives exactly 4000 whole characters with no ellipsis. Verified on fish 4.9.3: 5000 chars in, exactly 4000 out, and 4000 repetitions of a two-byte character survive whole."
+        "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L07182] The raw command is truncated to 4000 CHARACTERS before escaping, using [05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L07183] `string sub -l 4000`, matching the 4000 limit in the bash hook. Two [05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L07184] deliberate differences: `string sub -l` counts characters, so a UTF-8 command [05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L07185] is never cut mid-character, whereas the bash hook's `head -c 4000` counts [05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L07186] bytes and can; and truncating before escaping means a long command can never [05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L07187] be cut in the middle of an escape sequence, which would make the line [05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L07188] unparseable. Verified on fish 4.9.3, which this host runs: 5000 chars in, [05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L07189] exactly 4000 out, and 4000 repetitions of a two-byte character survive whole."
       ]
     },
     {
@@ -176,24 +178,20 @@
       "label": "A mutation harness must verify each mutation changed the file before trusting its result",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md",
-      "source_location": "L7882",
+      "source_location": "L07882",
       "norm_label": "a mutation harness must verify each mutation changed the file before trusting its result",
       "summary": "The first mutation harness reported meaningless all-passed results for four mutations because the mutations silently did not apply. Rebuilt to assert the file differs from baseline before running the suite, which then found two real coverage gaps: nothing distinguished reading $PWD in preexec from reading it in postexec, and the tab pass had no test at all. One mutation still survives, and that one is explained in the hook header rather than hidden.",
-      "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L07939] My first mutation harness was buggy and reported meaningless \"all passed\" results for 4 mutations because the mutations silently did not apply. I rebuilt it to verify each mutation changed the file first."
-      ]
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L07882] **My first mutation harness was buggy** and reported meaningless \"all passed\" results for 4 mutations because the mutations silently did not apply. I rebuilt it to verify each mutation changed the file first"
     },
     {
       "id": "concept--lock-the-log-file-itself-rather-than-through-a-sibling-lock-file",
       "label": "Lock the log file itself rather than through a sibling lock file",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md",
-      "source_location": "L7634",
+      "source_location": "L07217",
       "norm_label": "lock the log file itself rather than through a sibling lock file",
       "summary": "flock is given the log path itself, not a .lock sibling, so nothing extra appears in the user's log directory. The cost is that flock cannot create the file it locks, so the file must be touched first. Verified under ten concurrent writers times twenty-five lines: 250 lines, zero torn. util-linux flock rejects --no-fork together with -o, so the fork form is used deliberately.",
-      "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L07691] directly (flock -x $file cat >>$file) rather than through a sibling .lock file, so nothing extra appears in ~/.terminal_logs/. flock needs the file to exist, hence the touch."
-      ]
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L07217] directly (`flock -x $file cat >>$file`) rather than through a sibling [05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L07218] .lock file, so nothing extra appears in ~/.terminal_logs/. flock needs the [05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md:L07219] file to exist, hence the touch."
     }
   ],
   "links": [

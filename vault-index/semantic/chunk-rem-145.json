@@ -23,10 +23,10 @@
       "label": "Category totals fold over all eligible contexts before the top-ten display truncation",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t10-complete-category-totals [ses_f1f9abbceffe9ANJEc1qmy2oJw].md",
-      "source_location": "L9361",
+      "source_location": "L09346",
       "norm_label": "category totals fold over all eligible contexts before the top-ten display truncation",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t10-complete-category-totals [ses_f1f9abbceffe9ANJEc1qmy2oJw].md:L32] production aggregation truncates contexts before charting (dashboard.rs:299) so eligible data past the display limit never reaches any total",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t10-complete-category-totals [ses_f1f9abbceffe9ANJEc1qmy2oJw].md:L09346] new `aggregate_dashboard_contexts` production aggregation that folds totals over all eligible contexts BEFORE top-ten truncation (lines 133-157); `compute_activity_page_data` calls it instead of sort plus truncate (line 342)",
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t10-complete-category-totals [ses_f1f9abbceffe9ANJEc1qmy2oJw].md:L9361] Totals fold over the full eligible set first, then the display list truncates to ten; both outputs come from one function so they cannot drift"
       ]
     },
@@ -44,11 +44,11 @@
       "label": "KDE Konsole and kitty are classified as Development",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t10-complete-category-totals [ses_f1f9abbceffe9ANJEc1qmy2oJw].md",
-      "source_location": "L9345",
+      "source_location": "L09355",
       "norm_label": "kde konsole and kitty are classified as development",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t10-complete-category-totals [ses_f1f9abbceffe9ANJEc1qmy2oJw].md:L32] KDE terminal aliases are absent in both the Rust classifier and the TS mirror, so konsole/kitty land in Productivity",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t10-complete-category-totals [ses_f1f9abbceffe9ANJEc1qmy2oJw].md:L30] corpus entries: KDE Konsole and kitty are Development (terminal aliases), unknown apps have explicit tested policy"
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t10-complete-category-totals [ses_f1f9abbceffe9ANJEc1qmy2oJw].md:L09355] `maps the KDE Konsole app to Development` and `maps the kitty terminal app to Development` failed before the fix with Productivity, pass now.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t10-complete-category-totals [ses_f1f9abbceffe9ANJEc1qmy2oJw].md:L09345] new tests `terminal_apps_classify_as_development`, `unknown_apps_have_no_invented_category`, `classify_context_routes_each_kind`, `golden_corpus_tracker_and_journal_agree` (21 entries)"
       ]
     },
     {

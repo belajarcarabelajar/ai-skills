@@ -42,9 +42,20 @@ export function unquoteForms(q) {
   return [...new Set(out)];
 }
 
-const lines = (p) => {
-  const f = resolveFile(p);
-  return f ? fs.readFileSync(f, 'utf8').split('\n') : null;
+// Cache by RESOLVED path, not by the requested relative path: two callers may
+// resolve the same `source_file` against different roots (the CLI's real vault
+// vs a test's fixture root), and a relative-path key would hand the second
+// caller the first one's lines.
+const cache = new Map();
+const load = (sf, roots) => {
+  if (!sf) return null;
+  const file = resolveFile(sf, roots);
+  if (!file) return null;
+  if (!cache.has(file)) {
+    const L = fs.readFileSync(file, 'utf8').split('\n');
+    cache.set(file, { L, pad: paddingRanges(L) });
+  }
+  return cache.get(file);
 };
 
 /** Every line index (0-based) that contains any rendering of the quote. */
@@ -152,23 +163,16 @@ const chunkIds = (argv) => {
     .sort();
 };
 
-const cache = new Map();
-const load = (sf) => {
-  if (!cache.has(sf)) {
-    const L = lines(sf);
-    cache.set(sf, L ? { L, pad: paddingRanges(L) } : null);
-  }
-  return cache.get(sf);
-};
-
 function inPad(f, ln) { return f.pad.some(([a, b]) => ln >= a && ln <= b); }
 
 /**
  * Walk one chunk's rationale anchors and return every repair candidate with its
  * tier. Never mutates.
  */
-export function planChunk(name) {
-  const chunk = JSON.parse(fs.readFileSync(path.join(DIR, name), 'utf8'));
+export function planChunk(name, opts = {}) {
+  const dir = opts?.dir ?? DIR;
+  const roots = opts?.roots;
+  const chunk = JSON.parse(fs.readFileSync(path.join(dir, name), 'utf8'));
   const out = [];
   for (const n of chunk.nodes ?? []) {
     const r = n.rationale;
@@ -185,7 +189,7 @@ export function planChunk(name) {
         const forms = unquoteForms(quoted);
         // The anchor path may be a pre-§4a `[file:Lnnn]` placeholder; fall back
         // to the node's own source_file, which is a real path in the batch.
-        const f = load(a.file) || (n.source_file ? load(n.source_file) : null);
+        const f = load(a.file, roots) || (n.source_file ? load(n.source_file, roots) : null);
         if (!f) { out.push({ node: n.id, idx: i, k, tier: 'T4', why: 'no file' }); continue; }
         const L = f.L;
         if (forms.some((x) => L[a.line - 1]?.includes(x))) continue;  // already fine
@@ -288,7 +292,8 @@ function paraphraseSite(line, quoted) {
  * candidate is now re-parsed and re-tested; a repair that does not verify is
  * discarded rather than written.
  */
-export function applyPlan(s, pl) {
+export function applyPlan(s, pl, opts = {}) {
+  const roots = opts?.roots;
   const A = parseAnchors(s);
   if (A.length <= pl.k) return null;
   const a = A[pl.k];
@@ -311,7 +316,7 @@ export function applyPlan(s, pl) {
     // Write back the LINE's own characters for the matched span, not the
     // subagent's rendering of them. The search was relaxed; the stored data is
     // not.
-    const f2 = load(a.file) || load(pl.file);
+    const f2 = load(a.file, roots) || load(pl.file, roots);
     if (!f2) return null;
     const span = exactSpan(f2.L[pl.to - 1], unquoteForms(pl.quoted));
     if (!span) return null;
@@ -319,7 +324,7 @@ export function applyPlan(s, pl) {
   } else if (pl.tier === 'T3') {
     // The words were fabricated; replace them with the cited line's own
     // sentence, which is the thing the subagent was reaching for.
-    const f3 = load(a.file) || load(pl.file);
+    const f3 = load(a.file, roots) || load(pl.file, roots);
     if (!f3) return null;
     const span = exactSpan(f3.L[pl.to - 1], [pl.span]) ?? pl.span;
     if (!f3.L[pl.to - 1].includes(span)) return null;
@@ -334,27 +339,32 @@ export function applyPlan(s, pl) {
     const b = A2[k];
     const st = k + 1 < A2.length ? A2[k + 1].start : out.length;
     const q = out.slice(b.end, st).trim();
-    const f = load(b.file);
+    const f = load(b.file, roots);
     if (!f || q.length < 4) return null;
     if (!unquoteForms(q).some((x) => f.L[b.line - 1]?.includes(x))) return null;
   }
   return out;
 }
 
-export function rewrite(chunk, plans, tiers) {
+export function rewrite(chunk, plans, tiers, opts = {}) {
   const use = tiers.length ? tiers : ['T1', 'T2'];
   let n = 0;
   for (const pl of plans) {
     if (!use.includes(pl.tier) || pl.to == null) continue;
     const node = chunk.nodes.find((x) => x.id === pl.node);
     if (!node) continue;
-    const arr = Array.isArray(node.rationale) ? node.rationale.slice() : [node.rationale];
+    // Preserve the rationale's own shape. planChunk accepts a string or an
+    // array, and the repair must not silently turn every touched string into a
+    // one-element array — that changes the chunk's structure for a line-number
+    // fix and buries the real change in the diff.
+    const wasArray = Array.isArray(node.rationale);
+    const arr = wasArray ? node.rationale.slice() : [node.rationale];
     const s = arr[pl.idx];
     if (s == null) continue;
-    const rebuilt = applyPlan(s, pl);
+    const rebuilt = applyPlan(s, pl, opts);
     if (rebuilt == null) continue;   // unproven — leave the chunk alone
     arr[pl.idx] = rebuilt;
-    node.rationale = arr;
+    node.rationale = wasArray ? arr : arr[0];
     n++;
   }
   return n;

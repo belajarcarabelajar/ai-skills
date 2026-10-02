@@ -40,15 +40,22 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const ROOTS = [
+/**
+ * Where a chunk's `source_file` and its anchor paths resolve. Overridable
+ * rather than hardcoded at the call site, matching `vault-index-merge.mjs`: a
+ * caller auditing a corpus other than this machine's must not have to edit this
+ * file, and a unit test must be able to point at a temp fixture root instead of
+ * the real vault (which may not even exist off this host).
+ */
+export const DEFAULT_ROOTS = Object.freeze([
   '/home/belajarcarabelajar/Documents/conversations-archive',
   '/home/belajarcarabelajar/Dokumen/Obsidian Vault',
-];
+]);
 const DIR = 'vault-index/semantic';
 
-/** Locate a real file by repo-relative path across both vault roots. */
-export function resolveFile(rel) {
-  for (const r of ROOTS) {
+/** Locate a real file by repo-relative path across the vault roots. */
+export function resolveFile(rel, roots = DEFAULT_ROOTS) {
+  for (const r of roots) {
     const p = path.join(r, rel);
     if (fs.existsSync(p) && fs.statSync(p).isFile()) return p;
   }
@@ -134,12 +141,13 @@ function unquoteForms(q) {
 // (rem-118's `[file:L2500]` placeholders fail the path check; its quotes fail the
 // substring test), so a separate shape heuristic would only add noise.
 
-export function checkChunk(chunkPath) {
+export function checkChunk(chunkPath, opts = {}) {
+  const roots = opts?.roots ?? DEFAULT_ROOTS;
   const chunk = JSON.parse(fs.readFileSync(chunkPath, 'utf8'));
   const cache = new Map();
   const get = (rel) => {
     if (cache.has(rel)) return cache.get(rel);
-    const p = resolveFile(rel);
+    const p = resolveFile(rel, roots);
     if (!p) { cache.set(rel, null); return null; }
     const lines = fs.readFileSync(p, 'utf8').split('\n');
     // LONE-CR HAZARD. 29 transcripts contain a \r that is not followed by \n,

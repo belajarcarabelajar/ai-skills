@@ -1,90 +1,13 @@
 {
-  "generated": "2026-10-02, after N8n removal (commit 3a968b2)",
-  "note": "rem-* ids are a NEW namespace. batch-* ids were positional over the pre-deletion worklist and are retired; their chunks already exist and must not be re-run.",
+  "generated": "2026-10-02, after N8n removal (3a968b2) and tmp-test exclusion",
+  "note": "rem-* ids. 31 tool-test transcripts removed by .graphifyignore GROUP 7. Files already extracted into a committed chunk are excluded.",
   "root": "/home/belajarcarabelajar/Dokumen/Obsidian Vault",
-  "total": 260,
-  "files": 1037,
-  "alreadyExtracted": 42,
+  "total": 251,
+  "files": 997,
+  "alreadyExtracted": 51,
   "batches": [
     {
       "id": "rem-001",
-      "files": [
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
-          "bytes": 6355277
-        }
-      ],
-      "bytes": 6355277,
-      "truncated": true
-    },
-    {
-      "id": "rem-002",
-      "files": [
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - peningkatan-ai-skills-dari-input-data [ses_f267bdb37ffetNHhHL8RgPAu3Q].md",
-          "bytes": 6010680
-        }
-      ],
-      "bytes": 6010680,
-      "truncated": true
-    },
-    {
-      "id": "rem-003",
-      "files": [
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md",
-          "bytes": 5777091
-        }
-      ],
-      "bytes": 5777091,
-      "truncated": true
-    },
-    {
-      "id": "rem-004",
-      "files": [
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
-          "bytes": 5701502
-        }
-      ],
-      "bytes": 5701502,
-      "truncated": true
-    },
-    {
-      "id": "rem-005",
-      "files": [
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - youtube-error-pomodoro-snipset-di-linux [ses_f24efcd1effeOS4DRwPu3Myfzn].md",
-          "bytes": 4632565
-        }
-      ],
-      "bytes": 4632565,
-      "truncated": true
-    },
-    {
-      "id": "rem-006",
-      "files": [
-        {
-          "path": "05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf",
-          "bytes": 3304983
-        }
-      ],
-      "bytes": 3304983,
-      "truncated": true
-    },
-    {
-      "id": "rem-007",
-      "files": [
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md",
-          "bytes": 3025091
-        }
-      ],
-      "bytes": 3025091,
-      "truncated": true
-    },
-    {
-      "id": "rem-008",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
@@ -95,29 +18,7 @@
       "truncated": true
     },
     {
-      "id": "rem-009",
-      "files": [
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md",
-          "bytes": 2892262
-        }
-      ],
-      "bytes": 2892262,
-      "truncated": true
-    },
-    {
-      "id": "rem-010",
-      "files": [
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-arch-snipset [ses_f1d12d2deffeIXx71eca2M8vc4].md",
-          "bytes": 2849753
-        }
-      ],
-      "bytes": 2849753,
-      "truncated": true
-    },
-    {
-      "id": "rem-011",
+      "id": "rem-002",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md",
@@ -128,7 +29,7 @@
       "truncated": true
     },
     {
-      "id": "rem-012",
+      "id": "rem-003",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - sinkronisasi-riwayat-opencode-ke-obsidian [ses_f060b17deffej7q80pv7ZH1uH8].md",
@@ -139,7 +40,7 @@
       "truncated": true
     },
     {
-      "id": "rem-013",
+      "id": "rem-004",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - snipset-linux-audio-effects-investigation [ses_f1ad483dfffeyZJJrNCQ5KIB6m].md",
@@ -150,7 +51,7 @@
       "truncated": true
     },
     {
-      "id": "rem-014",
+      "id": "rem-005",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - magic-menu-shortcut-fix-for-arch-linux [ses_f2cc92c4cffezw37NWYgTFb6lP].md",
@@ -161,7 +62,7 @@
       "truncated": true
     },
     {
-      "id": "rem-015",
+      "id": "rem-006",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - audit-i18n-english-indonesia-snipset-desktop [ses_f20e6155effeLJSkn2bfl4lD0U].md",
@@ -172,7 +73,7 @@
       "truncated": true
     },
     {
-      "id": "rem-016",
+      "id": "rem-007",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - celah-perbaikan-ai-skills-berbasis-data [ses_f266eae13ffecuT3ynaxKpw1GX].md",
@@ -183,7 +84,7 @@
       "truncated": true
     },
     {
-      "id": "rem-017",
+      "id": "rem-008",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - webkit-crash-in-snipset-on-arch [ses_f2ffee07effeRrWczI3pZ1buos].md",
@@ -194,7 +95,7 @@
       "truncated": true
     },
     {
-      "id": "rem-018",
+      "id": "rem-009",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - bug-floating-pomodoro-hilang-saat-klik-luar [ses_f1bca3440ffeJm51FqaAbzQIUx].md",
@@ -205,7 +106,7 @@
       "truncated": true
     },
     {
-      "id": "rem-019",
+      "id": "rem-010",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - voice-profile-kosong-di-kde-plasma-linux [ses_f26392cdfffeZC4q4g38l5vpMD].md",
@@ -216,7 +117,7 @@
       "truncated": true
     },
     {
-      "id": "rem-020",
+      "id": "rem-011",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - find-hidden-snippet-in-snipset-sqlite-database [ses_f2068fd8cffeloJu4sB4sOZQkU].md",
@@ -227,7 +128,7 @@
       "truncated": true
     },
     {
-      "id": "rem-021",
+      "id": "rem-012",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - 404-page-bug-investigation [ses_f0bd11e5bffe9O4NsOdFL7YFfk].md",
@@ -238,7 +139,7 @@
       "truncated": true
     },
     {
-      "id": "rem-022",
+      "id": "rem-013",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-10-01 - kritik-model-mediasi-snipset-human-ai [ses_f0abc0277ffetYitlu8xI6BRBv].md",
@@ -249,7 +150,7 @@
       "truncated": true
     },
     {
-      "id": "rem-023",
+      "id": "rem-014",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-struktur-para-obsidian-vault [ses_f26e6abd1ffeR4J8VUnctJl2Yw].md",
@@ -260,7 +161,7 @@
       "truncated": true
     },
     {
-      "id": "rem-024",
+      "id": "rem-015",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - sinkronisasi-plan-dengan-obsidian-terbaru [ses_f20bc6e8fffea5kBDg0wj6NeSc].md",
@@ -271,7 +172,7 @@
       "truncated": true
     },
     {
-      "id": "rem-025",
+      "id": "rem-016",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - integrasi-jev-di-ai-skills-untuk-akurasi [ses_f103b5b86ffelSWs8r5QGtpvvf].md",
@@ -282,7 +183,7 @@
       "truncated": true
     },
     {
-      "id": "rem-026",
+      "id": "rem-017",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
@@ -293,7 +194,7 @@
       "truncated": true
     },
     {
-      "id": "rem-027",
+      "id": "rem-018",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md",
@@ -304,7 +205,7 @@
       "truncated": true
     },
     {
-      "id": "rem-028",
+      "id": "rem-019",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-satset-folder [ses_f281d7317ffeOf78hoBBrYZ6cV].md",
@@ -315,7 +216,7 @@
       "truncated": true
     },
     {
-      "id": "rem-029",
+      "id": "rem-020",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - status-snippet-for-buzzer-saat-ini [ses_f213f978cffeRRNVSIzwVj7FtB].md",
@@ -326,7 +227,7 @@
       "truncated": true
     },
     {
-      "id": "rem-030",
+      "id": "rem-021",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md",
@@ -337,7 +238,7 @@
       "truncated": true
     },
     {
-      "id": "rem-031",
+      "id": "rem-022",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
@@ -348,7 +249,7 @@
       "truncated": true
     },
     {
-      "id": "rem-032",
+      "id": "rem-023",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - perbaikan-inject-attachment-magic-menu-download-linux [ses_f08b8695affeoxzP70A34cuaph].md",
@@ -359,7 +260,7 @@
       "truncated": true
     },
     {
-      "id": "rem-033",
+      "id": "rem-024",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - installing-typeless-2-2-0-deb-package [ses_f2bf9c1daffe7JAQPHDJTCsA7V].md",
@@ -370,7 +271,7 @@
       "truncated": true
     },
     {
-      "id": "rem-034",
+      "id": "rem-025",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - college-assignment-anomaly-review-before-submit [ses_f206b53c8ffeeMpGgDQ94Z9lBg].md",
@@ -381,7 +282,7 @@
       "truncated": true
     },
     {
-      "id": "rem-035",
+      "id": "rem-026",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
@@ -392,7 +293,7 @@
       "truncated": true
     },
     {
-      "id": "rem-036",
+      "id": "rem-027",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
@@ -403,7 +304,7 @@
       "truncated": true
     },
     {
-      "id": "rem-037",
+      "id": "rem-028",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - r1-yt-dlp-invocation-contract [ses_f24bc733dffebZDP0NqZI3L9Rq].md",
@@ -414,7 +315,7 @@
       "truncated": true
     },
     {
-      "id": "rem-038",
+      "id": "rem-029",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-raw-folder [ses_f281d7319ffe2rQVakUr9zxWR5].md",
@@ -425,7 +326,7 @@
       "truncated": true
     },
     {
-      "id": "rem-039",
+      "id": "rem-030",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - telegram-bot-image-sync-verification [ses_f0b3fdf5cffe6ChADDBarmxvb7].md",
@@ -436,7 +337,7 @@
       "truncated": true
     },
     {
-      "id": "rem-040",
+      "id": "rem-031",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - intent-lock-login-kode-akses-kaminari99 [ses_f062ae74dffeB6bx90cYk0Y6Kr].md",
@@ -447,7 +348,7 @@
       "truncated": true
     },
     {
-      "id": "rem-041",
+      "id": "rem-032",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
@@ -458,7 +359,7 @@
       "truncated": true
     },
     {
-      "id": "rem-042",
+      "id": "rem-033",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-systemd-boot-kernel-entries [ses_f221dc2a9ffez0yuGn9R5Uw0ns].md",
@@ -469,7 +370,7 @@
       "truncated": true
     },
     {
-      "id": "rem-043",
+      "id": "rem-034",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - perbaikan-sistem-login-rusak [ses_f0cb21c35ffesBRnzbaIrhI8OK].md",
@@ -480,7 +381,7 @@
       "truncated": true
     },
     {
-      "id": "rem-044",
+      "id": "rem-035",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - mengganti-kernel-ke-cachyos-tanpa-reboot [ses_f2fb50b87ffePAyTfXtVGW1qqN].md",
@@ -491,7 +392,7 @@
       "truncated": true
     },
     {
-      "id": "rem-045",
+      "id": "rem-036",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - audit-kecepatan-os-tanpa-animasi [ses_f107f3a8fffeucwj2OzKAXMO9F].md",
@@ -502,7 +403,7 @@
       "truncated": true
     },
     {
-      "id": "rem-046",
+      "id": "rem-037",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md",
@@ -513,7 +414,7 @@
       "truncated": true
     },
     {
-      "id": "rem-047",
+      "id": "rem-038",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - super-ultra-code-plan-pr-delivery-session [ses_f08d01cd8ffe92DE7Adnn8J1o5].md",
@@ -524,7 +425,7 @@
       "truncated": true
     },
     {
-      "id": "rem-048",
+      "id": "rem-039",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - audit-kompatibilitas-skills-md-multi-agent [ses_f12437de6ffejl2if9I0g8pTjZ].md",
@@ -535,7 +436,7 @@
       "truncated": true
     },
     {
-      "id": "rem-049",
+      "id": "rem-040",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - dawnbook-hoax-percaya-12-modul [ses_f1bde037affeTp3p3TEY2cYiV1].md",
@@ -546,7 +447,7 @@
       "truncated": true
     },
     {
-      "id": "rem-050",
+      "id": "rem-041",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md",
@@ -557,7 +458,7 @@
       "truncated": true
     },
     {
-      "id": "rem-051",
+      "id": "rem-042",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - dukungan-appimage-snipset-di-arch-linux [ses_f307e386bffeYlPW4CvAW2eqoU].md",
@@ -568,7 +469,7 @@
       "truncated": true
     },
     {
-      "id": "rem-052",
+      "id": "rem-043",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - implementasi-platform-versioning-independen [ses_f1da808ceffeWNKndIe0gVWJF4].md",
@@ -579,7 +480,7 @@
       "truncated": true
     },
     {
-      "id": "rem-053",
+      "id": "rem-044",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-10-01 - inisiasi-folder-proyek-google-ekosistem [ses_f0aa41cdfffe58eSx30xIomnBi].md",
@@ -590,7 +491,7 @@
       "truncated": true
     },
     {
-      "id": "rem-054",
+      "id": "rem-045",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-kde-plasma-6-components [ses_f221dc2aaffeD7tR9uzbMitsZ7].md",
@@ -601,7 +502,7 @@
       "truncated": true
     },
     {
-      "id": "rem-055",
+      "id": "rem-046",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - membersihkan-dokumen-snipset-dalam-plain-text [ses_f1ce3636fffeCW1VfHkVhP71Bz].md",
@@ -612,7 +513,7 @@
       "truncated": true
     },
     {
-      "id": "rem-056",
+      "id": "rem-047",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - resume-codex-task-and-review-git-diff [ses_f2263a6f1ffe1H81iTVF0xnawu].md",
@@ -623,7 +524,7 @@
       "truncated": true
     },
     {
-      "id": "rem-057",
+      "id": "rem-048",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - perbaikan-kompatibilitas-tgrep-di-semua-perintah [ses_f10f5ccb8ffeC10H0U90ZySRQA].md",
@@ -634,7 +535,7 @@
       "truncated": true
     },
     {
-      "id": "rem-058",
+      "id": "rem-049",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
@@ -645,7 +546,7 @@
       "truncated": true
     },
     {
-      "id": "rem-059",
+      "id": "rem-050",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - ekstraksi-takeout-untuk-inisiasi-proyek-baru [ses_f12a9a77fffesY6FrqsFQjSCbZ].md",
@@ -656,7 +557,7 @@
       "truncated": true
     },
     {
-      "id": "rem-060",
+      "id": "rem-051",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-02 - diagnose-6-failing-script-tests [ses_f060d9198ffe9gB2iDyFXGc6pX].md",
@@ -667,7 +568,7 @@
       "truncated": true
     },
     {
-      "id": "rem-061",
+      "id": "rem-052",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-10-01 - cara-kerja-fitur-research [ses_f0a431a9effeUP5wA3Yv7NuuG5].md",
@@ -678,7 +579,7 @@
       "truncated": true
     },
     {
-      "id": "rem-062",
+      "id": "rem-053",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
@@ -689,7 +590,7 @@
       "truncated": true
     },
     {
-      "id": "rem-063",
+      "id": "rem-054",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - r4-distribution-and-packaging [ses_f24bc0789ffevLB6jWUf4ezm6j].md",
@@ -700,7 +601,7 @@
       "truncated": true
     },
     {
-      "id": "rem-064",
+      "id": "rem-055",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - hello-greeting-request [ses_f2ffb02beffewwEZlaHGg7xBxy].md",
@@ -715,7 +616,7 @@
       "truncated": false
     },
     {
-      "id": "rem-065",
+      "id": "rem-056",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - fix-root-package-scripts [ses_f123039d6ffeRCUrnp5alwgtfd].md",
@@ -730,7 +631,7 @@
       "truncated": false
     },
     {
-      "id": "rem-066",
+      "id": "rem-057",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c10-deep-research-report [ses_f24ec700cffe0vLgSj3nIz33P0].md",
@@ -745,7 +646,7 @@
       "truncated": false
     },
     {
-      "id": "rem-067",
+      "id": "rem-058",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t12-release-history-and-tooling [ses_f1d9670aeffeec0wbGK9b1oift].md",
@@ -760,7 +661,7 @@
       "truncated": false
     },
     {
-      "id": "rem-068",
+      "id": "rem-059",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - remove-dead-engine-mode-type [ses_f257de248ffeLu864vqn0xWscx].md",
@@ -775,7 +676,7 @@
       "truncated": false
     },
     {
-      "id": "rem-069",
+      "id": "rem-060",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - c3-content-collections [ses_f128cf21dffeT9oZcVqZ8w8dax].md",
@@ -790,7 +691,7 @@
       "truncated": false
     },
     {
-      "id": "rem-070",
+      "id": "rem-061",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - clipboard-sensitive-content-polling-rejection [ses_f08df5398ffeuNGtninIfjHuby].md",
@@ -805,7 +706,7 @@
       "truncated": false
     },
     {
-      "id": "rem-071",
+      "id": "rem-062",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-swappiness-and-reclaim [ses_f221dc2acffe1f9we0gV0PgII8].md",
@@ -820,7 +721,7 @@
       "truncated": false
     },
     {
-      "id": "rem-072",
+      "id": "rem-063",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - linux-arch-vps-installer-runbook [ses_f07bc78d8ffes2uAXjw5GMofpQ].md",
@@ -831,15 +732,15 @@
           "bytes": 158834
         },
         {
-          "path": "05 - Conversations/tmp-opencode-tool-test/2026-09-27 - model-default-saat-ini [ses_f1d228064ffe27sXSX2lGSH0Kr].md",
-          "bytes": 1059
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - tes [ses_f163b95e8fferd2orLNcYM48r4].md",
+          "bytes": 872
         }
       ],
-      "bytes": 818924,
+      "bytes": 818737,
       "truncated": false
     },
     {
-      "id": "rem-073",
+      "id": "rem-064",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - investigate-voiceselector-and-chunk-watchdog-debts [ses_f258317e5ffe1mZUF6ZMJHXI2m].md",
@@ -850,15 +751,15 @@
           "bytes": 653050
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - tes [ses_f163b95e8fferd2orLNcYM48r4].md",
-          "bytes": 872
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-24 - reply-with-exactly-ok [ses_f2b2f06feffe5JyapQ3MfPVVi0].md",
+          "bytes": 871
         }
       ],
-      "bytes": 819120,
+      "bytes": 819119,
       "truncated": false
     },
     {
-      "id": "rem-074",
+      "id": "rem-065",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - r3-legal-and-tos-surface [ses_f24bc7334ffeONkWu1YZEa5AAr].md",
@@ -873,7 +774,7 @@
       "truncated": false
     },
     {
-      "id": "rem-075",
+      "id": "rem-066",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - f2-f1-intrinsic-image-dimensions [ses_f169638d7ffeFPj2j3fMC6dflb].md",
@@ -888,7 +789,7 @@
       "truncated": false
     },
     {
-      "id": "rem-076",
+      "id": "rem-067",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - r5-waiting-room-layout-bypass [ses_f16b747c6ffe34ZUtY2QTNMUgr].md",
@@ -899,7 +800,7 @@
           "bytes": 199301
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-24 - reply-with-exactly-ok [ses_f2b2f06feffe5JyapQ3MfPVVi0].md",
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-24 - reply-with-exactly-ok [ses_f2b2f1f98ffe0f3gVDvn2Tv4Rm].md",
           "bytes": 871
         }
       ],
@@ -907,7 +808,7 @@
       "truncated": false
     },
     {
-      "id": "rem-077",
+      "id": "rem-068",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - integrasi-snipset-ke-vps-terbaru [ses_f1c2697b6ffeuPVpS0D7Z6ZAgS].md",
@@ -922,7 +823,7 @@
       "truncated": false
     },
     {
-      "id": "rem-078",
+      "id": "rem-069",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - t1-gui-verbatim-references [ses_f0be3b5e7ffeGwkG494moyWSAJ].md",
@@ -937,7 +838,7 @@
       "truncated": false
     },
     {
-      "id": "rem-079",
+      "id": "rem-070",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - fu4-explicit-status-on-silent-paths [ses_f0b0c7cfaffeu4kbzprwtbuUSC].md",
@@ -946,17 +847,13 @@
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-10-01 - author-f3-csat-event-patch [ses_f0a90bfe4ffeBLZI5V20IczZr8].md",
           "bytes": 230255
-        },
-        {
-          "path": "05 - Conversations/tmp/2026-09-29 - say-pong [ses_f10e6c647ffeETlAraCfEIdGP6].md",
-          "bytes": 515
         }
       ],
-      "bytes": 819176,
+      "bytes": 818661,
       "truncated": false
     },
     {
-      "id": "rem-080",
+      "id": "rem-071",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - d5-toast-and-primitive-sounds [ses_f1a9c133affem3ylLrB0ZQeRuF].md",
@@ -975,7 +872,7 @@
       "truncated": false
     },
     {
-      "id": "rem-081",
+      "id": "rem-072",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - investigate-sops-and-windows-updater-test-debts [ses_f25834e0bffeT27b9dlmsoTMNe].md",
@@ -994,7 +891,7 @@
       "truncated": false
     },
     {
-      "id": "rem-082",
+      "id": "rem-073",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - c4-middleware-session-check [ses_f0cb022adffeCXu1wNiYSLJQ0e].md",
@@ -1013,7 +910,7 @@
       "truncated": false
     },
     {
-      "id": "rem-083",
+      "id": "rem-074",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c12-deep-research-external-evidence [ses_f1acdd029ffeKApr0WsZBaKWdx].md",
@@ -1028,7 +925,7 @@
       "truncated": false
     },
     {
-      "id": "rem-084",
+      "id": "rem-075",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - e1-telegram-service-f1-f6 [ses_f0b2a1d30ffea0R42JxHXjIaoN].md",
@@ -1043,7 +940,7 @@
       "truncated": false
     },
     {
-      "id": "rem-085",
+      "id": "rem-076",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - connecting-opencode-to-zcode-endpoint [ses_f10ec7a39ffez3Lf5z5alrCVTD].md",
@@ -1058,7 +955,7 @@
       "truncated": false
     },
     {
-      "id": "rem-086",
+      "id": "rem-077",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - obsidian [ses_f1d1f7010ffeMMXqgy117zIbta].md",
@@ -1073,10 +970,10 @@
       "truncated": false
     },
     {
-      "id": "rem-087",
+      "id": "rem-078",
       "files": [
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-24 - reply-with-exactly-ok [ses_f2b2f1f98ffe0f3gVDvn2Tv4Rm].md",
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-24 - reply-with-exactly-ok [ses_f2b319fcbffeWFdhDuAvEXBzHb].md",
           "bytes": 871
         },
         {
@@ -1092,7 +989,7 @@
       "truncated": false
     },
     {
-      "id": "rem-088",
+      "id": "rem-079",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - fix-hardcoded-i18n-strings [ses_f174462a8ffelR8opt2WBEP8Ab].md",
@@ -1103,15 +1000,15 @@
           "bytes": 558830
         },
         {
-          "path": "05 - Conversations/tmp/2026-09-29 - say-pong [ses_f10dfdac8ffeqLsAanpGKXGd61].md",
-          "bytes": 778
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - test-message [ses_f10dc35a6ffeKPOr97F3hrNzuf].md",
+          "bytes": 772
         }
       ],
-      "bytes": 819198,
+      "bytes": 819192,
       "truncated": false
     },
     {
-      "id": "rem-089",
+      "id": "rem-080",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - trace-shortcut-write-call-sites [ses_f26591c91ffegP0HIZLoNMO4Bn].md",
@@ -1122,22 +1019,22 @@
           "bytes": 556139
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-24 - reply-with-exactly-ok [ses_f2b319fcbffeWFdhDuAvEXBzHb].md",
-          "bytes": 871
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-24 - reply-with-exactly-ok [ses_f2b2f4641ffeHvzeoh20utmaCd].md",
+          "bytes": 857
         }
       ],
-      "bytes": 818878,
+      "bytes": 818864,
       "truncated": false
     },
     {
-      "id": "rem-090",
+      "id": "rem-081",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - taxonomy-locale-visible-and-ceiling [ses_f16574357ffepBL31qJ4gpDJpH].md",
           "bytes": 549562
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-24 - reply-with-exactly-ok [ses_f2b2f4641ffeHvzeoh20utmaCd].md",
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-24 - reply-with-exactly-ok [ses_f2b2f75e3ffe9ANKfnu9V6pKQq].md",
           "bytes": 857
         },
         {
@@ -1149,7 +1046,7 @@
       "truncated": false
     },
     {
-      "id": "rem-091",
+      "id": "rem-082",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - r6-indonesian-solutions-json-ld [ses_f16b7874cffeeLGurSOupEWz3Z].md",
@@ -1164,7 +1061,7 @@
       "truncated": false
     },
     {
-      "id": "rem-092",
+      "id": "rem-083",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - brainstorming-skill-for-intent-locking [ses_f075be6eeffe3OQK1GwO3Z3Bth].md",
@@ -1179,7 +1076,7 @@
       "truncated": false
     },
     {
-      "id": "rem-093",
+      "id": "rem-084",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - cek-validasi-deploy-vps-selesai [ses_f0b822e96ffeE1zX5A5d6KawDI].md",
@@ -1194,7 +1091,7 @@
       "truncated": false
     },
     {
-      "id": "rem-094",
+      "id": "rem-085",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - save-state-pcsx2-v2-6-3-tidak-kompatibel [ses_f15d394c3ffeEqtCk5URLY5h6a].md",
@@ -1209,7 +1106,7 @@
       "truncated": false
     },
     {
-      "id": "rem-095",
+      "id": "rem-086",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-features-notes-cues [ses_f17b26722ffe0C3c17RXmw15pH].md",
@@ -1224,7 +1121,7 @@
       "truncated": false
     },
     {
-      "id": "rem-096",
+      "id": "rem-087",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-features-settings-ai-cues [ses_f17b26723ffecIhG63dyQxEUQm].md",
@@ -1235,19 +1132,19 @@
           "bytes": 278931
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-24 - reply-with-exactly-ok [ses_f2b2f75e3ffe9ANKfnu9V6pKQq].md",
-          "bytes": 857
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-24 - reply-with-exactly-ok [ses_f2b2fbce2ffeEmBaAGvLmm3l26].md",
+          "bytes": 838
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-24 - reply-with-exactly-ok [ses_f2b2fcd4affeU5CPmYrHxLkHFV].md",
           "bytes": 842
         }
       ],
-      "bytes": 819060,
+      "bytes": 819041,
       "truncated": false
     },
     {
-      "id": "rem-097",
+      "id": "rem-088",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t6-chunks-c33-c38 [ses_f16e2001dffe2eeRSSmAxgyt4h].md",
@@ -1262,7 +1159,7 @@
       "truncated": false
     },
     {
-      "id": "rem-098",
+      "id": "rem-089",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - say-hello-in-one-sentence [ses_f2ffbb54effe4ldxlpaMo16lRX].md",
@@ -1281,7 +1178,7 @@
       "truncated": false
     },
     {
-      "id": "rem-099",
+      "id": "rem-090",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t7-desktop-updater-channel-selection [ses_f1d9670afffeI1M3fuU0BJD05J].md",
@@ -1296,7 +1193,7 @@
       "truncated": false
     },
     {
-      "id": "rem-100",
+      "id": "rem-091",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - transisi-modul-tidak-mulus-di-desktop [ses_f1b87e7ccffevE31vBGr10xOcY].md",
@@ -1307,15 +1204,15 @@
           "bytes": 286122
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-24 - reply-with-exactly-ok [ses_f2b2fbce2ffeEmBaAGvLmm3l26].md",
-          "bytes": 838
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-24 - reply-with-exactly-ok [ses_f2b2fae5bffeEzPDjBbLKm7FQR].md",
+          "bytes": 834
         }
       ],
-      "bytes": 819135,
+      "bytes": 819131,
       "truncated": false
     },
     {
-      "id": "rem-101",
+      "id": "rem-092",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-cues-batch-a [ses_f178408e8ffeytvVLtBrayXvUn].md",
@@ -1334,7 +1231,7 @@
       "truncated": false
     },
     {
-      "id": "rem-102",
+      "id": "rem-093",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - e2-clipboard-menu-cache-fix [ses_f0b2a1d2effeY3Mdv7MO7mlCP9].md",
@@ -1349,7 +1246,7 @@
       "truncated": false
     },
     {
-      "id": "rem-103",
+      "id": "rem-094",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - write-init-type-parity-test [ses_f08bc0fb7ffexOnd7Om7z4BEAk].md",
@@ -1364,7 +1261,7 @@
       "truncated": false
     },
     {
-      "id": "rem-104",
+      "id": "rem-095",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t5-android-producer-isolation [ses_f1d880309ffewX5p6ZOpfFtNBT].md",
@@ -1379,7 +1276,7 @@
       "truncated": false
     },
     {
-      "id": "rem-105",
+      "id": "rem-096",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - typeless-optimization-for-ai-skills-workflows [ses_f0bef3380ffeONWpeoG7Brf618].md",
@@ -1398,7 +1295,7 @@
       "truncated": false
     },
     {
-      "id": "rem-106",
+      "id": "rem-097",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - r6-precedent-and-alternative-audit [ses_f24bc0786ffepEZYl6g8AsbFaj].md",
@@ -1409,19 +1306,19 @@
           "bytes": 513531
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-24 - reply-with-exactly-ok [ses_f2b2fae5bffeEzPDjBbLKm7FQR].md",
-          "bytes": 834
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-24 - reply-with-exactly-ok [ses_f2b2fae5dffenJ6QDR61r9fPqV].md",
+          "bytes": 826
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-24 - reply-with-exactly-ok [ses_f2b2fae5effegToAm9q7lQj6qn].md",
           "bytes": 834
         }
       ],
-      "bytes": 819119,
+      "bytes": 819111,
       "truncated": false
     },
     {
-      "id": "rem-107",
+      "id": "rem-098",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - v1-repro-re-run [ses_f0ca32efaffeP7K8olGLRqs1zw].md",
@@ -1440,7 +1337,7 @@
       "truncated": false
     },
     {
-      "id": "rem-108",
+      "id": "rem-099",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md",
@@ -1455,7 +1352,7 @@
       "truncated": false
     },
     {
-      "id": "rem-109",
+      "id": "rem-100",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - audit-linux-activity-capture-path [ses_f2593177dffebmwf7DKUz8dQjY].md",
@@ -1470,7 +1367,7 @@
       "truncated": false
     },
     {
-      "id": "rem-110",
+      "id": "rem-101",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-10-01 - author-f4-research-toggle-patch [ses_f0a90bfe3ffebkqS95vQgtXbCl].md",
@@ -1485,7 +1382,7 @@
       "truncated": false
     },
     {
-      "id": "rem-111",
+      "id": "rem-102",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-batch-c-12-files [ses_f17699447ffekdqy749bVRPTFE].md",
@@ -1500,26 +1397,26 @@
       "truncated": false
     },
     {
-      "id": "rem-112",
+      "id": "rem-103",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cover-dimensions-and-ratio-reconcile [ses_f1657096affeCvcc1c5iTFodvs].md",
           "bytes": 497851
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-24 - reply-with-exactly-ok [ses_f2b2fae5dffenJ6QDR61r9fPqV].md",
-          "bytes": 826
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-24 - reply-with-exactly-ok [ses_f2b32273effe0fmQPdv2mlkErO].md",
+          "bytes": 816
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-30 - menghapus-vim-di-arch-linux [ses_f0d41aa7effeB3OPE08mH0jgSS].md",
           "bytes": 320285
         }
       ],
-      "bytes": 818962,
+      "bytes": 818952,
       "truncated": false
     },
     {
-      "id": "rem-113",
+      "id": "rem-104",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - fix-escape-and-backdrop-guards [ses_f174462aaffeDEmW17UJO7qkBC].md",
@@ -1538,7 +1435,7 @@
       "truncated": false
     },
     {
-      "id": "rem-114",
+      "id": "rem-105",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md",
@@ -1553,7 +1450,7 @@
       "truncated": false
     },
     {
-      "id": "rem-115",
+      "id": "rem-106",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - koneksi-vps-banyak-packet-loss [ses_f1c7fa998ffeaX7rILtty0alcT].md",
@@ -1568,8 +1465,12 @@
       "truncated": false
     },
     {
-      "id": "rem-116",
+      "id": "rem-107",
       "files": [
+        {
+          "path": "03 - Resources/LLM Wiki/concepts/gak-belajar-tapi-dapat-nilai-bagus.md",
+          "bytes": 2510
+        },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c9a-error-codes-registry [ses_f20bafe9dffeee7Y4FDbWh6x5m].md",
           "bytes": 325466
@@ -1577,17 +1478,13 @@
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-verification-contract [ses_f269c4bdeffevHw106pYGSCWT5].md",
           "bytes": 490607
-        },
-        {
-          "path": "05 - Conversations/tmp-opencode-tool-test/2026-09-27 - ses_f1d23d78affeE4rVMWwmJH4Xn9 [ses_f1d23d78affeE4rVMWwmJH4Xn9].md",
-          "bytes": 2532
         }
       ],
-      "bytes": 818605,
+      "bytes": 818583,
       "truncated": false
     },
     {
-      "id": "rem-117",
+      "id": "rem-108",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - audit-journal-path-on-linux [ses_f2593046cffeSSNNiV7jM21XE6].md",
@@ -1602,7 +1499,7 @@
       "truncated": false
     },
     {
-      "id": "rem-118",
+      "id": "rem-109",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t6-chunks-c15-c20 [ses_f16e31f29ffeTsltrEQUTeBe9I].md",
@@ -1613,15 +1510,15 @@
           "bytes": 486309
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-24 - reply-with-exactly-ok [ses_f2b32273effe0fmQPdv2mlkErO].md",
-          "bytes": 816
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-24 - reply-with-exactly-ok [ses_f2b3173d0ffeT9RzSjzqFfI4Co].md",
+          "bytes": 804
         }
       ],
-      "bytes": 818858,
+      "bytes": 818846,
       "truncated": false
     },
     {
-      "id": "rem-119",
+      "id": "rem-110",
       "files": [
         {
           "path": "03 - Resources/LLM Wiki/concepts/prokrastinasi.md",
@@ -1640,34 +1537,34 @@
       "truncated": false
     },
     {
-      "id": "rem-120",
+      "id": "rem-111",
       "files": [
         {
-          "path": "03 - Resources/LLM Wiki/concepts/gak-belajar-tapi-dapat-nilai-bagus.md",
-          "bytes": 2510
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - say-hello-in-one-sentence [ses_f30013739ffe1cIO6Hb0Sef5G9].md",
+          "bytes": 795
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-features-settings-cues [ses_f17b26724ffe4s4NL81X00dnos].md",
           "bytes": 475207
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-24 - reply-with-exactly-ok [ses_f2b3173d0ffeT9RzSjzqFfI4Co].md",
-          "bytes": 804
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - pop-up-tertentu-di-mozilla-tidak-muncul [ses_f31258c0dffe0h7O4p650nC8Di].md",
+          "bytes": 2110
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - ibukota-australia [ses_f1d25879effe4EGL6wSzQp44bs].md",
-          "bytes": 738
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-24 - reply-with-exactly-ok [ses_f2b31603effeJINQ7MhrEqSNuV].md",
+          "bytes": 803
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - set-tgrep-as-default-search-command [ses_f16aafeacffe6TkaP4jl5u2iDd].md",
           "bytes": 339937
         }
       ],
-      "bytes": 819196,
+      "bytes": 818852,
       "truncated": false
     },
     {
-      "id": "rem-121",
+      "id": "rem-112",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - optimasi-ram-arch-sesuai-kapasitas [ses_f3100fe4cffephOMLUpOT1osmt].md",
@@ -1682,73 +1579,77 @@
       "truncated": false
     },
     {
-      "id": "rem-122",
+      "id": "rem-113",
       "files": [
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - say-hello-in-one-sentence [ses_f30013739ffe1cIO6Hb0Sef5G9].md",
-          "bytes": 795
-        },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - dedup-10-vaultpage-double-cues [ses_f1713d875ffeD4Feap1DRSYYuP].md",
           "bytes": 469655
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-24 - reply-with-exactly-ok [ses_f2b31603effeJINQ7MhrEqSNuV].md",
-          "bytes": 803
-        },
-        {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - research-oom-daemon-comparison [ses_f221dc2afffeeNpSQ4N6kFGC4e].md",
           "bytes": 347794
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - say-pong [ses_f10e4dcb2ffeVBoqN64q9nzihP].md",
+          "bytes": 744
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - say-pong [ses_f10e51af5ffeiqogPeVaPwoUQe].md",
+          "bytes": 762
         }
       ],
-      "bytes": 819047,
+      "bytes": 818955,
       "truncated": false
     },
     {
-      "id": "rem-123",
+      "id": "rem-114",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t1-clipboard-code-audit [ses_f1b184b00ffeWsjIRJDISmNquG].md",
           "bytes": 350308
         },
         {
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - ibukota-australia [ses_f1d25879effe4EGL6wSzQp44bs].md",
+          "bytes": 738
+        },
+        {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - ani-cli-indo-playback-fix [ses_f118969a0ffeRaBW3S6qal4B5G].md",
           "bytes": 467386
         },
         {
-          "path": "05 - Conversations/tmp-opencode-zcode/2026-09-29 - greeting [ses_f10e3a148ffepGVSL3ICvhylXg].md",
-          "bytes": 707
-        },
-        {
-          "path": "05 - Conversations/tmp/2026-09-29 - say-pong [ses_f10e69fbfffetEBKGrOtzBN6qd].md",
-          "bytes": 792
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - say-pong [ses_f10e53920ffeBUbMdq30q8fqar].md",
+          "bytes": 744
         }
       ],
-      "bytes": 819193,
+      "bytes": 819176,
       "truncated": false
     },
     {
-      "id": "rem-124",
+      "id": "rem-115",
       "files": [
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - v1-independent-repro-rerun [ses_f1b7b4f17ffeUpPFeiAEb4Z6Or].md",
+          "bytes": 2086
+        },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - deep-research-wayland-input-density [ses_f258b313affeq5eT2xP5hKvAjA].md",
           "bytes": 350233
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - pop-up-tertentu-di-mozilla-tidak-muncul [ses_f31258c0dffe0h7O4p650nC8Di].md",
-          "bytes": 2110
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - efisiensi-daya-listrik-pc [ses_f1d988394ffeR7mzol16F72rHi].md",
           "bytes": 466461
         }
       ],
-      "bytes": 818804,
+      "bytes": 818780,
       "truncated": false
     },
     {
-      "id": "rem-125",
+      "id": "rem-116",
       "files": [
+        {
+          "path": "01 - Projects/Snipset/plans/2026-09-11-fix-activity-journal-vision-screen-capture-pipeline.md",
+          "bytes": 5986
+        },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t9-tracker-presentation-reasons [ses_f1fa39e88ffeFN5QfZUtFVAq7k].md",
           "bytes": 346450
@@ -1756,17 +1657,13 @@
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-components-cues [ses_f17b1e0fdffegV5GBjL6DpbdNn].md",
           "bytes": 466140
-        },
-        {
-          "path": "05 - Conversations/tmp-opencode-tool-test/2026-09-27 - sejarah-internet-dari-arpanet-hingga-era-ai [ses_f1d24dea2ffe5X97R1fBr9DF0Z].md",
-          "bytes": 6272
         }
       ],
-      "bytes": 818862,
+      "bytes": 818576,
       "truncated": false
     },
     {
-      "id": "rem-126",
+      "id": "rem-117",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - slash-the-callback-redirect [ses_f11d8a7efffePOHWBYT76JH4kH].md",
@@ -1785,7 +1682,7 @@
       "truncated": false
     },
     {
-      "id": "rem-127",
+      "id": "rem-118",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - audit-feedback-states-ui [ses_f0bd14296ffe8V56vtEHKQKXWd].md",
@@ -1800,7 +1697,7 @@
       "truncated": false
     },
     {
-      "id": "rem-128",
+      "id": "rem-119",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t6-todoist-transactional-sync [ses_f20039a56ffeKhffnCGEoD418C].md",
@@ -1815,7 +1712,7 @@
       "truncated": false
     },
     {
-      "id": "rem-129",
+      "id": "rem-120",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t9-lcp-preload-contract [ses_f1696bb14ffeRoKS2rSP804CT3].md",
@@ -1826,34 +1723,34 @@
           "bytes": 444517
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - test-message [ses_f10dc35a6ffeKPOr97F3hrNzuf].md",
-          "bytes": 772
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - nilai-x-dari-x-5-12 [ses_f1d2529a6ffemBWAaFMJCoPT6b].md",
+          "bytes": 717
         }
       ],
-      "bytes": 818679,
+      "bytes": 818624,
       "truncated": false
     },
     {
-      "id": "rem-130",
+      "id": "rem-121",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - f1-unify-ai-chatbot-window-options [ses_f0653e333ffe4kbmjlkqIg9QmB].md",
           "bytes": 376229
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - assess-3-plans-website-i18n-speech [ses_f208d0ac2ffeQ2fupDNrEF3u2W].md",
-          "bytes": 441860
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-24 - say-ok [ses_f2b2dd3e6ffei1mGeFxocNy1yz].md",
+          "bytes": 672
         },
         {
-          "path": "05 - Conversations/tmp/2026-09-29 - say-pong [ses_f10e178b3ffe328w4PtenLCKs3].md",
-          "bytes": 769
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - assess-3-plans-website-i18n-speech [ses_f208d0ac2ffeQ2fupDNrEF3u2W].md",
+          "bytes": 441860
         }
       ],
-      "bytes": 818858,
+      "bytes": 818761,
       "truncated": false
     },
     {
-      "id": "rem-131",
+      "id": "rem-122",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - graphify-js-plugin-export-fix [ses_f07e83b71ffeqlRc6yhQ313p17].md",
@@ -1868,7 +1765,7 @@
       "truncated": false
     },
     {
-      "id": "rem-132",
+      "id": "rem-123",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-02 - t6-focus-and-responsive [ses_f05ed56d3ffeekSmQQCHP8U9LS].md",
@@ -1883,7 +1780,7 @@
       "truncated": false
     },
     {
-      "id": "rem-133",
+      "id": "rem-124",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t6-chunks-c45-c51 [ses_f16e1bf5effeuoW4M8to6HdrwY].md",
@@ -1892,17 +1789,13 @@
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-cf-cli-cloudflare-di-pc [ses_f16bcf263ffeP4ydwEeLdjZycU].md",
           "bytes": 380104
-        },
-        {
-          "path": "05 - Conversations/tmp/2026-09-29 - say-pong [ses_f10e5aaddffeKcWirUd72xf5WW].md",
-          "bytes": 769
         }
       ],
-      "bytes": 819098,
+      "bytes": 818329,
       "truncated": false
     },
     {
-      "id": "rem-134",
+      "id": "rem-125",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-pages-pomodoro-cues [ses_f17b1e0fbffeD6ivhnQcpV9oAN].md",
@@ -1917,7 +1810,7 @@
       "truncated": false
     },
     {
-      "id": "rem-135",
+      "id": "rem-126",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-pages-speech-cues [ses_f17b2671dffel2sYJJnLKtcP27].md",
@@ -1926,17 +1819,13 @@
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - fish-collector-and-docs-fix [ses_f0649ea65ffeR116fmTTLnvhHx].md",
           "bytes": 433710
-        },
-        {
-          "path": "05 - Conversations/tmp/2026-09-29 - say-pong [ses_f10e6a002ffefY3ieQNFHCi8N9].md",
-          "bytes": 769
         }
       ],
-      "bytes": 819116,
+      "bytes": 818347,
       "truncated": false
     },
     {
-      "id": "rem-136",
+      "id": "rem-127",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t8-download-routing-retry [ses_f1d526ca4ffejy210M5YRuZFhy].md",
@@ -1945,18 +1834,18 @@
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - convert-string-literals-to-catalog [ses_f17699444ffe9mvKVnkec6mwn9].md",
           "bytes": 429771
-        },
-        {
-          "path": "05 - Conversations/tmp/2026-09-29 - say-pong [ses_f10e6d9cbffe4HW0QPTqxQY24I].md",
-          "bytes": 769
         }
       ],
-      "bytes": 818669,
+      "bytes": 817900,
       "truncated": false
     },
     {
-      "id": "rem-137",
+      "id": "rem-128",
       "files": [
+        {
+          "path": "01 - Projects/Snipset/plans/2026-09-05-benchmarks-investor-overhaul.md",
+          "bytes": 5935
+        },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-long-tail-page-cues [ses_f17b1e0f6ffec46oGovFogx5w0].md",
           "bytes": 383201
@@ -1964,17 +1853,13 @@
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - t6-markdown-renderer [ses_f05f0d546ffeuPIj1K4UPMhp71].md",
           "bytes": 429644
-        },
-        {
-          "path": "05 - Conversations/tmp-opencode-tool-test/2026-09-27 - sejarah-internet-dari-arpanet-hingga-ai [ses_f1d2494afffeMcvNXZHdZBInFK].md",
-          "bytes": 6188
         }
       ],
-      "bytes": 819033,
+      "bytes": 818780,
       "truncated": false
     },
     {
-      "id": "rem-138",
+      "id": "rem-129",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-migration-sequencing [ses_f269c4c2dffez4uJvVc4vX4AS2].md",
@@ -1983,17 +1868,13 @@
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - semantic-extraction-chunk-3 [ses_f05f44afaffefytZq1fEOij3Sp].md",
           "bytes": 389970
-        },
-        {
-          "path": "05 - Conversations/tmp/2026-09-29 - say-pong [ses_f10d8e028ffe78XxczCdnFlAf7].md",
-          "bytes": 766
         }
       ],
-      "bytes": 819190,
+      "bytes": 818424,
       "truncated": false
     },
     {
-      "id": "rem-139",
+      "id": "rem-130",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - c7-fix-shape-recommendation [ses_f11e1c5f0ffeQkjQyU0Lz92gzg].md",
@@ -2012,7 +1893,7 @@
       "truncated": false
     },
     {
-      "id": "rem-140",
+      "id": "rem-131",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - resolve-remaining-vault-duplicate-cues [ses_f171bc06affe8FZwoyXzmydfGg].md",
@@ -2021,40 +1902,28 @@
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c14-telegram-photo-format-research [ses_f0b3a72bbffeAuf0yMsVRlF8Kf].md",
           "bytes": 393288
-        },
-        {
-          "path": "05 - Conversations/tmp/2026-09-29 - pong-reply-request [ses_f10e5f4e6ffepu3nuhhY0mhSoK].md",
-          "bytes": 765
         }
       ],
-      "bytes": 819124,
+      "bytes": 818359,
       "truncated": false
     },
     {
-      "id": "rem-141",
+      "id": "rem-132",
       "files": [
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - v1-independent-repro-rerun [ses_f1b7b4f17ffeUpPFeiAEb4Z6Or].md",
-          "bytes": 2086
-        },
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - riset-harga-ups-indonesia [ses_f18de69aaffe0BVYeD0oHrilsS].md",
           "bytes": 395481
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - say-pong [ses_f10e51af5ffeiqogPeVaPwoUQe].md",
-          "bytes": 762
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-10-01 - map-group-struct-usages [ses_f0a379156ffeFbZEKRcN2D36xj].md",
           "bytes": 420716
         }
       ],
-      "bytes": 819045,
+      "bytes": 816197,
       "truncated": false
     },
     {
-      "id": "rem-142",
+      "id": "rem-133",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - opencode-api-and-model-setup [ses_f30040eadffe9SP90VZSg9y6jU].md",
@@ -2069,7 +1938,7 @@
       "truncated": false
     },
     {
-      "id": "rem-143",
+      "id": "rem-134",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c3-web-guard-detectors [ses_f20d5f42affeGvmnZfPDsLVoHZ].md",
@@ -2078,17 +1947,13 @@
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s3-classify-call-sites-for-migration [ses_f1a6dbd30ffenR9NlSaMrKMTAB].md",
           "bytes": 401158
-        },
-        {
-          "path": "05 - Conversations/tmp-opencode-tool-test/2026-09-27 - ses_f1d23facfffemkqMD7ZmB3nUrQ [ses_f1d23facfffemkqMD7ZmB3nUrQ].md",
-          "bytes": 761
         }
       ],
-      "bytes": 818654,
+      "bytes": 817893,
       "truncated": false
     },
     {
-      "id": "rem-144",
+      "id": "rem-135",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-02 - t2-color-tokens-dark-mode [ses_f05fd50c6ffe3pH7j0O8oqbxAK].md",
@@ -2103,7 +1968,7 @@
       "truncated": false
     },
     {
-      "id": "rem-145",
+      "id": "rem-136",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - wire-7-silent-controls-group-d [ses_f172b3580ffeOp153DfzZCbakP].md",
@@ -2118,7 +1983,7 @@
       "truncated": false
     },
     {
-      "id": "rem-146",
+      "id": "rem-137",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - r7-d1-locale-migration [ses_f16938623ffeZpsFDzWm2DHToT].md",
@@ -2127,21 +1992,13 @@
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-30 - speedtest-install-for-offline-testing [ses_f0b84582cffexPA4oDFDHrH95B].md",
           "bytes": 403315
-        },
-        {
-          "path": "05 - Conversations/tmp-opencode-tool-test/2026-09-27 - the-early-bird-catches-the-worm-but-the-second-mouse-gets-the-cheese [ses_f1d23eea5ffeNvWyuz2J2yixhd].md",
-          "bytes": 1873
-        },
-        {
-          "path": "05 - Conversations/tmp/2026-09-29 - friendly-greeting [ses_f10de2e7bffeHrxlzdqwx6DZxj].md",
-          "bytes": 755
         }
       ],
-      "bytes": 818704,
+      "bytes": 816076,
       "truncated": false
     },
     {
-      "id": "rem-147",
+      "id": "rem-138",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c2-linux-packaging-deps [ses_f1acf8cbbffeBuLTWmhwQZ7M5F].md",
@@ -2150,21 +2007,13 @@
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - fixing-antigravity-cli-installation-errors [ses_f177e3d27ffeKsA7Jw5IfgZj8N].md",
           "bytes": 409535
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - say-pong [ses_f10e4dcb2ffeVBoqN64q9nzihP].md",
-          "bytes": 744
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - say-pong [ses_f10e53920ffeBUbMdq30q8fqar].md",
-          "bytes": 744
         }
       ],
-      "bytes": 819195,
+      "bytes": 817707,
       "truncated": false
     },
     {
-      "id": "rem-148",
+      "id": "rem-139",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t7a-blog-title-bug-and-budgets [ses_f16967694ffekpmyZs8rB4Bu5C].md",
@@ -2173,37 +2022,13 @@
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-batch-e-8-files [ses_f1769943fffeYLDactR4alJA9k].md",
           "bytes": 408068
-        },
-        {
-          "path": "05 - Conversations/tmp-opencode-zcode/2026-09-29 - hi [ses_f10e20cfcffe6SWo99undjQIY5].md",
-          "bytes": 731
-        },
-        {
-          "path": "05 - Conversations/tmp-opencode-zcode/2026-09-29 - hi [ses_f10e26ac8ffecyuGogop87XRCO].md",
-          "bytes": 731
-        },
-        {
-          "path": "05 - Conversations/tmp-opencode-zcode/2026-09-29 - hi [ses_f10e2a6dbffekArM007jDxDR5M].md",
-          "bytes": 731
-        },
-        {
-          "path": "05 - Conversations/tmp-opencode-zcode/2026-09-29 - hi [ses_f10e443aaffeD2idQX5nA4V9VX].md",
-          "bytes": 731
-        },
-        {
-          "path": "05 - Conversations/tmp-opencode-zcode/2026-09-29 - hi [ses_f10e48e2dffeNZZEAMpOtQDdta].md",
-          "bytes": 731
-        },
-        {
-          "path": "05 - Conversations/tmp-opencode-zcode/2026-09-29 - hi [ses_f10e4b04bffeDoPZFOhobKJNgV].md",
-          "bytes": 731
         }
       ],
-      "bytes": 819096,
+      "bytes": 814710,
       "truncated": false
     },
     {
-      "id": "rem-149",
+      "id": "rem-140",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - c9-cookie-attributes [ses_f0cb022bdffeV3EteofaOlbhrl].md",
@@ -2222,7 +2047,7 @@
       "truncated": false
     },
     {
-      "id": "rem-150",
+      "id": "rem-141",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - r3-r4-derived-breadcrumb-contract [ses_f16d0ca37ffeSEvQJQfzCLaHE2].md",
@@ -2241,7 +2066,7 @@
       "truncated": false
     },
     {
-      "id": "rem-151",
+      "id": "rem-142",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t2-snapshot-collector [ses_f16fbc5fbffelE3OI3ooVz0oat].md",
@@ -2260,7 +2085,7 @@
       "truncated": false
     },
     {
-      "id": "rem-152",
+      "id": "rem-143",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f10-verify-license-mock [ses_f2102c2f9ffexInDk9ypryOoJ5].md",
@@ -2279,7 +2104,7 @@
       "truncated": false
     },
     {
-      "id": "rem-153",
+      "id": "rem-144",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - map-in-app-clipboard-history-ui [ses_f1b28fafcffepblmd7skfCjbZE].md",
@@ -2290,19 +2115,15 @@
           "bytes": 370600
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - nilai-x-dari-x-5-12 [ses_f1d2529a6ffemBWAaFMJCoPT6b].md",
-          "bytes": 717
-        },
-        {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-30 - redo-t5-bucket-fix [ses_f104a1408ffe8YQX17n2DsLG01].md",
           "bytes": 79133
         }
       ],
-      "bytes": 819043,
+      "bytes": 818326,
       "truncated": false
     },
     {
-      "id": "rem-154",
+      "id": "rem-145",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - find-solutions-faq-english [ses_f15fa1c4bffe5IwP4aVAQg8vRZ].md",
@@ -2321,7 +2142,7 @@
       "truncated": false
     },
     {
-      "id": "rem-155",
+      "id": "rem-146",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t2-native-tts-lifecycle-repair [ses_f20039a58ffe0oQTJmylSru3bT].md",
@@ -2332,23 +2153,15 @@
           "bytes": 90520
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-24 - say-ok [ses_f2b2dd3e6ffei1mGeFxocNy1yz].md",
-          "bytes": 672
-        },
-        {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - t8-cli-entrypoint [ses_f05ddd29fffeVqHiHpBHM1LCMc].md",
           "bytes": 362958
-        },
-        {
-          "path": "05 - Conversations/tmp/2026-09-29 - pong-response-request [ses_f10e6c60cffepKbTvCXbZXiLia].md",
-          "bytes": 649
         }
       ],
-      "bytes": 819152,
+      "bytes": 817831,
       "truncated": false
     },
     {
-      "id": "rem-156",
+      "id": "rem-147",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - docs-corrections-f8-f3-f5 [ses_f16973daaffe6Pdlcsgqkkym1w].md",
@@ -2367,7 +2180,7 @@
       "truncated": false
     },
     {
-      "id": "rem-157",
+      "id": "rem-148",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - draft-taxonomy-id-names-plan [ses_f15f7ce47ffdn1hQdQWhGY56y2].md",
@@ -2386,7 +2199,7 @@
       "truncated": false
     },
     {
-      "id": "rem-158",
+      "id": "rem-149",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c5e-thread-lang-to-call-sites [ses_f20c9428effe4LAQ00wnrGXBAL].md",
@@ -2405,7 +2218,7 @@
       "truncated": false
     },
     {
-      "id": "rem-159",
+      "id": "rem-150",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-root-notes [ses_f281d722fffes6ePQbkjllkzcg].md",
@@ -2424,7 +2237,7 @@
       "truncated": false
     },
     {
-      "id": "rem-160",
+      "id": "rem-151",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - inventory-prior-docs-and-known-issues [ses_f2592cfaeffe5WZOY3OHInhsF9].md",
@@ -2443,7 +2256,7 @@
       "truncated": false
     },
     {
-      "id": "rem-161",
+      "id": "rem-152",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c8-rust-err-detector [ses_f20c36e25ffe7JDoLfRZaK4Lj7].md",
@@ -2462,7 +2275,7 @@
       "truncated": false
     },
     {
-      "id": "rem-162",
+      "id": "rem-153",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - find-taxonomy-locale-f16 [ses_f15fa1c3fffe6EIprRomJpDYiu].md",
@@ -2481,7 +2294,7 @@
       "truncated": false
     },
     {
-      "id": "rem-163",
+      "id": "rem-154",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c3-outbound-content-type-casing [ses_f0b3bb2ceffewYyH98lvlJTljh].md",
@@ -2500,7 +2313,7 @@
       "truncated": false
     },
     {
-      "id": "rem-164",
+      "id": "rem-155",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-28 - checklist-plan-obsidian-setelah-selesai [ses_f17018563ffeZSa9emLJ53v0Pg].md",
@@ -2519,7 +2332,7 @@
       "truncated": false
     },
     {
-      "id": "rem-165",
+      "id": "rem-156",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t4-remove-indexing-publish-path [ses_f1708362cffeAuoaNZa4nKesOA].md",
@@ -2538,7 +2351,7 @@
       "truncated": false
     },
     {
-      "id": "rem-166",
+      "id": "rem-157",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t3-playback-controls-session-wiring [ses_f1ff89e3effeulHQh7zkmpg2aX].md",
@@ -2557,7 +2370,7 @@
       "truncated": false
     },
     {
-      "id": "rem-167",
+      "id": "rem-158",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - konfigurasi-umum-stick-playstation-2 [ses_f15d9b788ffeBE5nBLwvpZlgiw].md",
@@ -2576,7 +2389,7 @@
       "truncated": false
     },
     {
-      "id": "rem-168",
+      "id": "rem-159",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - s1-terminal-honest-fallback [ses_f0ba6d539ffeJL4fSSKqAU3haq].md",
@@ -2595,7 +2408,7 @@
       "truncated": false
     },
     {
-      "id": "rem-169",
+      "id": "rem-160",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - map-backend-dashboard-command [ses_f25933045ffea5nWIMa0HvVKuL].md",
@@ -2614,7 +2427,7 @@
       "truncated": false
     },
     {
-      "id": "rem-170",
+      "id": "rem-161",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - p1-codemod-bare-audio-mocks [ses_f1a88a835fferMhxnWI1bCrTqX].md",
@@ -2633,7 +2446,7 @@
       "truncated": false
     },
     {
-      "id": "rem-171",
+      "id": "rem-162",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - audit-language-not-threaded [ses_f20cc8c10ffeuVnB0GcfW7NPUA].md",
@@ -2652,7 +2465,7 @@
       "truncated": false
     },
     {
-      "id": "rem-172",
+      "id": "rem-163",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - audit-responsive-mobile-ui [ses_f0bd14297ffe0zAhuJ9DcSaXKl].md",
@@ -2671,7 +2484,7 @@
       "truncated": false
     },
     {
-      "id": "rem-173",
+      "id": "rem-164",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - t8-descriptive-heading [ses_f0ba7a864ffewK51Gic4VCw8px].md",
@@ -2690,7 +2503,7 @@
       "truncated": false
     },
     {
-      "id": "rem-174",
+      "id": "rem-165",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - r10-fresh-eyes-omission-audit [ses_f1cfc53b1ffeL4VDnU7mu6zOSU].md",
@@ -2709,7 +2522,7 @@
       "truncated": false
     },
     {
-      "id": "rem-175",
+      "id": "rem-166",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - ketersediaan-snippets-pr-review [ses_f08c4b249ffeSpOjCFjjzjYDO9].md",
@@ -2728,7 +2541,7 @@
       "truncated": false
     },
     {
-      "id": "rem-176",
+      "id": "rem-167",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - f9-snapshot-shape-contract [ses_f1696f6f2ffeJBJJvbFeokMY1q].md",
@@ -2747,7 +2560,7 @@
       "truncated": false
     },
     {
-      "id": "rem-177",
+      "id": "rem-168",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - t6-prose-matches-classifier [ses_f1005402affehCLbGiT718Rp7k].md",
@@ -2766,7 +2579,7 @@
       "truncated": false
     },
     {
-      "id": "rem-178",
+      "id": "rem-169",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t4-retry-id-page-plus-data [ses_f21257583ffeJ4HD703hHMEsRd].md",
@@ -2785,7 +2598,7 @@
       "truncated": false
     },
     {
-      "id": "rem-179",
+      "id": "rem-170",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t6-chunks-c27-c32 [ses_f16e21dceffeAIcHdwVvaQziZJ].md",
@@ -2804,7 +2617,7 @@
       "truncated": false
     },
     {
-      "id": "rem-180",
+      "id": "rem-171",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - d1-snippet-insert-sound [ses_f1a9d2f5bffelrffLcVaePFtf2].md",
@@ -2823,7 +2636,7 @@
       "truncated": false
     },
     {
-      "id": "rem-181",
+      "id": "rem-172",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t6-chunks-c03-c08 [ses_f16e35fd7ffejwsMF4qqcB5D9A].md",
@@ -2846,7 +2659,7 @@
       "truncated": false
     },
     {
-      "id": "rem-182",
+      "id": "rem-173",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - find-long-solutions-titles [ses_f15fa1c49ffenHDmzBxGuwbywX].md",
@@ -2869,7 +2682,7 @@
       "truncated": false
     },
     {
-      "id": "rem-183",
+      "id": "rem-174",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c3-duplicate-monitor-threads [ses_f08dc55a5ffendW8CdbEN68VPI].md",
@@ -2892,7 +2705,7 @@
       "truncated": false
     },
     {
-      "id": "rem-184",
+      "id": "rem-175",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c05-overlay-callers-trace [ses_f1b94e626ffeqBJtAldHowh2rF].md",
@@ -2915,7 +2728,7 @@
       "truncated": false
     },
     {
-      "id": "rem-185",
+      "id": "rem-176",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - t3-registry-audit-cli [ses_f10175ee6ffeXIigw4ny4tIc3x].md",
@@ -2938,7 +2751,7 @@
       "truncated": false
     },
     {
-      "id": "rem-186",
+      "id": "rem-177",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - audit-nav-transitions-loading [ses_f0bd1429affe2B8ytJYiccFR34].md",
@@ -2961,7 +2774,7 @@
       "truncated": false
     },
     {
-      "id": "rem-187",
+      "id": "rem-178",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - trim-ch06-to-7kb [ses_f1bbd65edffev3efbsZwRRdD6P].md",
@@ -2984,7 +2797,7 @@
       "truncated": false
     },
     {
-      "id": "rem-188",
+      "id": "rem-179",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - map-digital-tracker-frontend-render [ses_f2593436cffeI9oKiaNGMbHT8r].md",
@@ -3007,7 +2820,7 @@
       "truncated": false
     },
     {
-      "id": "rem-189",
+      "id": "rem-180",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - search-state-spot-check [ses_f0bc61de7ffenlI8sK8v3jCj66].md",
@@ -3030,7 +2843,7 @@
       "truncated": false
     },
     {
-      "id": "rem-190",
+      "id": "rem-181",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-cloudflare/2026-09-26 - domain-email-routing-aktif-dan-tujuan-forward [ses_f222d0bc2ffeUh9UIuYZch0kvO].md",
@@ -3053,7 +2866,7 @@
       "truncated": false
     },
     {
-      "id": "rem-191",
+      "id": "rem-182",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - map-browser-voice-runtime-layer [ses_f26387f23ffe6NSgOzsPw7OOSZ].md",
@@ -3076,7 +2889,7 @@
       "truncated": false
     },
     {
-      "id": "rem-192",
+      "id": "rem-183",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s6b-wire-speech-page-sounds [ses_f1a62efbfffe2mVzEARPhEUDc2].md",
@@ -3099,7 +2912,7 @@
       "truncated": false
     },
     {
-      "id": "rem-193",
+      "id": "rem-184",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - w5-t9-bar-integration [ses_f249f0a6bffeuw7DEkrRtdrp4r].md",
@@ -3122,7 +2935,7 @@
       "truncated": false
     },
     {
-      "id": "rem-194",
+      "id": "rem-185",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t1-page-signals-extractor [ses_f1708657effeCLOTFPLlZTzgIn].md",
@@ -3145,7 +2958,7 @@
       "truncated": false
     },
     {
-      "id": "rem-195",
+      "id": "rem-186",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - snipset-app-import-excluding-vault [ses_f2dcc18eefferLI4QKW5r2Xq9n].md",
@@ -3168,7 +2981,7 @@
       "truncated": false
     },
     {
-      "id": "rem-196",
+      "id": "rem-187",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - t5-grep-family-probes-are-loose [ses_f100d4e35ffeYENxqNboSMnYln].md",
@@ -3191,7 +3004,7 @@
       "truncated": false
     },
     {
-      "id": "rem-197",
+      "id": "rem-188",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - find-rollback-anomaly-evidence [ses_f15fa1c3effeENy8HHeEt4FoDB].md",
@@ -3214,7 +3027,7 @@
       "truncated": false
     },
     {
-      "id": "rem-198",
+      "id": "rem-189",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - fully-gated-docs-spike [ses_f0bc61de6ffe3iKk7il4tRvIIc].md",
@@ -3237,7 +3050,7 @@
       "truncated": false
     },
     {
-      "id": "rem-199",
+      "id": "rem-190",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - audit-test-quality-depth [ses_f07d52cdbffeMpsA5YufHGpuZN].md",
@@ -3260,7 +3073,7 @@
       "truncated": false
     },
     {
-      "id": "rem-200",
+      "id": "rem-191",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - f7-remove-urlnotifications-publish [ses_f169770aeffe3Yoc1kyrkNDAgv].md",
@@ -3283,7 +3096,7 @@
       "truncated": false
     },
     {
-      "id": "rem-201",
+      "id": "rem-192",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-02 - g4-callback-email-conflict [ses_f05cce412ffe8eMK6z5V8Ojtrq].md",
@@ -3306,7 +3119,7 @@
       "truncated": false
     },
     {
-      "id": "rem-202",
+      "id": "rem-193",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f3-fix-utc-date-parse-bug [ses_f209bac70ffeZDTiArMuIKyG0k].md",
@@ -3329,7 +3142,7 @@
       "truncated": false
     },
     {
-      "id": "rem-203",
+      "id": "rem-194",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - rename-partitionforpublishing [ses_f1656a5c8ffeuMg7HDXpdFJFus].md",
@@ -3352,7 +3165,7 @@
       "truncated": false
     },
     {
-      "id": "rem-204",
+      "id": "rem-195",
       "files": [
         {
           "path": "01 - Projects/Snipset/plans/2026-09-05-ai-and-benchmark-merge.md",
@@ -3379,7 +3192,7 @@
       "truncated": false
     },
     {
-      "id": "rem-205",
+      "id": "rem-196",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - cek-apakah-repo-snipset-kosong [ses_f31195125ffeC3hICDFwXUt1pZ].md",
@@ -3406,7 +3219,7 @@
       "truncated": false
     },
     {
-      "id": "rem-206",
+      "id": "rem-197",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - c10-no-store-cache-headers [ses_f1b853c1fffeZzqUqbDW5v85DK].md",
@@ -3433,7 +3246,7 @@
       "truncated": false
     },
     {
-      "id": "rem-207",
+      "id": "rem-198",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - investigate-engine-mode-and-is-fallback-debts [ses_f25834e0affeAOkURQrq69BWw8].md",
@@ -3460,7 +3273,7 @@
       "truncated": false
     },
     {
-      "id": "rem-208",
+      "id": "rem-199",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c9c-operator-insert-errors [ses_f20b3a3d2ffeUMqpLh1BhnwxPQ].md",
@@ -3487,7 +3300,7 @@
       "truncated": false
     },
     {
-      "id": "rem-209",
+      "id": "rem-200",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c6a-relative-time [ses_f20bd623cffepCVl2UOnZVv68G].md",
@@ -3514,7 +3327,7 @@
       "truncated": false
     },
     {
-      "id": "rem-210",
+      "id": "rem-201",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - deterministic-manifest-writes [ses_f12268e2dffe0CxQlkO9a7cIYp].md",
@@ -3541,7 +3354,7 @@
       "truncated": false
     },
     {
-      "id": "rem-211",
+      "id": "rem-202",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c6b-today-tomorrow-labels [ses_f20bd3368ffeljwsaRfEE14jNZ].md",
@@ -3568,7 +3381,7 @@
       "truncated": false
     },
     {
-      "id": "rem-212",
+      "id": "rem-203",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-02 - g1-email-identity-resolution [ses_f05cce415ffeTbN7wPlR8BT7b8].md",
@@ -3595,7 +3408,7 @@
       "truncated": false
     },
     {
-      "id": "rem-213",
+      "id": "rem-204",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c4a-chatinput-sentinels [ses_f20cef924ffeuC2x2K4A2X5Qim].md",
@@ -3622,7 +3435,7 @@
       "truncated": false
     },
     {
-      "id": "rem-214",
+      "id": "rem-205",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - trim-ch07-to-7kb [ses_f1bbd53f3ffeJBgwneEj3buRNH].md",
@@ -3649,7 +3462,7 @@
       "truncated": false
     },
     {
-      "id": "rem-215",
+      "id": "rem-206",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-26 - update-ai-skills-readme-and-description [ses_f211714e5ffeBgLHp9qcIVx6aS].md",
@@ -3676,7 +3489,7 @@
       "truncated": false
     },
     {
-      "id": "rem-216",
+      "id": "rem-207",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - t3-gate-nullif-plus-callers [ses_f0ca96113ffem6Tx3AStouWRWH].md",
@@ -3703,7 +3516,7 @@
       "truncated": false
     },
     {
-      "id": "rem-217",
+      "id": "rem-208",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - commit-and-push-changes [ses_f2678890affe777uGPxG7ZpHSS].md",
@@ -3730,7 +3543,7 @@
       "truncated": false
     },
     {
-      "id": "rem-218",
+      "id": "rem-209",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - t1-freeze-spike-classifier [ses_f1021ad09ffeR7MULPimpqllbg].md",
@@ -3757,7 +3570,7 @@
       "truncated": false
     },
     {
-      "id": "rem-219",
+      "id": "rem-210",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c6e-dictionary-keys-for-plurals [ses_f20b61728ffegvLggbqWjBrFa0].md",
@@ -3784,7 +3597,7 @@
       "truncated": false
     },
     {
-      "id": "rem-220",
+      "id": "rem-211",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - audit-gsc-index-reject-unknown-flags [ses_f1656d920ffekORCZQZ7qG9esp].md",
@@ -3811,7 +3624,7 @@
       "truncated": false
     },
     {
-      "id": "rem-221",
+      "id": "rem-212",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t3-indexing-verdict-collector [ses_f16fb7e5cffeAsGCMDWeO67E3a].md",
@@ -3842,7 +3655,7 @@
       "truncated": false
     },
     {
-      "id": "rem-222",
+      "id": "rem-213",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - t2-sentinel-and-unknown-classes [ses_f101c6c59ffeLPZn8LQ57aOFfJ].md",
@@ -3873,7 +3686,7 @@
       "truncated": false
     },
     {
-      "id": "rem-223",
+      "id": "rem-214",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - probe-live-arch-environment [ses_f2592b288ffela1Jhc6nfqG4Ei].md",
@@ -3904,7 +3717,7 @@
       "truncated": false
     },
     {
-      "id": "rem-224",
+      "id": "rem-215",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - t1-marked-render-helper [ses_f0bfd0570ffeAc26F3U8afWI5F].md",
@@ -3935,7 +3748,7 @@
       "truncated": false
     },
     {
-      "id": "rem-225",
+      "id": "rem-216",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - verifikasi-file-skill-md-yang-hilang [ses_f1bdd2361ffece9FsSAPVLd6ka].md",
@@ -3966,7 +3779,7 @@
       "truncated": false
     },
     {
-      "id": "rem-226",
+      "id": "rem-217",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - find-broken-cover-refs [ses_f15fa1c48ffes0laG4IhrytG1F].md",
@@ -3997,7 +3810,7 @@
       "truncated": false
     },
     {
-      "id": "rem-227",
+      "id": "rem-218",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - t4-warn-on-unknown-skip-if [ses_f101198c3ffeizVZJ1CYZkRI41].md",
@@ -4028,7 +3841,7 @@
       "truncated": false
     },
     {
-      "id": "rem-228",
+      "id": "rem-219",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - ground-login-ui-surfaces [ses_f0629f2daffePVn0JxQpb3zCPl].md",
@@ -4059,7 +3872,7 @@
       "truncated": false
     },
     {
-      "id": "rem-229",
+      "id": "rem-220",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c1-evaluator-regex-corruption [ses_f1d0fe425ffexjfnOhe4iLw6fV].md",
@@ -4090,7 +3903,7 @@
       "truncated": false
     },
     {
-      "id": "rem-230",
+      "id": "rem-221",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - c10-oauth-env-wiring [ses_f0cb022bcffep2r10CW9Z4ie7i].md",
@@ -4121,7 +3934,7 @@
       "truncated": false
     },
     {
-      "id": "rem-231",
+      "id": "rem-222",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - c2-missing-prefetch-audit [ses_f1b853d44ffehAVpVWIjbhzNn8].md",
@@ -4148,23 +3961,31 @@
           "bytes": 135049
         },
         {
-          "path": "05 - Conversations/tmp/2026-09-29 - hi [ses_f10de29c3ffeAykLGQ2inBZoQj].md",
-          "bytes": 134458
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - audit-bloatware-kde-plasma-arch-linux [ses_f3088b6c4ffemZj3by0QziLuyY].md",
+          "bytes": 134257
         }
       ],
-      "bytes": 819106,
+      "bytes": 818905,
       "truncated": false
     },
     {
-      "id": "rem-232",
+      "id": "rem-223",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - author-ch11-verifikasi-inokulasi [ses_f1bce65e4ffeNpWpyN6YHjZDeb].md",
           "bytes": 132329
         },
         {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c4c-e-g-prefix-sentinels [ses_f20ce651effeb5ddr1D7aQMuLL].md",
+          "bytes": 129867
+        },
+        {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f11-footnote-split-fix [ses_f21028d7affecD0gDLX1L1LfTJ].md",
           "bytes": 132606
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c04-rust-focus-close-policy [ses_f1b94e627ffe60Yg1Ay1fojbW1].md",
+          "bytes": 27246
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - f2a-web-test-layers [ses_f1aed8d1affeIBgFNXDqyOUkqE].md",
@@ -4175,39 +3996,31 @@
           "bytes": 133533
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - audit-bloatware-kde-plasma-arch-linux [ses_f3088b6c4ffemZj3by0QziLuyY].md",
-          "bytes": 134257
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-llm-wiki-clusters [ses_f26e12945ffed0hPg61MbSOM2R].md",
-          "bytes": 23525
-        },
-        {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-30 - redo-t5-bucket-fix [ses_f10471915ffeHcFvXnVkXT0ZZv].md",
           "bytes": 131678
         }
       ],
-      "bytes": 819030,
+      "bytes": 818361,
       "truncated": false
     },
     {
-      "id": "rem-233",
+      "id": "rem-224",
       "files": [
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - install-graphify-skill-in-ai-skills [ses_f0814614effeyueYB0qYC5fGH2].md",
-          "bytes": 43425
-        },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - visual-viewport-verification [ses_f0bc61de8ffe6GlwL86td6Ikqr].md",
           "bytes": 129689
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c4c-e-g-prefix-sentinels [ses_f20ce651effeb5ddr1D7aQMuLL].md",
-          "bytes": 129867
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - red-phase-test-author [ses_f24dc937fffe2lyqrYE58RO494].md",
+          "bytes": 126908
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-marketing-cross-links [ses_f21252dc8ffev1dU4n3TTPFMAX].md",
           "bytes": 129695
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - w4-t4-rust-contract-tests [ses_f24a1b71effeGuOZnrokNxH42G].md",
+          "bytes": 45655
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c3-input-variable-session-store [ses_f1d0fb754ffeFN4lY5Vekn4fao].md",
@@ -4222,12 +4035,16 @@
           "bytes": 129387
         }
       ],
-      "bytes": 819039,
+      "bytes": 818310,
       "truncated": false
     },
     {
-      "id": "rem-234",
+      "id": "rem-225",
       "files": [
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - write-graphify-runbook [ses_f08075253ffeX3zIShsDTb4Egq].md",
+          "bytes": 61332
+        },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - t5-shared-gate-fragment [ses_f0ca0d64fffe0cU70TDhuffQot].md",
           "bytes": 126261
@@ -4235,14 +4052,6 @@
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - t4-panel-unavailable-state [ses_f257f920dffe7IvQkmSmG2kACF].md",
           "bytes": 126651
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - red-phase-test-author [ses_f24dc937fffe2lyqrYE58RO494].md",
-          "bytes": 126908
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - snipset-dan-mediasi-produktivitas-terhadap-csat [ses_f1c8ec234ffe4VcGXRpFKYtDh1].md",
-          "bytes": 58569
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - cek-versi-kde-plasma-pc [ses_f16db694affeA0DRoPghABTXxj].md",
@@ -4253,15 +4062,19 @@
           "bytes": 126705
         },
         {
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - d4-dry-run-message-test [ses_f05cb8032ffdJTGrZGQPkrZb74].md",
+          "bytes": 124653
+        },
+        {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - ground-ai-skills-overlay-profile [ses_f060a02b6ffeT6dNM5W9HWbyFT].md",
           "bytes": 126720
         }
       ],
-      "bytes": 818573,
+      "bytes": 819081,
       "truncated": false
     },
     {
-      "id": "rem-235",
+      "id": "rem-226",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - correct-runbook-concurrency-claims [ses_f07f9709cffes35EU3BzwMfYhY].md",
@@ -4272,12 +4085,12 @@
           "bytes": 124221
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - draft-title-shortening-options [ses_f15f7ce47ffehE5arEZ6Qqe3P4].md",
-          "bytes": 73672
-        },
-        {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - t3-normalizer-capture-availability [ses_f2582694cffeHWgYJx6wnoa1IN].md",
           "bytes": 124059
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c2a-dictionary-main-ts [ses_f20d6698fffePX4dtCcASQP7ip].md",
+          "bytes": 73988
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f12-chatbot-curated-aliases [ses_f21022b33ffeIQ6RHqPptPAYET].md",
@@ -4288,19 +4101,27 @@
           "bytes": 123861
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - d4-dry-run-message-test [ses_f05cb8032ffdJTGrZGQPkrZb74].md",
-          "bytes": 124653
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - dedup-d3-d4-double-cues [ses_f178408eaffeu3HFgix6wVA23t].md",
+          "bytes": 123656
         }
       ],
-      "bytes": 819031,
+      "bytes": 818350,
       "truncated": false
     },
     {
-      "id": "rem-236",
+      "id": "rem-227",
       "files": [
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - t1-pipeline-retarget [ses_f0bedbf78ffe4eMeBBwswus3a2].md",
+          "bytes": 86924
+        },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - ground-middleware-gate-entitlements [ses_f0629f2cdffe4j2QD4uK6Gfbfs].md",
           "bytes": 122321
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t6-chunk-c01 [ses_f16e44daaffeNSr18NVE9JEeju].md",
+          "bytes": 120518
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t2-red-contract-test [ses_f212eb808ffedPspWwDL8eJvnB].md",
@@ -4315,39 +4136,31 @@
           "bytes": 122545
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - dedup-d3-d4-double-cues [ses_f178408eaffeu3HFgix6wVA23t].md",
-          "bytes": 123656
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t3a-ownership-recon-gate [ses_f21fe7eacffepGN5a5aGHWFgCX].md",
-          "bytes": 83764
-        },
-        {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - test-message [ses_f1d29f65cffeX6nUYyNtc57VV7].md",
           "bytes": 121934
         }
       ],
-      "bytes": 819148,
+      "bytes": 819170,
       "truncated": false
     },
     {
-      "id": "rem-237",
+      "id": "rem-228",
       "files": [
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - t6-chunk-c01 [ses_f16e44daaffeNSr18NVE9JEeju].md",
-          "bytes": 120518
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - f2-skills-test-fix [ses_f0c9305edffen33wywUY0AOnYn].md",
+          "bytes": 107033
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c1-rust-resource-path-resolution [ses_f1acfb446ffewjvdZK8GfLaOBj].md",
           "bytes": 118184
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c15-substitution-contracts-and-wiring [ses_f1d0c10b3ffeO3kN4t4OClREBE].md",
-          "bytes": 105425
-        },
-        {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - r5-selection-contract-and-docs [ses_f1cff2a32ffevWtzHA3by4NyQR].md",
           "bytes": 119407
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - c11-theme-token-bypass [ses_f0bcaca81ffeEOPEBzs2KRNqpI].md",
+          "bytes": 117815
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - c16-repo-guard-coverage [ses_f0bc9fc39ffeUp1Fe4EcneEPHv].md",
@@ -4362,31 +4175,27 @@
           "bytes": 117960
         }
       ],
-      "bytes": 819174,
+      "bytes": 818079,
       "truncated": false
     },
     {
-      "id": "rem-238",
+      "id": "rem-229",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - t3-mathjax-dedupe-guards [ses_f1b7e1924ffe7JJpCc3WxmjatA].md",
           "bytes": 115392
         },
         {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - insert-per-skill-download-links [ses_f11ec6861ffe3m5Z36MnMCCDBx].md",
+          "bytes": 110417
+        },
+        {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c5a-locale-format-helper [ses_f20d5c63fffebRaw9wxEdurYC7].md",
           "bytes": 117110
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - c11-theme-token-bypass [ses_f0bcaca81ffeEOPEBzs2KRNqpI].md",
-          "bytes": 117815
-        },
-        {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c4-c5-c6-path-and-rotation [ses_f08dc55a4ffeHeDnIt2F20PYsu].md",
           "bytes": 115446
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - h12-verification-host-readiness [ses_f08b3c992ffewIN7JRnSOlGpoa].md",
-          "bytes": 10678
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - t3-collector-hook-contract [ses_f0666134cffef1nvJDKP6U0IRK].md",
@@ -4399,29 +4208,29 @@
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - verify-putro-rag-jurnal-infomedia [ses_f1cbeffbdffe3jwHmrftAbnkWA].md",
           "bytes": 116648
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - c8-starlight-content [ses_f128cf1aeffeMfTgDRaZD1K0oM].md",
+          "bytes": 18058
         }
       ],
-      "bytes": 819175,
+      "bytes": 819157,
       "truncated": false
     },
     {
-      "id": "rem-239",
+      "id": "rem-230",
       "files": [
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-26 - integrasi-prd-dalam-ai-skills [ses_f211fc048ffeufVFiYlIOJlmKt].md",
-          "bytes": 54829
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - insert-per-skill-download-links [ses_f11ec6861ffe3m5Z36MnMCCDBx].md",
-          "bytes": 110417
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - f2-skills-test-fix [ses_f0c9305edffen33wywUY0AOnYn].md",
-          "bytes": 107033
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - ganti-branch-masteri-ke-main [ses_f11bac09fffe6v48wEpzTLKBKa].md",
+          "bytes": 106726
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f3-error-announced-and-visible [ses_f24ce17ebffea2EFxEU2lgLSFd].md",
           "bytes": 109621
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - re-wire-3-snippets-modal-keys [ses_f1726bc69ffejsp7cTg6a4nTBd].md",
+          "bytes": 106331
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c2-cadence-arithmetic [ses_f08dc55abffendNwsShx2oUd5W].md",
@@ -4438,18 +4247,18 @@
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t4-package-scripts-and-readme [ses_f21a1c46bffeLG4H3fmoRimg0x].md",
           "bytes": 108832
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - snipset-dan-mediasi-produktivitas-terhadap-csat [ses_f1c8ec234ffe4VcGXRpFKYtDh1].md",
+          "bytes": 58569
         }
       ],
-      "bytes": 818981,
+      "bytes": 818328,
       "truncated": false
     },
     {
-      "id": "rem-240",
+      "id": "rem-231",
       "files": [
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - ganti-branch-masteri-ke-main [ses_f11bac09fffe6v48wEpzTLKBKa].md",
-          "bytes": 106726
-        },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - t3-feedback-a11y-errors-tdd [ses_f0bcac428ffetaI3dDfA66c85S].md",
           "bytes": 105311
@@ -4467,23 +4276,27 @@
           "bytes": 104665
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - re-wire-3-snippets-modal-keys [ses_f1726bc69ffejsp7cTg6a4nTBd].md",
-          "bytes": 106331
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c9-mock-harness-re-dispatch [ses_f24e1f3ffffe8z2SmFDyuPEaJ1].md",
+          "bytes": 82819
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c15-substitution-contracts-and-wiring [ses_f1d0c10b3ffeO3kN4t4OClREBE].md",
+          "bytes": 105425
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - h08-windows-cf-hdrop-invariant [ses_f08b44315ffe6sFnX4Uf2EpKQc].md",
           "bytes": 105950
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-home-dir-junk-and-caches [ses_f2690594cffdUEtknaXL8J3Vlh].md",
-          "bytes": 78795
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t1-registry-and-config [ses_f21ad7026ffegbPEh8tCesWK2l].md",
+          "bytes": 103954
         }
       ],
-      "bytes": 818725,
+      "bytes": 819071,
       "truncated": false
     },
     {
-      "id": "rem-241",
+      "id": "rem-232",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - audit-untested-scripts [ses_f07d52cdcffeyIuL9MuYnOBu9c].md",
@@ -4502,8 +4315,12 @@
           "bytes": 103823
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - h03-linux-clipboard-mime-layer [ses_f08b4a224ffexCt8yllkbtQg3Y].md",
-          "bytes": 95795
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c15-frontend-hide-listeners [ses_f1b8b2c6affezzmYFj5S16ynbE].md",
+          "bytes": 101127
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - c4-terminal-command-coverage [ses_f0bcba760ffe0IO3FMqDEr25yP].md",
+          "bytes": 98689
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - t4-native-default-paths [ses_f0666134bffeEzjCdCZS8affLJ].md",
@@ -4512,25 +4329,17 @@
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - menjalankan-btop-sebagai-wallpaper-kde-plasma [ses_f214df986ffeNZK6M5GULlMmJt].md",
           "bytes": 103800
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t1-registry-and-config [ses_f21ad7026ffegbPEh8tCesWK2l].md",
-          "bytes": 103954
         }
       ],
-      "bytes": 818297,
+      "bytes": 818364,
       "truncated": false
     },
     {
-      "id": "rem-242",
+      "id": "rem-233",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - emit-static-public-skill-set [ses_f12287574ffeitkSBYG4duVMQL].md",
           "bytes": 100616
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - remove-api-route-static-links [ses_f12268e2fffeZdbgSQH4HPk1iT].md",
-          "bytes": 14376
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - f1-wip-stack-review [ses_f0c9305eeffe4ueSEo2e3VZaKw].md",
@@ -4545,8 +4354,8 @@
           "bytes": 100191
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c15-frontend-hide-listeners [ses_f1b8b2c6affezzmYFj5S16ynbE].md",
-          "bytes": 101127
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c10-overlay-routing-safety [ses_f1b94e607ffeeCZ9jw4SlFTjw6].md",
+          "bytes": 15930
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - p3-info-toast-sound [ses_f1a883202ffeneT3FzT9oJVD4W].md",
@@ -4559,17 +4368,29 @@
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - add-directional-schema-hint [ses_f08baa991ffeUTDpjVBSNEIVX5].md",
           "bytes": 101095
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t14-vault-hub-wiring [ses_f219a691bffeNKBGd7yLO72EHi].md",
+          "bytes": 99945
         }
       ],
-      "bytes": 818821,
+      "bytes": 819193,
       "truncated": false
     },
     {
-      "id": "rem-243",
+      "id": "rem-234",
       "files": [
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - author-ch05-efek-kebenaran-ilusi [ses_f1bcfac88ffeKRiieJx2NIX0Xt].md",
+          "bytes": 38680
+        },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - v5-sibling-audit-plus-review [ses_f0ca32ee2ffemh2NeFUE4z4U3j].md",
           "bytes": 97375
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - ground-auth-entrypoint-chain [ses_f0629f2ceffeRcDAfawGKF6QKk].md",
+          "bytes": 95345
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - audit-shortcut-slot-coverage [ses_f26591c92ffeHomj6dxvKLOKo0].md",
@@ -4584,8 +4405,8 @@
           "bytes": 99608
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - c4-terminal-command-coverage [ses_f0bcba760ffe0IO3FMqDEr25yP].md",
-          "bytes": 98689
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - h03-linux-clipboard-mime-layer [ses_f08b4a224ffexCt8yllkbtQg3Y].md",
+          "bytes": 95795
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - h04-arboard-linux-capabilities [ses_f08b4a220ffeAJtHseMlv1UKTX].md",
@@ -4594,33 +4415,17 @@
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-existing-audit-tooling [ses_f26e12872ffe1DiBH10FO2lyCZ].md",
           "bytes": 97841
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t14-vault-hub-wiring [ses_f219a691bffeNKBGd7yLO72EHi].md",
-          "bytes": 99945
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - f1-wire-lint-script [ses_f12784634ffe6ESszWuSAiIkke].md",
-          "bytes": 31457
         }
       ],
-      "bytes": 818911,
+      "bytes": 818640,
       "truncated": false
     },
     {
-      "id": "rem-244",
+      "id": "rem-235",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - c1-route-pattern-semantics [ses_f11e1c60fffejuCITeBFYuluXj].md",
           "bytes": 94664
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - t1-nav-loading-indicator-tdd [ses_f0bce2a4affen6Llk5NLiH3bat].md",
-          "bytes": 62926
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-01 - ground-auth-entrypoint-chain [ses_f0629f2ceffeRcDAfawGKF6QKk].md",
-          "bytes": 95345
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - r7-xclip-target-semantics [ses_f1cfca4abffeDyUPFKcpQsA3IL].md",
@@ -4639,6 +4444,14 @@
           "bytes": 93835
         },
         {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - t1-matcher-prefix-and-length [ses_f0bc5d206ffeikHZbgRBQ0pmFR].md",
+          "bytes": 93128
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - s5-s6-class-and-doc-sync [ses_f087beda2ffebMPsZ3VFSYx3Ai].md",
+          "bytes": 66204
+        },
+        {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - memperbaiki-karakter-aneh-di-untitled-note-txt [ses_f232e5332ffe3CJxBD2ycajEzg].md",
           "bytes": 95154
         },
@@ -4647,12 +4460,16 @@
           "bytes": 94221
         }
       ],
-      "bytes": 818104,
+      "bytes": 819165,
       "truncated": false
     },
     {
-      "id": "rem-245",
+      "id": "rem-236",
       "files": [
+        {
+          "path": "01 - Projects/Snipset/plans/2026-09-11-dpa-and-subprocessors-trust-pages.md",
+          "bytes": 33933
+        },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - write-graphifyignore-files [ses_f08146148ffe4sFtpASuiYMUHQ].md",
           "bytes": 87615
@@ -4666,10 +4483,6 @@
           "bytes": 85819
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - t1-pipeline-retarget [ses_f0bedbf78ffe4eMeBBwswus3a2].md",
-          "bytes": 86924
-        },
-        {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - audit-rust-cli-crate-i18n [ses_f20e1da02ffezPgx2aYIE0FAKU].md",
           "bytes": 86338
         },
@@ -4678,31 +4491,35 @@
           "bytes": 87753
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - t1-matcher-prefix-and-length [ses_f0bc5d206ffeikHZbgRBQ0pmFR].md",
-          "bytes": 93128
-        },
-        {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k12-unowned-test-files [ses_f0891ad9affeB9VO6DQRupQLfI].md",
           "bytes": 92552
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-system-config-and-services [ses_f26905930ffeiM4o8ORRjLa2sD].md",
+          "bytes": 85742
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t20-mirror-namespace-rename [ses_f2186e85dffeteRzbx6brjcOeB].md",
           "bytes": 87081
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - f4-entitlement-enforcement [ses_f127845eeffev7jMMNTTlUNpJH].md",
-          "bytes": 24563
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - safely-updating-opencode-on-pc [ses_f132e99ffffeUSaGNmX94Kd2Md].md",
+          "bytes": 85236
         }
       ],
-      "bytes": 818881,
+      "bytes": 819177,
       "truncated": false
     },
     {
-      "id": "rem-246",
+      "id": "rem-237",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - draft-id-faq-translations [ses_f15f7ce48ffeTcZypU5VQwSr3o].md",
           "bytes": 83541
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - fix-broken-cover-seeds [ses_f15f8c559ffetZR179KeBfXD4V].md",
+          "bytes": 64939
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - fix-meta-capi-anyrequest-type [ses_f25320eb4ffe2LvSueDE5aCJ4s].md",
@@ -4717,10 +4534,6 @@
           "bytes": 84831
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - c14-pre-hydration-gap [ses_f0bca452dffedvsgHZebEikYQ6].md",
-          "bytes": 60689
-        },
-        {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - map-schemadiff-message-consumers [ses_f08bcf61cffeKNlzFl4FwvMM1f].md",
           "bytes": 84420
         },
@@ -4733,19 +4546,19 @@
           "bytes": 82968
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-system-config-and-services [ses_f26905930ffeiM4o8ORRjLa2sD].md",
-          "bytes": 85742
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t3a-ownership-recon-gate [ses_f21fe7eacffepGN5a5aGHWFgCX].md",
+          "bytes": 83764
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - safely-updating-opencode-on-pc [ses_f132e99ffffeUSaGNmX94Kd2Md].md",
-          "bytes": 85236
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - penjelasan-filesystem-ext4-dan-vfat [ses_f16970d02ffeeSqDc1BPQgkaog].md",
+          "bytes": 82696
         }
       ],
-      "bytes": 819076,
+      "bytes": 818808,
       "truncated": false
     },
     {
-      "id": "rem-247",
+      "id": "rem-238",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - c6-worker-vs-origin-404 [ses_f11e1c5fcffehb6lJHj1xK48f8].md",
@@ -4764,20 +4577,20 @@
           "bytes": 81838
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c9-mock-harness-re-dispatch [ses_f24e1f3ffffe8z2SmFDyuPEaJ1].md",
-          "bytes": 82819
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - write-scripts-readme [ses_f123039d5ffej3iidhfP4ngM8U].md",
+          "bytes": 81263
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c12-moderation-on-image-insert [ses_f0b3b5128ffe4yHCQcZ4qGy32R].md",
-          "bytes": 78057
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t19-representative-queries [ses_f210ab76fffeEM1hrJdcR3lCSD].md",
+          "bytes": 80730
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t11-vault-operating-doc [ses_f21a1c466ffe9laqrX1Wq01Dc1].md",
           "bytes": 81910
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - penjelasan-filesystem-ext4-dan-vfat [ses_f16970d02ffeeSqDc1BPQgkaog].md",
-          "bytes": 82696
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - verify-two-paper-claims [ses_f1cc85b1bffeBju647imOEKvK0].md",
+          "bytes": 81629
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - hapus-total-ani-cli-di-arch-linux [ses_f10fb2643ffe7f9GoYoA8mTETi].md",
@@ -4788,27 +4601,19 @@
           "bytes": 82648
         }
       ],
-      "bytes": 819143,
+      "bytes": 819193,
       "truncated": false
     },
     {
-      "id": "rem-248",
+      "id": "rem-239",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - author-ch07-penalaran-termotivasi [ses_f1bcf3fe3ffeUHqc20qGe6mvKO].md",
           "bytes": 80297
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - write-scripts-readme [ses_f123039d5ffej3iidhfP4ngM8U].md",
-          "bytes": 81263
-        },
-        {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - body-entity-decode-fix [ses_f0bd7b21bffer8RJAbRvn5IlYS].md",
           "bytes": 80083
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - c11-test-gap-analysis [ses_f0cb022a8ffexiTySbyK0ph2Po].md",
-          "bytes": 11189
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - t1-speech-engine-branch-predicate [ses_f2592dd82ffeaC6l3XeO6167Rf].md",
@@ -4819,47 +4624,59 @@
           "bytes": 80766
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t19-representative-queries [ses_f210ab76fffeEM1hrJdcR3lCSD].md",
-          "bytes": 80730
-        },
-        {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - r6-t2-red-validity-review [ses_f1cff10ceffeUXB4uK4ZHe4gtZ].md",
           "bytes": 81194
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - c13-test-layer-gap [ses_f0bca68e4ffehxWmvjiw1WDT4w].md",
+          "bytes": 78316
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - c15-inline-style-and-token-parity [ses_f0bca2363ffe7N5Yo7ZI2m5oiC].md",
           "bytes": 80456
         },
         {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f07334a54ffeKzsd3wwfN0eQdg].md",
+          "bytes": 19919
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c12-moderation-on-image-insert [ses_f0b3b5128ffe4yHCQcZ4qGy32R].md",
+          "bytes": 78057
+        },
+        {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c6-download-file-proxy-path [ses_f0b3bb2bbffed4c33UuW3MhDza].md",
           "bytes": 80666
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - verify-two-paper-claims [ses_f1cc85b1bffeBju647imOEKvK0].md",
-          "bytes": 81629
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-home-dir-junk-and-caches [ses_f2690594cffdUEtknaXL8J3Vlh].md",
+          "bytes": 78795
         }
       ],
-      "bytes": 818893,
+      "bytes": 819169,
       "truncated": false
     },
     {
-      "id": "rem-249",
+      "id": "rem-240",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - t2-visual-bridge-prefetch [ses_f1b7ca4e8ffeA3L9j0F3RRw2yV].md",
           "bytes": 77265
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - v4-diff-code-review [ses_f1b7b4f0cffdYno2aEm92u73XN].md",
-          "bytes": 55681
-        },
-        {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - f3-relative-funnel-hrefs [ses_f0c9305ecffeRmaJQvv9da86G1].md",
           "bytes": 77522
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c2a-dictionary-main-ts [ses_f20d6698fffePX4dtCcASQP7ip].md",
-          "bytes": 73988
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - draft-title-shortening-options [ses_f15f7ce47ffehE5arEZ6Qqe3P4].md",
+          "bytes": 73672
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - delete-dead-voiceselector-and-orphan-keys [ses_f257de247ffed1ls4E1pEvUhB4].md",
+          "bytes": 73919
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - extract-shared-node-resolution-helper [ses_f25323c38ffeT8L2MaoK1TeDsc].md",
+          "bytes": 60463
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f4-worker-embeddability-signal [ses_f24ce17e3ffek0Y7O30EzqZQJM].md",
@@ -4878,10 +4695,6 @@
           "bytes": 77691
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - c13-test-layer-gap [ses_f0bca68e4ffehxWmvjiw1WDT4w].md",
-          "bytes": 78316
-        },
-        {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k1-locale-copy-rewrite [ses_f08a83e6fffeSm4UR6JZ6nU47K].md",
           "bytes": 75531
         },
@@ -4890,11 +4703,11 @@
           "bytes": 73947
         }
       ],
-      "bytes": 819077,
+      "bytes": 819146,
       "truncated": false
     },
     {
-      "id": "rem-250",
+      "id": "rem-241",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - write-pcsx2-config-assertion-suite [ses_f1608acc5ffejVQ190E8z12zEP].md",
@@ -4903,10 +4716,6 @@
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - login-redirect-reasons-tdd [ses_f0bc61deaffeIz6TOh6nbpSGfG].md",
           "bytes": 71539
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - delete-dead-voiceselector-and-orphan-keys [ses_f257de247ffed1ls4E1pEvUhB4].md",
-          "bytes": 73919
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c0-repro-test [ses_f24ed043effeRDLd6SgUVihLWv].md",
@@ -4937,19 +4746,23 @@
           "bytes": 70066
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - pembersihan-karakter-markdown-pada-txt [ses_f2035a18ffferzgK86EVdpxW56].md",
-          "bytes": 31033
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t23-fix-audits-broken-link [ses_f2186e858ffe7M2KJeIrPfL06S].md",
+          "bytes": 70060
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-10-01 - installing-capy-0-4-1-appimage-properly [ses_f08d77037ffeAeHjmukw64C2hi].md",
           "bytes": 71952
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - ground-obsidian-vault-conventions [ses_f060a02beffe3KvYb1o0fy9nIf].md",
+          "bytes": 35198
         }
       ],
-      "bytes": 818652,
+      "bytes": 818958,
       "truncated": false
     },
     {
-      "id": "rem-251",
+      "id": "rem-242",
       "files": [
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - implement-skills-validator [ses_f123aa9d9ffeGt34hHbAyTal6w].md",
@@ -4972,10 +4785,6 @@
           "bytes": 68541
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - w3-t3-tauri-command [ses_f24a76fbdffe3iPSvRozVjY7cR].md",
-          "bytes": 62297
-        },
-        {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c1-inbound-image-data-format [ses_f0b3bb2d0ffe1qK1QZcCZLNAPT].md",
           "bytes": 67541
         },
@@ -4992,31 +4801,43 @@
           "bytes": 69961
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t23-fix-audits-broken-link [ses_f2186e858ffe7M2KJeIrPfL06S].md",
-          "bytes": 70060
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - obsidian-tidak-terbuka-di-arch-kde-plasma [ses_f21bbfa4dffeBw9R6gdiZ6TA1C].md",
+          "bytes": 67152
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - muse-spark-1-3-free-default-in-opencode [ses_f12e0b3c6ffetsUZ0QKCUacoqz].md",
+          "bytes": 65987
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-30 - pengertian-istopo [ses_f0d2f5c10ffe3ifD9TYM7lCovb].md",
           "bytes": 69705
         }
       ],
-      "bytes": 818311,
+      "bytes": 819093,
       "truncated": false
     },
     {
-      "id": "rem-252",
+      "id": "rem-243",
       "files": [
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - fix-broken-cover-seeds [ses_f15f8c559ffetZR179KeBfXD4V].md",
-          "bytes": 64939
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - t1-nav-loading-indicator-tdd [ses_f0bce2a4affen6Llk5NLiH3bat].md",
+          "bytes": 62926
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-02 - t1-access-code-verifier [ses_f060e70aeffehY3UXVP4re2Kxv].md",
+          "bytes": 61297
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - harden-rollback-verification [ses_f15f8c558ffe0yVboAYjjgB1g3].md",
+          "bytes": 36994
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t7-breadcrumb-allowlist [ses_f2129c1d1ffeAsqqIqt5YIfIMt].md",
           "bytes": 65853
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c13-live-db-forensics [ses_f0b3a72bdffe9EWEeAa5cSFJgV].md",
-          "bytes": 24045
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - w3-t3-tauri-command [ses_f24a76fbdffe3iPSvRozVjY7cR].md",
+          "bytes": 62297
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c2-workers-types-major-review [ses_f083c33a6ffe4s2EPvafW0b53s].md",
@@ -5027,16 +4848,16 @@
           "bytes": 66603
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - s5-s6-class-and-doc-sync [ses_f087beda2ffebMPsZ3VFSYx3Ai].md",
-          "bytes": 66204
-        },
-        {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - contour-vs-console-untuk-ngoding-arch-linux [ses_f3134c2bbffegWGFNU44GPJ9Kk].md",
           "bytes": 65829
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - hapus-kotak-status-berwarna-di-bawah-ascii [ses_f2fcd1537ffeFMVxJxdcTVyzjM].md",
           "bytes": 66343
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-github-metadata [ses_f281d72d6ffeCFqz0HaCLkDqm4].md",
+          "bytes": 64901
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-locales-and-i18n [ses_f26905960ffeyIYgN767HeXKyU].md",
@@ -5047,43 +4868,31 @@
           "bytes": 66802
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - obsidian-tidak-terbuka-di-arch-kde-plasma [ses_f21bbfa4dffeBw9R6gdiZ6TA1C].md",
-          "bytes": 67152
-        },
-        {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t19-drift-watchdog-timer [ses_f218655b9ffeFVX0sNIzzJjr52].md",
           "bytes": 66929
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - muse-spark-1-3-free-default-in-opencode [ses_f12e0b3c6ffetsUZ0QKCUacoqz].md",
-          "bytes": 65987
         }
       ],
-      "bytes": 818590,
+      "bytes": 818678,
       "truncated": false
     },
     {
-      "id": "rem-253",
+      "id": "rem-244",
       "files": [
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - write-graphify-runbook [ses_f08075253ffeX3zIShsDTb4Egq].md",
-          "bytes": 61332
+          "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-26 - integrasi-prd-dalam-ai-skills [ses_f211fc048ffeufVFiYlIOJlmKt].md",
+          "bytes": 54829
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - c9-sidebar-theme-reflow [ses_f1b853c87ffe074HgjaKH2JQzd].md",
           "bytes": 54167
         },
         {
+          "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - v4-diff-code-review [ses_f1b7b4f0cffdYno2aEm92u73XN].md",
+          "bytes": 55681
+        },
+        {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - sibling-audit-and-diff-review [ses_f11d712b1ffeQ4v6RfxB1Ykg0G].md",
           "bytes": 60115
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-10-02 - t1-access-code-verifier [ses_f060e70aeffehY3UXVP4re2Kxv].md",
-          "bytes": 61297
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - extract-shared-node-resolution-helper [ses_f25323c38ffeT8L2MaoK1TeDsc].md",
-          "bytes": 60463
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - fix-dependency-waves-failures [ses_f254d4dc3ffeB04ENk8zvvcNpY].md",
@@ -5102,35 +4911,51 @@
           "bytes": 58105
         },
         {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - c1-route-coverage-gap [ses_f0bcc11bcffeqkR28LVrdTrMAS].md",
+          "bytes": 54010
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - c14-pre-hydration-gap [ses_f0bca452dffedvsgHZebEikYQ6].md",
+          "bytes": 60689
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - c5-i18n-english-leak [ses_f0bcb8b94ffexvt9r1Ok6mfevX].md",
+          "bytes": 53785
+        },
+        {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - c6-dead-string-keys [ses_f0bcb69d6ffe9CdlsRdXJLAZbq].md",
           "bytes": 55489
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c3-starlight-sidebar-review [ses_f083c33a5ffecfS53fB8vhx5v1].md",
-          "bytes": 53100
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-github-metadata [ses_f281d72d6ffeCFqz0HaCLkDqm4].md",
-          "bytes": 64901
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-inbox-and-projects [ses_f26e129b5ffeFD5yXq3u8D0u2K].md",
           "bytes": 57343
         },
         {
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - gagal-mounting-dev-sda4-read-only-permanen [ses_f12f492faffe4H4HMSU5gq5i1E].md",
+          "bytes": 21832
+        },
+        {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - ground-opencode-db-schema [ses_f060a02bfffe4fj8raIv6M9cUe].md",
           "bytes": 59501
         }
       ],
-      "bytes": 819187,
+      "bytes": 818920,
       "truncated": false
     },
     {
-      "id": "rem-254",
+      "id": "rem-245",
       "files": [
+        {
+          "path": "01 - Projects/ai-skills/plans/2026-10-02-subagent-driven-vault-index.md",
+          "bytes": 51041
+        },
         {
           "path": "01 - Projects/terminal-log-intelligence/plans/2026-10-02-dashboard-frontend-audit.md",
           "bytes": 51011
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - fix-false-graphify-claim-in-agents-md [ses_f080b696effewVdx4L7HYz7Bfs].md",
+          "bytes": 40465
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - install-graphify-skill-in-vault [ses_f0814614dffevjKfliWRf05QNj].md",
@@ -5173,12 +4998,8 @@
           "bytes": 51529
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - c1-route-coverage-gap [ses_f0bcc11bcffeqkR28LVrdTrMAS].md",
-          "bytes": 54010
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - c5-i18n-english-leak [ses_f0bcb8b94ffexvt9r1Ok6mfevX].md",
-          "bytes": 53785
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c3-starlight-sidebar-review [ses_f083c33a5ffecfS53fB8vhx5v1].md",
+          "bytes": 53100
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k7-sidebar-badge-copy [ses_f08a794a7ffe1XvxQrorcGOFR9].md",
@@ -5187,29 +5008,25 @@
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - pcsx2-v2-6-3-appimage-abrt-crash [ses_f134926a9ffeN4WLWlGBsm8Hvr].md",
           "bytes": 53748
-        },
-        {
-          "path": "05 - Conversations/tmp-opencode-rtk-probe/2026-10-01 - menjalankan-git-status-di-tmp-opencode-rtk-probe [ses_f07ddd810ffe2LNDocm8DTC8Kq].md",
-          "bytes": 36684
         }
       ],
-      "bytes": 819004,
+      "bytes": 819131,
       "truncated": false
     },
     {
-      "id": "rem-255",
+      "id": "rem-246",
       "files": [
         {
           "path": "01 - Projects/Snipset/plans/2026-10-02-ai-companion-linux-portability-audit.md",
           "bytes": 44716
         },
         {
-          "path": "01 - Projects/ai-skills/plans/2026-10-02-subagent-driven-vault-index.md",
-          "bytes": 48500
-        },
-        {
           "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - add-graphify-out-to-gitignores [ses_f08075255ffeFPd40XC2Yc5XXH].md",
           "bytes": 45193
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - c7-font-loading-fout-check [ses_f1b853ca8ffeVkc644dPF6gnkz].md",
+          "bytes": 32481
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - c4-slash-less-link-hunt [ses_f11e1c600ffeEtB5JRtsfO0B4o].md",
@@ -5236,8 +5053,8 @@
           "bytes": 44100
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - w4-t4-rust-contract-tests [ses_f24a1b71effeGuOZnrokNxH42G].md",
-          "bytes": 45655
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c1-lockfile-sync-review [ses_f083c33a7ffeR0tECRbLEPtiRx].md",
+          "bytes": 43655
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c11-linux-specific-divergence [ses_f0b3b5129ffepA2AILMwPVa7HT].md",
@@ -5256,8 +5073,8 @@
           "bytes": 45261
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - install-qwen-image-2-1-gguf-on-vps [ses_f1bb38df4ffef2TJFLE2ilysRY].md",
-          "bytes": 25707
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t7-trigger-snippet [ses_f219ee8dcffe2KwBWYUS5MGnB6].md",
+          "bytes": 43923
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - cek-kesehatan-external-disk [ses_f16581903ffeBXdiG1JnmILsDY].md",
@@ -5272,15 +5089,19 @@
           "bytes": 49012
         }
       ],
-      "bytes": 818985,
+      "bytes": 819182,
       "truncated": false
     },
     {
-      "id": "rem-256",
+      "id": "rem-247",
       "files": [
         {
           "path": "01 - Projects/Snipset/plans/2026-09-09-snippet-content-internal-search.md",
           "bytes": 42424
+        },
+        {
+          "path": "01 - Projects/ai-skills/plans/2026-10-02-opencode-history-to-obsidian.md",
+          "bytes": 37850
         },
         {
           "path": "01 - Projects/fasttrack/plans/2026-10-02-access-code-fallback-login.md",
@@ -5291,8 +5112,8 @@
           "bytes": 41548
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - fix-false-graphify-claim-in-agents-md [ses_f080b696effewVdx4L7HYz7Bfs].md",
-          "bytes": 40465
+          "path": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - install-graphify-skill-in-ai-skills [ses_f0814614effeyueYB0qYC5fGH2].md",
+          "bytes": 43425
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - rebuild-redeploy-verify-links [ses_f11ea5fc1ffeSR2lBvnx9bw4DY].md",
@@ -5307,6 +5128,10 @@
           "bytes": 41601
         },
         {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - t1-tracks-worker-first [ses_f0c6ef12effe9vw4a6OkrHFOuo].md",
+          "bytes": 34168
+        },
+        {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - lint-group-c-web-components [ses_f2561a958ffe8Kd7mS236qpnVE].md",
           "bytes": 40327
         },
@@ -5317,6 +5142,10 @@
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f2-restore-health-timer [ses_f24ce17e2ffeixFW12CNteXXeB].md",
           "bytes": 42195
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t18-rulechat-page-cases [ses_f210addbdffeQTjeppGzm4VYHb].md",
+          "bytes": 37900
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t20-browse-shortcut [ses_f210a988dffelMTCxuOSMQtKdB].md",
@@ -5331,24 +5160,12 @@
           "bytes": 40695
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c1-lockfile-sync-review [ses_f083c33a7ffeR0tECRbLEPtiRx].md",
-          "bytes": 43655
-        },
-        {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c7-stale-pin-comments-review [ses_f083c33b4ffelz6HlOhl1jennt].md",
           "bytes": 41865
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - h02-downloads-cmds-path-rewrite [ses_f08b4a225ffdJ0nePZFWs0d1NL].md",
           "bytes": 42661
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t1-baseline-capture [ses_f2202fc0effe8664lmOAhHH3yB].md",
-          "bytes": 25383
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t7-trigger-snippet [ses_f219ee8dcffe2KwBWYUS5MGnB6].md",
-          "bytes": 43923
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - klip-ani-cli-indo-tidak-beraturan [ses_f110f20a9ffeDYr9hhWexyebcd].md",
@@ -5359,47 +5176,39 @@
           "bytes": 42165
         }
       ],
-      "bytes": 819191,
+      "bytes": 819108,
       "truncated": false
     },
     {
-      "id": "rem-257",
+      "id": "rem-248",
       "files": [
         {
-          "path": "01 - Projects/Snipset/plans/2026-09-11-dpa-and-subprocessors-trust-pages.md",
-          "bytes": 33933
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - t1-resolveplan-blank-fix [ses_f0caa104bffeiADMvy6PkMnb4N].md",
+          "bytes": 10080
         },
         {
-          "path": "01 - Projects/ai-skills/plans/2026-10-02-opencode-history-to-obsidian.md",
-          "bytes": 37850
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - t2-secure-cookie-option [ses_f0caa104affedh967X93j9TdoK].md",
+          "bytes": 30754
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - author-ch05-efek-kebenaran-ilusi [ses_f1bcfac88ffeKRiieJx2NIX0Xt].md",
-          "bytes": 38680
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - cari-password-ig-di-snipset-db [ses_f3069efdaffeJAI3cY0nf4YvtX].md",
+          "bytes": 33418
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - t1-tracks-worker-first [ses_f0c6ef12effe9vw4a6OkrHFOuo].md",
-          "bytes": 34168
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - t2-route-html-response [ses_f0bfb8c13ffeIZcssegEv2dpBb].md",
-          "bytes": 28586
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - harden-rollback-verification [ses_f15f8c558ffe0yVboAYjjgB1g3].md",
-          "bytes": 36994
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c9b-i18n-literal-budget [ses_f24e1c0ddffe7huB4fCkTRFtnl].md",
+          "bytes": 30987
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - fix-shellcheck-in-scripts-dev-and-push [ses_f24fc2fbcffek9QtkQvl7KNJK7].md",
           "bytes": 34821
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t18-rulechat-page-cases [ses_f210addbdffeQTjeppGzm4VYHb].md",
-          "bytes": 37900
-        },
-        {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - w1-t1-rust-service-skeleton [ses_f24afe4d8ffe3GbLffWpIQW5AX].md",
           "bytes": 37614
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c08-page-fallback-dial-path [ses_f1b94e615ffdvBp154m0cGnZn4].md",
+          "bytes": 30561
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c11-t2-focus-false-fix [ses_f1b938f8affeRki9fVqqFZ4RUn].md",
@@ -5408,6 +5217,18 @@
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c12-t3-rust-policy-fix [ses_f1b938f89ffebM0npIApaMYhvv].md",
           "bytes": 33434
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t2-live-db-evidence [ses_f1b184afeffeAKfU8xO9wRidGZ].md",
+          "bytes": 32197
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - dedup-d1-d2-double-cues [ses_f178408ecffeAz3lrqq1m32lwe].md",
+          "bytes": 32189
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - c8-h1-semantics [ses_f0bcb2fb9ffecH96lcem84i3lM].md",
+          "bytes": 30997
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c2-frontend-image-render-path [ses_f0b3bb2cfffePx1O3zIOQSoxIk].md",
@@ -5426,6 +5247,10 @@
           "bytes": 33892
         },
         {
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - pembersihan-karakter-markdown-pada-txt [ses_f2035a18ffferzgK86EVdpxW56].md",
+          "bytes": 31033
+        },
+        {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t10-vault-agents-schema-line [ses_f21a78477ffe3Ti35hzlTkuhmM].md",
           "bytes": 36076
         },
@@ -5438,6 +5263,10 @@
           "bytes": 34754
         },
         {
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - c4-d1-migrations [ses_f128cf1e2ffeAHIXPAN1eVxHRy].md",
+          "bytes": 32893
+        },
+        {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - c5-auth-lib-and-test [ses_f128cf1e1ffelmtDbUbIG66Jcx].md",
           "bytes": 37761
         },
@@ -5446,24 +5275,36 @@
           "bytes": 35668
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - ground-obsidian-vault-conventions [ses_f060a02beffe3KvYb1o0fy9nIf].md",
-          "bytes": 35198
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - f1-wire-lint-script [ses_f12784634ffe6ESszWuSAiIkke].md",
+          "bytes": 31457
         },
         {
-          "path": "05 - Conversations/tmp-opencode-rtk-probe/2026-10-01 - git-status-di-tmp-opencode-rtk-probe [ses_f07e123b7ffeb59Z2FmvEiPYGg].md",
-          "bytes": 37058
-        },
-        {
-          "path": "05 - Conversations/tmp-opencode-rtk-probe/2026-10-01 - git-status-di-tmp-opencode-rtk-probe [ses_f07e1deb7ffeoXH1LGqqDkWYrw].md",
-          "bytes": 37058
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-10-01 - instalasi-aplikasi-zapfast-di-linux [ses_f07276a04ffeDFt375ER0049sn].md",
+          "bytes": 30649
         }
       ],
-      "bytes": 819066,
+      "bytes": 818856,
       "truncated": false
     },
     {
-      "id": "rem-258",
+      "id": "rem-249",
       "files": [
+        {
+          "path": "01 - Projects/Snipset/plans/2026-09-05-clipboard-history-filter-fix.md",
+          "bytes": 22719
+        },
+        {
+          "path": "01 - Projects/Snipset/plans/2026-09-10-frontend-audio-wiring-continuation.md",
+          "bytes": 25345
+        },
+        {
+          "path": "01 - Projects/fasttrack/plans/2026-10-02-access-code-email-gate.md",
+          "bytes": 24961
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - author-ch03-dua-sistem-berpikir [ses_f1bd0152dffeWwY8HKExQZzr3P].md",
+          "bytes": 23101
+        },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - c11-render-blocking-chain [ses_f1b853c1effeSLn32wZeqmU1gE].md",
           "bytes": 26039
@@ -5473,36 +5314,32 @@
           "bytes": 25651
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - c7-font-loading-fout-check [ses_f1b853ca8ffeVkc644dPF6gnkz].md",
-          "bytes": 32481
+          "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - c8-media-cls-sampling [ses_f1b853c88ffenea3buEfQBOtlg].md",
+          "bytes": 22585
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - f6-f8-skills-md-cleanup [ses_f0bda3c5cffebEBhFKpabFiAIh].md",
+          "bytes": 22177
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - t2-full-skill-download [ses_f0bedbf76ffeu10TDyI8NcWCxD].md",
           "bytes": 26175
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - t2-secure-cookie-option [ses_f0caa104affedh967X93j9TdoK].md",
-          "bytes": 30754
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - t2-route-html-response [ses_f0bfb8c13ffeIZcssegEv2dpBb].md",
+          "bytes": 28586
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-23 - cari-password-ig-di-snipset-db [ses_f3069efdaffeJAI3cY0nf4YvtX].md",
-          "bytes": 33418
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t16-id-page-pricing-link [ses_f2119854cffeYQbhDX99c75f3l].md",
+          "bytes": 23401
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c9b-i18n-literal-budget [ses_f24e1c0ddffe7huB4fCkTRFtnl].md",
-          "bytes": 30987
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t5-style-parity-group [ses_f2129c1d7ffeWJcH1C47lxYdPH].md",
+          "bytes": 22233
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - w1-t6-source-type-variant [ses_f24aed193ffeCmqLBKW64wxe4U].md",
           "bytes": 28832
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c01-overlay-window-options [ses_f1b94e652ffelIUBWhA6MiE9xa].md",
-          "bytes": 8231
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c04-rust-focus-close-policy [ses_f1b94e627ffe60Yg1Ay1fojbW1].md",
-          "bytes": 27246
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c06-watchdog-vs-overlay [ses_f1b94e617ffeFnsEWKK2XQJob7].md",
@@ -5513,20 +5350,16 @@
           "bytes": 29172
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c08-page-fallback-dial-path [ses_f1b94e615ffdvBp154m0cGnZn4].md",
-          "bytes": 30561
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c10-scope-discipline-review [ses_f083c33a1ffexrWeOqemkxr8Tu].md",
+          "bytes": 23323
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t2-live-db-evidence [ses_f1b184afeffeAKfU8xO9wRidGZ].md",
-          "bytes": 32197
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c13-live-db-forensics [ses_f0b3a72bdffe9EWEeAa5cSFJgV].md",
+          "bytes": 24045
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - dedup-d1-d2-double-cues [ses_f178408ecffeAz3lrqq1m32lwe].md",
-          "bytes": 32189
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - c8-h1-semantics [ses_f0bcb2fb9ffecH96lcem84i3lM].md",
-          "bytes": 30997
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c8-update-variant-coverage [ses_f0b3b5144ffeoKs2KZiFCYYRoD].md",
+          "bytes": 23235
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k2-i18n-key-contract-test [ses_f08a83e6effeW3xPggkxZswlrv].md",
@@ -5537,6 +5370,10 @@
           "bytes": 30355
         },
         {
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-llm-wiki-clusters [ses_f26e12945ffed0hPg61MbSOM2R].md",
+          "bytes": 23525
+        },
+        {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-root-para-contract [ses_f26e129b8fferR6UcxLumT6W1C].md",
           "bytes": 26043
         },
@@ -5545,47 +5382,47 @@
           "bytes": 28919
         },
         {
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t1-baseline-capture [ses_f2202fc0effe8664lmOAhHH3yB].md",
+          "bytes": 25383
+        },
+        {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t8-prune-dead-plasmoids [ses_f21ef8085ffeWzN1OGOf9a5XMh].md",
           "bytes": 30084
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - install-qwen-image-2-1-gguf-on-vps [ses_f1bb38df4ffef2TJFLE2ilysRY].md",
+          "bytes": 25707
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - perbaikan-karakter-aneh-di-untitled-note-txt [ses_f1de0c6d2ffeJtrD4gklXmKQMa].md",
+          "bytes": 23397
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - estimasi-konsumsi-daya-pc [ses_f169bd3e5ffeXY7mDgrtkXmEP6].md",
           "bytes": 25683
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - c4-d1-migrations [ses_f128cf1e2ffeAHIXPAN1eVxHRy].md",
-          "bytes": 32893
-        },
-        {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - c6-auth-api-routes [ses_f128cf1dfffeVl7N211Pu5L8vc].md",
           "bytes": 26047
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - f4-entitlement-enforcement [ses_f127845eeffev7jMMNTTlUNpJH].md",
+          "bytes": 24563
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - pengecekan-kernel-duplikat [ses_f12f86572ffeFdF6xFU65YDGpv].md",
           "bytes": 25437
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-10-01 - instalasi-aplikasi-zapfast-di-linux [ses_f07276a04ffeDFt375ER0049sn].md",
-          "bytes": 30649
-        },
-        {
-          "path": "05 - Conversations/tmp-opencode-echotest/2026-09-29 - say-ok [ses_f10bd7e27ffemkwClnazU6IKYv].md",
-          "bytes": 27336
-        },
-        {
-          "path": "05 - Conversations/tmp-opencode-tool-test/2026-09-27 - daftar-file-dalam-direktori [ses_f1d25070bffeL55PdwqAHF0U42].md",
-          "bytes": 28354
-        },
-        {
-          "path": "05 - Conversations/tmp/2026-09-29 - pong-response-request [ses_f10e14b33fferuz3EJf1TBr4KJ].md",
-          "bytes": 27336
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-30 - latar-terminal-hitam-tajam [ses_f0b865202ffeO56x1zK6Fzv8Ws].md",
+          "bytes": 25036
         }
       ],
-      "bytes": 819168,
+      "bytes": 816861,
       "truncated": false
     },
     {
-      "id": "rem-259",
+      "id": "rem-250",
       "files": [
         {
           "path": "01 - Projects/Snipset/plans/2026-09-04-feature-request-form.md",
@@ -5596,20 +5433,28 @@
           "bytes": 17173
         },
         {
-          "path": "01 - Projects/Snipset/plans/2026-09-05-clipboard-history-filter-fix.md",
-          "bytes": 22719
-        },
-        {
           "path": "01 - Projects/Snipset/plans/2026-09-05-global-bulk-actions.md",
           "bytes": 19064
+        },
+        {
+          "path": "01 - Projects/Snipset/plans/2026-09-06-magic-menu-content-type-and-auto-close.md",
+          "bytes": 15258
+        },
+        {
+          "path": "01 - Projects/Snipset/plans/2026-09-06-stt-smart-fast-path-refinement.md",
+          "bytes": 13978
+        },
+        {
+          "path": "01 - Projects/Snipset/plans/2026-09-07-website-changelog-sync-curation-and-deploy.md",
+          "bytes": 13286
         },
         {
           "path": "01 - Projects/Snipset/plans/2026-09-08-desktop-update-changelog-popup.md",
           "bytes": 17099
         },
         {
-          "path": "01 - Projects/Snipset/plans/2026-09-10-frontend-audio-wiring-continuation.md",
-          "bytes": 25345
+          "path": "01 - Projects/Snipset/plans/2026-09-11-audio-save-snippet-metadata-and-group-matching.md",
+          "bytes": 15495
         },
         {
           "path": "01 - Projects/Snipset/plans/2026-09-11-fix-clipboard-image-draft-vision-metadata.md",
@@ -5628,179 +5473,16 @@
           "bytes": 16154
         },
         {
-          "path": "01 - Projects/fasttrack/plans/2026-10-02-access-code-email-gate.md",
-          "bytes": 24961
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - author-ch02-anatomi-hoaks [ses_f1bd048e2ffe27C67xY7Tw9FNT].md",
-          "bytes": 18000
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - author-ch03-dua-sistem-berpikir [ses_f1bd0152dffeWwY8HKExQZzr3P].md",
-          "bytes": 23101
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - c5-checkpoint-fetch-path [ses_f1b853cb4ffegvjI9fis1HmrZa].md",
-          "bytes": 20050
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - c8-media-cls-sampling [ses_f1b853c88ffenea3buEfQBOtlg].md",
-          "bytes": 22585
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - v2-regression-suite-check [ses_f1b7b4f16ffewG2sTOUFUGWhNk].md",
-          "bytes": 19876
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - add-bare-path-worker-route [ses_f11d8a839ffe5KjC5ftVqHlCwL].md",
-          "bytes": 17688
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - c2-dns-origin-ownership [ses_f11e1c60dffeFZnaSespic20BG].md",
-          "bytes": 21639
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - c3-astro-trailing-behavior [ses_f11e1c60affeylx10nKeGM6UT9].md",
-          "bytes": 22137
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - gate-repro-test-off-network [ses_f11d49318ffek0MLsMIz21Mj1b].md",
-          "bytes": 18102
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - repro-green-live-proof [ses_f11d712c9ffeMdb1Vvivj97Cv3].md",
-          "bytes": 20678
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - f4-gate-observability [ses_f0c8fa360ffekIvSGLRAhdiady].md",
-          "bytes": 16375
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - f6-f8-skills-md-cleanup [ses_f0bda3c5cffebEBhFKpabFiAIh].md",
-          "bytes": 22177
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - t3-session-aware-header [ses_f0c766ee6ffepfMHziuhM9lG49].md",
-          "bytes": 18843
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t16-id-page-pricing-link [ses_f2119854cffeYQbhDX99c75f3l].md",
-          "bytes": 23401
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t5-style-parity-group [ses_f2129c1d7ffeWJcH1C47lxYdPH].md",
-          "bytes": 22233
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c02-overlay-test-coverage [ses_f1b94e651ffe651dYHs1WkPLkX].md",
-          "bytes": 20800
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f07334a54ffeKzsd3wwfN0eQdg].md",
-          "bytes": 19919
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c10-scope-discipline-review [ses_f083c33a1ffexrWeOqemkxr8Tu].md",
-          "bytes": 23323
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c6-checkout-v7-review [ses_f083c33a2ffe2cFzmwJeQtsK0G].md",
-          "bytes": 17153
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c8-update-variant-coverage [ses_f0b3b5144ffeoKs2KZiFCYYRoD].md",
-          "bytes": 23235
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - clone-repo-snipset-ke-folder-project [ses_f311cf11bffee3GuzHEwS9Aq24].md",
-          "bytes": 19967
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - contour-vs-console-untuk-ngoding-arch-linux [ses_f31365691ffef5u31INM3Umzlv].md",
-          "bytes": 18037
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-areas-and-archives [ses_f26e129a0ffelHBzXj324AJcn2].md",
-          "bytes": 16179
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t3-chown-usr-to-root [ses_f21fd0c42ffeVWzsyzPforqxBm].md",
-          "bytes": 17056
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t7-autostart-cleanup-scoped [ses_f21f5f675ffeEJpyGL471vS2kD].md",
-          "bytes": 18234
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - perbaikan-karakter-aneh-di-untitled-note-txt [ses_f1de0c6d2ffeJtrD4gklXmKQMa].md",
-          "bytes": 23397
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - c7-middleware-gate [ses_f128cf1deffe7T4oA3pUtgxa58].md",
-          "bytes": 19910
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - c8-starlight-content [ses_f128cf1aeffeMfTgDRaZD1K0oM].md",
-          "bytes": 18058
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - gagal-mounting-dev-sda4-read-only-permanen [ses_f12f492faffe4H4HMSU5gq5i1E].md",
-          "bytes": 21832
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-30 - latar-terminal-hitam-tajam [ses_f0b865202ffeO56x1zK6Fzv8Ws].md",
-          "bytes": 25036
-        }
-      ],
-      "bytes": 819200,
-      "truncated": false
-    },
-    {
-      "id": "rem-260",
-      "files": [
-        {
-          "path": "01 - Projects/Snipset/plans/2026-09-04-system-requirements-deep-spec.md",
-          "bytes": 11168
-        },
-        {
-          "path": "01 - Projects/Snipset/plans/2026-09-05-benchmarks-investor-overhaul.md",
-          "bytes": 5935
-        },
-        {
-          "path": "01 - Projects/Snipset/plans/2026-09-06-magic-menu-content-type-and-auto-close.md",
-          "bytes": 15258
-        },
-        {
-          "path": "01 - Projects/Snipset/plans/2026-09-06-stt-smart-fast-path-refinement.md",
-          "bytes": 13978
-        },
-        {
-          "path": "01 - Projects/Snipset/plans/2026-09-07-website-changelog-sync-curation-and-deploy.md",
-          "bytes": 13286
-        },
-        {
-          "path": "01 - Projects/Snipset/plans/2026-09-11-audio-save-snippet-metadata-and-group-matching.md",
-          "bytes": 15495
-        },
-        {
-          "path": "01 - Projects/Snipset/plans/2026-09-11-enhance-ollama-vision-detection-ocr-fallback-magic-menu-groups.md",
-          "bytes": 5712
-        },
-        {
-          "path": "01 - Projects/Snipset/plans/2026-09-11-fix-activity-journal-vision-screen-capture-pipeline.md",
-          "bytes": 5986
-        },
-        {
           "path": "01 - Projects/Snipset/plans/2026-09-15-notes-table-support.md",
           "bytes": 13793
         },
         {
-          "path": "01 - Projects/fasttrack/plans/2026-10-01-tracks-pretty-render.md",
-          "bytes": 7747
-        },
-        {
           "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - author-ch01-pengantar [ses_f1bd07a98ffeaW1YBVkMYzegJi].md",
           "bytes": 12207
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - author-ch02-anatomi-hoaks [ses_f1bd048e2ffe27C67xY7Tw9FNT].md",
+          "bytes": 18000
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - author-ch04-heuristik-bias [ses_f1bcfe5d1ffe38goLPs3DsNxbz].md",
@@ -5827,6 +5509,141 @@
           "bytes": 11906
         },
         {
+          "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - c5-checkpoint-fetch-path [ses_f1b853cb4ffegvjI9fis1HmrZa].md",
+          "bytes": 20050
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - v2-regression-suite-check [ses_f1b7b4f16ffewG2sTOUFUGWhNk].md",
+          "bytes": 19876
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-29 - bloatware-aman-dihapus-di-folder-ps2 [ses_f12ca1540ffeaJbT0YmFnTzfkB].md",
+          "bytes": 15016
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - add-bare-path-worker-route [ses_f11d8a839ffe5KjC5ftVqHlCwL].md",
+          "bytes": 17688
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - add-starlight-404-page [ses_f121c702fffensgcCcqQnvifmc].md",
+          "bytes": 12789
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - c2-dns-origin-ownership [ses_f11e1c60dffeFZnaSespic20BG].md",
+          "bytes": 21639
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - c3-astro-trailing-behavior [ses_f11e1c60affeylx10nKeGM6UT9].md",
+          "bytes": 22137
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - c5-middleware-redirect-audit [ses_f11e1c5feffefzOkx53GTKn7F7].md",
+          "bytes": 12202
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - convert-mdx-pages-to-md [ses_f121c6fe6ffee4w7VVTq8faikS].md",
+          "bytes": 13426
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - gate-repro-test-off-network [ses_f11d49318ffek0MLsMIz21Mj1b].md",
+          "bytes": 18102
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - remove-api-route-static-links [ses_f12268e2fffeZdbgSQH4HPk1iT].md",
+          "bytes": 14376
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - repro-green-live-proof [ses_f11d712c9ffeMdb1Vvivj97Cv3].md",
+          "bytes": 20678
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - trace-prod-307-source [ses_f11d54b91ffe9QIUIOtZzkQJIb].md",
+          "bytes": 15516
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - c12-ui-funnel-links [ses_f0cb022a7ffeczuplyxIqls170].md",
+          "bytes": 14032
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - c5-route-gating-matrix [ses_f0cb022acffe5Tioan8JT1z6OK].md",
+          "bytes": 12150
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - c6-auth-lib-helpers [ses_f0cb022abffe5JjZQm6ARnaEI3].md",
+          "bytes": 13571
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - f4-gate-observability [ses_f0c8fa360ffekIvSGLRAhdiady].md",
+          "bytes": 16375
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - t3-session-aware-header [ses_f0c766ee6ffepfMHziuhM9lG49].md",
+          "bytes": 18843
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c9a-mock-two-instance-design [ses_f24e1c0dfffegqZPQG2JywupeF].md",
+          "bytes": 15149
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c02-overlay-test-coverage [ses_f1b94e651ffe651dYHs1WkPLkX].md",
+          "bytes": 20800
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - c6-checkout-v7-review [ses_f083c33a2ffe2cFzmwJeQtsK0G].md",
+          "bytes": 17153
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k10-rust-command-registration [ses_f08a79494ffew7V8XgJQCpPgoj].md",
+          "bytes": 15994
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - clone-repo-snipset-ke-folder-project [ses_f311cf11bffee3GuzHEwS9Aq24].md",
+          "bytes": 19967
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-23 - contour-vs-console-untuk-ngoding-arch-linux [ses_f31365691ffef5u31INM3Umzlv].md",
+          "bytes": 18037
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-areas-and-archives [ses_f26e129a0ffelHBzXj324AJcn2].md",
+          "bytes": 16179
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t2b-create-oomd-swap-threshold [ses_f2202fc05ffe8uCvZOi3dm5HUO].md",
+          "bytes": 12412
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t3-chown-usr-to-root [ses_f21fd0c42ffeVWzsyzPforqxBm].md",
+          "bytes": 17056
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t7-autostart-cleanup-scoped [ses_f21f5f675ffeEJpyGL471vS2kD].md",
+          "bytes": 18234
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - c7-middleware-gate [ses_f128cf1deffe7T4oA3pUtgxa58].md",
+          "bytes": 19910
+        }
+      ],
+      "bytes": 813560,
+      "truncated": false
+    },
+    {
+      "id": "rem-251",
+      "files": [
+        {
+          "path": "01 - Projects/Snipset/plans/2026-09-04-system-requirements-deep-spec.md",
+          "bytes": 11168
+        },
+        {
+          "path": "01 - Projects/Snipset/plans/2026-09-11-enhance-ollama-vision-detection-ocr-fallback-magic-menu-groups.md",
+          "bytes": 5712
+        },
+        {
+          "path": "01 - Projects/fasttrack/plans/2026-10-01-tracks-pretty-render.md",
+          "bytes": 7747
+        },
+        {
           "path": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - c4-mathjax-jank-analysis [ses_f1b853cd3ffeuxRqBU58zMB5zx].md",
           "bytes": 8139
         },
@@ -5835,24 +5652,8 @@
           "bytes": 11729
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-29 - bloatware-aman-dihapus-di-folder-ps2 [ses_f12ca1540ffeaJbT0YmFnTzfkB].md",
-          "bytes": 15016
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - add-starlight-404-page [ses_f121c702fffensgcCcqQnvifmc].md",
-          "bytes": 12789
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - c5-middleware-redirect-audit [ses_f11e1c5feffefzOkx53GTKn7F7].md",
-          "bytes": 12202
-        },
-        {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - c8-failing-repro-test [ses_f11e1c5efffe9Sgi503yZAyzEL].md",
           "bytes": 5881
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - convert-mdx-pages-to-md [ses_f121c6fe6ffee4w7VVTq8faikS].md",
-          "bytes": 13426
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - gate-repro-test-off-network [ses_f11d54b90ffeFqcmAInjIgFvou].md",
@@ -5867,16 +5668,12 @@
           "bytes": 9179
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - trace-prod-307-source [ses_f11d54b91ffe9QIUIOtZzkQJIb].md",
-          "bytes": 15516
-        },
-        {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - c1-login-entry-flow [ses_f0cb02304ffeR8l8dw5zek0mxH].md",
           "bytes": 11578
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - c12-ui-funnel-links [ses_f0cb022a7ffeczuplyxIqls170].md",
-          "bytes": 14032
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - c11-test-gap-analysis [ses_f0cb022a8ffexiTySbyK0ph2Po].md",
+          "bytes": 11189
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - c2-callback-exchange-flow [ses_f0cb02302ffe6IgSLSxpQTGqLr].md",
@@ -5885,14 +5682,6 @@
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - c3-entitlement-gate-403 [ses_f0cb02302ffd3tkA4W0wKhwH74].md",
           "bytes": 11175
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - c5-route-gating-matrix [ses_f0cb022acffe5Tioan8JT1z6OK].md",
-          "bytes": 12150
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - c6-auth-lib-helpers [ses_f0cb022abffe5JjZQm6ARnaEI3].md",
-          "bytes": 13571
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - c7-entitlement-precedence [ses_f0cb022aaffer0CRHfU93sUs76].md",
@@ -5911,10 +5700,6 @@
           "bytes": 7136
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - t1-resolveplan-blank-fix [ses_f0caa104bffeiADMvy6PkMnb4N].md",
-          "bytes": 10080
-        },
-        {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - v2-full-regression-suite [ses_f0ca32ef7ffeCr6TwiQ1kByRet].md",
           "bytes": 8887
         },
@@ -5927,28 +5712,20 @@
           "bytes": 7873
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c9a-mock-two-instance-design [ses_f24e1c0dfffegqZPQG2JywupeF].md",
-          "bytes": 15149
-        },
-        {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c9c-error-map-placement [ses_f24e1c0d8ffeEBawjVLIhLD0ay].md",
           "bytes": 11534
+        },
+        {
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c01-overlay-window-options [ses_f1b94e652ffelIUBWhA6MiE9xa].md",
+          "bytes": 8231
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c09-live-desktop-state [ses_f1b94e608ffeB9d3nRvlEbw2um].md",
           "bytes": 8901
         },
         {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - c10-overlay-routing-safety [ses_f1b94e607ffeeCZ9jw4SlFTjw6].md",
-          "bytes": 15930
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - k10-rust-command-registration [ses_f08a79494ffew7V8XgJQCpPgoj].md",
-          "bytes": 15994
-        },
-        {
-          "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t2b-create-oomd-swap-threshold [ses_f2202fc05ffe8uCvZOi3dm5HUO].md",
-          "bytes": 12412
+          "path": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - h12-verification-host-readiness [ses_f08b3c992ffewIN7JRnSOlGpoa].md",
+          "bytes": 10678
         },
         {
           "path": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t6-ollama-memory-cap [ses_f21e9fb2bffed8MVvyyCWLCir6].md",
@@ -5971,7 +5748,7 @@
           "bytes": 7190
         }
       ],
-      "bytes": 584409,
+      "bytes": 255270,
       "truncated": false
     }
   ]

@@ -82,7 +82,10 @@ function main(argv) {
     return 0;
   }
 
-  const query = argv.filter((a) => !a.startsWith('--')).join(' ');
+  const rest = argv.filter((a) => !a.startsWith('--'));
+  // `tgrep` is the documented search form (contract §5a); taken literally it
+  // would leak into the query and every documented call would miss.
+  const query = (rest[0] === 'tgrep' ? rest.slice(1) : rest).join(' ');
   if (!query) {
     console.log(`${byId.size} distinct ids across all chunks:`);
     for (const id of [...byId.keys()].sort()) console.log(id);

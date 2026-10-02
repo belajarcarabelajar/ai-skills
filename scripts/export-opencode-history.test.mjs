@@ -267,6 +267,110 @@ test('--dry-run over a vault that already exists still leaves it byte-identical'
   }
 });
 
+// ---------- 3b. the completion line must tell the truth about a dry run ----------
+//
+// WHY THESE FOUR EXIST
+//
+// A dry run used to end with `✅ nothing to write: every note was already up to
+// date.` That sentence was FALSE, and false in the specific way a summary is
+// worst at: it described a check that never happened. A dry run writes nothing,
+// so created/written/unchanged are all 0 by construction — 0 because nothing was
+// compared, not because everything matched. Keying the completion line off that
+// zero printed a confident claim on top of an absence of evidence.
+//
+// The message is now `✅ dry run: N session(s) rendered, nothing written.`, and
+// nothing was checking that it stayed that way. These tests are the check.
+
+test('a dry run never claims the notes were already up to date', async () => {
+  const f = fixture('dry-run-claim');
+  try {
+    const r = await run(['--db', f.fx.path, '--vault', f.vault, '--dry-run']);
+    assert.equal(r.code, 0, r.stderr);
+
+    // Both halves of the old sentence, asserted separately so the failure says
+    // which one came back.
+    const said = `${r.stdout}\n${r.stderr}`;
+    assert.equal(said.includes('already up to date'), false, `a dry run claimed the notes were up to date:\n${said}`);
+    assert.equal(said.includes('nothing to write'), false, `a dry run used the "nothing to write" wording:\n${said}`);
+
+    // What it says instead: the one thing a dry run actually knows, which is how
+    // much it rendered.
+    assert.match(said, /^✅ dry run: \d+ session\(s\) rendered, nothing written\.$/m, `the dry run completion line is missing:\n${said}`);
+    assert.equal(numberFrom(r.stdout, 'sessions processed'), 3, 'the dry run rendered nothing, so the line above is hollow');
+  } finally {
+    cleanup(f);
+  }
+});
+
+test('a dry run writes nothing, which is why it must not claim the notes matched', async () => {
+  const f = fixture('dry-run-writes-nothing');
+  try {
+    assert.equal(existsSync(f.vault), false, 'the fixture must start with no vault at all');
+
+    const r = await run(['--db', f.fx.path, '--vault', f.vault, '--dry-run']);
+    assert.equal(r.code, 0, r.stderr);
+
+    // The behaviour the message describes. Asserted next to the message assertion
+    // above so the two cannot drift apart: if a future change made the dry run
+    // write something, "nothing written" would be the false claim instead.
+    assert.equal(existsSync(f.vault), false, 'the dry run created the vault');
+    assert.deepEqual(allFiles(f.vault), [], 'the dry run left files in the vault');
+    assert.equal(numberFrom(r.stdout, 'notes created'), 0);
+    assert.equal(numberFrom(r.stdout, 'notes written'), 0);
+    // Zero for the trivial reason, not the reported one: `unchanged` is what a
+    // real comparison produces, and this run compared nothing.
+    assert.equal(numberFrom(r.stdout, 'notes unchanged'), 0);
+    assert.match(r.stdout, /^dry run: yes$/m, 'and it admits to being the reason');
+  } finally {
+    cleanup(f);
+  }
+});
+
+test('a real second run over an unchanged vault DOES say every note was up to date', async () => {
+  const f = fixture('uptodate-real');
+  try {
+    const first = await run(['--db', f.fx.path, '--vault', f.vault]);
+    assert.equal(first.code, 0, first.stderr);
+
+    // The first run wrote, so it must not be the run that says nothing changed.
+    const firstSaid = `${first.stdout}\n${first.stderr}`;
+    assert.equal(firstSaid.includes('already up to date'), false, `the first run claimed the notes were up to date:\n${firstSaid}`);
+    assert.match(firstSaid, /^✅ 3 note\(s\) written, 0 unchanged\.$/m, `the first run did not report writing:\n${firstSaid}`);
+
+    const second = await run(['--db', f.fx.path, '--vault', f.vault]);
+    assert.equal(second.code, 0, second.stderr);
+
+    // Here the claim is earned: 3 notes were really compared against the 3 on
+    // disk and 0 of them differed. This test exists so the dry-run fix cannot be
+    // satisfied by deleting the message — the honest summary of an unchanged
+    // vault is still the one worth printing.
+    const secondSaid = `${second.stdout}\n${second.stderr}`;
+    assert.match(secondSaid, /^✅ nothing to write: every note was already up to date\.$/m, `the second run did not report the notes as up to date:\n${secondSaid}`);
+    assert.equal(numberFrom(second.stdout, 'notes written'), 0, 'a second run reported a write over unchanged bytes');
+    assert.equal(numberFrom(second.stdout, 'notes created'), 0);
+    assert.equal(numberFrom(second.stdout, 'notes unchanged'), 3, 'the zero written must come from 3 real comparisons, not from skipping them');
+  } finally {
+    cleanup(f);
+  }
+});
+
+test('a real first run reports writing, and never claims the notes were up to date', async () => {
+  const f = fixture('first-run-not-uptodate');
+  try {
+    const r = await run(['--db', f.fx.path, '--vault', f.vault, '--limit', '1']);
+    assert.equal(r.code, 0, r.stderr);
+
+    const said = `${r.stdout}\n${r.stderr}`;
+    assert.match(said, /^✅ 1 note\(s\) written, 0 unchanged\.$/m, `the first run did not report the write:\n${said}`);
+    assert.equal(said.includes('already up to date'), false, `a run that wrote a note claimed the notes were up to date:\n${said}`);
+    // Same wording guard as the dry run, for the same reason: `nothing to write`
+    // is the other way this false claim can be spelled.
+    assert.equal(said.includes('nothing to write'), false, `a run that wrote a note said there was nothing to write:\n${said}`);
+  } finally {
+    cleanup(f);
+  }
+});
+
 // ---------- 4. --limit ----------
 
 test('--limit 0 processes nothing and writes nothing', async () => {

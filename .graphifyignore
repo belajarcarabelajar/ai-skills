@@ -48,3 +48,103 @@ node_modules/
 # maintained project artifacts, so it is excluded to keep the graph
 # describing the real repository. Present in the working copy.
 spike-out/
+
+# ------------------------------------------------------------
+# GROUP 5 — CLOUD EXTRACTION BOUNDARY (added 2026-10-02)
+# ------------------------------------------------------------
+#
+# WHY THIS GROUP EXISTS
+#
+# The scope note at the top of this file was written 2026-10-01 and states
+# plainly that no cloud-extraction boundary is declared here yet, and that this
+# file must be revisited before the first cloud run. This group is that revisit.
+# The earlier note is left byte-for-byte unchanged so that the diff of this
+# addition shows added lines only; where the two disagree, this group is the
+# later and correct statement.
+#
+# The measured fact, from docs/graphify-integration.md §1 and §6.4: markdown and
+# other document extraction REQUIRES an LLM backend, there is no local-only mode
+# for .md, and the only viable backend on this machine is a cloud model
+# (gpt-oss:120b-cloud via Ollama). A full `graphify extract` run here therefore
+# submits this repository's document content to a cloud provider. There is no
+# local model to fall back to; the local ones were measured unusable (§5).
+#
+# TWO CASES, NOT ONE
+#
+# 1. CODE. Symbols come from local AST parsing, which needs no LLM and no key, so
+#    a code-only corpus contributes no document text to any request.
+#    `graphify update` is measured AST-only with no API cost (§6.6).
+# 2. DOCS / PAPERS / IMAGES. These need semantic extraction, so their content is
+#    chunked and transmitted. `--code-only` skips doc/paper/image files (§3.1,
+#    §6.4), which is what keeps that content out of the corpus. UNMEASURED:
+#    whether a code-only `extract` still submits code-derived text to obtain
+#    semantic edges. Until that is measured, read `--code-only` as "docs stay
+#    home", not as "nothing leaves this machine".
+#
+# CONSEQUENCE AND REMEDY
+#
+# Do not run a full `graphify extract` in this repository until you have decided
+# that sending this repository's documentation to a provider is acceptable.
+# `--code-only` is the option that keeps documents local. Pointing `--backend` at
+# a different provider, for example one reached with a Gemini API key, changes WHO
+# receives the corpus, not WHETHER it is transmitted. graphify has no
+# `--no-graphifyignore` flag (§4.1, §6.5), so this file is the only control over
+# what the backend is allowed to accept: an over-broad pattern here is a data
+# exfiltration bug and not a slow build (§4.2).
+#
+# THIS FILE IS NOT A FIREWALL
+#
+# It cannot prevent egress. It decides what ENTERS the corpus, and the ignore
+# files are the only boundary that exists. What is written below is a decision
+# record plus an exclusion list, and it holds only while it is read before a run
+# rather than after one.
+#
+# CREDENTIAL SCAN — 2026-10-02, NOTHING FOUND
+#
+# The working copy was searched, excluding .git/ and node_modules/, for *.env,
+# .env*, *credential*, *secret*, *.key, *.pem, *token* and *.bak* filenames and
+# for API-key-shaped string values. Zero real hits. Two files match a naive
+# secret scan and are false positives: scripts/lib/redact.test.mjs and
+# scripts/lib/redaction-selftest.test.mjs contain synthetic strings such as
+# "api_key=synthetic-fixture-value-1" that exercise the redaction helpers. They
+# are not secrets and are deliberately not listed here.
+# This repository has no credential-bearing directory, so none is named below.
+# A boundary naming paths that do not exist is worse than no boundary. Re-run the
+# scan and add any credential-bearing path HERE, before the first cloud run.
+#
+# The paths below must never enter a cloud extraction corpus. Each was verified
+# present in this working copy on 2026-10-02 with `test -e`.
+#
+# All of them are already excluded above (GROUP 1 to GROUP 4). They are repeated
+# here because under this boundary each is load-bearing for a second and
+# different reason. Patterns in this file are last-match-wins, so repeating them
+# changes nothing about the result; the duplication is deliberate documentation.
+#
+# graphify-out/  Now exists — it did not on 2026-10-01, which is what GROUP 1's
+#                comment records, and that comment is left unchanged. Beyond
+#                being build output, this directory holds
+#                .graphify_chunk_01..03.json and .graphify_semantic_new.json:
+#                the chunked corpus and the semantic merge of what was already
+#                submitted. Re-ingesting graphify-out/ re-sends that payload, so
+#                this is the most load-bearing line in this file.
+# spike-out/     Recorded classifier cassettes rather than source. corpus.json
+#                and jev-cassette.json key cached answers by shell commands that
+#                read Obsidian vault note paths, e.g.
+#                books/kenapa-kita-gampang-percaya-hoax/src/content/11_*.md.
+#                That is another corpus's personal content, cached here.
+# bun.lock       Resolved dependency metadata for third-party packages: the
+#                same class as node_modules/ in GROUP 2, in a single file.
+# .git/          Object store and refs.
+# node_modules/  Vendored third-party packages, 556 MB in this working copy.
+graphify-out/
+spike-out/
+bun.lock
+.git/
+node_modules/
+#
+# Revert: delete this whole GROUP 5 block, from its banner down to the last
+# pattern line above, and the file is back to its 2026-10-01 state — the four
+# original groups and no declared boundary. Per docs/graphify-integration.md §7,
+# take a copy before editing: `cp .graphifyignore .graphifyignore.bak-<date>`.
+# Be clear about what reverting does: it removes the record, not the egress.
+# Markdown extraction still leaves this machine after the block is gone.

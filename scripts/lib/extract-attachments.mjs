@@ -19,14 +19,22 @@
 //      The name is attacker- and accident-controlled, so it contributes at most
 //      a sanitised human hint, never the extension.
 //   3. The filename is a pure function of (session, message, content). Re-runs
-//      rewrite the same path instead of churning the vault (AC-8), and two
+//      target the same path instead of churning the vault (AC-8), and two
 //      different images in one message cannot land on one file.
+//
+// AND THE PATH THEY NAME IS NOT REWRITTEN FOR NOTHING. The destination vault is
+// a git repository with `obsidian-git` installed, which commits and pushes on a
+// 10-minute timer, so writing identical bytes is not a harmless no-op: it is a
+// dirty file, a real commit and a real push. So the bytes on disk are compared
+// first, and an identical file is left completely untouched — not written with
+// the same content, not touched at all, mtime included. Same reason
+// `sync-writer.mjs` does it for notes.
 //
 // Fallback for unrecognised content: `FALLBACK_EXT` (`.bin`). Never a throw —
 // one odd attachment must not abort the import of a whole session.
 
 import { createHash } from 'node:crypto';
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
 // The documented fallback extension. Exported so a caller reporting on an
@@ -167,13 +175,50 @@ function wikilinkEmbed(filePath, base) {
 }
 
 /**
+ * True when `abs` already holds exactly these bytes.
+ *
+ * Read-then-compare, never "write it anyway and look at the mtime afterwards":
+ * the destination vault is a git repository and `obsidian-git` commits and
+ * pushes on a 10-minute timer, so a needless rewrite of identical bytes is a
+ * real commit and a real push, and it buries a genuine edit under no-op
+ * entries. `Buffer.equals` is the whole point — no trimming, no newline
+ * normalisation, no encoding round trip. Anything looser would call a file
+ * unchanged when it is not, and the difference would then never be published.
+ *
+ * @param {string} abs absolute path of the destination file
+ * @param {Buffer} next bytes about to be written
+ * @returns {boolean} true only if the file exists and matches byte for byte
+ */
+function bytesAlreadyOnDisk(abs, next) {
+  let existing;
+  try {
+    existing = readFileSync(abs);
+  } catch (err) {
+    // ENOENT: absent. ENOTDIR: a component above the leaf is a file, so the leaf
+    // cannot exist either. Both mean "nothing there yet", i.e. write it.
+    if (err.code === 'ENOENT' || err.code === 'ENOTDIR') return false;
+    // Anything else — EACCES, EIO — is a real failure and must not be silently
+    // reported as "unchanged", because that would skip a write that has to happen.
+    throw err;
+  }
+  return existing.equals(next);
+}
+
+/**
  * Extract a user message's inline attachments into real files.
  *
  * Each result is either a written attachment
- * `{ index, filename, path, embed, bytes, mime, skipped: false }` or a skipped
- * entry `{ index, filename: null, path: null, embed: null, bytes: 0, reason,
- * skipped: true }`. The index is always the entry's position in `files`, so a
- * skip never shifts the alignment between the log and the note.
+ * `{ index, filename, path, embed, bytes, mime, skipped: false, unchanged }` or a
+ * skipped entry `{ index, filename: null, path: null, embed: null, bytes: 0,
+ * reason, skipped: true }`. The index is always the entry's position in `files`,
+ * so a skip never shifts the alignment between the log and the note.
+ *
+ * `unchanged` is the content-aware-write result and is the point of this flag: it
+ * is true when the destination already held byte-identical content, in which
+ * case the file was not opened for writing at all and its mtime is exactly what
+ * it was. It is false when the bytes were written, whether the file was new or
+ * its content differed. A skipped entry carries no `unchanged` key: nothing was
+ * written and nothing was compared, so any value would be a lie.
  *
  * @param {Array<object|string>} files the `files[]` array from a user message
  * @param {string} destDir directory to write into; created recursively if absent
@@ -230,7 +275,15 @@ export function extractAttachments(files, destDir, opts = {}) {
 
     let result = cache.get(filename);
     if (result === undefined) {
-      writeFileSync(filePath, buffer);
+      // Content-aware write, and the only difference from writing unconditionally.
+      // On a match the file is not opened at all: not "written with the same
+      // bytes", untouched. mtime is left alone because mtime is what
+      // `git status` reads, and a bumped mtime is a dirty file to obsidian-git
+      // no matter what the bytes say. The filename is computed exactly as
+      // before, so a run that used to rewrite a path now skips it instead —
+      // never a different path.
+      const unchanged = bytesAlreadyOnDisk(filePath, buffer);
+      if (!unchanged) writeFileSync(filePath, buffer);
       result = {
         index,
         filename,
@@ -239,6 +292,7 @@ export function extractAttachments(files, destDir, opts = {}) {
         bytes: buffer.length,
         mime: sniffMime(buffer),
         skipped: false,
+        unchanged,
       };
       cache.set(filename, result);
     }

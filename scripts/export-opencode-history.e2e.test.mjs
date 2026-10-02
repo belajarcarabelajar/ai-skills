@@ -42,7 +42,7 @@
 import { test, after } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  existsSync, mkdtempSync, readFileSync, readdirSync, rmSync, statSync, utimesSync,
+  existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, statSync, utimesSync,
 } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
@@ -737,27 +737,61 @@ test('one unnameable session is skipped, reported, and every other note is still
 
 test('--dry-run over a fresh destination leaves no directory behind', async () => {
   const f = fixture('dry-run');
+  // A destination that is a SIBLING of the database, not a child of the same
+  // temp tree the fixture builder wrote into. The claim under test is about what
+  // the exporter did or did not create under `--vault`; it has nothing to say
+  // about what SQLite's own bookkeeping leaves in the database's directory, so
+  // the two must not share a directory that gets enumerated wholesale. The
+  // previous form of this test listed the temp tree and named the `-shm`/`-wal`
+  // sidecars explicitly, which tied "a dry run writes nothing" to the fixture's
+  // journal mode: change `journal_mode`, or have SQLite checkpoint and drop the
+  // sidecars on close, and the assertion breaks without the exporter having done
+  // anything wrong. Asserting on the destination alone cannot break that way.
+  const scratch = mkdtempSync(path.join(tmpdir(), 'e2e-export-dryrun-dest-'));
+  ROOTS.push(scratch);
+  // Two destinations, so that neither half of "creates nothing" is asserted
+  // vacuously: `absent` does not exist at all when the run starts, and `empty`
+  // does exist and is empty. One dry run cannot cover both, and asserting only
+  // one of them leaves the other untested for no reason.
+  const absent = path.join(scratch, 'absent');
+  const empty = path.join(scratch, 'empty');
+  mkdirSync(empty);
   try {
-    const r = await run(['--db', f.fx.path, '--vault', f.vault, '--dry-run']);
+    assert.equal(existsSync(absent), false, 'the absent destination exists before the run');
+    assert.deepEqual(readdirSync(empty), [], 'the empty destination is not empty before the run');
+
+    const r = await run(['--db', f.fx.path, '--vault', absent, '--dry-run']);
     assert.equal(r.code, 0, r.stderr);
 
-    // The destination did not exist before the run and must not exist after.
-    assert.equal(existsSync(f.vault), false, `a dry run created ${f.vault}`);
-    assert.equal(existsSync(f.conversations), false, `a dry run created ${CONVERSATIONS_DIR}/`);
-    assert.equal(existsSync(f.attachments), false, 'a dry run created the attachments directory');
-    assert.deepEqual(allFiles(f.root), [
-      path.join(f.root, 'opencode.db'),
-      path.join(f.root, 'opencode.db-shm'),
-      path.join(f.root, 'opencode.db-wal'),
-    ].filter((p) => existsSync(p)).sort(), 'a dry run left something in the temp tree that is not SQLite bookkeeping');
+    // Destination did not exist -> must still not exist. An implementation that
+    // `mkdir -p`s the vault before checking `--dry-run` fails here.
+    assert.equal(existsSync(absent), false, `a dry run created ${absent}`);
+    assert.deepEqual(allFiles(scratch), [], `a dry run left a file under ${scratch}`);
 
-    // It must still have done the WORK, not short-circuited: a dry run that
+    // And it must still have done the WORK, not short-circuited: a dry run that
     // skips rendering cannot tell you whether the export would succeed.
     assert.equal(numberFrom(r.stdout, 'db sessions'), f.fx.sessionIds.length);
     assert.equal(numberFrom(r.stdout, 'sessions processed'), f.fx.sessionIds.length);
     assert.equal(numberFrom(r.stdout, 'sessions failed'), 0);
     assert.match(r.stdout, /^dry run: yes$/m);
     assert.equal(numberFrom(r.stdout, 'notes created'), 0);
+
+    // Destination existed and was empty -> must be untouched: no new entries, no
+    // files. An implementation that creates the vault but skips the write fails
+    // here rather than being waved through.
+    const second = await run(['--db', f.fx.path, '--vault', empty, '--dry-run']);
+    assert.equal(second.code, 0, second.stderr);
+    assert.deepEqual(readdirSync(empty), [], `a dry run created entries under an empty destination`);
+    assert.deepEqual(allFiles(empty), [], `a dry run wrote files under an empty destination`);
+
+    // Named explicitly in both cases, because "the vault directory holds no
+    // files" and "the two directories the exporter creates for itself are
+    // absent" are different claims, and only the first is implied by the second
+    // run above when the exporter happened to create nothing at all.
+    for (const dest of [absent, empty]) {
+      assert.equal(existsSync(conversationsRoot(dest)), false, `a dry run created ${CONVERSATIONS_DIR}/ under ${dest}`);
+      assert.equal(existsSync(attachmentsRoot(dest)), false, `a dry run created the attachments directory under ${dest}`);
+    }
   } finally {
     f.cleanup();
   }
@@ -771,17 +805,29 @@ test('importing the exporter created nothing, and no run in this file touched a 
   // the module had run an export on import, it would have written into
   // DEFAULT_VAULT_ROOT and created `05 - Conversations/` there, which this
   // assertion would then see.
-  assert.equal(
-    existsSync(REAL_VAULT_CONVERSATIONS),
-    false,
-    `${REAL_VAULT_CONVERSATIONS} exists. If it was absent at import time this file did not create it — but the export is still writing to the real vault.`,
-  );
+  //
+  // This asserts the DELTA, not absolute absence. Asserting
+  // `existsSync(...) === false` conflated "this file never writes to the real
+  // vault" with "the real vault contains no export output" — two different
+  // claims. A real, authorised `bun run export:history` makes the second false
+  // while the first stays true, so the old form failed for a correct build.
+  // The snapshot comparison below is the claim this test actually means, and it
+  // holds whether or not a real export has ever been run.
   if (vaultEntriesAtImport !== null) {
+    const presentNow = readdirSync(DEFAULT_VAULT_ROOT).includes(CONVERSATIONS_DIR);
+    const presentAtImport = vaultEntriesAtImport.includes(CONVERSATIONS_DIR);
     assert.equal(
-      readdirSync(DEFAULT_VAULT_ROOT).includes(CONVERSATIONS_DIR),
-      false,
-      'the real vault gained the conversations directory during this test run',
+      presentNow,
+      presentAtImport,
+      'the real vault gained or lost the conversations directory during this test run',
     );
+    if (!presentAtImport) {
+      assert.equal(
+        existsSync(REAL_VAULT_CONVERSATIONS),
+        false,
+        `${REAL_VAULT_CONVERSATIONS} was absent at import time but exists now, so this test created it`,
+      );
+    }
   }
 
   // The positive half: this file made real runs, so the check above is not

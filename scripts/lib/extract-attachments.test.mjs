@@ -28,7 +28,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync, readFileSync, readdirSync, existsSync, statSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync, readFileSync, readdirSync, existsSync, statSync, utimesSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { deflateSync } from 'node:zlib';
 import path from 'node:path';
@@ -144,6 +144,11 @@ function sandbox(tag) {
 }
 
 const cleanup = (f) => rmSync(f.base, { recursive: true, force: true });
+
+// A fixed past timestamp, so "unchanged" cannot be satisfied by a rewrite that
+// happened to land inside the same millisecond as the read. Same technique, and
+// the same reason, as scripts/lib/sync-writer.test.mjs.
+const OLD_MTIME = new Date('2001-01-01T00:00:00.000Z');
 
 // ---------- 1. the bytes actually land on disk ----------
 
@@ -277,9 +282,11 @@ test('the filename is a pure function of context and content: the same input giv
     assert.equal(first[0].filename, second[0].filename, 're-running the import must not churn the vault');
     assert.equal(first[0].path, second[0].path);
     assert.equal(first[0].embed, second[0].embed);
-    // The second run overwrites the same path rather than adding a file.
+    // The second run leaves one file at that path — and, since the bytes match,
+    // does not write it at all (section 8 is where that is measured).
     assert.equal(readdirSync(f.dest).length, 1);
-    assert.deepEqual(readFileSync(first[0].path), png, 'an idempotent rewrite is still byte-correct');
+    assert.equal(second[0].unchanged, true, 'the identical second run is a no-op, not a rewrite');
+    assert.deepEqual(readFileSync(first[0].path), png, 'the file is still byte-correct');
   } finally {
     cleanup(f);
   }
@@ -555,6 +562,216 @@ test('an unwritable destDir raises, because that is a real failure and not a per
       /ENOTDIR|EEXIST|File exists/,
       'a broken destination must not be reported as a skipped attachment',
     );
+  } finally {
+    cleanup(f);
+  }
+});
+
+// ---------- 8. the write is content-aware, so a re-run pushes nothing ----------
+//
+// WHY THIS SECTION EXISTS. The destination vault is a git repository with
+// `obsidian-git` installed, which commits and pushes on a 10-minute timer with
+// nobody watching. So "rewrote the same bytes" is not a harmless no-op: a bumped
+// mtime is a dirty file to `git status`, which becomes a real commit and a real
+// push, and a genuine 1-line edit ends up buried under no-op entries. The
+// extractor therefore compares bytes before writing and leaves an identical file
+// untouched.
+//
+// Every test here ages the file with `utimesSync` and asserts the mtime BEFORE
+// the returned flag. `unchanged` is what the function claims about itself; the
+// mtime is what the filesystem says happened, and obsidian-git reads the second
+// one. If only one of the two can fail, it should be the one that catches a
+// write.
+
+test('a second run over identical content does not touch the file at all — not even its mtime', () => {
+  const f = sandbox('unchanged');
+  try {
+    const png = makePng(2, 2);
+    const entry = [{ filename: 'shot.png', data: b64(png) }];
+    const opts = { sessionId: 'ses_same', messageId: 'msg_0020' };
+
+    const first = extractAttachments(entry, f.dest, opts);
+    assert.equal(first[0].unchanged, false, 'the first run creates the file, so it is not unchanged');
+    assert.ok(existsSync(first[0].path));
+
+    // Age the file so that "unchanged" cannot be satisfied by a write landing in
+    // the same millisecond as the read.
+    utimesSync(first[0].path, OLD_MTIME, OLD_MTIME);
+    const before = statSync(first[0].path).mtimeMs;
+    assert.equal(before, OLD_MTIME.getTime(), 'the fixture did not take; the test is not measuring what it claims');
+
+    const second = extractAttachments(entry, f.dest, opts);
+    const after = statSync(first[0].path).mtimeMs;
+
+    // mtime first, deliberately: it is the evidence, and it is what a needless
+    // rewrite would have moved.
+    assert.equal(after, before, 'the file was rewritten with identical bytes; obsidian-git would push this');
+    assert.equal(second[0].unchanged, true, 'identical bytes must be reported as unchanged');
+    // ...and skipping costs the caller nothing else it relies on.
+    assert.equal(second[0].skipped, false, 'an unchanged file is not a skipped attachment');
+    assert.equal(second[0].path, first[0].path, 'skipping must not move the target');
+    assert.equal(second[0].embed, first[0].embed);
+    assert.equal(second[0].bytes, png.length);
+    assert.equal(second[0].mime, first[0].mime);
+    assert.deepEqual(readFileSync(second[0].path), png, 'skipping must not corrupt or truncate the file');
+    assert.equal(readdirSync(f.dest).length, 1);
+  } finally {
+    cleanup(f);
+  }
+});
+
+test('a run over identical content is a no-op for every entry, not just the first', () => {
+  const f = sandbox('unchanged-multi');
+  try {
+    const files = [makePng(1, 1, [0xff, 0x00, 0x00]), makeJpeg(), makePdf()]
+      .map((buf, i) => ({ filename: `multi-${i}`, data: b64(buf) }));
+    const opts = { sessionId: 'ses_multi', messageId: 'msg_0021' };
+
+    const first = extractAttachments(files, f.dest, opts);
+    assert.ok(first.every((a) => a.unchanged === false), 'the first run writes everything');
+    for (const a of first) utimesSync(a.path, OLD_MTIME, OLD_MTIME);
+    const before = first.map((a) => statSync(a.path).mtimeMs);
+
+    const second = extractAttachments(files, f.dest, opts);
+    const after = second.map((a) => statSync(a.path).mtimeMs);
+
+    assert.deepEqual(after, before, 'a re-run bumped an mtime');
+    assert.ok(
+      second.every((a) => a.unchanged === true),
+      `not every entry reported unchanged: ${JSON.stringify(second.map((a) => a.unchanged))}`,
+    );
+    assert.deepEqual(second.map((a) => a.filename), first.map((a) => a.filename));
+    assert.equal(readdirSync(f.dest).length, 3);
+  } finally {
+    cleanup(f);
+  }
+});
+
+test('the same payload twice in one call is written once, and both entries report the write that happened', () => {
+  const f = sandbox('dedupe-flag');
+  try {
+    // One write, two log entries. The supplied name is part of the filename, so
+    // both entries have to carry the same one to reach the same target — that is
+    // the in-call dedupe this is about (two names for the same image give two
+    // files, which the existing 'a bare basename' test covers). `unchanged`
+    // describes what THIS call did to the filesystem, so both entries report
+    // false: the file was written during this call and only one write happened.
+    // Reporting the second entry as unchanged would be a claim about a write
+    // that never occurred.
+    const dup = { filename: 'dup.png', data: b64(makePng()) };
+    const out = extractAttachments([dup, { ...dup }], f.dest, {
+      sessionId: 'ses_dupe',
+      messageId: 'msg_0022',
+    });
+
+    assert.equal(out.length, 2);
+    assert.equal(out[0].filename, out[1].filename, 'identical content under one context is one file');
+    assert.equal(readdirSync(f.dest).length, 1);
+    assert.equal(out[0].unchanged, false);
+    assert.equal(out[1].unchanged, false);
+  } finally {
+    cleanup(f);
+  }
+});
+
+test('changing the content for the same session/message writes a NEW file and reports unchanged: false', () => {
+  const f = sandbox('changed');
+  try {
+    const opts = { sessionId: 'ses_edit', messageId: 'msg_0023' };
+    const red = makePng(1, 1, [0xff, 0x00, 0x00]);
+    const blue = makePng(1, 1, [0x00, 0x00, 0xff]);
+
+    const first = extractAttachments([{ filename: 'shot.png', data: b64(red) }], f.dest, opts);
+    assert.equal(first[0].unchanged, false);
+    utimesSync(first[0].path, OLD_MTIME, OLD_MTIME);
+    const redMtime = statSync(first[0].path).mtimeMs;
+
+    // Same logical slot, amended or re-sent message: identical session and
+    // message id, different bytes. The content hash in the name is what keeps
+    // these two apart, so this is a new file rather than an overwrite.
+    const second = extractAttachments([{ filename: 'shot.png', data: b64(blue) }], f.dest, opts);
+
+    assert.notEqual(second[0].filename, first[0].filename, 'a content change must not target the old path');
+    assert.notEqual(second[0].path, first[0].path);
+    assert.equal(second[0].unchanged, false, 'a new file is not unchanged');
+    assert.equal(readdirSync(f.dest).length, 2, 'both the old and the new image belong in the vault');
+    assert.deepEqual(readFileSync(second[0].path), blue);
+    assert.deepEqual(readFileSync(first[0].path), red, 'the earlier attachment is not clobbered');
+    assert.equal(statSync(first[0].path).mtimeMs, redMtime, 'writing the new file disturbed the old one');
+
+    // And returning to the first content is a skip, not a third write.
+    const back = extractAttachments([{ filename: 'shot.png', data: b64(red) }], f.dest, opts);
+    assert.equal(back[0].unchanged, true, 'the original file is already exactly right');
+    assert.equal(readdirSync(f.dest).length, 2);
+  } finally {
+    cleanup(f);
+  }
+});
+
+test('a file that exists at the target path with DIFFERENT bytes is rewritten, not reported unchanged', () => {
+  const f = sandbox('corrupt');
+  try {
+    const png = makePng();
+    const opts = { sessionId: 'ses_corrupt', messageId: 'msg_0024' };
+
+    // First run to learn the deterministic target path, then damage the file.
+    const first = extractAttachments([{ filename: 'shot.png', data: b64(png) }], f.dest, opts);
+    const target = first[0].path;
+
+    // Truncated, so a length check alone would catch this — which is why the
+    // same-length case below is the one that matters.
+    writeFileSync(target, png.subarray(0, png.length - 4));
+    utimesSync(target, OLD_MTIME, OLD_MTIME);
+    const damagedMtime = statSync(target).mtimeMs;
+
+    const repaired = extractAttachments([{ filename: 'shot.png', data: b64(png) }], f.dest, opts);
+    assert.equal(repaired[0].filename, first[0].filename, 'the name algorithm did not change');
+    assert.equal(repaired[0].path, target);
+    assert.equal(repaired[0].unchanged, false, 'damaged bytes must not be reported unchanged');
+    assert.notEqual(statSync(target).mtimeMs, damagedMtime, 'the file was not rewritten');
+    assert.deepEqual(readFileSync(target), png, 'the file was not repaired');
+    assert.equal(readdirSync(f.dest).length, 1);
+
+    // Same length, different content: a length shortcut cannot be the whole
+    // comparison, so a one-byte flip of the payload must also be caught.
+    const oneBit = Buffer.from(png);
+    oneBit[oneBit.length - 1] ^= 0x01;
+    writeFileSync(target, oneBit);
+    const flipped = extractAttachments([{ filename: 'shot.png', data: b64(png) }], f.dest, opts);
+    assert.equal(flipped[0].unchanged, false, 'a one-byte difference is still a difference');
+    assert.deepEqual(readFileSync(target), png);
+  } finally {
+    cleanup(f);
+  }
+});
+
+test('a skipped entry carries no misleading unchanged value', () => {
+  const f = sandbox('skip-flag');
+  try {
+    const out = extractAttachments(
+      [
+        { filename: 'ok.png', data: b64(makePng()) },
+        { filename: 'bad.png', data: 'not valid base64 !!!' },
+        { filename: 'none.png' },
+      ],
+      f.dest,
+      { sessionId: 'ses_skipflag', messageId: 'msg_0025' },
+    );
+
+    assert.equal(out[0].unchanged, false, 'the written entry reports the write');
+    for (const a of out.filter((x) => x.skipped)) {
+      // Omitting the key is allowed, so is false; what is not allowed is
+      // claiming "true", which would assert a comparison that never happened.
+      assert.notEqual(a.unchanged, true, `skip at index ${a.index} claims it was unchanged`);
+      assert.ok(!('unchanged' in a) || a.unchanged === false);
+      // The existing skip shape is untouched.
+      assert.equal(a.filename, null);
+      assert.equal(a.path, null);
+      assert.equal(a.embed, null);
+      assert.equal(a.bytes, 0);
+      assert.equal(a.mime, null);
+      assert.ok(typeof a.reason === 'string' && a.reason.length > 0);
+    }
   } finally {
     cleanup(f);
   }

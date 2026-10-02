@@ -35,10 +35,16 @@ export const SNIPPET_CONTRACTS = {
   'orkestrasi-ngoding-plan.md': [
     'todowrite',
     'plan-issue-sync.mjs',
+    'session-learning-ledger-template.md',
+    'MEMORY.md',
+    'graphify:sync',
   ],
   'orkestrasi-debugging.md': [
     'todowrite',
     'plan-issue-sync.mjs',
+    'session-learning-ledger-template.md',
+    'MEMORY.md',
+    'graphify:sync',
   ],
   'orkestrasi-pr.md': [
     'todowrite',
@@ -50,6 +56,10 @@ export const SNIPPET_CONTRACTS = {
     'pr-registry.mjs order',
     'pr-review-template.md',
     'plan-issue-sync.mjs', // the plan's issue closes after the debt sweep, not before
+    'session-learning-ledger-template.md',
+    'MEMORY.md',
+    'graphify:sync',
+    'merged | closed',
   ],
   'orkestrasi-pr-review.md': [
     'todowrite',
@@ -57,11 +67,13 @@ export const SNIPPET_CONTRACTS = {
     'code-review-template.md',
     'gh pr diff',
     'gh pr checks',
+    'graphify:sync',
   ],
   'orkestrasi-brainstorm.md': [
     'todowrite',
     'brainstorm-intent-template.md',
     'question',
+    'graphify:sync',
   ],
 };
 

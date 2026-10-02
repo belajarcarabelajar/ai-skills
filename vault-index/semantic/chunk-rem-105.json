@@ -58,7 +58,7 @@
       "norm_label": "ashpd shortcut carries no component ownership field",
       "rationale": [
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md:L5737] Checked against `ashpd 0.13.13`: `Shortcut` exposes only `id()`, `description()` and `trigger_description()`. There is no ownership field, which is what confirms the deferral is required rather than optional",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md:L2805] Ownership is therefore an injected input rather than something the module reads, and the refusal policy applies because both a foreign attribution and an unattributed binding can be an inert foreign component the portal session was misattributed to"
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md:L2344] Ownership is therefore an injected input rather than something the module reads, and the refusal policy applies because both a foreign attribution and an unattributed binding can be an inert foreign component the portal session was misattributed to"
       ]
     },
     {

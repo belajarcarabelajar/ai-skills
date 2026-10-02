@@ -6,7 +6,7 @@
       "label": "HTTP Diagnostic Inspector fabricated diagnostics",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - c7-diagnostics-false-claims [ses_f0bcb4e8effeNPOSes7w2f1yiD].md",
-      "source_location": "L15526",
+      "source_location": "L01526",
       "norm_label": "http diagnostic inspector fabricated diagnostics",
       "summary": "The drawer in apps/website/src/components/NotFoundApp.tsx:212-237 renders six hardcoded JSX text literals as if they were measured server diagnostics. Verdict CONFIRMED: at least two are provably false for this deployment, one is unimplemented anywhere in the repo, one is unverifiable from the repo.",
       "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - c7-diagnostics-false-claims [ses_f0bcb4e8effeNPOSes7w2f1yiD].md:L01591] No measurement API is ever called by the drawer"
@@ -25,7 +25,7 @@
       "label": "Soft 404 guard claim",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-30 - c7-diagnostics-false-claims [ses_f0bcb4e8effeNPOSes7w2f1yiD].md",
-      "source_location": "L15572",
+      "source_location": "L01536",
       "norm_label": "soft 404 guard claim",
       "summary": "The drawer asserts 'Soft 404 Guard: Enabled (No 200 OK masking)'. A repo-wide rg for soft 404 / soft404 returns only the claim line itself; no guard, config, test, or implementation exists anywhere. IIS and 9110 behave identically: one hit each, both the claim lines."
     },

@@ -1,0 +1,268 @@
+{
+  "batch": "rem-039",
+  "nodes": [
+    {
+      "id": "concept--agent-skills-portable-six-field-frontmatter",
+      "label": "Agent Skills portable six-field frontmatter",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - audit-kompatibilitas-skills-md-multi-agent [ses_f12437de6ffejl2if9I0g8pTjZ].md",
+      "source_location": "L1703",
+      "norm_label": "agent skills portable six-field frontmatter",
+      "summary": "Claude Code accepts every frontmatter field, but claude.ai skill uploads, the Skills API and package_skill.py accept only the Agent Skills spec set: name, description, license, compatibility, metadata, allowed-tools. Any other key raises the unexpected-key error on those paths, and Claude Code loads the six-field form unchanged."
+    },
+    {
+      "id": "concept--allowed-tools-delimiter-portability-gap",
+      "label": "allowed-tools delimiter portability gap",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - audit-kompatibilitas-skills-md-multi-agent [ses_f12437de6ffejl2if9I0g8pTjZ].md",
+      "source_location": "L1984",
+      "norm_label": "allowed-tools delimiter portability gap",
+      "summary": "The agentskills.io spec writes allowed-tools space-delimited (Read Grep Glob); Claude Code writes it comma-delimited (Read, Grep, Glob). Both spellings are accepted by their own runtime, so the delimiter is the field that silently makes a skill single-vendor."
+    },
+    {
+      "id": "concept--canonical-agents-skills-dir-with-byte-identical-mirrors",
+      "label": "Canonical .agents/skills/ dir with byte-identical mirrors",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - audit-kompatibilitas-skills-md-multi-agent [ses_f12437de6ffejl2if9I0g8pTjZ].md",
+      "source_location": "L5659",
+      "norm_label": "canonical .agents/skills/ dir with byte-identical mirrors",
+      "summary": "T1-spec decision 1: one canonical tree at .agents/skills/<slug>/ plus byte-identical COPIES into .claude/, .gemini/, .opencode/ and .cursor/ skills dirs, so each vendor loader finds its own path without resolving anything at read time."
+    },
+    {
+      "id": "concept--thin-skill-md-with-verbatim-reference",
+      "label": "Thin SKILL.md plus verbatim full-instructions reference",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - audit-kompatibilitas-skills-md-multi-agent [ses_f12437de6ffejl2if9I0g8pTjZ].md",
+      "source_location": "L5661",
+      "norm_label": "thin skill.md plus verbatim full-instructions reference",
+      "summary": "T1-spec decision 3: SKILL.md carries at most a 15-step workflow plus a pointer, while the source instruction text is copied verbatim into references/full-instructions.md; frontmatter stays limited to name/description/license/metadata. Later measured across all 190 skills: 188 of the reference files are byte-identical 1:1 to the track-page source text, 2 differ for reasons outside the generator (L21900)."
+    },
+    {
+      "id": "concept--skill-body-byte-budget-vs-validator-token-ceiling",
+      "label": "Skill body byte budget against the validator token ceiling",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - audit-kompatibilitas-skills-md-multi-agent [ses_f12437de6ffejl2if9I0g8pTjZ].md",
+      "source_location": "L7111",
+      "norm_label": "skill body byte budget against the validator token ceiling",
+      "summary": "validate-skills.ts failed one skill with body ~5599 tokens (tokens = ceil(bytes/4), max 5000) because the generator's body-vs-references split let a ~22k-char Gemini section stay inline. The fix adds a render() closure with an enforcement loop: while byteLength(body) > 19000 (headroom under the 20000-byte ceiling) drop trailing steps, then trailing kapan bullets, then hard-shrink to 100 chars, never touching template sections or the references pointer."
+    },
+    {
+      "id": "concept--static-asset-serving-replaces-node-fs-route",
+      "label": "Static asset serving replaces the node:fs skill route",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - audit-kompatibilitas-skills-md-multi-agent [ses_f12437de6ffejl2if9I0g8pTjZ].md",
+      "source_location": "L9756",
+      "norm_label": "static asset serving replaces the node:fs skill route",
+      "summary": "The first delivery shape was an /api/skills/<slug> route reading through node:fs with an allowlist. It worked locally and 404ed on Cloudflare. The replacement publishes each SKILL.md as a static asset at <base>/skills/<slug>/SKILL.md; the route and its resolver were deleted and verified live as HTTP 200 with correct frontmatter."
+    },
+    {
+      "id": "concept--manifest-written-only-on-content-change",
+      "label": "Manifest written only when content changes",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - audit-kompatibilitas-skills-md-multi-agent [ses_f12437de6ffejl2if9I0g8pTjZ].md",
+      "source_location": "L9757",
+      "norm_label": "manifest written only when content changes",
+      "summary": "skills-manifest.json was not byte-identical across regeneration because generated_at was rewritten on every run (4622c7 -> 5e6dc0) even while all 190 SKILL.md hashes stayed identical. The manifest is now written only when content changes, so double regeneration is byte-identical and the timestamp means the time of the content change; spec section 6 was amended."
+    },
+    {
+      "id": "concept--stale-astro-digest-store-fast-path",
+      "label": "Stale Astro digest fast-path store in node_modules",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - audit-kompatibilitas-skills-md-multi-agent [ses_f12437de6ffejl2if9I0g8pTjZ].md",
+      "source_location": "L14108",
+      "norm_label": "stale astro digest fast-path store in node_modules",
+      "summary": "Converting MDX pages to plain .md broke the build, but not because of the conversion. The content was byte-identical, so Astro's digest fast-path never updated the stored filePath, and the live store is node_modules/.astro/data-store.json rather than the project's .astro/ directory. Traced via strace, the loader, and instrumentation; recorded in the plan Error Ledger. Fix is clearing the cache once; fresh installs and CI are unaffected."
+    },
+    {
+      "id": "concept--bare-base-url-404-from-worker-route-mismatch",
+      "label": "Bare base URL 404 from Worker route pattern mismatch",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - audit-kompatibilitas-skills-md-multi-agent [ses_f12437de6ffejl2if9I0g8pTjZ].md",
+      "source_location": "L19551",
+      "norm_label": "bare base url 404 from worker route pattern mismatch",
+      "summary": "Root cause 1 of 2: the route .../fasttrack/dashboard/* never matches a URL without a trailing slash, so the request fell through to the Azure nginx origin and returned the origin's 404. That is the 'Halaman tidak ditemukan' anyone typing the raw URL sees. Fixed by an explicit bare route; live bare -> 307 to the slashed form -> 200."
+    },
+    {
+      "id": "concept--oauth-callback-redirects-to-bare-url",
+      "label": "OAuth success callback redirects to the bare URL",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - audit-kompatibilitas-skills-md-multi-agent [ses_f12437de6ffejl2if9I0g8pTjZ].md",
+      "source_location": "L19552",
+      "norm_label": "oauth callback redirects to the bare url",
+      "summary": "Root cause 2 of 2: the OAuth callback sent a successful login to the slashless URL, so every newly logged-in user landed exactly on the bug, and it was the only publisher of that Location in the whole repo. Fixed by adding the slash to the callback Location, two lines total."
+    },
+    {
+      "id": "concept--starlight-404-page-leaks-into-autogenerated-sidebar",
+      "label": "Starlight 404 page leaks into the autogenerated sidebar",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - audit-kompatibilitas-skills-md-multi-agent [ses_f12437de6ffejl2if9I0g8pTjZ].md",
+      "source_location": "L21265",
+      "norm_label": "starlight 404 page leaks into the autogenerated sidebar",
+      "summary": "Read from Starlight 0.42.0 source, not guessed: the 404 page must stay in the docs collection because routing/data.js:117 fetches it with getEntry(\"docs\", \"404\"), but the autogenerated sidebar filters only on !sidebar.hidden (navigation.js:133) with a default of false (schema.js:70). So the 404.md added to silence a build warning became a nav item on every page. Fix is frontmatter sidebar.hidden: true alone; the file is not moved and the real 404 keeps working."
+    },
+    {
+      "id": "concept--download-attribute-decides-save-over-inline-render",
+      "label": "download attribute decides save over inline render",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - audit-kompatibilitas-skills-md-multi-agent [ses_f12437de6ffejl2if9I0g8pTjZ].md",
+      "source_location": "L22821",
+      "norm_label": "download attribute decides save over inline render",
+      "summary": "The download links were plain [Unduh SKILL.md](...) anchors with no download attribute, and the file was served as text/markdown with no Content-Disposition, so the browser read it as a document and opened it in a tab. Fix is an inline-HTML anchor with download=\"<slug>.skill.md\" plus the generator's own link updated so regeneration cannot reintroduce the bug; the response stays 200 text/markdown."
+    },
+    {
+      "id": "rationale--six-field-subset-avoids-unexpected-key-error",
+      "label": "Restricting frontmatter to the spec's six fields avoids the unexpected-key error",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - audit-kompatibilitas-skills-md-multi-agent [ses_f12437de6ffejl2if9I0g8pTjZ].md",
+      "source_location": "L1703",
+      "norm_label": "restricting frontmatter to the spec's six fields avoids the unexpected-key error",
+      "summary": "Stated reason: the six spec fields are exactly what the claude.ai upload path, the Skills API and package_skill.py validate, so writing anything beyond them fails there, while Claude Code accepts the same file unchanged."
+    },
+    {
+      "id": "rationale--space-delimiter-is-the-portable-allowed-tools-form",
+      "label": "Space-delimited allowed-tools is the portable form",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - audit-kompatibilitas-skills-md-multi-agent [ses_f12437de6ffejl2if9I0g8pTjZ].md",
+      "source_location": "L1984",
+      "norm_label": "space-delimited allowed-tools is the portable form",
+      "summary": "Stated reason: a space-delimited allowed-tools is cross-vendor portable because it is the agentskills.io spelling, while the comma-delimited form is Claude Code-specific."
+    },
+    {
+      "id": "rationale--copies-not-symlinks-for-windows-and-pages",
+      "label": "Byte-identical copies rather than symlinks because symlinks break Windows checkouts and Pages builds",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - audit-kompatibilitas-skills-md-multi-agent [ses_f12437de6ffejl2if9I0g8pTjZ].md",
+      "source_location": "L5659",
+      "norm_label": "byte-identical copies rather than symlinks because symlinks break windows checkouts and pages builds",
+      "summary": "Stated reason for the mirror strategy: symlinks break on Windows checkouts and on Pages builds, so the mirrors are real byte-identical copies."
+    },
+    {
+      "id": "rationale--node-fs-throws-on-workerd-without-nodejs-compat",
+      "label": "node:fs throws on workerd with no nodejs_compat flag, so the route degrades to 404 on Cloudflare",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - audit-kompatibilitas-skills-md-multi-agent [ses_f12437de6ffejl2if9I0g8pTjZ].md",
+      "source_location": "L8135",
+      "norm_label": "node:fs throws on workerd with no nodejs_compat flag, so the route degrades to 404 on cloudflare",
+      "summary": "Stated reason the API route was replaced: it works in dev and node-prerender but throws on workerd because wrangler.toml sets no nodejs_compat, so on Cloudflare it degrades to 404. The chunk named the follow-ups that would fix it in place (import.meta.glob raw, or copying skills into dist) before the shape was changed."
+    },
+    {
+      "id": "rationale--build-break-from-conversion-was-the-stale-store-not-the-conversion",
+      "label": "The build break came from the stale digest store, not from the conversion",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - audit-kompatibilitas-skills-md-multi-agent [ses_f12437de6ffejl2if9I0g8pTjZ].md",
+      "source_location": "L14108",
+      "norm_label": "the build break came from the stale digest store, not from the conversion",
+      "summary": "Stated reason the fix was one cache clear and not a revert: the byte-identical content made Astro's digest fast-path skip updating the stored filePath, and the live store sits in node_modules/.astro, so a fresh install or CI never sees it."
+    },
+    {
+      "id": "rationale--verify-the-urls-the-user-clicked-not-self-chosen-ones",
+      "label": "Verify the URLs the user clicked, not the ones chosen in-house",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - audit-kompatibilitas-skills-md-multi-agent [ses_f12437de6ffejl2if9I0g8pTjZ].md",
+      "source_location": "L20157",
+      "norm_label": "verify the urls the user clicked, not the ones chosen in-house",
+      "summary": "Stated reason the 'bug closed' claim was wrong twice: the earlier fix addressed a different bug (the bare base) and the sidebar was never checked, and completion had been concluded from URLs the assistant picked itself rather than the page the user actually clicked. The 404 page itself was also created in-house, to silence a build warning."
+    },
+    {
+      "id": "rationale--download-attribute-not-the-content-type-decides-save",
+      "label": "The download attribute, not the content type, is what makes the browser save",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-29 - audit-kompatibilitas-skills-md-multi-agent [ses_f12437de6ffejl2if9I0g8pTjZ].md",
+      "source_location": "L22893",
+      "norm_label": "the download attribute, not the content type, is what makes the browser save",
+      "summary": "Stated reason the fix was an attribute and not a MIME change: after the fix the file is still 200 text/markdown, and it is the download attribute that makes the browser save it instead of opening it. The generator's own emitted link was updated too, so regeneration cannot restore the bug."
+    }
+  ],
+  "links": [
+    {
+      "source": "concept--agent-skills-portable-six-field-frontmatter",
+      "target": "concept--allowed-tools-delimiter-portability-gap",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--canonical-agents-skills-dir-with-byte-identical-mirrors",
+      "target": "concept--thin-skill-md-with-verbatim-reference",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--thin-skill-md-with-verbatim-reference",
+      "target": "concept--skill-body-byte-budget-vs-validator-token-ceiling",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--static-asset-serving-replaces-node-fs-route",
+      "target": "concept--download-attribute-decides-save-over-inline-render",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--static-asset-serving-replaces-node-fs-route",
+      "target": "concept--manifest-written-only-on-content-change",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--bare-base-url-404-from-worker-route-mismatch",
+      "target": "concept--oauth-callback-redirects-to-bare-url",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--starlight-404-page-leaks-into-autogenerated-sidebar",
+      "target": "concept--bare-base-url-404-from-worker-route-mismatch",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--download-attribute-decides-save-over-inline-render",
+      "target": "concept--thin-skill-md-with-verbatim-reference",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "rationale--six-field-subset-avoids-unexpected-key-error",
+      "target": "concept--agent-skills-portable-six-field-frontmatter",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--space-delimiter-is-the-portable-allowed-tools-form",
+      "target": "concept--allowed-tools-delimiter-portability-gap",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--copies-not-symlinks-for-windows-and-pages",
+      "target": "concept--canonical-agents-skills-dir-with-byte-identical-mirrors",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--node-fs-throws-on-workerd-without-nodejs-compat",
+      "target": "concept--static-asset-serving-replaces-node-fs-route",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--build-break-from-conversion-was-the-stale-store-not-the-conversion",
+      "target": "concept--stale-astro-digest-store-fast-path",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--verify-the-urls-the-user-clicked-not-self-chosen-ones",
+      "target": "concept--starlight-404-page-leaks-into-autogenerated-sidebar",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--download-attribute-not-the-content-type-decides-save",
+      "target": "concept--download-attribute-decides-save-over-inline-render",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    }
+  ]
+}

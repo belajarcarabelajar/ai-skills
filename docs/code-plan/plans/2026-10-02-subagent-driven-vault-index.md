@@ -574,6 +574,7 @@ Recorded rather than estimated, because the number is what makes T8 schedulable.
 
 | Task | Step | Classification | Exit | Root cause | Retry used | Fallback | Status |
 |---|---|---|---|---|---|---|---|
+| T9 | 3 | contract | 1 | Merge raises degree-0 to **1790** (old 1,415): the old graph's document ids are not structural's path-slugs, so 1,369 old orphans never re-attach, and 421 new nodes (419 zero-link semantic concepts) are born isolated. Node count 21,370 ≥ 6,155 passes; degree-0 does not | 0 | none — dry-run only, vault graph untouched | `FAILED-BLOCKING` |
 | [T?] | [n] | [environment] | [1] | [cause] | [0/1] | [none] | `FAILED-ISOLATED` |
 
 - Classification: `code` | `test` | `contract` | `environment` | `infrastructure` | `pre-existing`.
@@ -592,7 +593,7 @@ Recorded so a fresh session continues instead of re-deriving. Everything below i
 
 | Where it stands | |
 |---|---|
-| Plan state | `Approved`. T1–T7 **complete**. T8 **complete** (all 251 batches extracted). |
+| Plan state | `Approved`. T1–T8 **complete**. **T9 blocked** — its step-3 gate fails on the measured merge (see §9d). |
 | Commits | tooling `26a91a2` · structural layer `ce2ab59` · narration filter `99edb67` · wave 2 `dd0694c` · worklist `0a7fc0c` / `584803e` · debt sweep `eaa5ba8` F3, `60fa515` F7, `7da0cb1` F6 · validator fix `13988e3` · wave 21 `17d7b8c` · T8 close-out `fcc77a9`, `257b321`, `38e8a28` |
 | Chunks landed | **271 files** `vault-index/semantic/chunk-*.json`, all passing `validateChunk`. Validator failures **4 → 0**, repaired 2026-10-03 |
 | Totals | **4,209 nodes · 2,907 links · 3,498 distinct ids · 711 deliberate id reuses** (measured 2026-10-03, worklist complete) |
@@ -674,6 +675,30 @@ Two gates exist and they are not the same gate. §9a now records both, because "
 **The mechanism that worked, `rem-249`, `rem-251` and `rem-248`, 2026-10-03:** write each node's `source_file` as the file's **basename** and each rationale anchor as `[@SELFFILE@:L<n>]`, then run one resolver pass that maps basename to the exact batch path and substitutes it into every anchor. All three chunks landed with 0 out-of-batch paths and 0 unresolved basenames on the first attempt, with 42/42, 40/40 and 75/75 anchors verifying. `rem-248` strengthened the technique one step further: the resolver also **reads each cited line and asserts the quoted span appears verbatim in it before writing the chunk**, so a quote that does not resolve is a build failure rather than a gate failure after the fact. The placeholder makes the anchor path structurally identical to `source_file`, so the two cannot disagree — the failure mode that produced the 19 silent skips cannot occur. **Use it for every remaining batch.**
 
 **Two further anchor rules the batch taught, both cheap:** a quoted span must include surrounding punctuation the line actually carries — `rem-249` lost one anchor by quoting `Math uses inline \( ... \)` from a line where the delimiters sit inside backticks — and a sentence that wraps across two lines should be quoted as two fragments at their own lines rather than as one span, which is what §4a already prescribes.
+
+### 9d. Measured 2026-10-03: T9's degree-0 gate fails — the merge was NOT written
+
+T9 has no runner; it was assembled from `scan`+`structural` (per root) and `loadChunks`+`merge`, then run as a **dry run only**. The vault `graph.json` was backed up to `graphify-out/backup-2026-10-03-t9/` and otherwise **left untouched**.
+
+Measured merge (structural over 1,012 archive files + 573 vault files, plus 271 semantic chunks, seeded on the old 6,155-node graph, `ghostPolicy: reattribute`):
+
+| Number | Value | Gate |
+|---|---|---|
+| Merged nodes | **21,370** | ≥ 6,155 ✅ |
+| Merged links | 19,433 | — |
+| **Merged degree-0** | **1,790** | < 1,415 ❌ **FAIL** |
+| Old degree-0 that reconnected | 46 of 1,415 | — |
+| Old degree-0 still isolated | 1,369 | — |
+| New isolated nodes | 421 (2 `document`, 419 `concept`) | — |
+| `previousNodesUnusableSourceFile` | 1,299 | must print, not reach 0 by deletion ✅ |
+| ghost reattributed / ambiguous / unmatched | 53 / 14 / 1,232 | — |
+| cross-chunk dangling → dropped | 8 → 4 links | — |
+
+**Root cause: two id schemes, one graph.** The structural layer slugs a document id from its repo-relative path; the old graph's document ids are *almost* the same but not identical — some carry a graphify suffix (`..._website_emoji_to_icon_migration_document` vs structural's `..._website_emoji_to_icon_migration`), some preserve dashes (`03_-_Resources_...` vs `03_resources_...`). So a re-emitted document node does **not** collide with the old one, its `contains` edges attach to a fresh node, and the old node stays an orphan. Result: 1,369 of the old 1,415 degree-0 nodes never re-attach, and the merged degree-0 rises.
+
+**T9 step 3 is explicit:** "node count is at least the old 6,155, and the degree-0 count is strictly lower than the old 1,415. A merge that raises either has failed even at exit 0." It raised degree-0, so per the same task's failure clause the merge was **STOPPED**, not written. F7's `reattribute` default is not the lever here — it recovers 53 of 1,299 and changes attribution, not edges.
+
+A resolution is an open decision (§8 `FAILED-BLOCKING`), not a re-run: the id schemes must be unified (a pre-merge id-normalisation pass, or structural ids made byte-identical to graphify's, or the old orphaned nodes superseded rather than retained), or the gate itself reconsidered now that the corpus triples from 6,155 to 21,370 nodes. **Do not write `graph.json` until one is chosen.**
 
 ## 10. Session-Close Debt Sweep & Follow-Up Backlog
 

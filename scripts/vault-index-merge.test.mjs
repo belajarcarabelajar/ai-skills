@@ -65,7 +65,17 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { merge, serializeGraph, writeGraph, NODE_KEY_ORDER, LINK_KEY_ORDER, TOP_LEVEL_KEY_ORDER } from './vault-index-merge.mjs';
+import {
+  merge,
+  serializeGraph,
+  writeGraph,
+  foldLabel,
+  GHOST_POLICIES,
+  DEFAULT_GHOST_POLICY,
+  NODE_KEY_ORDER,
+  LINK_KEY_ORDER,
+  TOP_LEVEL_KEY_ORDER,
+} from './vault-index-merge.mjs';
 import { validateChunk, FILE_TYPES, RELATIONS, CONFIDENCES } from './lib/chunk-schema.mjs';
 import { mkdtempSync, rmSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -847,5 +857,265 @@ describe('round trip', () => {
       assert.ok(RELATIONS.includes(l.relation), `relation ${l.relation} is not in the table`);
       assert.ok(CONFIDENCES.includes(l.confidence), `confidence ${l.confidence} is not in the table`);
     }
+  });
+});
+
+// ---------- 9. ghosts: nodes whose source_file is null or empty ----------
+//
+// The real vault graph, 2026-10-02: of 6,155 nodes, 1,269 carry `source_file:
+// null` and 30 an empty string. 1,185 of the 1,299 are an endpoint of some
+// edge, so they are not inert debris — they are carrying relationships that
+// cannot be checked against a file. `ghostPolicy` decides what happens to them.
+//
+// Measured against the real corpus, the three outcomes are 402 unique matches,
+// 292 ambiguous and 605 unmatched. The default is `reattribute` because it is
+// the only policy that cannot delete a fifth of the graph; the tests below pin
+// the arithmetic and the refusals rather than the numbers, so they keep
+// meaning if the corpus moves.
+
+describe('ghostPolicy', () => {
+  // One previous node with no usable source_file, of each of the three shapes
+  // the real graph uses, plus a live node they are all linked to.
+  function ghostGraph() {
+    return {
+      nodes: [
+        { id: 'live', label: 'Live Note', file_type: 'document', source_file: 'notes/live.md' },
+        { id: 'g-null', label: 'Alpha Note', file_type: 'document', source_file: null },
+        { id: 'g-empty', label: 'Beta Note', file_type: 'document', source_file: '' },
+        { id: 'g-conc', label: 'Gamma Note', file_type: 'concept', source_file: null },
+      ],
+      links: [link('g-null', 'live'), link('g-empty', 'live'), link('g-conc', 'live')],
+      hyperedges: [],
+    };
+  }
+
+  // A chunk supplying exactly one `document` titled `Alpha Note`.
+  function alphaChunk() {
+    return [{
+      name: 'structural',
+      chunk: {
+        nodes: [node('notes_alpha_note', { label: 'Alpha Note', file_type: 'document', source_file: 'notes/alpha-note.md' })],
+        links: [],
+      },
+    }];
+  }
+
+  test('the default is reattribute, not drop', () => {
+    // The one assertion that decides the argument. `drop` would delete the 1,299
+    // and orphan 1,454 of 5,527 links; `reattribute` can only ever fill in a
+    // path, and a wrong guess is visible in the counters where a deletion is
+    // not. Pinning the default stops a future edit from quietly choosing the
+    // destructive one.
+    assert.equal(DEFAULT_GHOST_POLICY, 'reattribute');
+    const { report } = merge(alphaChunk(), { previous: ghostGraph() });
+    assert.equal(report.ghostPolicy, 'reattribute');
+    assert.equal(report.ghostNodesDropped, 0);
+    assert.equal(report.nodes, 5, 'nothing is deleted under the default');
+  });
+
+  test('drop removes the ghosts, counts them, and keeps the rest', () => {
+    const { graph, report } = merge(alphaChunk(), { previous: ghostGraph(), ghostPolicy: 'drop' });
+    assert.equal(report.ghostNodesDropped, 3);
+    assert.deepEqual(idsOf(graph.nodes).sort(), ['live', 'notes_alpha_note']);
+    assert.equal(report.ghostPolicy, 'drop');
+  });
+
+  test('drop counts every link a dropped node was carrying, as orphans', () => {
+    // The cost of the choice, stated as a number. Each of the three ghosts is
+    // the SOURCE of one link, so all three links lose an endpoint; none of them
+    // is left in the graph looking intact.
+    const { graph, report } = merge(alphaChunk(), { previous: ghostGraph(), ghostPolicy: 'drop' });
+    assert.equal(report.linksOrphanedByGhosts, 3);
+    assert.deepEqual(graph.links, [], 'an orphaned link is removed, not left dangling');
+    assert.equal(report.danglingLinksDropped, 3, 'and it is counted there too, so the two reasons stay separable');
+  });
+
+  test('a link between two live nodes is not counted against the drop', () => {
+    // The orphan count must be about the ghosts, not about the graph. A link
+    // whose both endpoints survive the drop has nothing to do with it, and
+    // counting it would inflate the cost of the policy into a number nobody can
+    // act on.
+    const previous = ghostGraph();
+    previous.nodes.push(node('live-2', { file_type: 'document', source_file: 'notes/live-2.md' }));
+    previous.links.push(link('live', 'live-2'));
+    const { graph, report } = merge(alphaChunk(), { previous, ghostPolicy: 'drop' });
+    assert.equal(report.linksOrphanedByGhosts, 3, 'only the three that named a ghost');
+    assert.deepEqual(linkKeys(graph.links), ['live live-2 references']);
+  });
+
+  test('reattribute attaches a uniquely-matched ghost and reports it', () => {
+    const { graph, report } = merge(alphaChunk(), { previous: ghostGraph() });
+    assert.equal(report.ghostNodesReattributed, 1);
+    assert.equal(graph.nodes.find((n) => n.id === 'g-null').source_file, 'notes/alpha-note.md');
+    // The other two are left exactly as they were — present, still unattributed,
+    // and visible in a counter.
+    assert.equal(graph.nodes.find((n) => n.id === 'g-empty').source_file, '');
+    assert.equal(graph.nodes.find((n) => n.id === 'g-conc').source_file, null);
+  });
+
+  test('reattribute counts a no-match ghost instead of silently dropping it', () => {
+    const { graph, report } = merge(alphaChunk(), { previous: ghostGraph() });
+    assert.equal(report.unmatchedReattribution, 2);
+    assert.ok(idsOf(graph.nodes).includes('g-empty'), 'a ghost nobody matched is still in the graph');
+    assert.ok(idsOf(graph.nodes).includes('g-conc'));
+  });
+
+  test('an ambiguous label match is counted, never guessed', () => {
+    // Two notes with the same title. Picking either one asserts an origin
+    // nothing in the data supports, and the assertion would be invisible
+    // downstream — `graphify explain` would link the node to a file and be
+    // wrong. The measured corpus has 292 of these, so this is the common case.
+    const { graph, report } = merge(
+      [{
+        name: 'structural',
+        chunk: {
+          nodes: [
+            node('alpha_one', { label: 'Alpha Note', file_type: 'document', source_file: 'notes/alpha-one.md' }),
+            node('alpha_two', { label: 'Alpha Note', file_type: 'document', source_file: 'notes/alpha-two.md' }),
+          ],
+          links: [],
+        },
+      }],
+      { previous: ghostGraph() },
+    );
+    assert.equal(report.ambiguousReattribution, 1);
+    assert.equal(report.ghostNodesReattributed, 0);
+    assert.equal(graph.nodes.find((n) => n.id === 'g-null').source_file, null, 'left unattributed on purpose');
+  });
+
+  test('a label match is restricted to the same file_type', () => {
+    // The measured structural layer emits `document` nodes only, so a key that
+    // ignored file_type would offer a `concept` ghost the title of a document.
+    // 460 of the real ghosts are concepts; this is the rule that stops all of
+    // them from being attributed to whatever note happens to share a name.
+    const { graph, report } = merge(alphaChunk(), { previous: ghostGraph() });
+    assert.equal(graph.nodes.find((n) => n.id === 'g-conc').source_file, null);
+    assert.equal(report.ghostNodesReattributed, 1, 'only the document ghost matched');
+  });
+
+  test('a label match folds case, accents and punctuation', () => {
+    const previous = {
+      nodes: [{ id: 'g', label: 'Café-Strategy 2024!', file_type: 'document', source_file: null }],
+      links: [],
+      hyperedges: [],
+    };
+    const { graph, report } = merge(
+      [{
+        name: 'structural',
+        chunk: {
+          nodes: [node('note', { label: 'café strategy 2024', file_type: 'document', source_file: 'notes/real.md' })],
+          links: [],
+        },
+      }],
+      { previous },
+    );
+    assert.equal(report.ghostNodesReattributed, 1);
+    assert.equal(graph.nodes.find((n) => n.id === 'g').source_file, 'notes/real.md');
+  });
+
+  test('an empty label matches nothing rather than the first real title', () => {
+    const previous = {
+      nodes: [
+        { id: 'blank', label: '', file_type: 'document', source_file: null },
+        { id: 'punc', label: '---', file_type: 'document', source_file: null },
+      ],
+      links: [],
+      hyperedges: [],
+    };
+    const { report } = merge(alphaChunk(), { previous });
+    assert.equal(report.unmatchedReattribution, 2);
+    assert.equal(report.ghostNodesReattributed, 0);
+  });
+
+  test('a ghost the union has already filled in is not a ghost', () => {
+    // A chunk that supplies the same id with a real path has resolved the
+    // defect; re-attributing on top of that would overwrite a real path with a
+    // guessed one.
+    const { graph, report } = merge(
+      [
+        {
+          name: 'structural',
+          chunk: {
+            nodes: [node('g-null', { label: 'Alpha Note', file_type: 'document', source_file: 'notes/authoritative.md' })],
+            links: [],
+          },
+        },
+      ],
+      { previous: ghostGraph() },
+    );
+    assert.equal(report.ghostNodes, 2, 'only the two the union never filled');
+    assert.equal(graph.nodes.find((n) => n.id === 'g-null').source_file, 'notes/authoritative.md');
+  });
+
+  test('an unknown ghostPolicy is refused rather than defaulted', () => {
+    assert.throws(() => merge([], { ghostPolicy: 'guess' }), /ghostPolicy must be one of/);
+  });
+
+  test('both policies leave a graph with no previous ghost untouched', () => {
+    // previousGraph() has two nodes and twoChunks() contributes four distinct
+    // ids (a1, shared, a2, b1), so the union is six. `drop` must not find a
+    // seventh thing to remove just because it was asked to.
+    for (const ghostPolicy of GHOST_POLICIES) {
+      const { graph, report } = merge(twoChunks(), { previous: previousGraph(), ghostPolicy });
+      assert.equal(report.ghostNodes, 0);
+      assert.equal(report.ghostNodesDropped, 0);
+      assert.equal(report.ghostNodesReattributed, 0);
+      assert.equal(report.linksOrphanedByGhosts, 0);
+      assert.equal(graph.nodes.length, 6, `every node survives under ${ghostPolicy}`);
+    }
+  });
+
+  test('the merged output stays a valid chunk after a drop', () => {
+    // The point of dropping is that the result can be re-validated. If the
+    // orphan removal left anything malformed, the policy would trade one
+    // invalid graph for a differently invalid one.
+    const { graph } = merge(alphaChunk(), { previous: ghostGraph(), ghostPolicy: 'drop' });
+    const allIds = new Set(idsOf(graph.nodes));
+    const verdict = validateChunk({ nodes: graph.nodes, links: graph.links }, { knownNodeIds: allIds });
+    assert.deepEqual(verdict.errors, []);
+  });
+
+  test('the previous graph is never mutated by either policy', () => {
+    // `previous` came off disk. A merge that rewrote it would make the second
+    // run's input depend on the first run's policy, which is how a `drop`
+    // becomes permanent without anybody deciding it twice.
+    for (const ghostPolicy of GHOST_POLICIES) {
+      const previous = ghostGraph();
+      const before = JSON.stringify(previous);
+      merge(alphaChunk(), { previous, ghostPolicy });
+      assert.equal(JSON.stringify(previous), before, `${ghostPolicy} left previous alone`);
+    }
+  });
+});
+
+// ---------- 10. foldLabel ----------
+//
+// Exported because the vault's own `norm_label` is assigned by a later pass
+// that owns different rules, and the corpus carries real accents, hyphens and
+// en-dashes. If these foldings ever change, every unique/ambiguous split in
+// the report changes with them, silently.
+
+describe('foldLabel', () => {
+  test('case, accents and punctuation all collapse', () => {
+    assert.equal(foldLabel('AI Tools List'), foldLabel('ai-tools-list'));
+    assert.equal(foldLabel('Café Strategy'), foldLabel('cafe  strategy'));
+    assert.equal(foldLabel('Done Is Better Than Perfect'), 'done is better than perfect');
+  });
+
+  test('an en-dash and a hyphen are the same separator', () => {
+    assert.equal(foldLabel('Report (2023) – Sistem Pembayaran'), foldLabel('report (2023) - sistem pembayaran'));
+  });
+
+  test('a non-string folds to the empty string, which matches nothing', () => {
+    for (const value of [undefined, null, 42, {}, []]) assert.equal(foldLabel(value), '');
+  });
+
+  test('a label of pure punctuation folds to the empty string', () => {
+    assert.equal(foldLabel('---'), '');
+    assert.equal(foldLabel('   '), '');
+  });
+
+  test('digits survive, because titles contain years', () => {
+    assert.equal(foldLabel('Ebook 2024'), 'ebook 2024');
   });
 });

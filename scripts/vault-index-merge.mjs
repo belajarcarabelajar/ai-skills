@@ -164,6 +164,61 @@ const MAX_DANGLING_SAMPLES = 20;
 // collapse into one key.
 const KEY_SEP = '\u0000';
 
+/** The two ways a node with no usable `source_file` can be handled. */
+export const GHOST_POLICIES = Object.freeze(['drop', 'reattribute']);
+
+/**
+ * The default, and the argument for it.
+ *
+ * `reattribute`, because it is the only one of the two that cannot destroy
+ * work. Measured on the real vault graph, 2026-10-02, against the structural
+ * layer over its 3,390 notes: of the 1,299 nodes whose `source_file` is null or
+ * empty, 402 get a unique same-type label match, 292 are ambiguous and 605 find
+ * nothing. `drop` would delete all 1,299 — 21.1% of 6,155 nodes — and orphan
+ * 1,454 of the 5,527 links, 26.3% of them, because 1,185 of the 1,299 are an
+ * endpoint of some edge. A policy that can lose a quarter of the graph on a
+ * defect in one field is not a default; it is a decision that should need
+ * saying out loud, which is what `drop` now is.
+ *
+ * The evidence that `reattribute` is not merely the timid choice: 694 of the
+ * 769 `document` ghosts carry a label that appears as some real note title.
+ * Ninety percent label overlap with the note corpus is not what garbage looks
+ * like — these are note-title nodes that lost their path, and the 402 unique
+ * matches are the recoverable subset. The other 605 are left counted and
+ * untouched.
+ */
+export const DEFAULT_GHOST_POLICY = 'reattribute';
+
+/**
+ * Fold a label to the form two labels are compared in.
+ *
+ * Case-folded, accent-stripped, and every run of non-alphanumerics collapsed to
+ * one space, so `AI Tools List`, `ai-tools-list`, `AI-Tools-List` and
+ * `AI Tools List` are one key. NFKD first, then drop the combining marks it
+ * leaves behind, or `Café` and `Cafe` would stay apart on a corpus of 6,155
+ * nodes carrying real accents.
+ *
+ * Deliberately NOT the graph's own `norm_label`: that field is assigned by a
+ * later pass that owns its own rules, only 1,269 of the ghosts are known to
+ * carry it, and an incoming chunk's node need not have it at all. Comparing two
+ * labels through a convention this module does not control is how two things
+ * that look equal stop being equal.
+ *
+ * @param {unknown} label
+ * @returns {string} `''` when nothing survives, which matches nothing — the
+ *   same treatment `isAbsent` gives an empty `source_file`, so a ghost with a
+ *   blank label is reported rather than attributed to the first real title.
+ */
+export function foldLabel(label) {
+  if (typeof label !== 'string') return '';
+  return label
+    .normalize('NFKD')
+    .replace(/\p{M}+/gu, '')
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, ' ')
+    .trim();
+}
+
 // Keys that are never copied off a record. `__proto__` is the real one: an
 // object literal with `__proto__:` sets a prototype instead of creating a
 // property, so the only way to produce the hazard is JSON.parse — which is
@@ -434,6 +489,121 @@ function resolveEndpoints(accepted, unionIds) {
 }
 
 // ---------------------------------------------------------------------------
+// pass 3 — decide the fate of every node with no usable source_file
+// ---------------------------------------------------------------------------
+
+/**
+ * `drop` or `reattribute` the nodes whose `source_file` is null or empty.
+ *
+ * Both return the same shape so a caller reading the report does not have to
+ * know which ran: the other mode's counters read zero rather than being absent,
+ * because a missing key and a zero are different answers to "did anything go
+ * missing" and this report exists so that question has one.
+ *
+ * A node is a ghost when `source_file` is null, undefined or empty — the three
+ * shapes the real graph uses, measured at 1,269 `null` and 30 `""`. `0` and
+ * `false` are not ghosts: `isAbsent` says so for the same reason it refuses to
+ * treat `community: 0` as a value to overwrite.
+ *
+ * Only nodes that came from `previous` can be ghosts, because an accepted
+ * chunk's nodes have all been through the peer validator, which rejects a
+ * missing `source_file` as a path problem. That is why the pool is taken from
+ * `previous` explicitly and why a chunk cannot smuggle one in.
+ *
+ * @param {Map<string, object>} nodeRecords the union, mutated in place.
+ * @param {Map<string, object>} linkRecords the link union, read-only here.
+ * @param {{nodes?: object[]}|undefined} previous
+ * @param {Set<string>} unionIds ids of every node in the union, including
+ *   ones an accepted chunk has already filled in.
+ * @param {'drop'|'reattribute'} policy
+ * @returns {{dropped: number, orphanedLinks: number, reattributed: number,
+ *   ambiguous: number, unmatched: number, ghostIds: Set<string>}}
+ */
+function resolveGhosts(nodeRecords, linkRecords, previous, unionIds, policy) {
+  const prevNodes = previous !== null && typeof previous === 'object' && !Array.isArray(previous) && Array.isArray(previous.nodes)
+    ? previous.nodes
+    : [];
+
+  const ghosts = [];
+  for (const n of prevNodes) {
+    if (n === null || typeof n !== 'object' || Array.isArray(n)) continue;
+    const id = filledString(n.id);
+    if (id === null) continue;
+    // A node id that an accepted chunk has since supplied is not a ghost any
+    // more: the union holds the union's record, and that record has a path.
+    if (!isAbsent(nodeRecords.get(id)?.source_file)) continue;
+    ghosts.push(id);
+  }
+
+  const out = { dropped: 0, orphanedLinks: 0, reattributed: 0, ambiguous: 0, unmatched: 0, ghostIds: new Set(ghosts) };
+  if (ghosts.length === 0) return out;
+
+  if (policy === 'drop') {
+    for (const id of ghosts) {
+      if (!nodeRecords.delete(id)) continue;
+      unionIds.delete(id);
+      out.dropped += 1;
+    }
+    // Counted here rather than left to the dangling pass, because a link lost
+    // this way is a different fact from a link that was already dangling: this
+    // one was well-formed a moment ago and this run broke it. `merge` also
+    // counts these in `danglingLinksDropped`, so the two counters describe the
+    // two reasons and neither hides the total cost of the choice.
+    for (const key of linkRecords.keys()) {
+      const [source, target] = key.split(KEY_SEP);
+      if (out.ghostIds.has(source) || out.ghostIds.has(target)) out.orphanedLinks += 1;
+    }
+    return out;
+  }
+
+  // `reattribute`. The candidate pool is the union's records that HAVE a usable
+  // source_file, keyed by file_type AND folded label. Both halves of the key are
+  // load-bearing:
+  //
+  //   - file_type, because the measured structural layer emits `document` and
+  //     nothing else, so a type-free key would offer a `concept` ghost a
+  //     document's title as its origin. 460 of the ghosts are concepts.
+  //   - folded label, because "AI Tools List" and "ai-tools-list" are the same
+  //     note title written twice.
+  //
+  // Candidates come from the union rather than from `previous` alone, so a
+  // re-extraction this run is the first thing with a path on a record also
+  // counts as evidence about which note it is.
+  const index = new Map();
+  for (const record of nodeRecords.values()) {
+    if (isAbsent(record.source_file)) continue;
+    const key = `${String(record.file_type)}${KEY_SEP}${foldLabel(record.label)}`;
+    const bucket = index.get(key);
+    if (bucket === undefined) index.set(key, [record.id]);
+    else bucket.push(record.id);
+  }
+
+  for (const id of ghosts) {
+    const record = nodeRecords.get(id);
+    const key = `${String(record.file_type)}${KEY_SEP}${foldLabel(record.label)}`;
+    const hits = index.get(key);
+    // No key, or a key whose every candidate was itself deleted, is the same
+    // answer: nothing to attach to.
+    if (hits === undefined || hits.length === 0) {
+      out.unmatched += 1;
+      continue;
+    }
+    if (hits.length > 1) {
+      // Not guessed. Two notes carry this title, and the graph has no way to
+      // say which of them a concept came from; picking the first would
+      // manufacture a provenance record indistinguishable from an extracted one,
+      // which is the exact failure the module header is about.
+      out.ambiguous += 1;
+      continue;
+    }
+    record.source_file = nodeRecords.get(hits[0]).source_file;
+    out.reattributed += 1;
+  }
+
+  return out;
+}
+
+// ---------------------------------------------------------------------------
 // the merge
 // ---------------------------------------------------------------------------
 
@@ -451,15 +621,25 @@ function resolveEndpoints(accepted, unionIds) {
  *   (`{nodes, links}`) or a wrapper (`{name, chunk}`). A wrapper is how a
  *   chunk of `null` can be named, which is a real subagent failure.
  * @param {{previous?: {nodes?: object[], links?: object[], hyperedges?: object[]},
- *   builtAtCommit?: string|null, keepDangling?: boolean}} [opts]
+ *   builtAtCommit?: string|null, keepDangling?: boolean,
+ *   ghostPolicy?: 'drop'|'reattribute'}} [opts]
  * @returns {{graph: object, report: object}}
  */
 export function merge(chunks, opts = {}) {
   if (!Array.isArray(chunks)) throw new TypeError(`chunks must be an array, got ${typeof chunks}`);
 
-  const { previous, builtAtCommit, keepDangling = false } = opts ?? {};
+  const { previous, builtAtCommit, keepDangling = false, ghostPolicy = DEFAULT_GHOST_POLICY } = opts ?? {};
+  if (!GHOST_POLICIES.includes(ghostPolicy)) {
+    throw new TypeError(`ghostPolicy must be one of ${GHOST_POLICIES.join(', ')}, got ${JSON.stringify(ghostPolicy)}`);
+  }
   const { accepted, rejections, nodeRecords, linkRecords, previousLinkKeys, report } = collect(chunks, previous);
   const unionIds = new Set(nodeRecords.keys());
+
+  // Before endpoint resolution, because `drop` removes ids from `unionIds` and
+  // the resolution below is what turns the links that referenced them into
+  // dangling ones. Running it after would report a drop as a pre-existing
+  // defect, which is the conflation this module is written against.
+  const ghosts = resolveGhosts(nodeRecords, linkRecords, previous, unionIds, ghostPolicy);
 
   const { crossChunkResolved, crossChunkDangling, danglingSamples } = resolveEndpoints(accepted, unionIds);
 
@@ -519,6 +699,13 @@ export function merge(chunks, opts = {}) {
       ...report,
       nodes: graph.nodes.length,
       links: graph.links.length,
+      ghostPolicy,
+      ghostNodes: ghosts.ghostIds.size,
+      ghostNodesDropped: ghosts.dropped,
+      linksOrphanedByGhosts: ghosts.orphanedLinks,
+      ghostNodesReattributed: ghosts.reattributed,
+      ambiguousReattribution: ghosts.ambiguous,
+      unmatchedReattribution: ghosts.unmatched,
       crossChunkResolved,
       crossChunkDangling,
       danglingLinksDropped,

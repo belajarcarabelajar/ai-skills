@@ -596,3 +596,138 @@ suffixes rather than skips on a name collision (§3.6).
 **Withdrawn as measured-but-wrong:** the 1.67 h / 0.42 h / 8-worker wall-clock
 projection table (§5.1). The speedup it implied does not exist on this backend.
 Do not reinstate it from memory — re-measure if you need a full-run figure.
+---
+
+## 8. The 1,299 unattributable nodes — F7, decided with measurements
+
+The vault's existing `graph.json` carries **6,155 nodes and 5,527 links**. Of
+those nodes, **1,299 have a `source_file` that is `null` (1,269) or empty (30)**
+and **1,185 of them are an endpoint of at least one edge**. By `file_type`:
+`document` 769, `concept` 460, `code` 61, `paper` 9.
+
+They fail `chunk-schema.mjs` (`source_file` must be a repo-relative path), so a
+merged graph carrying them is not itself a valid chunk, and the failure
+surfaces later as 1,299 validation errors with no indication of origin.
+`vault-index-merge.mjs` previously counted them (`previousNodesUnusableSourceFile`)
+and preserved them. F7 is the decision of what happens next, and it is now an
+explicit option, `ghostPolicy`.
+
+### 8.1 Measured, not assumed
+
+Run against the real vault — the structural layer over its 3,390 markdown files
+fed as one chunk into `merge()` with the real `graph.json` as `previous`:
+
+| Policy | nodes out | re-attributed | ambiguous | unmatched | dropped | links orphaned |
+|---|---|---|---|---|---|---|
+| `reattribute` (default) | 27,849 | **453** | 297 | 549 | 0 | 0 |
+| `drop` | 26,550 | 0 | 0 | 0 | **1,299** | **1,454** |
+
+**The three numbers F7 asked for: 453 unique, 297 ambiguous, 549 no match.**
+
+Two independent controls, because "unique match" is worthless if uniqueness is
+easy:
+
+- All **453** re-attributed `source_file` values **exist on disk** (`statSync`,
+  file). Zero invented paths.
+- **0 of 453** randomly-generated labels matched any title. The match is
+  informative, not a coincidence of a 6,155-node pool.
+- **408 of 453** rescued paths corroborate the ghost label (note title, H1 or
+  filename). The 45 that do not are mostly concept ghosts pointing at a note
+  that merely discusses the term — see §8.4.
+
+The candidate pool is the **union** (previous + incoming chunks), keyed by
+`file_type` + `foldLabel()`. Of the 453, **402** came from the new structural
+layer and **51** from a previous node that already had a real path. The union
+pool is deliberate: the graph's own earlier extraction is evidence about which
+note a node belongs to, and ignoring it would discard 51 matches for no gain.
+
+### 8.2 Why the default is `reattribute`
+
+It is the only one of the two that **cannot destroy work**.
+
+- `drop` deletes **1,299 nodes — 21.1% of the graph — and orphans 1,454 links,
+  26.3% of all links**, because 1,185 of those nodes carry edges. A policy that
+  loses a quarter of the graph on a defect in one field should require someone
+  to type it.
+- `reattribute` fills in 453 paths and touches nothing else. Its failure mode
+  is a **wrong** path; `drop`'s failure mode is a **missing** one. A wrong path
+  is visible in `ghostNodesReattributed` and re-checkable against disk; a
+  missing path is invisible once written.
+
+That 694 of the 769 `document` ghosts carry a label matching *some* real note
+title is what makes this the recoverable option rather than the timid one:
+ninety percent label overlap is not what garbage looks like. These are
+note-title nodes that lost their path.
+
+### 8.3 What `reattribute` refuses to do
+
+An **ambiguous** match is counted (`ambiguousReattribution`), never guessed.
+Measured: 297. Two notes share a title and the graph cannot say which one a
+node came from; picking the first would write a provenance record
+indistinguishable from an extracted one, which is the failure this codebase
+treats as worst.
+
+A match is unique only when **exactly one** union node has both the same
+`file_type` and the same `foldLabel()`.
+
+- **`file_type` is part of the key.** The structural layer emits `document`
+  nodes only, so a type-free key would offer each of the 460 `concept` ghosts
+  some document's title as an origin. 460 is the largest single class that
+  cannot be safely re-attributed this way.
+- **`foldLabel()`** is case-folded, accent-stripped (NFKD), and collapses every
+  run of non-alphanumerics to one space, so `AI Tools List` = `ai-tools-list`
+  and `Café Strategy` = `cafe strategy`. It is deliberately **not** the graph's
+  own `norm_label`, which is assigned by a later pass with its own rules and is
+  absent on 30 nodes.
+- A label that folds to `''` matches nothing. A ghost with a blank label is
+  reported, never attached to the first real title.
+
+### 8.4 The honest limit: 846 stay unattributed
+
+Under the default, **846 of 1,299 remain without a path** — 297 ambiguous, 549
+with no match. This is the correct outcome, not a bug to route around:
+
+| type | total | re-attributed | still unattributed | of which carry edges |
+|---|---|---|---|---|
+| `document` | 769 | 404 | 365 | 753 |
+| `concept` | 460 | 48 | 412 | 387 |
+| `code` | 61 | 1 | 60 | 36 |
+| `paper` | 9 | 0 | 9 | 9 |
+
+Two structural reasons:
+
+1. **The 30 `""`/`null` `code` ghosts are AST artefacts**, e.g. ids like
+   `scripts_watch_inbox_py_path` labelled `Path` or `Any`. These are Python
+   symbol names, not note titles; a title match is the wrong instrument. 1,285
+   of the 1,299 are `_origin: null` and 14 are `_origin: ast`.
+2. **A concept ghost names a term, not a note.** The same concept legitimately
+   appears in many notes, and 412 of the 460 either match several or none.
+
+**Ghost ids do not decode to files.** All 1,299 were tested for it: reversing
+each id against the vault's 3,390 paths resolved **0**. An id like
+`scripts_watch_inbox_py_path` looks like `scripts/watch_inbox.py` + symbol
+`Path`, but the vault holds markdown notes, not the `ai-skills` Python tree the
+ghost ids were minted from. Ids are not a cheaper attribution route; only
+label match works, and only sometimes.
+
+**So re-attribution does not make the merged graph valid.** 846 nodes still fail
+the peer validator. F7 removes 453 of 1,299 defects and makes the remaining 846
+explicitly countable. Making the graph fully valid needs a re-extraction of
+those nodes with a real path, which is a different piece of work.
+
+### 8.5 API
+
+```js
+merge(chunks, { previous, ghostPolicy: 'reattribute' | 'drop' })
+```
+
+Default `'reattribute'`; an unrecognised value throws rather than falling back.
+Report fields: `ghostNodes`, `ghostNodesDropped`, `linksOrphanedByGhosts`,
+`ghostNodesReattributed`, `ambiguousReattribution`, `unmatchedReattribution`,
+and `ghostPolicy` itself. Links orphaned by a drop are counted **both** in
+`linksOrphanedByGhosts` (the cause) and `danglingLinksDropped` (the effect) —
+the two describe different reasons, and neither hides the total cost.
+
+`previous` is never mutated by either policy, so a `drop` is not permanent
+across runs: re-merging the same `previous` under the default brings the nodes
+back.

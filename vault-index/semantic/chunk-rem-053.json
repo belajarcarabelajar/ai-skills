@@ -9,17 +9,17 @@
       "source_location": "L3628",
       "norm_label": "run[] as the execution key that never existed",
       "description": "executePlan() needs tasks[].run[]; the key is in no template, no plan, and no test, so an --execute run performed zero task steps and only skip_if probes ran.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L3628] Determinism is only real where the runner actually reads the key"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L03628] Sebabnya: `executePlan()` di `scripts/ultra-plan-runner.mjs:376` butuh `tasks[].run[]`. Key itu **tidak ada di mana pun**"
     },
     {
       "id": "concept--determinism-split-validate-vs-execute",
       "label": "Determinism split: high at validating, near zero at executing",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
-      "source_location": "L3676",
+      "source_location": "L3578",
       "norm_label": "determinism split: high at validating, near zero at executing",
       "description": "Plan validation scored 9/10 and integrity gates 9/10, while execution scored 2/10 and small-task scope 1/10.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L03578] The largest hole sat in the most frequently used path"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L03578] the single largest determinism hole, and Bounded is the most frequent path"
     },
     {
       "id": "concept--documented-but-unread-plan-fields",
@@ -29,7 +29,7 @@
       "source_location": "L3630",
       "norm_label": "documented-but-unread plan fields",
       "description": "files, idempotency_key, verify_exit and defaults.on_precondition_fail were documented in SKILL.md and never read by the runner.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L3630] Fields the runner never reads are a documentation claim, not a contract"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L03630] 4 dari 6 field yang didokumentasikan **tidak pernah dibaca runner**: `files`, `idempotency_key`, `verify_exit`, `defaults.on_precondition_fail`"
     },
     {
       "id": "concept--block-style-run-breaks-the-plan-yaml-parser",
@@ -45,10 +45,10 @@
       "label": "Loose skip_if: a text probe accepted as a behavioural check",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
-      "source_location": "L3658",
+      "source_location": "L4354",
       "norm_label": "loose skip_if: a text probe accepted as a behavioural check",
       "description": "skip_if: grep -q 'Plan Publish Gate' <source file> exits 0 and plan-mark-done ticks the task, although the string may only sit in a comment.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L4354] A text-presence probe proves the string exists, not that the behaviour works"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L04354] a text-presence probe on a source or doc file proves the string exists, not that the behavior works"
     },
     {
       "id": "concept--green-ci-proves-no-contract",
@@ -58,7 +58,7 @@
       "source_location": "L3664",
       "norm_label": "green ci proves no contract",
       "description": "202 tests passed and bun run ci was green while the doc-runner gap was live, because validate-skill.mjs had no check comparing which fields the runner reads against which the template declares.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L05420] A green suite with no contract check is vacuous"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L03664] **CI hijau tidak membuktikan kontrak apa pun.** 202 test pass, `bun run ci` hijau, padahal celah doc↔runner di atas hidup"
     },
     {
       "id": "concept--schema-runner-contract-key-export",
@@ -83,30 +83,30 @@
       "label": "Prose steps are the handoff point where the LLM substitutes commands",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
-      "source_location": "L3660",
+      "source_location": "L3568",
       "norm_label": "prose steps are the handoff point where the llm substitutes commands",
       "description": "'One step equals one command' is advice, not a check: the agent must read prose, extract a command, and run it.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L03568] The most important anti-drift rules are also the softest"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L03568] **The biggest anti-wander rules are the softest ones.**"
     },
     {
       "id": "concept--coercescalar-strips-quotes-without-escapes",
       "label": "coerceScalar strips quotes without processing escapes",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
-      "source_location": "L7999",
+      "source_location": "L14193",
       "norm_label": "coercescalar strips quotes without processing escapes",
       "description": "A real parser bug found only because the agent's own plan was executed: a backslash reached the shell doubled and the step failed silently as an exit mismatch.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L14193] The agent's own plan being executed is what surfaced the parser bug"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L14193] Ini baru ketahuan karena plan saya sendiri dieksekusi."
     },
     {
       "id": "concept--retracted-missing-svg-title-desc-claim",
       "label": "Retracted claim that rendered SVG lacks title/desc",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
-      "source_location": "L14195",
+      "source_location": "L11058",
       "norm_label": "retracted claim that rendered svg lacks title/desc",
       "description": "The false claim reported to the user was that rendered SVG carries no <title>/<desc>; it was retracted after a re-test showed both tags present, wired via aria-labelledby.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L11058] One failed tool call is not a finding"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L11058] saya melompat ke kesimpulan dari satu tool yang gagal, persis kesalahan yang AGENTS.md-rule 3 larang."
     },
     {
       "id": "concept--a11y-gate-reads-rendered-svg-not-source",
@@ -116,7 +116,7 @@
       "source_location": "L14185",
       "norm_label": "a11y gate reads the rendered svg, not the mermaid source",
       "description": "validate-skill.mjs now checks the rendered SVG for title/desc plus aria wiring, because a source-only regex passes even when the render drops the wiring.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L14185] A source regex cannot prove the render"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L14185] **`validate-skill.mjs` memeriksa SVG hasil render**, bukan hanya sumber Mermaid, untuk wiring `<title>`/`<desc>` + aria yang diklaim skill."
     },
     {
       "id": "concept--no-hosted-runner-free-tier-quota",
@@ -126,27 +126,27 @@
       "source_location": "L9162",
       "norm_label": "no hosted runner: github actions frozen to manual on free-tier quota",
       "description": "The push and pull_request triggers on main were removed so every push stops burning Actions minutes, with the revert written into the workflow header.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L9162] Every push burns free-tier Actions minutes"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L09162] tiap push membakar menit Actions"
     },
     {
       "id": "concept--validate-only-the-changed-mermaid-block",
       "label": "Validate only the changed Mermaid block instead of re-rendering all 26",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
-      "source_location": "L8576",
+      "source_location": "L8391",
       "norm_label": "validate only the changed mermaid block instead of re-rendering all 26",
       "description": "Rendering 26 blocks through a headless browser is the expensive part; the 25 unchanged blocks were proven byte-identical to HEAD so only the 1 new block needed a render.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L13476] Rendering every Mermaid block through a headless browser is the expensive part"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L08391] render 26 blok Mermaid lewat browser headless itu bagian borosnya. Saya pisahkan mana yang benar-benar berubah."
     },
     {
       "id": "concept--contract-check-split-from-full-validate",
       "label": "Contract check split into its own ~30ms command",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md",
-      "source_location": "L14187",
+      "source_location": "L6718",
       "norm_label": "contract check split into its own ~30ms command",
       "description": "bun run contract:check is separated from the full render, with a negative control: replacing run: must fail and the tree must be clean afterwards.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L06934] A check that has only ever passed is indistinguishable from one that does nothing"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L06718] I must verify it actually *fails* when a key is missing — otherwise it's a vacuous check."
     },
     {
       "id": "concept--grandfather-existing-loose-skip-if",
@@ -156,7 +156,7 @@
       "source_location": "L12107",
       "norm_label": "grandfather existing loose skip_if so a new hard error does not break old plans",
       "description": "6 loose skip_ifs in 3 plan files were allowlisted with written reasons because turning the warning into an error would have broken plans that already existed.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L12107] A new hard error breaks every plan that predates it"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L12107] supaya perubahan ini tidak merusak plan yang sudah ada."
     }
   ],
   "links": [

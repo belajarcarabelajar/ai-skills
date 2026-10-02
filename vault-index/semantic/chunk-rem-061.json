@@ -127,7 +127,7 @@
       "source_location": "L2541",
       "norm_label": "widened shape must be seen red under a mutant",
       "summary": "Nine new tests were added, then evidence was produced rather than assumed: narrowing `SYSTEM_HUB_GLOB` to a non-matching pattern, subprocess-isolated, gives 7 RED / 9 GREEN under the mutant and 0 RED / 16 GREEN real. The seven that go red are the real glob-teeth; the nine that stay green are glob-independent by design (positive control, linter-blindness proof, leaf-exclusion guard, set-vanished direction) and are explicitly not counted as widening-teeth. One test was initially filtered out by a name mismatch ('discovers' rather than 'widened_shape') and the filter was corrected rather than the count reported as complete.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - widen-vault-reachability-scope [ses_f217dd475ffezDFQEpyyNO5Hnf].md:L2561] A real-vault red/green needs a hash-proved restore"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - widen-vault-reachability-scope [ses_f217dd475ffezDFQEpyyNO5Hnf].md:L01633] A real-vault red/green needs a hash-proved restore"
     }
   ],
   "links": [

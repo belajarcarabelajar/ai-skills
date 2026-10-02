@@ -17,7 +17,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - integrasi-jev-di-ai-skills-untuk-akurasi [ses_f103b5b86ffelSWs8r5QGtpvvf].md",
       "source_location": "L1173",
       "norm_label": "classifyskipif default fallthrough",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - integrasi-jev-di-ai-skills-untuk-akurasi [ses_f103b5b86ffelSWs8r5QGtpvvf].md:L7004] Adding bash to EVIDENCE_COMMAND widens the gap"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - integrasi-jev-di-ai-skills-untuk-akurasi [ses_f103b5b86ffelSWs8r5QGtpvvf].md:L13430] Adding bash to EVIDENCE_COMMAND widens the gap"
     },
     {
       "id": "concept--grep-family-probe-false-pass",
@@ -42,7 +42,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - integrasi-jev-di-ai-skills-untuk-akurasi [ses_f103b5b86ffelSWs8r5QGtpvvf].md",
       "source_location": "L9098",
       "norm_label": "warn before error for the unknown class",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - integrasi-jev-di-ai-skills-untuk-akurasi [ses_f103b5b86ffelSWs8r5QGtpvvf].md:L9098] Unknown warns rather than errors in phase 1"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - integrasi-jev-di-ai-skills-untuk-akurasi [ses_f103b5b86ffelSWs8r5QGtpvvf].md:L13430] Unknown warns rather than errors in phase 1"
     },
     {
       "id": "concept--frozen-spike-classifier-snapshot",
@@ -51,7 +51,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - integrasi-jev-di-ai-skills-untuk-akurasi [ses_f103b5b86ffelSWs8r5QGtpvvf].md",
       "source_location": "L8265",
       "norm_label": "frozen spike classifier snapshot",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - integrasi-jev-di-ai-skills-untuk-akurasi [ses_f103b5b86ffelSWs8r5QGtpvvf].md:L8265] Freeze the classifier before changing it"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - integrasi-jev-di-ai-skills-untuk-akurasi [ses_f103b5b86ffelSWs8r5QGtpvvf].md:L13430] Freeze the classifier before changing it"
     },
     {
       "id": "concept--degenerate-corpus",
@@ -60,7 +60,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - integrasi-jev-di-ai-skills-untuk-akurasi [ses_f103b5b86ffelSWs8r5QGtpvvf].md",
       "source_location": "L9116",
       "norm_label": "degenerate corpus",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - integrasi-jev-di-ai-skills-untuk-akurasi [ses_f103b5b86ffelSWs8r5QGtpvvf].md:L8267] Do not fabricate the dedupe corpus"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-30 - integrasi-jev-di-ai-skills-untuk-akurasi [ses_f103b5b86ffelSWs8r5QGtpvvf].md:L08688] Do not fabricate the dedupe corpus"
     },
     {
       "id": "concept--cross-set-pair-exclusion",

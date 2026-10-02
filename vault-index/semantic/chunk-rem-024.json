@@ -51,7 +51,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - installing-typeless-2-2-0-deb-package [ses_f2bf9c1daffe7JAQPHDJTCsA7V].md",
       "source_location": "L27364",
       "norm_label": "sd is not a drop-in sed: it rewrites files in place by default",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - installing-typeless-2-2-0-deb-package [ses_f2bf9c1daffe7JAQPHDJTCsA7V].md:L27361] Shadowing sed with sd was rejected because `sed 's/a/A/' file` only prints while `sd a A file` overwrites the file, so a transparent wrapper would turn a read-only command into a destructive one"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-24 - installing-typeless-2-2-0-deb-package [ses_f2bf9c1daffe7JAQPHDJTCsA7V].md:L27722] Shadowing sed with sd was rejected because `sed 's/a/A/' file` only prints while `sd a A file` overwrites the file, so a transparent wrapper would turn a read-only command into a destructive one"
     },
     {
       "id": "concept--conservative-grep-wrapper-delegates-risky-flags",

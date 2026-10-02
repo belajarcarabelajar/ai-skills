@@ -109,7 +109,7 @@
       "source_location": "L17460",
       "norm_label": "post merge re verification on the new base",
       "summary": "After #442 merged as 30deffa54, the suite was re-run on vps-bcb after git pull --ff-only onto that commit rather than re-reading the pre-merge result: 188 passed, clippy 0, fmt clean. An empty diff against the verified branch proved main content byte-identical, because the merge rebased and SHA ancestry could not.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - super-ultra-code-plan-pr-delivery-session [ses_f08d01cd8ffe92DE7Adnn8J1o5].md:L17460] The post-merge run is the evidence for that merge, not a re-read of the pre-merge run"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - super-ultra-code-plan-pr-delivery-session [ses_f08d01cd8ffe92DE7Adnn8J1o5].md:L17462] The post-merge run is the evidence for that merge, not a re-read of the pre-merge run"
     },
     {
       "id": "concept--direction-specific-schema-mismatch-remedy",
@@ -129,7 +129,7 @@
       "source_location": "L17252",
       "norm_label": "sidecar rebuild signal when the app schema changes",
       "summary": "Root cause of the incident class: snipset-cli is versioned 0.2.0 independently of the app, so nothing signals a sidecar rebuild when the app schema changes. Research verified no user_version or schema_revision exists anywhere and no macOS target or build script exists. Kept as a Draft plan because it proposes making a stale sidecar a fatal build failure.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - super-ultra-code-plan-pr-delivery-session [ses_f08d01cd8ffe92DE7Adnn8J1o5].md:L17252] The sidecar plan is left Draft and unapproved because making a stale sidecar fatal overrides a deliberate decision documented at stage-cli-sidecar.mjs:4-6"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - super-ultra-code-plan-pr-delivery-session [ses_f08d01cd8ffe92DE7Adnn8J1o5].md:L17254] The sidecar plan is left Draft and unapproved because making a stale sidecar fatal overrides a deliberate decision documented at stage-cli-sidecar.mjs:4-6"
     }
   ],
   "links": [

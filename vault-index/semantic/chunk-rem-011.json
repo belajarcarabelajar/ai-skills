@@ -24,7 +24,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md",
       "source_location": "L20921",
       "norm_label": "fish shell collector hook",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md:L20921] fish hook written because .bashrc execs fish"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md:L24032] fish hook written because .bashrc execs fish"
     },
     {
       "id": "concept--systemd-user-timer-persistent",
@@ -33,7 +33,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md",
       "source_location": "L8412",
       "norm_label": "systemd user timer with persistent=true",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md:L21915] Persistent=true covers the Linger=no gap"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md:L10873] Persistent=true covers the Linger=no gap"
     },
     {
       "id": "concept--cloudflared-locally-managed-tunnel",
@@ -67,8 +67,8 @@
       "source_location": "L29050",
       "norm_label": "light-dark() css function for theming",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md:L29050] light-dark() chosen over prefers-color-scheme blocks",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md:L29759] third-party font request leaks visitor IP"
+        "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md:L34510] light-dark() chosen over prefers-color-scheme blocks",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md:L29795] third-party font request leaks visitor IP"
       ]
     },
     {
@@ -78,7 +78,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md",
       "source_location": "L29727",
       "norm_label": "fake dom test harness via new function",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md:L30662] fake DOM instead of converting app.js to a module"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md:L36693] fake DOM instead of converting app.js to a module"
     },
     {
       "id": "concept--single-writer-per-file-orchestration",
@@ -103,7 +103,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md",
       "source_location": "L27233",
       "norm_label": "keyboard-inaccessible heatmap cells",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md:L38254] focus ring measured in a real render, not assumed"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-terminal-log-intelligence/2026-10-01 - daftar-repo-github-tentang-terminal [ses_f07123cb2ffeBeX3ln2FgTW59u].md:L38857] focus ring measured in a real render, not assumed"
     },
     {
       "id": "concept--donut-quarter-offset-bug",

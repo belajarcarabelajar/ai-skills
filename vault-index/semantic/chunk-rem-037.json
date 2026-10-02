@@ -202,7 +202,7 @@
       "source_location": "L16318",
       "norm_label": "verify merge by content not sha ancestry",
       "summary": "Reused id. The pushed commit dd42b4148 was not found in origin/main, and the assistant refused to guess why. Checking content settled it: four CustomerSupport files present, ResearchStatisticsTab gone, and the two commits rebased to cba7aa647 and 92d358a3c, so the SHAs changed while the content landed whole.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md:L16318] Content equality proves the work landed where ancestry cannot"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - customer-support-tab-rename-and-stats-overhaul [ses_f08ae3246ffeIVradxR1hZ5PMK].md:L09535] Content equality proves the work landed where ancestry cannot"
     }
   ],
   "links": [

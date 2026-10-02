@@ -59,7 +59,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - sinkronisasi-shortcut-snipset-dua-arah [ses_f26610dabffe09guILt65II2Cb].md",
       "source_location": "L12748",
       "norm_label": "pending-push reconciliation",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - sinkronisasi-shortcut-snipset-dua-arah [ses_f26610dabffe09guILt65II2Cb].md:L7097] No guaranteed silent write from app to system settings"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - sinkronisasi-shortcut-snipset-dua-arah [ses_f26610dabffe09guILt65II2Cb].md:L09357] No guaranteed silent write from app to system settings"
     },
     {
       "id": "concept--stable-portal-shortcut-ids",

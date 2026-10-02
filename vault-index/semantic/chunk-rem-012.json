@@ -34,7 +34,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-10-02 - sinkronisasi-riwayat-opencode-ke-obsidian [ses_f060b17deffej7q80pv7ZH1uH8].md",
       "source_location": "L7465",
       "norm_label": "sqlite wal-safe read-only open",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-10-02 - sinkronisasi-riwayat-opencode-ke-obsidian [ses_f060b17deffej7q80pv7ZH1uH8].md:L4941] SQLite read-only open needed because the database is live and in WAL mode"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-10-02 - sinkronisasi-riwayat-opencode-ke-obsidian [ses_f060b17deffej7q80pv7ZH1uH8].md:L03414] SQLite read-only open needed because the database is live and in WAL mode"
     },
     {
       "id": "concept--export-time-secret-redaction",

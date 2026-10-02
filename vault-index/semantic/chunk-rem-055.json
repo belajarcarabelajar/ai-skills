@@ -101,7 +101,7 @@
       "source_location": "L6604",
       "norm_label": "an already-merged pr is terminal: record the discrepancy, never revert",
       "summary": "The user merged both PRs, including #438 which carried a P1. The response was to record the merge commits, re-verify the finding against the merged origin/main tree, and change nothing else: no revert, no un-merge, nothing posted.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - pull-request-review-orchestration [ses_f085aa3a4ffeFf5LPuRAOkO1Hu].md:L6393] No revert, because a revert is a new change and not an undo"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - pull-request-review-orchestration [ses_f085aa3a4ffeFf5LPuRAOkO1Hu].md:L00039] No revert, because a revert is a new change and not an undo"
     },
     {
       "id": "concept--untracked-workflow-invisible-to-dependabot",

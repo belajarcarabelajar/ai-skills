@@ -52,7 +52,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f2-retire-ok-or-sentinel [ses_f209be6e9ffeUzsjifu9sv5v3j].md",
       "source_location": "L1830",
       "norm_label": "include_str! retired-literal guard",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f2-retire-ok-or-sentinel [ses_f209be6e9ffeUzsjifu9sv5v3j].md:L2049] test assertions legitimately spell out the expected text"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f2-retire-ok-or-sentinel [ses_f209be6e9ffeUzsjifu9sv5v3j].md:L02050] test assertions legitimately spell out the expected text"
     },
     {
       "id": "concept--rustfmt-use-segment-ordering",

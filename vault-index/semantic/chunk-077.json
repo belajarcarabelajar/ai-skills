@@ -42,7 +42,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-batch-d-10-files [ses_f17699445ffeq07cbExFDI9PT1].md",
       "source_location": "L37",
       "norm_label": "self sounding claim",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-batch-d-10-files [ses_f17699445ffeq07cbExFDI9PT1].md:L37] Pin bare-referenced handlers so the self-sounding claim becomes executable proof"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - pin-batch-d-10-files [ses_f17699445ffeq07cbExFDI9PT1].md:L00046] Pin bare-referenced handlers so the self-sounding claim becomes executable proof"
     },
     {
       "id": "concept--plan-publishing-contract-guard",
@@ -51,7 +51,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t6-validator-guard [ses_f219ee8ddffeRCbq5xZqGSiCuU].md",
       "source_location": "L36",
       "norm_label": "plan publishing contract guard",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - t6-validator-guard [ses_f219ee8ddffeRCbq5xZqGSiCuU].md:L47] Cheap existence checks must fail before the expensive mmdc render pass"
+      "rationale": "Cheap existence checks must fail before the expensive mmdc render pass"
     },
     {
       "id": "concept--mandatory-negative-test",
@@ -60,7 +60,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t6-validator-guard [ses_f219ee8ddffeRCbq5xZqGSiCuU].md",
       "source_location": "L50",
       "norm_label": "mandatory negative test",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - t6-validator-guard [ses_f219ee8ddffeRCbq5xZqGSiCuU].md:L51] A guard only ever observed passing is indistinguishable from one that does nothing"
+      "rationale": "A guard only ever observed passing is indistinguishable from one that does nothing"
     },
     {
       "id": "concept--shared-error-counter-validator",

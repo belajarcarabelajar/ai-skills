@@ -122,7 +122,7 @@
       "norm_label": "build-free producer dry-run",
       "rationale": [
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L9779] A dry run should validate everything it can and state what it cannot",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L9753] A dry run must not perform a persistent write"
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L09943] A dry run must not perform a persistent write"
       ]
     },
     {
@@ -141,7 +141,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
       "source_location": "L12689",
       "norm_label": "minisign signature fail-closed",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L12689] A soft warning lets an unsigned release through; throw instead"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L06331] A soft warning lets an unsigned release through; throw instead"
     },
     {
       "id": "concept--embedded-producer-script-execution",
@@ -150,7 +150,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
       "source_location": "L4718",
       "norm_label": "embedded producer script execution",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L12674] Run the JS embedded in the PowerShell so the test drives production code"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L05398] Run the JS embedded in the PowerShell so the test drives production code"
     },
     {
       "id": "concept--source-level-only-powershell-assertion",
@@ -159,7 +159,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
       "source_location": "L69",
       "norm_label": "source-level-only powershell assertion",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L12686] No pwsh on this host, so PowerShell claims are not runtime evidence"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L05398] No pwsh on this host, so PowerShell claims are not runtime evidence"
     },
     {
       "id": "concept--bash-metacharacter-free-embedded-js",

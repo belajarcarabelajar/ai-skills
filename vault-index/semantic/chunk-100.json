@@ -73,7 +73,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - h07-test-layer-gap [ses_f08b44319ffedUZZLTat73lafe].md",
       "source_location": "L6252",
       "norm_label": "cargo-r2 nextest run -p snipset --lib <filter> -j 4",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-10-01 - space-bunny-sebagai-default-opencode [ses_f065a056cffeTTeIY8oRsKWOCI].md:L505] --lib is mandatory because Nextest without it links dozens of 200MB+ binaries at once and drove the host past 6GB into a BSOD"
+      "rationale": "--lib is mandatory because Nextest without it links dozens of 200MB+ binaries at once and drove the host past 6GB into a BSOD"
     },
     {
       "id": "concept--opencode-default-model-jsonc-config",

@@ -37,7 +37,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
       "source_location": "L4706",
       "norm_label": "absent gamepad blocks automated in-game benchmarking",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L8044] The missing controller is a proven environment limit, not an excuse: the OSD numbers were turned on precisely so the human could supply them"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L01155] The missing controller is a proven environment limit, not an excuse: the OSD numbers were turned on precisely so the human could supply them"
     },
     {
       "id": "concept--memory-pressure-as-emulator-bottleneck",

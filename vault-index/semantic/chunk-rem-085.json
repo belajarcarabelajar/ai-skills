@@ -33,7 +33,7 @@
       "source_location": "L8552",
       "norm_label": "a raw joyaxisn binding is silently dropped when the gamepad mapping claims that axis",
       "summary": "PCSX2's SDLInputSource.cpp HandleJoystickAxisEvent returns early for any axis flagged in joy_axis_used_in_pad, because it is marked as already claimed by SDL's Gamepad event path. A binding written as `SDL-0/-JoyAxis4` for such an axis produces no input at all while the generic name `SDL-0/-RightY` on the same axis works. Six of eight analog directions died this way on 2026-09-29.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - save-state-pcsx2-v2-6-3-tidak-kompatibel [ses_f15d394c3ffeEqtCk5URLY5h6a].md:L6335] The early return exists to avoid double events, confirmed by the upstream comment \"Will get handled by Gamepad event\"; the device opens as `USB gamepad` with 5 axes and 12 buttons (L8170), so its axes are claimed by the Gamepad path.",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - save-state-pcsx2-v2-6-3-tidak-kompatibel [ses_f15d394c3ffeEqtCk5URLY5h6a].md:L08497] The early return exists to avoid double events, confirmed by the upstream comment \"Will get handled by Gamepad event\"; the device opens as `USB gamepad` with 5 axes and 12 buttons (L8170), so its axes are claimed by the Gamepad path.",
       "description": "Emergency exception recorded in the same note: if a generic axis name reads weak or dead while the raw axis tests full range, fall back to raw JoyAxisN for that one axis only, because it is not claimed by the mapping. This worked for RLeft/RRight = ∓JoyAxis2."
     },
     {
@@ -64,7 +64,7 @@
       "source_location": "L5002",
       "norm_label": "the gas protocol for capturing raw joystick events",
       "summary": "The user holds the stick, replies \"gas\", and only then does a 60 second /dev/input/js0 capture run, printing min, max and event count per AXIS and BTN. Init-only events with value 0 mean centred; full plus and minus 32767 on an axis means healthy; zero events over a 4 second idle means nothing is stuck.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - save-state-pcsx2-v2-6-3-tidak-kompatibel [ses_f15d394c3ffeEqtCk5URLY5h6a].md:L4998] Stated reason for the handshake: instructions are always read by the user after the tool has already finished, so a short read and the user's movement land in different windows; two earlier captures missed and produced wrong conclusions."
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - save-state-pcsx2-v2-6-3-tidak-kompatibel [ses_f15d394c3ffeEqtCk5URLY5h6a].md:L08512] Stated reason for the handshake: instructions are always read by the user after the tool has already finished, so a short read and the user's movement land in different windows; two earlier captures missed and produced wrong conclusions."
     },
     {
       "id": "concept--dead-axis-verdict-retracted-by-a-longer-clean-capture",
@@ -74,7 +74,7 @@
       "source_location": "L5315",
       "norm_label": "the dead right stick axis verdict was retracted by a longer clean capture",
       "summary": "A 60 second capture under the gas protocol reported axis 4 at 0 events and concluded the right stick's vertical axis was physically dead. The next 60 second run, in which the user pressed no buttons, showed axis 4 at 252 events spanning -32767 to +32767 and axis 3 creeping 0 to 19255. The hardware was fine and the fault was in the SDL translation layer.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - save-state-pcsx2-v2-6-3-tidak-kompatibel [ses_f15d394c3ffeEqtCk5URLY5h6a].md:L5315] Stated correction: the earlier run missed because face buttons were being pressed rather than pure vertical motion, and the previous drifting reading was taken while the user was holding the stick."
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - save-state-pcsx2-v2-6-3-tidak-kompatibel [ses_f15d394c3ffeEqtCk5URLY5h6a].md:L08497] Stated correction: the earlier run missed because face buttons were being pressed rather than pure vertical motion, and the previous drifting reading was taken while the user was holding the stick."
     },
     {
       "id": "concept--pcsx2-v282-wayland-init-segv-worked-around-with-xwayland",

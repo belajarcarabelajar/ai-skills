@@ -247,7 +247,7 @@
       "summary": "Three commits by the same git identity landed at 18:25, 18:27 and 18:31 on the branch that PR #440 was merged from, and a fourth dirty file appeared, which broke this session's commit with cannot lock ref 'HEAD'. Two live opencode processes confirmed a second writer. The same session was found active in ai-skills and on the build host, and its commit fixed a real bug in code already merged to main.",
       "rationale": [
         "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L19847] Unstage the file rather than leave it staged, because loud failure beats silent contamination",
-        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L19768] Stop all work in that repository while another writer is active"
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L07612] Stop all work in that repository while another writer is active"
       ]
     },
     {

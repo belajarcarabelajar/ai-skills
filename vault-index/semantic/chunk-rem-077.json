@@ -85,7 +85,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - production-ready-ui-audit-and-loading-spinners [ses_f0bd1b41effeBRBBW1nRb03EtD].md",
       "source_location": "L7679",
       "norm_label": "dev comments are stripped from inlined css at render time so t1/revert notes do not ship to end users",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - production-ready-ui-audit-and-loading-spinners [ses_f0bd1b41effeBRBBW1nRb03EtD].md:L4700] The inline style block is client-visible by design because the track page is a standalone SSR string that does not load custom.css, so a T2/Revert comment is a session note for the next session rather than user-facing copy"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-fasttrack/2026-09-30 - production-ready-ui-audit-and-loading-spinners [ses_f0bd1b41effeBRBBW1nRb03EtD].md:L01965] The inline style block is client-visible by design because the track page is a standalone SSR string that does not load custom.css, so a T2/Revert comment is a session note for the next session rather than user-facing copy"
     }
   ],
   "links": [

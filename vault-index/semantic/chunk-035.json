@@ -139,7 +139,7 @@
       "norm_label": "linux version file behind its own release tags",
       "rationale": [
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md:L22141] Refuse the binary swap because contradictory version state must not be guessed at",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md:L22531] Confirm both tags are ancestors of main before building, so no published work is lost"
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md:L01958] Confirm both tags are ancestors of main before building, so no published work is lost"
       ]
     },
     {

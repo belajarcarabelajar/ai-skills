@@ -63,7 +63,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md",
       "source_location": "L28121",
       "norm_label": "canonical_url + section as the dedup key, language as an attribute",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - audit-copilot-folder [ses_f281d730affeCQbbXW6MJEffQ1].md:L28124] Language belongs as an attribute, not as an independent knowledge entry"
+      "rationale": "Language belongs as an attribute, not as an independent knowledge entry"
     },
     {
       "id": "concept--para-llm-wiki-migration-destination-map",

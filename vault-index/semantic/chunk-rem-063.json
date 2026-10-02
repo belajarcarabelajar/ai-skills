@@ -29,7 +29,7 @@
       "source_location": "L9199",
       "norm_label": "in-app tauri updater replaces the installed elf with the appimage",
       "summary": "Verified against the updater endpoint the app actually calls and against the frontend updater path: on Linux the Tauri updater does downloadAndInstall() then relaunch(), replacing current_exe with the downloaded artifact, and for this project that artifact is Snipset_<ver>_amd64.AppImage. A separate prepare_update() in updater_cmds.rs:169 still logs the hardcoded Windows phrase 'allow NSIS to kill the app', which is a no-op on the Linux path.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - linux-arch-vps-installer-runbook [ses_f07bc78d8ffes2uAXjw5GMofpQ].md:L9201] Letting the in-app updater run would destroy the extract-install invariant, the backup chain, and CLI parity"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - linux-arch-vps-installer-runbook [ses_f07bc78d8ffes2uAXjw5GMofpQ].md:L02275] Letting the in-app updater run would destroy the extract-install invariant, the backup chain, and CLI parity"
     },
     {
       "id": "concept--install-script-explicit-install-flag",
@@ -49,7 +49,7 @@
       "source_location": "L6490",
       "norm_label": "a published release can carry the right version string and stale content",
       "summary": "The user reported missing features, not a missing version. linux-v0.6.854 had been built from commit f64cd05c5 with 16 later commits on origin/main, and probing the installed binary confirmed get_customer_support_overview, export_customer_support_report and CustomerSupportTrendChart were all absent while 0.6.854 was present. The version comes from the merged tauri.linux.conf.json, not from the code, so a correct version proves nothing about content.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - linux-arch-vps-installer-runbook [ses_f07bc78d8ffes2uAXjw5GMofpQ].md:L6413] A correct version string is not evidence that the code is current, so the binary is probed for post-release symbols"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - linux-arch-vps-installer-runbook [ses_f07bc78d8ffes2uAXjw5GMofpQ].md:L02129] A correct version string is not evidence that the code is current, so the binary is probed for post-release symbols"
     },
     {
       "id": "concept--frozen-lockfile-lockfile-coherence-gate",

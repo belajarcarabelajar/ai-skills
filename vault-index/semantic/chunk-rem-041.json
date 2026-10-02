@@ -72,7 +72,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md",
       "source_location": "L13761",
       "norm_label": "va rating does not determine runtime; battery energy does",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md:L13757] Sizing rule of two to three times the measured load, which puts a 100 W desktop at 650 VA"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - kesesuaian-ups-12v-inforce-untuk-komputer [ses_f18e54b8affeD4NQnz1bvJqjDp].md:L06140] Sizing rule of two to three times the measured load, which puts a 100 W desktop at 650 VA"
     },
     {
       "id": "concept--runtime-need-is-clean-shutdown-not-outage-survival",

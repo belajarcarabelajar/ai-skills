@@ -1,0 +1,189 @@
+{
+  "nodes": [
+    {
+      "id": "concept--kdotool-foreground-detection",
+      "label": "kdotool foreground detection on KDE Wayland",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - audit-journal-path-on-linux [ses_f2593046cffeSSNNiV7jM21XE6].md",
+      "source_location": "L12307",
+      "norm_label": "kdotool foreground detection on kde wayland",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - audit-journal-path-on-linux [ses_f2593046cffeSSNNiV7jM21XE6].md:L12307] Linux foreground resolution is best-effort: Wayland to kdotool getactivewindow getwindowpid, X11/Unknown to xprop -root _NET_ACTIVE_WINDOW then xprop -id <id> _NET_WM_PID. Any missing tool, non-zero exit, or parse failure yields None, so the sample is dropped and the journal is generated with no recorded activity at all."
+    },
+    {
+      "id": "concept--linux-capture-provider-input-density-gate",
+      "label": "Linux capture provider input-density gate",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - audit-journal-path-on-linux [ses_f2593046cffeSSNNiV7jM21XE6].md",
+      "source_location": "L12315",
+      "norm_label": "linux capture provider input-density gate",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - audit-journal-path-on-linux [ses_f2593046cffeSSNNiV7jM21XE6].md:L12315] On Linux input_density is hardcoded None and the worker only emits an input_density event when the sample carries one, so the input-intensity line is never emitted, webcam presence is never detected, and classify_focus_session can never reach DeepWork, which requires keystrokes >= 100 on an input_density event."
+    },
+    {
+      "id": "concept--derive-focus-session-queue-gating",
+      "label": "derive_focus_session gated on queue items",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - audit-journal-path-on-linux [ses_f2593046cffeSSNNiV7jM21XE6].md",
+      "source_location": "L12320",
+      "norm_label": "derive_focus_session gated on queue items",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - audit-journal-path-on-linux [ses_f2593046cffeSSNNiV7jM21XE6].md:L12320] screenshot_ref_hash is always None on Linux, so upsert_queue_item is never reached; commit_pending_queue then early-returns on an empty queue before the derive_focus_session and insert_derived_session block, leaving derived_sessions permanently empty on Linux."
+    },
+    {
+      "id": "concept--non-canonical-dominant-state-key",
+      "label": "dominant_state stored with a non-canonical key",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - audit-journal-path-on-linux [ses_f2593046cffeSSNNiV7jM21XE6].md",
+      "source_location": "L12323",
+      "norm_label": "dominant_state stored with a non-canonical key",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - audit-journal-path-on-linux [ses_f2593046cffeSSNNiV7jM21XE6].md:L12323] The value is built with format!(\"{:?}\", focus_session_type).to_lowercase(), producing deepwork, meetingheavy, and lightwork, of which only distracted and recovery are valid keys in JOURNAL_STATE_KEYS; deepwork matches neither stateIcon nor stateColors, so the badge degrades to the hash fallback while the raw string is still displayed."
+    },
+    {
+      "id": "concept--hardcoded-truth-score-85-at-write-time",
+      "label": "Truth score hardcoded to 85 at write time",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - audit-journal-path-on-linux [ses_f2593046cffeSSNNiV7jM21XE6].md",
+      "source_location": "L12322",
+      "norm_label": "truth score hardcoded to 85 at write time",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - audit-journal-path-on-linux [ses_f2593046cffeSSNNiV7jM21XE6].md:L12322] Manual generation writes a hardcoded 85i64 and journal_json = \"{}\", so the value the TruthScoreCalculator produced is never persisted and journal.truth_score, dominant_state, and claims can never be read back, because the dashboard parses journal_json to produce them."
+    },
+    {
+      "id": "concept--unavailability-indistinguishable-from-zero",
+      "label": "Unavailability indistinguishable from zero",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - audit-journal-path-on-linux [ses_f2593046cffeSSNNiV7jM21XE6].md",
+      "source_location": "L12353",
+      "norm_label": "unavailability indistinguishable from zero",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - audit-journal-path-on-linux [ses_f2593046cffeSSNNiV7jM21XE6].md:L12353] The no-journal-row default in compute_activity_page_data is optimistically fabricated as truth_score 100 and dominant_state deep_work, so a day that has a journal present but an unparseable journal_json reports 100 percent and deep_work, and a failed statement prepare leaves those same defaults in place."
+    },
+    {
+      "id": "concept--activity-key-guard-fail-closed-to-missing",
+      "label": "Activity key guard fails closed to Missing",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - audit-journal-path-on-linux [ses_f2593046cffeSSNNiV7jM21XE6].md",
+      "source_location": "L12332",
+      "norm_label": "activity key guard fails closed to missing",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - audit-journal-path-on-linux [ses_f2593046cffeSSNNiV7jM21XE6].md:L12332] ActivityKeyGuard::initialize maps a non-empty Ok(key) to Loaded and maps everything else, error or empty alike, to Missing with safe_error_code ACTIVITY_KEY_MISSING and activity_enabled, capture_enabled, and database_opened all false, so a keyring-thread panic surfaced as KEYRING_THREAD_FAILED is caught by the catch-all arm and misreported as a missing key."
+    },
+    {
+      "id": "concept--journal-statistic-missing-from-tab",
+      "label": "Journal statistic missing from the tracker tab",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - audit-journal-path-on-linux [ses_f2593046cffeSSNNiV7jM21XE6].md",
+      "source_location": "L12431",
+      "norm_label": "journal statistic missing from the tracker tab",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - audit-journal-path-on-linux [ses_f2593046cffeSSNNiV7jM21XE6].md:L12431] The generation path binds the result of record_journal_event to underscore and discards it, so the very write that produces the Journal card in the Statistics tab is thrown away and the card stays at zero with no error reported anywhere."
+    },
+    {
+      "id": "concept--pending-rendered-markdown-hides-worker-journal",
+      "label": "rendered_markdown pending hides the worker journal",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - audit-journal-path-on-linux [ses_f2593046cffeSSNNiV7jM21XE6].md",
+      "source_location": "L12434",
+      "norm_label": "rendered_markdown pending hides the worker journal",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - audit-journal-path-on-linux [ses_f2593046cffeSSNNiV7jM21XE6].md:L12434] The worker writes rendered_markdown as the literal string pending, and get_journal_entries explicitly filters that value out, so even when the worker's insert_journal succeeds the entry is invisible in the UI list, on top of the result of that insert being discarded at the call site."
+    },
+    {
+      "id": "concept--pty-reproduction-as-the-control-for-tui-clipboard",
+      "label": "pty reproduction as the control for TUI clipboard paste",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - perbaikan-paste-gambar-di-opencode [ses_f26497020ffeWRs5OjcrDoP42Q].md",
+      "source_location": "L6195",
+      "norm_label": "pty reproduction as the control for tui clipboard paste",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - perbaikan-paste-gambar-di-opencode [ses_f26497020ffeWRs5OjcrDoP42Q].md:L6195] Driving opencode inside a pty with the same clipboard and the same model produced [Image 1], which rules out opencode, the model, and the clipboard contents in one measurement rather than by argument."
+    },
+    {
+      "id": "concept--terminal-consumed-paste-key-yields-zero-bytes",
+      "label": "Terminal-consumed paste key yields zero bytes",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - perbaikan-paste-gambar-di-opencode [ses_f26497020ffeWRs5OjcrDoP42Q].md",
+      "source_location": "L6202",
+      "norm_label": "terminal-consumed paste key yields zero bytes",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - perbaikan-paste-gambar-di-opencode [ses_f26497020ffeWRs5OjcrDoP42Q].md:L6224] Alt+V was bound as a second prompt.paste key precisely because it is not intercepted by Konsole and therefore always reaches opencode, whereas the terminal's own Ctrl+Shift+V is consumed before the application sees it."
+    },
+    {
+      "id": "concept--arboard-in-process-clipboard-read",
+      "label": "arboard in-process clipboard read",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - perbaikan-paste-gambar-di-opencode [ses_f26497020ffeWRs5OjcrDoP42Q].md",
+      "source_location": "L5702",
+      "norm_label": "arboard in-process clipboard read",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - perbaikan-paste-gambar-di-opencode [ses_f26497020ffeWRs5OjcrDoP42Q].md:L5702] No wl-paste or xclip appears anywhere in the v2.0.14 binary, so the clipboard image is read by arboard inside the process rather than by asking the terminal to deliver clipboard bytes."
+    },
+    {
+      "id": "concept--wayland-clipboard-read-requests-image-png-only",
+      "label": "Wayland clipboard read requests image/png only",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - perbaikan-paste-gambar-di-opencode [ses_f26497020ffeWRs5OjcrDoP42Q].md",
+      "source_location": "L5710",
+      "norm_label": "wayland clipboard read requests image/png only",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - perbaikan-paste-gambar-di-opencode [ses_f26497020ffeWRs5OjcrDoP42Q].md:L5710] arboard on Wayland asks for image/png specifically through wl-clipboard-rs, so a clipboard that offers only image/jpeg yields NoMimeType and nothing is pasted, which is why the oc-clip-img fallback converts to a PNG file and passes the path instead of relying on the clipboard MIME type."
+    }
+  ],
+  "links": [
+    {
+      "source": "concept--activity-key-guard-fail-closed-to-missing",
+      "target": "concept--unavailability-indistinguishable-from-zero",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--hardcoded-truth-score-85-at-write-time",
+      "target": "concept--unavailability-indistinguishable-from-zero",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--derive-focus-session-queue-gating",
+      "target": "concept--non-canonical-dominant-state-key",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--derive-focus-session-queue-gating",
+      "target": "concept--hardcoded-truth-score-85-at-write-time",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--pending-rendered-markdown-hides-worker-journal",
+      "target": "concept--journal-statistic-missing-from-tab",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--linux-capture-provider-input-density-gate",
+      "target": "concept--derive-focus-session-queue-gating",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--kdotool-foreground-detection",
+      "target": "concept--linux-capture-provider-input-density-gate",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--pty-reproduction-as-the-control-for-tui-clipboard",
+      "target": "concept--terminal-consumed-paste-key-yields-zero-bytes",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--terminal-consumed-paste-key-yields-zero-bytes",
+      "target": "concept--arboard-in-process-clipboard-read",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--arboard-in-process-clipboard-read",
+      "target": "concept--wayland-clipboard-read-requests-image-png-only",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--terminal-consumed-paste-key-yields-zero-bytes",
+      "target": "concept--wayland-clipboard-read-requests-image-png-only",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    }
+  ]
+}

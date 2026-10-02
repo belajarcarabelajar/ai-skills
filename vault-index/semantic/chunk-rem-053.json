@@ -19,7 +19,7 @@
       "source_location": "L3676",
       "norm_label": "determinism split: high at validating, near zero at executing",
       "description": "Plan validation scored 9/10 and integrity gates 9/10, while execution scored 2/10 and small-task scope 1/10.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L3656] The largest hole sat in the most frequently used path"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L03578] The largest hole sat in the most frequently used path"
     },
     {
       "id": "concept--documented-but-unread-plan-fields",
@@ -58,7 +58,7 @@
       "source_location": "L3664",
       "norm_label": "green ci proves no contract",
       "description": "202 tests passed and bun run ci was green while the doc-runner gap was live, because validate-skill.mjs had no check comparing which fields the runner reads against which the template declares.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L3664] A green suite with no contract check is vacuous"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L05420] A green suite with no contract check is vacuous"
     },
     {
       "id": "concept--schema-runner-contract-key-export",
@@ -86,7 +86,7 @@
       "source_location": "L3660",
       "norm_label": "prose steps are the handoff point where the llm substitutes commands",
       "description": "'One step equals one command' is advice, not a check: the agent must read prose, extract a command, and run it.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L3662] The most important anti-drift rules are also the softest"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L03568] The most important anti-drift rules are also the softest"
     },
     {
       "id": "concept--coercescalar-strips-quotes-without-escapes",
@@ -136,7 +136,7 @@
       "source_location": "L8576",
       "norm_label": "validate only the changed mermaid block instead of re-rendering all 26",
       "description": "Rendering 26 blocks through a headless browser is the expensive part; the 25 unchanged blocks were proven byte-identical to HEAD so only the 1 new block needed a render.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L8389] Rendering every Mermaid block through a headless browser is the expensive part"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L13476] Rendering every Mermaid block through a headless browser is the expensive part"
     },
     {
       "id": "concept--contract-check-split-from-full-validate",
@@ -146,7 +146,7 @@
       "source_location": "L14187",
       "norm_label": "contract check split into its own ~30ms command",
       "description": "bun run contract:check is separated from the full render, with a negative control: replacing run: must fail and the tree must be clean afterwards.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L6724] A check that has only ever passed is indistinguishable from one that does nothing"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-27 - determinisme-eksekusi-ai-skills [ses_f1c11e32fffeKV29zAwTQTCrBi].md:L06934] A check that has only ever passed is indistinguishable from one that does nothing"
     },
     {
       "id": "concept--grandfather-existing-loose-skip-if",

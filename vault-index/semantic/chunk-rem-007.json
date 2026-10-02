@@ -142,7 +142,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md",
       "source_location": "L14764",
       "norm_label": "self-deadlock from holding the global db lock in a test",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md:L15177] Rewrite the deadlocked test through the production path instead of patching the lock"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - implementing-linux-reliability-plan [ses_f200ecb5fffelR3s9J4u3267bb].md:L43071] Rewrite the deadlocked test through the production path instead of patching the lock"
     },
     {
       "id": "concept--live-acceptance-gate",

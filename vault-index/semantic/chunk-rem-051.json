@@ -26,7 +26,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-02 - diagnose-6-failing-script-tests [ses_f060d9198ffe9gB2iDyFXGc6pX].md",
       "source_location": "L12277",
       "norm_label": "version equality assertion encoded a coincidence not an invariant",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-02 - diagnose-6-failing-script-tests [ses_f060d9198ffe9gB2iDyFXGc6pX].md:L12277] The platform-versioning doc records equal Windows/Linux values as a known gap, not a contract"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-02 - diagnose-6-failing-script-tests [ses_f060d9198ffe9gB2iDyFXGc6pX].md:L12286] The platform-versioning doc records equal Windows/Linux values as a known gap, not a contract"
     },
     {
       "id": "concept--bind-p-omits-x-bindings-vacuous-assertion",
@@ -35,7 +35,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-02 - diagnose-6-failing-script-tests [ses_f060d9198ffe9gB2iDyFXGc6pX].md",
       "source_location": "L12338",
       "norm_label": "bash bind -p omits -x bindings so the negative tab-bind assertion could never fail",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-02 - diagnose-6-failing-script-tests [ses_f060d9198ffe9gB2iDyFXGc6pX].md:L10641] Adding the enabled-case positive control turns a vacuous green into a real test"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-02 - diagnose-6-failing-script-tests [ses_f060d9198ffe9gB2iDyFXGc6pX].md:L10650] Adding the enabled-case positive control turns a vacuous green into a real test"
     },
     {
       "id": "concept--bashrc-exec-fish-hangs-interactive-test",

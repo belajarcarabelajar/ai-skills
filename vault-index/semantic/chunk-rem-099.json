@@ -1,0 +1,316 @@
+{
+  "batch": "rem-099",
+  "vault_roots": [
+    "/home/belajarcarabelajar/Documents/conversations-archive",
+    "/home/belajarcarabelajar/Dokumen/Obsidian Vault"
+  ],
+  "nodes": [
+    {
+      "id": "concept--gesture-gated-toast-audio",
+      "label": "Gesture-gated toast audio",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md",
+      "source_location": "L56",
+      "norm_label": "gesture-gated toast audio",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L58] Therefore: do NOT gate playAudio itself. Gating it would suppress all 652 event-bound sounds in environments where the synthetic event never fires, and would churn a large number of existing tests. Gate the toast cue only.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L52] Many toasts are raised by background work, not by anything the user did, so any user without Ollama installed got an error chime every time the app launches, before touching anything."
+      ]
+    },
+    {
+      "id": "concept--bare-vitest-mock-factory-trap",
+      "label": "vitest serves undeclared exports from a throwing Proxy, so a bare vi.mock factory breaks any runtime read of them",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md",
+      "source_location": "L6128",
+      "norm_label": "vitest serves undeclared exports from a throwing proxy, so a bare vi.mock factory breaks any runtime read of them",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L6128] utils/audio is mocked in 161 test files and vitest serves undeclared exports from a throwing Proxy, so reading a new hasUserInteracted() from it would make the negative control fail by design, and the task forbids weakening that test."
+      ]
+    },
+    {
+      "id": "concept--negative-control-test",
+      "label": "Negative control test",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md",
+      "source_location": "L6130",
+      "norm_label": "negative control test",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L6130] I did not weaken it, I strengthened it. Its beforeEach now does resetToastInteractionForTests() for order independence plus a real window.dispatchEvent(new Event('pointerdown')) that reaches the actual capture-phase listener, while the audio mock still offers only playAudio. That dispatch is itself the proof the gate needs no second audio export.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L6191] The reason for the literal table is kept and is now accurate: undeclared exports throw from vitest's Proxy, that caused 14 real failures, and the single remaining bare factory is the standing negative control."
+      ]
+    },
+    {
+      "id": "concept--interaction-latch-placed-in-toastsound-not-utils-audio",
+      "label": "The user-interaction latch lives in ToastSound.tsx, not utils/audio.ts",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md",
+      "source_location": "L6128",
+      "norm_label": "the user-interaction latch lives in toastsound.tsx, not utils/audio.ts",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L6128] Keeping the latch in ToastSound.tsx means the toast path reads exactly one thing from utils/audio (playAudio), before and after the change, so the negative control needed no structural rescue at all. It is also the more honest location: this is a toast-cue rule, not a general audio rule, and putting it in utils/audio would invite a future reader to think it applies to playAudio.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L2376] The recommendation was utils/audio.ts, but the negative control is a hard constraint, so the state was placed where the bare factory cannot observe it."
+      ]
+    },
+    {
+      "id": "concept--capture-phase-module-load-interaction-latch",
+      "label": "Capture-phase, passive, module-load interaction listener",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md",
+      "source_location": "L6132",
+      "norm_label": "capture-phase, passive, module-load interaction listener",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L6132] Registered at module load, not in an effect, so the latch is armed before the first background toast can fire. Capture matters: a bubble-phase handler calling stopPropagation() must not be able to raise a toast before the latch flips. touchstart is kept because a webview that has not synthesised pointer events still delivers it, and it is idempotent otherwise."
+      ]
+    },
+    {
+      "id": "concept--stale-147-bare-mock-count-corrected-by-measurement",
+      "label": "The '147 bare mock factories' comment was stale; measured 161 mocking files, 160 spread, exactly 1 bare",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md",
+      "source_location": "L6191",
+      "norm_label": "the '147 bare mock factories' comment was stale; measured 161 mocking files, 160 spread, exactly 1 bare",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L6191] Measured, not assumed: 161 test files vi.mock utils/audio; 160 use async (importOriginal) => ({...actual}) after the codemod; exactly 1 uses a bare factory, and it is ToastSound.bareMock.test.tsx itself. The measurement date was written inside the comment so a future reader knows when the numbers were taken.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L1816] The first count was fooled because the negative control's own header comment contains the literal string importOriginal, so the grep for bare factories matched a comment."
+      ]
+    },
+    {
+      "id": "concept--toast-cue-blast-radius-contained-by-context-mocking",
+      "label": "Toast-cue blast radius stayed empty because most tests mock ToastContext away or assert on a component soundEffect",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md",
+      "source_location": "L6183",
+      "norm_label": "toast-cue blast radius stayed empty because most tests mock toastcontext away or assert on a component soundeffect",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L6183] I probed 52 files that can reach playToastSound and assert on playAudio. The reason the blast radius is otherwise empty is that most tests either mock contexts/ToastContext away or assert with toHaveBeenCalledWith on a component soundEffect rather than a toHaveBeenCalledTimes on a toast cue.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L3478] Only toHaveBeenCalledTimes and toHaveBeenNthCalledWith assertions are brittle; toHaveBeenCalledWith is tolerant of the toast cue being absent."
+      ]
+    },
+    {
+      "id": "concept--pre-existing-failure-proved-by-reverting-only-owned-files",
+      "label": "A failure outside your ownership is proved pre-existing by reverting only your own files and re-running",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md",
+      "source_location": "L5558",
+      "norm_label": "a failure outside your ownership is proved pre-existing by reverting only your own files and re-running",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L5558] Confirmed: those 2 failures are PRE-EXISTING on HEAD (commit 91fc92f96), not caused by my change. Same 2 tests, same assertion, same count. I reverted only my three ToastSound files, reran, and got the identical 2 failed | 8 passed, then restored.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - s5-fix-startup-toast-chime [ses_f1a63f048ffeZyV1um630y2Oag].md:L5386] The safer form of the check: copy the file, git checkout the HEAD version, run, then restore from the copy, rather than stashing."
+      ]
+    },
+    {
+      "id": "concept--appimage-dataroot-ignores-portable-txt",
+      "label": "The AppImage branch of PCSX2's DataRoot logic overrides portable.txt, and -datapath appends a literal 'PCSX2'",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md",
+      "source_location": "L7044",
+      "norm_label": "the appimage branch of pcsx2's dataroot logic overrides portable.txt, and -datapath appends a literal 'pcsx2'",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md:L7044] -portable is useless on an AppImage. Pcsx2Config.cpp:2258-2271 checks getenv('APPIMAGE') first and, if it is set, forces DataRoot to <AppImage dir>/PCSX2, ignoring the contents of portable.txt entirely. The portable.txt already sitting in the folder becomes dead.",
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md:L3071] -datapath is also unusable here: it does Path::Combine(CustomDataPath, 'PCSX2'), appending the literal string, so -datapath /home/.../Games/PS2 yields DataRoot /home/.../Games/PS2/PCSX2 rather than the folder itself."
+      ]
+    },
+    {
+      "id": "concept--symlink-xdg-config-to-reuse-an-existing-portable-folder",
+      "label": "Symlink ~/.config/PCSX2 to the existing folder so it becomes the emulator's DataRoot",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md",
+      "source_location": "L7046",
+      "norm_label": "symlink ~/.config/pcsx2 to the existing folder so it becomes the emulator's dataroot",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md:L7046] What does work is the symlink: Path::RealPath on Linux resolves symlinks per component (FileSystem.cpp:388-425), so ~/.config/PCSX2 reads as ~/Games/PS2. Proof in the log: DataRoot Directory: /home/belajarcarabelajar/Games/PS2.",
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md:L03572] Confirmed: Path::RealPath on Linux resolves symlinks and works on non-existent paths, doing an lstat per component and stopping the existence check after the first error while still building the path."
+      ]
+    },
+    {
+      "id": "concept--pcsx2-memcard-file-is-16384-sectors-of-528-bytes",
+      "label": "A PCSX2 .ps2 memory card file is 16384 sectors of 528 bytes, mapped 1:1 onto card address",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md",
+      "source_location": "L9532",
+      "norm_label": "a pcsx2 .ps2 memory card file is 16384 sectors of 528 bytes, mapped 1:1 onto card address",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md:L09546] McdSizeInSectors = m_fileSize / (SectorSize + EraseBlockSizeInSectors) = 8650752 / (512 + 16) = 16384, so the on-disk stride is 528 bytes per sector, not 512.",
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md:L9610] Seek is a raw FSeek64(f, adr, SEEK_SET), so card address equals file offset 1:1, with no header offset. The 512-byte assumption was what made the first two integrity tests wrong."
+      ]
+    },
+    {
+      "id": "concept--pcsx2-memcard-file-has-no-per-sector-checksum",
+      "label": "PCSX2 never writes per-sector checksums into a .ps2 memory card file; the bytes stay at the 0xFF fill",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md",
+      "source_location": "L9766",
+      "norm_label": "pcsx2 never writes per-sector checksums into a .ps2 memory card file; the bytes stay at the 0xff fill",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md:L09780] The per-sector XOR checksum is simply not present in PCSX2's file format. The checksum bytes are 0xFF, the fill value from Create(), never updated, and the guest BIOS computes checksums on the fly during transfer rather than reading them from the file.",
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md:L9845] So a checksum audit of a .ps2 file measures something PCSX2 never writes; the 'tousands of sectors differ' number is void, not evidence of damage."
+      ]
+    },
+    {
+      "id": "concept--ps1-card-checksum-formula-misapplied-to-ps2-cards",
+      "label": "The PS1 memory card checksum formula does not apply to PS2 cards",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md",
+      "source_location": "L9025",
+      "norm_label": "the ps1 memory card checksum formula does not apply to ps2 cards",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md:L09039] This checksum test is invalid. The formula at MemoryCardProtocol.cpp:118 lives inside the ps1McState block, which is PS1 memory card support, not the PS2 card. My conclusion that 16313 sectors were corrupt was a false alarm from a wrong method."
+      ]
+    },
+    {
+      "id": "concept--pcsx2-log-formatted-is-only-a-26-byte-header-check",
+      "label": "'Formatted' in the PCSX2 log is a 26-byte header string compare, not an integrity check",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md",
+      "source_location": "L8437",
+      "norm_label": "'formatted' in the pcsx2 log is a 26-byte header string compare, not an integrity check",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md:L8437] FileMcd_IsMemoryCardFormatted (MemoryCardFile.cpp:873-889) only compares a 26 byte header against the string 'Sony PS2 Memory Card Format'. It does not verify the directory table, block allocation, or checksum integrity, so 'Formatted' in the log is a very weak check and does not mean healthy."
+      ]
+    },
+    {
+      "id": "concept--pcsx2-memcard-fat-index-is-relative-to-alloc-offset",
+      "label": "PCSX2 memory card FAT entries are indexed relative to alloc_offset, not absolutely",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md",
+      "source_location": "L14387",
+      "norm_label": "pcsx2 memory card fat entries are indexed relative to alloc_offset, not absolutely",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md:L14387] The root cause: I indexed the FAT table entries by absolute cluster number when they are relative to alloc_offset. I tested three predicted FAT numbers and all three were right; the 483-plus-terminator figure I had been holding was a different data region's chain that happened to be neatly sequential.",
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md:L14388] With the correct indexing, 22 real files (19 in slot 1, 3 in slot 2) were checked one by one and every length matched its chain exactly (524/524, 949/949, 992/992, 100/100, 63/63), all terminators valid, all consecutive. Zero problems."
+      ]
+    },
+    {
+      "id": "concept--pkill-f-pattern-matches-the-invoking-shell",
+      "label": "pkill -f matches the invoking shell's own command line and kills it",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md",
+      "source_location": "L5546",
+      "norm_label": "pkill -f matches the invoking shell's own command line and kills it",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md:L5546] pkill -f matched my own shell because the pattern matched its command line. A narrower pattern was used instead, e.g. pkill -x on the exact process name."
+      ]
+    },
+    {
+      "id": "concept--tmpfs-tmp-is-not-a-persistent-backup",
+      "label": "/tmp is tmpfs, so a backup left only there is lost on reboot",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md",
+      "source_location": "L13484",
+      "norm_label": "/tmp is tmpfs, so a backup left only there is lost on reboot",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md:L13484] The old backup existed only in /tmp, which is tmpfs and disappears on reboot. That is why a persistent one was created at memcards/backup-20260929/ with the md5 verified identical."
+      ]
+    },
+    {
+      "id": "concept--memory-pressure-as-emulator-bottleneck",
+      "label": "Memory pressure, not GPU load, is the emulator bottleneck",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md",
+      "source_location": "L7057",
+      "norm_label": "memory pressure, not gpu load, is the emulator bottleneck",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md:L7057] zram was 3.8/3.8 GB full during setup, so close Firefox first (about 1.1 GB) before serious play. The OSD read GPU 12.6% and EE 34.7% with nothing saturated, so switching renderer would not have helped."
+      ]
+    },
+    {
+      "id": "concept--pcsx2-renderer-forced-away-from-auto-triggers-its-own-warning",
+      "label": "PCSX2 emits its own unsafe-settings warning when the renderer is forced off Auto",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md",
+      "source_location": "L8807",
+      "norm_label": "pcsx2 emits its own unsafe-settings warning when the renderer is forced off auto",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md:L8807] One real warning I caused: OSD [unsafe_settings_warning]: the renderer is not set to Auto, because I set Renderer = 14 instead of Auto (-1). Reported as self-inflicted rather than left in the log unexplained.",
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-28 - setup-game-ps2-dari-folder-games [ses_f163a11ebffeOc1sDO0LmUW6lt].md:L03052] Auto = -1, so Renderer = -1 in the INI means Auto, which is the right default and not an error, per Config.h:271-281."
+      ]
+    }
+  ],
+  "links": [
+    {
+      "source": "concept--gesture-gated-toast-audio",
+      "target": "concept--interaction-latch-placed-in-toastsound-not-utils-audio",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--interaction-latch-placed-in-toastsound-not-utils-audio",
+      "target": "concept--bare-vitest-mock-factory-trap",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--capture-phase-module-load-interaction-latch",
+      "target": "concept--gesture-gated-toast-audio",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--negative-control-test",
+      "target": "concept--bare-vitest-mock-factory-trap",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--stale-147-bare-mock-count-corrected-by-measurement",
+      "target": "concept--negative-control-test",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--toast-cue-blast-radius-contained-by-context-mocking",
+      "target": "concept--gesture-gated-toast-audio",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--pre-existing-failure-proved-by-reverting-only-owned-files",
+      "target": "concept--toast-cue-blast-radius-contained-by-context-mocking",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--appimage-dataroot-ignores-portable-txt",
+      "target": "concept--symlink-xdg-config-to-reuse-an-existing-portable-folder",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--pcsx2-memcard-file-is-16384-sectors-of-528-bytes",
+      "target": "concept--pcsx2-memcard-file-has-no-per-sector-checksum",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--ps1-card-checksum-formula-misapplied-to-ps2-cards",
+      "target": "concept--pcsx2-memcard-file-has-no-per-sector-checksum",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--pcsx2-log-formatted-is-only-a-26-byte-header-check",
+      "target": "concept--pcsx2-memcard-file-is-16384-sectors-of-528-bytes",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--pcsx2-memcard-fat-index-is-relative-to-alloc-offset",
+      "target": "concept--pcsx2-log-formatted-is-only-a-26-byte-header-check",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--pkill-f-pattern-matches-the-invoking-shell",
+      "target": "concept--tmpfs-tmp-is-not-a-persistent-backup",
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS"
+    },
+    {
+      "source": "concept--pcsx2-renderer-forced-away-from-auto-triggers-its-own-warning",
+      "target": "concept--memory-pressure-as-emulator-bottleneck",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    }
+  ]
+}

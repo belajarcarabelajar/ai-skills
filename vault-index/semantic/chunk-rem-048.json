@@ -56,7 +56,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - perbaikan-kompatibilitas-tgrep-di-semua-perintah [ses_f10f5ccb8ffeC10H0U90ZySRQA].md",
       "source_location": "L16231",
       "norm_label": "tgrep's published speed claims measure tgrep serve client/server latency with the index already built, not the on-disk index alone",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - perbaikan-kompatibilitas-tgrep-di-semua-perintah [ses_f10f5ccb8ffeC10H0U90ZySRQA].md:L16246] The tgrep speed claim only holds with serve running, on repos of 15K-500K indexed files, with selective patterns, and Linux being the weakest platform at 2.82x geomean"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - perbaikan-kompatibilitas-tgrep-di-semua-perintah [ses_f10f5ccb8ffeC10H0U90ZySRQA].md:L04534] The tgrep speed claim only holds with serve running, on repos of 15K-500K indexed files, with selective patterns, and Linux being the weakest platform at 2.82x geomean"
     },
     {
       "id": "concept--explicit-file-list-bypasses-the-tgrep-index",
@@ -99,7 +99,7 @@
       "source_location": "L2438",
       "norm_label": "flags whose gnu semantics tgrep cannot reproduce are delegated wholesale to /usr/bin/grep rather than approximated",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - perbaikan-kompatibilitas-tgrep-di-semua-perintah [ses_f10f5ccb8ffeC10H0U90ZySRQA].md:L2438] -L was delegated because GNU returns 0 when a file matched while tgrep returns 0 when a file was printed, and the mixed case is not derivable from tgrep's exit code",
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - perbaikan-kompatibilitas-tgrep-di-semua-perintah [ses_f10f5ccb8ffeC10H0U90ZySRQA].md:L01999] -L was delegated because GNU returns 0 when a file matched while tgrep returns 0 when a file was printed, and the mixed case is not derivable from tgrep's exit code",
         "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - perbaikan-kompatibilitas-tgrep-di-semua-perintah [ses_f10f5ccb8ffeC10H0U90ZySRQA].md:L5301] -c was delegated because --include-zero with --binary made tgrep print file:0 rows for every git object and ELF file, and GNU was 2.3x faster on the same scan anyway"
       ]
     }

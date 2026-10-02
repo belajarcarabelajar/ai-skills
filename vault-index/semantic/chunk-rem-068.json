@@ -15,7 +15,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - integrasi-snipset-ke-vps-terbaru [ses_f1c2697b6ffeuPVpS0D7Z6ZAgS].md",
       "source_location": "L12332",
       "norm_label": "temporarily disabled github actions workflows",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - integrasi-snipset-ke-vps-terbaru [ses_f1c2697b6ffeuPVpS0D7Z6ZAgS].md:L9992] Every workflow was made manual-only because the account had hit the GitHub Actions runner-minute limit"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - integrasi-snipset-ke-vps-terbaru [ses_f1c2697b6ffeuPVpS0D7Z6ZAgS].md:L13545] Every workflow was made manual-only because the account had hit the GitHub Actions runner-minute limit"
     },
     {
       "id": "concept--release-workflow-job-gate-preserves-executable-test",

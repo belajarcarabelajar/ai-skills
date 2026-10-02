@@ -162,7 +162,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
       "source_location": "L15271",
       "norm_label": "deleting 748 n8n raw captures and reverting it: fully reversible because every file was git-tracked",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L15263] All 748 N8n files were git-tracked, so the deletion was fully reversible through git checkout and proceeded behind a manifest"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L15539] All 748 N8n files were git-tracked, so the deletion was fully reversible through git checkout and proceeded behind a manifest"
     },
     {
       "id": "concept--nxdomain-negative-cache-blocks-a-new-subdomain",

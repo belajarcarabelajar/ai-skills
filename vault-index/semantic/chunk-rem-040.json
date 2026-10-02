@@ -24,7 +24,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - dawnbook-hoax-percaya-12-modul [ses_f1bde037affeTp3p3TEY2cYiV1].md",
       "source_location": "L9947",
       "norm_label": "three-attempt cap on length-rewrite loops",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - dawnbook-hoax-percaya-12-modul [ses_f1bde037affeTp3p3TEY2cYiV1].md:L9637] Repeated rewrites to shave characters waste generative tokens for negligible gain"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - dawnbook-hoax-percaya-12-modul [ses_f1bde037affeTp3p3TEY2cYiV1].md:L11863] Repeated rewrites to shave characters waste generative tokens for negligible gain"
     },
     {
       "id": "concept--anti-template-closing-headings-orchestrator-assigned",
@@ -42,7 +42,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - dawnbook-hoax-percaya-12-modul [ses_f1bde037affeTp3p3TEY2cYiV1].md",
       "source_location": "L9684",
       "norm_label": "repo agent-memory files symlinked to one canonical file",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - dawnbook-hoax-percaya-12-modul [ses_f1bde037affeTp3p3TEY2cYiV1].md:L11671] A symlink resolves to the target, so editing any one name edits the same underlying content"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-dawnbook/2026-09-27 - dawnbook-hoax-percaya-12-modul [ses_f1bde037affeTp3p3TEY2cYiV1].md:L11863] A symlink resolves to the target, so editing any one name edits the same underlying content"
     },
     {
       "id": "concept--coauthor-trailer-for-kania-attributed-commits",

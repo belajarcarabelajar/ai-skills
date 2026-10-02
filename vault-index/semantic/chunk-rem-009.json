@@ -228,7 +228,7 @@
       "source_location": "L12483",
       "norm_label": "concurrent session clobbering shared locale files",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L12489] Because another agent was editing the same locale files seconds earlier, further edits and any commit had to stop rather than race",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L34297] Because another agent was editing the same locale files seconds earlier, further edits and any commit had to stop rather than race",
         "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - perbaikan-statistik-digital-tracker-di-arch-linux [ses_f259490f8ffehG7H43tpD32YZc].md:L24164] git add -A silently swept the dependency-wave fix into a formatting-only commit, caught and amended before pushing"
       ]
     },

@@ -18,7 +18,7 @@
       "source_location": "L3649",
       "norm_label": "keyword first then group tag support context escalation",
       "summary": "analytics_v2/helpers.rs:76-88 effective_support_context() decides support context in three steps: a keyword hit from infer_support_context returns true outright, otherwise research_mode=on plus a tagged group_id upgrades it to true, otherwise false. The consequence stated in the note is that /jadwal, /refund and LMS expansions from a tagged group enter the tagged cohort with no keyword in the snippet text at all.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-10-01 - cara-kerja-fitur-research [ses_f0a431a9effeUP5wA3Yv7NuuG5].md:L3650] The keyword check runs first so existing snippets keep counting without a group tag"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-10-01 - cara-kerja-fitur-research [ses_f0a431a9effeUP5wA3Yv7NuuG5].md:L07603] The keyword check runs first so existing snippets keep counting without a group tag"
     },
     {
       "id": "concept--research-export-metadata-and-hash-only-privacy-invariant",

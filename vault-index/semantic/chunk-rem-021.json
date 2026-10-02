@@ -102,7 +102,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md",
       "source_location": "L16191",
       "norm_label": "backup gate reports sensitive tracked paths instead of blocking",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - menyimpan-salinan-hasil-plan-ai-ke-obsidian [ses_f21b6fa1effeLW2AN5521r1E2D].md:L16191] The repository is private, so the release and the git history have the same audience and blocking buys no protection the archive does not already have"
+      "rationale": "The repository is private, so the release and the git history have the same audience and blocking buys no protection the archive does not already have"
     }
   ],
   "links": [

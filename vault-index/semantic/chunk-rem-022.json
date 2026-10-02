@@ -7,7 +7,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
       "source_location": "L7198",
       "norm_label": "managedoomswaplimit silently dropped by systemd 261",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md:L14653] A silently dropped oomd key means the user's OOM protection erodes with no visible error"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md:L06562] A silently dropped oomd key means the user's OOM protection erodes with no visible error"
     },
     {
       "id": "concept--oomd-dropin-directory-name-must-match-the-reader",
@@ -52,7 +52,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
       "source_location": "L10529",
       "norm_label": "positive control proving the ownership scan can detect rather than being permission-blocked",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md:L14871] The repair was scoped to two paths because a 249,811-entry scan found exactly two non-root paths under /usr"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md:L10417] The repair was scoped to two paths because a 249,811-entry scan found exactly two non-root paths under /usr"
     },
     {
       "id": "concept--missing-rtkit-drops-pipewire-to-rt-priority-1",
@@ -96,7 +96,7 @@
       "norm_label": "healthy page cache is not memory waste",
       "rationale": [
         "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md:L14576] Dropping the cache is the one optimization the user forbade, so it was rejected outright",
-        "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md:L14645] A 4.3-5.7x zram ratio means 1 GiB of swap costs only 167 MiB of real RAM, so the swappiness change had nothing to buy"
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md:L06562] A 4.3-5.7x zram ratio means 1 GiB of swap costs only 167 MiB of real RAM, so the swappiness change had nothing to buy"
       ]
     },
     {
@@ -151,7 +151,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md",
       "source_location": "L8485",
       "norm_label": "max_swappiness never existed in mainline; 5.8 changed the bound from one_hundred to two_hundred",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md:L8483] The research report's premises were checked against mainline source and two of its named things turned out never to have existed"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-26 - audit-ram-arch-linux-kde-plasma [ses_f22248119ffegx5NVeaNt7xTYe].md:L05559] The research report's premises were checked against mainline source and two of its named things turned out never to have existed"
     },
     {
       "id": "concept--per-zone-wmarks-setup-replaced-per-cpu-watermarks",

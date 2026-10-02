@@ -162,7 +162,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md",
       "source_location": "L76448",
       "norm_label": "ollama cpuquota throttling via systemd drop-in",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L74788] Konfigurasi embedding terlalu keras membuat listrik PC tidak stabil, jadi harus pelan agar user bisa kerja di latar belakang"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - evaluasi-konfigurasi-obsidian-di-komputer [ses_f284bb3a2ffeuB2YC7sKYLwUpp].md:L74792] Konfigurasi embedding terlalu keras membuat listrik PC tidak stabil, jadi harus pelan agar user bisa kerja di latar belakang"
     },
     {
       "id": "concept--startupwmclass-taskbar-grouping",

@@ -127,7 +127,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md",
       "source_location": "L29259",
       "norm_label": "test voice two-state button has no single correct cue key",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md:L29259] A cue at the speech call site lands on top of the first spoken syllable"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - rencana-playaudio-handler-84-per-elemen-di-55-file [ses_f182a4d3dffe4NA4gW38SknKGF].md:L28870] A cue at the speech call site lands on top of the first spoken syllable"
     },
     {
       "id": "concept--three-dismiss-entry-points",

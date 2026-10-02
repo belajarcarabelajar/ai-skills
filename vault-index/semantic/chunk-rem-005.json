@@ -37,7 +37,7 @@
       "source_location": "L45364",
       "norm_label": "tauri acl treats every http origin as remote on linux",
       "summary": "On Linux Tauri decides locality from the scheme, so the .localhost HTTP-origin rule only applies on Windows/Android; any http:// origin is remote and cannot reach uncapped app commands. Enabling has_app_acl_manifest for 431 app commands broke licensing and forced the revert.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - youtube-error-pomodoro-snipset-di-linux [ses_f24efcd1effeOS4DRwPu3Myfzn].md:L45357] The .localhost HTTP-origin rule only applies on Windows and Android"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - youtube-error-pomodoro-snipset-di-linux [ses_f24efcd1effeOS4DRwPu3Myfzn].md:L09621] The .localhost HTTP-origin rule only applies on Windows and Android"
     },
     {
       "id": "concept--eval-driven-youtube-player-webview",
@@ -47,7 +47,7 @@
       "source_location": "L47247",
       "norm_label": "eval driven youtube player webview zero capability zero ipc",
       "summary": "A separate Tauri webview loading https://www.youtube.com/embed/{id} as a top-level https document, driven from Rust with eval() over the YouTube postMessage protocol. Because it never invokes frontend IPC, the remote-origin ACL restriction does not apply and no capability is required.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - youtube-error-pomodoro-snipset-di-linux [ses_f24efcd1effeOS4DRwPu3Myfzn].md:L56326] No frontend IPC means the remote-origin ACL never applies"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - youtube-error-pomodoro-snipset-di-linux [ses_f24efcd1effeOS4DRwPu3Myfzn].md:L31733] No frontend IPC means the remote-origin ACL never applies"
     },
     {
       "id": "concept--static-loopback-youtube-player-page",
@@ -57,7 +57,7 @@
       "source_location": "L56328",
       "norm_label": "single static html player page on loopback 21772",
       "summary": "The fix actually shipped at the end of the session: a teeny loopback HTTP server serving one constant HTML string that reads the video id from its own query and frames the embed with referrerPolicy=\"origin\". No app assets, no secrets, one path, zero capability.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - youtube-error-pomodoro-snipset-di-linux [ses_f24efcd1effeOS4DRwPu3Myfzn].md:L60307] One static page, no app assets, no secrets, single path"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - youtube-error-pomodoro-snipset-di-linux [ses_f24efcd1effeOS4DRwPu3Myfzn].md:L05954] One static page, no app assets, no secrets, single path"
     },
     {
       "id": "concept--yt-dlp-resolve-and-stream-audio",
@@ -86,7 +86,7 @@
       "source_location": "L22340",
       "norm_label": "search list video embeddable filter not part status",
       "summary": "A bug found in the session's own shipped work: the search worker asked for part=snippet,status, but search.list accepts only part=snippet and exposes no status resource, so status.embeddable can never come back and an unsupported part risks 400 invalidPart. The documented filter is the videoEmbeddable=true query parameter, which requires type=video (already set).",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - youtube-error-pomodoro-snipset-di-linux [ses_f24efcd1effeOS4DRwPu3Myfzn].md:L22338] videoEmbeddable=true is the documented embeddability filter"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - youtube-error-pomodoro-snipset-di-linux [ses_f24efcd1effeOS4DRwPu3Myfzn].md:L05442] videoEmbeddable=true is the documented embeddability filter"
     }
   ],
   "links": [

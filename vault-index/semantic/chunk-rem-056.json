@@ -201,7 +201,7 @@
       "source_location": "L10291",
       "norm_label": "501 entries measured from a read-only snapshot copy of the live database, never an estimate",
       "summary": "Text 260, Typed 143, Image 56, RichText 23, Link 14, Code 5, range 2026-09-20 21:51 to 2026-09-27 21:43 UTC, exactly 1 favorite. Measured by copying db + wal + shm so the running app was never locked, written or restarted.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-snippets [ses_f1b2d101dffeuO6rGxfkgxpEkx].md:L35] 必须实测条目总数，不能靠猜测说两百多或三三百多"
+      "rationale": "必须实测条目总数，不能靠猜测说两百多或三三百多"
     },
     {
       "id": "concept--magic-menu-sees-only-what-reaches-the-system-clipboard",

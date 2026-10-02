@@ -68,7 +68,7 @@
       "source_location": "L4596",
       "norm_label": "harness prompt triage",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md:L4628] Codex-desktop-specific rules break other harnesses",
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md:L04574] Codex-desktop-specific rules break other harnesses",
         "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md:L4627] Our super-skill already exceeds the pasted protocol content"
       ]
     },

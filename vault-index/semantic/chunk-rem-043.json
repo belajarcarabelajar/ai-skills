@@ -29,7 +29,7 @@
       "source_location": "L10995",
       "norm_label": "independent platform versioning",
       "summary": "Reused id. The session's subject: 14 tasks (T0-T13) giving Windows, Linux and Android their own version number instead of sharing root package.json, Cargo.toml and a bare v* tag, so a Windows release can no longer silently take the Linux version and the website can no longer show a wrong 'latest'.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - implementasi-platform-versioning-independen [ses_f1da808ceffeWNKndIe0gVWJF4].md:L10995] One shared version number let the platforms drift"
+      "rationale": "One shared version number let the platforms drift"
     },
     {
       "id": "concept--locked-deployment-contract-needs-explicit-signoff",
@@ -58,7 +58,7 @@
       "source_location": "L5895",
       "norm_label": "pre existing failure proven by re running at the ancestor commit",
       "summary": "Reused id. Four clippy errors and a tab-bind.test.mjs failure were claimed pre-existing, then proved by reverting the transferred changes on the VPS and re-running: the identical four errors appeared on the clean tree. Recorded as pre-existing debt rather than a regression of this work.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - implementasi-platform-versioning-independen [ses_f1da808ceffeWNKndIe0gVWJF4].md:L4928] Calling a failure pre-existing requires reproducing it before the work started"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - implementasi-platform-versioning-independen [ses_f1da808ceffeWNKndIe0gVWJF4].md:L08121] Calling a failure pre-existing requires reproducing it before the work started"
     },
     {
       "id": "concept--reqwest-default-headers-apply-at-execute",
@@ -96,7 +96,7 @@
       "source_location": "L3152",
       "norm_label": "zero subagent compiler policy",
       "summary": "Reused id. Every Rust compile in this session was run by the parent over ssh on vps-bcb, never by a subagent and never on the local desktop, because AGENTS.md forbids compiling on the interactive machine.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - implementasi-platform-versioning-independen [ses_f1da808ceffeWNKndIe0gVWJF4].md:L10999] Cargo builds run on the VPS to avoid overloading local Arch storage"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - implementasi-platform-versioning-independen [ses_f1da808ceffeWNKndIe0gVWJF4].md:L01373] Cargo builds run on the VPS to avoid overloading local Arch storage"
     }
   ],
   "links": [

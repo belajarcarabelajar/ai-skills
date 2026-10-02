@@ -7,7 +7,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
       "source_location": "L1528",
       "norm_label": "aur install instead of manual binary copy",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md:L1534] AUR install is tracked by pacman, auto-updates, and auto-pulls the missing dependencies"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md:L01535] AUR install is tracked by pacman, auto-updates, and auto-pulls the missing dependencies"
     },
     {
       "id": "concept--curl-impersonate-for-cloudflare-block",
@@ -25,7 +25,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
       "source_location": "L4421",
       "norm_label": "hianime vidstream-2 (megaplay) replacing zokoanime",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md:L4421] Installed 5.1.0 and even upstream 5.1.4 hardcode ZokoAnime, so source lookup fails against a site serving only Vidstream-2"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md:L05097] Installed 5.1.0 and even upstream 5.1.4 hardcode ZokoAnime, so source lookup fails against a site serving only Vidstream-2"
     },
     {
       "id": "concept--patched-ani-cli-shadowing-aur-binary",
@@ -46,7 +46,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
       "source_location": "L4757",
       "norm_label": "stale bash hash keeping the old binary after a fix is installed",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md:L4757] The user's terminal had hashed ani-cli to /usr/bin/ani-cli 5.1.0 and kept using it even though the fixed /usr/local/bin copy shadowed it, while the fresh test shells did not"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md:L05433] The user's terminal had hashed ani-cli to /usr/bin/ani-cli 5.1.0 and kept using it even though the fixed /usr/local/bin copy shadowed it, while the fresh test shells did not"
     },
     {
       "id": "concept--grep-wrapper-tgrep-warning-breaks-ani-cli",
@@ -55,7 +55,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
       "source_location": "L5634",
       "norm_label": "local grep wrapper routing to tgrep breaks one ani-cli call",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md:L5634] The wrapper's own GREP_WRAPPER=0 escape hatch is scoped to ani-cli so the normal grep to tgrep speedup is left untouched, and only the one non-piped grep -q history check at line 443 hits the wrapper"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md:L28436] The wrapper's own GREP_WRAPPER=0 escape hatch is scoped to ani-cli so the normal grep to tgrep speedup is left untouched, and only the one non-piped grep -q history check at line 443 hits the wrapper"
     },
     {
       "id": "concept--ani-cli-indo-subtitle-pairing-wrapper",
@@ -73,7 +73,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
       "source_location": "L20669",
       "norm_label": "english subtitle fallback for episodes with no indonesian file",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md:L25656] A double-episode subtitle file was deleted because its combined timing is wrong when played per episode, so English with correct timing is better"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md:L28436] A double-episode subtitle file was deleted because its combined timing is wrong when played per episode, so English with correct timing is better"
     },
     {
       "id": "concept--mpv-subtitle-track-selection-limits",
@@ -90,7 +90,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
       "source_location": "L23901",
       "norm_label": "hardsub mkv batches defeat subtitle extraction",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md:L23901] The 2.5 GB Pixeldrain batch turned out to be hardsub MKV with no subtitle track, so it was deleted rather than kept"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md:L28436] The 2.5 GB Pixeldrain batch turned out to be hardsub MKV with no subtitle track, so it was deleted rather than kept"
     },
     {
       "id": "concept--subtitle-pack-plaintext-content-check",
@@ -117,7 +117,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md",
       "source_location": "L27293",
       "norm_label": "ani-cli streams over hls unless the download flag is given",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md:L27293] ani-cli resolves an HLS link and mpv plays it straight from the server, so nothing is left on disk and -d is the only mode that saves a real video file"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md:L28436] ani-cli resolves an HLS link and mpv plays it straight from the server, so nothing is left on disk and -d is the only mode that saves a real video file"
     },
     {
       "id": "concept--layered-ani-cli-source-failure-diagnosis",
@@ -136,7 +136,7 @@
       "source_location": "L26030",
       "norm_label": "separate private repository for the fansub collection, wrapper and config",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md:L26027] Subtitles are copyrighted fansub data that must live in a private repo, since a public clone or fork would expose them to takedown",
+        "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md:L28436] Subtitles are copyrighted fansub data that must live in a private repo, since a public clone or fork would expose them to takedown",
         "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md:L26026] ani-cli is upstream and gets overwritten by yay updates, while the personal collection is a private asset, so mixing them guarantees a conflict on every update",
         "[05 - Conversations/home-belajarcarabelajar/2026-09-29 - best-ani-cli-installation-method [ses_f12cc9dc9ffei13Fg940VV7cBU].md:L26734] The SubDL key stays in a mode-600 file the script reads directly rather than in the environment, because an env value is readable by every child process"
       ]

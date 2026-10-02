@@ -20,7 +20,9 @@ const REMINDER =
   "[graphify] knowledge graph at graphify-out/. For focused questions, run graphify query with your question (scoped subgraph, usually much smaller than GRAPH_REPORT.md) instead of grepping raw files. Read GRAPH_REPORT.md only for broad architecture context.";
 
 export default {
-  id: "graphify",
+  // Unique id: the global plugin already owns "graphify". Colliding ids made
+  // this project-scoped copy register as a duplicate.
+  id: "graphify-ai-skills",
   async setup(ctx) {
     let reminded = false;
 
@@ -34,6 +36,14 @@ export default {
 
       const input = event.input;
       if (!input || typeof input.command !== "string") return;
+
+      // A differently-id'd copy of this plugin (e.g. ~/.opencode/plugins and
+      // ~/ai-skills/.opencode/plugins) may already have injected the reminder.
+      // Reuse its marker so only one echo is prepended per session.
+      if (input.command.includes("[graphify]")) {
+        reminded = true;
+        return;
+      }
 
       // ';' not '&&' — Windows PowerShell 5.1 rejects '&&' as a statement
       // separator, breaking the first bash command of the session (#1646).

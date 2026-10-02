@@ -12,8 +12,9 @@
       "source_location": "L4389",
       "norm_label": "session-close debt sweep and follow-up injection",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L23] No coding debt may survive the session, so the sweep asks 3-5 follow-up questions",
-        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L25] The user should only tick boxes rather than typing follow-up questions by hand"
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L00021] Jadi dalam satu sesi itu tidak ada utang coding yang tersisa.",
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L00023] Default-nya menyajikan antara 3-5 pertanyaan follow-up, atau pokoknya apa saja yang sekiranya bisa di-follow-up dari temuan selama proses implementation plan dan eksekusi.",
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L00025] Jadi pengguna tinggal centang-centang saja secara otomatis tanpa harus mengetik manual."
       ]
     },
     {
@@ -23,7 +24,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
       "source_location": "L4387",
       "norm_label": "plan completion saturation rule",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L4387] A task at 90 percent is not a valid state, only Blocked or DEFERRED with a reason"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L04387] Task di 90% atau \"kecuali testnya\" bukan state yang valid, hanya `Blocked`/`DEFERRED` dengan alasan."
     },
     {
       "id": "concept--follow-up-injection-template",
@@ -40,7 +41,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
       "source_location": "L12273",
       "norm_label": "mmdc missing is a hard error not a silently skipped gate",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L12274] A gate that reports success without proving anything is the same as having no gate"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L12274] Tadinya `console.warn` lalu skip, jadi gate melaporkan sukses tanpa membuktikan apa pun."
     },
     {
       "id": "concept--mermaid-depends-on-edge-contract",
@@ -49,7 +50,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
       "source_location": "L12261",
       "norm_label": "structural depends_on/arrow edge contract in ultra-plan-runner",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L6041] Joining all blocks into one string let unrelated diagram labels satisfy the contract and never checked depends_on edges at all"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L06041] cuma `mermaidBlocks.join('\\n')` lalu tes `\\bT1\\b`. Akibatnya: (a) semua block digabung, jadi id yang muncul di diagram **yang tidak relevan** tetap lolos; (b) **edge `depends_on` tidak pernah dicek sama sekali**; (c) cocok juga ke string di dalam label/komentar. Yang diklaim \"contract\" setengahnya unenforced."
     },
     {
       "id": "concept--mermaid-config-file-as-single-source-of-truth",
@@ -58,7 +59,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
       "source_location": "L12271",
       "norm_label": "mermaid config file as single source of truth",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L12281] Passing -t dark over a config produced light nodes on a dark background, so two separate config files are correct"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L12281] `-t dark` + config** menghasilkan node terang di atas background gelap. Dua file config terpisah ternyata yang benar."
     },
     {
       "id": "concept--acctitle-accdescr-accessibility",
@@ -73,9 +74,9 @@
       "label": "Recursive Variable chosen for its four-face variable-font embedding",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
-      "source_location": "L9457",
+      "source_location": "L12280",
       "norm_label": "recursive variable font embedding",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L9457] Mermaid 12 inlines the webfont as base64 and grew each SVG from 12 KB to 197 KB, so the four-face font was chosen over the twenty-face one"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L12280] mermaid 12 meng-inline font sebagai base64. SVG naik 12 KB → 197 KB. Saya uji Open Sans (393 KB, 20 face) vs Recursive Variable (207 KB, 4 face) dan pilih yang kecil"
     },
     {
       "id": "concept--committed-light-dark-hero-image",
@@ -84,7 +85,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
       "source_location": "L12255",
       "norm_label": "committed light/dark hero image",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L12255] GitHub renders Mermaid blocks natively, so committing the other SVGs would only add duplicate megabytes"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L12255] GitHub merender blok Mermaid secara native, jadi meng-commit 16 SVG其它 hanya menambah megabyte duplikat."
     },
     {
       "id": "concept--skill-md-symlink-duplicate-render",
@@ -109,7 +110,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
       "source_location": "L12258",
       "norm_label": "ci migration to bun and node 22",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L6035] The workflow ran npm install and npx while the master skill declares both strictly prohibited"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L06035] `npm install`... `npx`... **STRICTLY PROHIBITED**\". `.github/workflows/ci.yml` menjalankan persis `npm install` + `npx puppeteer browsers install chrome-headless-shell`."
     },
     {
       "id": "concept--execution-is-subagent-first-trigger-snippet",
@@ -118,7 +119,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
       "source_location": "L13422",
       "norm_label": "execution is subagent-first trigger snippet",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L13418] The trigger prompt is read by the agent as a standalone instruction, so a rule living only in the master file is not carried over"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L13418] trigger prompt dibaca agent sebagai instruksi mandiri — dan di situ aturannya hilang."
     },
     {
       "id": "concept--investigation-is-subagent-first-trigger-snippet",
@@ -128,8 +129,8 @@
       "source_location": "L13424",
       "norm_label": "investigation is subagent-first trigger snippet",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L13418] The trigger prompt is read by the agent as a standalone instruction, so a rule living only in the master file is not carried over",
-        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L13429] A short stack trace is explicitly not a valid reason to skip fan-out, because a short trace with several possible causes is the best case to fan out"
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L13418] trigger prompt dibaca agent sebagai instruksi mandiri — dan di situ aturannya hilang.",
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L13429] Dan \"stack trace-nya pendek\" dinyatakan **bukan** alasan sah — stack pendek dengan beberapa cause yang mungkin justru kasus yang paling baik di-fan-out."
       ]
     },
     {
@@ -147,7 +148,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md",
       "source_location": "L13439",
       "norm_label": "lexical subagent term validator guard",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L13443] The guard is lexical, not semantic: it proves the terms are present, not that the agent really fixed anything"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L13443] ini guard **leksikal**, bukan semantik. Ia membuktikan term-termnya ada, bukan bahwa agent benar-benar memperbaiki chuckle."
     },
     {
       "id": "concept--snippets-manifest-json",
@@ -165,10 +166,10 @@
       "source_location": "L15874",
       "norm_label": "snippet database sync drift check",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L12274] A gate that reports success without proving anything is the same as having no gate",
-        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L15886] Markdown files use em dashes and typographic punctuation while the database stores ASCII, so without normalizing both sides every edit reports false drift",
-        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L15888] The snippet database does not exist on a CI runner, so a missing CLI is reported as unreachable and exits zero rather than as a content failure",
-        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L14232] Em dashes are replaced with hyphens before a snippet reaches the database because the master skill bans them in user-visible copy as reading as generative text"
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L12274] Tadinya `console.warn` lalu skip, jadi gate melaporkan sukses tanpa membuktikan apa pun.",
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L15886] File markdown pakai em dash dan kurung tipografis; konten database pakai ASCII. Tanpa normalisasi, setiap edit akan dilaporkan sebagai drift palsu.",
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L15888] Jadi `checkDrift` menandai `ENOENT` dan exit non-zero sebagai `unreachable`, lalu `--check` mencetak batasnya dengan hash lokal dan exit 0.",
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - penambahan-follow-up-questions-ai-skill [ses_f25457c63ffeEts7uz91zl4SFu].md:L14232] Isi file markdown memakai `—`, tapi saya kirim `-` ke database. Alasannya snippet ini masuk ke AI agent, dan master skill sendiri melarang em dash di user-visible copy karena terbaca sebagai teks generatif."
       ]
     }
   ],

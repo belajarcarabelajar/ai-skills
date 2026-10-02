@@ -1374,8 +1374,23 @@ The same sweep that mines code debt also mines the session for the agent's **own
 - After the batch closes, run the sweep's own short pass once more: did executing item A create new debt in the surface it touched? Any new candidate goes to the same ranked list, and the user is asked again only for genuinely new items.
 - Batch the selections into one round. Sequentially asking about each follow-up's sub-steps reproduces the low-value prompting this stage exists to eliminate.
 
+### 📇 6.6 Sync Session Artifacts to Graphify — local, no model (mandatory when the repo has a graph)
+> 📇 **Closing stage — the documents you generated are part of the deliverable, so they belong in the knowledge graph.** A plan, batch manifest, spike report, handoff, progress log or learning ledger that only exists on disk is invisible to `graphify query`, `path` and `explain`. `graphify update .` cannot fix this: its help reads "re-extract code files and update the graph (no LLM needed)" and it parses code, so Markdown is never ingested by it.
+
+```
+RUN `graphify update .` FIRST, THEN `bun run graphify:sync` — IN THAT ORDER
+```
+
+- **Order is load-bearing.** `graphify update .` rewrites the code graph and is not known to preserve foreign nodes; running it *after* the sync can discard the document nodes the sync just added. So the sequence is: (1) `graphify update .`, (2) `bun run graphify:sync`.
+- **What the sync does.** It runs the deterministic structural layer of the vault-index pipeline over this repository's eligible Markdown — one `document` node per file, its ATX `heading` nodes, and its resolvable `[[wikilinks]]` as `references` edges — then unions them into `graphify-out/graph.json` with the same merge used by the vault rebuild. It is a **local line scan: no LLM call, no API key, no network**, so it does not cross the cloud-extraction boundary recorded in `.graphifyignore`.
+- **Run it from the ai-skills repository**, whatever project owns the session: `bun run graphify:sync`. The script lives there because the pipeline it reuses lives there. With no arguments it syncs every eligible repo doc; pass explicit `docs/code-plan/plans/<file>.md` paths to narrow it.
+- **It is deterministic and idempotent.** A second run over unchanged files writes byte-identical output, existing graphify-era document ids are remapped rather than duplicated, and every code/concept/rationale node already in the graph is retained. Verify without writing via `bun run graphify:check` (exit 1 = stale), and preview via `bun scripts/graphify-sync.mjs --dry-run`.
+- **It also runs automatically at commit time, in the right order.** `install.sh` sets `core.hooksPath=.githooks`, and `.githooks/pre-commit` runs the pair without anyone remembering: when the commit touched code it runs `graphify update .` first, then `bun run graphify:sync`, so the structural document layer is the last writer and survives. A Markdown-only commit skips the code rebuild and runs the sync alone. The hook is non-blocking — every path exits 0, because a failed refresh of derived state must never block a commit — and `GRAPHIFY_SYNC_SKIP=1 git commit ...` disables it for one commit. Run the manual pair as well when the session generated documents that will not be committed here, or when you need the graph current before the commit lands.
+- **Never fabricate a graph.** If `graphify` is not installed or `graphify-out/graph.json` does not exist, the sync refuses and says so. Record that in one line and move on; do not build a hand-written `graph.json` to make the step look done. The graph is derived state, and a hand-authored one is a second source of truth.
+
 ### 🚫 Anti-Patterns
 - Closing the session with a report and no question. A debt sweep that produces prose instead of a selectable question has not run.
+- Letting generated Markdown stay invisible to `graphify query` because `graphify update` "should have handled it". It only parses code; run `bun run graphify:sync` after it, every session.
 - Generic chips (`"Anything else?"`, `"More tests?"`) with no file path and no finish line. Unactionable options waste the user's attention and get ignored.
 - Padding to 3-5 items with speculative work, or asking 8 questions because everything looked interesting. Rank first, then cap.
 - Turning a follow-up question into a new scope decision. The user picking an item is approval to close known debt inside the same goal, not approval to redesign the feature.

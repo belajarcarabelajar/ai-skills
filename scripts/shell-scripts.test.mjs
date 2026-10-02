@@ -157,6 +157,116 @@ test('verify-chunk.sh shows usage with no args', () => {
   assert.ok(r.stderr.includes('usage:') || r.stdout.includes('usage:'));
 });
 
+// ---------- .githooks/pre-commit ----------
+
+const HOOK = path.join(ROOT, '.githooks', 'pre-commit');
+
+/** A throwaway git repo with the hook installed via core.hooksPath. */
+function hookRepo() {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'githooks-test-'));
+  fs.mkdirSync(path.join(tmp, '.githooks'), { recursive: true });
+  fs.copyFileSync(HOOK, path.join(tmp, '.githooks', 'pre-commit'));
+  fs.chmodSync(path.join(tmp, '.githooks', 'pre-commit'), 0o755);
+  const git = (args, env) => spawnSync('git', args, { cwd: tmp, encoding: 'utf8', env: env ?? process.env });
+  git(['init', '-q']);
+  git(['config', 'user.email', 'test@example.com']);
+  git(['config', 'user.name', 'test']);
+  git(['config', 'core.hooksPath', '.githooks']);
+  return { tmp, git };
+}
+
+/** Give the temp repo a graph to merge into. */
+function withGraph(tmp) {
+  fs.mkdirSync(path.join(tmp, 'graphify-out'), { recursive: true });
+  fs.writeFileSync(path.join(tmp, 'graphify-out', 'graph.json'), '{}\n');
+}
+
+/** A stand-in sync that records that it ran, and in which order. */
+function fakeSync(tmp) {
+  fs.mkdirSync(path.join(tmp, 'scripts'), { recursive: true });
+  fs.writeFileSync(
+    path.join(tmp, 'scripts', 'graphify-sync.mjs'),
+    "import { appendFileSync } from 'fs';\nappendFileSync('order.txt', 'sync\\n');\n",
+  );
+}
+
+/** A stand-in graphify CLI that records its invocation. Returns its bin dir. */
+function fakeGraphify(tmp) {
+  const bin = path.join(tmp, 'fakebin');
+  fs.mkdirSync(bin, { recursive: true });
+  const p = path.join(bin, 'graphify');
+  fs.writeFileSync(p, '#!/usr/bin/env bash\nprintf "update\\n" >> order.txt\nexit 0\n');
+  fs.chmodSync(p, 0o755);
+  return bin;
+}
+
+const orderOf = (tmp) => {
+  try {
+    return fs.readFileSync(path.join(tmp, 'order.txt'), 'utf8');
+  } catch {
+    return '';
+  }
+};
+
+test('pre-commit hook exists and is executable', () => {
+  assert.ok(fs.existsSync(HOOK), '.githooks/pre-commit does not exist');
+  assert.ok(isExecutable(HOOK), '.githooks/pre-commit is not executable');
+});
+
+test('pre-commit hook has valid bash syntax', () => {
+  assert.ok(bashSyntaxCheck(HOOK), '.githooks/pre-commit has syntax errors');
+});
+
+test('pre-commit hook never uses set -e (a failed sync must not block a commit)', () => {
+  const content = fs.readFileSync(HOOK, 'utf8');
+  assert.ok(content.includes('set -uo pipefail'), 'hook should use set -uo pipefail');
+  assert.ok(!/^set -[a-z]*e/m.test(content), 'hook must not use set -e');
+});
+
+test('pre-commit hook is a silent no-op when nothing is staged', () => {
+  const { tmp, git } = hookRepo();
+  const r = git(['commit', '-q', '--allow-empty', '-m', 'empty']);
+  assert.equal(r.status, 0);
+  assert.ok(!`${r.stdout}${r.stderr}`.includes('graphify'), 'hook should not run with an empty diff');
+  fs.rmSync(tmp, { recursive: true, force: true });
+});
+
+test('pre-commit hook skips cleanly when there is no graph to merge into', () => {
+  const { tmp, git } = hookRepo();
+  fs.writeFileSync(path.join(tmp, 'plan.md'), '# Plan\n');
+  git(['add', 'plan.md']);
+  const r = git(['commit', '-qm', 'md']);
+  assert.equal(r.status, 0);
+  assert.ok(`${r.stdout}${r.stderr}`.includes('no graph at graphify-out/graph.json'), 'hook should report the missing graph');
+  fs.rmSync(tmp, { recursive: true, force: true });
+});
+
+test('a Markdown-only commit runs the doc sync and NOT the code update', () => {
+  const { tmp, git } = hookRepo();
+  withGraph(tmp);
+  fakeSync(tmp);
+  fs.writeFileSync(path.join(tmp, 'plan.md'), '# Plan\n');
+  git(['add', 'plan.md']);
+  const r = git(['commit', '-qm', 'md']);
+  assert.equal(r.status, 0);
+  assert.equal(orderOf(tmp), 'sync\n');
+  fs.rmSync(tmp, { recursive: true, force: true });
+});
+
+test('a code commit runs graphify update BEFORE the doc sync', () => {
+  const { tmp, git } = hookRepo();
+  withGraph(tmp);
+  fakeSync(tmp);
+  const bin = fakeGraphify(tmp);
+  fs.writeFileSync(path.join(tmp, 'thing.mjs'), 'export const x = 1;\n');
+  git(['add', 'thing.mjs']);
+  const env = { ...process.env, PATH: `${bin}:${process.env.PATH}` };
+  const r = git(['commit', '-qm', 'code'], env);
+  assert.equal(r.status, 0);
+  assert.equal(orderOf(tmp), 'update\nsync\n');
+  fs.rmSync(tmp, { recursive: true, force: true });
+});
+
 // ---------- Cross-script integration ----------
 
 test('all shell scripts have proper shebangs', () => {

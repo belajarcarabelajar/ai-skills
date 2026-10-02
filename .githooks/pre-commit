@@ -1,0 +1,142 @@
+#!/usr/bin/env bash
+# .githooks/pre-commit
+#
+# WHAT THIS IS FOR
+#   Keep this repository's graphify graph consistent with what the commit
+#   actually contains, in one step, without anyone remembering:
+#
+#     graphify update .        # re-extract code (local AST, no LLM, no network)
+#     bun run graphify:sync    # add the Markdown's structural chunk nodes
+#
+#   `graphify update` parses code but not notes, and `graphify:sync` parses
+#   notes but knows nothing about code — so a commit that changes both must run
+#   both, in this order, or the graph describes one half of the commit.
+#
+# WHY THE ORDER IS UPDATE THEN SYNC
+#   `update` rebuilds graph.json and its writer is not guaranteed to preserve
+#   foreign nodes. Running sync first and update second can discard the document
+#   nodes the sync just added. Running update first means the structural layer is
+#   the last writer, so the document nodes survive. The repo's Step 6.6 states
+#   the same order for the manual path.
+#
+# MEASURED 2026-10-03 on this machine, graphify 0.9.73
+#   `graphify update .` took 5.3 s over 181 code files, grew the graph from 2342
+#   to 2832 nodes, and PRESERVED the semantic layers (concept 284 -> 274,
+#   rationale 156 -> 158, paper 4). The following `graphify:sync` restored the
+#   structural document layer, ending at 2984 nodes with code 943 -> 1589 and
+#   `graphify:check` reporting CURRENT. So the pair converges; it does not fight.
+#   update also carries its own shrink guard — it refuses to overwrite graph.json
+#   with fewer nodes unless `--force` is passed.
+#
+# WHY A GIT HOOK AND NOT AN OPENCODE PLUGIN HOOK
+#   OpenCode v2's only session-lifecycle event is `session.idle`, which fires
+#   after EVERY assistant turn rather than at a session end, so a plugin hook
+#   there would re-scan constantly. A git hook is harness-agnostic (OpenCode,
+#   Claude Code, a terminal all end in `git commit`) and is a committed file
+#   rather than machine-local plugin state.
+#
+# GATING — what runs when
+#   no staged change          -> nothing
+#   no graph to update        -> skip with a one-line note
+#   Markdown only             -> sync only      (code did not change; skip the 5.3 s rebuild)
+#   any non-Markdown staged   -> update, then sync
+#   graphify / bun not found  -> skip with a one-line note, commit proceeds
+#
+# CONTRACT
+#   Always exits 0. The graph is derived, local, and regenerable; a refresh that
+#   fails must never block a commit. A failure is printed as a warning.
+#
+# ENABLE
+#   install.sh runs `git config core.hooksPath .githooks` for you. By hand:
+#     git config core.hooksPath .githooks
+#
+# DISABLE (temporarily)
+#   GRAPHIFY_SYNC_SKIP=1 git commit ...
+#
+# REVERT
+#   git config --unset core.hooksPath      # back to the default .git/hooks
+#   and/or delete this file. Neither touches graphify-out/, which is gitignored
+#   and rebuilt on demand.
+#
+# NOTE: `set -uo pipefail` and deliberately NOT `-e`. `-e` would abort the commit
+# on the first non-zero command in this hook, which is the opposite of the
+# contract above.
+set -uo pipefail
+
+if [ "${GRAPHIFY_SYNC_SKIP:-}" = "1" ]; then
+  exit 0
+fi
+
+REPO_DIR="$(git rev-parse --show-toplevel 2>/dev/null || true)"
+if [ -z "$REPO_DIR" ]; then
+  exit 0
+fi
+
+# Every staged path in one newline-delimited list. `--diff-filter=ACMR` ignores
+# deletes: a deleted file is handled by the next full run, and a pre-commit hook
+# cannot know the union it wants.
+staged="$(git -C "$REPO_DIR" diff --cached --name-only --diff-filter=ACMR 2>/dev/null || true)"
+if [ -z "$staged" ]; then
+  exit 0
+fi
+
+# Split the staged set into "docs" (what sync owns) and "code" (everything else,
+# which is what makes update worth its 5.3 s). Done in bash, not by shelling out
+# to a matcher, so the loop is the only parser and it cannot drift from the
+# pathspec used above.
+has_docs=0
+has_code=0
+while IFS= read -r file; do
+  [ -z "$file" ] && continue
+  case "$file" in
+    *.md|*.mdx) has_docs=1 ;;
+    *) has_code=1 ;;
+  esac
+done <<<"$staged"
+
+GRAPH="$REPO_DIR/graphify-out/graph.json"
+if [ ! -f "$GRAPH" ]; then
+  echo "[graphify] no graph at graphify-out/graph.json yet; skipping (run a graphify extraction first)"
+  exit 0
+fi
+
+# Bun is the only sanctioned runtime; fall back to its standard install path
+# because hooks can run with a minimal environment.
+BUN_BIN="$(command -v bun || true)"
+if [ -z "$BUN_BIN" ] && [ -x "$HOME/.bun/bin/bun" ]; then
+  BUN_BIN="$HOME/.bun/bin/bun"
+fi
+
+SYNC="$REPO_DIR/scripts/graphify-sync.mjs"
+
+# 1. Code first, only when code actually changed.
+if [ "$has_code" -eq 1 ]; then
+  GRAPHIFY_BIN="$(command -v graphify || true)"
+  if [ -z "$GRAPHIFY_BIN" ] && [ -x "$HOME/.local/bin/graphify" ]; then
+    GRAPHIFY_BIN="$HOME/.local/bin/graphify"
+  fi
+  if [ -n "$GRAPHIFY_BIN" ]; then
+    update_output="$(cd "$REPO_DIR" && "$GRAPHIFY_BIN" update . 2>&1)" && update_status=0 || update_status=$?
+    if [ "$update_status" -ne 0 ]; then
+      echo "[graphify] update did not complete (exit $update_status); doc sync still runs" >&2
+      printf '%s\n' "$update_output" | tail -n 5 >&2
+    fi
+  else
+    echo "[graphify] graphify CLI not found; code graph not refreshed (doc sync still runs)"
+  fi
+fi
+
+# 2. Documents last, so the structural layer is the final writer. Runs whenever
+# anything was staged: after an update the docs must be re-asserted on top, and
+# on a doc-only commit this is the whole job.
+if [ "$has_docs" -eq 1 ] || [ "$has_code" -eq 1 ]; then
+  if [ -n "$BUN_BIN" ] && [ -f "$SYNC" ]; then
+    sync_output="$(cd "$REPO_DIR" && "$BUN_BIN" "$SYNC" 2>&1)" && sync_status=0 || sync_status=$?
+    if [ "$sync_status" -ne 0 ]; then
+      echo "[graphify] doc sync did not complete (exit $sync_status); commit proceeds" >&2
+      printf '%s\n' "$sync_output" | tail -n 5 >&2
+    fi
+  fi
+fi
+
+exit 0

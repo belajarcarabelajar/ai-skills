@@ -157,4 +157,24 @@ else
   echo "[OK] Internal repo skill package symlinks verified."
 fi
 
+# 8. Enable the committed git hooks. `.githooks/pre-commit` keeps the repo's
+#    graph consistent with each commit: when code changed it runs
+#    `graphify update .` (local AST), then `bun run graphify:sync` adds the
+#    Markdown's structural nodes last. A Markdown-only commit pays only for the
+#    sync. core.hooksPath is repo-local config, so this changes nothing outside
+#    this checkout and is undone with one unset. The hook itself never blocks a
+#    commit: every path exits 0, because the graph is derived state.
+if git -C "$REPO_DIR" rev-parse --git-dir >/dev/null 2>&1; then
+  if [ "$DRY_RUN" = true ]; then
+    echo "[DRY-RUN] Would set repo-local git config: core.hooksPath=.githooks"
+    echo "[DRY-RUN]   - .githooks/pre-commit -> non-blocking: graphify update (code) then graphify:sync (docs)"
+  else
+    git -C "$REPO_DIR" config core.hooksPath .githooks
+    echo "[OK] Enabled git hooks: core.hooksPath=.githooks"
+    echo "     (revert: git -C \"$REPO_DIR\" config --unset core.hooksPath)"
+  fi
+else
+  echo "[SKIP] Not a git checkout; skipping core.hooksPath (the hook is opt-in)."
+fi
+
 echo "==> Ultimate AI Coding Skill installation complete!"

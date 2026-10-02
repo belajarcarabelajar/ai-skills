@@ -93,6 +93,9 @@ export function buildIdBySourceFile(structuralChunks) {
   for (const entry of structuralChunks ?? []) {
     for (const node of entry?.chunk?.nodes ?? []) {
       if (node?.file_type !== 'document') continue;
+      // A heading node also carries `file_type: 'document'`. It is a child of its
+      // file, not the file's identity, so it must never become the map's target.
+      if (node?.node_kind === 'heading') continue;
       const sourceFile = filled(node.source_file);
       if (sourceFile === null || !filled(node.id)) continue;
       if (!bySourceFile.has(sourceFile)) bySourceFile.set(sourceFile, node.id);
@@ -107,6 +110,15 @@ export function buildIdBySourceFile(structuralChunks) {
  * Pure: returns a new `previous`; the input is not mutated. When no document id
  * changes, the original object is returned untouched so a caller can cheaply
  * tell the pass was a no-op.
+ *
+ * ONLY DOCUMENT ROOTS ARE REMAPPED, and `node_kind === 'heading'` is the second
+ * half of that rule. The structural layer gives a heading node
+ * `file_type: 'document'` too, so a file-keyed remap that ignored `node_kind`
+ * would map every heading back onto its own file's document id, fuse them, and
+ * leave one node carrying a heading's `source_location` and `heading_level`. It
+ * would also break idempotency: a first run emits the headings, and a second run
+ * over that output collapses them — the same input producing a different graph.
+ * Measured against `graphify-sync` on 2026-10-03.
  *
  * @param {{nodes?: object[], links?: object[], [k: string]: unknown}} previous
  * @param {Map<string, string>} idBySourceFile
@@ -126,6 +138,7 @@ export function normalizePreviousIds(previous, idBySourceFile) {
   const idMap = new Map();
   for (const node of nodes) {
     if (node === null || typeof node !== 'object' || node.file_type !== 'document') continue;
+    if (node.node_kind === 'heading') continue;
     const sourceFile = filled(node.source_file);
     if (sourceFile === null) continue;
     const target = idBySourceFile.get(sourceFile);

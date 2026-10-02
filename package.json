@@ -23,6 +23,8 @@
     "mirror:publish": "bun scripts/plan-publish.mjs",
     "mirror:check": "bun scripts/plan-publish.mjs --check --all",
     "mirror:status": "bun scripts/plan-publish.mjs --status",
+    "graphify:sync": "bun scripts/graphify-sync.mjs",
+    "graphify:check": "bun scripts/graphify-sync.mjs --check",
     "math:bayes": "bun scripts/bayesian-confidence.mjs",
     "math:invariants": "bun scripts/formal-invariants.mjs",
     "math:batch": "bun scripts/queueing-batch.mjs",

@@ -81,12 +81,15 @@ Inline execution exists only as a documented exception, not a default.
 ai-skills/
 ├── README.md                                    # Documentation & architecture flow
 ├── LICENSE                                      # MIT License
-├── package.json                                 # devDependencies: @mermaid-js/mermaid-cli
+├── package.json                                 # npm scripts & devDependencies (@mermaid-js/mermaid-cli)
 ├── Super Ultra Code Plan Implementation.md      # SINGLE SOURCE OF TRUTH (Master Skill)
+├── MEMORY.md                                    # Distilled in-repo rules from Step 6 learning harvest
 ├── install.sh                                   # 1-command installer for all harnesses
 ├── mermaid.config.json                          # Light theme: palette + embedded-font stack
 ├── mermaid.dark.config.json                     # Dark variant, same layout and font
 ├── puppeteer-config.json                        # Headless flags for mermaid-cli rendering
+├── .githooks/
+│   └── pre-commit                               # Non-blocking: refresh graphify graph when a commit includes Markdown
 ├── .github/
 │   └── workflows/
 │       └── ci.yml                               # CI: bun install, render, drift gate, validate, test
@@ -94,10 +97,12 @@ ai-skills/
 │   ├── lifecycle.svg                            # README hero, light
 │   └── lifecycle-dark.svg                       # README hero, dark
 ├── docs/
+│   ├── graphify-integration.md                  # graphify setup, memory bounds, and runbook
 │   └── code-plan/
-│       ├── <date>-<slug>.manifest.md            # Batch manifest written before the first dispatch
-│       └── plans/
-│           └── <date>-<slug>.md                 # ultra-plan/v1 plans this repo executed
+│       ├── <date>-<slug>.manifest.md            # Batch manifests written before dispatch
+│       ├── plans/
+│       │   └── <date>-<slug>.md                 # ultra-plan/v1 plans this repo executed
+│       └── spikes/                              # Spike reports & hypothesis evaluation
 ├── examples/
 │   ├── worked-example.md                        # Full pipeline walkthrough (filled-in reference)
 │   └── deep-research-worked-example.md          # Citation-grounded report at target density
@@ -105,10 +110,14 @@ ai-skills/
 │   ├── sync.sh                                  # Bidirectional sync (~/.config/ai <-> repo)
 │   ├── render-diagrams.sh                       # Render all mermaid blocks to SVG
 │   ├── validate-skill.mjs                       # Frontmatter, link, token, mermaid & a11y lint
+│   ├── check-runner-contract.mjs                # Fast structural check for runner frontmatter keys
+│   ├── skipif-registry-audit.mjs                # Tally and classify skip_if predicates across all plans
 │   ├── ultra-plan-runner.mjs                    # ultra-plan/v1 DAG runner + visual map contract
 │   ├── ultra-plan-runner.test.mjs               # Contract tests for the runner
 │   ├── sync-snippets.mjs                        # Drift guard: snippets/ <-> Snipset database
 │   ├── sync-snippets.test.mjs                   # Normalization + drift-detection tests
+│   ├── export-opencode-history.mjs              # OpenCode SQLite session history -> Obsidian notes mirror
+│   ├── lib/                                     # Exporter & chunk utilities (db, redact, note-name, sync-writer, etc.)
 │   ├── plan-publish.mjs                         # Publish plans into the Obsidian vault (one-way mirror)
 │   ├── plan-publish.test.mjs                    # Publish, idempotency, drift, and refusal tests
 │   ├── plan-publish-registry.mjs                # Vault + project registry and destination paths
@@ -119,16 +128,25 @@ ai-skills/
 │   ├── pr-registry.test.mjs                     # Collision, terminal-state, and merge-order guards
 │   ├── plan-issue-sync.mjs                      # Plan -> GitHub issue mirror (one-way, hash-keyed)
 │   ├── plan-issue-sync.test.mjs                 # Action-matrix and real-argv/stdin guards
+│   ├── graphify-sync.mjs                        # Union repo Markdown chunk nodes into graphify-out/graph.json
+│   ├── graphify-sync.test.mjs                   # Remap, idempotency, retention, and gate tests
+│   ├── vault-index.mjs                          # Vault index scanner & worklist generator
+│   ├── vault-index-verify.mjs                   # Verify coverage, privacy boundaries, and graphify read paths
+│   ├── vault-index-rebuild.mjs                  # Rebuild merged knowledge graph from structural + semantic chunks
+│   ├── vault-index-cluster.mjs                  # Leiden clustering pass for knowledge graph
 │   └── plan-mirror-check.sh                     # Local drift watchdog (systemd --user timer, check only)
 ├── snippets.manifest.json                      # Maps trigger prompts to Snipset database slots
 ├── plans.publish.json                          # Vault path, destination template, and project roots for the plan mirror
 ├── plan.issues.json                            # Project -> owner/repo for the plan-issue mirror (committed config)
 ├── pr.registry.json                            # Live PR session slots (gitignored; per-machine coordination state)
 ├── snippets/                                    # Copy-paste trigger prompts
-│   ├── orkestrasi-ngoding-plan.md               # Plan + TDD + mandatory subagent fan-out
-│   ├── orkestrasi-debugging.md                  # RCA + mandatory hypothesis-parallel subagent fan-out
-│   └── orkestrasi-pr.md                         # PR delivery, review, and topological batch merge
+│   ├── orkestrasi-brainstorm.md                # Brainstorm intent lock (keyword: brn)
+│   ├── orkestrasi-ngoding-plan.md               # Plan + TDD + mandatory subagent fan-out (keyword: ;')
+│   ├── orkestrasi-debugging.md                  # RCA + mandatory hypothesis-parallel subagents (keyword: ';)
+│   ├── orkestrasi-pr.md                         # PR delivery, review, and topological batch merge (keyword: ;;')
+│   └── orkestrasi-pr-review.md                  # Standalone PR review & verification gate (keyword: prr)
 ├── templates/                                   # Companion templates (blank scaffolds)
+│   ├── brainstorm-intent-template.md           # Brainstorm intent lock, task list A/B/C/D, & approval gate
 │   ├── implementation-plan-template.md          # Visual work breakdown & task mapping
 │   ├── spike-report-template.md                 # Timeboxed exploratory spike & hypotheses
 │   ├── systematic-debugging-log-template.md     # 4-phase RCA & bug reproduction log
@@ -137,11 +155,16 @@ ai-skills/
 │   ├── progress-log-template.md                 # Persistent task state across sessions
 │   ├── adr-template.md                          # Architecture Decision Record with decision tree
 │   ├── subagent-contract-template.md            # Subagent task contract & parent audit gate
+│   ├── vault-index-subagent-contract.md         # Subagent contract for note reading & semantic extraction
 │   ├── code-review-template.md                  # Reviewer output contract & verdict
 │   ├── deep-research-report-template.md         # Citation-grounded long-form research report
 │   ├── follow-up-injection-template.md          # Session-close debt sweep & follow-up question
 │   ├── pull-request-template.md                 # PR body, local evidence table, delivery metadata
-│   └── pr-review-template.md                    # Remote PR review, coverage table, binary verdict
+│   ├── pr-review-template.md                    # Remote PR review, coverage table, binary verdict
+│   └── session-learning-ledger-template.md      # Self-learning ledger for operational mistakes
+├── vault-index/                                 # Subagent-extracted semantic vault knowledge graph
+│   ├── manifest.json                            # Vault files, sha256 hashes, byte sizes, and node counts
+│   └── semantic/                                # Subagent chunk outputs (chunk-*.json)
 └── skills/
     └── super-ultra-code-plan/                   # Full skill package with bundled templates & examples
         ├── SKILL.md -> ../../Super Ultra Code Plan Implementation.md
@@ -262,6 +285,7 @@ label drift.
 
 Agents can instantly scaffold structured artifacts using the ready-to-use templates in `templates/`. Every planning artifact mandatorily includes at least one embedded Mermaid diagram (a plan without Mermaid is incomplete and blocks the approval gate):
 
+- **[`brainstorm-intent-template.md`](templates/brainstorm-intent-template.md)**: Intent Lock Report before any plan is written — records verbatim user intent, maps tasks A/B/C/D into interpreted scope, embeds a scope map Mermaid flowchart, documents non-goals and trade-offs (distinguishing Human-locked from Agent-default choices), and enforces the human approval gate before planning.
 - **[`implementation-plan-template.md`](templates/implementation-plan-template.md)**: MANDATORY Mermaid visual map (tasks, dependencies, gates, verification), task breakdown, failing tests (RED), implementation (GREEN), and verification matrix.
 - **[`spike-report-template.md`](templates/spike-report-template.md)**: Hypothesis testing flow, epistemic unknowns exploration, and architectural trade-off evaluations.
 - **[`systematic-debugging-log-template.md`](templates/systematic-debugging-log-template.md)**: 4-phase RCA state machine (REPRODUCE -> DIAGNOSE -> FIX -> VERIFY) and bug reproduction log.
@@ -272,10 +296,11 @@ Agents can instantly scaffold structured artifacts using the ready-to-use templa
 - **[`progress-log-template.md`](templates/progress-log-template.md)**: Persistent task state log - the single source of truth for a task across multiple sessions (checklist, decisions, evidence trail, session log).
 - **[`adr-template.md`](templates/adr-template.md)**: Architecture Decision Record (ADR) - structured decision tree, alternative trade-off comparison, and consequences.
 - **[`subagent-contract-template.md`](templates/subagent-contract-template.md)**: Subagent task contract - task chunking and fan-out plan, strict scope isolation, permitted target files, gather & synthesize checkpoint, and parent diff audit gate sequence.
+- **[`vault-index-subagent-contract.md`](templates/vault-index-subagent-contract.md)**: Vault Index Extraction Contract (Semantic Layer) — Subagent task contract for reading notes and emitting `concept` / attribute nodes into isolated chunk files with strict `source_file` provenance and chunk-schema validation.
 - **[`code-review-template.md`](templates/code-review-template.md)**: Reviewer output contract - rule attribution precedence, 8-point bug qualification filter, P0–P3 priority with confidence, exhaustiveness and dedupe rules, suggestion block format, and the binary `correct` / `not correct` verdict.
 - **[`deep-research-report-template.md`](templates/deep-research-report-template.md)**: Citation-grounded long-form research report - executive summary, `##` themes with `###` subsections, inline `[n]` citations, LaTeX notation, and a closing synthesis.
 - **[`follow-up-injection-template.md`](templates/follow-up-injection-template.md)**: Session-close debt sweep - harvested debt candidates, `NOW`/`LATER` classification, the ranked 3-5 follow-up set, the batched multi-select question, the execution record, and the deferred backlog.
-- **[`session-learning-ledger-template.md`](templates/session-learning-ledger-template.md)**: Self-learning ledger filled during the Step 6 Learning Harvest - records the agent's own operational mistakes (wrong tool calls, misread rules, blind retries, premature guesses, scope creep), distills them into `WHEN → DO → NOT` rules through the Minimum-Signal and 30-Day Horizon gates, writes kept rules in-repo automatically, and promotes recurring rules to `~/AGENTS.md` only with per-item user approval. The next session reads these before starting work.
+- **[`session-learning-ledger-template.md`](templates/session-learning-ledger-template.md)**: Self-learning ledger filled during the Step 6 Learning Harvest - records the agent's own operational mistakes (wrong tool calls, misread rules, blind retries, premature guesses, scope creep), distills them into `WHEN → DO → NOT` rules through the Minimum-Signal and 30-Day Horizon gates, writes kept rules in-repo automatically into [`MEMORY.md`](MEMORY.md), and promotes recurring rules to `~/AGENTS.md` only with per-item user approval. The next session reads these before starting work.
 
 ---
 
@@ -319,8 +344,12 @@ Bun only.
 
 ```bash
 bun run plan:check docs/code-plan/plans/<plan>.md   # validate the DAG and the visual map
-bun run plan:run  docs/code-plan/plans/<plan>.md   # same, then execute the tasks
+bun run plan:run   docs/code-plan/plans/<plan>.md   # same, then execute the tasks
+bun run contract:check                              # fast structural check for all 18 runner keys (~1s)
+bun run audit:skipif                                # tally & audit skip_if predicates across registry
 ```
+
+`bun run contract:check` (`scripts/check-runner-contract.mjs`) verifies that `templates/implementation-plan-template.md` and the master skill plan header declare all 18 keys the runner reads (`tasks[].run[].cmd`, `tasks[].skip_if`, etc.) using pure AST/frontmatter comparison in ~1 second, bypassing the expensive headless Mermaid browser rendering.
 
 The visual map check is the part that catches a lying plan. Every task heading must have a
 matching node in the Mermaid block, and every `depends_on` edge must match a Mermaid edge
@@ -618,25 +647,28 @@ for the coverage table, the line-anchoring rule, and the binary verdict.
 
 ## Trigger Snippets
 
-Copy-paste prompts for the three entry points. They live in
+Copy-paste prompts for the five workflow entry points. They live in
 [`snippets/`](snippets/) and are the fastest way to activate the skill correctly.
 
-- **[`orkestrasi-ngoding-plan.md`](snippets/orkestrasi-ngoding-plan.md)**: plan generation, TDD execution, and the mandatory subagent pipeline.
-- **[`orkestrasi-debugging.md`](snippets/orkestrasi-debugging.md)**: root cause analysis with hypothesis-parallel investigation, and the mandatory subagent pipeline.
-- **[`orkestrasi-pr.md`](snippets/orkestrasi-pr.md)**: PR delivery from a finished session, PR review, and the ordered batch merge.
+- **[`orkestrasi-brainstorm.md`](snippets/orkestrasi-brainstorm.md)** (keyword: `brn`): grill-until-locked brainstorm interview BEFORE any plan: grounds in the repository, surfaces trade-offs via the harness question tool, and locks tasks A/B/C/D into an approved intent artifact.
+- **[`orkestrasi-ngoding-plan.md`](snippets/orkestrasi-ngoding-plan.md)** (keyword: `;`): plan generation, TDD execution, and the mandatory subagent pipeline.
+- **[`orkestrasi-debugging.md`](snippets/orkestrasi-debugging.md)** (keyword: `;,`): root cause analysis with hypothesis-parallel investigation, and the mandatory subagent pipeline.
+- **[`orkestrasi-pr.md`](snippets/orkestrasi-pr.md)** (keyword: `;;,`): PR delivery from a finished session, PR review, and the ordered batch merge.
+- **[`orkestrasi-pr-review.md`](snippets/orkestrasi-pr-review.md)** (keyword: `prr`): standalone remote PR review, line-anchored findings, coverage table, and binary verdict; merges to main only when pre-authorized and all gates pass.
 
-All three carry the same subagent rules, because the most common failure is an agent
+All five carry the same subagent and evidence rules, because the most common failure is an agent
 that reads a trigger prompt, never sees a subagent requirement in it, and quietly
 implements everything inline. Each one states the eight-step pipeline explicitly:
 task-chunking, batch manifest, high fan-out floor, non-overlapping scopes, nested
 fan-out, gather and synthesize, parent diff audit, and batched dispatch. Inline work is
 allowed only as a written exception.
 
-The debugging variant chunks by **hypothesis** rather than by file, so competing
+The brainstorming variant locks user intent through structured interview rounds before any plan
+or code exists. The debugging variant chunks by **hypothesis** rather than by file, so competing
 explanations are tested in parallel and a disproven cause is discarded without
-contaminating the others. The PR variant adds the terms specific to its own phase:
-derived isolation, parent-only git ownership, the PR body contract, `--body-file`, the
-topological merge order, and the separate review contract.
+contaminating the others. The PR delivery variant adds derived isolation, parent-only git ownership,
+the PR body contract (`--body-file`), and topological batch merge. The PR review variant enforces
+line-anchored review contracts and gates merging behind green local checks and a `correct` verdict.
 
 ### Keeping the database in sync
 
@@ -794,6 +826,54 @@ names one vault by absolute path on one machine, and the plan set it enumerates 
 mirrors for none of it, so the check is a local gate to run on the machine that owns the vault
 rather than something a portable CI runner can ever pass.
 
+### Indexing generated Markdown into the graph
+
+`graphify update .` cannot do this. Its help reads "re-extract code files and update the
+graph (no LLM needed)" and it parses code, so every plan, batch manifest, spike report,
+handoff, progress log and learning ledger a session writes stays invisible to `graphify
+query`, `path` and `explain`. `scripts/graphify-sync.mjs` closes that gap with the
+deterministic half of the vault-index pipeline: one `document` node per eligible Markdown
+file, its ATX `heading` nodes, and its resolvable `[[wikilinks]]` as `references` edges,
+unioned into `graphify-out/graph.json`.
+
+```bash
+bun run graphify:sync     # structural extraction + merge, writes graph.json
+bun run graphify:check    # exit 1 when the graph is stale; never writes
+bun scripts/graphify-sync.mjs --dry-run
+bun scripts/graphify-sync.mjs docs/code-plan/plans/<plan>.md   # narrow to files
+```
+
+| Concern | How it is handled |
+|---|---|
+| Cloud boundary | It is a local line scan: no `extract`, no API key, no packet. The eligible set is decided by graphify's own detector through `scan()`, so the `.gitignore`/`.graphifyignore` boundary is the same one a future extraction would honour rather than a second matcher. |
+| Ordering | Run it **after** `graphify update .`. `update` rewrites the code graph and is not known to preserve foreign nodes, so running it after the sync can discard the document nodes the sync just added. The pre-commit hook below enforces this order automatically. |
+| Duplicate ids | The graph already carries graphify-era `document` ids. Before the union, previous `document` ids are remapped onto this layer's ids for the same `source_file`, so a known file is not indexed twice and its edges follow the remap. `node_kind: heading` nodes are never remapped — they are children of a file, not its identity. |
+| Loss | `merge()` seeds the union from the previous graph, so code, concept and rationale nodes are retained and can only be added to. A gate refuses to write when the node count would fall. |
+| Idempotency | `structural()` is deterministic and the merge is a union keyed on node id, so a second run over unchanged files writes byte-identical output. `graphify:check` is the gate. |
+| Missing graph | It refuses and says so. It merges into an existing graph; it never fabricates one. |
+
+This runs at the end of a session as Step 6.6 of the skill, and it also runs automatically
+through a committed git hook.
+
+### The pre-commit hook
+
+`.githooks/pre-commit` keeps the graph consistent with what a commit actually contains,
+without the agent having to remember: when code changed it runs `graphify update .` (local
+AST), then `bun run graphify:sync` adds the Markdown's structural nodes last. `install.sh`
+enables it with `git config core.hooksPath .githooks`.
+
+| Concern | How it is handled |
+|---|---|
+| Not blocking | Every path exits 0. The graph is derived, local and regenerable, so a failed step prints a bounded warning and the commit proceeds — a red graph must never block history. |
+| Ordering | `graphify update` runs **before** the sync, never after. `update` rebuilds `graph.json` and its writer is not guaranteed to preserve foreign nodes, so the structural layer must be the last writer or the document nodes can vanish. Measured 2026-10-03: `update` took 5.3 s, grew the graph 2342 → 2832 nodes, preserved the semantic layers (concept 284 → 274, rationale 156 → 158), and the following sync restored the document layer to 2984 nodes with `graphify:check` CURRENT. |
+| Gating / cost | Nothing runs when the staged diff is empty or there is no graph to update. A **Markdown-only** commit runs the sync alone and skips the 5.3 s code rebuild; a commit with **any non-Markdown** file runs `update` then the sync. Both steps are local: no LLM, no network. |
+| Why a git hook and not an OpenCode plugin hook | OpenCode v2's only session-lifecycle event is `session.idle`, which fires after **every** assistant turn rather than at a session end, so a plugin hook there would re-scan constantly. A git hook is harness-agnostic (OpenCode, Claude Code, a terminal all end in `git commit`) and is a committed file rather than machine-local plugin state. |
+| Enable / disable | `git config core.hooksPath .githooks` enables it; `GRAPHIFY_SYNC_SKIP=1 git commit ...` disables it for one commit; `git config --unset core.hooksPath` reverts to the default `.git/hooks`. Neither touches `graphify-out/`. |
+
+This is deliberately **not** part of `bun run ci`: it writes a gitignored, machine-local
+artifact whose correctness depends on the vault and the installed graphify, neither of
+which a portable CI runner can see.
+
 ### The drift watchdog
 
 `scripts/plan-mirror-check.sh` wraps `mirror:check` for unattended daily runs. It only ever
@@ -813,6 +893,65 @@ Disable it with:
 systemctl --user disable --now plan-mirror-check.timer
 systemctl --user reset-failed plan-mirror-check.service
 ```
+
+---
+
+## Exporting OpenCode History to Obsidian
+
+`scripts/export-opencode-history.mjs` provides a deterministic, one-way mirror from the local OpenCode SQLite session database (`~/.local/share/opencode/opencode.db`) into Obsidian markdown notes under `05 - Conversations/<Project>/`.
+
+```bash
+bun run export:history [options]
+bun scripts/export-opencode-history.mjs --dry-run --limit 5
+bun scripts/export-opencode-history.mjs --project-dir /home/belajarcarabelajar/ai-skills
+```
+
+### Safety and Content Guarantees
+
+| Concern | How it is handled |
+|---|---|
+| Read-Only SQLite Access | The database is opened with `readonly: true` (`openReadonly()`). No query touches the `credential` table; there is no code path capable of writing to the database. |
+| Inlined Attachments | Inline session images and binary attachments are hashed with sha256 and unpacked into `.attachments/`. Timestamps are preserved across runs (`restoreUnchangedAttachmentTimes`) so `obsidian-git` avoids false-positive commits on unchanged images. |
+| Spill Containment | Large tool execution outputs spilled to disk are read safely within an allowed root. Path traversal (`..` and symlinks pointing outside the root) is strictly refused, and output exceeding `maxBytes` is truncated with a clear visible marker. |
+| Secret Redaction | 8 distinct secret signatures are redacted from messages before writing: AWS access keys, GitHub classic & fine-grained PATs, PEM private keys, JWTs, Bearer tokens, TOTP codes, and generic API key assignments. |
+| Change Detection | `sync-writer.mjs` checks note contents before writing. A re-run against an unchanged database performs zero disk writes. |
+| Failure Containment | Writes are buffered: individual broken sessions are logged and skipped, but if more than half of the batch fails, the run exits non-zero having written nothing. |
+
+### CLI Options
+
+| Flag | Purpose |
+|---|---|
+| `--dry-run` | Render and resolve sessions without writing notes or attachments to disk. |
+| `--limit N` | Process at most N sessions, oldest first (0 processes none). |
+| `--vault PATH` | Destination Obsidian vault root (defaults to `$OPENCODE_EXPORT_VAULT` or `/home/belajarcarabelajar/Dokumen/Obsidian Vault`). |
+| `--db PATH` | Path to the OpenCode SQLite database (defaults to `~/.local/share/opencode/opencode.db`). |
+| `--project-dir PATH` | Filter to export only sessions associated with PATH or its subdirectories. |
+
+---
+
+## Vault Indexing & Knowledge Graph Verification
+
+This repository maintains the extraction contracts, scripts, and verification gates for building a comprehensive knowledge graph of the local Obsidian vault and archived conversations without cloud extraction costs:
+
+- **Structural Layer (`vault-index-structural.mjs`)**: Local deterministic extraction of document nodes, ATX headings (`contains` edges), and `[[wikilinks]]` (`references` edges).
+- **Semantic Layer (`vault-index/semantic/`)**: Subagents extract high-signal `concept` nodes and decision attributes into isolated chunk files using [`templates/vault-index-subagent-contract.md`](templates/vault-index-subagent-contract.md), strictly adhering to `scripts/lib/chunk-schema.mjs`.
+- **Manifest (`vault-index/manifest.json`)**: Records tracked roots, sha256 content hashes, byte sizes, and node counts across 9,600+ lines.
+- **Community Clustering (`vault-index-cluster.mjs` / `.py`)**: Runs graphify's native Leiden community detection algorithm locally on the assembled graph.
+
+### Verification Gate (`scripts/vault-index-verify.mjs`)
+
+Task T12 verification proves that the hand-authored graph satisfies all structural, privacy, and query contracts:
+
+```bash
+bun scripts/vault-index-verify.mjs                 # full gate: coverage + privacy + live graphify read paths
+bun scripts/vault-index-verify.mjs --no-graphify   # fast gate: coverage and privacy rules only (~2s, CI-safe)
+```
+
+| Assertion | Contract |
+|---|---|
+| Coverage | Every path in the worklist is verified as a `source_file` in the graph or recorded in the manifest skip list. |
+| Privacy Boundary | Verifies that no node `source_file` falls under excluded sensitive directories (e.g. `Satset/`). Boundary violations fail loudly. |
+| Read Path Integrity | Verifies that `graphify query`, `graphify explain`, and `graphify path` execute with exit 0 and non-empty output against the assembled graph. |
 
 ---
 
@@ -874,6 +1013,107 @@ M/M/c queue model for optimal subagent dispatch. Computes wait probabilities, qu
 bun run math:batch
 ```
 
+
+---
+
+## Plan Lifecycle Audit & Task Completion
+
+Two scripts manage the lifecycle state of `ultra-plan/v1` plans after execution.
+
+### Plan Lifecycle Audit (`scripts/plan-lifecycle-audit.mjs`)
+
+Audits the `status:` field across all tracked plans and splits the count into three honest buckets:
+
+| Bucket | Meaning |
+|---|---|
+| `untracked` | No YAML frontmatter at all. The mirror's `Draft` is a publisher fallback, not a real claim. |
+| `tracked` | Has frontmatter with `status: Draft` — a real lifecycle claim that may be stale. Only these are candidates for backfill. |
+| `frontmatter-no-status` | Has a `---` fence but no `status:` key. Malformed plan. |
+
+```bash
+bun scripts/plan-lifecycle-audit.mjs         # human-readable tally
+bun scripts/plan-lifecycle-audit.mjs --json  # same data as JSON
+```
+
+Always exits 0 — a report, not a gate. A threshold would fail the moment a new plan is added.
+
+### Task Completion (`scripts/plan-mark-done.mjs`)
+
+Reads a runner execution log and applies `[x]` ticks to plan `[ ]` step lines for every task that reached a terminal success (`PASSED` or `SKIPPED-IDEMPOTENT`). Three non-success statuses (`NEEDS-AGENT`, `READY (dry-run)`, `HALTED-UPSTREAM`) are explicitly refused — a task is marked done only when evidence says so.
+
+```bash
+bun scripts/plan-mark-done.mjs --from runner.log docs/code-plan/plans/<plan>.md
+bun scripts/plan-mark-done.mjs --task T3 docs/code-plan/plans/<plan>.md  # assert, no evidence
+```
+
+---
+
+## Vault Chunk Quality Gates
+
+Scripts for maintaining correctness of the `vault-index/semantic/` chunk corpus produced by the vault-indexing subagent pipeline.
+
+### Anchor Audit (`scripts/check-anchors.mjs`)
+
+Verifies that every `[path:LN]` anchor in a semantic chunk points to a real line containing the quoted words verbatim. Four silent failure modes it prevents: vacuous zero-count (bracket imbalance swallows pattern), fabricated quotes (keyword overlap ≠ verbatim), synthetic harness padding (quotes sourced from `session-event: synthetic` blocks), and wrong anchor side (commentary before `[path:LN]` instead of after).
+
+```bash
+bun scripts/check-anchors.mjs rem-154          # one chunk, exit 1 on any failure
+bun scripts/check-anchors.mjs --all            # full corpus, report only
+bun scripts/check-anchors.mjs --all --quiet    # only chunks with failures
+```
+
+### Anchor Repair (`scripts/repair-anchors.mjs`)
+
+Automatically repairs pre-§4a anchors that fail the verbatim test using a tiered strategy:
+
+| Tier | Strategy |
+|---|---|
+| T1 | Quote IS verbatim somewhere in the file — rewrite anchor to the correct line number. |
+| T2 | Quote wraps two consecutive lines — split into two anchors per §4a. |
+| T3 | Quote absent, but `source_location` names a supporting line — replace with a verbatim slice. |
+| T4 | Nothing verifiable — **left alone and reported, never guessed.** |
+
+```bash
+bun scripts/repair-anchors.mjs --survey            # tier counts, no writes
+bun scripts/repair-anchors.mjs --tier 1 --apply    # rewrite correct line numbers
+bun scripts/repair-anchors.mjs --chunk 037 --apply # one chunk, any tier
+```
+
+### Chunk Validation & Acceptance (`scripts/verify-chunk.sh`, `scripts/accept-chunks.sh`)
+
+Parent-side gather-and-synthesize helpers:
+
+```bash
+./scripts/verify-chunk.sh rem-090              # validate one chunk with cross-chunk link resolution
+./scripts/accept-chunks.sh rem-127 075         # dry run: gate + structural diff
+./scripts/accept-chunks.sh --commit -m 'msg' rem-127
+./scripts/accept-chunks.sh --commit            # all dirty chunks
+```
+
+`accept-chunks.sh` enforces that node ids, order, and links array match HEAD unless the chunk declared a case-3 deletion — the one change allowed to alter structure.
+
+---
+
+## graphify Integration Integrity
+
+### AGENTS.md Section Drift (`scripts/agents-md-current.mjs`)
+
+Detects when a repo's `## graphify` block in `AGENTS.md` is stale relative to the installed `graphify` binary. A **missing** block is self-correcting (agent falls back to grep). A **stale** block is worse — it asserts the graph is absent when it exists, causing the agent to silently skip `graphify query` for the entire session.
+
+```bash
+bun scripts/agents-md-current.mjs
+```
+
+### Plugin Drift Guard (`scripts/graphify-plugin-drift.mjs`)
+
+Guards `.opencode/plugins/graphify.js` against silent overwrites by `graphify install --project`. The installer has been measured to change the plugin's exported shape to an unverified signature and delete hand-written module resolution notes. This script **reports only** — it has no write path, and a test asserts the local file's bytes are unchanged after any call.
+
+```bash
+bun scripts/graphify-plugin-drift.mjs
+```
+
+Full measured runbook: [`docs/graphify-integration.md`](docs/graphify-integration.md).
+
 ---
 
 ## Validation & Quality Checks
@@ -883,6 +1123,9 @@ Run the automated validation suite locally:
 ```bash
 # Install the pinned toolchain (once)
 bun install
+
+# Fast runner frontmatter contract check (~1s, pure AST comparison)
+bun run contract:check
 
 # Render all diagrams to diagrams/
 bun run render-diagrams
@@ -895,6 +1138,12 @@ bun test scripts/
 
 # Trigger prompts vs the Snipset database (skips cleanly where no database exists)
 bun run snippets:check
+
+# Fast knowledge graph verification (coverage and boundary rules, ~2s)
+bun scripts/vault-index-verify.mjs --no-graphify
+
+# OpenCode history exporter dry run
+bun run export:history --dry-run --limit 1
 ```
 
 Or run the whole gate in order with `bun run ci`.

@@ -33,6 +33,13 @@ describe('buildIdBySourceFile', () => {
     ]);
     expect(m.get('x.md')).toBe('first');
   });
+
+  test('never lets a heading node become the mapped document id', () => {
+    const m = buildIdBySourceFile([
+      { chunk: { nodes: [{ id: 'h', file_type: 'document', node_kind: 'heading', source_file: 'x.md' }, doc('root', 'x.md')] } },
+    ]);
+    expect(m.get('x.md')).toBe('root');
+  });
 });
 
 describe('normalizePreviousIds', () => {
@@ -47,6 +54,22 @@ describe('normalizePreviousIds', () => {
     expect(out.links[0].source).toBe('notes_x');
     expect(report.documentIdsRemapped).toBe(1);
     expect(report.linksRewritten).toBe(1);
+  });
+
+  test('never remaps a heading node, even though it is file_type document', () => {
+    // The structural layer gives heading nodes `file_type: 'document'`. Fusing
+    // one onto its file's document id would carry the heading's source_location
+    // and heading_level onto the document and break a re-run's idempotency.
+    const previous = {
+      nodes: [
+        doc('x', 'x.md'),
+        { id: 'x_heading', file_type: 'document', node_kind: 'heading', source_file: 'x.md', source_location: 'L3' },
+      ],
+      links: [],
+    };
+    const { previous: out, report } = normalizePreviousIds(previous, new Map([['x.md', 'x']]));
+    expect(out.nodes.map((n) => n.id).sort()).toEqual(['x', 'x_heading']);
+    expect(report.documentIdsRemapped).toBe(0);
   });
 
   test('never remaps a non-document node, even when it cites the same file', () => {

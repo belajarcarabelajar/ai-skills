@@ -6,11 +6,12 @@
       "label": "PCSX2 config enum semantics read from upstream source",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
-      "source_location": "L4501",
+      "source_location": "L05090",
       "norm_label": "pcsx2 config enum semantics read from upstream source",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L5090] Every load-bearing config fact was resolved from upstream source, which is stronger evidence than a secondary guide",
-        "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L4516] Checking the source killed two working hypotheses: accurate blending was already the cheapest default and linear_present_mode was BilinearSmooth, not FSR"
+        "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L05090] every load-bearing external fact I needed (renderer enum, blending enum, linear-present enum, preloading enum, extrathreads scope) was resolved directly from upstream source, which is stronger evidence than secondary guides",
+        "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L04509] `accurate_blending_unit = 1` = `Basic` = **the PCSX2 default**. Not an aggressive setting. Good — this corrects my earlier hypothesis. I must NOT recommend lowering it (it's already Basic). Actually my earlier assumption was wrong — good thing I checked.",
+        "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L04516] `linear_present_mode = 1` = `BilinearSmooth` = **the PCSX2 default**, NOT FSR! My earlier hypothesis about FSR was WRONG. Verified. Note: in 2.8 the FSR options were replaced by this enum. Good catch."
       ]
     },
     {
@@ -26,27 +27,27 @@
       "label": "Measurement step before any graphics optimization",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
-      "source_location": "L4558",
+      "source_location": "L04907",
       "norm_label": "measurement step before any graphics optimization",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L4907] Without a baseline the audit cannot say whether graphics settings are the bottleneck, so the plan leads with making measurement possible"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L04907] **I cannot tell whether graphics settings are the bottleneck without a measurement, and the measurement needs a human with a controller.** So the correct plan leads with *making measurement possible*, not with *tweaking knobs*."
     },
     {
       "id": "concept--no-gamepad-blocks-automated-benchmark",
       "label": "Absent gamepad blocks automated in-game benchmarking",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
-      "source_location": "L4706",
+      "source_location": "L08044",
       "norm_label": "absent gamepad blocks automated in-game benchmarking",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L01155] The missing controller is a proven environment limit, not an excuse: the OSD numbers were turned on precisely so the human could supply them"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L08044] Saya tidak bisa memProgram game — tidak ada gamepad, dan itu batas lingkungan yang saya buktikan, bukan alasan. OSD GPU% sekarang sudah menyala justru untuk ini."
     },
     {
       "id": "concept--memory-pressure-as-emulator-bottleneck",
       "label": "Memory pressure, not GPU load, is the emulator bottleneck",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
-      "source_location": "L4895",
+      "source_location": "L04895",
       "norm_label": "memory pressure, not gpu load, is the emulator bottleneck",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L4895] 2.87 GB available with zram three-quarters full and swappiness 180 makes swap thrash the likelier cause of stutter, and it has nothing to do with graphics settings"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L04895] **F6 — Memory pressure is the real risk, not GPU.** 2.87 GB available, zram 74% full, swappiness 180, and PCSX2's EE recompiler is RAM-hungry. The desktop is eating 3.5+ GB. This is the most likely actual cause of stutter — and it has nothing to do with graphics settings."
     },
     {
       "id": "concept--osd-stats-prerequisite-for-gpu-decisions",
@@ -61,9 +62,9 @@
       "label": "Python assertion suite as a TDD cycle over a config file",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
-      "source_location": "L5716",
+      "source_location": "L05686",
       "norm_label": "python assertion suite as a tdd cycle over a config file",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L5686] The verifier was written in Python because python3 is explicitly an evidence command, while bash only reaches the behavioural classification by default fallthrough"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L05686] Decision: I'll write a **Python** verifier `docs/audit/verify_pcsx2_config.py` that parses the ini and asserts invariants. `python3` is explicitly in EVIDENCE_COMMAND → `behavioural` classification, unambiguous. This is a genuine test, and it doubles as the RED/GREEN test for the config edits — which is exactly right for TDD on a config change: the test fails before the change, passes after."
     },
     {
       "id": "concept--mermaid-depends-on-contract-positive-control",
@@ -78,27 +79,27 @@
       "label": "Retracted claim that SETUP-LINUX.md carried the wrong PCSX2 version",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
-      "source_location": "L8918",
+      "source_location": "L08918",
       "norm_label": "retracted claim that setup-linux.md carried the wrong pcsx2 version",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L8918] The binary reports v2.8.2 itself, which overrode the earlier reading of the AppImage strings and cancelled the doc fix"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L08918] **Koreksi terbuka:** saya sempat menuduh SETUP-LINUX.md salah versi (2.8.2 vs 2.8.8). Salah — binary-nya sendiri bilang `v2.8.2`. Tidak jadi diubah; yang ditambahkan hanya sitasi renderer, pointer revert, dan known-issues."
     },
     {
       "id": "concept--stable-channel-over-nightly",
       "label": "Stay on the stable channel rather than the nightly build",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
-      "source_location": "L9573",
+      "source_location": "L09577",
       "norm_label": "stay on the stable channel rather than the nightly build",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L9577] Do not chase the nightly for performance, because on a machine this modest stability is worth more than daily prerelease experiments"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L09577] Satu catatan: jangan tergoda nightly demi performa — di mesin sekencang ini stabilitas lebih berharga daripada eksperimen harian yang bisa regress."
     },
     {
       "id": "concept--pin-records-appimage-mount-path",
       "label": "Pinning an AppImage while it runs records its ephemeral mount path",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
-      "source_location": "L9885",
+      "source_location": "L09890",
       "norm_label": "pinning an appimage while it runs records its ephemeral mount path",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L9890] Pin from the application menu, not from the running window, because the window path is the one that produces a stale entry"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L09890] - Kalau ikon panel masih error sekali ini, lepas pin-nya lalu pin ulang **dari menu aplikasi** (klik kanan PCSX2 → pin), jangan dari window yang sedang jalan. Itu cara yang tidak menghasilkan path basi."
     },
     {
       "id": "concept--icon-lookup-by-window-name-fallback",
@@ -115,25 +116,25 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
       "source_location": "L11032",
       "norm_label": "plasmashell restart required for the taskbar icon to re-render",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L11032] Refreshing the KDE icon cache alone changed nothing because the live task manager still held the previous render"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L11032] Kronologinya menjelaskan laporan \"nothing changed\" tadi: refresh cache (`kbuildsycoca6`) saja tidak cukup karena task manager yang hidup masih megang tampilan lama. Yang menyembuhkan adalah **restart plasmashell** — setelah itu logonya ke-render."
     },
     {
       "id": "concept--artifact-language-from-target-repo",
       "label": "Artifact language taken from the target repository, not the prompt",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
-      "source_location": "L5773",
+      "source_location": "L05773",
       "norm_label": "artifact language taken from the target repository, not the prompt",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L5773] The plan is written in Indonesian because SETUP-LINUX.md is already Indonesian, since the surrounding repository language governs the artifact"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L05773] One thing about language: the repository's existing language. `SETUP-LINUX.md` is in Indonesian. The user writes Indonesian. Per ARTIFACT LANGUAGE rule: \"write the plan... in the language the target repository already uses, read off the surrounding code and docs\". SETUP-LINUX.md is Indonesian. So the plan must be in **Indonesian**. That's the correct call and it's a real constraint I should honor."
     },
     {
       "id": "concept--skipped-debt-sweep-after-declined-interaction",
       "label": "Skipping the debt-sweep question set after the user declined the interactive step",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md",
-      "source_location": "L8924",
+      "source_location": "L08924",
       "norm_label": "skipping the debt-sweep question set after the user declined the interactive step",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L8924] Repeating the declined interactive step as a checkbox is forbidden, so every follow-up was written into the plan backlog instead"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-games-ps2/2026-09-28 - audit-optimasi-grafis-ps2-pada-pc [ses_f16147691ffehxhbWPQDgAXvmi].md:L08924] Soal debt sweep question-set: sengaja tidak saya tembakkan — kamu baru saja decline bagian interaktif, dan mengulanginya sebagai checkbox adalah hal yang dilarang skill. Semua follow-up (F1–F8) tercatat di plan, tidak ada yang menguap."
     },
     {
       "id": "rationale--startupwmclass-value-read-from-appimage-not-guessed",

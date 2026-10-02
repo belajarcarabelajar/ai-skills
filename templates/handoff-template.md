@@ -104,9 +104,24 @@ A  src/api/rate-limit.test.ts
 
 ---
 
+## Session Learning Ledger (mistakes → rules for next time)
+
+> Output of the Step 6 Learning Harvest (`templates/session-learning-ledger-template.md`).
+> These are the agent's OWN operational mistakes this session, distilled into rules so the next
+> session does not repeat them. Read these BEFORE starting work.
+
+| # | Rule (`WHEN <situation> → DO <action>, NOT <anti-pattern>`) | Written to |
+|---|---|---|
+| L1 | | `MEMORY.md` (in-repo) / `~/AGENTS.md` (global, approved) |
+
+- [ ] `KEEP` rules written in-repo; declined global promotions left in the ledger only.
+
+---
+
 ## Resume Checklist (for next session)
 
 - [ ] Read this handoff document fully
+- [ ] **Read the Session Learning Ledger rules above before touching anything — do not repeat last session's mistakes**
 - [ ] Run `git status` to confirm working tree state
 - [ ] Re-read the active plan file
 - [ ] Confirm last verified state still holds (re-run key test command above)

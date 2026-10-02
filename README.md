@@ -275,6 +275,7 @@ Agents can instantly scaffold structured artifacts using the ready-to-use templa
 - **[`code-review-template.md`](templates/code-review-template.md)**: Reviewer output contract - rule attribution precedence, 8-point bug qualification filter, P0–P3 priority with confidence, exhaustiveness and dedupe rules, suggestion block format, and the binary `correct` / `not correct` verdict.
 - **[`deep-research-report-template.md`](templates/deep-research-report-template.md)**: Citation-grounded long-form research report - executive summary, `##` themes with `###` subsections, inline `[n]` citations, LaTeX notation, and a closing synthesis.
 - **[`follow-up-injection-template.md`](templates/follow-up-injection-template.md)**: Session-close debt sweep - harvested debt candidates, `NOW`/`LATER` classification, the ranked 3-5 follow-up set, the batched multi-select question, the execution record, and the deferred backlog.
+- **[`session-learning-ledger-template.md`](templates/session-learning-ledger-template.md)**: Self-learning ledger filled during the Step 6 Learning Harvest - records the agent's own operational mistakes (wrong tool calls, misread rules, blind retries, premature guesses, scope creep), distills them into `WHEN → DO → NOT` rules through the Minimum-Signal and 30-Day Horizon gates, writes kept rules in-repo automatically, and promotes recurring rules to `~/AGENTS.md` only with per-item user approval. The next session reads these before starting work.
 
 ---
 

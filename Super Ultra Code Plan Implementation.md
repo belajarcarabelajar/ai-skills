@@ -1341,6 +1341,14 @@ Sweep the session record, not just the last command, for anything that was notic
 
 Every candidate must be stated as an outcome with a file path and a checkable finish line, not as a topic. "Refactor the auth module" is not a candidate. "Extract token refresh out of session.ts:88-140 and cover it with a new session.test.ts case" is.
 
+### 🧠 6.2.8 Learning Harvest — the agent's own mistakes, not just code debt
+The same sweep that mines code debt also mines the session for the agent's **own operational mistakes** — wrong tool calls, misread or missed skill/AGENTS rules, blind retries, premature guesses made instead of searching first, and scope creep. This is the concrete execution of the Continuous Learning & Memory Lifecycle Phase 1 (Rollout Extraction), run at the one point in the pipeline where the whole session is visible and verified. It is distinct from the Error Ledger: the Error Ledger records per-task *technical* failures (test/build/exit code), while this harvest records *behavioral* failures of the agent and turns the durable ones into rules the next session reads before it starts.
+
+- Record the harvest with `templates/session-learning-ledger-template.md`: a raw Mistake Log, then a distilled set of `WHEN <situation> → DO <action>, NOT <anti-pattern>` candidate rules.
+- Each candidate must pass **both** existing gates or it is a NO-OP (zero file changes): the Minimum-Signal gate ("will a future agent plausibly act differently and more effectively?") and the 30-Day Horizon test ("still true and worth reading a month from now?"). This is what keeps the ledger from filling with transient noise.
+- `KEEP` rules are written in-repo automatically (append under a `Task Group:` header in `MEMORY.md`). A rule that recurs across projects on this machine may additionally be promoted to `~/AGENTS.md`, but global promotion is **per-item and requires explicit user approval**, is never destructive or credential-touching, and always writes a revert note inside the edited file. Decline leaves the rule in the ledger only.
+- Learning candidates do not consume the 3-5 follow-up question cap; they are a separate written artifact. Only propose a question here when a kept rule implies a concrete code or doc change (e.g. encoding the rule into a lint or a check).
+
 ### 🧮 6.3 Rank & Cap — default 3 to 5 questions
 - Default to **3-5 follow-up questions**, ranked by `(leftover risk × blast radius × cheapness to close)`. Cap at 5 so the user can answer in one glance; rank below that always go to a written follow-up backlog in the plan or progress log, not to an extra question batch.
 - Expand beyond 5 only when the harvested debt is itself more than 5 genuinely independent items, and then state explicitly why the cap was raised. Under-filling is also a defect: never ask a single trivial question when three real ones exist.

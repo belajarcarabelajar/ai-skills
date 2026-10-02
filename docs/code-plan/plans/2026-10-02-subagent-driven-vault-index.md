@@ -1,7 +1,7 @@
 ---
 schema: ultra-plan/v1
 plan_id: 2026-10-02-subagent-driven-vault-index
-status: Approved
+status: Complete
 version: 2
 runner_contract: true
 defaults:
@@ -593,18 +593,18 @@ Recorded so a fresh session continues instead of re-deriving. Everything below i
 
 | Where it stands | |
 |---|---|
-| Plan state | `Approved`. T1–T9 **complete** (T9 landed via id normalization, §9d). |
-| Commits | tooling `26a91a2` · structural layer `ce2ab59` · narration filter `99edb67` · wave 2 `dd0694c` · worklist `0a7fc0c` / `584803e` · debt sweep `eaa5ba8` F3, `60fa515` F7, `7da0cb1` F6 · validator fix `13988e3` · wave 21 `17d7b8c` · T8 close-out `fcc77a9`, `257b321`, `38e8a28` · T9 runner `b032a4e` |
+| Plan state | `Complete`. T1–T14 **complete**. |
+| Commits | tooling `26a91a2` · structural `ce2ab59` · narration `99edb67` · wave 2 `dd0694c` · worklist `0a7fc0c` / `584803e` · debt `eaa5ba8` F3, `60fa515` F7, `7da0cb1` F6 · validator `13988e3` · wave 21 `17d7b8c` · T8 close `fcc77a9`, `257b321`, `38e8a28` · T9 runner `b032a4e` · T9 manifest `ca0a8ba` · T10 cluster `cf76679` · T12 verify `ff40ffe` · T13 doc `c23a69b` · AGENTS `b7137a9` / `85198d1` / `c895e1b` |
 | Chunks landed | **271 files** `vault-index/semantic/chunk-*.json`, all passing `validateChunk`. Validator failures **4 → 0**, repaired 2026-10-03 |
-| Totals | **4,209 nodes · 2,907 links · 3,498 distinct ids · 711 deliberate id reuses** (measured 2026-10-03, worklist complete) |
-| By type | 4,206 `concept` · 3 `rationale` — the standalone why-node is retired (§3), so reasons live as a `rationale` attribute on the concept they explain |
+| Totals | **20,214 nodes · 18,812 links · 3,696 communities** (merged graph, 2026-10-03) |
+| By type | 12,626 `document` · 6,427 `concept` · 1,027 `code` · 119 `rationale` · 15 `paper` |
 | Anchor gate | `check-anchors.mjs --all`: **162 of 271 chunks clean**. 4,035 anchors parsed, **571 failed**, 26 in padding, 675 past a lone CR. Every failure is legacy; the `rem-242 … rem-247` close-out chunks add **0** — see §9c |
-| Full suite | `bun test scripts/` → 993 pass / 0 fail across 36 files |
+| Full suite | `bun test scripts/` → **1,280 pass / 0 fail** across 50 files |
 | Worklist | `vault-index/semantic/batches.json`, 251 batches, ids `rem-001 … rem-251` |
-| Progress | **251 of 251 batches. Extraction complete.** Nothing left to dispatch |
-| Remote | `ai-skills` pushed to `origin/main` at `38e8a28`. Working tree clean |
+| Progress | **251 of 251 batches. Extraction complete.** T9 manifest, T10 clustering, T12 verify, T13 doc, T14 gate **complete** |
+| Remote | `ai-skills` pushed to `origin/main` at `c23a69b`. Working tree clean |
 
-**T8 is finished, so there is nothing to dispatch.** Every `rem-*` in `batches.json` now has a `chunk-rem-*.json` on disk. The next task is **T9**, the merge into the vault graph. Its step 3 requires the anchor count reported next to the node count: `4209 nodes, 4035 anchors parsed, 571 failed` — do not merge on the validator's exit code alone (§9c).
+**T1–T14 are complete.** Every `rem-*` in `batches.json` has a `chunk-rem-*.json` on disk. T9's manifest is written (`vault-index/manifest.json`), T10's clustering applied (3,696 communities), T12's verifier passes, T13's doc updated, T14's full gate green. The Session-Close Debt Sweep follows (§10).
 
 **Two scope changes landed mid-run and both are permanent:** commit `3a968b2` deleted the 748 N8n raw-capture files, and `.graphifyignore` GROUP 7 (`c20b3be`) excludes 31 tool-test transcripts. Eligible corpus went 2,360 → 1,584. Batch ids were regenerated into a `rem-*` namespace because they are positional and cannot survive a worklist change.
 
@@ -713,9 +713,9 @@ Measured with normalization, written to `graphify-out/graph.json` (`built_at_com
 | `previousNodesUnusableSourceFile` | 1,299 → 1,249 kept (50 reattributed) | not deleted ✅ |
 | chunk rejects | 0 of 273 | ✅ |
 
-10 new tests (`scripts/vault-index-rebuild.test.mjs`) pin the normalization; full suite **1,250 pass / 0 fail**.
+10 new tests (`scripts/vault-index-rebuild.test.mjs`) pin the normalization; full suite **1,280 pass / 0 fail**.
 
-**Still open under T9 (not done):** the plan's second output, `vault-index/manifest.json` recording every indexed file and its content hash, was **not** produced — the existing `graphify-out/manifest.json` is unchanged. T10 (recluster, which consumes this graph) has **not** run, so `graph.json` carries no fresh `community` fields yet.
+**T9 complete:** `vault-index/manifest.json` produced (1,609 indexed, 0 skipped, 0 unresolved). **T10 complete:** graphify's own Leiden pass + hub-based naming applied (3,696 communities, degree-0 1,358). **T11 complete:** AGENTS.md sections refreshed. **T12 complete:** `scripts/vault-index-verify.mjs` + test (coverage PASS, excluded prefixes PASS, query/explain/path PASS). **T13 complete:** corpus gap recorded in `docs/graphify-integration.md`. **T14 complete:** full gate green (tests 1,280 pass, plan-lifecycle-audit exit 0, CI green).
 
 ## 10. Session-Close Debt Sweep & Follow-Up Backlog
 

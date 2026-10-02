@@ -7,16 +7,16 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md",
       "source_location": "L35",
       "norm_label": "i18n out-of-scope register",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md:L35] Write the register down because nobody recorded the scope decision"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md:L00035] Nobody wrote that decision down, so the next session will re-audit the same ~1089 strings from scratch."
     },
     {
       "id": "concept--single-error-choke-point",
       "label": "Single error choke point",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md",
-      "source_location": "L40",
+      "source_location": "L49",
       "norm_label": "single error choke point",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md:L49] Route errors through the choke point first because it is one edit"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md:L00049] route the 40 error strings through the `main.rs:25` choke point first (one edit)"
     },
     {
       "id": "concept--tauri-coupled-locale-library",
@@ -47,16 +47,16 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md",
       "source_location": "L1149",
       "norm_label": "unreproducible audit metric",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md:L874] Cite reproducible counts instead of copying a brief number forward"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md:L01149] \"40 human error strings\" is not reproducible with any documented method. I'll replace it with sourced metrics: 144 `Err(` sites across 19 files, 64 `Result<_, String>` signatures, 127 `format!(\"…\")` call sites, 9 `Err(\"literal\")`. I'll flag this."
     },
     {
       "id": "concept--word-boundary-locale-grep",
       "label": "Word-boundary locale grep",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md",
-      "source_location": "L1152",
+      "source_location": "L1461",
       "norm_label": "word-boundary locale grep",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md:L1461] A bare substring search for lang returns false positives from language"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - c11-out-of-scope-register [ses_f20d4ef23ffekLpqS0garbv3zJ].md:L01461] A bare case-insensitive `lang` substring search returns 14 false positives from `language`."
     },
     {
       "id": "concept--cli-english-only-by-decision",
@@ -115,9 +115,9 @@
       "label": "Stale aggregate refused, not clobbered",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
-      "source_location": "L4326",
+      "source_location": "L58",
       "norm_label": "stale aggregate refused, not clobbered",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L58] A stale aggregate must be refused rather than clobbered"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L00058] use the T2 conflict detection so a stale aggregate is refused, not clobbered."
     },
     {
       "id": "concept--build-free-producer-dry-run",
@@ -127,8 +127,8 @@
       "source_location": "L57",
       "norm_label": "build-free producer dry-run",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L9779] A dry run should validate everything it can and state what it cannot",
-        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L09943] A dry run must not perform a persistent write"
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L09779] dry-run validates everything it can. If build output exists → full validation including signature (fail closed). If not → print the plan with `signature: unavailable (no build output)` and exit 0, since there is genuinely nothing to verify.",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L00057] no build, no `gh` upload, no push, no persistent writes."
       ]
     },
     {
@@ -136,9 +136,9 @@
       "label": "Windows-owned state rollback",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
-      "source_location": "L58",
+      "source_location": "L8712",
       "norm_label": "windows-owned state rollback",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L8712] Atomic tmp-plus-rename means only the file that succeeded needs restoring"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L08712] `writeJsonAtomically` is atomic (tmp+rename), so a failed write leaves the target untouched. So restoring is only needed for the file that succeeded."
     },
     {
       "id": "concept--minisign-signature-fail-closed",
@@ -147,7 +147,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
       "source_location": "L12689",
       "norm_label": "minisign signature fail-closed",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L06331] A soft warning lets an unsigned release through; throw instead"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L12689] the old \"Warning: No signature found … latest.json will lack signature\" soft path is now `throw` on both a missing and an empty signature."
     },
     {
       "id": "concept--embedded-producer-script-execution",
@@ -156,16 +156,16 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
       "source_location": "L4718",
       "norm_label": "embedded producer script execution",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L05398] Run the JS embedded in the PowerShell so the test drives production code"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L04718] the ps1's embedded JS is a literal copy of the model's script body — I can even assert that the JS embedded in the .ps1 (extracted from the here-string) is byte-comparable to the model's script, and that running the extracted script against the temp repo behaves identically!"
     },
     {
       "id": "concept--source-level-only-powershell-assertion",
       "label": "Source-level-only PowerShell assertion",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
-      "source_location": "L69",
+      "source_location": "L12686",
       "norm_label": "source-level-only powershell assertion",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L05398] No pwsh on this host, so PowerShell claims are not runtime evidence"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L12686] **Source-level only — this is NOT runtime evidence.** There is no `pwsh` on this host and installing one is out of scope, so **no line of the four `.ps1` files has ever been executed**."
     },
     {
       "id": "concept--bash-metacharacter-free-embedded-js",
@@ -174,7 +174,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
       "source_location": "L4209",
       "norm_label": "bash-metacharacter-free embedded js",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L4209] Bash single-quote wrapping forbids quotes, dollars and backticks in the payload"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L04209] JS must therefore contain NO single quotes and NO `$` and no backticks."
     },
     {
       "id": "concept--explicit-platform-and-version-required",
@@ -194,7 +194,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
       "source_location": "L4689",
       "norm_label": "text-parsed workflow trigger contract",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L4689] Parse the workflow as text because yaml is only a transitive dependency"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L04689] `yaml` is not a direct dependency in package.json — it's transitive (probably from vite/others). \"No new runtime dependency\" — importing a transitive dep in a test is a bit fragile. Safer: parse release.yml as **text** for the trigger contract (the task explicitly permits \"parsing `.github/workflows/release.yml` as YAML/text\")."
     },
     {
       "id": "concept--mandatory-powershell-param-ci-hazard",
@@ -203,7 +203,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md",
       "source_location": "L11351",
       "norm_label": "mandatory powershell param ci hazard",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L11351] A Mandatory param prompts and fails when CI invokes the script with no arguments"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t4-windows-release-producer [ses_f1d4e892fffelRC4k0J2VCDCtX].md:L11351] release.yml: `pwsh -File scripts/build/build-tauri.ps1` (no -Platform) → Mandatory would PROMPT interactively in a non-interactive shell → PowerShell errors out. That's a real breakage!"
     }
   ],
   "links": [

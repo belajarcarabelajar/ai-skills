@@ -142,7 +142,19 @@ export function checkChunk(chunkPath) {
     const p = resolveFile(rel);
     if (!p) { cache.set(rel, null); return null; }
     const lines = fs.readFileSync(p, 'utf8').split('\n');
-    const v = { path: p, lines, pad: paddingRanges(lines) };
+    // LONE-CR HAZARD. 29 transcripts contain a \r that is not followed by \n,
+    // because a line of the agent's own code — `split(/\r?\n/)` — survived into
+    // the note. Node, Bun and awk agree on the line count; PYTHON TEXT MODE
+    // DOES NOT, because universal-newline translation folds a lone \r into a
+    // line break and every line after the first one shifts. Measured: one
+    // transcript reads 28,561 lines here and 29,340 in Python text mode.
+    //
+    // So `split('\n')` below is the canonical definition, and any ad-hoc check
+    // run through python3 must pass newline='' to disagree with it honestly
+    // rather than silently. Anchors past the first lone CR are counted so the
+    // blast radius is visible instead of assumed.
+    const firstLoneCR = lines.findIndex((l) => l.endsWith('\r'));
+    const v = { path: p, lines, pad: paddingRanges(lines), crAt: firstLoneCR + 1 || 0 };
     cache.set(rel, v);
     return v;
   };
@@ -150,7 +162,7 @@ export function checkChunk(chunkPath) {
   const t = {
     nodes: 0, anchorsParsed: 0, anchorsChecked: 0,
     anchorsFailed: 0, anchorsInPadding: 0,
-    locOutOfRange: 0, fileMissing: 0,
+    locOutOfRange: 0, fileMissing: 0, pastLoneCR: 0,
   };
   const failures = [];
 
@@ -176,6 +188,7 @@ export function checkChunk(chunkPath) {
         t.anchorsInPadding++;
         failures.push(`${n.id}: source_location L${ln} is inside a session-event padding block`);
       }
+      if (f.crAt && ln > f.crAt) t.pastLoneCR++;
     }
 
     const r = n.rationale;
@@ -210,6 +223,7 @@ export function checkChunk(chunkPath) {
           failures.push(`${n.id}: anchor L${a.line} out of range (${a.file} has ${af.lines.length} lines)`);
           continue;
         }
+        if (af.crAt && a.line > af.crAt) t.pastLoneCR++;
         if (af.pad.some(([lo, hi]) => a.line >= lo && a.line <= hi)) {
           t.anchorsFailed++;
           t.anchorsInPadding++;
@@ -263,7 +277,7 @@ const names = all
   ? fs.readdirSync(DIR).filter((n) => /^chunk(-rem)?-\d+\.json$/.test(n)).sort()
   : [`chunk-${argv[0]}.json`];
 
-let totParsed = 0, totChecked = 0, totFailed = 0, totPad = 0, totNodes = 0;
+let totParsed = 0, totChecked = 0, totFailed = 0, totPad = 0, totPastCR = 0, totNodes = 0;
 let bad = 0, unparseable = 0, worst = null;
 
 for (const name of names) {
@@ -277,7 +291,7 @@ for (const name of names) {
   }
   totParsed += r.anchorsParsed; totChecked += r.anchorsChecked;
   totFailed += r.anchorsFailed; totPad += r.anchorsInPadding;
-  totNodes += r.nodes;
+  totNodes += r.nodes; totPastCR += r.pastLoneCR;
   if (r.anchorsFailed > 0) { bad++; if (!worst || r.anchorsFailed > worst.n) worst = { name, n: r.anchorsFailed }; }
   if (r.anchorsFailed > 0 || !quiet || !all) {
     const flag = r.anchorsFailed > 0 ? 'FAIL' : r.anchorsParsed === 0 ? 'ZERO' : ' ok ';
@@ -287,7 +301,8 @@ for (const name of names) {
       `${String(r.anchorsParsed).padStart(3)} parsed  ` +
       `${String(r.anchorsChecked).padStart(3)} checked  ` +
       `${String(r.anchorsFailed).padStart(3)} failed  ` +
-      `${String(r.anchorsInPadding).padStart(3)} in-pad`,
+      `${String(r.anchorsInPadding).padStart(3)} in-pad  ` +
+      `${String(r.pastLoneCR).padStart(3)} past-CR`,
     );
     for (const f of r.failures.slice(0, all ? 3 : 20)) console.log('      ' + f.replace(/\n/g, '\n      '));
     if (all && r.failures.length > 3) console.log(`      … and ${r.failures.length - 3} more`);
@@ -296,7 +311,7 @@ for (const name of names) {
 
 console.log(
   `\n${all ? 'CORPUS' : 'CHUNK'}: ${totNodes} nodes, ${totParsed} anchors parsed, ` +
-  `${totChecked} checked, ${totFailed} failed, ${totPad} in padding`,
+  `${totChecked} checked, ${totFailed} failed, ${totPad} in padding, ${totPastCR} anchors past a lone CR`,
 );
 if (all) console.log(`${names.length - bad - unparseable}/${names.length} chunks clean` + (worst ? `, worst ${worst.name} at ${worst.n}` : ''));
 if (unparseable > 0) console.log(`${unparseable} file(s) missing or unparseable`);

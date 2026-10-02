@@ -172,6 +172,24 @@ test('merged is terminal', () => {
     'un-merging is a revert, not a state edit; letting the file do it would hide the revert');
 });
 
+test('closed is terminal and records when, without claiming a merge', () => {
+  const reg = openSession();
+  const closed = setState(reg, 'w1', 'closed').registry;
+  assert.equal(closed.sessions[0].state, 'closed');
+  assert.ok(closed.sessions[0].closed_at, 'a close records when it happened, so the history is not lost');
+  assert.equal(closed.sessions[0].merged_at, undefined, 'a closed PR did not reach the base branch, so there is no merge time');
+  assert.throws(() => setState(closed, 'w1', 'active'), /is already closed; reverting or redoing it is a new session/,
+    'reopening a closed session would hide that its PR never landed');
+});
+
+test('a session can be closed before a PR is recorded, because nothing owes a merge', () => {
+  // Unlike `merged`, closing is not a claim of green evidence, so it is allowed
+  // from `verified`: a session whose work is superseded can stop without a PR.
+  const claimed = claimSlot({ version: 1, sessions: [] }, { plan: 'p', session: 'w1', repoRoot: REPO });
+  const ready = setState(claimed.registry, 'w1', 'verified').registry;
+  assert.equal(setState(ready, 'w1', 'closed').registry.sessions[0].state, 'closed');
+});
+
 test('an unknown state is refused instead of falling back to a default', () => {
   const reg = openSession();
   assert.throws(() => setState(reg, 'w1', 'MERGED'), /unknown session state/);
@@ -209,6 +227,18 @@ test('merged sessions drop out of the order and do not block their dependents', 
 
   const order = mergeOrder(reg).map((s) => s.session);
   assert.deepEqual(order, ['w2'], 'a landed dependency is satisfied, not pending');
+});
+
+test('closed sessions drop out of the order and do not block their dependents', () => {
+  let reg = openSession('w1');
+  reg = setState(reg, 'w1', 'closed').registry;
+  reg = claimSlot(reg, { plan: 'p', session: 'w2', repoRoot: REPO, dependsOn: ['w1'] }).registry;
+  reg = setState(reg, 'w2', 'active').registry;
+  reg = setState(reg, 'w2', 'verified').registry;
+  reg = setPr(reg, 'w2', 43).registry;
+
+  const order = mergeOrder(reg).map((s) => s.session);
+  assert.deepEqual(order, ['w2'], 'a closed dependency will never merge, so it is not something to wait on');
 });
 
 test('a dependency cycle is refused with the cycle named', () => {
@@ -269,6 +299,17 @@ test('conflict surface names the sessions that must land first', () => {
 
   assert.deepEqual(conflictSurface(reg, 'w2').blocked_by, ['w1']);
   assert.deepEqual(conflictSurface(reg, 'w1').blocked_by, []);
+});
+
+test('a closed session does not move the base, but does satisfy a dependency', () => {
+  let reg = openSession('w1');
+  reg = setState(reg, 'w1', 'closed').registry;
+  reg = claimSlot(reg, { plan: 'p', session: 'w2', repoRoot: REPO, dependsOn: ['w1'] }).registry;
+
+  const surface = conflictSurface(reg, 'w2');
+  assert.equal(surface.rebase_required, false, 'a close leaves origin/<base> where it was; only a merge moves it');
+  assert.deepEqual(surface.landed_before_rebase, [], 'a closed PR is not a landed merge');
+  assert.deepEqual(surface.blocked_by, [], 'a closed dependency is finished, not something w2 must wait on');
 });
 
 // --- Persistence -------------------------------------------------------------

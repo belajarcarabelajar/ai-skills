@@ -43,25 +43,34 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, '..');
 export const DEFAULT_REGISTRY = path.join(rootDir, 'pr.registry.json');
 
-// A session moves through these in order. `merged` is terminal.
+// A session moves through these in order. `merged` and `closed` are terminal.
 //
 //   isolated  worktree and branch exist, nothing written yet
 //   active    subagents are writing inside the isolated worktree
 //   verified  local evidence is green and the parent diff audit passed
 //   open      the PR exists and is on the remote
 //   merged    the PR reached the base branch
+//   closed    the PR was closed without merging (superseded, abandoned, or its
+//             change landed by another path). The record is kept so the session
+//             still has history, but it owes no merge and must not block a
+//             dependent the way an unmerged `open` session does.
 //
 // `verified` is a separate state from `open` on purpose. It is the gate that
 // stops an agent from merging a session whose checks were never run, and it is
 // the same distinction the plan lifecycle already draws between Verification and
 // Complete.
-export const SESSION_STATES = ['isolated', 'active', 'verified', 'open', 'merged'];
+export const SESSION_STATES = ['isolated', 'active', 'verified', 'open', 'merged', 'closed'];
 
 // States from which a merge is allowed. `open` alone is not enough: the PR
 // existing on the remote says nothing about whether the local evidence is green.
 export const MERGEABLE_STATES = ['open'];
 
 const TERMINAL_STATE = 'merged';
+const CLOSED_STATE = 'closed';
+// Both terminal states stop a session from moving again, but only `merged` moved
+// the base branch. `closed` leaves origin/<base> untouched, so it must not feed
+// the rebase calculation the way a merge does.
+const TERMINAL_STATES = [TERMINAL_STATE, CLOSED_STATE];
 
 // ---------- Naming ----------
 
@@ -235,10 +244,14 @@ export function setState(registry, sessionId, next) {
     if (next === TERMINAL_STATE) {
       return assertMergeable(s);
     }
-    // Merged is terminal. Nothing reopens it, because a session that reached the
-    // base branch cannot be "un-merged" by editing a file; that needs a revert.
-    if (s.state === TERMINAL_STATE && next !== TERMINAL_STATE) {
-      throw new Error(`session "${s.session}" is already merged; reverting or redoing it is a new session, not a state change`);
+    // Both terminal states are final. Nothing reopens a session: one that
+    // reached the base branch cannot be "un-merged" by editing a file, and one
+    // whose PR is closed is finished. Redoing either is a new session.
+    if (TERMINAL_STATES.includes(s.state)) {
+      throw new Error(`session "${s.session}" is already ${s.state}; reverting or redoing it is a new session, not a state change`);
+    }
+    if (next === CLOSED_STATE) {
+      return { ...s, state: next, closed_at: new Date().toISOString() };
     }
     return { ...s, state: next };
   });
@@ -280,7 +293,7 @@ function assertMergeable(s) {
 export function mergeOrder(registry, { only = null } = {}) {
   const wanted = only ? new Set(only.map((s) => slugify(s, 'session filter'))) : null;
   const inScope = registry.sessions.filter((s) => {
-    if (s.state === TERMINAL_STATE) return false;
+    if (TERMINAL_STATES.includes(s.state)) return false;
     if (wanted && !wanted.has(s.session)) return false;
     return true;
   });
@@ -318,13 +331,17 @@ export function conflictSurface(registry, sessionId) {
   if (!node) throw new Error(`no slot for session "${target}"; claim it first`);
 
   // Anything already merged can conflict with this session, because the base
-  // branch moved after this branch was cut.
+  // branch moved after this branch was cut. A closed session did not move the
+  // base, so it is not a rebase reason even though it does satisfy a dependency.
   const landed = registry.sessions.filter((s) => s.state === TERMINAL_STATE && s.session !== target);
   // `blocked_by` is this session's own unmerged dependencies, not its
   // dependents. Naming the wrong direction would tell a session to wait on the
-  // sessions that are actually waiting on it.
-  const landedNames = new Set(landed.map((s) => s.session));
-  const pending = (node.depends_on ?? []).filter((d) => !landedNames.has(d));
+  // sessions that are actually waiting on it. A closed dependency is finished:
+  // it will never merge, so listing it as blocked would wait forever.
+  const resolved = new Set(
+    registry.sessions.filter((s) => TERMINAL_STATES.includes(s.state)).map((s) => s.session),
+  );
+  const pending = (node.depends_on ?? []).filter((d) => !resolved.has(d));
 
   return {
     session: node,

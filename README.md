@@ -557,18 +557,20 @@ impossible:
 
 ```
 isolated → active → verified → open → merged
+                                    ↘ closed
 ```
 
 | Constraint | Why it is a hard error |
 |---|---|
 | A PR number cannot be recorded before `verified` | Recording one implies the work is finished and checked, so `isolated → open` would skip the gate that makes a merge safe |
 | Only an `open` session with a PR can merge | A green local run alone is not a mergeable session |
-| `merged` is terminal | Reverting or redoing a session is a new session with a new branch. A file that can "un-merge" hides the revert from the merge order |
+| `merged` and `closed` are terminal | Reverting or redoing a session is a new session with a new branch. A file that can "un-merge" hides the revert from the merge order |
+| A closed session did not move the base | `merged` is a rebase reason because it advanced `origin/main`; `closed` is not, so `surface` never lists it as landed, while `order` still treats it as a satisfied dependency |
 | A duplicate branch or worktree is refused | A registry that reports success for a layout that will lose work is worse than no registry |
 
 ```bash
 bun scripts/pr-registry.mjs claim --plan <plan-id> --session <slug> [--depends-on <slug>,<slug>]
-bun scripts/pr-registry.mjs state <session> <isolated|active|verified|open|merged>
+bun scripts/pr-registry.mjs state <session> <isolated|active|verified|open|merged|closed>
 bun scripts/pr-registry.mjs pr <session> --number 42
 bun scripts/pr-registry.mjs order       # topological merge order
 bun scripts/pr-registry.mjs surface w3  # what must rebase first, what blocks it

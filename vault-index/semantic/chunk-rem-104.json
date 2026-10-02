@@ -1,0 +1,246 @@
+{
+  "batch": "rem-104",
+  "nodes": [
+    {
+      "id": "concept--escape-dismiss-cue-parity",
+      "label": "Escape was the one silent dismiss path out of a modal that rings on every other dismiss",
+      "file_type": "concept",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - fix-escape-and-backdrop-guards [ses_f174462aaffeDEmW17UJO7qkBC].md:L10423] Three dismiss paths exist on WelcomeModal and WhatsNewModal and one of them is quiet: the Escape keydown handler calls onClose() with no cue while the backdrop click and the header and footer close buttons all play close_001.ogg. Fixed by routing Escape and the other three through one module-scope dismissWithCue helper so 'all dismiss paths ring identically' is structural rather than three hand-written pairs.",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - fix-escape-and-backdrop-guards [ses_f174462aaffeDEmW17UJO7qkBC].md",
+      "source_location": "L10423",
+      "norm_label": "escape was the one silent dismiss path out of a modal that rings on every other dismiss"
+    },
+    {
+      "id": "concept--backdrop-target-guard",
+      "label": "Modal backdrop target guard",
+      "file_type": "concept",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - fix-escape-and-backdrop-guards [ses_f174462aaffeDEmW17UJO7qkBC].md:L10497] Reused id: same claim, same house pattern (PomodoroThemeSelector). This note's own reason, which contradicts the brief it was handed: with onMouseDown plus the dialog body's stopPropagation intact, no press can reach these backdrops carrying a foreign target, so the brief's 'text selection that starts inside the body and ends on the backdrop' case would need a click handler to bite, not onMouseDown. The guard is defence-in-depth, not a live fix, and the test can only reach it by mounting an extra backdrop child.",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - fix-escape-and-backdrop-guards [ses_f174462aaffeDEmW17UJO7qkBC].md",
+      "source_location": "L10497",
+      "norm_label": "modal backdrop target guard"
+    },
+    {
+      "id": "concept--happy-dom-target-propagation-vacuous-guard",
+      "label": "happy-dom computes the propagation path from event.target, which makes a faked-target backdrop guard test vacuous",
+      "file_type": "concept",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - fix-escape-and-backdrop-guards [ses_f174462aaffeDEmW17UJO7qkBC].md:L10451] Reused id: same mechanism, rediscovered here by mutation. The first guard test was vacuous - removing both guards left it green - because happy-dom computes the propagation path from event.target, so a faked target inside the dialog body is stopped by the body's stopPropagation before the backdrop handler runs. Rewritten to mount a real extra child of the backdrop; removing the guards then fails exactly those two tests.",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - fix-escape-and-backdrop-guards [ses_f174462aaffeDEmW17UJO7qkBC].md",
+      "source_location": "L10451",
+      "norm_label": "happy-dom computes the propagation path from event target which makes a faked target backdrop guard test vacuous"
+    },
+    {
+      "id": "concept--typed-param-index-blind-spot",
+      "label": "indexFunctions regex cannot index typed parameter lists",
+      "file_type": "concept",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - fix-escape-and-backdrop-guards [ses_f174462aaffeDEmW17UJO7qkBC].md:L10498] Reused id: same mechanism, worked out here for the new dismissWithCue helper. indexFunctions matches parameter lists with \\([^)]*\\), so a helper typed (onClose: () => void) is not indexed - the inner ) ends the parameter match early - and every call site of it was reported as an unaccounted silent control (WelcomeModal.tsx:42,58 and WhatsNewModal.tsx:36,52,92). Worked around with a type DismissFn = () => void alias; reported as a fourth blind spot alongside bare references, useCallback and cross-module cues.",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - fix-escape-and-backdrop-guards [ses_f174462aaffeDEmW17UJO7qkBC].md",
+      "source_location": "L10498",
+      "norm_label": "indexfunctions regex cannot index typed parameter lists"
+    },
+    {
+      "id": "concept--line-count-change-breaks-the-audio-contract-file-line-keys",
+      "label": "The audio cue coverage contract is keyed on file:line, so a line-count change invalidates keys and has to be reported",
+      "file_type": "concept",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - fix-escape-and-backdrop-guards [ses_f174462aaffeDEmW17UJO7qkBC].md:L10483] Reused id: same constraint. Verified rather than assumed: no re-key was needed because every contract-keyed line stayed byte-identical (WelcomeModal.tsx:52, WhatsNewModal.tsx:46, EmbeddingSyncSection.tsx:292/299/311/318) and no line above a contract key moved. The dismissWithCue helper was placed below the component on purpose, because prettier refuses a one-line if (x) { a(); b(); } and that would have pushed the keyed line 52/46 down by 3. Every changed file's new line count is listed for the parent regardless.",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - fix-escape-and-backdrop-guards [ses_f174462aaffeDEmW17UJO7qkBC].md",
+      "source_location": "L10485",
+      "norm_label": "the audio cue coverage contract is keyed on file line so a line count change invalidates keys and has to be reported"
+    },
+    {
+      "id": "concept--cue-key-must-name-the-action-not-the-component",
+      "label": "A cue key must name the action the control performs, not the component it lives in",
+      "file_type": "concept",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - fix-escape-and-backdrop-guards [ses_f174462aaffeDEmW17UJO7qkBC].md:L10470] CLOSE is played by both real dismiss paths in PomodoroThemeSelector itself (backdrop :97, header X :119), so the custom-theme editor's Cancel chip - whose whole body is setEditingCustom(false) and which leaves the modal open - must not ring it. Changed to BACK (back_001.ogg), which is this repo's established step-back-out-of-a-layer cue (PomodoroControls Reset Cycle/Reset Round, SubtaskList remove, OverlayHeader reset position, ChatInput stop generating); the commit-side exit already owns CONFIRMATION.",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - fix-escape-and-backdrop-guards [ses_f174462aaffeDEmW17UJO7qkBC].md",
+      "source_location": "L10470",
+      "norm_label": "a cue key must name the action the control performs not the component it lives in"
+    },
+    {
+      "id": "concept--vitest-node-wrapper-broken-by-bun-spawnsync-encoding",
+      "label": "scripts/test/run-vitest-with-node.mjs dies on this host with Bun's --encoding CLI error, so bun run test is unusable locally",
+      "file_type": "concept",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - fix-escape-and-backdrop-guards [ses_f174462aaffeDEmW17UJO7qkBC].md:L10496] Pre-existing and unrelated to the changes: the wrapper dies with \"error: a value is required for '--encoding <ENCODING>' but none was supplied\" in Bun's spawnSync on the node-probe path, and it still fails with VITEST_NODE=/usr/bin/node. Worked around by running the command the wrapper would exec - node ../../node_modules/vitest/vitest.mjs run --config ../../config/build/vite.config.ts - after checking the wrapper resolves the same entrypoint and args. Filed as needing a separate ticket.",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-28 - fix-escape-and-backdrop-guards [ses_f174462aaffeDEmW17UJO7qkBC].md",
+      "source_location": "L10496",
+      "norm_label": "scripts test run vitest with node mjs dies on this host with bun s encoding cli error so bun run test is unusable locally"
+    },
+    {
+      "id": "concept--resolver-measurement-before-link-repair",
+      "label": "Link repair gated behind correcting the basename-only resolver measurement",
+      "file_type": "concept",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-entities [ses_f269c4c87ffeDuMlUC0RE3jDhC].md:L6319] Reused id: same instrument defect. There is no wiki/ directory anywhere in the vault, so the four [[wiki/...]] targets in LLM Wiki/index.md are broken in Obsidian, but they resolve in vault_lint.py through the by_relative -> by_stem -> by_key basename fallback at scripts/vault_lint.py:110-118. That fallback is why those four pages appear as incoming: 0 orphans in the productivity audit while lint reports 0 active broken links - the two graphs disagree and the linter is the one masking the defect. Remedy is a path_link_mismatch check, not editing the links first.",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-entities [ses_f269c4c87ffeDuMlUC0RE3jDhC].md",
+      "source_location": "L6319",
+      "norm_label": "link repair gated behind correcting the basename only resolver measurement"
+    },
+    {
+      "id": "concept--frontmatter-related-links-invisible-to-strict",
+      "label": "Frontmatter related links are never counted as active broken links, so a class of dead links is structurally invisible to --strict",
+      "file_type": "concept",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-entities [ses_f269c4c87ffeDuMlUC0RE3jDhC].md:L6420] Reused id: same claim, cited from the entities-and-clusters review. related_section (line 103) only matches an H2 ## Related heading in the body and frontmatter is stripped at line 102 before link scanning, so a broken [[...]] inside a related: array is never counted in active_broken_links. Conclusion stated outright: 0 active broken links does not mean what the verification reports claim.",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-entities [ses_f269c4c87ffeDuMlUC0RE3jDhC].md",
+      "source_location": "L6420",
+      "norm_label": "frontmatter related links are never counted as active broken links so a class of dead links is structurally invisible to strict"
+    },
+    {
+      "id": "concept--parse-frontmatter-cannot-read-yaml-block-sequences",
+      "label": "vault_lint's hand-rolled parse_frontmatter cannot read YAML block sequences, so working related: links read as empty",
+      "file_type": "concept",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-entities [ses_f269c4c87ffeDuMlUC0RE3jDhC].md:L6418] parse_frontmatter (lines 19-34) returns \"\" for related: followed by \"  - \\\"[[...]]\\\"\" items, which is why the para audit JSON records related: \"\" for Clusters/Academic Work.md even though the file has four working links. Every missing_metadata finding for related on such a page is a parser artifact, not a real gap.",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-entities [ses_f269c4c87ffeDuMlUC0RE3jDhC].md",
+      "source_location": "L6418",
+      "norm_label": "vault lint s hand rolled parse frontmatter cannot read yaml block sequences so working related links read as empty"
+    },
+    {
+      "id": "concept--orphan-exemption-misses-underscore-index",
+      "label": "orphan_files exempts only files literally named index.md or overview.md, so Clusters/_index.md is permanently reported as an orphan",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-entities [ses_f269c4c87ffeDuMlUC0RE3jDhC].md",
+      "source_location": "L6424",
+      "norm_label": "orphan files exempts only files literally named index md or overview md so clusters underscore index md is permanently reported as an orphan"
+    },
+    {
+      "id": "concept--incompatible-frontmatter-generations",
+      "label": "Incompatible frontmatter generations in the source corpus",
+      "file_type": "concept",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-entities [ses_f269c4c87ffeDuMlUC0RE3jDhC].md:L6288] Reused id: same coexistence, counted per directory here. Three generations sit in entities/: 8 compiled entities carrying title/aliases/tags/related, 3 stubs carrying title/tags/related, and 3 archived social-media captures carrying created_at/updated_at/source/original_location/archived_at with no frontmatter title, para, created, updated or related. The REQUIRED_METADATA contract in scripts/para_structure_audit.py:40 is (title, type, para, status, created, updated, related), so none of the three satisfies it.",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-entities [ses_f269c4c87ffeDuMlUC0RE3jDhC].md",
+      "source_location": "L6288",
+      "norm_label": "incompatible frontmatter generations in the source corpus"
+    },
+    {
+      "id": "concept--para-metadata-contract-gap",
+      "label": "Vault-wide PARA metadata contract gap across para, status, created, updated, related",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-entities [ses_f269c4c87ffeDuMlUC0RE3jDhC].md",
+      "source_location": "L6300",
+      "norm_label": "vault wide para metadata contract gap across para status created updated related"
+    },
+    {
+      "id": "concept--backdating-provenance-is-fabrication",
+      "label": "Backdating a missing created date to today's date is fabrication, not remediation",
+      "file_type": "concept",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-entities [ses_f269c4c87ffeDuMlUC0RE3jDhC].md:L6454] When adding created to the 8 compiled entities and 6 clusters that lack it, use the original compile date, not today - backdating provenance is fabrication. The same rule is restated at the end as do not backdate created on the 11 pages that lack them; derive or mark unknown instead. The neighbouring rule for the misfiled captures is to never reuse their stale original_location values as link targets.",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-entities [ses_f269c4c87ffeDuMlUC0RE3jDhC].md",
+      "source_location": "L6454",
+      "norm_label": "backdating a missing created date to today s date is fabrication not remediation"
+    },
+    {
+      "id": "concept--content-based-para-audit",
+      "label": "Content-based PARA audit from first paragraph and title",
+      "file_type": "concept",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-entities [ses_f269c4c87ffeDuMlUC0RE3jDhC].md:L6385] Reused id: same mechanism, here used to explain a false positive. The Project recommendation for Clusters/Academic Work.md is a keyword score over the first meaningful paragraph, with assignments and deliverable counted as Project keywords in scripts/para_structure_audit.py:64-67.",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-entities [ses_f269c4c87ffeDuMlUC0RE3jDhC].md",
+      "source_location": "L6385",
+      "norm_label": "content based para audit from first paragraph and title"
+    },
+    {
+      "id": "concept--moc-meta-text-false-positive",
+      "label": "A cluster MOC scores as Project because its meta-text describes assignments, not because it is one",
+      "file_type": "concept",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-entities [ses_f269c4c87ffeDuMlUC0RE3jDhC].md:L6389] The page scores as Project because it is describing assignments, not because it is one - the heuristic is reading the MOC's meta-text about its members. Corroborating signals that it is a MOC: type moc identical to all five siblings, no outcome, no deadline, no owner, no status, and three outbound links that are all cross-folder pointers into 01 - Projects/Academic. Recommendation is to reject the move, set para to resource, and build the missing 01 - Projects/index.md that is the actual root cause.",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-entities [ses_f269c4c87ffeDuMlUC0RE3jDhC].md",
+      "source_location": "L6389",
+      "norm_label": "a cluster moc scores as project because its meta text describes assignments not because it is one"
+    },
+    {
+      "id": "concept--disagreement-recorded-not-moved",
+      "label": "PARA category disagreement recorded without moving the file",
+      "file_type": "concept",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-entities [ses_f269c4c87ffeDuMlUC0RE3jDhC].md:L6410] Reused id: same decision, applied to the second academic row. 01 - Projects/Academic/tugas-etika-hukum-bisnis.md is recommended as Area because its first paragraph is prose about CSR programs, yet the file is unambiguously a single graded assignment with a fixed deliverable. Record the disagreement as reviewed-and-rejected in the log; do not edit the file. The Productivity Dashboard already frames the three academic notes as an owner status decision.",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-entities [ses_f269c4c87ffeDuMlUC0RE3jDhC].md",
+      "source_location": "L6410",
+      "norm_label": "para category disagreement recorded without moving the file"
+    },
+    {
+      "id": "concept--baseline-reconciliation-before-remediation",
+      "label": "Baseline reconciliation task before any remediation is planned",
+      "file_type": "concept",
+      "rationale": "[05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-entities [ses_f269c4c87ffeDuMlUC0RE3jDhC].md:L6371] Reused id: same blocker, named again here from the reachability pass. The productivity audit reports LLM Wiki/index.md and 0. Common/index.md as incoming: 0 while four and five pages respectively link to them by explicit vault-relative path. The two audit graphs and the linter disagree with each other and with the files on disk, so do not remediate against any count until reconciled; Phase 0 is to re-run both audits now that Vector Search is gone and discard the existing JSONs as pre-removal snapshots.",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-entities [ses_f269c4c87ffeDuMlUC0RE3jDhC].md",
+      "source_location": "L6371",
+      "norm_label": "baseline reconciliation task before any remediation is planned"
+    },
+    {
+      "id": "concept--rayleigh-scattering",
+      "label": "Rayleigh scattering",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - mengapa-langit-berwarna-biru [ses_f1d256609ffeWjBsZbnAebjvNQ].md",
+      "source_location": "L43",
+      "norm_label": "rayleigh scattering"
+    },
+    {
+      "id": "concept--chain-of-thought-nondisclosure",
+      "label": "Internal reasoning is not disclosed; a high-level summary of the approach is offered instead",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-27 - mengapa-langit-berwarna-biru [ses_f1d256609ffeWjBsZbnAebjvNQ].md",
+      "source_location": "L45",
+      "norm_label": "internal reasoning is not disclosed a high level summary of the approach is offered instead"
+    }
+  ],
+  "links": [
+    {
+      "source": "concept--backdrop-target-guard",
+      "target": "concept--happy-dom-target-propagation-vacuous-guard",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "note": "The guard is only exercisable in a test by mounting an extra child of the backdrop, which is exactly the workaround the happy-dom vacuity finding forced."
+    },
+    {
+      "source": "concept--typed-param-index-blind-spot",
+      "target": "concept--escape-dismiss-cue-parity",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "note": "The dismissWithCue helper introduced to make the three dismiss paths ring identically became invisible to the cue-coverage detector because of this regex, and five call sites were reported as unaccounted silent controls."
+    },
+    {
+      "source": "concept--cue-key-must-name-the-action-not-the-component",
+      "target": "concept--line-count-change-breaks-the-audio-contract-file-line-keys",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "note": "Changing the Cancel chip key had to be verified against the same file:line-keyed audio contract as the rest of the edit."
+    },
+    {
+      "source": "concept--incompatible-frontmatter-generations",
+      "target": "concept--para-metadata-contract-gap",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "note": "The three coexisting schema generations are measured against REQUIRED_METADATA (title, type, para, status, created, updated, related); none of the three satisfies it."
+    },
+    {
+      "source": "concept--parse-frontmatter-cannot-read-yaml-block-sequences",
+      "target": "concept--frontmatter-related-links-invisible-to-strict",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "note": "Both are ways frontmatter related: escapes the link check: one because the parser returns empty for a block sequence, the other because the scanner never looks at frontmatter at all."
+    },
+    {
+      "source": "concept--resolver-measurement-before-link-repair",
+      "target": "concept--frontmatter-related-links-invisible-to-strict",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "note": "Listed together under tooling limitations that must be fixed before any lint result is trusted; together they make 0 active broken links meaningless."
+    },
+    {
+      "source": "concept--baseline-reconciliation-before-remediation",
+      "target": "concept--resolver-measurement-before-link-repair",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "note": "Phase 0 discards the counts and Phase 1 fixes the resolver, in that order - the reconciliation is the gate the repair waits behind."
+    },
+    {
+      "source": "concept--content-based-para-audit",
+      "target": "concept--moc-meta-text-false-positive",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "note": "The MOC meta-text false positive is the specific failure of the content-based scoring; the audit is described as a keyword score over the first meaningful paragraph."
+    },
+    {
+      "source": "concept--content-based-para-audit",
+      "target": "concept--disagreement-recorded-not-moved",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "note": "Both audit rows it rejects - the cluster MOC and tugas-etika-hukum-bisnis.md - are disagreement rows produced by the same keyword score."
+    }
+  ]
+}

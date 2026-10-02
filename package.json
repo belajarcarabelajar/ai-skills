@@ -23,6 +23,9 @@
     "mirror:publish": "bun scripts/plan-publish.mjs",
     "mirror:check": "bun scripts/plan-publish.mjs --check --all",
     "mirror:status": "bun scripts/plan-publish.mjs --status",
+    "math:bayes": "bun scripts/bayesian-confidence.mjs",
+    "math:invariants": "bun scripts/formal-invariants.mjs",
+    "math:batch": "bun scripts/queueing-batch.mjs",
     "export:history": "bun scripts/export-opencode-history.mjs",
     "ci": "bash scripts/render-diagrams.sh && bun scripts/validate-skill.mjs && bun test scripts/ && bun scripts/sync-snippets.mjs --check"
   },

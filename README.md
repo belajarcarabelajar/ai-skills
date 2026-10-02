@@ -797,6 +797,66 @@ systemctl --user reset-failed plan-mirror-check.service
 
 ---
 
+## Mathematical Utilities
+
+Three pure-function modules provide mathematical foundations for workflow decisions. They are deterministic, dependency-free, and fully tested with hand-computed fixtures.
+
+### Bayesian Confidence Aggregation (`scripts/bayesian-confidence.mjs`)
+
+Combines independent findings from multiple subagents into a single posterior probability using the odds form of Bayes' theorem:
+
+```
+posterior_odds = prior_odds × ∏(p_i / (1 - p_i))
+```
+
+| Export | Purpose |
+|---|---|
+| `combineConfidence(findings, prior)` | Combine independent findings into a posterior |
+| `classifyVerdict(posterior)` | Map posterior to `auto-merge`, `human-review`, or `reject` |
+| `weightOfEvidence(confidence)` | Log-likelihood ratio (nats) for a single finding |
+| `aggregateFindings(findings, prior)` | Full verdict object with counts |
+
+**Thresholds:** `>= 0.95` auto-merge, `>= 0.70` human review, `< 0.70` reject.
+
+```bash
+bun run math:bayes
+```
+
+### Formal Logic Invariants (`scripts/formal-invariants.mjs`)
+
+Structural predicates that must hold for a plan to be well-formed. Each returns `true` or a violation string.
+
+| Export | Invariant |
+|---|---|
+| `isAcyclic(graph)` | Dependency graph is a DAG (no cycles) |
+| `hasReferentialIntegrity(graph, taskIds)` | All dependencies reference existing tasks |
+| `hasMutuallyExclusiveScopes(scopes)` | No two tasks claim the same file |
+| `hasValidGateOrdering(tasks)` | Verification comes after implementation |
+| `hasUniqueIdempotencyKeys(tasks)` | No duplicate idempotency keys |
+| `validateInvariants(plan)` | Run all checks, return violation list |
+
+```bash
+bun run math:invariants
+```
+
+### Queueing Theory Batch Sizing (`scripts/queueing-batch.mjs`)
+
+M/M/c queue model for optimal subagent dispatch. Computes wait probabilities, queue lengths, and cost-minimizing batch sizes.
+
+| Export | Formula |
+|---|---|
+| `erlangC(λ, μ, c)` | Probability an arriving task must wait |
+| `averageQueueLength(λ, μ, c)` | Mean queue length `L_q` |
+| `averageWaitTime(λ, μ, c)` | Mean wait time `W_q = L_q / λ` |
+| `optimalBatchSize(λ, μ, costs)` | Cost-minimizing batch size |
+| `completionProbability(λ, μ, c, t)` | `P(T <= t)` |
+
+```bash
+bun run math:batch
+```
+
+---
+
 ## Validation & Quality Checks
 
 Run the automated validation suite locally:

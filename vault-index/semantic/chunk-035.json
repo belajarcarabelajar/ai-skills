@@ -1,0 +1,299 @@
+{
+  "nodes": [
+    {
+      "id": "concept--ai-companion-linux-portability-audit",
+      "label": "AI Companion Linux portability audit",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L19",
+      "norm_label": "ai companion linux portability audit"
+    },
+    {
+      "id": "concept--zero-runtime-evidence",
+      "label": "Zero runtime evidence for the feature on this host",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L16352",
+      "norm_label": "zero runtime evidence for the feature on this host"
+    },
+    {
+      "id": "concept--alt-space-phantom-shortcut",
+      "label": "Alt+Space phantom companion shortcut",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L6208",
+      "norm_label": "alt+space phantom companion shortcut"
+    },
+    {
+      "id": "concept--dead-ollamaonline-prop",
+      "label": "Dead ollamaOnline prop in AICompanionPage",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L6210",
+      "norm_label": "dead ollamaonline prop in aicompanionpage"
+    },
+    {
+      "id": "concept--companion-overlay-visibility-instrumentation-gap",
+      "label": "Companion overlay visibility instrumentation gap",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L6212",
+      "norm_label": "companion overlay visibility instrumentation gap"
+    },
+    {
+      "id": "concept--webkit-compositing-policy-x11-only",
+      "label": "WEBKIT_DISABLE_COMPOSITING_MODE set only on X11",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L4725",
+      "norm_label": "webkit_disable_compositing_mode set only on x11"
+    },
+    {
+      "id": "concept--xdg-globalshortcuts-portal-app-identity",
+      "label": "XDG GlobalShortcuts portal app identity",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L1976",
+      "norm_label": "xdg globalshortcuts portal app identity"
+    },
+    {
+      "id": "concept--ydotool-uinput-prerequisite",
+      "label": "ydotoold and /dev/uinput prerequisite for Wayland input injection",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L1975",
+      "norm_label": "ydotoold and /dev/uinput prerequisite for wayland input injection"
+    },
+    {
+      "id": "concept--dual-ai-chatbot-creation-sites",
+      "label": "Divergent ai-chatbot window creation sites",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L4535",
+      "norm_label": "divergent ai-chatbot window creation sites"
+    },
+    {
+      "id": "concept--tauri-ready-window-readiness-race",
+      "label": "Window readiness race (sleep 100ms vs tauri://ready)",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L4925",
+      "norm_label": "window readiness race (sleep 100ms vs tauri://ready)"
+    },
+    {
+      "id": "concept--companion-timestamp-format-migration",
+      "label": "Mixed timestamp formats in companion tables",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L16368",
+      "norm_label": "mixed timestamp formats in companion tables"
+    },
+    {
+      "id": "concept--shared-global-log-file-test-isolation",
+      "label": "Shared process-global log file test isolation",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L21254",
+      "norm_label": "shared process-global log file test isolation"
+    },
+    {
+      "id": "concept--clear-system-logs-cross-process-deleter",
+      "label": "clear_system_logs as a cross-process log deleter",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L21781",
+      "norm_label": "clear_system_logs as a cross-process log deleter"
+    },
+    {
+      "id": "concept--audio-cue-register-key-drift",
+      "label": "audioCueCoverage register keyed by file:line",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L21777",
+      "norm_label": "audiocuecoverage register keyed by file:line"
+    },
+    {
+      "id": "concept--stale-release-version-literal-drift",
+      "label": "Stale release version literals in release-path tests",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L21107",
+      "norm_label": "stale release version literals in release-path tests"
+    },
+    {
+      "id": "concept--linux-version-file-tag-mismatch",
+      "label": "Linux version file behind its own release tags",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L22435",
+      "norm_label": "linux version file behind its own release tags"
+    },
+    {
+      "id": "concept--zero-subagent-compiler-policy",
+      "label": "Zero-subagent-compiler policy on the VPS build host",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L13216",
+      "norm_label": "zero-subagent-compiler policy on the vps build host"
+    },
+    {
+      "id": "concept--heavy-verification-sha-guard",
+      "label": "Heavy verification SHA guard on vps-bcb",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L16686",
+      "norm_label": "heavy verification sha guard on vps-bcb"
+    },
+    {
+      "id": "concept--verification-log-self-deletion",
+      "label": "Verification script deletes its own failure evidence",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L18484",
+      "norm_label": "verification script deletes its own failure evidence"
+    },
+    {
+      "id": "concept--shellcheck-sc2015-and-or-trap",
+      "label": "SC2015 A && B || C is not if-then-else",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L19161",
+      "norm_label": "sc2015 a && b || c is not if-then-else"
+    },
+    {
+      "id": "concept--global-gitignore-hides-untracked-test",
+      "label": "Global gitignore hiding an untracked test file",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L20246",
+      "norm_label": "global gitignore hiding an untracked test file"
+    },
+    {
+      "id": "concept--linux-arch-install-runbook-five-invariants",
+      "label": "Linux Arch install runbook five invariants",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L22827",
+      "norm_label": "linux arch install runbook five invariants"
+    },
+    {
+      "id": "concept--blank-proof-before-install",
+      "label": "Blank-proof before binary install",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L22833",
+      "norm_label": "blank-proof before binary install"
+    },
+    {
+      "id": "rationale--audit-before-patch",
+      "label": "Diagnose before fixing because the failure surface spans undeclared platform contracts",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L6191",
+      "norm_label": "diagnose before fixing because the failure surface spans undeclared platform contracts"
+    },
+    {
+      "id": "rationale--verify-before-deploy",
+      "label": "Run the full suite before deploying, because a regression makes the deploy pointless",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L16498",
+      "norm_label": "run the full suite before deploying, because a regression makes the deploy pointless"
+    },
+    {
+      "id": "rationale--migration-runs-every-startup",
+      "label": "The startup migration is the riskiest change because it runs for every user on every launch",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L16440",
+      "norm_label": "the startup migration is the riskiest change because it runs for every user on every launch"
+    },
+    {
+      "id": "rationale--rekey-register-do-not-delete",
+      "label": "Re-key the register instead of deleting exclusions, because deleting would reintroduce the gap the contract prevents",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L21779",
+      "norm_label": "re-key the register instead of deleting exclusions, because deleting would reintroduce the gap the contract prevents"
+    },
+    {
+      "id": "rationale--durable-log-isolation-needs-env-override",
+      "label": "A durable logging fix needs an env-backed log-dir override covering every reader",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L21785",
+      "norm_label": "a durable logging fix needs an env-backed log-dir override covering every reader"
+    },
+    {
+      "id": "rationale--refuse-to-guess-version-conflict",
+      "label": "Refuse the binary swap because contradictory version state must not be guessed at",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L22141",
+      "norm_label": "refuse the binary swap because contradictory version state must not be guessed at"
+    },
+    {
+      "id": "rationale--confirm-tags-reachable-before-bumping",
+      "label": "Confirm both tags are ancestors of main before building, so no published work is lost",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L22531",
+      "norm_label": "confirm both tags are ancestors of main before building, so no published work is lost"
+    },
+    {
+      "id": "rationale--sc2015-wrong-by-construction",
+      "label": "SC2015 was wrong by construction rather than a live bug, and the distinction changes how it is reported",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L19170",
+      "norm_label": "sc2015 was wrong by construction rather than a live bug, and the distinction changes how it is reported"
+    },
+    {
+      "id": "rationale--key-by-handler-not-line-number",
+      "label": "Key the audio register by handler or data-testid because line-number keys die again on the next insertion",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L21787",
+      "norm_label": "key the audio register by handler or data-testid because line-number keys die again on the next insertion"
+    },
+    {
+      "id": "rationale--quit-via-tray-not-sigterm",
+      "label": "The app must be quit via the tray because there is no SIGTERM handler to preserve session bookkeeping",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - audit-ai-companion-di-arch-linux [ses_f0732c855ffe3kI3xk46FrYEA2].md",
+      "source_location": "L22817",
+      "norm_label": "the app must be quit via the tray because there is no sigterm handler to preserve session bookkeeping"
+    }
+  ],
+  "links": [
+    { "source": "rationale--audit-before-patch", "target": "concept--ai-companion-linux-portability-audit", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--verify-before-deploy", "target": "concept--ai-companion-linux-portability-audit", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--migration-runs-every-startup", "target": "concept--companion-timestamp-format-migration", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--rekey-register-do-not-delete", "target": "concept--audio-cue-register-key-drift", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--key-by-handler-not-line-number", "target": "concept--audio-cue-register-key-drift", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--durable-log-isolation-needs-env-override", "target": "concept--shared-global-log-file-test-isolation", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--refuse-to-guess-version-conflict", "target": "concept--linux-version-file-tag-mismatch", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--confirm-tags-reachable-before-bumping", "target": "concept--linux-version-file-tag-mismatch", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--sc2015-wrong-by-construction", "target": "concept--shellcheck-sc2015-and-or-trap", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "rationale--quit-via-tray-not-sigterm", "target": "concept--linux-arch-install-runbook-five-invariants", "relation": "rationale_for", "confidence": "EXTRACTED" },
+    { "source": "concept--ai-companion-linux-portability-audit", "target": "concept--zero-runtime-evidence", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--zero-runtime-evidence", "target": "concept--companion-overlay-visibility-instrumentation-gap", "relation": "conceptually_related_to", "confidence": "INFERRED" },
+    { "source": "concept--companion-overlay-visibility-instrumentation-gap", "target": "concept--webkit-compositing-policy-x11-only", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--webkit-compositing-policy-x11-only", "target": "concept--dual-ai-chatbot-creation-sites", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--dual-ai-chatbot-creation-sites", "target": "concept--tauri-ready-window-readiness-race", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--alt-space-phantom-shortcut", "target": "concept--xdg-globalshortcuts-portal-app-identity", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--xdg-globalshortcuts-portal-app-identity", "target": "concept--ai-companion-linux-portability-audit", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--ydotool-uinput-prerequisite", "target": "concept--ai-companion-linux-portability-audit", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--dead-ollamaonline-prop", "target": "concept--alt-space-phantom-shortcut", "relation": "conceptually_related_to", "confidence": "INFERRED" },
+    { "source": "concept--companion-timestamp-format-migration", "target": "concept--stale-release-version-literal-drift", "relation": "conceptually_related_to", "confidence": "INFERRED" },
+    { "source": "concept--shared-global-log-file-test-isolation", "target": "concept--clear-system-logs-cross-process-deleter", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--audio-cue-register-key-drift", "target": "concept--shared-global-log-file-test-isolation", "relation": "conceptually_related_to", "confidence": "INFERRED" },
+    { "source": "concept--stale-release-version-literal-drift", "target": "concept--linux-version-file-tag-mismatch", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--global-gitignore-hides-untracked-test", "target": "concept--stale-release-version-literal-drift", "relation": "conceptually_related_to", "confidence": "INFERRED" },
+    { "source": "concept--zero-subagent-compiler-policy", "target": "concept--heavy-verification-sha-guard", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--heavy-verification-sha-guard", "target": "concept--verification-log-self-deletion", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--shellcheck-sc2015-and-or-trap", "target": "concept--heavy-verification-sha-guard", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--linux-arch-install-runbook-five-invariants", "target": "concept--blank-proof-before-install", "relation": "conceptually_related_to", "confidence": "EXTRACTED" },
+    { "source": "concept--linux-version-file-tag-mismatch", "target": "concept--linux-arch-install-runbook-five-invariants", "relation": "conceptually_related_to", "confidence": "EXTRACTED" }
+  ]
+}

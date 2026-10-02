@@ -1,0 +1,242 @@
+{
+  "nodes": [
+    {
+      "id": "concept--graphify-codebase-graph-preflight",
+      "label": "Graphify codebase graph preflight",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - wire-graphify-into-deep-research-path [ses_f080a8e1fffeNi62CM6DlAep7Q].md",
+      "source_location": "L1231",
+      "norm_label": "graphify codebase graph preflight"
+    },
+    {
+      "id": "concept--graphify-scoped-subgraph-queries",
+      "label": "Graphify scoped subgraph queries",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - wire-graphify-into-deep-research-path [ses_f080a8e1fffeNi62CM6DlAep7Q].md",
+      "source_location": "L1244",
+      "norm_label": "graphify scoped subgraph queries"
+    },
+    {
+      "id": "concept--on-demand-graph-presence-check",
+      "label": "On-demand graph presence check",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - wire-graphify-into-deep-research-path [ses_f080a8e1fffeNi62CM6DlAep7Q].md",
+      "source_location": "L1248",
+      "norm_label": "on-demand graph presence check"
+    },
+    {
+      "id": "concept--graph-results-are-leads-not-evidence",
+      "label": "Graph results are leads, not evidence",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - wire-graphify-into-deep-research-path [ses_f080a8e1fffeNi62CM6DlAep7Q].md",
+      "source_location": "L1250",
+      "norm_label": "graph results are leads, not evidence"
+    },
+    {
+      "id": "rationale--scoped-subgraph-is-a-size-argument-not-a-speed-claim",
+      "label": "Scoped subgraph is a size argument, not a speed claim",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - wire-graphify-into-deep-research-path [ses_f080a8e1fffeNi62CM6DlAep7Q].md",
+      "source_location": "L1248",
+      "norm_label": "scoped subgraph is a size argument, not a speed claim"
+    },
+    {
+      "id": "rationale--no-invented-performance-numbers",
+      "label": "No invented performance or token-reduction numbers",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - wire-graphify-into-deep-research-path [ses_f080a8e1fffeNi62CM6DlAep7Q].md",
+      "source_location": "L1253",
+      "norm_label": "no invented performance or token-reduction numbers"
+    },
+
+    {
+      "id": "concept--xdg-globalshortcuts-portal-contract",
+      "label": "XDG GlobalShortcuts portal contract",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - sinkronisasi-shortcut-snipset-dua-arah [ses_f26610dabffe09guILt65II2Cb].md",
+      "source_location": "L7097",
+      "norm_label": "xdg globalshortcuts portal contract"
+    },
+    {
+      "id": "concept--silent-live-preference-overwrite",
+      "label": "Silent live-preference overwrite",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - sinkronisasi-shortcut-snipset-dua-arah [ses_f26610dabffe09guILt65II2Cb].md",
+      "source_location": "L7098",
+      "norm_label": "silent live-preference overwrite"
+    },
+    {
+      "id": "concept--pending-push-reconciliation",
+      "label": "Pending-push reconciliation",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - sinkronisasi-shortcut-snipset-dua-arah [ses_f26610dabffe09guILt65II2Cb].md",
+      "source_location": "L12748",
+      "norm_label": "pending-push reconciliation"
+    },
+    {
+      "id": "concept--stable-portal-shortcut-ids",
+      "label": "Stable portal shortcut ids across rebind",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - sinkronisasi-shortcut-snipset-dua-arah [ses_f26610dabffe09guILt65II2Cb].md",
+      "source_location": "L10914",
+      "norm_label": "stable portal shortcut ids across rebind"
+    },
+    {
+      "id": "concept--shortcut-slot-coverage-audit",
+      "label": "Shortcut slot coverage audit",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - sinkronisasi-shortcut-snipset-dua-arah [ses_f26610dabffe09guILt65II2Cb].md",
+      "source_location": "L7099",
+      "norm_label": "shortcut slot coverage audit"
+    },
+    {
+      "id": "concept--zero-subagent-compiler-policy",
+      "label": "Zero subagent compiler policy",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - sinkronisasi-shortcut-snipset-dua-arah [ses_f26610dabffe09guILt65II2Cb].md",
+      "source_location": "L7181",
+      "norm_label": "zero subagent compiler policy"
+    },
+    {
+      "id": "concept--speech-shortcut-cache-clobber",
+      "label": "Speech shortcut cache clobber",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - sinkronisasi-shortcut-snipset-dua-arah [ses_f26610dabffe09guILt65II2Cb].md",
+      "source_location": "L9416",
+      "norm_label": "speech shortcut cache clobber"
+    },
+    {
+      "id": "concept--control-api-settings-set-blind-spot",
+      "label": "Control-API settings/set blind spot",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - sinkronisasi-shortcut-snipset-dua-arah [ses_f26610dabffe09guILt65II2Cb].md",
+      "source_location": "L9417",
+      "norm_label": "control-api settings/set blind spot"
+    },
+    {
+      "id": "rationale--no-guaranteed-silent-write-to-system-settings",
+      "label": "No guaranteed silent write from app to system settings",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - sinkronisasi-shortcut-snipset-dua-arah [ses_f26610dabffe09guILt65II2Cb].md",
+      "source_location": "L7097",
+      "norm_label": "no guaranteed silent write from app to system settings"
+    },
+    {
+      "id": "rationale--stable-ids-prevent-duplicate-system-settings-entry",
+      "label": "Stable ids prevent a duplicate System Settings entry",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - sinkronisasi-shortcut-snipset-dua-arah [ses_f26610dabffe09guILt65II2Cb].md",
+      "source_location": "L10915",
+      "norm_label": "stable ids prevent a duplicate system settings entry"
+    },
+    {
+      "id": "rationale--repo-rule-outranks-generic-skill-default",
+      "label": "Repo rule outranks generic skill default",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - sinkronisasi-shortcut-snipset-dua-arah [ses_f26610dabffe09guILt65II2Cb].md",
+      "source_location": "L7386",
+      "norm_label": "repo rule outranks generic skill default"
+    },
+    {
+      "id": "rationale--unmapped-slot-never-rebinds-or-syncs",
+      "label": "Unmapped slot never rebinds nor syncs",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - sinkronisasi-shortcut-snipset-dua-arah [ses_f26610dabffe09guILt65II2Cb].md",
+      "source_location": "L7099",
+      "norm_label": "unmapped slot never rebinds nor syncs"
+    }
+  ],
+  "links": [
+    {
+      "source": "concept--graphify-scoped-subgraph-queries",
+      "target": "concept--graphify-codebase-graph-preflight",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--on-demand-graph-presence-check",
+      "target": "concept--graphify-codebase-graph-preflight",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--graph-results-are-leads-not-evidence",
+      "target": "concept--graphify-codebase-graph-preflight",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--scoped-subgraph-is-a-size-argument-not-a-speed-claim",
+      "target": "concept--graphify-codebase-graph-preflight",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--no-invented-performance-numbers",
+      "target": "concept--graphify-codebase-graph-preflight",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+
+    {
+      "source": "concept--xdg-globalshortcuts-portal-contract",
+      "target": "concept--pending-push-reconciliation",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--silent-live-preference-overwrite",
+      "target": "concept--pending-push-reconciliation",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--stable-portal-shortcut-ids",
+      "target": "concept--pending-push-reconciliation",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--shortcut-slot-coverage-audit",
+      "target": "concept--pending-push-reconciliation",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--speech-shortcut-cache-clobber",
+      "target": "concept--silent-live-preference-overwrite",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--control-api-settings-set-blind-spot",
+      "target": "concept--shortcut-slot-coverage-audit",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "rationale--no-guaranteed-silent-write-to-system-settings",
+      "target": "concept--pending-push-reconciliation",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--stable-ids-prevent-duplicate-system-settings-entry",
+      "target": "concept--stable-portal-shortcut-ids",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--repo-rule-outranks-generic-skill-default",
+      "target": "concept--zero-subagent-compiler-policy",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--unmapped-slot-never-rebinds-or-syncs",
+      "target": "concept--shortcut-slot-coverage-audit",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    }
+  ]
+}

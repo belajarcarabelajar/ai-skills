@@ -82,36 +82,36 @@ tasks:
     skip_if: "false"
     verify_exit: 0
   - id: T7
-    depends_on: [T6]
-    files: { create: [], modify: [], test: [] }
-    idempotency_key: "T7:extract-the-curated-corpus-with-parallel-subagents"
-    skip_if: "false"
+    depends_on: [T2, T3]
+    files: { create: [scripts/vault-index-structural.mjs, scripts/vault-index-structural.test.mjs], modify: [], test: [scripts/vault-index-structural.test.mjs] }
+    idempotency_key: "T7:structural-layer-needs-no-model"
+    skip_if: "bun test scripts/vault-index-structural.test.mjs"
     verify_exit: 0
+    run:
+      - cmd: "bun test scripts/vault-index-structural.test.mjs"
+        expect_exit: 1
+        retry: 0
+      - cmd: "bun test scripts/vault-index-structural.test.mjs"
+        expect_exit: 0
+        retry: 1
   - id: T8
-    depends_on: [T7]
-    files: { create: [vault-index/manifest.json], modify: [], test: [] }
-    idempotency_key: "T8:merge-chunks-and-write-the-vault-graph"
+    depends_on: [T6, T7]
+    files: { create: [vault-index/semantic/batches.json], modify: [], test: [] }
+    idempotency_key: "T8:concept-and-rationale-layer-needs-a-model"
     skip_if: "false"
     verify_exit: 0
   - id: T9
-    depends_on: [T8]
-    files: { create: [], modify: ["Dokumen/Obsidian Vault/graphify-out/graph.json"], test: [] }
-    idempotency_key: "T9:recluster-so-the-merged-graph-gets-communities"
+    depends_on: [T7, T8]
+    files: { create: [vault-index/manifest.json], modify: [], test: [] }
+    idempotency_key: "T9:merge-both-layers-into-the-vault-graph"
     skip_if: "false"
     verify_exit: 0
   - id: T10
     depends_on: [T9]
-    files: { create: [scripts/vault-index-verify.mjs, scripts/vault-index-verify.test.mjs], modify: [], test: [scripts/vault-index-verify.test.mjs] }
-    idempotency_key: "T10:graphify-query-path-explain-survive-a-hand-authored-graph"
-    skip_if: "bun test scripts/vault-index-verify.test.mjs"
+    files: { create: [], modify: ["Dokumen/Obsidian Vault/graphify-out/graph.json"], test: [] }
+    idempotency_key: "T10:recluster-so-the-merged-graph-gets-communities"
+    skip_if: "false"
     verify_exit: 0
-    run:
-      - cmd: "bun test scripts/vault-index-verify.test.mjs"
-        expect_exit: 1
-        retry: 0
-      - cmd: "bun test scripts/vault-index-verify.test.mjs"
-        expect_exit: 0
-        retry: 1
   - id: T11
     depends_on: [T5]
     files: { create: [], modify: [AGENTS.md, "Dokumen/Obsidian Vault/AGENTS.md"], test: [scripts/agents-md-current.test.mjs] }
@@ -127,18 +127,31 @@ tasks:
         retry: 1
   - id: T12
     depends_on: [T10, T11]
+    files: { create: [scripts/vault-index-verify.mjs, scripts/vault-index-verify.test.mjs], modify: [], test: [scripts/vault-index-verify.test.mjs] }
+    idempotency_key: "T12:graphify-query-path-explain-survive-a-hand-authored-graph"
+    skip_if: "bun test scripts/vault-index-verify.test.mjs"
+    verify_exit: 0
+    run:
+      - cmd: "bun test scripts/vault-index-verify.test.mjs"
+        expect_exit: 1
+        retry: 0
+      - cmd: "bun test scripts/vault-index-verify.test.mjs"
+        expect_exit: 0
+        retry: 1
+  - id: T13
+    depends_on: [T12]
     files: { create: [], modify: [docs/graphify-integration.md], test: [] }
-    idempotency_key: "T12:record-the-measured-corpus-gap-in-the-integration-doc"
+    idempotency_key: "T13:record-the-measured-corpus-gap-in-the-integration-doc"
     skip_if: "bun scripts/validate-skill.mjs"
     verify_exit: 0
     run:
       - cmd: "bun scripts/validate-skill.mjs"
         expect_exit: 0
         retry: 0
-  - id: T13
-    depends_on: [T12]
+  - id: T14
+    depends_on: [T13]
     files: { create: [], modify: [], test: [] }
-    idempotency_key: "T13:full-gate-green-and-vault-graph-verified"
+    idempotency_key: "T14:full-gate-green-and-vault-graph-verified"
     skip_if: "bun run ci"
     verify_exit: 0
     run:
@@ -216,7 +229,7 @@ The last row is why this plan does not tune clustering. A node with no edges can
 ```mermaid
 flowchart TD
     accTitle: Subagent-driven vault index implementation plan
-    accDescr: Four independent tooling tasks build the chunk schema, the scanner, the batcher, the merger and the drift guard. A prose contract task and the parallel extraction run follow, then the merge and recluster write the vault graph. A verification task and the AGENTS.md repair run in parallel, and a documentation task and the final full gate close the plan behind a human approval gate.
+    accDescr: Five independent tooling tasks build the chunk schema, the scanner, the batcher, the merger and the drift guard. A structural extractor needs no model, so it runs in parallel with the subagent contract. The concept and rationale layer then runs by subagent, both layers merge, the graph is reclustered, and verification and the AGENTS.md repair converge before documentation and the final full gate close the plan behind a human approval gate.
     T1["T1: chunk schema + validator"] --> T2["T2: scan via graphify.detect"]
     T1 --> T3["T3: batch by bytes"]
     T1 --> T4["T4: merge chunks"]
@@ -224,16 +237,20 @@ flowchart TD
     T2 --> T6["T6: subagent extraction contract"]
     T3 --> T6
     T4 --> T6
-    T6 --> T7["T7: parallel extraction run"]
-    T7 --> T8["T8: merge into vault graph"]
-    T8 --> T9["T9: recluster vault graph"]
-    T9 --> T10["T10: verify query/path/explain"]
+    T2 --> T7["T7: structural layer, no model"]
+    T3 --> T7
+    T6 --> T8["T8: concept + rationale layer"]
+    T7 --> T8
+    T7 --> T9["T9: merge both layers"]
+    T8 --> T9
+    T9 --> T10["T10: recluster vault graph"]
+    T10 --> T12["T12: verify query/path/explain"]
     T5 --> T11["T11: rewrite both AGENTS.md"]
-    T10 --> T12["T12: record corpus gap in docs"]
     T11 --> T12
-    T12 --> T13["T13: full gate green"]
-    T6 --> Gate{{"Human Approval Gate"}}
-    T13 --> Gate
+    T12 --> T13["T13: record corpus gap in docs"]
+    T13 --> T14["T14: full gate green"]
+    T8 --> Gate{{"Human Approval Gate"}}
+    T14 --> Gate
     Gate --> Verify["Verify: coverage + query evidence"]
     Verify --> Finish["Completion & Sign-off"]
 ```
@@ -358,68 +375,75 @@ flowchart LR
 - [ ] **Step 2 — Dry-run one batch by hand** and confirm the output validates against T1's validator before any fan-out.
 - [ ] **Step 3 — Verify:** the contract names every function T7's subagents call.
 
-### Task T7: Parallel extraction run
+### Task T7: Structural layer, no model
 
 - **Interfaces:**
-  - Consumes: the worklist from T2 (1,822 files), the batches from T3 (283 at the chosen budget), the contract from T6.
-  - Produces: `vault-index/chunks/chunk-NNN.json`, one per batch, each schema-valid.
+  - Consumes: the worklist from T2, the batches from T3.
+  - Produces: `structural(root, files, opts) -> chunk` in `scripts/vault-index-structural.mjs`, emitting `document`, `contains` and `references` only.
 - **Preconditions (assert FIRST):**
-  - [ ] Upstream: the approval gate is signed (else abort: `E_PRECOND_APPROVAL`).
-  - [ ] Input contract: the worklist is all 1,822 eligible files with none under an excluded prefix (else abort: `E_PRECOND_INPUT`).
-  - On failure: STOP, record to §7, re-dispatch only the failing batch.
+  - [ ] Dependency: T2's `scan` and T3's `batch` resolve (else abort: `E_PRECOND_UPSTREAM`).
+  - [ ] Input contract: every worklist path exists and is repo-relative (else abort: `E_PRECOND_INPUT`).
+  - On failure: STOP, record to §8, continue only tasks independent of T7.
 - **Idempotency Check (BEFORE Step 1):**
   - [ ] Skip when `skip_if` exits 0 → `SKIPPED-IDEMPOTENT`.
-- [ ] **Step 1 — Write the batch manifest** with chunk id, owner, target files, expected output and verification command, and confirm no two chunks own the same file. 283 chunks, so the manifest is written to disk and not held in context.
-- [ ] **Step 2 — Dispatch** narrow subagents in waves, 10–20 concurrent, reaping each wave before starting the next. **A batch whose chunk file exists and passes T1's validator is skipped**, which is what makes the 334-batch run resumable across session boundaries. Report completed and remaining counts after every wave.
-- [ ] **Step 3 — Verify:** every chunk passes T1's validator; report the count that failed and re-dispatch only those, never the whole set.
-- [ ] **Step 4 — Coverage check:** assert every one of the 1,822 worklist paths is claimed by exactly one batch, so no file is silently skipped by a packing bug in T3.
+- **Why this task exists at all — measured 2026-10-02.** A 200-note sample found YAML frontmatter in **100%**, headings in 98%, wikilinks in 60%, and code fences in 48%. The frontmatter is structured, carrying `title`, `type`, `project`, and a `related: ["[[...]]"` list. So the entire structural layer is decidable without a model, and dispatching 283 subagents to produce it would spend model calls to re-derive what a parser already knows exactly. This task is the whole reason T7 and T8 are separate.
+- [ ] **Step 1 — Failing Test (RED):** cmd: `bun test scripts/vault-index-structural.test.mjs` | expect: exit 1 | retry: 0
+- [ ] **Step 2 — Implementation (GREEN):** per file emit exactly one `document` node whose `id` is a slug of the repo-relative path and whose `label` is the frontmatter `title` (falling back to the H1, then the filename). Emit `contains` edges to each ATX heading, using a `source_location` of `L<n>`. Emit `references` edges for every `[[wikilink]]` found in frontmatter `related` and in the body, skipping links inside fenced code blocks. Resolve a wikilink target to a `document` node by path, by basename, and by frontmatter alias, and record an unresolved target rather than dropping it silently.
+  - **`source_file` is mandatory on every node, always.** The existing vault graph carries 1,299 nodes with a null or empty `source_file` that cannot be re-verified against disk; this layer must not add a single one.
+  - Deterministic byte-for-byte across runs, because the merge in T9 is a union keyed on node id and an unstable id would make T14's idempotency check impossible.
+- [ ] **Step 3 — Verify:** cmd: `bun test scripts/vault-index-structural.test.mjs` | expect: exit 0, 0 failures | retry: 1
+  - **Evidence 2026-10-02:** `81 pass / 0 fail`; full suite `934 pass / 0 fail` across 34 files. A full-corpus dry run over 4,138 files reports **0 nodes with an empty, absolute or traversing `source_file`**, 0 duplicate ids, 0 dangling endpoints, 0 rejected batches — the property that keeps this layer from reproducing the vault's 1,299 ghost nodes.
+  - **Defect found in the parent audit and fixed before merge.** The first version emitted a node for every ATX heading, which on this corpus meant **317,050 heading nodes, 90.5% of them session-transcript tool-call scaffolding** — the 20 most repeated headings in the entire vault are `output` (59,410), `input` (59,385), `reasoning` (33,365), `tool · shell` (30,802) and `assistant text` (15,002). Roughly half the corpus is rendered session transcripts whose heading tree belongs to the *renderer*, not the writer. Merging that would have put 89% noise into the graph and re-created the exact fragmentation this project exists to fix.
+  - The fix filters scaffolding by an **anchored, case-insensitive title match** — whole-title exact set plus start-anchored regexps for `tool · …`, `[seq N] …`, `[prose fenced] …`. Anchoring was measured, not assumed: a substring rule additionally swallows 776 real headings (`user input` 42, `reasoning lenses` 5, `use system …`). Both sets are exported so a caller can read the decision. Measured cost of the rule: **26 real headings filtered against 294,437 kept out.**
+  - A surviving heading nested under a filtered one is **promoted to the nearest ancestor that emitted a node**, not flattened — flattening would make an id depend on how much scaffolding sat above it, so deleting one tool call would renumber everything beneath it. 2,794 headings need promotion. Verified against a reconstructed pre-fix module: **0 ids moved, 0 document ids changed, 0 non-scaffolding headings lost.** None of the original 67 tests needed changing.
+  - Corpus-wide result: 4,138 document nodes + **22,564** heading nodes (down from 317,050), 3,388 `references`, 294,486 skipped. `references` fell by 35 because 114 folded into 149 after promotion; that is the correct direction, since a link that pointed at a `#### output` heading now points at the section that survived.
+  - **Caveat for the merge, recorded here so it is not rediscovered:** the emitted set is heading-heavy by design relative to a code graph, because this corpus is prose. A document-level consumer should filter on the `node_kind` field, which is on every node for that reason.
 
-### Task T8: Merge into the vault graph
+### Task T8: Concept and rationale layer
 
 - **Interfaces:**
-  - Consumes: chunks from T7, merger from T4.
+  - Consumes: the structural chunk from T7, the contract from T6, the batches from T3.
+  - Produces: `vault-index/semantic/batches.json` and, per batch, a chunk of `concept` / `rationale` nodes with `conceptually_related_to` and `rationale_for` edges.
+- **Preconditions (assert FIRST):**
+  - [ ] Upstream: the approval gate is signed, and T7's structural layer is green (else abort: `E_PRECOND_APPROVAL`).
+  - [ ] Input contract: every concept node names a `source_file` that is a real path in the worklist (else abort: `E_PRECOND_INPUT`).
+  - On failure: STOP, record to §8, re-dispatch only the failing batch.
+- **Idempotency Check (BEFORE Step 1):**
+  - [ ] Skip when `skip_if` exits 0 → `SKIPPED-IDEMPOTENT`. This task has no single shell command, so `skip_if` is the sentinel `false` and it reports `NEEDS-AGENT` by design.
+- [ ] **Step 1 — Write the dispatch manifest** to `vault-index/semantic/batches.json` with chunk id, owner, target files, expected output and verification command, and assert no two chunks own the same file.
+- [ ] **Step 2 — Dispatch** narrow subagents in waves. **A batch whose output already exists and passes T1's validator is skipped**, so a multi-session run resumes instead of restarting. Report completed and remaining counts after every wave.
+- [ ] **Step 3 — Verify:** every emitted chunk passes T1's validator, and the count of concepts carrying a resolvable `source_file` is reported rather than assumed.
+
+### Task T9: Merge both layers into the vault graph
+
+- **Interfaces:**
+  - Consumes: the structural chunk from T7, the semantic chunks from T8, the merger from T4.
   - Produces: the vault's `graphify-out/graph.json`, plus `vault-index/manifest.json` recording every indexed file and its content hash.
 - **Preconditions (assert FIRST):**
-  - [ ] Upstream: T7 produced at least one schema-valid chunk per batch (else abort: `E_PRECOND_UPSTREAM`).
-  - [ ] Input contract: the existing `graphify-out/graph.json` is copied to a timestamped backup first, because it is the only record of the 540-file graph and it is gitignored.
-  - On failure: STOP, record to §7, restore the backup.
+  - [ ] Upstream: T7 green and T8 complete (else abort: `E_PRECOND_UPSTREAM`).
+  - [ ] Input contract: the existing `graphify-out/graph.json` and `GRAPH_REPORT.md` are copied to a timestamped backup first, because they are the only record of the 540-file graph and `graphify-out/` is gitignored (else abort: `E_PRECOND_INPUT`).
+  - On failure: STOP, record to §8, restore the backup.
 - **Idempotency Check (BEFORE Step 1):**
   - [ ] Skip when `skip_if` exits 0 → `SKIPPED-IDEMPOTENT`.
 - [ ] **Step 1 — Back up** the current `graph.json` and `GRAPH_REPORT.md`.
-- [ ] **Step 2 — Merge** old nodes, old links and the new chunks into one graph; the 540 already-indexed files are retained rather than re-extracted.
-- [ ] **Step 3 — Verify:** node count is at least the old 6,155, and the count of degree-0 nodes is strictly lower than the old 1,415. A merge that raises the orphan count has failed even at exit 0.
-  - **Known input, measured 2026-10-02:** the previous graph contributes **1,299 nodes that fail T1's validator** (1,269 `source_file: null`, 30 `source_file: ""`). T4 preserves them and reports the count as `previousNodesUnusableSourceFile`, so a graph merged on this history is deliberately not itself a valid chunk. T8 must print that number and must not let it reach zero by deletion — a drop is F7's decision, not a side effect of merging.
+- [ ] **Step 2 — Merge** the old graph, the structural layer and the semantic layers into one. The 540 already-indexed files are retained rather than re-extracted.
+- [ ] **Step 3 — Verify:** node count is at least the old 6,155, and the degree-0 count is strictly lower than the old 1,415. A merge that raises either has failed even at exit 0.
+  - **Known input, measured 2026-10-02:** the previous graph contributes **1,299 nodes that fail T1's validator** (1,269 `source_file: null`, 30 `source_file: ""`). T4 reports them as `previousNodesUnusableSourceFile`. T9 must print that number and must not let it reach zero by deletion — a drop is F7's decision, not a side effect of merging.
 
-### Task T9: Recluster
+### Task T10: Recluster
 
 - **Interfaces:**
-  - Consumes: the merged graph from T8.
+  - Consumes: the merged graph from T9.
   - Produces: communities and names over the merged graph.
 - **Preconditions (assert FIRST):**
-  - [ ] Upstream: T8's orphan count is lower than 1,415 (else abort: `E_PRECOND_UPSTREAM`).
+  - [ ] Upstream: T9's degree-0 count is lower than 1,415 (else abort: `E_PRECOND_UPSTREAM`).
   - [ ] Input contract: `built_at_commit` is the vault's current `HEAD` (else abort: `E_PRECOND_INPUT`).
-  - On failure: STOP, record to §7, keep the unclustered merged graph.
+  - On failure: STOP, record to §8, keep the unclustered merged graph.
 - **Idempotency Check (BEFORE Step 1):**
   - [ ] Skip when `skip_if` exits 0 → `SKIPPED-IDEMPOTENT`.
 - [ ] **Step 1 — Run** `graphify cluster-only` in the vault with `--no-viz`, so graphify's own Leiden pass and hub-based naming produce the communities.
-- [ ] **Step 2 — Record** community size distribution before and after. The pass is expected to change little on its own; the improvement must come from the edges T8 added, and this measurement is what proves that.
-- [ ] **Step 3 — Verify:** median community size is reported, and the degree-0 count is reported separately so a flat median cannot hide a regression.
-
-### Task T10: Prove graphify accepts a hand-authored graph
-
-- **Interfaces:**
-  - Consumes: the reclustered vault graph.
-  - Produces: `scripts/vault-index-verify.mjs` and its test, asserting coverage and queryability.
-- **Preconditions (assert FIRST):**
-  - [ ] Upstream: T9 completed (else abort: `E_PRECOND_UPSTREAM`).
-  - [ ] Input contract: `graphify --version` is 0.9.73, the version the schema was written against (else abort: `E_PRECOND_INPUT`).
-  - On failure: STOP, record to §7.
-- **Idempotency Check (BEFORE Step 1):**
-  - [ ] Skip when `skip_if` exits 0 → `SKIPPED-IDEMPOTENT`.
-- [ ] **Step 1 — Failing Test (RED):** cmd: `bun test scripts/vault-index-verify.test.mjs` | expect: exit 1 | retry: 0
-- [ ] **Step 2 — Implementation (GREEN):** assert that every worklist path is either a `source_file` of some node or in the recorded skip list; assert `graphify query`, `graphify explain` and `graphify path` each exit 0 and return non-empty output; assert no `source_file` falls under an excluded prefix.
-- [ ] **Step 3 — Verify:** cmd: `bun test scripts/vault-index-verify.test.mjs` | expect: exit 0, 0 failures | retry: 1
-- [ ] **Step 4 — Commit:** `git add scripts/vault-index-verify.mjs scripts/vault-index-verify.test.mjs && git commit -m "test: assert vault graph coverage and graphify queryability"`
+- [ ] **Step 2 — Do not pass `--resolution`.** Measured on a copy of the real vault graph at 0.2, 0.5 and 2.0: singleton communities stayed at exactly 1,415 in every case, because 1,415 nodes have no incident edge at all. The parameter cannot move a node that has nothing to cluster with.
+- [ ] **Step 3 — Record** community size distribution before and after, and report the degree-0 count separately so a flat median cannot hide a regression.
 
 ### Task T11: Rewrite both AGENTS.md sections
 
@@ -441,63 +465,54 @@ flowchart LR
   - The live test asserts `current === true`, not `current === false`. A guard asserting the stale state would be green today and red after this very fix — it would freeze the defect rather than detect it. The TDD red comes from writing the test before the implementation, not from pinning the wrong state. This inverts the task's original wording; the implementation chunk raised it and the correction stands.
 - [ ] **Step 4 — Commit:** in ai-skills, `git add AGENTS.md && git commit -m "docs: refresh the graphify section to match the installed block"`. The vault's `AGENTS.md` is committed in the vault repo, separately.
 
-### Task T12: Record the measured corpus gap
+
+### Task T12: Prove graphify accepts a hand-authored graph
 
 - **Interfaces:**
-  - Consumes: the coverage numbers from T8 and T9.
-  - Produces: an updated §4.3 in `docs/graphify-integration.md`.
+  - Consumes: the reclustered vault graph.
+  - Produces: `scripts/vault-index-verify.mjs` and its test.
+- **Preconditions (assert FIRST):**
+  - [ ] Upstream: T10 completed (else abort: `E_PRECOND_UPSTREAM`).
+  - [ ] Input contract: `graphify --version` is 0.9.73, the version the schema was written against (else abort: `E_PRECOND_INPUT`).
+  - On failure: STOP, record to §8.
+- **Idempotency Check (BEFORE Step 1):**
+  - [ ] Skip when `skip_if` exits 0 → `SKIPPED-IDEMPOTENT`.
+- [ ] **Step 1 — Failing Test (RED):** cmd: `bun test scripts/vault-index-verify.test.mjs` | expect: exit 1 | retry: 0
+- [ ] **Step 2 — Implementation (GREEN):** assert every worklist path is either a `source_file` of some node or in the recorded skip list; assert `graphify query`, `graphify explain` and `graphify path` each exit 0 with non-empty output; assert no `source_file` falls under an excluded prefix.
+- [ ] **Step 3 — Verify:** cmd: `bun test scripts/vault-index-verify.test.mjs` | expect: exit 0, 0 failures | retry: 1
+- [ ] **Step 4 — Commit:** `git add scripts/vault-index-verify.mjs scripts/vault-index-verify.test.mjs && git commit -m "test: assert vault graph coverage and graphify queryability"`
+
+### Task T13: Record the measured corpus gap
+
+- **Interfaces:**
+  - Consumes: the coverage numbers from T9 and T10.
+  - Produces: updated §4.3 and §6.4 in `docs/graphify-integration.md`.
 - **Preconditions (assert FIRST):**
   - [ ] Upstream: T10 and T11 both complete (else abort: `E_PRECOND_UPSTREAM`).
   - [ ] Input contract: final coverage numbers exist as measured values, not projections.
-  - On failure: STOP, record to §7.
+  - On failure: STOP, record to §8.
 - **Idempotency Check (BEFORE Step 1):**
   - [ ] Skip when `skip_if` exits 0 → `SKIPPED-IDEMPOTENT`.
-- [ ] **Step 1 — Correct §4.3.** It states the eligible scope as 1,312 files / 11.4 MB / ~2.86 M tokens, measured on 2026-10-01. The current measurement is 2,360 files, because commit `9863c56` added 1,042 conversation exports. State both, dated, so the older number reads as history rather than as a live figure.
-- [ ] **Step 2 — Correct §6.4.** Its conclusion that an AST-only free graph of a markdown vault is "not achievable" was true for the cloud-LLM path and is no longer the whole picture once a local agent is the extraction backend. Keep the original claim and add the subagent path beside it rather than deleting the measurement.
+- [ ] **Step 1 — Correct §4.3.** It states the eligible scope as 1,312 files / 11.4 MB / ~2.86 M tokens, measured 2026-10-01. The current measurement is 2,362, because commit `9863c56` added 1,042 conversation exports. State both, dated, so the older number reads as history rather than a live figure.
+- [ ] **Step 2 — Correct §6.4.** Its conclusion that an AST-only free graph of a markdown vault is "not achievable" was true for the cloud-LLM path and is no longer the whole picture: T7 shows the structural layer needs no model at all, and T8 shows the semantic layer can be run locally by subagents. Keep the original measurement and add the subagent path beside it rather than deleting it.
 - [ ] **Step 3 — Verify:** cmd: `bun scripts/validate-skill.mjs` | expect: exit 0 | retry: 0
 
-### Task T13: Full gate
+### Task T14: Full gate
 
 - **Interfaces:**
   - Consumes: every task above.
   - Produces: green `ci`, green lifecycle audit, and a recorded evidence table.
 - **Preconditions (assert FIRST):**
-  - [ ] Upstream: T12 complete (else abort: `E_PRECOND_UPSTREAM`).
+  - [ ] Upstream: T13 complete (else abort: `E_PRECOND_UPSTREAM`).
   - [ ] Input contract: the working tree contains no unrelated user changes staged by this plan.
-  - On failure: STOP, record to §7.
+  - On failure: STOP, record to §8.
 - **Idempotency Check (BEFORE Step 1):**
   - [ ] Skip when `skip_if` exits 0 → `SKIPPED-IDEMPOTENT`.
 - [ ] **Step 1 — Tests:** cmd: `bun test scripts/` | expect: exit 0, 0 failures | retry: 1
 - [ ] **Step 2 — Lifecycle audit:** cmd: `bun scripts/plan-lifecycle-audit.mjs` | expect: exit 0 | retry: 0
 - [ ] **Step 3 — Full gate:** cmd: `bun run ci` | expect: exit 0 | retry: 0
-- [ ] **Step 4 — Commit** any remaining changes and finish with `git status`.
+- [ ] **Step 4 — Commit** any remaining changes, remove temporary files, and finish with `git status`.
 
-## 6. Corpus Scope, Measured
-
-Recorded rather than estimated, because the number is what makes T7 schedulable.
-
-| Set | Files | Size | Est. tokens | Disposition |
-|---|---|---|---|---|
-| Already indexed | 540 | — | — | retained by T8, not re-extracted |
-| Curated notes (`03 - Resources/`, `01 - Projects/`, `90 - System/`) | 780 | 2.9 MB | ~0.8 M | indexed by T7 |
-| `05 - Conversations/` | 1,042 | 300.9 MB | ~86 M | **indexed by T7 — decided at the gate** |
-| Excluded by `.graphifyignore` | 822 | 13.7 MB (`Satset/` alone is 522) | — | never indexed, permanently |
-
-**Worklist measured through `graphify.detect` and T2's `scan()`: 1,822 files, 307.1 MB.** (The draft said 1,821; T2 measured 1,822 because the `paper` bucket holds one file that a `document`-only count misses. The invariant asserted in T2's test is `eligible === indexed + worklist`, not a magic constant.)
-
-Packing by byte budget, measured by running T3's `batch()` over that real worklist:
-
-| Per-subagent budget | Batches | Avg files per batch |
-|---|---|---|
-| 400 KB (draft estimate) | 546 | 3.3 |
-| 800 KB (draft estimate) | 334 | 5.5 |
-| **800 KB (T3 first-fit, measured)** | **283** | **6.4** |
-
-T3 packs tighter than the draft's greedy simulation because it is first-fit rather than next-fit: 97% of the corpus is small notes that refill the holes a next-fit pass abandons. Measured on the real worklist, 65 files exceed the budget and each correctly becomes its own flagged batch, **0 normal batches exceed the budget**, and the whole plan is computed in 16 ms — so a resumed session recomputes it in milliseconds rather than reading a cache.
-
-**283 dispatches is a multi-session run.** At 10–20 concurrent subagents that is roughly 15–20 waves, so T7 is built to be resumable: a batch whose chunk file already exists and validates is skipped, and `vault-index/manifest.json` records every completed batch. A session boundary costs the remaining batches, not the whole run. This is stated here rather than discovered halfway through, because the draft's "ten narrow subagents" framing was written before the 1,042 transcripts were in scope, and it no longer describes the work.
-
-**Why the conversation corpus is still worth indexing despite the token cost.** It is 99% of the volume, and its durable conclusions are already captured in `docs/code-plan/plans/` and mirrored into `01 - Projects/`. What the transcripts add that the plans do not is the reasoning that did not survive into a plan: discarded alternatives, failed approaches, and the corrections that reversed an earlier decision. That is the layer a knowledge graph is for, and it is exactly the layer a future session cannot reconstruct from the plan files alone.
 
 ## 7. Verification Matrix Before Completion
 
@@ -535,7 +550,7 @@ Known pre-existing state, recorded so it is not misread as caused by this plan: 
 
 ## 9. Human Approval Gate
 
-- [x] Approved 2026-10-02. Scope: run T1–T5 and T11 first; T7's 283-batch corpus run is authorised but sequenced after the tooling is proven.
+- [x] Approved 2026-10-02. Scope: T1–T5 and T11 complete. T7 was split from T8 on 2026-10-02 after a 200-note sample showed the structural layer needs no model; T8 keeps the concept and rationale layer.
 - [x] `05 - Conversations/` decision: index the whole eligible corpus, 1,822 files, 307.1 MB. Recorded in §6 with its real cost.
 
 ## 10. Session-Close Debt Sweep & Follow-Up Backlog

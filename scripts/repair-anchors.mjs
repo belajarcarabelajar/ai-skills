@@ -23,6 +23,7 @@
 //   ./scripts/repair-anchors.mjs --survey            tier counts, no writes
 //   ./scripts/repair-anchors.mjs --tier 1 --apply    rewrite line numbers
 //   ./scripts/repair-anchors.mjs --chunk 037 --apply one chunk, any tier
+//   ./scripts/repair-anchors.mjs --list T4 --chunk 037   the T4 worklist
 import fs from 'node:fs';
 import path from 'node:path';
 import { parseAnchors, resolveFile, paddingRanges } from './check-anchors.mjs';
@@ -213,14 +214,14 @@ export function planChunk(name) {
         const loc = mLoc ? Number(mLoc[1]) : null;
         const locOk = loc && loc >= 1 && loc <= L.length && !inPad(f, loc);
         if (!locOk) {
-          out.push({ node: n.id, idx: i, k, tier: 'T4', from: a.line, quoted, why: 'no usable source_location' });
+          out.push({ node: n.id, idx: i, k, tier: 'T4', from: a.line, file: a.file, quoted, why: 'no usable source_location' });
           continue;
         }
         const site = paraphraseSite(L[loc - 1], quoted);
         if (site) {
           out.push({ node: n.id, idx: i, k, tier: 'T3', to: loc, from: a.line, file: a.file, quoted, span: site.span, score: site.score });
         } else {
-          out.push({ node: n.id, idx: i, k, tier: 'T4', from: a.line, quoted, why: 'quote absent and source_location does not carry the words either' });
+          out.push({ node: n.id, idx: i, k, tier: 'T4', from: a.line, file: a.file, quoted, why: 'quote absent and source_location does not carry the words either' });
         }
       }
     }
@@ -371,10 +372,22 @@ const tiers = argv.reduce((acc, v, i) => (v === '--tier' ? [...acc, argv[i + 1]]
 
 const tally = { T1: 0, T2: 0, T3: 0, T4: 0 };
 let changedChunks = 0, changedAnchors = 0;
+const listing = argv.includes('--list');
 for (const name of chunkIds(argv)) {
   let { chunk, plans } = planChunk(name);
   if (!plans.length) continue;
   for (const p of plans) tally[p.tier]++;
+  if (listing) {
+    const only = argv.includes('--list') ? argv[argv.indexOf('--list') + 1] : null;
+    for (const p of plans) {
+      if (only && p.tier !== only) continue;
+      console.log(JSON.stringify({
+        tier: p.tier, node: p.node, why: p.why ?? null,
+        file: p.file ?? null, from: p.from ?? null, to: p.to ?? null,
+        quoted: (p.quoted ?? '').slice(0, 300),
+      }));
+    }
+  }
   if (!apply) continue;
   const todo = plans.filter((p) => (tiers.length ? tiers : ["T1","T2"]).includes(p.tier) && p.to != null);
   if (!todo.length) continue;
@@ -384,10 +397,12 @@ for (const name of chunkIds(argv)) {
     changedChunks++; changedAnchors += c;
   }
 }
+if (!listing) {
 console.log(`T1 line-number fix      ${tally.T1}`);
 console.log(`T2 two-line wrap split  ${tally.T2}`);
 console.log(`T3 replace quote words  ${tally.T3}   (needs a slice decision, not automated)`);
 console.log(`T4 no verifiable line   ${tally.T4}   (left alone)`);
 if (apply) console.log(`\napplied ${changedAnchors} rewrites across ${changedChunks} chunks — re-run check-anchors.mjs --all`);
 else console.log('\nsurvey only; pass --apply with --tier to write');
+}
 }

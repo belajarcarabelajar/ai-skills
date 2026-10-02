@@ -1,0 +1,203 @@
+{
+  "batch": "rem-105",
+  "nodes": [
+    {
+      "id": "concept--kglobalaccel-keys-vs-defaultkeys",
+      "label": "KGlobalAccel keys vs defaultKeys",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md",
+      "source_location": "L483",
+      "norm_label": "kglobalaccel keys vs defaultkeys",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md:L483] Per AGENTS.md rule 7, field 1 of a KGlobalAccel component is `keys` and field 2 is `defaultKeys`; all 18 orphan entries have `keys=none`, so the orphan component holds no live key sequence at all",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md:L426] Under misattribution the sync reads the inert `org.kde.konsole` component whose live field is `none` and whose only populated field is `defaultKeys`, so KGlobalAccel defaults land in the database"
+      ]
+    },
+    {
+      "id": "concept--orphan-kglobalaccel-component",
+      "label": "Orphan KGlobalAccel component org.kde.konsole",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md",
+      "source_location": "L480",
+      "norm_label": "orphan kglobalaccel component org.kde.konsole",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md:L487] The orphan's stored `defaultKeys` are a stale set that collides with the live active keys of `snipset_desktop`, so if the orphan were ever reactivated it would contend for keys the real component already holds; that concrete hazard is why cleanup is worth doing even while the orphan is inert"
+      ]
+    },
+    {
+      "id": "concept--foreign-live-binding-ownership-gate",
+      "label": "Foreign live binding ownership gate on preference sync",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md",
+      "source_location": "L5729",
+      "norm_label": "foreign live binding ownership gate on preference sync",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md:L5729] A live binding reaches a write only if `owner_of` returns `Snipset` or `Unobservable`; `Foreign(c)` and `Unowned` are both refused and reported",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md:L5731] The gate sits before the pending-push comparisons, not just before `store`: a `confirmed` push means the desktop agreed with what Snipset stored, and a foreign component saying so means nothing, so letting it through would let a coincidental match clear the record of what the user asked for",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md:L2411] Blocking adoption for every binding would kill the whole feature and violate the hard requirement that a genuine same-application external edit must still be adopted, so the guard activates only when ownership data exists"
+      ]
+    },
+    {
+      "id": "concept--unobservable-is-distinct-from-unowned",
+      "label": "Unobservable ownership is a distinct variant from Unowned",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md",
+      "source_location": "L5729",
+      "norm_label": "unobservable ownership is a distinct variant from unowned",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md:L5729] Keeping `Unowned` and `Unobservable` as distinct variants rather than one empty map makes \"never populated\" representable, so an observable session with a missing id is reported while a session that could not observe ownership keeps today's behavior; collapsing them would let the ambiguous case silently disable the guard, which is the same class of bug as the original",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md:L2414] `Ownership::Unobservable` is session-level: the portal gave nothing to reason about, so policy keeps today's adoption behavior, which is the documented deferral and preserves requirement 3 today"
+      ]
+    },
+    {
+      "id": "concept--ashpd-shortcut-exposes-no-component-ownership",
+      "label": "ashpd Shortcut carries no component ownership field",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md",
+      "source_location": "L5737",
+      "norm_label": "ashpd shortcut carries no component ownership field",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md:L5737] Checked against `ashpd 0.13.13`: `Shortcut` exposes only `id()`, `description()` and `trigger_description()`. There is no ownership field, which is what confirms the deferral is required rather than optional",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md:L2805] Ownership is therefore an injected input rather than something the module reads, and the refusal policy applies because both a foreign attribution and an unattributed binding can be an inert foreign component the portal session was misattributed to"
+      ]
+    },
+    {
+      "id": "concept--registry-component-name-is-not-the-portal-app-id",
+      "label": "KGlobalAccel registry component name is not the portal app id",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md",
+      "source_location": "L4676",
+      "norm_label": "kglobalaccel registry component name is not the portal app id",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md:L4676] The registry component name `snipset_desktop` uses underscores and is not the hyphenated portal application id the session is created with; conflating the two is how a session ends up reading another application's bindings in the first place"
+      ]
+    },
+    {
+      "id": "concept--zero-subagent-compiler-policy",
+      "label": "Zero subagent compiler policy",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md",
+      "source_location": "L5716",
+      "norm_label": "zero subagent compiler policy",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t3-refuse-foreign-bindings [ses_f1d2226bbffehuFBkHUHP1DMjy].md:L5716] No build or test command was run for this task, per the hard prohibition; the code was verified by reading and review only, leaving the unverified-compile risk stated explicitly rather than resolved locally"
+      ]
+    },
+    {
+      "id": "concept--target-selected-runtime-identity",
+      "label": "Target-selected runtime identity",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t6-rust-runtime-version-identity [ses_f1da1a2baffeiKZVdRe4DoS4Cz].md",
+      "source_location": "L3289",
+      "norm_label": "target-selected runtime identity",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t6-rust-runtime-version-identity [ses_f1da1a2baffeiKZVdRe4DoS4Cz].md:L3289] build.rs reads the version authority of the compile target (`CARGO_CFG_TARGET_OS`) and exports it as `SNIPSET_APP_VERSION`, so a Windows build reports the Windows number and a Linux build the Linux one even when both come from the same commit",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t6-rust-runtime-version-identity [ses_f1da1a2baffeiKZVdRe4DoS4Cz].md:L3144] The key is the compile target and never the build host OS, because a Linux CI runner cross-compiling for Windows must pick the Windows number or the installer would report the wrong release"
+      ]
+    },
+    {
+      "id": "concept--app-owned-versus-schema-version-uses",
+      "label": "App-owned versus schema-owned version constants",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t6-rust-runtime-version-identity [ses_f1da1a2baffeiKZVdRe4DoS4Cz].md",
+      "source_location": "L10229",
+      "norm_label": "app-owned versus schema-owned version constants",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t6-rust-runtime-version-identity [ses_f1da1a2baffeiKZVdRe4DoS4Cz].md:L10229] The backup file format version `version: \"2.0\"` is kept unchanged as a schema version consumed by restore and must never track the release number; a wrongly replaced schema version is a data-compatibility bug",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t6-rust-runtime-version-identity [ses_f1da1a2baffeiKZVdRe4DoS4Cz].md:L78] When in doubt, leave a CARGO_PKG_VERSION use alone and report it, because the app-owned versus not-app-owned distinction is the highest-risk part of the migration"
+      ]
+    },
+    {
+      "id": "concept--fail-closed-version-authority-in-build-script",
+      "label": "Build script fails closed on a missing or malformed version authority",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t6-rust-runtime-version-identity [ses_f1da1a2baffeiKZVdRe4DoS4Cz].md",
+      "source_location": "L3205",
+      "norm_label": "fail-closed version authority in build script",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t6-rust-runtime-version-identity [ses_f1da1a2baffeiKZVdRe4DoS4Cz].md:L3205] A missing or malformed authority panics the build with a distinct message rather than resolving quietly to some other number, so each failure mode (unreadable file, invalid JSON, absent or non-string version, invalid release shape) is reported instead of defaulted",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t6-rust-runtime-version-identity [ses_f1da1a2baffeiKZVdRe4DoS4Cz].md:L226] Platform-owned authorities deliberately have no fallback to the root package.json version or the latest.json aggregate, because those identify shared tooling and a legacy compatibility view, not a release authority"
+      ]
+    },
+    {
+      "id": "concept--rerun-if-changed-disables-the-default-rebuild-heuristic",
+      "label": "Emitting rerun-if-changed disables Cargo's default rebuild heuristic",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t6-rust-runtime-version-identity [ses_f1da1a2baffeiKZVdRe4DoS4Cz].md",
+      "source_location": "L6526",
+      "norm_label": "emitting rerun-if-changed disables cargo's default rebuild heuristic",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t6-rust-runtime-version-identity [ses_f1da1a2baffeiKZVdRe4DoS4Cz].md:L6526] Emitting any `cargo:rerun-if-changed` at all disables the default rerun-if-anything-changed behaviour, so the build script emits a directive for every authority it could read rather than only the selected one, and tauri-build's own config directives cover the rest"
+      ]
+    },
+    {
+      "id": "concept--static-source-test-is-not-compilation-evidence",
+      "label": "A static source-reading test is not compilation evidence",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t6-rust-runtime-version-identity [ses_f1da1a2baffeiKZVdRe4DoS4Cz].md",
+      "source_location": "L10165",
+      "norm_label": "a static source-reading test is not compilation evidence",
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t6-rust-runtime-version-identity [ses_f1da1a2baffeiKZVdRe4DoS4Cz].md:L10165] The green run of the vitest suite is static evidence, not compilation evidence: a JS test cannot compile Rust, so the exact cargo commands the parent must run are handed over as the real gate",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t6-rust-runtime-version-identity [ses_f1da1a2baffeiKZVdRe4DoS4Cz].md:L10281] The Android authority is deliberately not read by build.rs because per design Android keeps using its own native BuildConfig, and the prompt's path arithmetic for it was off by one directory, so the question is moot",
+        "[05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - t6-rust-runtime-version-identity [ses_f1da1a2baffeiKZVdRe4DoS4Cz].md:LL00081] The test is described as a static contract test in the script-vitest suite that asserts the structural contract by reading source files, with an instruction to be honest in the report that it is static evidence rather than compilation evidence"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "source": "concept--kglobalaccel-keys-vs-defaultkeys",
+      "target": "concept--foreign-live-binding-ownership-gate",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--orphan-kglobalaccel-component",
+      "target": "concept--foreign-live-binding-ownership-gate",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--registry-component-name-is-not-the-portal-app-id",
+      "target": "concept--foreign-live-binding-ownership-gate",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--ashpd-shortcut-exposes-no-component-ownership",
+      "target": "concept--unobservable-is-distinct-from-unowned",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--target-selected-runtime-identity",
+      "target": "concept--app-owned-versus-schema-version-uses",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--fail-closed-version-authority-in-build-script",
+      "target": "concept--target-selected-runtime-identity",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--rerun-if-changed-disables-the-default-rebuild-heuristic",
+      "target": "concept--target-selected-runtime-identity",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--static-source-test-is-not-compilation-evidence",
+      "target": "concept--zero-subagent-compiler-policy",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--static-source-test-is-not-compilation-evidence",
+      "target": "concept--app-owned-versus-schema-version-uses",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    }
+  ]
+}

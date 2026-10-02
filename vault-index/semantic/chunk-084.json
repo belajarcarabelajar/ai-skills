@@ -1,0 +1,456 @@
+{
+  "batch": "batch-084",
+  "nodes": [
+    {
+      "id": "concept--n8n-user-folder-env-var-override",
+      "label": "n8n user folder environment variable override",
+      "file_type": "concept",
+      "source_file": "03 - Resources/Sources/Raw Captures/N8n/Configuration - General/Specify user folder path.md",
+      "source_location": "L11",
+      "norm_label": "n8n user folder environment variable override"
+    },
+    {
+      "id": "concept--error-code-registry",
+      "label": "ErrorCode registry in error_codes.rs",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f2-retire-ok-or-sentinel [ses_f209be6e9ffeUzsjifu9sv5v3j].md",
+      "source_location": "L31",
+      "norm_label": "errorcode registry in error_codes.rs"
+    },
+    {
+      "id": "concept--byte-identical-english-fallback",
+      "label": "byte-identical English fallback",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f2-retire-ok-or-sentinel [ses_f209be6e9ffeUzsjifu9sv5v3j].md",
+      "source_location": "L52",
+      "norm_label": "byte-identical english fallback"
+    },
+    {
+      "id": "concept--database-not-initialized-wire-code",
+      "label": "database.not_initialized wire code",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f2-retire-ok-or-sentinel [ses_f209be6e9ffeUzsjifu9sv5v3j].md",
+      "source_location": "L11324",
+      "norm_label": "database.not_initialized wire code"
+    },
+    {
+      "id": "concept--ok-or-else-lazy-error-construction",
+      "label": "ok_or_else lazy error construction",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f2-retire-ok-or-sentinel [ses_f209be6e9ffeUzsjifu9sv5v3j].md",
+      "source_location": "L11328",
+      "norm_label": "ok_or_else lazy error construction"
+    },
+    {
+      "id": "concept--include-str-retired-literal-guard",
+      "label": "include_str! retired-literal guard",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f2-retire-ok-or-sentinel [ses_f209be6e9ffeUzsjifu9sv5v3j].md",
+      "source_location": "L1830",
+      "norm_label": "include_str! retired-literal guard"
+    },
+    {
+      "id": "concept--rustfmt-use-segment-ordering",
+      "label": "rustfmt use-segment ordering",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f2-retire-ok-or-sentinel [ses_f209be6e9ffeUzsjifu9sv5v3j].md",
+      "source_location": "L5472",
+      "norm_label": "rustfmt use-segment ordering"
+    },
+    {
+      "id": "concept--frontend-error-dictionary-parity",
+      "label": "frontend error dictionary parity",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f2-retire-ok-or-sentinel [ses_f209be6e9ffeUzsjifu9sv5v3j].md",
+      "source_location": "L11343",
+      "norm_label": "frontend error dictionary parity"
+    },
+    {
+      "id": "rationale--sentinel-retirement-collapses-sites",
+      "label": "retiring the sentinel collapses 210 sites to one code",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f2-retire-ok-or-sentinel [ses_f209be6e9ffeUzsjifu9sv5v3j].md",
+      "source_location": "L33",
+      "norm_label": "retiring the sentinel collapses 210 sites to one code",
+      "statement": "Retiring the sentinel to a registered error code is the fix: it collapses 210 sites to one code, and it makes the rest of that arm worth scanning."
+    },
+    {
+      "id": "rationale--no-user-visible-string-may-change",
+      "label": "no user-visible string may change",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f2-retire-ok-or-sentinel [ses_f209be6e9ffeUzsjifu9sv5v3j].md",
+      "source_location": "L52",
+      "norm_label": "no user-visible string may change",
+      "statement": "No user-visible string may change. The english fallback must be byte-identical."
+    },
+    {
+      "id": "rationale--domain-not-subsystem",
+      "label": "the wire domain is database, not a subsystem",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f2-retire-ok-or-sentinel [ses_f209be6e9ffeUzsjifu9sv5v3j].md",
+      "source_location": "L11324",
+      "norm_label": "the wire domain is database, not a subsystem",
+      "statement": "The domain is database, not a subsystem, because the same DB mutex is missing for clipboard, snippets, notes, chat, speech, analytics, gamification, Vault, LAN transfer and tasks. Reusing the existing notes.database_not_initialized was rejected: it is a notes-only cold-start race with its own retry wording, so reuse would have changed a user-visible string and misattributed the subsystem."
+    },
+    {
+      "id": "rationale--lazy-allocation-on-success-path",
+      "label": "ok_or_else keeps the success path allocation-free",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f2-retire-ok-or-sentinel [ses_f209be6e9ffeUzsjifu9sv5v3j].md",
+      "source_location": "L11328",
+      "norm_label": "ok_or_else keeps the success path allocation-free",
+      "statement": "ok_or(\"...\") became ok_or_else(|| DATABASE_NOT_INITIALIZED.english.to_string()) because ok_or evaluates eagerly and would allocate even on success; laziness is preserved and the &str to String conversion keeps the error type identical, so no signature or error type changed."
+    },
+    {
+      "id": "rationale--assertions-legitimately-spell-the-text",
+      "label": "test assertions legitimately spell out the expected text",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f2-retire-ok-or-sentinel [ses_f209be6e9ffeUzsjifu9sv5v3j].md",
+      "source_location": "L2049",
+      "norm_label": "test assertions legitimately spell out the expected text",
+      "statement": "Only the exact returned-or-collected call shapes are banned, because test assertions legitimately still spell the expected text out; banning the bare literal would fail on assertions that are correct."
+    },
+    {
+      "id": "rationale--repo-convention-locals-before-external",
+      "label": "the repo convention puts local imports before external crates",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f2-retire-ok-or-sentinel [ses_f209be6e9ffeUzsjifu9sv5v3j].md",
+      "source_location": "L5449",
+      "norm_label": "the repo convention puts local imports before external crates",
+      "statement": "A survey of pre-existing import blocks found 105 put super/crate before external crates and only 3 did the opposite, and those 3 were exactly the files this sweep had just touched, so the dominant convention is local-first."
+    },
+    {
+      "id": "rationale--parent-owns-frontend-dictionaries",
+      "label": "the parent owns the frontend dictionaries",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - f2-retire-ok-or-sentinel [ses_f209be6e9ffeUzsjifu9sv5v3j].md",
+      "source_location": "L11343",
+      "norm_label": "the parent owns the frontend dictionaries",
+      "statement": "every_code_is_covered_by_both_frontend_dictionaries will fail until both keys exist; the dictionaries are not this chunk's scope, so the chunk reported the exact wire string and english value and left the edit to the parent."
+    },
+    {
+      "id": "concept--plan-mirror-contract-test",
+      "label": "plan mirror contract test",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t9-vault-mirror-contract-test [ses_f21a1c467ffeZtDCHHZUzTrC7i].md",
+      "source_location": "L36",
+      "norm_label": "plan mirror contract test"
+    },
+    {
+      "id": "concept--pinned-vault-frontmatter-vocabulary",
+      "label": "pinned vault frontmatter vocabulary",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t9-vault-mirror-contract-test [ses_f21a1c467ffeZtDCHHZUzTrC7i].md",
+      "source_location": "L39",
+      "norm_label": "pinned vault frontmatter vocabulary"
+    },
+    {
+      "id": "concept--source-hash-twelve-lowercase-hex",
+      "label": "source_hash as 12 lowercase hex characters",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t9-vault-mirror-contract-test [ses_f21a1c467ffeZtDCHHZUzTrC7i].md",
+      "source_location": "L41",
+      "norm_label": "source_hash as 12 lowercase hex characters"
+    },
+    {
+      "id": "concept--raw-frontmatter-related-link-reader",
+      "label": "raw-frontmatter related-link reader",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t9-vault-mirror-contract-test [ses_f21a1c467ffeZtDCHHZUzTrC7i].md",
+      "source_location": "L2305",
+      "norm_label": "raw-frontmatter related-link reader"
+    },
+    {
+      "id": "concept--wikilink-ambiguity-as-unresolved",
+      "label": "wikilink ambiguity treated as unresolved",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t9-vault-mirror-contract-test [ses_f21a1c467ffeZtDCHHZUzTrC7i].md",
+      "source_location": "L1259",
+      "norm_label": "wikilink ambiguity treated as unresolved"
+    },
+    {
+      "id": "concept--source-path-ancestor-resolution",
+      "label": "source_path ancestor resolution",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t9-vault-mirror-contract-test [ses_f21a1c467ffeZtDCHHZUzTrC7i].md",
+      "source_location": "L2307",
+      "norm_label": "source_path ancestor resolution"
+    },
+    {
+      "id": "concept--external-teeth-check",
+      "label": "external teeth-check against broken fixtures",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t9-vault-mirror-contract-test [ses_f21a1c467ffeZtDCHHZUzTrC7i].md",
+      "source_location": "L59",
+      "norm_label": "external teeth-check against broken fixtures"
+    },
+    {
+      "id": "concept--skip-with-stated-reason",
+      "label": "skip-with-a-stated-reason",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t9-vault-mirror-contract-test [ses_f21a1c467ffeZtDCHHZUzTrC7i].md",
+      "source_location": "L43",
+      "norm_label": "skip-with-a-stated-reason"
+    },
+    {
+      "id": "rationale--required-related-is-a-contract-violation",
+      "label": "requiring related turns a silent contract violation into a failure",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t9-vault-mirror-contract-test [ses_f21a1c467ffeZtDCHHZUzTrC7i].md",
+      "source_location": "L47",
+      "norm_label": "requiring related turns a silent contract violation into a failure",
+      "statement": "The vault's Page Contract requires every active page to have at least one meaningful related page, and the publisher omits related only when a project's index file is missing, so requiring it converts a silent contract violation into a test failure. An earlier draft omitted related and would have let a mirror pass while violating the vault's own contract."
+    },
+    {
+      "id": "rationale--pinning-stops-invented-values",
+      "label": "pinning type and para stops invented vocabulary",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t9-vault-mirror-contract-test [ses_f21a1c467ffeZtDCHHZUzTrC7i].md",
+      "source_location": "L39",
+      "norm_label": "pinning type and para stops invented vocabulary",
+      "statement": "Pinning type to note and para to project is what stops a future edit from inventing type: plan or reverting to para: projects; the two values are the measured vocabulary across 2757 vault files."
+    },
+    {
+      "id": "rationale--block-style-related-unparseable",
+      "label": "block-style related is unparseable from the frontmatter dict",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t9-vault-mirror-contract-test [ses_f21a1c467ffeZtDCHHZUzTrC7i].md",
+      "source_location": "L2305",
+      "norm_label": "block-style related is unparseable from the frontmatter dict",
+      "statement": "related in block style parses to an empty string via vault_lint.parse_frontmatter because list items have no colon; presence still works, so at-least-one-related-link cannot be checked from the parsed dict and needs the raw-frontmatter helper."
+    },
+    {
+      "id": "rationale--ambiguity-matches-the-linter",
+      "label": "ambiguity stays unresolved because the linter agrees",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t9-vault-mirror-contract-test [ses_f21a1c467ffeZtDCHHZUzTrC7i].md",
+      "source_location": "L2301",
+      "norm_label": "ambiguity stays unresolved because the linter agrees",
+      "statement": "vault_lint refuses to resolve a multi-candidate stem and leaves it in unresolved_targets, so the mirror test keeps that semantics; the publisher must emit fully qualified links, because Obsidian would guess too."
+    },
+    {
+      "id": "rationale--ancestor-walk-covers-a-sibling-repo",
+      "label": "the ancestor walk resolves a repo-relative source_path",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t9-vault-mirror-contract-test [ses_f21a1c467ffeZtDCHHZUzTrC7i].md",
+      "source_location": "L2307",
+      "norm_label": "the ancestor walk resolves a repo-relative source_path",
+      "statement": "source_path is resolved tolerantly as absolute, ~, or relative to the note or vault or any ancestor of either; that ancestor walk is what makes a repo-relative docs/code-plan/plans/x.md resolve when the repo is a sibling of the vault, while garbage still resolves nowhere and fails."
+    },
+    {
+      "id": "rationale--glob-scoped-to-project-plans",
+      "label": "the discovery glob is scoped to project plans only",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t9-vault-mirror-contract-test [ses_f21a1c467ffeZtDCHHZUzTrC7i].md",
+      "source_location": "L2303",
+      "norm_label": "the discovery glob is scoped to project plans only",
+      "statement": "The glob 01 - Projects/*/plans/*.md does not match the six existing plans at 01 - Projects/*/docs/code-plan/plans/*.md, so those are correctly out of scope; a publisher copying the repo's own docs/code-plan/plans layout would land in the wrong place and be silently untested."
+    },
+    {
+      "id": "rationale--teeth-check-is-required-evidence",
+      "label": "a suite that only ever skips is indistinguishable from a broken one",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t9-vault-mirror-contract-test [ses_f21a1c467ffeZtDCHHZUzTrC7i].md",
+      "source_location": "L2311",
+      "norm_label": "a suite that only ever skips is indistinguishable from a broken one",
+      "statement": "A test that fails because a feature has not shipped is a broken test, so skip-with-a-stated-reason is right; but a suite that only ever skips is indistinguishable from a broken one, which is why three always-active tests exist and why the external teeth-check is the primary evidence the skipping assertions have teeth."
+    },
+    {
+      "id": "rationale--unshipped-feature-is-a-broken-test",
+      "label": "failing because a feature has not shipped makes a broken test",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-26 - t9-vault-mirror-contract-test [ses_f21a1c467ffeZtDCHHZUzTrC7i].md",
+      "source_location": "L43",
+      "norm_label": "failing because a feature has not shipped makes a broken test",
+      "statement": "01 - Projects/*/plans/ does not exist yet, so the suite must not fail and must not error on a missing directory; it should skip and say so, because a test that fails merely because the feature has not shipped is a broken test."
+    }
+  ],
+  "links": [
+    {
+      "source": "rationale--sentinel-retirement-collapses-sites",
+      "target": "concept--error-code-registry",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--no-user-visible-string-may-change",
+      "target": "concept--byte-identical-english-fallback",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--domain-not-subsystem",
+      "target": "concept--database-not-initialized-wire-code",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--lazy-allocation-on-success-path",
+      "target": "concept--ok-or-else-lazy-error-construction",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--assertions-legitimately-spell-the-text",
+      "target": "concept--include-str-retired-literal-guard",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--repo-convention-locals-before-external",
+      "target": "concept--rustfmt-use-segment-ordering",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--parent-owns-frontend-dictionaries",
+      "target": "concept--frontend-error-dictionary-parity",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--error-code-registry",
+      "target": "concept--byte-identical-english-fallback",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--error-code-registry",
+      "target": "concept--database-not-initialized-wire-code",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--error-code-registry",
+      "target": "concept--frontend-error-dictionary-parity",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--error-code-registry",
+      "target": "concept--rustfmt-use-segment-ordering",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--ok-or-else-lazy-error-construction",
+      "target": "concept--byte-identical-english-fallback",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--include-str-retired-literal-guard",
+      "target": "concept--byte-identical-english-fallback",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--include-str-retired-literal-guard",
+      "target": "concept--database-not-initialized-wire-code",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--required-related-is-a-contract-violation",
+      "target": "concept--plan-mirror-contract-test",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--pinning-stops-invented-values",
+      "target": "concept--pinned-vault-frontmatter-vocabulary",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--block-style-related-unparseable",
+      "target": "concept--raw-frontmatter-related-link-reader",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--ambiguity-matches-the-linter",
+      "target": "concept--wikilink-ambiguity-as-unresolved",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--ancestor-walk-covers-a-sibling-repo",
+      "target": "concept--source-path-ancestor-resolution",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--glob-scoped-to-project-plans",
+      "target": "concept--plan-mirror-contract-test",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--teeth-check-is-required-evidence",
+      "target": "concept--external-teeth-check",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--unshipped-feature-is-a-broken-test",
+      "target": "concept--skip-with-stated-reason",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--plan-mirror-contract-test",
+      "target": "concept--pinned-vault-frontmatter-vocabulary",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--plan-mirror-contract-test",
+      "target": "concept--source-hash-twelve-lowercase-hex",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--plan-mirror-contract-test",
+      "target": "concept--source-path-ancestor-resolution",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--plan-mirror-contract-test",
+      "target": "concept--raw-frontmatter-related-link-reader",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--plan-mirror-contract-test",
+      "target": "concept--wikilink-ambiguity-as-unresolved",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--plan-mirror-contract-test",
+      "target": "concept--skip-with-stated-reason",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--external-teeth-check",
+      "target": "concept--skip-with-stated-reason",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--raw-frontmatter-related-link-reader",
+      "target": "concept--pinned-vault-frontmatter-vocabulary",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--source-path-ancestor-resolution",
+      "target": "concept--wikilink-ambiguity-as-unresolved",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    }
+  ]
+}

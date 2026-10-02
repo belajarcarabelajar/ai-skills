@@ -1,0 +1,377 @@
+{
+  "batch_id": "rem-004",
+  "nodes": [
+    {
+      "id": "concept--search-console-service-account-audit",
+      "label": "Search Console service-account audit",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
+      "source_location": "L1398",
+      "norm_label": "search console service account audit"
+    },
+    {
+      "id": "concept--sops-encrypted-secret-store",
+      "label": "SOPS-encrypted secret store",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
+      "source_location": "L2031",
+      "norm_label": "sops encrypted secret store"
+    },
+    {
+      "id": "concept--seo-audit-fan-out-architecture",
+      "label": "SEO audit fan-out architecture",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
+      "source_location": "L15130",
+      "norm_label": "seo audit fan out architecture"
+    },
+    {
+      "id": "concept--url-inspection-quota",
+      "label": "URL Inspection API quota",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
+      "source_location": "L15114",
+      "norm_label": "url inspection api quota"
+    },
+    {
+      "id": "concept--indexing-api-unsupported-use",
+      "label": "Indexing API unsupported use",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
+      "source_location": "L15115",
+      "norm_label": "indexing api unsupported use"
+    },
+    {
+      "id": "concept--core-web-vitals-75th-percentile",
+      "label": "Core Web Vitals 75th percentile",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
+      "source_location": "L15116",
+      "norm_label": "core web vitals 75th percentile"
+    },
+    {
+      "id": "concept--positive-control-for-extractors",
+      "label": "Positive control for extractors",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
+      "source_location": "L15122",
+      "norm_label": "positive control for extractors"
+    },
+    {
+      "id": "concept--derived-test-contracts",
+      "label": "Derived test contracts",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
+      "source_location": "L14558",
+      "norm_label": "derived test contracts"
+    },
+    {
+      "id": "concept--plan-publish-registry-prefix-routing",
+      "label": "Plan publish registry prefix routing",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
+      "source_location": "L30942",
+      "norm_label": "plan publish registry prefix routing"
+    },
+    {
+      "id": "concept--worktree-routing-enumeration-asymmetry",
+      "label": "Worktree routing-enumeration asymmetry",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
+      "source_location": "L33020",
+      "norm_label": "worktree routing enumeration asymmetry"
+    },
+    {
+      "id": "concept--lcp-preload-cache-key-duplication",
+      "label": "LCP preload cache-key duplication",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
+      "source_location": "L40215",
+      "norm_label": "lcp preload cache key duplication"
+    },
+    {
+      "id": "concept--blog-tags-slug-global-unique",
+      "label": "blog_tags.slug global UNIQUE constraint",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
+      "source_location": "L50459",
+      "norm_label": "blog tags slug global unique constraint"
+    },
+    {
+      "id": "concept--d1-rejects-like-use-instr",
+      "label": "D1 rejects LIKE, use instr",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
+      "source_location": "L61786",
+      "norm_label": "d1 rejects like use instr"
+    },
+    {
+      "id": "concept--rollback-success-traffic-anomaly",
+      "label": "Rollback SUCCESS with no traffic shift",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
+      "source_location": "L61737",
+      "norm_label": "rollback success traffic anomaly"
+    },
+    {
+      "id": "concept--deploy-dirty-ack-policy",
+      "label": "Deploy dirty-ack policy",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
+      "source_location": "L55714",
+      "norm_label": "deploy dirty ack policy"
+    },
+    {
+      "id": "concept--vps-first-compilation-policy",
+      "label": "VPS-first compilation policy",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
+      "source_location": "L61832",
+      "norm_label": "vps first compilation policy"
+    },
+    {
+      "id": "concept--rationale--unverified-extractor-manufactures-findings",
+      "label": "An unverified extractor is a machine for manufacturing findings",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
+      "source_location": "L15122",
+      "norm_label": "an unverified extractor is a machine for manufacturing findings"
+    },
+    {
+      "id": "rationale--latency-not-quota-is-the-constraint",
+      "label": "Latency, not quota, is the constraint",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
+      "source_location": "L15114",
+      "norm_label": "latency not quota is the constraint"
+    },
+    {
+      "id": "rationale--indexing-api-removed-not-gated",
+      "label": "Indexing API publish path removed, not gated",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
+      "source_location": "L15115",
+      "norm_label": "indexing api publish path removed not gated"
+    },
+    {
+      "id": "rationale--cvw-judged-on-field-data",
+      "label": "Core Web Vitals judged on 28-day field data",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
+      "source_location": "L15116",
+      "norm_label": "core web vitals judged on 28-day field data"
+    },
+    {
+      "id": "rationale--no-supported-way-to-publish-worktree-plans",
+      "label": "No supported way to publish worktree plans to the parent project folder",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
+      "source_location": "L30963",
+      "norm_label": "no supported way to publish worktree plans to the parent project folder"
+    },
+    {
+      "id": "rationale--worktree-holds-the-whole-recorded-history",
+      "label": "A worktree holds the whole recorded history, so enumerating it re-files everything",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
+      "source_location": "L33020",
+      "norm_label": "a worktree holds the whole recorded history so enumerating it re-files everything"
+    },
+    {
+      "id": "rationale--fetchpriority-is-the-positive-authorial-lcp-claim",
+      "label": "fetchpriority is the positive authorial LCP claim, loading=eager is not",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
+      "source_location": "L40375",
+      "norm_label": "fetchpriority is the positive authorial lcp claim loading eager is not"
+    },
+    {
+      "id": "rationale--locale-pass-through-breaks-16-live-urls",
+      "label": "Taxonomy locale pass-through turns 16 live 200s into 302s",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
+      "source_location": "L50470",
+      "norm_label": "taxonomy locale pass through turns 16 live 200s into 302s"
+    },
+    {
+      "id": "rationale--dirty-ack-ships-unreviewed-changes",
+      "label": "Dirty-ack ships unreviewed changes, which is exactly what policy forbids",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
+      "source_location": "L55714",
+      "norm_label": "dirty ack ships unreviewed changes which is exactly what policy forbids"
+    },
+    {
+      "id": "rationale--licenses-json-change-is-build-regeneration",
+      "label": "The licenses.json change is build regeneration, not dirt",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
+      "source_location": "L55797",
+      "norm_label": "the licenses json change is build regeneration not dirt"
+    },
+    {
+      "id": "rationale--blanket-1200x630-backfill-would-falsify-8-of-10-covers",
+      "label": "A blanket 1200x630 backfill would falsify 8 of 10 covers",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
+      "source_location": "L61743",
+      "norm_label": "a blanket 1200x630 backfill would falsify 8 of 10 covers"
+    },
+    {
+      "id": "rationale--upload-cover-is-not-the-only-entry-path",
+      "label": "upload-cover is not the only path a cover arrives by",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
+      "source_location": "L61745",
+      "norm_label": "upload cover is not the only path a cover arrives by"
+    },
+    {
+      "id": "rationale--docs-deploy-needs-maudit-from-cargo",
+      "label": "Docs deploy needs maudit, which needs cargo, which is forbidden on this host",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset-seo/2026-09-28 - cek-search-console-dan-key-snipset [ses_f1721b560ffeIyFCM2xuP6QZhc].md",
+      "source_location": "L61808",
+      "norm_label": "docs deploy needs maudit from cargo which is forbidden on this host"
+    }
+  ],
+  "links": [
+    {
+      "source": "rationale--latency-not-quota-is-the-constraint",
+      "target": "concept--url-inspection-quota",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--latency-not-quota-is-the-constraint",
+      "target": "concept--seo-audit-fan-out-architecture",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--indexing-api-removed-not-gated",
+      "target": "concept--indexing-api-unsupported-use",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--cvw-judged-on-field-data",
+      "target": "concept--core-web-vitals-75th-percentile",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--unverified-extractor-manufactures-findings",
+      "target": "concept--positive-control-for-extractors",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--no-supported-way-to-publish-worktree-plans",
+      "target": "concept--plan-publish-registry-prefix-routing",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--worktree-holds-the-whole-recorded-history",
+      "target": "concept--worktree-routing-enumeration-asymmetry",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--fetchpriority-is-the-positive-authorial-lcp-claim",
+      "target": "concept--lcp-preload-cache-key-duplication",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--locale-pass-through-breaks-16-live-urls",
+      "target": "concept--blog-tags-slug-global-unique",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--dirty-ack-ships-unreviewed-changes",
+      "target": "concept--deploy-dirty-ack-policy",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--licenses-json-change-is-build-regeneration",
+      "target": "concept--deploy-dirty-ack-policy",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--blanket-1200x630-backfill-would-falsify-8-of-10-covers",
+      "target": "concept--d1-rejects-like-use-instr",
+      "relation": "rationale_for",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "rationale--upload-cover-is-not-the-only-entry-path",
+      "target": "concept--d1-rejects-like-use-instr",
+      "relation": "rationale_for",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "rationale--docs-deploy-needs-maudit-from-cargo",
+      "target": "concept--vps-first-compilation-policy",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--search-console-service-account-audit",
+      "target": "concept--sops-encrypted-secret-store",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--positive-control-for-extractors",
+      "target": "concept--seo-audit-fan-out-architecture",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--seo-audit-fan-out-architecture",
+      "target": "concept--derived-test-contracts",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--derived-test-contracts",
+      "target": "concept--lcp-preload-cache-key-duplication",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--worktree-routing-enumeration-asymmetry",
+      "target": "concept--plan-publish-registry-prefix-routing",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--blog-tags-slug-global-unique",
+      "target": "concept--d1-rejects-like-use-instr",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--rollback-success-traffic-anomaly",
+      "target": "concept--deploy-dirty-ack-policy",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--rollback-success-traffic-anomaly",
+      "target": "concept--vps-first-compilation-policy",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--core-web-vitals-75th-percentile",
+      "target": "concept--lcp-preload-cache-key-duplication",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    }
+  ]
+}

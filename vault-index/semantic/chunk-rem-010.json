@@ -1,0 +1,266 @@
+{
+  "nodes": [
+    {
+      "id": "concept--wayland-x11-clipboard-bridge",
+      "label": "One-directional X11-Wayland clipboard bridge",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-arch-snipset [ses_f1d12d2deffeIXx71eca2M8vc4].md",
+      "source_location": "L6960",
+      "norm_label": "one-directional x11-wayland clipboard bridge"
+    },
+    {
+      "id": "concept--arboard-wayland-data-control-feature",
+      "label": "arboard wayland-data-control feature",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-arch-snipset [ses_f1d12d2deffeIXx71eca2M8vc4].md",
+      "source_location": "L7045",
+      "norm_label": "arboard wayland-data-control feature"
+    },
+    {
+      "id": "concept--simulate-copy-windows-only",
+      "label": "Windows-only simulate_copy selection capture",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-arch-snipset [ses_f1d12d2deffeIXx71eca2M8vc4].md",
+      "source_location": "L7795",
+      "norm_label": "windows-only simulate_copy selection capture"
+    },
+    {
+      "id": "concept--ai-variable-linux-injection-gap",
+      "label": "#{ai:} Linux injection gap",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-arch-snipset [ses_f1d12d2deffeIXx71eca2M8vc4].md",
+      "source_location": "L16311",
+      "norm_label": "#{ai:} linux injection gap"
+    },
+    {
+      "id": "concept--byte-transparent-clipboard-delivery",
+      "label": "Byte-transparent single clipboard delivery",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-arch-snipset [ses_f1d12d2deffeIXx71eca2M8vc4].md",
+      "source_location": "L5834",
+      "norm_label": "byte-transparent single clipboard delivery"
+    },
+    {
+      "id": "concept--silent-copy-clipboard-feedback",
+      "label": "Silent-copy clipboard feedback loop",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-arch-snipset [ses_f1d12d2deffeIXx71eca2M8vc4].md",
+      "source_location": "L6817",
+      "norm_label": "silent-copy clipboard feedback loop"
+    },
+    {
+      "id": "concept--frozen-pre-expansion-clipboard-gate",
+      "label": "Frozen pre-expansion clipboard gate",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-arch-snipset [ses_f1d12d2deffeIXx71eca2M8vc4].md",
+      "source_location": "L5886",
+      "norm_label": "frozen pre-expansion clipboard gate"
+    },
+    {
+      "id": "concept--unicode-case-fold-char-expansion",
+      "label": "Unicode case-fold char-count divergence",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-arch-snipset [ses_f1d12d2deffeIXx71eca2M8vc4].md",
+      "source_location": "L4743",
+      "norm_label": "unicode case-fold char-count divergence"
+    },
+    {
+      "id": "concept--unmapped-chrono-moment-tokens",
+      "label": "Unmapped chrono moment tokens",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-arch-snipset [ses_f1d12d2deffeIXx71eca2M8vc4].md",
+      "source_location": "L9730",
+      "norm_label": "unmapped chrono moment tokens"
+    },
+    {
+      "id": "concept--nextest-no-tests-default-false-skip",
+      "label": "nextest no-tests default false skip",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-arch-snipset [ses_f1d12d2deffeIXx71eca2M8vc4].md",
+      "source_location": "L16387",
+      "norm_label": "nextest no-tests default false skip"
+    },
+    {
+      "id": "concept--resolved-dependency-graph-contract-test",
+      "label": "Resolved dependency graph contract test",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-arch-snipset [ses_f1d12d2deffeIXx71eca2M8vc4].md",
+      "source_location": "L18534",
+      "norm_label": "resolved dependency graph contract test"
+    },
+    {
+      "id": "concept--detached-vps-worktree-compilation",
+      "label": "Detached VPS worktree compilation",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-arch-snipset [ses_f1d12d2deffeIXx71eca2M8vc4].md",
+      "source_location": "L15897",
+      "norm_label": "detached vps worktree compilation"
+    },
+    {
+      "id": "concept--headless-vps-cannot-reproduce-wayland-defect",
+      "label": "Headless VPS cannot reproduce Wayland defect",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-arch-snipset [ses_f1d12d2deffeIXx71eca2M8vc4].md",
+      "source_location": "L11784",
+      "norm_label": "headless vps cannot reproduce wayland defect"
+    },
+    {
+      "id": "concept--zero-subagent-compiler-policy",
+      "label": "Zero-subagent compiler policy",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-arch-snipset [ses_f1d12d2deffeIXx71eca2M8vc4].md",
+      "source_location": "L3201",
+      "norm_label": "zero-subagent compiler policy"
+    },
+    {
+      "id": "rationale--root-cause-is-missing-feature-not-regression",
+      "label": "Root cause is a missing dependency feature, not a recent regression",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-arch-snipset [ses_f1d12d2deffeIXx71eca2M8vc4].md",
+      "source_location": "L9688",
+      "norm_label": "root cause is a missing dependency feature, not a recent regression"
+    },
+    {
+      "id": "rationale--no-reliable-wayland-selection-api",
+      "label": "No reliable Wayland API to read another app's selection",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-arch-snipset [ses_f1d12d2deffeIXx71eca2M8vc4].md",
+      "source_location": "L11784",
+      "norm_label": "no reliable wayland api to read another app's selection"
+    },
+    {
+      "id": "rationale--preserve-and-restore-clipboard-before-probe",
+      "label": "Save and restore the user's clipboard before the discriminator probe",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-arch-snipset [ses_f1d12d2deffeIXx71eca2M8vc4].md",
+      "source_location": "L6834",
+      "norm_label": "save and restore the user's clipboard before the discriminator probe"
+    },
+    {
+      "id": "rationale--xclip-utf8-premise-inverted",
+      "label": "xclip already defaults to UTF8_STRING, so the encoding task is unnecessary",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-arch-snipset [ses_f1d12d2deffeIXx71eca2M8vc4].md",
+      "source_location": "L15881",
+      "norm_label": "xclip already defaults to utf8_string, so the encoding task is unnecessary"
+    },
+    {
+      "id": "rationale--compiler-policy-outranks-skill-fanout",
+      "label": "Repository compiler policy outranks the skill's fan-out mandate",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-27 - linux-arch-snipset [ses_f1d12d2deffeIXx71eca2M8vc4].md",
+      "source_location": "L3201",
+      "norm_label": "repository compiler policy outranks the skill's fan-out mandate"
+    }
+  ],
+  "links": [
+    {
+      "source": "concept--arboard-wayland-data-control-feature",
+      "target": "concept--wayland-x11-clipboard-bridge",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--wayland-x11-clipboard-bridge",
+      "target": "concept--arboard-wayland-data-control-feature",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--simulate-copy-windows-only",
+      "target": "concept--arboard-wayland-data-control-feature",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--silent-copy-clipboard-feedback",
+      "target": "concept--arboard-wayland-data-control-feature",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--ai-variable-linux-injection-gap",
+      "target": "concept--byte-transparent-clipboard-delivery",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--frozen-pre-expansion-clipboard-gate",
+      "target": "concept--arboard-wayland-data-control-feature",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--unicode-case-fold-char-expansion",
+      "target": "concept--byte-transparent-clipboard-delivery",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--unmapped-chrono-moment-tokens",
+      "target": "concept--frozen-pre-expansion-clipboard-gate",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--headless-vps-cannot-reproduce-wayland-defect",
+      "target": "concept--arboard-wayland-data-control-feature",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--detached-vps-worktree-compilation",
+      "target": "concept--headless-vps-cannot-reproduce-wayland-defect",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--zero-subagent-compiler-policy",
+      "target": "concept--detached-vps-worktree-compilation",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--resolved-dependency-graph-contract-test",
+      "target": "concept--arboard-wayland-data-control-feature",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--nextest-no-tests-default-false-skip",
+      "target": "concept--resolved-dependency-graph-contract-test",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--root-cause-is-missing-feature-not-regression",
+      "target": "concept--arboard-wayland-data-control-feature",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--no-reliable-wayland-selection-api",
+      "target": "concept--simulate-copy-windows-only",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--preserve-and-restore-clipboard-before-probe",
+      "target": "concept--wayland-x11-clipboard-bridge",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--xclip-utf8-premise-inverted",
+      "target": "concept--arboard-wayland-data-control-feature",
+      "relation": "rationale_for",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "rationale--compiler-policy-outranks-skill-fanout",
+      "target": "concept--zero-subagent-compiler-policy",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    }
+  ]
+}

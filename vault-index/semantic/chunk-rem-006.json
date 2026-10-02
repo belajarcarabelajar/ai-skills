@@ -1,0 +1,241 @@
+{
+  "batch_id": "rem-006",
+  "nodes": [
+    {
+      "id": "concept--data-flow-diagram",
+      "label": "Data flow diagram (DFD)",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf",
+      "source_location": "L321",
+      "norm_label": "data flow diagram"
+    },
+    {
+      "id": "concept--flowchart",
+      "label": "Flowchart",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf",
+      "source_location": "L1489",
+      "norm_label": "flowchart"
+    },
+    {
+      "id": "concept--document-flowchart",
+      "label": "Document flowchart",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf",
+      "source_location": "L2031",
+      "norm_label": "document flowchart"
+    },
+    {
+      "id": "concept--system-flowchart",
+      "label": "System flowchart",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf",
+      "source_location": "L2432",
+      "norm_label": "system flowchart"
+    },
+    {
+      "id": "concept--program-flowchart",
+      "label": "Program flowchart",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf",
+      "source_location": "L2525",
+      "norm_label": "program flowchart"
+    },
+    {
+      "id": "concept--data-dictionary",
+      "label": "Data dictionary",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf",
+      "source_location": "L693",
+      "norm_label": "data dictionary"
+    },
+    {
+      "id": "concept--context-diagram",
+      "label": "Context diagram",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf",
+      "source_location": "L727",
+      "norm_label": "context diagram"
+    },
+    {
+      "id": "concept--internal-control-flowchart",
+      "label": "Internal control flowchart",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf",
+      "source_location": "L2050",
+      "norm_label": "internal control flowchart"
+    },
+    {
+      "id": "concept--flowchart-symbol-set",
+      "label": "Four categories of flowcharting symbols",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf",
+      "source_location": "L1528",
+      "norm_label": "four categories of flowcharting symbols"
+    },
+    {
+      "id": "concept--logical-versus-physical-system-documentation",
+      "label": "Logical versus physical emphasis in system documentation",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf",
+      "source_location": "L2568",
+      "norm_label": "logical versus physical emphasis in system documentation"
+    },
+    {
+      "id": "rationale--documentation-tools-simplify-and-onboard",
+      "label": "Documentation tools exist to reduce complexity and onboard new team members",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf",
+      "source_location": "L288",
+      "norm_label": "documentation tools exist to reduce complexity and onboard new team members"
+    },
+    {
+      "id": "rationale--dfd-logical-flowchart-physical",
+      "label": "Physical process changes alter the flowchart but barely touch the DFD, so pick the tool by the viewer's information needs",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf",
+      "source_location": "L2758",
+      "norm_label": "physical process changes alter the flowchart but barely touch the dfd, so pick the tool by the viewer's information needs"
+    },
+    {
+      "id": "rationale--learn-both-documentation-tools",
+      "label": "Both DFDs and flowcharts must be learned because both are used by IS professionals and both appear on professional exams",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf",
+      "source_location": "L303",
+      "norm_label": "both dfds and flowcharts must be learned because both are used by is professionals and both appear on professional exams"
+    },
+    {
+      "id": "rationale--internal-control-flowcharts-expose-weaknesses",
+      "label": "Document flowcharts are used to evaluate the adequacy of internal controls and to reveal control weaknesses and inefficiencies",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf",
+      "source_location": "L2050",
+      "norm_label": "document flowcharts are used to evaluate the adequacy of internal controls and to reveal control weaknesses and inefficiencies"
+    },
+    {
+      "id": "rationale--sarbanes-oxley-raised-flowchart-importance",
+      "label": "Sarbanes-Oxley 2002 raised the importance of flowcharts by requiring companies to document business processes and internal control procedures",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/.attachments/ses_f2d8a2521ffeJxBe2BCBitz86p-msg_0d275daf5001a3t8GmwQjFt24y-attachment-00ca149f36175b6e.pdf",
+      "source_location": "L1499",
+      "norm_label": "sarbanes-oxley 2002 raised the importance of flowcharts by requiring companies to document business processes and internal control procedures"
+    }
+  ],
+  "links": [
+    {
+      "source": "concept--data-flow-diagram",
+      "target": "concept--flowchart",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--document-flowchart",
+      "target": "concept--flowchart",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--system-flowchart",
+      "target": "concept--flowchart",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--program-flowchart",
+      "target": "concept--flowchart",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--internal-control-flowchart",
+      "target": "concept--document-flowchart",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--data-dictionary",
+      "target": "concept--data-flow-diagram",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--context-diagram",
+      "target": "concept--data-flow-diagram",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--flowchart-symbol-set",
+      "target": "concept--flowchart",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--logical-versus-physical-system-documentation",
+      "target": "concept--data-flow-diagram",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--logical-versus-physical-system-documentation",
+      "target": "concept--flowchart",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--system-flowchart",
+      "target": "concept--data-flow-diagram",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--program-flowchart",
+      "target": "concept--system-flowchart",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--documentation-tools-simplify-and-onboard",
+      "target": "concept--data-flow-diagram",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--documentation-tools-simplify-and-onboard",
+      "target": "concept--flowchart",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--dfd-logical-flowchart-physical",
+      "target": "concept--logical-versus-physical-system-documentation",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--learn-both-documentation-tools",
+      "target": "concept--data-flow-diagram",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--learn-both-documentation-tools",
+      "target": "concept--flowchart",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--internal-control-flowcharts-expose-weaknesses",
+      "target": "concept--internal-control-flowchart",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--sarbanes-oxley-raised-flowchart-importance",
+      "target": "concept--flowchart",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    }
+  ]
+}

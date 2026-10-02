@@ -168,7 +168,7 @@ tasks:
 
 # Subagent-Driven Vault Index — Implementation Plan
 
-> **The vault knowledge graph indexes 540 of 2,360 eligible markdown files.** Measured 2026-10-02: `graphify.detect.detect()` on the vault root returns 2,360 `.md` files after `.gitignore` and `.graphifyignore` are applied; the existing `graphify-out/manifest.json` lists 540 of them. `GRAPH_REPORT.md` records the reason in its own Corpus Check line — `cluster-only mode — file stats not available` — so the graph was never produced by a full extraction pass.
+> **The vault knowledge graph indexes 540 of 1,615 eligible markdown files.** Measured 2026-10-02: `graphify.detect.detect()` on the vault root returns 2,360 `.md` files after `.gitignore` and `.graphifyignore` are applied; the existing `graphify-out/manifest.json` lists 540 of them. `GRAPH_REPORT.md` records the reason in its own Corpus Check line — `cluster-only mode — file stats not available` — so the graph was never produced by a full extraction pass.
 >
 > **`graphify update` cannot close this gap.** Its CLI help reads `re-extract code files and update the graph (no LLM needed)`, and the implementation calls `_rebuild_code`. It parses code. The 1,820 missing files are markdown, so an AST-only rebuild will never see them.
 >
@@ -208,9 +208,9 @@ Every number below was produced on this machine on 2026-10-02. Nothing here is f
 
 | Measurement | Command | Result |
 |---|---|---|
-| Eligible markdown | `graphify.detect.detect(Path("."))` | 2,360 `.md` after both ignore files |
+| Eligible markdown | `graphify.detect.detect(Path("."))` | **2,360** at first measurement, **1,615** after commit `3a968b2` removed the 748 N8n raw-capture files |
 | Already indexed | `graph.json` nodes' `source_file` vs the above | 540 |
-| Unindexed | difference | **1,820 files** |
+| Unindexed | difference | **1,822** at first measurement; **1,075** after the N8n removal |
 | `GRAPH_REPORT.md` Corpus Check | read | `cluster-only mode — file stats not available` |
 | Corpus by top-level folder | `os.walk` + `getsize` | `05 - Conversations/` 1,042 files / 300.9 MB; the other 778 files / 2.9 MB |
 | `graphify update` scope | `--help`, `watch.py:1425` | `Re-run AST extraction` — code only |
@@ -429,6 +429,7 @@ flowchart LR
 - [ ] **Step 2 — Merge** the old graph, the structural layer and the semantic layers into one. The 540 already-indexed files are retained rather than re-extracted.
 - [ ] **Step 3 — Verify:** node count is at least the old 6,155, and the degree-0 count is strictly lower than the old 1,415. A merge that raises either has failed even at exit 0.
   - **Known input, measured 2026-10-02:** the previous graph contributes **1,299 nodes that fail T1's validator** (1,269 `source_file: null`, 30 `source_file: ""`). T4 reports them as `previousNodesUnusableSourceFile`. T9 must print that number and must not let it reach zero by deletion — a drop is F7's decision, not a side effect of merging.
+  - **Second known input, measured 2026-10-02:** **9 nodes across 4 committed chunks (`chunk-072`, `chunk-084`, `chunk-087`, `chunk-100`) name a `source_file` that no longer exists on disk**, because those chunks read N8n stubs before commit `3a968b2` deleted all 748. This is not an extraction defect — the extraction was correct when written and the files were legitimately deleted afterwards. But T9 **must** drop nodes whose `source_file` is absent from disk, and report the count. A merge that emits them re-creates the exact unattributable-node failure this project set out to remove, except this time nobody could even say which note it came from.
 
 ### Task T10: Recluster
 
@@ -513,6 +514,32 @@ flowchart LR
 - [ ] **Step 3 — Full gate:** cmd: `bun run ci` | expect: exit 0 | retry: 0
 - [ ] **Step 4 — Commit** any remaining changes, remove temporary files, and finish with `git status`.
 
+
+## 6. Corpus Scope, Measured
+
+Recorded rather than estimated, because the number is what makes T8 schedulable. **These figures changed once during execution**: the vault's 748 N8n raw-capture files were deleted in commit `3a968b2` on 2026-10-02, which removed 96% of what this plan had been calling the "curated" layer.
+
+| Set | Files | Size | Disposition |
+|---|---|---|---|
+| Already indexed (in `graphify-out/manifest.json`) | 540 | — | retained by T9, not re-extracted |
+| Session transcripts (`05 - Conversations/`) | 1,005 | ~300 MB | **indexed by T8** |
+| Curated notes — projects, system, other resources | **32** | ~0.7 MB | **indexed by T8** |
+| N8n raw captures | 0 (were 742) | was 2.3 MB | **deleted 2026-10-02, commit `3a968b2`** |
+| Excluded by `.graphifyignore` | ~800 | — | never indexed, permanently |
+
+| Measurement | First measurement | After `3a968b2` |
+|---|---|---|
+| Eligible `.md` | 2,360 | **1,615** |
+| Worklist | 1,822 | **1,075**, then **1,037** after excluding the 42 already extracted |
+| Curated files in worklist | 774 | **32** |
+| Batches | 283 | **260** (63 oversized) |
+| Corpus size | 334 MB | 305 MB |
+
+**The "curated" label was wrong and it cost planning time.** The 774 curated files were assumed to be plans and ADRs worth indexing ahead of the transcripts. Measured, **742 of them were third-party N8n vendor documentation clippings** and only 30 were project plans. A recommendation to prioritise that layer was made on that false premise and withdrawn once the composition was counted. Recorded because the error is cheap to repeat: a directory name is not a value judgement.
+
+**Batch ids are positional, so they cannot survive a change to the worklist.** `batch-078` over the pre-deletion worklist pointed at different files than `batch-078` would afterwards — and `chunk-078.json` was already committed against the old meaning. The current worklist therefore uses a **`rem-*` id namespace**, `batch-*` is retired rather than reused, and the 42 files already extracted into committed chunks are excluded from it. Verified: overlap between the new worklist and anything already extracted is 0.
+
+**260 batches is a multi-session run.** At 10–20 concurrent subagents that is roughly 15–26 waves. T8 is built to be resumable — a batch whose chunk file exists and passes T1's validator is skipped — so a session boundary costs the remaining batches, not the whole run.
 
 ## 7. Verification Matrix Before Completion
 

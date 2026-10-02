@@ -1,0 +1,226 @@
+{
+  "batch_id": "rem-005",
+  "nodes": [
+    {
+      "id": "concept--youtube-iframe-player-error-153",
+      "label": "YouTube IFrame Player error 153",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - youtube-error-pomodoro-snipset-di-linux [ses_f24efcd1effeOS4DRwPu3Myfzn].md",
+      "source_location": "L9882",
+      "norm_label": "youtube iframe player error 153",
+      "summary": "YouTube IFrame API onError code 153: 'request does not include the HTTP Referer header or equivalent API Client identification'. Confirmed from the app log in this session and identified as the trigger for Snipset's generic 'YouTube Player Error' on the Linux packaged build."
+    },
+    {
+      "id": "concept--tauri-protocol-origin-asymmetry",
+      "label": "Tauri protocol origin asymmetry (Windows HTTP vs Linux custom scheme)",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - youtube-error-pomodoro-snipset-di-linux [ses_f24efcd1effeOS4DRwPu3Myfzn].md",
+      "source_location": "L34919",
+      "norm_label": "tauri protocol origin asymmetry windows http vs linux custom scheme",
+      "summary": "Tauri v2 serves its custom protocol as http://snipset.localhost on Windows but as snipset://localhost on Linux/macOS. Only the Windows document is an HTTP origin, so only Windows sends a Referer on the embed request — the explanation for 'works on Windows, fails on Linux'."
+    },
+    {
+      "id": "concept--loopback-http-origin-player-option",
+      "label": "Option A: serve the frontend from loopback HTTP origin",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - youtube-error-pomodoro-snipset-di-linux [ses_f24efcd1effeOS4DRwPu3Myfzn].md",
+      "source_location": "L35396",
+      "norm_label": "option a serve the frontend from loopback http origin",
+      "summary": "Architecture the session adopted then abandoned: on Linux, serve the app document from http://127.0.0.1:<port> so it has an HTTP origin and the embed request carries a Referer, with Host/Origin validation against DNS rebinding and hard-fail bind against port squatters."
+    },
+    {
+      "id": "concept--tauri-acl-local-vs-remote",
+      "label": "Tauri ACL treats every http origin as remote on Linux",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - youtube-error-pomodoro-snipset-di-linux [ses_f24efcd1effeOS4DRwPu3Myfzn].md",
+      "source_location": "L45364",
+      "norm_label": "tauri acl treats every http origin as remote on linux",
+      "summary": "On Linux Tauri decides locality from the scheme, so the .localhost HTTP-origin rule only applies on Windows/Android; any http:// origin is remote and cannot reach uncapped app commands. Enabling has_app_acl_manifest for 431 app commands broke licensing and forced the revert."
+    },
+    {
+      "id": "concept--eval-driven-youtube-player-webview",
+      "label": "Eval-driven YouTube player webview (zero capability, zero IPC)",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - youtube-error-pomodoro-snipset-di-linux [ses_f24efcd1effeOS4DRwPu3Myfzn].md",
+      "source_location": "L47247",
+      "norm_label": "eval driven youtube player webview zero capability zero ipc",
+      "summary": "A separate Tauri webview loading https://www.youtube.com/embed/{id} as a top-level https document, driven from Rust with eval() over the YouTube postMessage protocol. Because it never invokes frontend IPC, the remote-origin ACL restriction does not apply and no capability is required."
+    },
+    {
+      "id": "concept--static-loopback-youtube-player-page",
+      "label": "Single static HTML player page on 127.0.0.1:21772",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - youtube-error-pomodoro-snipset-di-linux [ses_f24efcd1effeOS4DRwPu3Myfzn].md",
+      "source_location": "L56328",
+      "norm_label": "single static html player page on loopback 21772",
+      "summary": "The fix actually shipped at the end of the session: a teeny loopback HTTP server serving one constant HTML string that reads the video id from its own query and frames the embed with referrerPolicy=\"origin\". No app assets, no secrets, one path, zero capability."
+    },
+    {
+      "id": "concept--yt-dlp-resolve-and-stream-audio",
+      "label": "yt-dlp resolve-and-stream audio path",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - youtube-error-pomodoro-snipset-di-linux [ses_f24efcd1effeOS4DRwPu3Myfzn].md",
+      "source_location": "L25880",
+      "norm_label": "yt dlp resolve and stream audio path",
+      "summary": "Native YouTube audio extraction for the Pomodoro player: resolve a signed direct media URL with yt-dlp on the Rust side and hand it to HTMLAudioElement — no proxy, no bundled binary, no new permission, no new Rust crate. Later disabled for this feature after it proved unable to succeed on the target videos."
+    },
+    {
+      "id": "concept--youtube-error-code-mapping-gap",
+      "label": "Unmapped YouTube onError code collapse to generic literal",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - youtube-error-pomodoro-snipset-di-linux [ses_f24efcd1effeOS4DRwPu3Myfzn].md",
+      "source_location": "L9881",
+      "norm_label": "unmapped youtube onerror code collapse to generic literal",
+      "summary": "The primary violated invariant: every IFrame onError code the app can receive must map to a specific localized message and the numeric code must be preserved. The mapping covered only {100,101,150,2}, so 153 and any future code collapsed to one literal and the code was never logged or persisted."
+    },
+    {
+      "id": "concept--search-list-video-embeddable-filter",
+      "label": "search.list videoEmbeddable filter (not part=status)",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - youtube-error-pomodoro-snipset-di-linux [ses_f24efcd1effeOS4DRwPu3Myfzn].md",
+      "source_location": "L22340",
+      "norm_label": "search list video embeddable filter not part status",
+      "summary": "A bug found in the session's own shipped work: the search worker asked for part=snippet,status, but search.list accepts only part=snippet and exposes no status resource, so status.embeddable can never come back and an unsupported part risks 400 invalidPart. The documented filter is the videoEmbeddable=true query parameter, which requires type=video (already set)."
+    },
+    {
+      "id": "rationale--error-153-is-identity-failure-not-codec",
+      "label": "Error 153 is an identity failure, not a codec or capability failure",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - youtube-error-pomodoro-snipset-di-linux [ses_f24efcd1effeOS4DRwPu3Myfzn].md",
+      "source_location": "L37643",
+      "norm_label": "error 153 is an identity failure not a codec or capability failure",
+      "summary": "The reported integer was 153, not 5, so the failure is identity rather than inability: WebKitGTK got far enough to load the embed and report an error, and the referrer is what is lacking rather than the codec. The note is explicit that this is a necessary condition, not proof playback follows."
+    },
+    {
+      "id": "rationale--tauri-locality-is-decided-by-scheme",
+      "label": "The .localhost HTTP-origin rule only applies on Windows and Android",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - youtube-error-pomodoro-snipset-di-linux [ses_f24efcd1effeOS4DRwPu3Myfzn].md",
+      "source_location": "L45357",
+      "norm_label": "the localhost http origin rule only applies on windows and android",
+      "summary": "Quoting Tauri's own check — protocols.contains_key(scheme) under not(windows) and not(android) — the note concludes that on Linux an http:// origin can never also be local, which is what made Option A unworkable and why the initial security review had underestimated the cost."
+    },
+    {
+      "id": "rationale--eval-driven-webview-avoids-acl-entirely",
+      "label": "No frontend IPC means the remote-origin ACL never applies",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - youtube-error-pomodoro-snipset-di-linux [ses_f24efcd1effeOS4DRwPu3Myfzn].md",
+      "source_location": "L56326",
+      "norm_label": "no frontend ipc means the remote origin acl never applies",
+      "summary": "The ACL only rejects webviews that call Tauri commands. Because this player webview is driven from Rust via eval() with zero IPC, it is allowed to live on a remote origin without any grant — the exact restriction that killed Option A does not bind here."
+    },
+    {
+      "id": "rationale--one-static-page-no-app-assets-no-secrets",
+      "label": "One static page, no app assets, no secrets, single path",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - youtube-error-pomodoro-snipset-di-linux [ses_f24efcd1effeOS4DRwPu3Myfzn].md",
+      "source_location": "L60307",
+      "norm_label": "one static page no app assets no secrets single path",
+      "summary": "The stated reason this design worked where the full loopback approach failed: the webview is controlled from Rust via eval() so the ACL has nothing to check, the page exposes nothing, it answers one path on GET/HEAD only, Host must match, and a test asserts no bridge, credentials, or internal port is reachable."
+    },
+    {
+      "id": "rationale--referer-is-not-signed-into-media-urls",
+      "label": "Referer is not signed into direct media URLs",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - youtube-error-pomodoro-snipset-di-linux [ses_f24efcd1effeOS4DRwPu3Myfzn].md",
+      "source_location": "L25590",
+      "norm_label": "referer is not signed into direct media urls",
+      "summary": "Verified from yt-dlp's source: it sends no Referer on googlevideo GETs and the signed sparams set is expire,ei,ip,id,itag — no referer. The IP is what is signed and same-machine satisfies it, so handing the signed URL to HTMLAudioElement is viable with zero CSP change because media-src already whitelists *.googlevideo.com."
+    },
+    {
+      "id": "rationale--videoembeddable-over-part-status",
+      "label": "videoEmbeddable=true is the documented embeddability filter",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - youtube-error-pomodoro-snipset-di-linux [ses_f24efcd1effeOS4DRwPu3Myfzn].md",
+      "source_location": "L22338",
+      "norm_label": "video embeddable true is the documented embeddability filter",
+      "summary": "The stated reason for the worker fix: the official search.list docs say part must be snippet and the search resource exposes no status property, so the embeddability filter was silently a no-op in production and risked 400 invalidPart, while the tests passed only because upstream was mocked."
+    }
+  ],
+  "links": [
+    {
+      "source": "concept--youtube-iframe-player-error-153",
+      "target": "concept--tauri-protocol-origin-asymmetry",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--youtube-iframe-player-error-153",
+      "target": "concept--youtube-error-code-mapping-gap",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--tauri-protocol-origin-asymmetry",
+      "target": "concept--loopback-http-origin-player-option",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--loopback-http-origin-player-option",
+      "target": "concept--tauri-acl-local-vs-remote",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--tauri-acl-local-vs-remote",
+      "target": "concept--eval-driven-youtube-player-webview",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--eval-driven-youtube-player-webview",
+      "target": "concept--static-loopback-youtube-player-page",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--yt-dlp-resolve-and-stream-audio",
+      "target": "concept--youtube-iframe-player-error-153",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--search-list-video-embeddable-filter",
+      "target": "concept--youtube-error-code-mapping-gap",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--error-153-is-identity-failure-not-codec",
+      "target": "concept--youtube-iframe-player-error-153",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--tauri-locality-is-decided-by-scheme",
+      "target": "concept--tauri-acl-local-vs-remote",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--eval-driven-webview-avoids-acl-entirely",
+      "target": "concept--eval-driven-youtube-player-webview",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--one-static-page-no-app-assets-no-secrets",
+      "target": "concept--static-loopback-youtube-player-page",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--referer-is-not-signed-into-media-urls",
+      "target": "concept--yt-dlp-resolve-and-stream-audio",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--videoembeddable-over-part-status",
+      "target": "concept--search-list-video-embeddable-filter",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    }
+  ]
+}

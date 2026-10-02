@@ -1,0 +1,374 @@
+{
+  "nodes": [
+    {
+      "id": "concept--subagent-first-default",
+      "label": "Subagent-First Default",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
+      "source_location": "L2325",
+      "norm_label": "subagent-first default"
+    },
+    {
+      "id": "concept--task-chunking-principle",
+      "label": "Task-Chunking Principle",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
+      "source_location": "L2326",
+      "norm_label": "task-chunking principle"
+    },
+    {
+      "id": "concept--high-fan-out-floor",
+      "label": "High Fan-Out Floor",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
+      "source_location": "L2327",
+      "norm_label": "high fan-out floor"
+    },
+    {
+      "id": "concept--gather-and-synthesize-loop",
+      "label": "Gather & Synthesize Loop",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
+      "source_location": "L2328",
+      "norm_label": "gather & synthesize loop"
+    },
+    {
+      "id": "concept--parent-dispatch-discipline",
+      "label": "Parent Dispatch Discipline",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
+      "source_location": "L2329",
+      "norm_label": "parent dispatch discipline"
+    },
+    {
+      "id": "concept--nested-fan-out",
+      "label": "Nested Fan-Out",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
+      "source_location": "L2329",
+      "norm_label": "nested fan-out"
+    },
+    {
+      "id": "concept--chunk-boundary-check",
+      "label": "Chunk Boundary Check",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
+      "source_location": "L2330",
+      "norm_label": "chunk boundary check"
+    },
+    {
+      "id": "concept--harness-prompt-triage",
+      "label": "Harness Prompt Triage",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
+      "source_location": "L4596",
+      "norm_label": "harness prompt triage"
+    },
+    {
+      "id": "concept--portable-instruction-content",
+      "label": "Portable Instruction Content",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
+      "source_location": "L4580",
+      "norm_label": "portable instruction content"
+    },
+    {
+      "id": "concept--completion-audit",
+      "label": "Completion Audit",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
+      "source_location": "L4603",
+      "norm_label": "completion audit"
+    },
+    {
+      "id": "concept--no-progress-blocked-audit",
+      "label": "No-Progress & Blocked Audit",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
+      "source_location": "L4604",
+      "norm_label": "no-progress & blocked audit"
+    },
+    {
+      "id": "concept--fidelity-rule",
+      "label": "Fidelity Rule",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
+      "source_location": "L4605",
+      "norm_label": "fidelity rule"
+    },
+    {
+      "id": "concept--multi-agent-role-contract",
+      "label": "Multi-Agent Role Contract",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
+      "source_location": "L4606",
+      "norm_label": "multi-agent role contract"
+    },
+    {
+      "id": "concept--pre-approval-specificity",
+      "label": "Pre-Approval Specificity",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
+      "source_location": "L4607",
+      "norm_label": "pre-approval specificity"
+    },
+    {
+      "id": "concept--credential-handoff",
+      "label": "Credential Hand-Off",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
+      "source_location": "L4608",
+      "norm_label": "credential hand-off"
+    },
+    {
+      "id": "concept--least-privilege-permission-requests",
+      "label": "Least-Privilege Permission Requests",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
+      "source_location": "L4609",
+      "norm_label": "least-privilege permission requests"
+    },
+    {
+      "id": "concept--sandbox-enforcement-mapping",
+      "label": "Sandbox Enforcement Mapping",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
+      "source_location": "L4610",
+      "norm_label": "sandbox enforcement mapping"
+    },
+    {
+      "id": "concept--review-exhaustiveness",
+      "label": "Review Exhaustiveness",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
+      "source_location": "L4616",
+      "norm_label": "review exhaustiveness"
+    },
+    {
+      "id": "concept--compaction-continuity",
+      "label": "Compaction Continuity",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
+      "source_location": "L4618",
+      "norm_label": "compaction continuity"
+    },
+    {
+      "id": "concept--self-contained-final-answer",
+      "label": "Self-Contained Final Answer",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
+      "source_location": "L4621",
+      "norm_label": "self-contained final answer"
+    },
+    {
+      "id": "rationale--ten-small-chunks-beat-five-massive",
+      "label": "Ten small chunks beat five massive ones",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
+      "source_location": "L2327",
+      "norm_label": "ten small chunks beat five massive ones"
+    },
+    {
+      "id": "rationale--guardrails-stay-above-fan-out",
+      "label": "RAM/timeout guardrails kept above the fan-out default",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
+      "source_location": "L2340",
+      "norm_label": "ram/timeout guardrails kept above the fan-out default"
+    },
+    {
+      "id": "rationale--desktop-specific-material-breaks-other-harnesses",
+      "label": "Codex-desktop-specific rules break other harnesses",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
+      "source_location": "L4628",
+      "norm_label": "codex-desktop-specific rules break other harnesses"
+    },
+    {
+      "id": "rationale--super-skill-already-superset",
+      "label": "Our super-skill already exceeds the pasted protocol content",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
+      "source_location": "L4627",
+      "norm_label": "our super-skill already exceeds the pasted protocol content"
+    },
+    {
+      "id": "rationale--only-12-15-percent-portable",
+      "label": "Only 12-15% of the pasted material is portable instruction content",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
+      "source_location": "L4580",
+      "norm_label": "only 12-15% of the pasted material is portable instruction content"
+    },
+    {
+      "id": "rationale--keep-one-authorization-domain",
+      "label": "New authorization rules must stay inside one Authority domain",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
+      "source_location": "L4634",
+      "norm_label": "new authorization rules must stay inside one authority domain"
+    },
+    {
+      "id": "rationale--confirmation-matrix-too-heavy",
+      "label": "The five-category browser confirmation matrix is too heavy for a coding skill",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
+      "source_location": "L4629",
+      "norm_label": "the five-category browser confirmation matrix is too heavy for a coding skill"
+    },
+    {
+      "id": "rationale--review-rubric-already-covers-most",
+      "label": "The existing review rubric already covers most of the imported rubric",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-09-25 - defaulting-execution-to-many-sub-agents [ses_f268e0f13ffeZpyQad4JJN6OQt].md",
+      "source_location": "L4526",
+      "norm_label": "the existing review rubric already covers most of the imported rubric"
+    }
+  ],
+  "links": [
+    {
+      "source": "rationale--ten-small-chunks-beat-five-massive",
+      "target": "concept--high-fan-out-floor",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--guardrails-stay-above-fan-out",
+      "target": "concept--high-fan-out-floor",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--desktop-specific-material-breaks-other-harnesses",
+      "target": "concept--harness-prompt-triage",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--super-skill-already-superset",
+      "target": "concept--harness-prompt-triage",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--only-12-15-percent-portable",
+      "target": "concept--portable-instruction-content",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--keep-one-authorization-domain",
+      "target": "concept--pre-approval-specificity",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--confirmation-matrix-too-heavy",
+      "target": "concept--credential-handoff",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--review-rubric-already-covers-most",
+      "target": "concept--review-exhaustiveness",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--task-chunking-principle",
+      "target": "concept--subagent-first-default",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--high-fan-out-floor",
+      "target": "concept--task-chunking-principle",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--gather-and-synthesize-loop",
+      "target": "concept--high-fan-out-floor",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--parent-dispatch-discipline",
+      "target": "concept--gather-and-synthesize-loop",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--nested-fan-out",
+      "target": "concept--parent-dispatch-discipline",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--chunk-boundary-check",
+      "target": "concept--task-chunking-principle",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--multi-agent-role-contract",
+      "target": "concept--subagent-first-default",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--portable-instruction-content",
+      "target": "concept--harness-prompt-triage",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--credential-handoff",
+      "target": "concept--pre-approval-specificity",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--least-privilege-permission-requests",
+      "target": "concept--pre-approval-specificity",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--sandbox-enforcement-mapping",
+      "target": "concept--pre-approval-specificity",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--no-progress-blocked-audit",
+      "target": "concept--completion-audit",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--fidelity-rule",
+      "target": "concept--completion-audit",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--review-exhaustiveness",
+      "target": "concept--completion-audit",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--self-contained-final-answer",
+      "target": "concept--compaction-continuity",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--harness-prompt-triage",
+      "target": "concept--multi-agent-role-contract",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    }
+  ]
+}

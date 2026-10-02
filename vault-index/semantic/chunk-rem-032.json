@@ -16,7 +16,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
       "source_location": "L7013",
       "norm_label": "markdown has no local-only extraction mode, so a vault graph requires an llm backend",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L6995] Markdown has no local-only mode, so the free AST-only Phase 1 offered earlier does not exist for a vault"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L07013] Important correction: **markdown has no local-only mode** — graphify requires a backend for docs. My \"free AST-only Phase 1\" doesn't exist for a vault."
     },
     {
       "id": "concept--think-false-is-ignored-on-the-ollama-generate-path",
@@ -42,11 +42,11 @@
       "label": ".graphifyignore is always enforced: no --no-graphifyignore flag exists, so the exclusions are permanent",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L6843",
+      "source_location": "L6933",
       "norm_label": ".graphifyignore is always enforced: no --no-graphifyignore flag exists, so the exclusions are permanent",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L6933] The strict .graphifyignore was kept because it still yields 1312 notes and 2.86M tokens including all of 01 - Projects and the wiki's concept, entity and cluster layer",
-        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L5548] A cloud backend means note content leaves the machine, contradicting the vault's no-external-service posture, so .graphifyignore became mandatory"
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L06933] The strict ignore still includes 1312 files / 2.86M tokens — that's a solid corpus, including all of 01 - Projects (320) and 956 files from 03 - Resources (which excludes sources/ but includes concepts, entities, Clusters, Technology).",
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L05548] **A `.graphifyignore` becomes mandatory, not optional.** A cloud model means note content leaves the machine — which contradicts the vault's own `AGENTS.md` (\"no semantic vector index or embedding service is configured\")"
       ]
     },
     {
@@ -70,11 +70,11 @@
       "label": "03 - Resources/Attachments treated as a scope exclusion rather than a content sample",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L9072",
+      "source_location": "L9060",
       "norm_label": "03 - resources/attachments treated as a scope exclusion rather than a content sample",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L9060] Attachment images are screenshots and rendered PDFs with low concept value and very high per-item cost; the 1316 markdown docs are the signal",
-        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L9062] Stopping the run to re-scope was safe because graphify reuses completed chunks from its cache"
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L09060] Decision: exclude `03 - Resources/Attachments/` from the graph. Rationale: they're binary attachments (screenshots, PDFs renders) whose concept value is low and whose per-item cost is very high. The user's goal is a knowledge graph of the vault's notes, and the 1316 md docs are the signal.",
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L09062] Let me stop the extraction, add Attachments to .graphifyignore, and restart. graphify caches completed chunks, so restarting should reuse the semantic cache (SHA256 cache) — the 31 completed chunks should be reused."
       ]
     },
     {
@@ -93,11 +93,11 @@
       "label": "88 .gitignore patterns still point at wiki/sources/ after the PARA move, so secret-bearing notes under 03 - Resources/LLM Wiki/sources stay tracked and pushed",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L4788",
+      "source_location": "L9803",
       "norm_label": "88 .gitignore patterns still point at wiki/sources/ after the para move, so secret-bearing notes under 03 - resources/llm wiki/sources stay tracked and pushed",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L9803] A .gitignore entry never untracks an already-tracked path, and untracking is the user's decision",
-        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L4790] No extraction pass may run until the pushed secret notes are resolved, because a .graphifyignore protects the graph, not the remote"
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L09803] **Ignore rules don't untrack tracked files.** Those 29 sensitive notes are still in the index and in history. The patch stops *future* tracking; it protects nothing until `git rm --cached` runs. You chose patch-only, so that's where it stands",
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L04790] **do not run any extraction pass over the vault until this is resolved.** A `.graphifyignore` alone won't help — it protects the graph, not the remote."
       ]
     },
     {
@@ -105,9 +105,9 @@
       "label": "git check-ignore reports nothing for tracked paths; verifying new ignore rules needs --no-index",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L8552",
+      "source_location": "L8542",
       "norm_label": "git check-ignore reports nothing for tracked paths; verifying new ignore rules needs --no-index",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L8542] gitignore does not apply to tracked files, so the first check-ignore run proved nothing about the new rules"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L08542] For tracked files, gitignore doesn't apply to them (they're already tracked), and `check-ignore` has a `--no-index` flag to check patterns regardless."
     },
     {
       "id": "concept--installer-wrote-a-false-graph-claim-into-agents-md",
@@ -132,7 +132,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
       "source_location": "L11362",
       "norm_label": "plain mv instead of git mv, because git mv stages and obsidian git auto-pushes staged paths within seconds",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L11202] git mv stages the rename, and Obsidian Git would commit and push it within ten seconds without review"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L11362] Aku pakai `mv` biasa, **bukan** `git mv` — `git mv` men-stage, dan vault auto-push 10 detik."
     },
     {
       "id": "concept--content-hashing-disproved-the-claimed-duplicate-corpus",
@@ -155,18 +155,18 @@
       "label": "An anonymous 404 from the API means the repo is private, not that it was deleted",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L16744",
+      "source_location": "L16846",
       "norm_label": "an anonymous 404 from the api means the repo is private, not that it was deleted",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L16846] Because the repo is private and the codes have not leaked, the backup codes are rotated calmly first and deletion comes later"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L16846] repo-mu **private**, dan 2FA codes itu belum bocor ke siapa pun. Jadi rotasi bisa kamu lakukan dengan tenang — tidak ada panik. Urutannya: rotasi dulu, baru delete nanti."
     },
     {
       "id": "concept--n8n-raw-capture-deletion-and-its-revert",
       "label": "Deleting 748 N8n raw captures and reverting it: fully reversible because every file was git-tracked",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L15271",
+      "source_location": "L15275",
       "norm_label": "deleting 748 n8n raw captures and reverting it: fully reversible because every file was git-tracked",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L15539] All 748 N8n files were git-tracked, so the deletion was fully reversible through git checkout and proceeded behind a manifest"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L15275] Karena semuanya git-tracked, penghapusan ini **fully reversible** lewat `git checkout`. Aku buat manifest dulu sesuai kontrak vault, lalu hentikan extraction, hapus, restart."
     },
     {
       "id": "concept--nxdomain-negative-cache-blocks-a-new-subdomain",
@@ -181,9 +181,12 @@
       "label": "The extracted graph has median degree 1, 1415 orphan nodes (23%), and one god node (LLM Wiki Index, 694 connections)",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
-      "source_location": "L20900",
+      "source_location": "L20769",
       "norm_label": "the extracted graph has median degree 1, 1415 orphan nodes (23%), and one god node (llm wiki index, 694 connections)",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L20769] The ugly rendering was a symptom of the graph's content, not of the colour scheme, so the renderer was rebuilt rather than the palette retuned"
+      "rationale": [
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L20769] **warnanya biyasanya jelek karena isinya kacau**, bukan karena warnanya.",
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L20983] Bukan ngedit HTML generator-nya — aku bikin renderer sendiri dari `graph.json`, pakai data asli."
+      ]
     },
     {
       "id": "concept--vis-network-edges-need-node-ids-not-dataset-ordinals",
@@ -248,7 +251,7 @@
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md",
       "source_location": "L8330",
       "norm_label": "the stale .gitignore patch was regenerated by hand rather than fuzzy-applied to a security file",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L8308] A fuzzy apply on a security-critical .gitignore is not verification, so the patch was regenerated from the current file"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - integrating-graphify-with-ai-skills-obsidian [ses_f08265ed8ffeskLquEm502BU5L].md:L08330] Patch is stale — the `.gitignore` append shifted its context, and `graphify-out/` is already handled. I'll regenerate it myself rather than trust a fuzzy apply on a security file."
     }
   ],
   "links": [

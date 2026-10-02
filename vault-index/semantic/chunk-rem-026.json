@@ -6,10 +6,10 @@
       "label": "Subagents do not commit; the parent commits",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
-      "source_location": "L5099",
+      "source_location": "L9004",
       "norm_label": "subagents do not commit; the parent commits",
       "summary": "Stated as P0-2 and then implemented: a subagent may not commit, branch, push or stash. The parent owns every git operation. Reused id; the rule is stated here in its widest form and the plan template's per-task 'Step 5: Commit' was the conflict it removes.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L9004] Parallel git commits in one repository race on .git/index.lock, so commit ownership moved to the parent and was batched per repo after the diff audit"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L09004] git itu shared mutable state tanpa per-writer lock, jadi dua subagent staging bersamaan menghasilkan commit berisi setengah perubahan milik yang lain, dan commit itu tidak pernah dites dalam bentuk itu."
     },
     {
       "id": "concept--pr-as-terminal-stage-of-a-session",
@@ -25,10 +25,10 @@
       "label": "One PR per session, not per subagent",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
-      "source_location": "L5101",
+      "source_location": "L5131",
       "norm_label": "one pr per session, not per subagent",
       "summary": "Granularity was left undefined in the reference material. The decision recorded here: 20 subagents inside one session produce one PR, 20 sessions produce 20 PRs.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L5131] One PR per session because per-chunk granularity multiplies into 200 PRs and kills the merge queue"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L05131] Kalau per chunk, 20 sesi × 10 subagent = 200 PR dan merge queue kamu mati."
     },
     {
       "id": "concept--branch-and-worktree-naming-derived-by-tool",
@@ -53,10 +53,10 @@
       "label": "Topological merge order taken from the plan depends_on DAG",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
-      "source_location": "L8998",
+      "source_location": "L5196",
       "norm_label": "topological merge order taken from the plan depends_on dag",
       "summary": "order is topological over depends_on with a name tiebreak so it is reproducible; surface <s> reports what has to rebase first. Rebase before every merge, resolve inside the session's own branch, verify after every merge.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L5196] Verify after each merge, because 20 merges then one test leaves 19 merges without evidence"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L05196] **Verifikasi setelah tiap merge**, bukan sekali di akhir. 20 merge lalu 1 test = 19 merge tanpa bukti"
     },
     {
       "id": "concept--pr-is-publication-not-verification",
@@ -84,7 +84,7 @@
       "source_location": "L12125",
       "norm_label": "issue number kept in a sidecar, never in plan frontmatter",
       "summary": "The mapping lives in plan.issues.json. An author-written github_issue frontmatter key is honoured as an override instead of being created over.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L12125] The issue number cannot go in plan frontmatter because the vault publisher hashes the whole plan text, so injecting it would make every mirror stale"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L12125] **Nomor issue tidak boleh masuk frontmatter plan.** Publisher vault meng-hash seluruh teks plan, jadi menyuntik nomor akan mengubah `source_hash` dan langsung membuat SEMUA mirror vault stale → exit 3."
     },
     {
       "id": "concept--issue-body-via-stdin-not-argv",
@@ -94,7 +94,7 @@
       "source_location": "L12127",
       "norm_label": "issue body passed on stdin rather than in argv",
       "summary": "A 10 KB plan in argv hits ARG_MAX and crosses shell quoting rules, so the bytes must land identical to the plan for the mirror premise to hold. A test asserts argv and stdin against the real gh binary on disk.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L12127] The body goes on stdin because byte identity between issue and plan is the only premise the mirror rests on"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L12127] **Body lewat stdin, bukan argv.** Plan 10 KB di argv kena `ARG_MAX` dan melewati quoting rules shell, jadi byte-nya berhenti identik dengan plan — dan itu satu-satunya premis mirror-nya."
     },
     {
       "id": "concept--issue-state-derived-from-plan-status",
@@ -104,7 +104,7 @@
       "source_location": "L12129",
       "norm_label": "issue state derived from the plan status field",
       "summary": "deriveAction is a pure function of (entry, planText, status) returning create, update-body, update-state, update-and-state or current, where current means zero gh calls. Blocked stays open because the work is unfinished; only Complete closes.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L12129] An issue closed by hand does not win, because the issue is derived state and the next sync reopens it"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L12129] Issue yang ditutup manual **tidak menang** — issue itu derived state, jadi sync berikutnya reopen-nya."
     },
     {
       "id": "concept--gh-issue-create-edit-have-no-json-flag",
@@ -129,20 +129,20 @@
       "label": "The plan file checklist outranks the tool list when they disagree",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
-      "source_location": "L12154",
+      "source_location": "L12156",
       "norm_label": "the plan file checklist outranks the tool list when they disagree",
       "summary": "Both artifacts are mandatory and neither replaces the other: the tool list is live progress that dies at compaction, the file checklist is the version-controlled record that survives it. On mismatch the file wins and the tool list is corrected.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L12156] Do not skip the list because the widget is missing; the list is the contract and the tool is only how it is displayed"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L12156] **Jangan skip list karena widget hilang** — list itu kontrak, tool cuma cara menampilkannya."
     },
     {
       "id": "concept--shipped-cli-rejects-its-sibling-app-schema",
       "label": "The shipped CLI rejects the database its own sibling app creates",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
-      "source_location": "L18589",
+      "source_location": "L18591",
       "norm_label": "the shipped cli rejects the database its own sibling app creates",
       "summary": "Snipset 0.6.854's schema_migrations.rs adds groups.research_tag; GROUP_COLUMNS in crates/snipset-cli/src/db/fingerprint.rs was not taught the column, so every write is refused with schema_match: false. Root cause is an upstream release defect, not drift on the machine: all seven local binaries were tested and all are 0.2.0 with research_tag appearing zero times.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L18591] research_tag is listed even though the CLI never reads it, because the constant is a fingerprint of the shape the app produces and fail-closed must survive"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L18591] `research_tag` dicantumkan **meski CLI tidak pernah membacanya**, karena konstanta itu fingerprint *bentuk yang dihasilkan app*, bukan kolom yang dipakai CLI."
     },
     {
       "id": "concept--fingerprint-name-vs-shape-agreement",
@@ -185,20 +185,20 @@
       "label": "schema cli fingerprint guard workflow",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
-      "source_location": "L19136",
+      "source_location": "L19148",
       "norm_label": "schema cli fingerprint guard workflow",
       "summary": "Reused id. The decisive measurement: no workflow in the Snipset repository runs on pull_request and ci.yml is workflow_dispatch only, so a correct guard test does not fire on the pull request that adds a schema migration, which is exactly the moment it must. The written but uncommitted remedy is a path-filtered workflow on schema_migrations.rs and fingerprint.rs.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L19148] A path-filtered trigger is needed because dispatch-only CI never runs on the pull request that adds the migration"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L19148] `ci.yml` is `workflow_dispatch`-only, so it will not fire on the PR that adds a schema migration. That's the exact failure moment."
     },
     {
       "id": "concept--hand-built-cli-breaks-runbook-byte-identity",
       "label": "A hand-built CLI breaks the runbook byte-identity invariant until a release ships",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
-      "source_location": "L18637",
+      "source_location": "L19200",
       "norm_label": "a hand-built cli breaks the runbook byte-identity invariant until a release ships",
       "summary": "The installed CLI is sha b6aa82ef from a hand build, not the release's 770f29da, so the runbook requirement that ~/.local/bin/snipset be identical to the release sidecar is violated until 0.6.855 ships. Recorded in Snipset PR #440 rather than left as a local binary.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L19200] Keep the hand-built CLI, because reverting to the release binary immediately re-breaks snippet writes"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L19200] Ia bekerja, dan menolaknya langsung mengembalikan `snippet add` ke kondisi rusak. Pelanggaran invarian itu adalah trade yang benar sampai rilis terbit, dan sudah tercatat di Snipset #440."
     },
     {
       "id": "concept--backup-filename-sha-misread-as-version-drift",
@@ -232,22 +232,22 @@
       "label": "gh 2.102.0 removed gh issue edit --state",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
-      "source_location": "L20133",
+      "source_location": "L20159",
       "norm_label": "gh 2.102.0 removed gh issue edit --state",
       "summary": "plan-issue-sync.mjs used --state, so every close and reopen would have failed with unknown flag against the installed gh. The class of mistake is identical to the --json assumption caught earlier in the same file, where one instance was fixed and the second left behind.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L20159] The concurrent session's bug report was verified against the installed gh before being accepted"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L20159] Saya verifikasi klaim `gh` mereka sebelum menerima:"
     },
     {
       "id": "concept--concurrent-session-committed-onto-my-branch",
       "label": "A concurrent session committed onto this session's branch and moved HEAD",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
-      "source_location": "L19757",
+      "source_location": "L19847",
       "norm_label": "a concurrent session committed onto this session's branch and moved head",
       "summary": "Three commits by the same git identity landed at 18:25, 18:27 and 18:31 on the branch that PR #440 was merged from, and a fourth dirty file appeared, which broke this session's commit with cannot lock ref 'HEAD'. Two live opencode processes confirmed a second writer. The same session was found active in ai-skills and on the build host, and its commit fixed a real bug in code already merged to main.",
       "rationale": [
-        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L19847] Unstage the file rather than leave it staged, because loud failure beats silent contamination",
-        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L07612] Stop all work in that repository while another writer is active"
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L19847] Unstaging is the right call — loud failure beats silent contamination.",
+        "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L19765] I must not proceed with repo surgery while another writer is active."
       ]
     },
     {
@@ -255,10 +255,10 @@
       "label": "Negative control on the fingerprint guard: removing the column fails two tests",
       "file_type": "concept",
       "source_file": "05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md",
-      "source_location": "L17451",
+      "source_location": "L17370",
       "norm_label": "negative control on the fingerprint guard: removing the column fails two tests",
       "summary": "Six of six green, then research_tag was temporarily removed and two tests failed with the exact diagnosis, so the guard is real rather than decorative.",
-      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L17370] A guard only ever observed passing is indistinguishable from one that does nothing"
+      "rationale": "[05 - Conversations/home-belajarcarabelajar-ai-skills/2026-10-01 - evaluasi-improvement-ai-skills-dari-data [ses_f0a32890affewqrQwI030ukAbI].md:L17370] guard ini harus benar-benar menangkap bug, kalau tidak dia cuma hiasan"
     }
   ],
   "links": [

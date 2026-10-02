@@ -1,0 +1,507 @@
+{
+  "batch": "081",
+  "nodes": [
+    {
+      "id": "concept--usetranslation-hard-default-to-english",
+      "label": "useTranslation hard default to English",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
+      "source_location": "L26",
+      "norm_label": "useTranslation hard default to English"
+    },
+    {
+      "id": "concept--i18n-completeness-guard-blind-spot",
+      "label": "i18n completeness guard blind spot",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
+      "source_location": "L28",
+      "norm_label": "i18n completeness guard blind spot"
+    },
+    {
+      "id": "concept--prop-drilling-as-the-language-convention",
+      "label": "Prop drilling as the language convention",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
+      "source_location": "L56",
+      "norm_label": "prop drilling as the language convention"
+    },
+    {
+      "id": "concept--license-gate-structural-blocker",
+      "label": "LicenseGate structural blocker",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
+      "source_location": "L1102",
+      "norm_label": "license gate structural blocker"
+    },
+    {
+      "id": "concept--use-overlay-language-localstorage-hook",
+      "label": "useOverlayLanguage localStorage hook",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
+      "source_location": "L1511",
+      "norm_label": "useOverlayLanguage localStorage hook"
+    },
+    {
+      "id": "concept--underscore-prop-discard-satisfies-lint",
+      "label": "Underscore prop discard satisfies lint",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
+      "source_location": "L38",
+      "norm_label": "underscore prop discard satisfies lint"
+    },
+    {
+      "id": "concept--red-probe-outside-the-repo",
+      "label": "RED probe outside the repo",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
+      "source_location": "L67",
+      "norm_label": "red probe outside the repo"
+    },
+    {
+      "id": "concept--explicit-lang-instead-of-tolocalestring",
+      "label": "Explicit lang instead of toLocale",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
+      "source_location": "L67",
+      "norm_label": "explicit lang instead of toLocale"
+    },
+    {
+      "id": "concept--clean-positive-control",
+      "label": "Clean positive control",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
+      "source_location": "L13512",
+      "norm_label": "clean positive control"
+    },
+    {
+      "id": "concept--optional-lang-prop-keeps-english-identical",
+      "label": "Optional lang prop keeps English identical",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
+      "source_location": "L13528",
+      "norm_label": "optional lang prop keeps English identical"
+    },
+    {
+      "id": "concept--stale-audit-line-numbers",
+      "label": "Stale audit line numbers",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
+      "source_location": "L33",
+      "norm_label": "stale audit line numbers"
+    },
+    {
+      "id": "concept--dead-code-verified-not-deleted",
+      "label": "Dead code verified not deleted",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
+      "source_location": "L13539",
+      "norm_label": "dead code verified not deleted"
+    },
+    {
+      "id": "concept--missing-web-search-grounding-toast-key",
+      "label": "Missing web search grounding toast key",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
+      "source_location": "L13532",
+      "norm_label": "missing web search grounding toast key"
+    },
+    {
+      "id": "concept--pristine-head-reproduction",
+      "label": "Pristine HEAD reproduction",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
+      "source_location": "L13565",
+      "norm_label": "pristine head reproduction"
+    },
+    {
+      "id": "rationale--use-what-exists-prop-drilling-is-the-convention",
+      "label": "Use what exists, prop drilling is the convention",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
+      "source_location": "L56",
+      "norm_label": "use what exists, prop drilling is the convention"
+    },
+    {
+      "id": "rationale--host-default-locale-would-false-pass",
+      "label": "Host default locale would false pass",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
+      "source_location": "L67",
+      "norm_label": "host default locale would false pass"
+    },
+    {
+      "id": "rationale--license-gate-is-the-parent-of-app",
+      "label": "LicenseGate is the parent of App",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
+      "source_location": "L13533",
+      "norm_label": "license gate is the parent of App"
+    },
+    {
+      "id": "rationale--toggle-label-keys-would-change-english",
+      "label": "Toggle label keys would change English",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
+      "source_location": "L13532",
+      "norm_label": "toggle label keys would change English"
+    },
+    {
+      "id": "rationale--optional-props-mean-no-english-regression",
+      "label": "Optional props mean no English regression",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
+      "source_location": "L13528",
+      "norm_label": "optional props mean no English regression"
+    },
+    {
+      "id": "rationale--audit-flagged-some-entries-as-false-positives",
+      "label": "Audit flagged some entries as false positives",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
+      "source_location": "L33",
+      "norm_label": "audit flagged some entries as false positives"
+    },
+    {
+      "id": "rationale--do-not-resurrect-or-delete-dead-code",
+      "label": "Do not resurrect or delete dead code",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
+      "source_location": "L59",
+      "norm_label": "do not resurrect or delete dead code"
+    },
+    {
+      "id": "rationale--same-failure-on-pristine-head-proves-not-mine",
+      "label": "Same failure on pristine HEAD proves not mine",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - d23a-in-app-language-plumbing [ses_f209b2405ffe08AnCcTF0KB8oo].md",
+      "source_location": "L13565",
+      "norm_label": "same failure on pristine HEAD proves not mine"
+    },
+    {
+      "id": "concept--zero-unique-commit-merge-check",
+      "label": "Zero unique commit merge check",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
+      "source_location": "L535",
+      "norm_label": "zero unique commit merge check"
+    },
+    {
+      "id": "concept--remote-branch-deletion-needs-confirmation",
+      "label": "Remote branch deletion needs confirmation",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
+      "source_location": "L558",
+      "norm_label": "remote branch deletion needs confirmation"
+    },
+    {
+      "id": "concept--github-keeps-no-branch-reflogs",
+      "label": "GitHub keeps no branch reflogs",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
+      "source_location": "L2716",
+      "norm_label": "github keeps no branch reflogs"
+    },
+    {
+      "id": "concept--runner-minute-freeze",
+      "label": "Runner minute freeze",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
+      "source_location": "L1427",
+      "norm_label": "runner minute freeze"
+    },
+    {
+      "id": "concept--path-filtered-pull-request-trigger",
+      "label": "Path filtered pull request trigger",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
+      "source_location": "L2703",
+      "norm_label": "path filtered pull request trigger"
+    },
+    {
+      "id": "concept--checkout-action-version-pin-drift",
+      "label": "checkout action version pin drift",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
+      "source_location": "L2704",
+      "norm_label": "checkout action version pin drift"
+    },
+    {
+      "id": "concept--untracked-file-survives-checkout",
+      "label": "Untracked file survives checkout",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
+      "source_location": "L209",
+      "norm_label": "untracked file survives checkout"
+    },
+    {
+      "id": "concept--schema-cli-fingerprint-guard-workflow",
+      "label": "schema cli fingerprint guard workflow",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
+      "source_location": "L1197",
+      "norm_label": "schema cli fingerprint guard workflow"
+    },
+    {
+      "id": "rationale--git-branch-d-not-force-delete",
+      "label": "Use branch minus d not force delete",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
+      "source_location": "L543",
+      "norm_label": "use branch minus d not force delete"
+    },
+    {
+      "id": "rationale--remote-deletion-is-visible-to-everyone",
+      "label": "Remote deletion is visible to everyone",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
+      "source_location": "L558",
+      "norm_label": "remote deletion is visible to everyone"
+    },
+    {
+      "id": "rationale--no-reflog-makes-the-tips-unrecoverable",
+      "label": "No reflog makes the tips unrecoverable",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
+      "source_location": "L2716",
+      "norm_label": "no reflog makes the tips unrecoverable"
+    },
+    {
+      "id": "rationale--push-trigger-reenables-runner-consumption",
+      "label": "Push trigger reenables runner consumption",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
+      "source_location": "L1427",
+      "norm_label": "push trigger reenables runner consumption"
+    },
+    {
+      "id": "rationale--path-filter-bounds-runner-minutes",
+      "label": "Path filter bounds runner minutes",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
+      "source_location": "L2703",
+      "norm_label": "path filter bounds runner minutes"
+    },
+    {
+      "id": "rationale--dependabot-cannot-see-an-untracked-workflow",
+      "label": "Dependabot cannot see an untracked workflow",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
+      "source_location": "L2704",
+      "norm_label": "dependabot cannot see an untracked workflow"
+    },
+    {
+      "id": "rationale--untracked-paths-absent-from-origin-main",
+      "label": "Untracked paths absent from origin main",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - switch-to-main-delete-merged-branches [ses_f07c64099ffezGC09Kcf1yMVXs].md",
+      "source_location": "L209",
+      "norm_label": "untracked paths absent from origin main"
+    }
+  ],
+  "links": [
+    {
+      "source": "rationale--use-what-exists-prop-drilling-is-the-convention",
+      "target": "concept--prop-drilling-as-the-language-convention",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--host-default-locale-would-false-pass",
+      "target": "concept--explicit-lang-instead-of-tolocalestring",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--license-gate-is-the-parent-of-app",
+      "target": "concept--license-gate-structural-blocker",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--toggle-label-keys-would-change-english",
+      "target": "concept--missing-web-search-grounding-toast-key",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--optional-props-mean-no-english-regression",
+      "target": "concept--optional-lang-prop-keeps-english-identical",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--audit-flagged-some-entries-as-false-positives",
+      "target": "concept--stale-audit-line-numbers",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--do-not-resurrect-or-delete-dead-code",
+      "target": "concept--dead-code-verified-not-deleted",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--same-failure-on-pristine-head-proves-not-mine",
+      "target": "concept--pristine-head-reproduction",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--usetranslation-hard-default-to-english",
+      "target": "concept--i18n-completeness-guard-blind-spot",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--license-gate-structural-blocker",
+      "target": "concept--use-overlay-language-localstorage-hook",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--license-gate-structural-blocker",
+      "target": "concept--prop-drilling-as-the-language-convention",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--underscore-prop-discard-satisfies-lint",
+      "target": "concept--usetranslation-hard-default-to-english",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--underscore-prop-discard-satisfies-lint",
+      "target": "concept--optional-lang-prop-keeps-english-identical",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--red-probe-outside-the-repo",
+      "target": "concept--explicit-lang-instead-of-tolocalestring",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--red-probe-outside-the-repo",
+      "target": "concept--clean-positive-control",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--clean-positive-control",
+      "target": "concept--explicit-lang-instead-of-tolocalestring",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--pristine-head-reproduction",
+      "target": "concept--clean-positive-control",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--optional-lang-prop-keeps-english-identical",
+      "target": "concept--prop-drilling-as-the-language-convention",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--stale-audit-line-numbers",
+      "target": "concept--dead-code-verified-not-deleted",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--missing-web-search-grounding-toast-key",
+      "target": "concept--i18n-completeness-guard-blind-spot",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "rationale--git-branch-d-not-force-delete",
+      "target": "concept--zero-unique-commit-merge-check",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--remote-deletion-is-visible-to-everyone",
+      "target": "concept--remote-branch-deletion-needs-confirmation",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--no-reflog-makes-the-tips-unrecoverable",
+      "target": "concept--github-keeps-no-branch-reflogs",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--push-trigger-reenables-runner-consumption",
+      "target": "concept--runner-minute-freeze",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--path-filter-bounds-runner-minutes",
+      "target": "concept--path-filtered-pull-request-trigger",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--dependabot-cannot-see-an-untracked-workflow",
+      "target": "concept--checkout-action-version-pin-drift",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--untracked-paths-absent-from-origin-main",
+      "target": "concept--untracked-file-survives-checkout",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--runner-minute-freeze",
+      "target": "concept--path-filtered-pull-request-trigger",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--runner-minute-freeze",
+      "target": "concept--schema-cli-fingerprint-guard-workflow",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--schema-cli-fingerprint-guard-workflow",
+      "target": "concept--checkout-action-version-pin-drift",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--schema-cli-fingerprint-guard-workflow",
+      "target": "concept--untracked-file-survives-checkout",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--checkout-action-version-pin-drift",
+      "target": "concept--untracked-file-survives-checkout",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "concept--zero-unique-commit-merge-check",
+      "target": "concept--remote-branch-deletion-needs-confirmation",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--remote-branch-deletion-needs-confirmation",
+      "target": "concept--github-keeps-no-branch-reflogs",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    }
+  ]
+}

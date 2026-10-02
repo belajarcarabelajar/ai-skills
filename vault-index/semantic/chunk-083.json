@@ -1,0 +1,295 @@
+{
+  "batch": "batch-083",
+  "nodes": [
+    {
+      "id": "concept--silent-failure-of-linux-attachment-injection",
+      "label": "Silent failure of Linux attachment injection",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - h10-overlay-failure-feedback [ses_f08b3c99bffeCVhBbeHh8rHpqJ].md",
+      "source_location": "L2463",
+      "norm_label": "silent failure of linux attachment injection"
+    },
+    {
+      "id": "concept--toast-error-feedback-in-downloads-magic-menu",
+      "label": "Toast error feedback in DownloadsMagicMenu",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - h10-overlay-failure-feedback [ses_f08b3c99bffeCVhBbeHh8rHpqJ].md",
+      "source_location": "L2352",
+      "norm_label": "toast error feedback in downloadsmagicmenu"
+    },
+    {
+      "id": "concept--non-windows-inject-file-attachment-fallback",
+      "label": "Non-Windows inject_file_attachment fallback",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - h10-overlay-failure-feedback [ses_f08b3c99bffeCVhBbeHh8rHpqJ].md",
+      "source_location": "L2452",
+      "norm_label": "non-windows inject_file_attachment fallback"
+    },
+    {
+      "id": "concept--rust-side-window-hide-before-injection",
+      "label": "Rust-side window hide before injection",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - h10-overlay-failure-feedback [ses_f08b3c99bffeCVhBbeHh8rHpqJ].md",
+      "source_location": "L2435",
+      "norm_label": "rust-side window hide before injection"
+    },
+    {
+      "id": "concept--non-windows-copy-bundle-to-clipboard-no-op",
+      "label": "Non-Windows copy_bundle_to_clipboard no-op",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - h10-overlay-failure-feedback [ses_f08b3c99bffeCVhBbeHh8rHpqJ].md",
+      "source_location": "L2466",
+      "norm_label": "non-windows copy_bundle_to_clipboard no-op"
+    },
+    {
+      "id": "rationale--toast-alone-cannot-deliver-linux-failure-feedback",
+      "label": "A toast alone cannot deliver Linux failure feedback",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - h10-overlay-failure-feedback [ses_f08b3c99bffeCVhBbeHh8rHpqJ].md",
+      "source_location": "L2583",
+      "norm_label": "a toast alone cannot deliver linux failure feedback"
+    },
+    {
+      "id": "rationale--defer-window-hide-until-injection-outcome-known",
+      "label": "Defer the window hide until the injection outcome is known",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-10-01 - h10-overlay-failure-feedback [ses_f08b3c99bffeCVhBbeHh8rHpqJ].md",
+      "source_location": "L2586",
+      "norm_label": "defer the window hide until the injection outcome is known"
+    },
+    {
+      "id": "concept--three-layer-llm-wiki-separation",
+      "label": "Three-layer LLM Wiki separation",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md",
+      "source_location": "L12572",
+      "norm_label": "three-layer llm wiki separation"
+    },
+    {
+      "id": "concept--frozen-source-evidence-layer",
+      "label": "Frozen source evidence layer",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md",
+      "source_location": "L12580",
+      "norm_label": "frozen source evidence layer"
+    },
+    {
+      "id": "concept--restricted-sources-manifest",
+      "label": "Restricted Sources Manifest",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md",
+      "source_location": "L12674",
+      "norm_label": "restricted sources manifest"
+    },
+    {
+      "id": "concept--source-path-and-source-hash-provenance",
+      "label": "source_path and source_hash provenance",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md",
+      "source_location": "L12633",
+      "norm_label": "source_path and source_hash provenance"
+    },
+    {
+      "id": "concept--vault-lint-contract-mode",
+      "label": "vault_lint.py --contract mode",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md",
+      "source_location": "L12666",
+      "norm_label": "vault_lint.py --contract mode"
+    },
+    {
+      "id": "concept--missing-frontmatter-linter-measurement-gap",
+      "label": "missing_frontmatter linter measurement gap",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md",
+      "source_location": "L12501",
+      "norm_label": "missing_frontmatter linter measurement gap"
+    },
+    {
+      "id": "concept--bare-stem-wikilink-ambiguity",
+      "label": "Bare-stem wikilink ambiguity",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md",
+      "source_location": "L12568",
+      "norm_label": "bare-stem wikilink ambiguity"
+    },
+    {
+      "id": "concept--authored-index-summary-column",
+      "label": "Authored index Summary column",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md",
+      "source_location": "L12531",
+      "norm_label": "authored index summary column"
+    },
+    {
+      "id": "concept--credential-material-in-active-source-layer",
+      "label": "Credential material in the active source layer",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md",
+      "source_location": "L12540",
+      "norm_label": "credential material in the active source layer"
+    },
+    {
+      "id": "rationale--source-bodies-must-stay-byte-identical",
+      "label": "Source bodies must stay byte-identical",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md",
+      "source_location": "L12574",
+      "norm_label": "source bodies must stay byte-identical"
+    },
+    {
+      "id": "rationale--frontmatter-edit-falsifies-the-capture-record",
+      "label": "A frontmatter edit falsifies the capture record",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md",
+      "source_location": "L12580",
+      "norm_label": "a frontmatter edit falsifies the capture record"
+    },
+    {
+      "id": "rationale--manifest-makes-exclusion-possible-when-files-are-frozen",
+      "label": "A path manifest makes exclusion possible when the files cannot be modified",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md",
+      "source_location": "L12676",
+      "norm_label": "a path manifest makes exclusion possible when the files cannot be modified"
+    },
+    {
+      "id": "rationale--copied-index-summary-cannot-drift",
+      "label": "A Summary cell copied from the page cannot drift",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md",
+      "source_location": "L12658",
+      "norm_label": "a summary cell copied from the page cannot drift"
+    },
+    {
+      "id": "rationale--gaps-and-uncertainty-stops-summary-laundering",
+      "label": "Gaps and uncertainty stops a summary laundering a weak source",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar/2026-09-25 - review-llm-wiki-sources [ses_f269c4c88ffeJXzhCNYDN11Zw4].md",
+      "source_location": "L12611",
+      "norm_label": "gaps and uncertainty stops a summary laundering a weak source"
+    }
+  ],
+  "links": [
+    {
+      "source": "concept--toast-error-feedback-in-downloads-magic-menu",
+      "target": "concept--silent-failure-of-linux-attachment-injection",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--non-windows-inject-file-attachment-fallback",
+      "target": "concept--silent-failure-of-linux-attachment-injection",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--rust-side-window-hide-before-injection",
+      "target": "concept--silent-failure-of-linux-attachment-injection",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--non-windows-inject-file-attachment-fallback",
+      "target": "concept--non-windows-copy-bundle-to-clipboard-no-op",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--toast-alone-cannot-deliver-linux-failure-feedback",
+      "target": "concept--toast-error-feedback-in-downloads-magic-menu",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--toast-alone-cannot-deliver-linux-failure-feedback",
+      "target": "concept--silent-failure-of-linux-attachment-injection",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--defer-window-hide-until-injection-outcome-known",
+      "target": "concept--rust-side-window-hide-before-injection",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--frozen-source-evidence-layer",
+      "target": "concept--three-layer-llm-wiki-separation",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--restricted-sources-manifest",
+      "target": "concept--three-layer-llm-wiki-separation",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--source-path-and-source-hash-provenance",
+      "target": "concept--frozen-source-evidence-layer",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--missing-frontmatter-linter-measurement-gap",
+      "target": "concept--vault-lint-contract-mode",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--bare-stem-wikilink-ambiguity",
+      "target": "concept--three-layer-llm-wiki-separation",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--authored-index-summary-column",
+      "target": "concept--three-layer-llm-wiki-separation",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--credential-material-in-active-source-layer",
+      "target": "concept--restricted-sources-manifest",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--credential-material-in-active-source-layer",
+      "target": "concept--missing-frontmatter-linter-measurement-gap",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "rationale--source-bodies-must-stay-byte-identical",
+      "target": "concept--three-layer-llm-wiki-separation",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--frontmatter-edit-falsifies-the-capture-record",
+      "target": "concept--frozen-source-evidence-layer",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--manifest-makes-exclusion-possible-when-files-are-frozen",
+      "target": "concept--restricted-sources-manifest",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--copied-index-summary-cannot-drift",
+      "target": "concept--authored-index-summary-column",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--gaps-and-uncertainty-stops-summary-laundering",
+      "target": "concept--three-layer-llm-wiki-separation",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    }
+  ]
+}

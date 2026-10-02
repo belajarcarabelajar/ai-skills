@@ -1,0 +1,303 @@
+{
+  "batch_id": "batch-078",
+  "nodes": [
+    {
+      "id": "concept--voice-profile-select-empty-state",
+      "label": "Voice Profile select renders as an empty greyed box",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - map-voice-profile-ui-surfaces [ses_f26387f22ffewAD4aiHCS1yQFZ].md",
+      "source_location": "L2620",
+      "norm_label": "voice profile select renders as an empty greyed box"
+    },
+    {
+      "id": "concept--select-placeholder-option-asymmetry",
+      "label": "Placeholder option asymmetry between sibling selects",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - map-voice-profile-ui-surfaces [ses_f26387f22ffewAD4aiHCS1yQFZ].md",
+      "source_location": "L2637",
+      "norm_label": "placeholder option asymmetry between sibling selects"
+    },
+    {
+      "id": "concept--missing-disabled-css-rule-for-select-input",
+      "label": "No :disabled CSS rule exists for .input / select.input",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - map-voice-profile-ui-surfaces [ses_f26387f22ffewAD4aiHCS1yQFZ].md",
+      "source_location": "L2667",
+      "norm_label": "no :disabled css rule exists for .input / select.input"
+    },
+    {
+      "id": "concept--tts-voice-resolver-filters-unresolvable-profiles",
+      "label": "listAvailableVoiceProfiles filters profiles with no resolved voice",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - map-voice-profile-ui-surfaces [ses_f26387f22ffewAD4aiHCS1yQFZ].md",
+      "source_location": "L2592",
+      "norm_label": "listavailablevoiceprofiles filters profiles with no resolved voice"
+    },
+    {
+      "id": "concept--tts-voice-profile-picker-button-group",
+      "label": "TtsVoiceProfilePicker is a button group, not a select",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - map-voice-profile-ui-surfaces [ses_f26387f22ffewAD4aiHCS1yQFZ].md",
+      "source_location": "L2643",
+      "norm_label": "ttsvoiceprofilepicker is a button group, not a select"
+    },
+    {
+      "id": "concept--audio-settings-raw-select-no-wrapper-component",
+      "label": "No Select wrapper component; AudioSettingsSection uses raw select.input",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - map-voice-profile-ui-surfaces [ses_f26387f22ffewAD4aiHCS1yQFZ].md",
+      "source_location": "L2672",
+      "norm_label": "no select wrapper component; audiosettingssection uses raw select.input"
+    },
+    {
+      "id": "rationale--explain-empty-voice-runtime-instead-of-enabled-empty-dropdown",
+      "label": "Explain an empty voice runtime instead of leaving an enabled empty profile dropdown",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - map-voice-profile-ui-surfaces [ses_f26387f22ffewAD4aiHCS1yQFZ].md",
+      "source_location": "L2676",
+      "norm_label": "explain an empty voice runtime instead of leaving an enabled empty profile dropdown"
+    },
+    {
+      "id": "rationale--picker-substitutes-message-for-whole-list",
+      "label": "Substitute the unavailable message for the whole list so no empty widget is drawn",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-25 - map-voice-profile-ui-surfaces [ses_f26387f22ffewAD4aiHCS1yQFZ].md",
+      "source_location": "L2649",
+      "norm_label": "substitute the unavailable message for the whole list so no empty widget is drawn"
+    },
+    {
+      "id": "concept--per-producer-collector-state",
+      "label": "Per-producer CollectorState with reason codes",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-linux-capture-capability [ses_f20039a54ffeg73csCMDUwcFtf].md",
+      "source_location": "L15788",
+      "norm_label": "per-producer collectorstate with reason codes"
+    },
+    {
+      "id": "concept--live-collector-probes-replace-target-os-flag",
+      "label": "Live collector probes replace cfg!(target_os=\"windows\") input-density flag",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-linux-capture-capability [ses_f20039a54ffeg73csCMDUwcFtf].md",
+      "source_location": "L15798",
+      "norm_label": "live collector probes replace cfg!(target_os=\"windows\") input-density flag"
+    },
+    {
+      "id": "concept--current-capture-availability-replaces-history-inference",
+      "label": "current_capture_availability replaces historical-context health inference",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-linux-capture-capability [ses_f20039a54ffeg73csCMDUwcFtf].md",
+      "source_location": "L15790",
+      "norm_label": "current_capture_availability replaces historical-context health inference"
+    },
+    {
+      "id": "concept--activity-input-counting-decoupled-from-snippet-gates",
+      "label": "Activity input counting decoupled from snippet expansion gates",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-linux-capture-capability [ses_f20039a54ffeg73csCMDUwcFtf].md",
+      "source_location": "L15792",
+      "norm_label": "activity input counting decoupled from snippet expansion gates"
+    },
+    {
+      "id": "concept--evdev-pointer-device-heuristic",
+      "label": "evdev pointer device heuristic (BTN_LEFT plus REL_X/REL_Y)",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-linux-capture-capability [ses_f20039a54ffeg73csCMDUwcFtf].md",
+      "source_location": "L15793",
+      "norm_label": "evdev pointer device heuristic (btn_left plus rel_x/rel_y)"
+    },
+    {
+      "id": "concept--partial-coverage-without-fake-zero",
+      "label": "Partial keyboard-only coverage reported without a fake zero mouse",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-linux-capture-capability [ses_f20039a54ffeg73csCMDUwcFtf].md",
+      "source_location": "L15799",
+      "norm_label": "partial keyboard-only coverage reported without a fake zero mouse"
+    },
+    {
+      "id": "concept--select-capture-reason-priority",
+      "label": "select_capture_reason priority ordering",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-linux-capture-capability [ses_f20039a54ffeg73csCMDUwcFtf].md",
+      "source_location": "L15790",
+      "norm_label": "select_capture_reason priority ordering"
+    },
+    {
+      "id": "concept--counter-test-serial-lock",
+      "label": "COUNTER_TEST_SERIAL shared lock for global counter races",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-linux-capture-capability [ses_f20039a54ffeg73csCMDUwcFtf].md",
+      "source_location": "L15814",
+      "norm_label": "counter_test_serial shared lock for global counter races"
+    },
+    {
+      "id": "concept--rust-e0603-pub-re-export-fix",
+      "label": "Rust E0603 fixed with a pub use re-export through types.rs",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-linux-capture-capability [ses_f20039a54ffeg73csCMDUwcFtf].md",
+      "source_location": "L16656",
+      "norm_label": "rust e0603 fixed with a pub use re-export through types.rs"
+    },
+    {
+      "id": "concept--evdev-relative-axis-code-tuple-field",
+      "label": "evdev 0.13.2 RelativeAxisCode exposes no code(); use the .0 tuple field",
+      "file_type": "concept",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-linux-capture-capability [ses_f20039a54ffeg73csCMDUwcFtf].md",
+      "source_location": "L16658",
+      "norm_label": "evdev 0.13.2 relativeaxiscode exposes no code(); use the .0 tuple field"
+    },
+    {
+      "id": "rationale--pointer-unknown-until-observed-because-rdev-cannot-enumerate",
+      "label": "X11 pointer stays Unknown until first observed action because rdev cannot enumerate",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-linux-capture-capability [ses_f20039a54ffeg73csCMDUwcFtf].md",
+      "source_location": "L15810",
+      "norm_label": "x11 pointer stays unknown until first observed action because rdev cannot enumerate"
+    },
+    {
+      "id": "rationale--additive-per-producer-statuses-for-frontend-compat",
+      "label": "Per-producer statuses added additively so the current frontend keeps working until T9 migrates it",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-linux-capture-capability [ses_f20039a54ffeg73csCMDUwcFtf].md",
+      "source_location": "L15810",
+      "norm_label": "per-producer statuses added additively so the current frontend keeps working until t9 migrates it"
+    },
+    {
+      "id": "rationale--no-grab-no-key-storage-for-linux-event-path",
+      "label": "Extend the existing Linux event path without a second listener, without grabbing input, without storing keys",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-linux-capture-capability [ses_f20039a54ffeg73csCMDUwcFtf].md",
+      "source_location": "L36",
+      "norm_label": "extend the existing linux event path without a second listener, without grabbing input, without storing keys"
+    },
+    {
+      "id": "rationale--shared-serial-lock-for-global-counter-races",
+      "label": "Mitigate test-only global-counter races with a shared serial lock",
+      "file_type": "rationale",
+      "source_file": "05 - Conversations/home-belajarcarabelajar-proyek-snipset/2026-09-26 - t8-linux-capture-capability [ses_f20039a54ffeg73csCMDUwcFtf].md",
+      "source_location": "L15814",
+      "norm_label": "mitigate test-only global-counter races with a shared serial lock"
+    }
+  ],
+  "links": [
+    {
+      "source": "concept--select-placeholder-option-asymmetry",
+      "target": "concept--voice-profile-select-empty-state",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--missing-disabled-css-rule-for-select-input",
+      "target": "concept--voice-profile-select-empty-state",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--tts-voice-resolver-filters-unresolvable-profiles",
+      "target": "concept--voice-profile-select-empty-state",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--tts-voice-profile-picker-button-group",
+      "target": "concept--voice-profile-select-empty-state",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--audio-settings-raw-select-no-wrapper-component",
+      "target": "concept--select-placeholder-option-asymmetry",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--explain-empty-voice-runtime-instead-of-enabled-empty-dropdown",
+      "target": "concept--voice-profile-select-empty-state",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--picker-substitutes-message-for-whole-list",
+      "target": "concept--tts-voice-profile-picker-button-group",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--live-collector-probes-replace-target-os-flag",
+      "target": "concept--per-producer-collector-state",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--current-capture-availability-replaces-history-inference",
+      "target": "concept--per-producer-collector-state",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--select-capture-reason-priority",
+      "target": "concept--current-capture-availability-replaces-history-inference",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--activity-input-counting-decoupled-from-snippet-gates",
+      "target": "concept--current-capture-availability-replaces-history-inference",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--partial-coverage-without-fake-zero",
+      "target": "concept--per-producer-collector-state",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--evdev-pointer-device-heuristic",
+      "target": "concept--partial-coverage-without-fake-zero",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--counter-test-serial-lock",
+      "target": "concept--activity-input-counting-decoupled-from-snippet-gates",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--rust-e0603-pub-re-export-fix",
+      "target": "concept--per-producer-collector-state",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "concept--evdev-relative-axis-code-tuple-field",
+      "target": "concept--evdev-pointer-device-heuristic",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--pointer-unknown-until-observed-because-rdev-cannot-enumerate",
+      "target": "concept--per-producer-collector-state",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--additive-per-producer-statuses-for-frontend-compat",
+      "target": "concept--per-producer-collector-state",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--no-grab-no-key-storage-for-linux-event-path",
+      "target": "concept--evdev-pointer-device-heuristic",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rationale--shared-serial-lock-for-global-counter-races",
+      "target": "concept--counter-test-serial-lock",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED"
+    }
+  ]
+}

@@ -13,7 +13,10 @@ sprites", or "offer the Blue Feather", this is what it means.
 | Crops and seeds | What you plant, tend, and ship | Skills and their source files; `install.sh` plants them into every harness |
 | Power Berry | A hidden berry that permanently raises max stamina by 10; ten of them exist | A permanent capability upgrade: each merged skill or tooling change raises what the pipeline can do in a day |
 | Mystic Berry (Kappa's Berry) | Halves the fatigue rate; earned from Kappa after leaving three cucumbers in Mother Lake, one per spring day | Work that halves context fatigue: token frugality, graphify queries over raw dumps, `ctx_execute` over full output |
-| The seven Harvest Sprites | Chef, Nappy, Hoggy, Aqua, Bold, Timid, and Staid, each in a different color | Subagents. Fan-out sends sprites to separate fields, and each sprite owns one small chunk |
+| The seven Harvest Sprites | Chef, Nappy, Hoggy, Aqua, Bold, Timid, and Staid, each in a different color; they live in the hut behind the church and are hired for 1, 3, or 7 days once raised to 3 hearts | Subagents. Fan-out sends sprites to separate fields, and each sprite owns one small chunk |
+| Watering (menyiram) | One of the three farm jobs: ask a sprite to water crops; skill is tracked per job and rises by 1 per task; trained by the watering follow-the-leader minigame | Keep-alive work: rebase the session branch, rerun checks, keep in-progress crops alive until harvest |
+| Animal Care (merawat) | One of the three farm jobs: ask a sprite to feed and brush animals; same 1/3/7 day request and 3-heart rule; trained by the chicken-feeding minigame | Long-lived assets: templates, the graph, the vault index, and docs that live across seasons, not one harvest |
+| Harvesting (memanen) | One of the three farm jobs: ask a sprite to harvest ripe crops; same request rules; guides advise keeping at least one sprite on harvest | Shipping: gather reports, verify with fresh evidence, toss into the shipping bin (`scripts/pr-registry.mjs`), and propose the Blue Feather |
 | The Tea Party | A spring gathering held only when all seven sprites are home | The gather-and-synthesize checkpoint: reports are collected only when every dispatched sprite has reported |
 | Affection (heart levels) | Seven colors from black to red, tracked in points (blue is 20,000 to 29,999; green is 30,000 to 39,999) | Trust, measured: review findings, fresh evidence, and merged work accumulate points; nothing is approved on vibes |
 | Blue Feather | Sold at the Supermarket for 1,000G once a bachelorette reaches an orange heart; the marriage proposal item | A pull request. Opening one is the proposal, the owner's approval is the yes, and the merge is the wedding |
@@ -33,7 +36,7 @@ game-inspired vocabulary hangs under.
 
 ## Sources
 
-Game facts above were checked against fan guides on 2026-10-03; rows backed
+Game facts above were checked against fan guides on 2026-10-03 and 2026-10-04; rows backed
 by a listed source are covered by it, and the rest (such as the thirty-day
 seasons and the town names) are general game lore.
 
@@ -43,3 +46,5 @@ seasons and the town names) are general game lore.
 - GameFAQs, Harvest Moon: Back to Nature Guide and Walkthrough (faqs/10669, 2001-02-16), snippet: Saibara forges an Orichalcum accessory for 1,000G, ready after three days.
 - Harvest Moon: Back to Nature Guide (https://www.harvestmoonbacktonatureguide.com/girls.html), accessed 2026-10-03: heart level affection point ranges (blue 20,000 to 29,999; green 30,000 to 39,999).
 - Ushi No Tane forum, "Harvest Sprite Tea Party" (https://fogu.com/hmforum/viewtopic.php?t=174351), accessed 2026-10-03: the tea party requires all seven sprites at home.
+- Ushi No Tane, Characters Harvest Sprites (https://fogu.com/hm4/peeps/sprites.htm), fetched 2026-10-04: hut behind the church; three jobs (water crops, harvest crops, take care of animals); Chef red, Nappy orange, Hoggy yellow, Timid green, Aqua blue, Staid indigo, Bold violet; 1/3/7 day requests from the next morning; 3 hearts required; color grass gifts; three training minigames (watering follow-the-leader, turnip pull, chicken feed).
+- Harvest Moon Wiki (Fandom), "Harvest Sprites (BTN)" search snippets, accessed 2026-10-04: hired for watering crops, harvesting crops, and animal care; one job per sprite per day; hidden skill level per job starts at 0 and rises by 1 per task.
